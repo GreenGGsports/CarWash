@@ -24,7 +24,7 @@ class Reservation(Base):
         return f"<Reservation(id={self.id}, appointment={self.appointment}, name='{self.name}', service_id={self.service_id})>"
 
     @classmethod
-    def create_reservation(cls, session, appointment, license_plate, name, phone_number, brand, type, company_id, service_id, parking_spot=None):
+    def add_reservation(cls, session, appointment, license_plate, name, phone_number, brand, type, company_id, service_id, parking_spot=None):
         reservation = cls(
             appointment=appointment,
             license_plate=license_plate,
