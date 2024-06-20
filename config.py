@@ -5,7 +5,9 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
-
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///../db/car_wash.db' 
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    
 class TestingConfig(Config):
     TESTING = True
     DEBUG = True

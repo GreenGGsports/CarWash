@@ -12,7 +12,8 @@ def show_reservation_form():
 @reservation_ctrl.route('/add', methods=['POST'])
 def create_reservation():
     data = request.json
-    
+    from pdb import set_trace 
+    set_trace()
     appointment = data.get('appointment')
     license_plate = data.get('license_plate')
     name = data.get('name')
@@ -31,7 +32,7 @@ def create_reservation():
             phone_number=phone_number,
             brand=brand,
             type=type,
-            company_id=service_id,
+            company_id=company_id,
             service_id=service_id,
             parking_spot=parking_spot
         )
