@@ -1,5 +1,7 @@
 from flask import Flask
 from src.controllers.reservation_controller import reservation_ctrl
+from flask_sqlalchemy import SQLAlchemy
+db = SQLAlchemy()
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../db/car_wash.db'  # Replace with your database URI

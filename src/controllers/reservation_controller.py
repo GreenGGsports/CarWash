@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 from src.models.reservation_model import Reservation
+from src.models.company_model import Company
 from src.views.reservation_view import ReservationView
 
 reservation_ctrl = Blueprint('reservation_ctrl', __name__, url_prefix='/reservation')
@@ -22,6 +23,8 @@ def create_reservation():
     service_id = data.get('service_id')
     parking_spot = data.get('parking_spot')
     
+    company = Company(name='Fasz',id=1)
+    
     try:
         reservation = Reservation.add_reservation(
             appointment=appointment,
@@ -30,7 +33,7 @@ def create_reservation():
             phone_number=phone_number,
             brand=brand,
             type=type,
-            company_id=company_id,
+            company_id=Company.id,
             service_id=service_id,
             parking_spot=parking_spot
         )
