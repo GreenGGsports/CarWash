@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String
-from .base import Base
 from sqlalchemy.orm import Session
+from .base import Base
 
 class ServiceModel(Base):
     __tablename__ = 'Service'
@@ -9,33 +9,66 @@ class ServiceModel(Base):
     service_name = Column(String, nullable=False)
     price = Column(Integer, nullable=False)
 
-def get_service(db: Session, service_id: int):
-    return db.query(ServiceModel).filter(ServiceModel.id == service_id).first()
+    def __repr__(self):
+        return f"<ServiceModel(id={self.id}, service_name='{self.service_name}', price={self.price})>"
 
-def get_services(db: Session, skip: int = 0, limit: int = 10):
-    return db.query(ServiceModel).offset(skip).limit(limit).all()
+    @classmethod
+    def add_service(cls, session: Session, service_name: str, price: int):
+        service = cls(
+            service_name = service_name,
+            price = price
+        )
+        session.add(service)
+        session.commit()
+        return service
 
-def create_service(db: Session, service_name: str, price: int):
-    db_service = ServiceModel(service_name=service_name, price=price)
-    db.add(db_service)
-    db.commit()
-    db.refresh(db_service)
-    return db_service
-
-def update_service(db: Session, service_id: int, service_name: str = None, price: int = None):
-    db_service = get_service(db, service_id)
-    if db_service:
-        if service_name is not None:
-            db_service.service_name = service_name
-        if price is not None:
-            db_service.price = price
-        db.commit()
-        db.refresh(db_service)
-    return db_service
-
-def delete_service(db: Session, service_id: int):
-    db_service = get_service(db, service_id)
-    if db_service:
-        db.delete(db_service)
-        db.commit()
-    return db_service
+    @classmethod
+    def get_service(cls, session: Session, service_id: int):
+        """Fetch a single service by its ID."""
+        try:
+            return session.query(cls).get(service_id)
+        except Exception as e:
+            session.rollback()
+            raise e
+    
+    @classmethod
+    def get_services(cls, session: Session, skip: int = 0, limit: int = 10):
+        """Fetch a list of services with optional pagination."""
+        try:
+            return session.query(cls).offset(skip).limit(limit).all()
+        except Exception as e:
+            session.rollback()
+            raise e
+    
+    @classmethod
+    def update_service(cls, session: Session, service_id: int, **kwargs):
+        """Update an existing service."""
+        try:
+            service = session.query(cls).get(service_id)
+            if not service:
+                return None
+            
+            for key, value in kwargs.items():
+                if hasattr(service, key):
+                    setattr(service, key, value)
+            
+            session.commit()
+            return service
+        except Exception as e:
+            session.rollback()
+            raise e
+    
+    @classmethod
+    def delete_service(cls, session: Session, service_id: int):
+        """Delete a service by its ID."""
+        try:
+            service = session.query(cls).get(service_id)
+            if service:
+                session.delete(service)
+                session.commit()
+                return True
+            else:
+                return False
+        except Exception as e:
+            session.rollback()
+            raise e
