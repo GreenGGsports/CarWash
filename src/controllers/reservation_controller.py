@@ -23,8 +23,6 @@ def create_reservation():
     service_id = data.get('service_id')
     parking_spot = data.get('parking_spot')
     
-    company = Company(name='Fasz',id=1)
-    
     try:
         reservation = Reservation.add_reservation(
             appointment=appointment,
@@ -33,7 +31,7 @@ def create_reservation():
             phone_number=phone_number,
             brand=brand,
             type=type,
-            company_id=Company.id,
+            company_id=service_id,
             service_id=service_id,
             parking_spot=parking_spot
         )
