@@ -1,9 +1,4 @@
 from flask import Flask 
-from controllers import (
-    reservation_controller
-)
-
-from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from config import DevelopmentConfig, TestingConfig, ProductionConfig
 
@@ -19,19 +14,19 @@ def create_app(config_name):
     else:
         app.config.from_object(ProductionConfig)
     
-    db.init_app(app)
+    db.init_app(app,)
     
     with app.app_context():
-        from . import routes
         db.create_all()  # Adatbázis táblák létrehozása az alkalmazás inicializálásakor
     
     return app
 
-app = create_app('development')
+# app = create_app('development')
 
-@app.route('/')
-def hello_world():
-    return 'Hello, World!'
+# @app.route('/')
+# def hello_world():
+#     return 'Hello, World!'
 
 if __name__ == '__main__':
+    app = create_app('development')
     app.run()

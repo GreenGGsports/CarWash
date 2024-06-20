@@ -9,6 +9,7 @@ class DevelopmentConfig(Config):
 class TestingConfig(Config):
     TESTING = True
     DEBUG = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///../db/test_car_wash.db'
 
 class ProductionConfig(Config):
     pass
