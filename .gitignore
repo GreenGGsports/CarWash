@@ -1,2 +1,4 @@
 db/*
 myvenv/*
+*.pyc
+__pycache__/

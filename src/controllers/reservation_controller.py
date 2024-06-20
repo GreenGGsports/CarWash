@@ -1,9 +1,14 @@
 from flask import Blueprint, request, jsonify
 from src.models.reservation_model import Reservation
+from src.views.reservation_view import ReservationView
 
-reservation_ctrl = Blueprint('reservation_ctrl',__name__,'/reservation')
+reservation_ctrl = Blueprint('reservation_ctrl', __name__, url_prefix='/reservation')
 
-@reservation_ctrl.route('/reservation', methods = ['POST'])
+@reservation_ctrl.route('/')
+def show_reservation_form():
+    return ReservationView.show_reservation_form()
+
+@reservation_ctrl.route('/add', methods=['POST'])
 def create_reservation():
     data = request.json
     
@@ -39,4 +44,3 @@ def create_reservation():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 400
-    
