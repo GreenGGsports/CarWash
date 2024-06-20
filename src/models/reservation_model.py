@@ -20,8 +20,8 @@ class ReservationModel(Base):
     service_id = Column(Integer, ForeignKey('Service.id'), nullable=False)
     parking_spot = Column(String, nullable=True)
     
-    company = relationship("Company")
-    service = relationship("Service")
+    company = relationship("CompanyModel")
+    service = relationship("ServiceModel")
     
     def __repr__(self):
         return f"<Reservation(id={self.id}, appointment={self.appointment}, name='{self.name}', service_id={self.service_id})>"
