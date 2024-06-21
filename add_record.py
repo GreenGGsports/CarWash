@@ -1,9 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from src.models.base import Base
 from src.models.reservation_model import Reservation
-from src.models.service_model import Service
-from src.models.company_model import Company
 import datetime
 
 # Assuming you have created the database and engine as before
