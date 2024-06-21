@@ -1,4 +1,3 @@
-from models.reservation_model import Reservation
 from flask import Blueprint
 
 class ReservationController:
