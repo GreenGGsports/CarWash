@@ -1,13 +1,8 @@
 import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
 from src.models.reservation_model import ReservationModel  # Adjust the import according to your project structure
-from sqlalchemy import Column, Integer, String
-from sqlalchemy.orm import declarative_base  # noqa: F811
 import datetime
-from src.models.company_model import CompanyModel as Company
-from src.models.service_model import ServiceModel as Service
 # Creating a new Base for the test environment
 from src.models.base import Base
 
