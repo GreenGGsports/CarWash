@@ -15,11 +15,13 @@ def tables(engine):
     Base.metadata.drop_all(engine)
 
 @pytest.fixture(scope='function')
-def session(engine, tables):
+def session(engine):
+    Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
     session = Session()
     yield session
     session.close()
+    Base.metadata.drop_all(engine)
 
 def test_create_service(session):
     service_name = "Test Service"

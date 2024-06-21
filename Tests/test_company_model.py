@@ -16,14 +16,14 @@ def tables(engine):
     yield
     Base.metadata.drop_all(engine)
 
-
 @pytest.fixture(scope='function')
-def session(engine, tables):
+def session(engine):
+    Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
     session = Session()
     yield session
     session.close()
-
+    Base.metadata.drop_all(engine)
 
 def test_add_company(session):
     company_name = "Test Company"
@@ -46,13 +46,10 @@ def test_get_companies(session):
     CompanyModel.add_company(session, company_name_1)
     CompanyModel.add_company(session, company_name_2)
     companies = CompanyModel.get_companies(session)
-    from pdb import set_trace
-    set_trace()
     assert len(companies) == 2
     assert companies[0].company_name in [company_name_1, company_name_2]
     assert companies[1].company_name in [company_name_1, company_name_2]
     
-
 
 def test_update_company(session):
     company_name = "Test Company"
