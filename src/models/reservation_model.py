@@ -1,12 +1,11 @@
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 import datetime
-from sqlalchemy.orm import Session
-from .base import Base
+from .base import BaseModel
 
 
 
-class ReservationModel(Base):
+class ReservationModel(BaseModel):
     __tablename__ = 'Reservation'
     
     id = Column(Integer, primary_key=True)
@@ -42,44 +41,3 @@ class ReservationModel(Base):
         session.add(reservation)
         session.commit()
         return reservation
-    
-    @classmethod
-    def read_reservation(cls, session: Session, reservation_id: int):
-        try:
-            reservation = session.query(cls).get(reservation_id)
-            return reservation
-        except Exception as e:
-            session.rollback()
-            raise e
-
-    @classmethod    
-    def update_reservation(cls, session: Session, reservation_id: int, **kwargs):
-        try:
-            reservation = session.query(cls).get(reservation_id)
-            if not reservation:
-                return None
-            
-            for key, value in kwargs.items():
-                if hasattr(reservation, key):
-                    setattr(reservation, key, value)
-            
-            session.commit()
-            return reservation
-        except Exception as e:
-            session.rollback()
-            raise e
-    
-    @classmethod
-    def delete_reservation(cls, session: Session, reservation_id: int):
-        try:
-            reservation = session.query(cls).get(reservation_id)
-            if reservation:
-                session.delete(reservation)
-                session.commit()
-                return True
-            else:
-                return False
-        except Exception as e:
-            session.rollback()
-            raise e
-    
