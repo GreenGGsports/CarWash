@@ -1,7 +1,8 @@
-from flask import Blueprint, request, jsonify
-from src.models.reservation_model import Reservation
-from src.models.company_model import Company
+from flask import Blueprint, request, jsonify, current_app
+from src.models.reservation_model import ReservationModel
 from src.views.reservation_view import ReservationView
+from datetime import datetime
+from sqlalchemy.orm import sessionmaker
 
 reservation_ctrl = Blueprint('reservation_ctrl', __name__, url_prefix='/reservation')
 
@@ -12,20 +13,12 @@ def show_reservation_form():
 @reservation_ctrl.route('/add', methods=['POST'])
 def create_reservation():
     data = request.json
-    from pdb import set_trace 
-    set_trace()
-    appointment = data.get('appointment')
-    license_plate = data.get('license_plate')
-    name = data.get('name')
-    phone_number = data.get('phone_number')
-    brand = data.get('brand')
-    type = data.get('type')
-    company_id = data.get('company_id')
-    service_id = data.get('service_id')
-    parking_spot = data.get('parking_spot')
+    appointment, license_plate, name, phone_number, brand, type, company_id, service_id, parking_spot  = parse_response(data)
+    session = current_app.session_factory.get_session()
     
     try:
-        reservation = Reservation.add_reservation(
+        reservation = ReservationModel.add_reservation(
+            session=session,
             appointment=appointment,
             license_plate=license_plate,
             name=name,
@@ -45,4 +38,28 @@ def create_reservation():
         }}), 201
 
     except Exception as e:
+        from pdb import set_trace 
+        set_trace()
         return jsonify({'error': str(e)}), 400
+    
+    finally:
+        # Close the session to release resources
+        session.close()
+    
+def parse_response(data):
+    appointment = data.get('appointment')
+    try:
+        appointment =  datetime.strptime(appointment, '%Y-%m-%d %H:%M')
+    except ValueError as e:
+        raise ValueError(f"Incorrect data format, should be YYYY-MM-DD HH:MM. Error: {e}")
+    
+    license_plate = data.get('license_plate')
+    name = data.get('name')
+    phone_number = data.get('phone_number')
+    brand = data.get('brand')
+    type = data.get('type')
+    company_id = data.get('company_id')
+    service_id = data.get('service_id')
+    parking_spot = data.get('parking_spot')
+    return appointment, license_plate, name, phone_number, brand, type, company_id, service_id, parking_spot 
+
