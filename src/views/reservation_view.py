@@ -10,6 +10,3 @@ class ReservationView:
         template_full_path = os.path.join(os.path.dirname(__file__), reservation_view.template_folder, 'add_reservation.html')
         print(f"Searching for template at: {template_full_path}")
         return render_template('add_reservation.html')
-
-    def submit_form():
-        return request.json 

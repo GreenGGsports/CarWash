@@ -41,9 +41,9 @@
     <script>
         function submitForm() {
             const appointmentInput = document.getElementById('appointment').value;
-            // Convert datetime-local format to YYYY-MM-DD HH:MM format
-            const appointment = appointmentInput.replace('T', ' ');
-            
+            // Convert datetime-local format to YYYY-MM-DDTHH:MM format
+            const appointment = appointmentInput.replace('T', 'T');
+
             const licensePlate = document.getElementById('license_plate').value;
             const name = document.getElementById('name').value;
             const phoneNumber = document.getElementById('phone_number').value;

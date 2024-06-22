@@ -3,8 +3,6 @@ from sqlalchemy.orm import relationship
 import datetime
 from sqlalchemy.orm import Session
 from .base import Base
-from .company_model import CompanyModel  # Adjust import path as necessary
-from .service_model import ServiceModel
 
 
 class ReservationModel(Base):

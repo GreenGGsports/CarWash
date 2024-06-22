@@ -1,3 +1,4 @@
+import os 
 class Config:
     DEBUG = False
     TESTING = False
@@ -5,7 +6,7 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///../db/car_wash.db' 
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(os.getcwd(), 'db', 'car_wash.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     
 class TestingConfig(Config):

@@ -1,8 +1,7 @@
 from flask import Blueprint, request, jsonify, current_app
 from src.models.reservation_model import ReservationModel
 from src.views.reservation_view import ReservationView
-from datetime import datetime
-from sqlalchemy.orm import sessionmaker
+import datetime
 
 reservation_ctrl = Blueprint('reservation_ctrl', __name__, url_prefix='/reservation')
 
@@ -38,8 +37,6 @@ def create_reservation():
         }}), 201
 
     except Exception as e:
-        from pdb import set_trace 
-        set_trace()
         return jsonify({'error': str(e)}), 400
     
     finally:
@@ -49,7 +46,7 @@ def create_reservation():
 def parse_response(data):
     appointment = data.get('appointment')
     try:
-        appointment =  datetime.strptime(appointment, '%Y-%m-%d %H:%M')
+        appointment = datetime.datetime.strptime(appointment, '%Y-%m-%dT%H:%M')
     except ValueError as e:
         raise ValueError(f"Incorrect data format, should be YYYY-MM-DD HH:MM. Error: {e}")
     
