@@ -1,42 +1,37 @@
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
+from sqlalchemy import Column, Integer, DateTime, Boolean, Float, ForeignKey, String
 from sqlalchemy.orm import relationship
-import datetime
+from sqlalchemy.orm.session import Session
+from datetime import datetime
+
 from .base import BaseModel
 
-
-
 class ReservationModel(BaseModel):
-    __tablename__ = 'Reservation'
-    
-    id = Column(Integer, primary_key=True)
-    appointment = Column(DateTime, default=datetime.datetime.utcnow)
-    license_plate = Column(String(10), nullable=False)
-    name = Column(String, nullable=False)
-    phone_number = Column(String(20), nullable=False)
-    brand = Column(String, nullable=False)
-    type = Column(String, nullable=False)
-    company_id = Column(Integer, ForeignKey('Company.id'), nullable=False)
+    __tablename__ = 'reservation'
+
+    appointment_id = Column(Integer, ForeignKey('Appointment.id'), nullable=False)
     service_id = Column(Integer, ForeignKey('Service.id'), nullable=False)
-    parking_spot = Column(String, nullable=True)
-    
-    company = relationship("CompanyModel")
+    company_id = Column(Integer, ForeignKey('Company.id'), nullable=False)
+    reservation_date = Column(DateTime, nullable=False)
+    parking_spot = Column(Integer)
+    car_type = Column(String)
+    license_plate = Column(String)
+    final_price = Column(Float)
+
+    appointment = relationship("AppointmentModel")
     service = relationship("ServiceModel")
-    
-    def __repr__(self):
-        return f"<Reservation(id={self.id}, appointment={self.appointment}, name='{self.name}', service_id={self.service_id})>"
+    company = relationship("CompanyModel")
 
     @classmethod
-    def add_reservation(cls, session, appointment, license_plate, name, phone_number, brand, type, company_id, service_id, parking_spot=None):
-        reservation = cls(
-            appointment=appointment,
+    def add_reservation(cls, session, license_plate, company_id, service_id,appointment_id,reservation_date , car_type, final_price ,parking_spot=None):
+        reservation = cls( 
             license_plate=license_plate,
-            name=name,
-            phone_number=phone_number,
-            brand=brand,
-            type=type,
             company_id=company_id,
             service_id=service_id,
-            parking_spot=parking_spot
+            appointment_id = appointment_id,
+            parking_spot=parking_spot,
+            reservation_date = reservation_date,
+            car_type = car_type,
+            final_price = final_price
         )
         session.add(reservation)
         session.commit()

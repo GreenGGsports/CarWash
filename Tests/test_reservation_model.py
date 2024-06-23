@@ -1,11 +1,9 @@
 import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from src.models.reservation_model import ReservationModel  # Adjust the import according to your project structure
-import datetime
-# Creating a new Base for the test environment
+from src.models.reservation_model import ReservationModel  # Adjust import path as necessary
+from datetime import datetime
 from src.models.base import Base
-
 
 # Configure an in-memory SQLite database for testing
 @pytest.fixture(scope='module')
@@ -28,81 +26,76 @@ def session(engine):
     Base.metadata.drop_all(engine)
 
 def test_add_reservation(session):
-    # Adding a company and service to satisfy foreign key constraints
-
-    appointment = datetime.datetime.utcnow()
+    appointment = datetime.utcnow()
     reservation = ReservationModel.add_reservation(
         session=session,
-        appointment=appointment,
-        license_plate='ABC123',
-        name='John Doe',
-        phone_number='1234567890',
-        brand='Toyota',
-        type='Sedan',
-        company_id=1,
+        appointment_id=1,
         service_id=1,
-        parking_spot='A1'
+        company_id=1,
+        reservation_date=appointment,
+        parking_spot='A1',
+        car_type='Sedan',
+        license_plate='ABC123',
+        final_price=100.0
     )
     
     assert reservation.id is not None
-    assert reservation.name == 'John Doe'
     assert reservation.license_plate == 'ABC123'
+    assert reservation.car_type == 'Sedan'
 
 def test_read_reservation(session):
-    
-    appointment = datetime.datetime.utcnow()
+    reservation_date = datetime.utcnow()
     reservation = ReservationModel.add_reservation(
         session=session,
-        appointment=appointment,
-        license_plate='DEF456',
-        name='Jane Doe',
-        phone_number='0987654321',
-        brand='Honda',
-        type='SUV',
-        company_id=1,
+        appointment_id=1,
         service_id=1,
-        parking_spot='B2'
+        company_id=1,
+        reservation_date=reservation_date,
+        parking_spot='B2',
+        car_type='SUV',
+        license_plate='DEF456',
+        final_price=120.0
     )
     
     read_reservation = ReservationModel.get_by_id(session, reservation.id)
     assert read_reservation.id == reservation.id
-    assert read_reservation.name == 'Jane Doe'
+    assert read_reservation.license_plate == 'DEF456'
+    assert read_reservation.car_type == 'SUV'
 
 def test_update_reservation(session):
-    appointment = datetime.datetime.utcnow()
+    appointment = datetime.utcnow()
     reservation = ReservationModel.add_reservation(
         session=session,
-        appointment=appointment,
-        license_plate='GHI789',
-        name='Jim Doe',
-        phone_number='1112223333',
-        brand='Ford',
-        type='Truck',
-        company_id=1,
+        appointment_id=1,
         service_id=1,
-        parking_spot='C3'
+        company_id=1,
+        reservation_date=appointment,
+        parking_spot='C3',
+        car_type='Truck',
+        license_plate='GHI789',
+        final_price=150.0
     )
     
     updated_reservation = ReservationModel.update_by_id(
         session=session,
         obj_id=reservation.id,
-        name='Jimmy Doe'
+        car_type='Van'
     )
     
-    assert updated_reservation.name == 'Jimmy Doe'
-def test_delete_reservation(session):    
-    appointment = datetime.datetime.utcnow()
+    assert updated_reservation.car_type == 'Van'
+
+def test_delete_reservation(session):
+    appointment = datetime.utcnow()
     reservation = ReservationModel.add_reservation(
         session=session,
-        appointment=appointment,
-        license_plate='JKL012',
-        name='Jake Doe',
-        phone_number='4445556666',
-        brand='Chevrolet',
-        type='Coupe',
-        company_id=1,
+        appointment_id=1,
         service_id=1,
-        parking_spot='D4'
+        company_id=1,
+        reservation_date=appointment,
+        parking_spot='D4',
+        car_type='Coupe',
+        license_plate='JKL012',
+        final_price=180.0
     )
     
     result = ReservationModel.delete_by_id(session, reservation.id)
