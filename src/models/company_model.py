@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String
-from sqlalchemy.orm import Session, relationship
+from sqlalchemy.orm import Session
 from .base import BaseModel
 
 class CompanyModel(BaseModel):
@@ -7,7 +7,7 @@ class CompanyModel(BaseModel):
     
     id = Column(Integer, primary_key=True)
     company_name = Column(String, nullable=False)
-    reservations = relationship("ReservationModel")
+
 
     
     def __repr__(self):

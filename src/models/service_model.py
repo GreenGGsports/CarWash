@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String
-from sqlalchemy.orm import Session, relationship
+from sqlalchemy.orm import Session
 from .base import BaseModel
 
 class ServiceModel(BaseModel):
@@ -8,7 +8,6 @@ class ServiceModel(BaseModel):
     service_name = Column(String, nullable=False)
     price = Column(Integer, nullable=False)
 
-    reservations = relationship("ReservationModel")
     def __repr__(self):
         return f"<ServiceModel(id={self.id}, service_name='{self.service_name}', price={self.price})>"
 
