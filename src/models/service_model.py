@@ -3,9 +3,8 @@ from sqlalchemy.orm import Session
 from .base import BaseModel
 
 class ServiceModel(BaseModel):
-    __tablename__ = 'Service'
+    __tablename__ = 'service'
     
-    id = Column(Integer, primary_key=True)
     service_name = Column(String, nullable=False)
     price = Column(Integer, nullable=False)
 

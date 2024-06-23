@@ -1,7 +1,7 @@
 # tests/conftest.py
 
 import pytest
-from app import create_app, db
+from setup import create_app, db
 from src.models.reservation_model import ReservationModel
 from src.models.company_model import CompanyModel
 from src.models.service_model import ServiceModel
