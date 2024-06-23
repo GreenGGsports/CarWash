@@ -63,7 +63,7 @@ def test_read_reservation(session):
         parking_spot='B2'
     )
     
-    read_reservation = ReservationModel.read_reservation(session, reservation.id)
+    read_reservation = ReservationModel.get_by_id(session, reservation.id)
     assert read_reservation.id == reservation.id
     assert read_reservation.name == 'Jane Doe'
 
@@ -82,14 +82,13 @@ def test_update_reservation(session):
         parking_spot='C3'
     )
     
-    updated_reservation = ReservationModel.update_reservation(
+    updated_reservation = ReservationModel.update_by_id(
         session=session,
-        reservation_id=reservation.id,
+        obj_id=reservation.id,
         name='Jimmy Doe'
     )
     
     assert updated_reservation.name == 'Jimmy Doe'
-
 def test_delete_reservation(session):    
     appointment = datetime.datetime.utcnow()
     reservation = ReservationModel.add_reservation(
@@ -105,8 +104,8 @@ def test_delete_reservation(session):
         parking_spot='D4'
     )
     
-    result = ReservationModel.delete_reservation(session, reservation.id)
+    result = ReservationModel.delete_by_id(session, reservation.id)
     assert result is True
 
-    deleted_reservation = ReservationModel.read_reservation(session, reservation.id)
+    deleted_reservation = ReservationModel.get_by_id(session, reservation.id)
     assert deleted_reservation is None
