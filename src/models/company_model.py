@@ -1,12 +1,14 @@
 from sqlalchemy import Column, Integer, String
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, relationship
 from .base import BaseModel
 
 class CompanyModel(BaseModel):
-    __tablename__ = 'Company'
+    __tablename__ = 'company'
     
     id = Column(Integer, primary_key=True)
     company_name = Column(String, nullable=False)
+    reservations = relationship("ReservationModel")
+
     
     def __repr__(self):
         return f"<CompanyModel(id={self.id}, company_name='{self.company_name}')>"

@@ -1,14 +1,14 @@
 from sqlalchemy import Column, Integer, String
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, relationship
 from .base import BaseModel
 
 class ServiceModel(BaseModel):
-    __tablename__ = 'Service'
+    __tablename__ = 'service'
     
-    id = Column(Integer, primary_key=True)
     service_name = Column(String, nullable=False)
     price = Column(Integer, nullable=False)
 
+    reservations = relationship("ReservationModel")
     def __repr__(self):
         return f"<ServiceModel(id={self.id}, service_name='{self.service_name}', price={self.price})>"
 

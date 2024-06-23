@@ -37,7 +37,6 @@ def create_reservation():
             service_id=service_id,
             parking_spot=parking_spot
         )
-
         return jsonify({'message': 'Reservation added successfully!', 'reservation': {
             'id': reservation.id,
             'appointment': reservation.appointment.isoformat(),

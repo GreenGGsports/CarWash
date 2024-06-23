@@ -6,17 +6,16 @@ from .base import BaseModel
 
 
 class ReservationModel(BaseModel):
-    __tablename__ = 'Reservation'
-    
-    id = Column(Integer, primary_key=True)
+    __tablename__ = 'reservation'
+
     appointment = Column(DateTime, default=datetime.datetime.utcnow)
     license_plate = Column(String(10), nullable=False)
     name = Column(String, nullable=False)
     phone_number = Column(String(20), nullable=False)
     brand = Column(String, nullable=False)
     type = Column(String, nullable=False)
-    company_id = Column(Integer, ForeignKey('Company.id'), nullable=False)
-    service_id = Column(Integer, ForeignKey('Service.id'), nullable=False)
+    company_id = Column(Integer, ForeignKey('company.id'), nullable=False)
+    service_id = Column(Integer, ForeignKey('service.id'), nullable=False)
     parking_spot = Column(String, nullable=True)
     
     company = relationship("CompanyModel")
