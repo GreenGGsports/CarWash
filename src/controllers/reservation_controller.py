@@ -12,7 +12,16 @@ def show_reservation_form():
 @reservation_ctrl.route('/add', methods=['POST'])
 def create_reservation():
     data = request.json
-    appointment, license_plate, name, phone_number, brand, type, company_id, service_id, parking_spot  = parse_response(data)
+    if not data:
+        return jsonify({'error': 'No input data provided'}), 400
+
+    try:    
+        appointment, license_plate, name, phone_number, brand, type, company_id, service_id, parking_spot  = parse_response(data)
+    except KeyError as e:
+        return jsonify({'error': f'Missing field {str(e)}'}), 400
+    except ValueError as e:
+        return jsonify({'error': f"Incorrect data format: {str(e)}"}), 400
+        
     session = current_app.session_factory.get_session()
     
     try:
@@ -44,11 +53,9 @@ def create_reservation():
         session.close()
     
 def parse_response(data):
+
     appointment = data.get('appointment')
-    try:
-        appointment = datetime.datetime.strptime(appointment, '%Y-%m-%dT%H:%M')
-    except ValueError as e:
-        raise ValueError(f"Incorrect data format, should be YYYY-MM-DD HH:MM. Error: {e}")
+    appointment = datetime.datetime.strptime(appointment, '%Y-%m-%dT%H:%M')
     
     license_plate = data.get('license_plate')
     name = data.get('name')
@@ -58,5 +65,7 @@ def parse_response(data):
     company_id = data.get('company_id')
     service_id = data.get('service_id')
     parking_spot = data.get('parking_spot')
+    
+    
     return appointment, license_plate, name, phone_number, brand, type, company_id, service_id, parking_spot 
 

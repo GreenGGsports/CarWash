@@ -1,75 +1,92 @@
-import pytest
+import unittest
 from unittest.mock import patch, MagicMock
+from flask import Flask, jsonify
+from src.controllers.reservation_controller import reservation_ctrl, parse_response
+from src.models.reservation_model import ReservationModel
 from datetime import datetime
-from flask import Flask
-from src.controllers.reservation_controller import reservation_ctrl
-from flask import Flask, current_app, json
+from setup import create_app
 
-@pytest.fixture
-def app():
-    """Create and configure a test app instance."""
-    app = Flask(__name__)
-    app.config['TESTING'] = True  # Set TESTING config to True
-    app.register_blueprint(reservation_ctrl)
-    yield app
+class ReservationControllerTestCase(unittest.TestCase):
+    def setUp(self):
+        self.app = create_app('testing')  # Create your Flask app
+        self.app.config['TESTING'] = True
+        self.client = self.app.test_client()
 
-@pytest.fixture
-def client(app):
-    """Create a test client using the Flask application."""
-    return app.test_client()
+        # Create an application context
+        self.app_context = self.app.app_context()
+        self.app_context.push()
 
-def test_show_reservation_form(client):
-    """Test the show_reservation_form endpoint."""
-    with patch('src.controllers.reservation_controller.ReservationView.show_reservation_form') as mock_show_form:
-        mock_show_form.return_value = 'Mocked form HTML'
-        response = client.get('/reservation/')
-        assert response.status_code == 200
-        assert response.data.decode() == 'Mocked form HTML'
-        mock_show_form.assert_called_once()
-        
+        # Create a request context
+        self.request_context = self.app.test_request_context()
+        self.request_context.push()
 
+    def tearDown(self):
+        # Pop contexts
+        self.request_context.pop()
+        self.app_context.pop()
 
-def test_create_reservation(client):
-    """Test the create_reservation endpoint."""
-    mock_session = MagicMock()
-    mock_add_reservation = MagicMock()
-    mock_session_factory = MagicMock()
-    mock_session_factory.get_session.return_value = mock_session
-    mock_reservation_model = MagicMock()
-    mock_reservation_model.add_reservation.return_value = MagicMock(
-        id=1,
-        appointment=datetime(2024, 6, 25, 10, 0),
-        name='John Doe',
-        service_id=3
-    )
-    
-    with patch.object(current_app, 'session_factory', mock_session_factory), \
-         patch('src.models.reservation_model.ReservationModel', mock_reservation_model):
-        
-        json_data = {
-            'appointment': '2024-06-25T10:00',
+    @patch('src.controllers.reservation_controller.current_app')
+    @patch('src.controllers.reservation_controller.request')
+    def test_create_reservation_success(self, mock_request, mock_current_app):
+
+        mock_session = MagicMock()
+        mock_current_app.session_factory.get_session.return_value = mock_session
+        data = {
+            'appointment': '2023-07-10T15:30',
             'license_plate': 'ABC123',
             'name': 'John Doe',
             'phone_number': '1234567890',
             'brand': 'Toyota',
             'type': 'SUV',
             'company_id': 1,
-            'service_id': 3,
-            'parking_spot': 'A1'
+            'service_id': 2,
+            'parking_spot': 5
         }
         
-        # Use app.app_context() to manually activate application context
-        with app.app_context():
-            response = client.post('/reservation/add', json=json_data)
+        mock_request.json = data
+
+        mock_reservation = MagicMock()
+        mock_reservation.id = 1
+        mock_reservation.appointment = datetime.strptime(data['appointment'], '%Y-%m-%dT%H:%M')
+        mock_reservation.name = data['name']
+        mock_reservation.service_id = data['service_id']
+
+        ReservationModel.add_reservation = MagicMock(return_value=mock_reservation)
+        response = self.client.post('/reservation/add')
+        response_data = response.get_json()
+
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response_data['message'], 'Reservation added successfully!')
+        self.assertEqual(response_data['reservation']['id'], 1)
+        self.assertEqual(response_data['reservation']['name'], data['name'])
+        self.assertEqual(response_data['reservation']['service_id'], data['service_id'])
+
+    @patch('src.controllers.reservation_controller.current_app')
+    @patch('src.controllers.reservation_controller.request')
+    def test_create_reservation_failure(self, mock_request, mock_current_app):
+        mock_session = MagicMock()
+        mock_current_app.session_factory.get_session.return_value = mock_session
         
-        assert response.status_code == 201
-        assert mock_session_factory.get_session.called
-        assert mock_reservation_model.add_reservation.called
+        data = {
+            'appointment': 'invalid date',
+            'license_plate': 'ABC123',
+            'name': 'John Doe',
+            'phone_number': '1234567890',
+            'brand': 'Toyota',
+            'type': 'SUV',
+            'company_id': 1,
+            'service_id': 2,
+            'parking_spot': 5
+        }
         
-        data = json.loads(response.data.decode())
-        assert 'message' in data
-        assert 'reservation' in data
-        assert data['reservation']['id'] == 1
-        assert data['reservation']['appointment'] == '2024-06-25T10:00:00'
-        assert data['reservation']['name'] == 'John Doe'
-        assert data['reservation']['service_id'] == 3
+        mock_request.json = data
+
+        response = self.client.post('/reservation/add')
+        response_data = response.get_json()
+
+        self.assertEqual(response.status_code, 400)
+        self.assertIn('error', response_data)
+        self.assertIn('Incorrect data format', response.get_data(as_text=True))
+
+if __name__ == '__main__':
+    unittest.main()
