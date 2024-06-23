@@ -1,11 +1,14 @@
 # tests/conftest.py
 
 import pytest
-from setup import create_app, db
+from setup import create_app
 from src.models.reservation_model import ReservationModel
 from src.models.company_model import CompanyModel
 from src.models.service_model import ServiceModel
 import datetime
+
+from flask_sqlalchemy import SQLAlchemy
+db = SQLAlchemy()
 
 @pytest.fixture(scope='module')
 def test_client():
@@ -15,10 +18,7 @@ def test_client():
     with flask_app.app_context():
         db.create_all()
 
-        from pdb import set_trace
-        set_trace()
         company = CompanyModel(company_name='Test Company')
-        set_trace()
         service = ServiceModel(service_name='Test Service')
         db.session.add(company)
         db.session.add(service)

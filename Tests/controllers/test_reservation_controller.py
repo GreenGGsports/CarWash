@@ -8,6 +8,7 @@ class ReservationControllerTestCase(unittest.TestCase):
     def setUp(self):
         self.app = create_app('testing')  # Create your Flask app
         self.app.config['TESTING'] = True
+        self.app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
         self.client = self.app.test_client()
 
         # Create an application context
