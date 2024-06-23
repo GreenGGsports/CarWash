@@ -1,7 +1,5 @@
 import unittest
 from unittest.mock import patch, MagicMock
-from flask import Flask, jsonify
-from src.controllers.reservation_controller import reservation_ctrl, parse_response
 from src.models.reservation_model import ReservationModel
 from datetime import datetime
 from setup import create_app
