@@ -52,9 +52,8 @@ def create_reservation():
         session.close()
     
 def parse_response(data):
-
-    appointment = data.get('appointment')
-    appointment = datetime.datetime.strptime(appointment, '%Y-%m-%dT%H:%M')
+    appointment = data.get('appointmentDate')
+    appointment = datetime.datetime.strptime(appointment, '%Y-%m-%d')
     
     license_plate = data.get('license_plate')
     name = data.get('name')

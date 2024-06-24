@@ -4,6 +4,7 @@ from sessions import SessionFactory
 
 from config import DevelopmentConfig, TestingConfig, ProductionConfig
 from src.controllers.reservation_controller import reservation_ctrl
+from src.controllers.appointment_controller import appointment_ctrl
 from database import create_database
 
 def create_app(config_name: str):
@@ -31,6 +32,7 @@ def create_app(config_name: str):
 
 def add_blueprints(app: Flask):
     app.register_blueprint(reservation_ctrl, url_prefix='/reservation')
+    app.register_blueprint(appointment_ctrl,url_prefix='/reservation')
     return app 
 
 

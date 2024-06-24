@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Reservation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <h1>Create Reservation</h1>
     <form id="reservationForm">
-        <label for="appointment">Appointment:</label><br>
-        <input type="datetime-local" id="appointment" name="appointment" required><br><br>
-        
+        <label for="appointmentDate">Select a date:</label>
+        <input type="date" id="appointmentDate" name="appointmentDate" required><br><br>
+
+        <div id="appointmentOptions"></div>
+
         <label for="license_plate">License Plate:</label><br>
         <input type="text" id="license_plate" name="license_plate" required><br><br>
         
@@ -38,50 +41,6 @@
         <button type="button" onclick="submitForm()">Submit</button>
     </form>
 
-    <script>
-        function submitForm() {
-            const appointmentInput = document.getElementById('appointment').value;
-            // Convert datetime-local format to YYYY-MM-DDTHH:MM format
-            const appointment = appointmentInput.replace('T', 'T');
-
-            const licensePlate = document.getElementById('license_plate').value;
-            const name = document.getElementById('name').value;
-            const phoneNumber = document.getElementById('phone_number').value;
-            const brand = document.getElementById('brand').value;
-            const type = document.getElementById('type').value;
-            const companyId = parseInt(document.getElementById('company_id').value);
-            const serviceId = parseInt(document.getElementById('service_id').value);
-            const parkingSpot = document.getElementById('parking_spot').value;
-
-            const data = {
-                appointment: appointment,
-                license_plate: licensePlate,
-                name: name,
-                phone_number: phoneNumber,
-                brand: brand,
-                type: type,
-                company_id: companyId,
-                service_id: serviceId,
-                parking_spot: parkingSpot
-            };
-
-            fetch('/reservation/add', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-                // Handle success response here
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                // Handle error here
-            });
-        }
-    </script>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </body>
 </html>
