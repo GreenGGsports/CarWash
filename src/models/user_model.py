@@ -10,16 +10,16 @@ class UserModel(BaseModel):
     email = Column(String, unique=True, nullable=False)
     full_name = Column(String, nullable=False)
     phone_number = Column(String, nullable=True)
-    address = Column(String, nullable=True)
+    Licence_plate = Column(String, nullable=True)
 
     @classmethod
-    def add_user(cls, session: Session, username, email, full_name, phone_number=None, address=None):
+    def add_user(cls, session: Session, username, email, full_name, Licence_plate, phone_number=None):
         user = cls(
             username=username,
             email=email,
             full_name=full_name,
             phone_number=phone_number,
-            address=address,
+            Licence_plate = Licence_plate  
         )
         session.add(user)
         session.commit()

@@ -29,53 +29,48 @@ def test_add_reservation(session):
     appointment = datetime.utcnow()
     reservation = ReservationModel.add_reservation(
         session=session,
-        appointment_id = 1,
+        slot_id = 1,
         service_id = 1,
         company_id = 1,
         user_id = 1,
         reservation_date=appointment,
         parking_spot='A1',
         car_type='Sedan',
-        license_plate='ABC123',
         final_price=100.0
     )
     
     assert reservation.id is not None
-    assert reservation.license_plate == 'ABC123'
     assert reservation.car_type == 'Sedan'
 
 def test_read_reservation(session):
     reservation_date = datetime.utcnow()
     reservation = ReservationModel.add_reservation(
         session=session,
-        appointment_id=1,
+        slot_id=1,
         service_id=1,
         company_id=1,
         user_id = 1,
         reservation_date=reservation_date,
         parking_spot='B2',
         car_type='SUV',
-        license_plate='DEF456',
         final_price=120.0
     )
     
     read_reservation = ReservationModel.get_by_id(session, reservation.id)
     assert read_reservation.id == reservation.id
-    assert read_reservation.license_plate == 'DEF456'
     assert read_reservation.car_type == 'SUV'
 
 def test_update_reservation(session):
     appointment = datetime.utcnow()
     reservation = ReservationModel.add_reservation(
         session=session,
-        appointment_id=1,
+        slot_id=1,
         service_id=1,
         company_id=1,
         user_id = 1,
         reservation_date=appointment,
         parking_spot='C3',
         car_type='Truck',
-        license_plate='GHI789',
         final_price=150.0
     )
     
@@ -91,14 +86,13 @@ def test_delete_reservation(session):
     appointment = datetime.utcnow()
     reservation = ReservationModel.add_reservation(
         session=session,
-        appointment_id=1,
+        slot_id=1,
         service_id=1,
         company_id=1,
         user_id = 1,
         reservation_date=appointment,
         parking_spot='D4',
         car_type='Coupe',
-        license_plate='JKL012',
         final_price=180.0
     )
     
