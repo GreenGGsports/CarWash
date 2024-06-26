@@ -5,6 +5,9 @@ from app import create_app, db
 from src.models.reservation_model import ReservationModel
 from src.models.company_model import CompanyModel
 from src.models.service_model import ServiceModel
+from src.models.user_model import UserModel
+from src.models.slot_model import SlotModel
+
 import datetime
 
 @pytest.fixture(scope='module')
