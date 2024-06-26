@@ -2,3 +2,4 @@ db/*
 myvenv/*
 *.pyc
 pycache/
+.pytest_cache
