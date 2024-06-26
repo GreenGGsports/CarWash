@@ -11,8 +11,8 @@ def get_slot_id(session: Session, reservation_date: datetime) -> int:
         if reservation_date >= slot.end_time:
             if ReservationModel.is_slot_available(session, slot.id, reservation_date):
                 available_slots.append(slot)
-    
-    # Keresünk a legkésőbbi slotot a reservation_date előtt
+                
+    # Find the latest slot before the reservation_date
     latest_slot = None
     for slot in available_slots:
         if not latest_slot or slot.start_time >= latest_slot.start_time:

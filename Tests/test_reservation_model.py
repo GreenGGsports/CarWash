@@ -103,3 +103,66 @@ def test_delete_reservation(session):
     deleted_reservation = ReservationModel.get_by_id(session, reservation.id)
     assert deleted_reservation is None
 
+def test_add_reservation_slot_unavailable(session):
+    # Sample data
+    company_id = 1
+    service_id = 1
+    slot_id = 1
+    user_id = 1
+    reservation_date = datetime.now() + timedelta(days=1)
+    car_type = "SUV"
+    final_price = 100.0
+    parking_spot = 1
+
+    # Add an initial reservation
+    ReservationModel.add_reservation(
+        session=session,
+        company_id=company_id,
+        service_id=service_id,
+        slot_id=slot_id,
+        reservation_date=reservation_date,
+        user_id=user_id,
+        car_type=car_type,
+        final_price=final_price,
+        parking_spot=parking_spot
+    )
+
+    # Attempt to add a second reservation for the same slot and date
+    with pytest.raises(Exception, match="Slot is not available for reservation"):
+        ReservationModel.add_reservation(
+            session=session,
+            company_id=company_id,
+            service_id=service_id,
+            slot_id=slot_id,
+            reservation_date=reservation_date,
+            user_id=user_id,
+            car_type=car_type,
+            final_price=final_price,
+            parking_spot=parking_spot
+        )
+
+        assert not ReservationModel.is_slot_available(session, slot_id, reservation_date)
+
+def test_is_slot_available(session):
+    # Sample data
+    slot_id = 1
+    reservation_date = datetime.now() + timedelta(days=1)
+
+    # Ensure slot is available initially
+    assert ReservationModel.is_slot_available(session, slot_id, reservation_date)
+
+    # Add a reservation
+    ReservationModel.add_reservation(
+        session=session,
+        company_id=1,
+        service_id=1,
+        slot_id=slot_id,
+        reservation_date=reservation_date,
+        user_id=1,
+        car_type="SUV",
+        final_price=100.0,
+        parking_spot=1
+    )
+
+    # Ensure slot is not available after reservation
+    assert not ReservationModel.is_slot_available(session, slot_id, reservation_date)
