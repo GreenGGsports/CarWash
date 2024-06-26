@@ -2,6 +2,7 @@ import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime, timedelta
+from src.models.billing_model import BillingModel
 from src.models.reservation_model import ReservationModel  # Adjust import path as necessary
 from src.models.slot_model import SlotModel  # Adjust import path as necessary
 from src.models.base import Base

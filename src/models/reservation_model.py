@@ -4,7 +4,7 @@ from datetime import datetime, date
 from .base import BaseModel
 
 class ReservationModel(BaseModel):
-    __tablename__ = 'reservation'
+    __tablename__ = 'Reservation'
 
     id = Column(Integer, primary_key=True)
     slot_id = Column(Integer, ForeignKey('Slot.id'), nullable=False)
@@ -15,16 +15,18 @@ class ReservationModel(BaseModel):
     parking_spot = Column(Integer)
     car_type = Column(String)
     final_price = Column(Float)
+    booking_id = Column(Integer,ForeignKey('Billing.id'),nullable=True)
 
     slot = relationship("SlotModel")
     service = relationship("ServiceModel")
     company = relationship("CompanyModel")
     user = relationship("UserModel")
+    booking = relationship("BillingModel")
 
     @classmethod
     def add_reservation(cls, session: Session, company_id: int, service_id: int, slot_id: int, 
                         reservation_date: datetime, user_id: int, car_type: str, final_price: float, 
-                        parking_spot: int = None):
+                        parking_spot: int = None, booking_id: int = None):
         # Check if the slot is available
         if not cls.is_slot_available(session, slot_id, reservation_date):
             raise Exception("Slot is not available for reservation")
@@ -37,7 +39,8 @@ class ReservationModel(BaseModel):
             parking_spot=parking_spot,
             reservation_date=reservation_date,
             car_type=car_type,
-            final_price=final_price
+            final_price=final_price,
+            booking_id = booking_id,
         )
         try:
             session.add(reservation)
