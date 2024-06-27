@@ -8,9 +8,11 @@ from src.models.slot_model import SlotModel  # Adjust import path as necessary
 from src.models.base import Base
 
 # Configure an in-memory SQLite database for testing
+
 @pytest.fixture(scope='module')
 def engine():
     return create_engine('sqlite:///:memory:')
+
 
 @pytest.fixture(scope='module')
 def tables(engine):

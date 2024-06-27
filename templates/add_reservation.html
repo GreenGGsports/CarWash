@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Reservation</title>
+</head>
+<body>
+    <h1>Create Reservation</h1>
+    <form id="reservationForm">
+        <label for="appointment">Appointment:</label><br>
+        <input type="datetime-local" id="appointment" name="appointment" required><br><br>
+        
+        <label for="license_plate">License Plate:</label><br>
+        <input type="text" id="license_plate" name="license_plate" required><br><br>
+        
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+        
+        <label for="phone_number">Phone Number:</label><br>
+        <input type="text" id="phone_number" name="phone_number" required><br><br>
+        
+        <label for="brand">Brand:</label><br>
+        <input type="text" id="brand" name="brand" required><br><br>
+        
+        <label for="type">Type:</label><br>
+        <input type="text" id="type" name="type" required><br><br>
+        
+        <label for="company_id">Company ID:</label><br>
+        <input type="number" id="company_id" name="company_id" required><br><br>
+        
+        <label for="service_id">Service ID:</label><br>
+        <input type="number" id="service_id" name="service_id" required><br><br>
+        
+        <label for="parking_spot">Parking Spot:</label><br>
+        <input type="text" id="parking_spot" name="parking_spot"><br><br>
+        
+        <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+
+    <script>
+        function submitForm() {
+            const appointmentInput = document.getElementById('appointment').value;
+            // Convert datetime-local format to YYYY-MM-DDTHH:MM format
+            const appointment = appointmentInput.replace('T', 'T');
+
+            const licensePlate = document.getElementById('license_plate').value;
+            const name = document.getElementById('name').value;
+            const phoneNumber = document.getElementById('phone_number').value;
+            const brand = document.getElementById('brand').value;
+            const type = document.getElementById('type').value;
+            const companyId = parseInt(document.getElementById('company_id').value);
+            const serviceId = parseInt(document.getElementById('service_id').value);
+            const parkingSpot = document.getElementById('parking_spot').value;
+
+            const data = {
+                appointment: appointment,
+                license_plate: licensePlate,
+                name: name,
+                phone_number: phoneNumber,
+                brand: brand,
+                type: type,
+                company_id: companyId,
+                service_id: serviceId,
+                parking_spot: parkingSpot
+            };
+
+            fetch('/reservation/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                // Handle success response here
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Handle error here
+            });
+        }
+    </script>
+</body>
+</html>

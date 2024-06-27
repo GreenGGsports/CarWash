@@ -18,7 +18,7 @@ if __name__ == '__main__':
     session = create_session()
     
     # Create a new reservation
-    new_reservation = Reservation.create_reservation(
+    new_reservation = Reservation.add_reservation(
         session,
         appointment=datetime.datetime.utcnow(),
         license_plate='ABC123',
