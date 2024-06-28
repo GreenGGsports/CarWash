@@ -1,11 +1,15 @@
 # tests/conftest.py
 
 import pytest
-from setup import create_app, db
+from setup import create_app
 from src.models.reservation_model import ReservationModel
 from src.models.company_model import CompanyModel
 from src.models.service_model import ServiceModel
 import datetime
+
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
 
 @pytest.fixture(scope='module')
 def test_client():

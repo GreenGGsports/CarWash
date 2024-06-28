@@ -1,76 +1,84 @@
 import pytest
-from unittest.mock import patch, MagicMock
-from sqlalchemy.orm import Session
-from werkzeug.security import generate_password_hash, check_password_hash
-from src.models.user_model import UserModel  
-@pytest.fixture
-def session():
-    # Creating a mock session
-    return MagicMock(spec=Session)
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from src.models.base import BaseModel  # Adjust the import path as per your project structure
+from src.models.user_model import UserModel  # Adjust the import path as per your project structure
 
-@pytest.fixture
-def user_data():
-    return {
-        'id': 1,
-        'user_name': 'testuser',
-        'password': 'testpassword'
-    }
+@pytest.fixture(scope='module')
+def engine():
+    return create_engine('sqlite:///:memory:')
 
-def test_add_user(session, user_data):
-    with patch('your_module.generate_password_hash') as mock_generate_password_hash:
-        mock_generate_password_hash.return_value = 'hashedpassword'
-        
-        user = UserModel.add_user(session, user_data['user_name'], user_data['password'])
-        
-        session.add.assert_called_once_with(user)
-        session.commit.assert_called_once()
-        assert user.user_name == user_data['user_name']
-        assert user.password_hash == 'hashedpassword'
+@pytest.fixture(scope='module')
+def tables(engine):
+    BaseModel.metadata.create_all(engine)
+    yield
+    BaseModel.metadata.drop_all(engine)
 
-def test_login_success(session, user_data):
-    with patch('your_module.check_password_hash') as mock_check_password_hash:
-        mock_check_password_hash.return_value = True
-        
-        user = UserModel(
-            id=user_data['id'], 
-            user_name=user_data['user_name'], 
-            password_hash=generate_password_hash(user_data['password'])
-        )
-        session.query.return_value.filter.return_value.first.return_value = user
-        
-        logged_in_user = UserModel.login(session, user_data['user_name'], user_data['password'])
-        
-        assert logged_in_user == user
+@pytest.fixture(scope='function')
+def session(engine, tables):
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    yield session
+    session.close()
 
-def test_login_failure(session, user_data):
-    with patch('your_module.check_password_hash') as mock_check_password_hash:
-        mock_check_password_hash.return_value = False
-        
-        user = UserModel(
-            id=user_data['id'], 
-            user_name=user_data['user_name'], 
-            password_hash=generate_password_hash(user_data['password'])
-        )
-        session.query.return_value.filter.return_value.first.return_value = user
-        
-        logged_in_user = UserModel.login(session, user_data['user_name'], user_data['password'])
-        
-        assert logged_in_user == False
+# Test cases for UserModel
+def test_add_user(session):
+    # Arrange
+    user_name = "test_user"
+    password = "test_password"
 
-def test_check_name_taken(session, user_data):
-    session.query.return_value.filter.return_value.first.return_value = UserModel(
-        id=user_data['id'], 
-        user_name=user_data['user_name'], 
-        password_hash=generate_password_hash(user_data['password'])
-    )
-    
-    is_taken = UserModel.check_name_taken(session, user_data['user_name'])
-    
-    assert is_taken == True
+    # Act
+    user = UserModel.add_user(session, user_name, password)
 
-def test_check_name_not_taken(session):
-    session.query.return_value.filter.return_value.first.return_value = None
-    
-    is_taken = UserModel.check_name_taken(session, 'newuser')
-    
-    assert is_taken == False
+    # Assert
+    assert user.id is not None
+    assert user.user_name == user_name
+    assert user.password_hash != password  # Ensure password is hashed
+
+def test_login_success(session):
+    # Arrange
+    user_name = "test_user"
+    password = "test_password"
+    UserModel.add_user(session, user_name, password)
+
+    # Act
+    user = UserModel.login(session, user_name, password)
+
+    # Assert
+    assert user is not False
+    assert user.user_name == user_name
+
+def test_login_failure(session):
+    # Arrange
+    user_name = "test_user"
+    password = "test_password"
+    wrong_password = "wrong_password"
+    UserModel.add_user(session, user_name, password)
+
+    # Act
+    result = UserModel.login(session, user_name, wrong_password)
+
+    # Assert
+    assert result is False
+
+def test_check_name_taken_true(session):
+    # Arrange
+    user_name = "test_user"
+    password = "test_password"
+    UserModel.add_user(session, user_name, password)
+
+    # Act
+    is_taken = UserModel.check_name_taken(session, user_name)
+
+    # Assert
+    assert is_taken is True
+
+def test_check_name_taken_false(session):
+    # Arrange
+    user_name = "non_existent_user"
+
+    # Act
+    is_taken = UserModel.check_name_taken(session, user_name)
+
+    # Assert
+    assert is_taken is False

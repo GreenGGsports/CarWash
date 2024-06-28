@@ -40,7 +40,7 @@ class UserModel(BaseModel):
     def check_name_taken(cls,session: Session,user_name: str):
         user_query = session.query(cls).filter(
             cls.user_name == user_name
-            )
+            ).first()
         if user_query:
             return True
         
