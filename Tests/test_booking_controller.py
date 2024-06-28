@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker
 from datetime import datetime, timedelta
 from src.models.base import Base
 from src.models.slot_model import SlotModel
-from src.models.reservation_model import ReservationModel
+from src.models.reservation_model import ReservationModel, CarTypeEnum
 from src.controllers.booking_controller import get_slot_id
 
 # Configure an in-memory SQLite database for testing
@@ -46,7 +46,7 @@ def test_is_slot_available(session):
         user_id=1,
         reservation_date=start_time,
         parking_spot=1,
-        car_type='Sedan',
+        car_type='small_car',
         final_price=100.0
     )
 
@@ -74,7 +74,7 @@ def test_is_slot_available(session):
         user_id=1,
         reservation_date=start_time_2,
         parking_spot=1,
-        car_type='SUV',
+        car_type='small_car',
         final_price=120.0
     )
 
@@ -115,7 +115,7 @@ def test_double_booking_only_available_or_earlier(session):
         user_id=1,
         reservation_date= reservation_date_1,
         parking_spot=1,
-        car_type='SUV',
+        car_type='small_car',
         final_price=120.0
     )
 

@@ -30,6 +30,8 @@ def test_add_company(session):
     company = CompanyModel.add_company(session, company_name)
     assert company.id is not None
     assert company.company_name == company_name
+    company2 = CompanyModel.add_company(session, company_name, 0.1)
+    assert company2.discount == 0.1
 
 def test_get_company(session):
     company_name = "Test Company"
