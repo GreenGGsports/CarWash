@@ -16,7 +16,7 @@ def get_billing_data():
     
     session = current_app.session_factory.get_session()
     try:
-        result_dict = BillingModel.get_first_by_license_plate(license_plate)
+        result_dict = BillingModel.get_first_by_license_plate(license_plate).__dict__
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     finally:

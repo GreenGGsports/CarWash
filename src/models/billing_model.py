@@ -34,12 +34,12 @@ class BillingModel(BaseModel):
             raise e 
                
     @classmethod    
-    def get_by_license_plate(cls, session: Session, license_plate):
+    def get_first_by_license_plate(cls, session: Session, license_plate):
         billing_data = session.query(cls).filter(
             cls.license_plate == license_plate
         ).first()
         
         if billing_data:
-            return billing_data.__dict__
+            return billing_data
         return False 
         
