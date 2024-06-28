@@ -2,6 +2,9 @@ from sqlalchemy import Column, Integer, DateTime, Float, ForeignKey, String
 from sqlalchemy.orm import relationship, Session
 from datetime import datetime, date
 from .base import BaseModel
+from sqlalchemy import Enum
+
+CarTypeEnum = Enum('small_car', 'large_car', name='car_type_enum')
 
 class ReservationModel(BaseModel):
     __tablename__ = 'reservation'
@@ -13,7 +16,7 @@ class ReservationModel(BaseModel):
     user_id = Column(Integer, ForeignKey('User.id'), nullable=False)
     reservation_date = Column(DateTime, nullable=False)
     parking_spot = Column(Integer)
-    car_type = Column(String)
+    car_type = Column(CarTypeEnum, nullable=False)
     final_price = Column(Float)
 
     slot = relationship("SlotModel")
@@ -23,7 +26,7 @@ class ReservationModel(BaseModel):
 
     @classmethod
     def add_reservation(cls, session: Session, company_id: int, service_id: int, slot_id: int, 
-                        reservation_date: datetime, user_id: int, car_type: str, final_price: float, 
+                        reservation_date: datetime, user_id: int, car_type, final_price: float, 
                         parking_spot: int = None):
         # Check if the slot is available
         if not cls.is_slot_available(session, slot_id, reservation_date):

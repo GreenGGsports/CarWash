@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker
 from datetime import datetime, timedelta
 from src.models.base import Base
 from src.models.slot_model import SlotModel
-from src.models.reservation_model import ReservationModel
+from src.models.reservation_model import ReservationModel, CarTypeEnum
 from src.controllers.booking_controller import get_slot_id
 
 # Configure an in-memory SQLite database for testing
@@ -28,8 +28,6 @@ def session(engine):
     Base.metadata.drop_all(engine)
 
 def test_is_slot_available(session):
-    from pdb import set_trace
-    set_trace()
 
     # Create a slot
     start_time = datetime.now()
@@ -48,7 +46,7 @@ def test_is_slot_available(session):
         user_id=1,
         reservation_date=start_time,
         parking_spot=1,
-        car_type='Sedan',
+        car_type='small_car',
         final_price=100.0
     )
 
@@ -76,7 +74,7 @@ def test_is_slot_available(session):
         user_id=1,
         reservation_date=start_time_2,
         parking_spot=1,
-        car_type='SUV',
+        car_type='small_car',
         final_price=120.0
     )
 
@@ -109,20 +107,35 @@ def test_double_booking_only_available_or_earlier(session):
     assert reserved_slot_1.start_time.hour == 12
     assert reserved_slot_1.end_time.hour == 13
 
+    reservation_2 = ReservationModel.add_reservation(
+        session=session,
+        slot_id=slot_id_1,
+        service_id=1,
+        company_id=1,
+        user_id=1,
+        reservation_date= reservation_date_1,
+        parking_spot=1,
+        car_type='small_car',
+        final_price=120.0
+    )
+
     # Próbáljunk újra ugyanarra az időpontra foglalni
     slot_id_2 = get_slot_id(session, reservation_date_1)
 
     # Ellenőrizzük, hogy nem sikerült újra ugyanarra az időpontra foglalni
     assert slot_id_2 is not None
-    assert slot_id_1 != slot_id_2
+    assert slot_id_1 == slot_id_2 + 1 
 
+    slot2 = SlotModel.get_by_id(session, slot_id_2)
+    assert slot2.start_time.hour == 11
+    assert slot2.end_time.hour == 12
 
     # Foglalás 12:00-ra (korábbi időpontra)
-    reservation_date_2 = datetime.now().replace(hour=12, minute=0, second=0, microsecond=0)
-    slot_id_2 = get_slot_id(session, reservation_date_2)
-    assert slot_id_2 is not None
+    reservation_date_3 = datetime.now().replace(hour=12, minute=0, second=0, microsecond=0)
+    slot_id_3 = get_slot_id(session, reservation_date_3)
+    assert slot_id_3 is not None
 
     # Ellenőrizzük, hogy a visszaadott slot ID a 11:00-12:00-as időszakra vonatkozik-e
-    reserved_slot_2 = SlotModel.query.get(slot_id_2)
+    reserved_slot_2 = SlotModel.get_by_id(session, slot_id_3)
     assert reserved_slot_2.start_time.hour == 11
     assert reserved_slot_2.end_time.hour == 12
