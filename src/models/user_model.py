@@ -4,7 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from .base import BaseModel
 
 class UserModel(BaseModel):
-    __tablename__ = 'user'
+    __tablename__ = 'User'
     
     id = Column(Integer, primary_key=True)
     user_name = Column(String, nullable=False)

@@ -3,19 +3,21 @@ from sqlalchemy.orm import Session
 from .base import BaseModel
 
 class ServiceModel(BaseModel):
-    __tablename__ = 'service'
+    __tablename__ = 'Service'
     
     service_name = Column(String, nullable=False)
-    price = Column(Integer, nullable=False)
+    price_small = Column(Integer, nullable=False)
+    price_large = Column(Integer, nullable=False)
 
     def __repr__(self):
         return f"<ServiceModel(id={self.id}, service_name='{self.service_name}', price={self.price})>"
 
     @classmethod
-    def add_service(cls, session: Session, service_name: str, price: int):
+    def add_service(cls, session: Session, service_name: str, price_small: int, price_large: int):
         service = cls(
             service_name = service_name,
-            price = price
+            price_small = price_small,
+            price_large = price_large
         )
         session.add(service)
         session.commit()
