@@ -1,0 +1,491 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #000033;
+    width: 1920px;
+}
+
+.logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px auto 0;
+}
+
+.line {
+    width: 1710px;
+    height: 1px;
+    background-color: white;
+    margin-bottom: 50px; /* Igény szerint állítható távolság a logótól */
+}
+
+.focim{
+    color: white;
+    text-align: center;
+    margin: 0 auto 30px;
+}
+
+.alcim{
+    background-color: #E0C278;
+    width: 1009px;
+    height: 103px;
+    border-radius: 0 10px 25px 0;
+    font-size: 60px;
+    text-align: center;
+    margin-bottom: 100px;
+    margin-top: 100px;
+}
+
+.FoglalasiFelulet {
+    border: 0.1px solid white;
+    box-shadow: 5px 10px white;
+    border-radius: 10px 50px 50px 10px;
+    width: 1500px;
+    margin: auto;
+    box-shadow: inset 0 0 30px white, 0 0 20px white;
+}
+
+.csomagok {
+    display: flex;
+    flex-wrap: nowrap; /* Többsoros elrendezés kisebb képernyőkön */
+    gap: 50px; /* Térköz a csomagok között */
+    margin: 0 32px 150px 32px;
+}
+
+.csomag {
+    border: 1px solid white;
+    width: 320px;
+    height: 600px;
+    color: white;
+    border-radius: 10px 10px 80px 10px;
+    text-align: center;
+    padding: 20px 0;
+    background-color: transparent; /* Az alapértelmezett gomb stílusok eltávolítása */
+    font-size: 1.2em;
+    cursor: pointer; /* Mutató kézkurzor hozzáadása a gombhoz */
+    box-shadow: inset 0 0 30px white, 0 0 20px white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.csomag:focus {
+    outline: none; /* Az alapértelmezett fókuszkeret eltávolítása */
+}
+
+
+.ExtrakKeret {
+    width: 1415px;
+    height: 1025px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin: 0 auto;
+    border: 0.1px solid white;
+    border-radius: 25px;
+    box-shadow: inset 0 0 30px white, 0 0 20px white;
+}
+
+.ExtrakContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.KulsoExtrak,
+.BelsoExtrak {
+    width: 48%; /* Az elemek egymás melletti elrendezése */
+    border: 0.1px solid white;
+    box-shadow: inset 0 0 30px white, 0 0 20px white;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ExtrakAlcim {
+    background-color: #E0C278;
+    width: 100%; /* Teljes szélességű cím */
+    height: 52px;
+    border-radius: 0 12.5px 25px 0;
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Két oszlopos elrendezés a belső és külső extrákhoz */
+.BelsoExtrak > div,
+.KulsoExtrak > div {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 10px;
+}
+
+/* Bal oldali elemek */
+.BelsoExtrakBal,
+.KulsoExtrakBal,
+.BelsoExtrakJobb,
+.KulsoExtrakJobb {
+    width: 48%; /* Két oszlop, 10px gap kompenzálásával */
+    height: 50px;
+    border: 0.1px solid white;
+    background-color: transparent; /* Az alapértelmezett gomb stílusok eltávolítása */
+    border-radius: 20px 5px 5px 5px;
+    box-shadow: inset 0 0 30px white, 0 0 20px white;
+    text-align: center;
+    justify-content: center;
+    color: white;
+    margin-bottom: 10px; /* Térköz az elemek között függőlegesen */
+    cursor: pointer; /* Mutató kézkurzor hozzáadása */
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.BelsoExtrakJobb {
+    border-radius: 5px 5px 5px 20px;
+}
+
+/* Az alapértelmezett fókuszkeret eltávolítása */
+.BelsoExtrakBal:focus,
+.KulsoExtrakBal:focus,
+.BelsoExtrakJobb:focus,
+.KulsoExtrakJobb:focus {
+    outline: none;
+}
+
+/* Kiválasztott állapot stílusai */
+.BelsoExtrakBal.selected,
+.KulsoExtrakBal.selected,
+.BelsoExtrakJobb.selected,
+.KulsoExtrakJobb.selected {
+    background-color: #FF4081;
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+
+.EgyebInfo{
+    width: 1430px;
+    height: 100px;
+    border: 0.1px solid white;
+    border-radius: 25px;
+    box-shadow: inset 0 0 30px white, 0 0 20px white;
+    text-align: center;
+}
+
+.EgyebInfo > p{
+    color: white;
+}
+
+.Idopontfoglalas{
+    width: 1430px;
+    height: 350px;
+    border: 0.1px solid white;
+    box-shadow: inset 0 0 30px white, 0 0 20px white;
+    border-radius: 25px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.AtadasContainer {
+    display: flex;
+    flex-wrap: wrap; /* Többsoros elrendezés kisebb képernyőkön */
+    gap: 10px; /* Térköz az elemek között */
+}
+
+.atadas {
+    flex: 1 1 calc(50% - 10px); /* Két oszlop 10px gap kompenzálásával */
+    color: white; /* Példa szöveg szín */
+    padding: 10px; /* Példa padding */
+    border-radius: 5px; /* Példa border radius */
+    box-sizing: border-box; /* Győződj meg róla, hogy a padding és a border is figyelembe van véve */
+    text-align: center; /* Középre igazítás */
+    width: 323px;
+    height: 50px;
+    border: 0.1px solid white;
+    box-shadow: inset 0 0 30px white, 0 0 20px white;
+    background-color: transparent; /* Az alapértelmezett gomb stílusok eltávolítása */
+    cursor: pointer; /* Mutató kézkurzor hozzáadása */
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.atadasElso {
+    border-radius: 20px 5px 5px 5px;
+}
+
+.atadasUtolso {
+    border-radius: 5px 5px 20px 5px;
+}
+
+/* Az alapértelmezett fókuszkeret eltávolítása */
+.atadas:focus {
+    outline: none;
+}
+
+/* Kiválasztott állapot stílusai */
+.atadas.selected {
+    background-color: #FF4081;
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/*naptár*/
+
+.group {
+    position: relative;
+    margin: 30px 20px 50px;
+}
+
+input {
+    color: #424242;
+    font-size: 1.2em;
+    padding: 10px 10px 5px 5px;
+    display: block;
+    width: 300px;
+    border: none;
+    border-bottom: 1px solid #607D8B;
+}
+input:focus {
+    outline: none;
+}
+
+label.input-label {
+    color: #616161;
+    position: absolute;
+}
+
+input:focus ~ label.input-label {
+    color: #0288D1;
+}
+
+input[readonly] ~ label.input-label {
+    top: -15px;
+    font-size: 0.9em;
+}
+
+.bar {
+    position: relative;
+    display: block;
+    width: 315px;
+}
+
+.bar:before,
+.bar:after {
+    background: #0288D1;
+    content: '';
+    height: 2px;
+    width: 0;
+    bottom: 1px;
+    position: absolute;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+.bar:before {
+    left: 50%;
+}
+
+.bar:after {
+    right: 50%;
+}
+
+input:focus ~ .bar:before,
+input:focus ~ .bar:after {
+    width: 50%;
+}
+
+/* egyedi naptár */
+
+#calendar-tomorrow {
+    display: none; /* input mező elrejtése */
+}
+
+.flatpickr-calendar {
+    background: #1E1E3F;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    color: white;
+    width: 658px; /* Szélesség beállítása */
+    height: 300px; /* Magasság beállítása */
+    padding: 0; /* Padding eltávolítása */
+    display: flex;
+    flex-direction: column; /* A naptár függőleges igazítása */
+}
+
+.flatpickr-innerContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+/* Naptár napok */
+.flatpickr-days {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+}
+
+.flatpickr-day {
+    border: 1px solid white;
+    color: white;
+    flex: 1 0 calc(100% / 7); /* A napok egyenlő szélessége (7 oszlop) */
+    height: calc(100% / 6); /* Egyenlő magasság (6 sor) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.flatpickr-day.today {
+    background: #1E1E3F;
+    border-color: #FF4081;
+}
+
+.flatpickr-day.selected {
+    background: #FF4081;
+    border-color: #FF4081;
+}
+
+.flatpickr-day:hover {
+    background: #FF4081;
+    border-color: #FF4081;
+}
+
+/* Hétvégék */
+.flatpickr-day.weekend {
+    color: #FF4081;
+}
+
+/* Naptár fejlécek */
+.flatpickr-months .flatpickr-prev-month,
+.flatpickr-months .flatpickr-next-month {
+    color: white;
+}
+
+.flatpickr-months .flatpickr-current-month {
+    color: white;
+}
+
+/* Esemény gombok */
+.flatpickr-time-container .flatpickr-time {
+    color: white;
+    background: #1E1E3F;
+    border: none;
+}
+
+.flatpickr-time-container .numInputWrapper {
+    border: none;
+}
+
+/* Események */
+.flatpickr-day.today::after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #FF4081;
+}
+
+/* Esemény gomb stílus */
+button.flatpickr-day {
+    background: #1E1E3F;
+    border: 1px solid white;
+    border-radius: 5px;
+    color: white;
+}
+
+button.flatpickr-day:hover,
+button.flatpickr-day:focus {
+    background: #FF4081;
+    border-color: #FF4081;
+    color: white;
+}
+
+body {
+    background-color: #000033;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.AdatokFelulet {
+    width: 100%;
+    max-width: 1450px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.Rendszam {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.Rendszam label {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.RendszamBemenet {
+    width: 100%;
+    max-width: 500px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2em;
+    background-color: #1E1E3F;
+    color: white;
+}
+
+.AdatokContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.SzemelyesAdatok, .AutoAdatok, .SzamlazasiAdatok, .Megjegyzes {
+    background-color: #1E1E3F;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 48%;
+}
+
+.SzamlazasiAdatok, .Megjegyzes {
+    height: auto; /* Magasság automatikus, hogy igazodjon a tartalomhoz */
+}
+
+.Bemenet {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #000033;
+    color: white;
+    font-size: 1em;
+    margin-left: 5%;
+}
+
+
