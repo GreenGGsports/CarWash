@@ -9,8 +9,6 @@ class UserModel(BaseModel):
     id = Column(Integer, primary_key=True)
     user_name = Column(String, nullable=False)
     password_hash = Column(String,nullable=False )
-
-
     
     def __repr__(self):
         return f"<UserModel(id={self.id}, user_name='{self.user_name}')>"
