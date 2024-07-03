@@ -28,7 +28,8 @@ class UserModel(BaseModel):
         user = session.query(cls).filter(
             cls.user_name == user_name
             ).first()
-        
+        if not user:
+            return False
         if check_password_hash(user.password_hash,password):
             return user
         else:

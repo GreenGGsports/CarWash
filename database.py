@@ -7,7 +7,7 @@ from src.models.slot_model import SlotModel
 from src.models.user_model import UserModel
 
 
-def create_database():
+def create_database(engine):
     db_path = 'sqlite:///db/car_wash.db'
     engine = create_engine(db_path)
     BaseModel.metadata.create_all(engine)

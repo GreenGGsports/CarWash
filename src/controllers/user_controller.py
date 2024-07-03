@@ -1,6 +1,6 @@
 from src.models.user_model import UserModel
 from sqlalchemy.orm import Session
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, current_app
 import jwt
 from functools import wraps
 
@@ -46,11 +46,12 @@ def login_required(func):
 
 @user_ctrl.route('/login', methods=['POST'])
 def login():
+    session = current_app.session_factory.get_session()
     data = request.get_json()
     user_name = data.get('user_name')
     password = data.get('password')
 
-    user = UserModel.login(user_name=user_name, password=password)
+    user = UserModel.login(session=session,user_name=user_name, password=password)
     if user:
         token = generate_token(user.id)
         return jsonify({'token': token}), 200
