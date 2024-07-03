@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, String, Enum, ForeignKey
 from sqlalchemy.orm import Session, relationship
 from .base import BaseModel
 
-EtraTypeEnum = Enum('small_car', 'large_car', name='car_type_enum')
+EtraTypeEnum = Enum('interior', 'exterior', name='EtraTypeEnum ')
 
 class ExtraModel(BaseModel):
     __tablename__ = 'Extra'
