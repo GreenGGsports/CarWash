@@ -1,31 +1,7 @@
-import pytest
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
 from datetime import datetime, timedelta
-from src.models.base import Base
 from src.models.slot_model import SlotModel
 from src.models.reservation_model import ReservationModel, CarTypeEnum
 from src.controllers.booking_controller import get_slot_id
-
-# Configure an in-memory SQLite database for testing
-@pytest.fixture(scope='module')
-def engine():
-    return create_engine('sqlite:///:memory:')
-
-@pytest.fixture(scope='module')
-def tables(engine):
-    Base.metadata.create_all(engine)
-    yield
-    Base.metadata.drop_all(engine)
-
-@pytest.fixture(scope='function')
-def session(engine):
-    Base.metadata.create_all(engine)
-    Session = sessionmaker(bind=engine)
-    session = Session()
-    yield session
-    session.close()
-    Base.metadata.drop_all(engine)
 
 def test_is_slot_available(session):
 
