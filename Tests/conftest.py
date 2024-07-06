@@ -1,12 +1,10 @@
-# tests/conftest.py
-
 import pytest
 from setup import create_app
 
 from src.models.base import BaseModel
 from src.models.reservation_model import ReservationModel
-from src.models.company_model import CompanyModel
 from src.models.service_model import ServiceModel
+from src.models.company_model import CompanyModel
 from src.models.user_model import UserModel
 from src.models.slot_model import SlotModel
 from sessions import SessionFactory

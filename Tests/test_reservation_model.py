@@ -1,14 +1,6 @@
 import pytest
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-import datetime
-from datetime import timedelta
+from datetime import datetime, timedelta
 from src.models.reservation_model import ReservationModel  # Adjust import path as necessary
-from src.models.slot_model import SlotModel  # Adjust import path as necessary
-from src.models.base import Base
-
-from Tests.conftest import *
-
 
 def test_add_reservation(session):
     appointment = datetime.datetime.utcnow()

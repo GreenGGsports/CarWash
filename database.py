@@ -5,6 +5,7 @@ from src.models.service_model import ServiceModel
 from src.models.company_model import CompanyModel
 from src.models.slot_model import SlotModel
 from src.models.user_model import UserModel
+from src.models.carwash_model import CarWashModel
 
 
 def create_database(engine):
