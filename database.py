@@ -8,9 +8,7 @@ from src.models.user_model import UserModel
 from src.models.carwash_model import CarWashModel
 
 
-def create_database(engine):
-    db_path = 'sqlite:///db/car_wash.db'
-    engine = create_engine(db_path)
+def create_database(engine,db_path):
     BaseModel.metadata.create_all(engine)
     print("Database created successfully.")
 

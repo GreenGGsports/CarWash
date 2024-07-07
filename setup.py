@@ -15,7 +15,7 @@ def create_app(config_name: str):
     app.session_factory = SessionFactory(engine)
     
     with app.app_context():
-        create_database(engine)
+        create_database(engine,app.config['SQLALCHEMY_DATABASE_URI'])
     
     init_login_manager(app=app)
     # Register blueprints
