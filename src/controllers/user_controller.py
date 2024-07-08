@@ -13,6 +13,7 @@ def show_test_form():
 class User(UserMixin):
     def __init__(self, id):
         self.id = id
+        self.reservation_id = None
 
 
 # Function to initialize LoginManager
