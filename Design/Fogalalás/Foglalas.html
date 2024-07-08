@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="foglalas.css">
+    <title>Foglalás</title>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img style="width: 450px; height: 95px" src="Logo2.png" />
+        </div>
+        <div class="line"></div>
+    </header>
+    <div class="FoglalasiFelulet">
+        <h1 class="focim">Időpont foglalás</h1>
+        <div class="RegisztracioAlcimContainer">
+            <!--<div style="width: 9px; height: 103px; left: 0px; top: 0px; position: absolute; background: #13669C; border-top-left-radius: 60px; border-top-right-radius: 60px"></div>-->
+            <div class="RegisztracioAlcimBox"></div>
+            <div class="RegisztracioAlcim">Belépés & Regisztráció</div>
+        </div>
+        <div class="RegisztracioContainer">
+            <form action="">
+                <div class="RegisztracioBox">
+                    <label style="position: relative; top: 21px; left: 67px;" for="Felhasznev">Felhasználónév*</label>
+                    <input placeholder="Felhasználónév" class="FelhaszNev"></input>
+                    <label style="position: relative; top: 21px; left: 260px;" for="Jelszo">Jelszó*</label>
+                    <input type="password" placeholder="Jelszó" class="Jelszo"></input>
+                    <button class="Belepes">Belépés</button>
+                    <button class="Regisztracio">Regisztráció</button>
+                    <input type="checkbox" class="AdatvedelemPipa"></input>
+                    <div class="Adatvedelem">*Elfogadom az ÁSZF-et és az Adatvédelmi szabályzatot</div>
+                    <div class="Line2"></div>
+                    <div class="RegNelkulSzoveg">Regisztráció nélkül foglalok</div>
+                    <input type="checkbox" class="RegNelkulPipa"></input>
+                </div>
+            </form>
+        </div>
+        <h2 class="alcim1">Automosóink</h2>
+        <div class="HelyszinekContainer">
+            <form style="display: contents;" action="">
+                <div class="box">
+                    <button class="keret">
+                        <img class="helyszin" src="https://via.placeholder.com/335x100" />
+                        <div class="cim">
+                            1097 Budapest,<br />Könyves Kálmán krt. 11.</div>
+                        <div class="IkonKeret">
+                            <div class="ikon"></div>
+                        </div>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <h2 class="alcim">Csomagjaink</h2>
+        <form action="">
+            <div class="CsomagokContainer">
+                <button class="CsomagokBox"></button>
+            </div>
+            <h2 class="alcim">Extrák</h2>
+            <div class="ExtrakContainers">
+                <div class="ExtrakContainer">
+                    <div class="ExtrakKeret">
+                        <div class="ExtrakAlcim">
+                            <div class="KulsoExtrak">Külső Extrák</div>
+                            <label class="KulsoGomb">
+                                <input type="checkbox" class="checkbox">
+                                <span class="checkbox-label">Bogároldás</span>
+                            </label>                                                                                  
+                        </div>
+                    </div>
+                </div>
+                <div class="ExtrakContainer">
+                    <div class="ExtrakKeret">
+                        <div class="ExtrakAlcim">
+                            <div class="KulsoExtrak">Külső Extrák</div>
+                        </div>
+                        <label class="BelsoGomb2">
+                            <input type="checkbox" class="checkbox">
+                            <span class="checkbox-label">Extra porszívózás</span>
+                        </label>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="FigyelmeztetesKeret">
+            <div class="Figyelmeztetes">
+                <p>*Az extra szennyezett autóknál, ha nem választja ki a megfelelő Extra csomagot a foglaláskor, akkor a
+                    költség kétszeresét számoljuk fel!</p>
+            </div>
+        </div>
+        <div style="width: 1009px; height: 103px; left: 0px; top: 0px; position: absolute">
+            <div class="AlcimContainer"></div>
+            <div class="AlcimBox"></div>
+            <div class="AlcimSzoveg">
+                Válassz szabad időpontot</div>
+        </div>
+        <form action="">
+            <div class="IdopontContainer">
+                <div class="IdopontBox">
+                    <div class="group">
+                        <input type="text" id="calendar-tomorrow">
+                        <span class="bar"></span>
+                    </div>
+                    <div class="IdopontLine">
+                    </div>
+                    <div class="GombBox">
+                        <label class="IdopontGomb1">
+                            <input type="checkbox" class="checkbox">
+                            <span class="checkbox-label">10 órás átadás</span>
+                        </label>                        
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="IdopontFigyelmeztetes">
+            <div class="Figyelmeztetes">
+                <p>*Az extra szennyezett autóknál, ha nem választja ki a megfelelő Extra csomagot a foglaláskor, akkor a
+                    költség kétszeresét számoljuk fel!</p>
+            </div>
+        </div>
+        <div class="AdatokContainer">
+            <form action="">
+                <div class="MegjegyzesContainer">
+                    <div class="MegjegyzesBox">
+                        <textarea id="megjegyzes" class="MegjegyzesBemenet" placeholder="Írja be a megjegyzését..."></textarea>
+                        <div class="MegjegyzesAlcimContainer">
+                            <div class="MegjegyzesAlcimBox">
+                                <!--<div
+                                    style="width: 3px; height: 52px; left: 0px; top: 0px; position: absolute; background: #13669C; border-top-left-radius: 30px; border-top-right-radius: 30px">
+                                </div>-->
+                                <div class="MegjegyzesAlcimSzoveg">
+                                    Megjegyzés
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="SzamlazasiAdatokContainer">
+                    <div class="SzamlazasiAdatokBox">
+                        <label style="position: relative; top: 350px; left: 62px;" for="">Email</label>
+                        <input type="email" placeholder="Email" class="Email">Email</input>
+                        <label style="position: relative; top: 460px; right: 40px;" for="">Cégnév</label>
+                        <input placeholder="Cégnév" class="Cegnev">Cégnév</input>
+                        <label style="position: relative; top: 240px; left: 148px;" for="">Keresztnév</label>
+                        <input placeholder="Keresztnév" class="KeresztNev">Kereszt név</input>
+                        <label style="position: relative; top: 350px; right: 45px;" for="">Cím</label>
+                        <input placeholder="Cím" class="Cim">Cím</input>
+                        <div class="Fizetes">
+                            <label for="fizetesi_mod" class="dropdown-label">Fizetési mód</label>
+                            <select id="fizetesi_mod" class="dropdown">
+                                <option value="keszpenz">Készpénz</option>
+                                <option value="bankkartya">Bankkártya</option>
+                            </select>
+                        </div>                        
+                        <label style="position: relative; top: 460px; right: 122px;" for="">Adószám</label>
+                        <input placeholder="Adószám" class="Adoszam">Adószám</input>
+                        <label style="position: relative; top: 207px; left: 57px;" for="">Vezetéknév</label>
+                        <input placeholder="Vezetéknév" class="VezetekNev">Vezeték név</input>
+                        <div class="SzamlazasiAlcimContainer">
+                            <div class="SzamlazasiAlcimBox"></div>
+                            <!--<div 
+                                style="width: 3px; height: 52px; left: 0px; top: 0px; position: absolute; background: #13669C; border-top-left-radius: 30px; border-top-right-radius: 30px">
+                            </div>-->
+                            <div class="SzamlazasiAlcim">Számlázási adatok</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="AutoAdatokContainer">
+                    <div class="AutoAdatokBox">
+                    </div>
+                    <label style="position: relative; top: 241px; left: 377px;" for="">Autó méret</label>
+                    <input placeholder="Autó méret" class="AutoMeret">Autó Méret</input>
+                    <label style="position: relative; top: 241px; right: 119px;" for="">Parkoló</label>
+                    <input placeholder="Parkoló" class="Parkolo">Parkoló</input>
+                    <div class="Tipus">
+                        <label style="position: absolute; bottom: 44px; left: 20px;" for="auto_tipus" class="dropdown-label">Autó Típus</label>
+                        <select id="auto_tipus" class="dropdown">
+                            <option value="kis_auto">Kis autó</option>
+                            <option value="kozepes_auto">Közepes autó</option>
+                            <option value="nagy_auto">Nagy autó</option>
+                        </select>
+                    </div>
+                    <label style="position: relative; top: 128px; right: 249px;" for="">Márka</label>                                     
+                    <input placeholder="Márka" class="Marka">Márka</input>
+                    <div class="AutoAdatokAlcimContainer"
+                        style="width: 403px; height: 52px; left: 0px; top: 48px; position: absolute">
+                        <div class="AutoAdatokAlcimBox">
+                        </div>
+                        <!--<div
+                            style="width: 3px; height: 52px; left: 0px; top: 0px; position: absolute; background: #13669C; border-top-left-radius: 30px; border-top-right-radius: 30px">
+                        </div>-->
+                        <div class="AutoAdatokAlcim">Autó adatok</div>
+                    </div>
+                </div>
+                <div class="SzemelyesAdatokContainer">
+                    <div class="SzemelyesAdatokBox"></div>
+                    <div class="SzemelyesAdatokAlcimContainer">
+                        <div class="SzemelyesAdatokAlcimBox"></div>
+                        <!--<div
+                            style="width: 3px; height: 52px; left: 0px; top: 0px; position: absolute; background: #13669C; border-top-left-radius: 30px; border-top-right-radius: 30px">
+                        </div>-->
+                        <div class="SzemelyesAdatokAlcim">Személyes adatok</div>
+                    </div>
+                    <label style="position: relative; top: 239px; left: 390px;" for="">Cégnév</label>
+                    <input placeholder="Cégnév" class="Cegnev2">Cégnév</input>
+                    <label style="position: relative; top: 239px; right: 76px;" for="">Telefonszám</label>
+                    <input type="number" placeholder="Telefonszám" class="Telefon">Telefonszám</input>
+                    <label style="position: relative; top: 128px; left: 50px;" for="">KeresztNév</label>
+                    <input placeholder="Keresztnév" class="KeresztNev2">Kereszt név</input>
+                    <label style="position: relative; top: 128px; right: 482px;" for="Vezetéknév">Vezeték név</label>
+                    <input placeholder="Vezetéknév" class="VezetekNev2">Vezeték név</input>
+                </div>
+                <div class="AdatokCimContainer">
+                    <!--<div style="width: 9px; height: 103px; left: 0px; top: 0px; position: absolute; background: #13669C">
+                    </div>-->
+                    <div class="AdatokCimBox"></div>
+                    <div class="AdatokCim">Add meg az adataidat</div>
+                </div>
+                <div class="RendszamContainer"></div>
+                <div class="RendszamSzoveg">Rendszám:</div>
+                <input placeholder="Rendszám" class="RendszamBemenet">Rendszám</input>
+            </form>
+        </div>
+        <div class="FoglalasContainer">
+            <button class="Foglalas">Foglalás</button>
+        </div>
+
+        <!--
+        <h2 class="alcim">Add meg az adatiad</h2>
+        <div class="AdatokContainer">
+            <div class="SzemelyesAdatok">
+                <form>
+                    <h3 class="AdatokAlcim">Személyes adatok</h3>
+                    <div class="InputWrapper">
+                        <div class="Bal">
+                            <label for="vezeteknev">*Vezeték név</label>
+                            <input type="text" id="vezeteknev" class="Bemenet" placeholder="Vezeték név">
+                            <label for="telefonszam">*Telefon szám</label>
+                            <input type="tel" id="telefonszam" class="Bemenet" placeholder="Telefon szám">
+                        </div>
+                        <div class="Jobb">
+                            <label for="keresztnev">*Kereszt név</label>
+                            <input type="text" id="keresztnev" class="Bemenet" placeholder="Kereszt név">
+                            <label for="cegnev">Cég név</label>
+                            <input type="text" id="cegnev" class="Bemenet" placeholder="Cég név">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="AutoAdatok">
+                <form>
+                    <h3 class="AdatokAlcim">Autó adatok</h3>
+                    <div class="InputWrapper">
+                        <div class="Bal">
+                            <label for="marka">*Márka</label>
+                            <input type="text" id="marka" class="Bemenet" placeholder="Márka">
+                            <label for="parkolo">*Parkoló</label>
+                            <input type="text" id="parkolo" class="Bemenet" placeholder="Parkoló">
+                        </div>
+                        <div class="Jobb">
+                            <label for="tipus">*Típus</label>
+                            <input type="text" id="tipus" class="Bemenet" placeholder="Típus">
+                            <label for="automeret">*Autó méret</label>
+                            <input type="text" id="automeret" class="Bemenet" placeholder="Autó méret">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="SzamlazasiAdatok">
+                <form>
+                    <h3 class="AdatokAlcim">Számlázási adatok</h3>
+                    <div class="InputWrapper">
+                        <div class="Bal">
+                            <label for="fizetesimod">*Fizetési mód</label>
+                            <input type="text" id="fizetesimod" class="Bemenet" placeholder="Fizetési mód">
+                            <label for="vezeteknevszamlazas">*Vezeték név</label>
+                            <input type="text" id="vezeteknevszamlazas" class="Bemenet" placeholder="Vezeték név">
+                            <label for="email">*E-mail cím</label>
+                            <input type="email" id="email" class="Bemenet" placeholder="E-mail cím">
+                        </div>
+                        <div class="Jobb">
+                            <label for="keresztnevszamlazas">*Kereszt név</label>
+                            <input type="text" id="keresztnevszamlazas" class="Bemenet" placeholder="Kereszt név">
+                            <label for="cim">*Cím</label>
+                            <input type="text" id="cim" class="Bemenet" placeholder="Cím">
+                            <label for="cegnevszamlazas">Cég név</label>
+                            <input type="text" id="cegnevszamlazas" class="Bemenet" placeholder="Cég név">
+                            <label for="adoszam">Adószám</label>
+                            <input type="text" id="adoszam" class="Bemenet" placeholder="Adószám">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="Megjegyzes">
+                <h3 class="AdatokAlcim">Megjegyzés</h3>
+                <textarea class="Bemenet" placeholder="Megjegyzés"></textarea>
+            </div>
+        </div>
+    </div>-->
+        <!-- Flatpickr JS -->
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <!-- Localization -->
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ja.js"></script>
+
+        <script>
+            // Inicializálja a Flatpickr-t a megadott input mezőkhöz
+            flatpickr('#calendar-tomorrow', {
+                minDate: new Date().fp_incr(1),
+                inline: true // állandó naptár
+            });
+
+            flatpickr('#calendar-selectrange', {
+                minDate: new Date().fp_incr(1),
+                maxDate: new Date().fp_incr(7)
+            });
+
+            flatpickr('#calendar-range', {
+                mode: "range"
+            });
+
+            // Japanese locale példával
+            flatpickr('#calendar-ja', {
+                locale: "ja",
+                dateFormat: "Y/m/d"
+            });
+        </script>
+</body>
+
+</html>
