@@ -9,6 +9,7 @@ from src.models.company_model import CompanyModel
 from src.models.user_model import UserModel
 from src.models.carwash_model import CarWashModel
 from src.models.extra_model import ExtraModel
+from src.models.reservation_extras import reservation_extra
 
 # Configure an in-memory SQLite database for testing
 @pytest.fixture(scope='function')

@@ -6,6 +6,8 @@ from src.models.company_model import CompanyModel
 from src.models.slot_model import SlotModel
 from src.models.user_model import UserModel
 from src.models.carwash_model import CarWashModel
+from src.models.extra_model import ExtraModel
+from src.models.reservation_extras import reservation_extra
 
 
 def create_database():
