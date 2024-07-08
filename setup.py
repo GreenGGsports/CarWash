@@ -24,7 +24,7 @@ def create_app(config_name: str):
 
 def add_blueprints(app: Flask):
     app.register_blueprint(reservation_ctrl, url_prefix='/reservation')
-    app.register_blueprint(user_ctrl,url_prefix='/login_test')
+    app.register_blueprint(user_ctrl,url_prefix='/reservation')
     return app 
 
 if __name__ == '__main__':
