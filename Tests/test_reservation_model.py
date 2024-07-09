@@ -151,6 +151,8 @@ def test_is_slot_available(session):
     
 
 def test_add_multiple_extras(session):
+    # Create a new session
+    
     # Sample data
     slot_id = 1
     reservation_date = datetime.now() + timedelta(days=1)
@@ -167,7 +169,6 @@ def test_add_multiple_extras(session):
     session.commit()
 
     # Get the IDs of the added extras
-    extra_ids = [extra.id for extra in extras]
 
     # Add a reservation with the extra IDs
     reservation = ReservationModel.add_reservation(
@@ -180,12 +181,18 @@ def test_add_multiple_extras(session):
         car_type='large_car',
         final_price=100.0,
         parking_spot=1,
-        extras=extra_ids  # Pass the IDs of the extras
+        extras=extras  # Pass the list of ExtraModel objects, not their IDs
     )
 
     assert reservation is not None
 
+    # Refresh the session to ensure the reservation is up-to-date
+    session.refresh(reservation)
+
     # Assert that the extras are correctly associated with the reservation
-    assert len(reservation.extras) == len(extra_ids)
-    for extra_id in extra_ids:
-        assert any(extra.id == extra_id for extra in reservation.extras)
+    assert len(reservation.extras) == len(extras)
+    for extra in extras:
+        assert any(res_extra.id == extra.id for res_extra in reservation.extras)
+
+    # Clean up
+    session.close()

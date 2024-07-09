@@ -40,7 +40,7 @@ class ReservationModel(BaseModel):
 
         # Ellenőrizzük, hogy a slot elérhető-e
         if not cls.is_slot_available(session, slot_id, reservation_date):
-            raise Exception("A foglaláshoz nem elérhető hely.")
+            raise Exception("Slot is not available for reservation")
 
         # Foglalás létrehozása
         reservation = cls(
