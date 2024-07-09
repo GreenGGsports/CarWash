@@ -2,10 +2,11 @@
 <html lang="hu">
 
 <head>
+    <script src="/static/script.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" href="foglalas.css">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='foglalas.css') }}">
     <title>Foglalás</title>
 </head>
 
@@ -226,12 +227,12 @@
         </div>
 
   
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
     <!-- Scriptek -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <!-- Localization -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ja.js"></script>
     <!-- Külön JavaScript fájl -->
-    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 
 </body>
 

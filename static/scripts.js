@@ -12,10 +12,10 @@ document.getElementById('loginRegisterForm').addEventListener('submit', function
     var action = event.submitter.className;
     if (action === 'Belepes') {
         // Belépés gomb megnyomva
-        loginOrRegister('/login', username, password);
+        loginOrRegister('/user/login', username, password);
     } else if (action === 'Regisztracio') {
         // Regisztráció gomb megnyomva
-        loginOrRegister('/add_user', username, password);
+        loginOrRegister('/user/add_user', username, password);
     }
 });
 

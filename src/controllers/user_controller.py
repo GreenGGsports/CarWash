@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify, current_app, render_template
 from src.models.user_model import UserModel
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
-user_ctrl = Blueprint('user_ctrl', __name__, url_prefix='/user')
+user_ctrl = Blueprint('user_ctrl', __name__)
 
 
 #only for testing
@@ -31,8 +31,9 @@ def init_login_manager(app):
 @user_ctrl.route('/login', methods=['POST'])
 def login():
     session = current_app.session_factory.get_session()
-    user_name = request.form.get('user_name')
-    password = request.form.get('password')
+    data = request.json
+    user_name = data.get('user_name')
+    password = data.get('password')
     user = UserModel.login(session=session, user_name=user_name, password=password)
     if user:
         user_obj = User(user.id)
@@ -51,8 +52,9 @@ def logout():
 @user_ctrl.route('/add_user', methods=['POST'])
 def add_user():
     session = current_app.session_factory.get_session()
-    user_name = request.form.get('user_name')
-    password = request.form.get('password')
+    data = request.json
+    user_name = data.get('user_name')
+    password = data.get('password')
     if not UserModel.check_name_taken(session=session, user_name=user_name):
         UserModel.add_user(session=session, user_name=user_name, password=password)
         return jsonify({'status': 'success'})

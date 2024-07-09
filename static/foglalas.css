@@ -1,0 +1,2042 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: black;
+    width: 1920px;
+}
+
+button{
+    cursor: pointer;
+}
+
+.logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px auto 25px;
+}
+
+.line {
+    width: 1710px;
+    height: 1px;
+    background-color: white;
+    margin-bottom: 113px; /* Igény szerint állítható távolság a logótól */
+}
+
+.FoglalasiFelulet {
+    border: 0.1px solid white;
+    box-shadow: 5px 10px white;
+    border-radius: 10px 50px 50px 10px;
+    width: 1500px;
+    margin: 101px auto;
+    box-shadow: inset 0 0 30px white, 0 0 20px white;
+    height: 6000px;
+}
+
+.focim{
+    color: white;
+    text-align: center;
+    margin: 100px auto 103px;
+    font-size: 83px;
+}
+
+.RegisztracioAlcimContainer{
+    width: 1009px;
+    height: 103px;
+    position: relative;
+}
+
+.RegisztracioAlcimBox{
+    width: 1000px;
+    height: 100px;
+    left: 9px;
+    top: 3px;
+    position: absolute;
+    background: #13669C;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 25px;
+}
+
+.RegisztracioAlcim{
+    width: 696px;
+    height: 72px;
+    left: 224px;
+    top: 30px;
+    position: absolute;
+    color: black;
+    font-size: 55px;
+    font-family: Graphie;
+    font-weight: 700;
+    line-height: 40px;
+    letter-spacing: 1.65px;
+    word-wrap: break-word;
+}
+
+.RegisztracioContainer{
+    width: 1430px;
+    height: 300px;
+    position: relative;
+}
+
+.RegisztracioBox{
+    width: 1430px;
+    height: 300px;
+    left: 35px;
+    top: 100px;
+    position: absolute;
+    background: black;
+    box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset;
+    border-radius: 25px;
+    border: 1.50px #13669C solid;
+}
+
+.FelhaszNev{
+    width: 305px;
+    height: 50px;
+    left: 50px;
+    top: 80px;
+    position: absolute;
+    background: black;
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border: 1.50px #13669C solid;
+    color: white;
+}
+
+.FelhaszNev::placeholder, .Jelszo::placeholder{
+    font-size: 20px;
+}
+
+.Jelszo{
+    width: 305px;
+    height: 50px;
+    left: 395px;
+    top: 80px;
+    position: absolute;
+    background: black;
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border: 1.50px #13669C solid;
+    color: white;
+}
+
+.Belepes{
+    width: 300px;
+    height: 100px;
+    left: 740px;
+    top: 50px;
+    position: absolute;
+    background: black;
+    box-shadow: 0px 0px 10px 3px rgba(123, 242, 218, 0.50);
+    border-top-left-radius: 30px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border: 1.50px #7BF2DA solid;
+    text-align: center;
+    line-height: 50px;
+    color: white;
+    font-size: 40px;
+}
+
+.Regisztracio{
+    width: 300px;
+    height: 100px;
+    left: 1080px;
+    top: 50px;
+    position: absolute;
+    background: black;
+    box-shadow: 0px 0px 10px 3px rgba(123, 242, 218, 0.50);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 5px;
+    border: 1.50px #7BF2DA solid;
+    text-align: center;
+    line-height: 50px;
+    color: white;
+    font-size: 40px;
+}
+
+/*.BelepesSzoveg{
+    width: 158px;
+    height: 38px;
+    left: 810px;
+    top: 68px;
+    position: absolute;
+    text-align: center;
+    color: #F3F5F5;
+    font-size: 40px;
+    font-family: Graphie;
+    font-weight: 600;
+    word-wrap: break-word;
+}
+
+.RegisztracioSzoveg{
+    width: 226px;
+    height: 38px;
+    left: 1117px;
+    top: 68px;
+    position: absolute;
+    text-align: center;
+    color: #F3F5F5;
+    font-size: 40px;
+    font-family: Graphie;
+    font-weight: 600;
+    word-wrap: break-word;
+}*/
+
+.AdatvedelemPipa{
+    width: 50px;
+    height: 50px;
+    background: black;
+    box-shadow: 0px 0px 10px 1.5px rgba(19, 102, 156, 0.50) inset;
+    border-radius: 10px;
+    border: 1.50px #13669C solid;
+    position: relative;
+    top: 198px;
+    right: 174px;
+}
+
+.Line2{
+    width: 2px;
+    height: 120px;
+    left: 1061px;
+    top: 44px;
+    position: absolute;
+    background: #13669C;
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
+}
+
+.RegNelkulSzoveg{
+    left: 946px;
+    top: 210px;
+    position: absolute;
+    color: white;
+    font-size: 25px;
+    font-family: Graphie;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
+.RegNelkulPipa{
+    width: 50px;
+    height: 50px;
+    left: 871px;
+    top: 200px;
+    position: absolute;
+    background: black;
+    box-shadow: 0px 0px 10px 1.5px rgba(19, 102, 156, 0.50) inset;
+    border-radius: 10px;
+    border: 1.50px #13669C solid;
+}
+
+.Adatvedelem{
+    color: white;
+    font-size: 25px;
+    font-family: Graphie;
+    font-weight: 350;
+    word-wrap: break-word;
+    position: relative;
+    top: 146px;
+    left: 125px;
+}
+
+.alcim1{
+    width: 1009px;
+    height: 103px;
+    font-size: 60px;
+    text-align: center;
+    margin-bottom: 100px;
+    margin-top: 200px;
+    border-radius: 0px 5px 25px 0px;
+    background: #13669C;
+}
+
+.alcim{
+    width: 1009px;
+    height: 103px;
+    font-size: 60px;
+    text-align: center;
+    margin-bottom: 100px;
+    margin-top: 100px;
+    border-radius: 0px 5px 25px 0px;
+    background: #13669C;
+}
+
+.HelyszinekContainer{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.box{
+    width: 335px;
+    height: 400px; 
+    position: relative 
+}
+
+.keret{
+    width: 335px;
+    height: 400px;
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    background: black;
+    box-shadow: 0px 0px 15px 3px rgba(124, 242, 218, 0.45) inset; 
+    border-top-left-radius: 60px; 
+    border-top-right-radius: 10px; 
+    border-bottom-right-radius: 10px; 
+    border-bottom-left-radius: 10px;
+    border: 1.50px #13669C solid
+}
+
+.keret2{
+    width: 335px;
+    height: 400px;
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    background: black;
+    box-shadow: 0px 0px 15px 3px rgba(124, 242, 218, 0.45) inset; 
+    border-radius: 10px;
+    border: 1.50px #13669C solid
+}
+
+.keret3{
+    width: 335px;
+    height: 400px;
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    background: black;
+    box-shadow: 0px 0px 15px 3px rgba(124, 242, 218, 0.45) inset; 
+    border-radius: 10px;
+    border: 1.50px #13669C solid
+}
+
+.keret4{
+    width: 335px;
+    height: 400px;
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    background: black;
+    box-shadow: 0px 0px 15px 3px rgba(124, 242, 218, 0.45) inset; 
+    border-radius: 10px 10px 60px 10px;
+    border: 1.50px #13669C solid
+}
+
+.helyszin{
+    width: 335px;
+    height: 100px;
+    left: 0px;
+    top: 47px; 
+    position: absolute
+}
+
+.cim{
+    width: 283px;
+    height: 60px; 
+    left: 26px; 
+    top: 290px; 
+    position: absolute; 
+    text-align: center; 
+    color: #F3F5F5; 
+    font-size: 25px; 
+    font-family: Inter; 
+    font-weight: 600; 
+    word-wrap: break-word
+}
+
+.IkonKeret{
+    width: 79px; 
+    height: 79px; 
+    left: 128px; 
+    top: 200px;
+    position: absolute
+}
+
+.ikon{
+    width: 45.53px; 
+    height: 65.83px; 
+    left: 16.72px; 
+    top: 6.58px; 
+    position: absolute;
+    background: #F3F5F5
+}
+
+.box{
+    width: 335px;
+    height: 400px; 
+    position: relative 
+}
+
+.CsomagokBox {
+    width: 335px;
+    height: 643px;
+    flex-shrink: 0;
+    border-radius: 60px 10px 10px 10px;
+    border: 1.5px solid #13669C;
+    background: #000;
+    box-shadow: 0px 0px 15px 3px rgba(124, 242, 218, 0.50), 0px 0px 15px 3px rgba(124, 242, 218, 0.45) inset;
+}
+.CsomagokBox2 {
+    width: 335px;
+    height: 643px;
+    flex-shrink: 0;
+    border-radius: 60px 10px 10px 10px;
+    border: 1.5px solid #13669C;
+    background: #000;
+    box-shadow: 0px 0px 15px 3px rgba(124, 242, 218, 0.50), 0px 0px 15px 3px rgba(124, 242, 218, 0.45) inset;
+}
+.CsomagokBox4 {
+    width: 335px;
+    height: 643px;
+    flex-shrink: 0;
+    border-radius: 10px 10px 60px 10px;
+    border: 1.5px solid #13669C;
+    background: #000;
+    box-shadow: 0px 0px 15px 3px rgba(124, 242, 218, 0.50), 0px 0px 15px 3px rgba(124, 242, 218, 0.45) inset;
+}
+
+.CsomagokContainer{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.CsomagKeret {
+    width: 335px; 
+    height: 643px; 
+    background: black; 
+    box-shadow: 0px 0px 15px 3px rgba(124, 242, 218, 0.45) inset; 
+    border-radius: 60px 10px 10px 10px;
+    border: 1.50px #13669C solid
+}
+
+.csomag:focus {
+    outline: none; /* Az alapértelmezett fókuszkeret eltávolítása */
+}
+
+
+.ExtrakKeret {
+    width: 700px; 
+    height: 430px; 
+    left: 3px; 
+    top: 0px; 
+    position: absolute; 
+    background: black; 
+    box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset; 
+    border-radius: 25px; 
+    border: 1.50px #13669C solid
+}
+
+.ExtrakContainers {
+    display: flex;
+    justify-content: center;
+    gap: 30px; /* Adjust the gap between the two blocks */
+}
+
+.ExtrakContainer {
+    width: 703px; 
+    height: 430px;
+    position: relative;
+}
+
+.KulsoExtrak{
+    left: 85px; 
+    top: 1px; 
+    position: absolute; 
+    text-align: center; 
+    color: black; 
+    font-size: 30px; 
+    font-family: Inter; 
+    font-weight: 600; 
+    word-wrap: break-word
+}
+
+.KulsoGomb {
+    width: 320px;
+    height: 50px;
+    background: black;
+    box-shadow: 0px 0px 10px 3px rgba(124, 242, 218, 0.35) inset;
+    border-radius: 20px 5px 5px 5px;
+    border: 1.5px #13669C solid;
+    color: #F3F5F5;
+    text-align: center;
+    font-family: Graphie;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 50px; /* Center text vertically */
+    cursor: pointer; /* Change cursor to pointer */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute; /* Keep the same position */
+    left: 23px; 
+    top: 80px;
+}
+
+.checkbox {
+    display: none;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.checkbox:checked + .checkbox-label {
+    box-shadow: 0px 0px 10px 3px rgba(124, 242, 218, 0.50) inset;
+    border: 1.50px rgba(124, 242, 218, 0.90) solid;
+    border-radius: 20px 5px 5px 5px;
+}
+
+
+
+.KulsoGomb2{
+    width: 320px; 
+    height: 50px; 
+    left: 363px; 
+    top: 130px; 
+    position: absolute; 
+    background: black; 
+    box-shadow: 0px 0px 10px 3px rgba(124, 242, 218, 0.50) inset; 
+    border-radius: 5px 5px 20px 5px; 
+    border: 1.50px rgba(124, 242, 218, 0.90) solid;
+    color: #F3F5F5;
+    text-align: center;
+    font-family: Graphie;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.KulsoGomb3{
+    width: 320px; 
+    height: 50px; 
+    left: 23px; 
+    top: 200px; 
+    position: absolute; 
+    background: black; 
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
+    border-radius: 20px 5px 5px 5px;
+    border: 1.50px #13669C solid;
+    color: #F3F5F5;
+    text-align: center;
+    font-family: Graphie;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.KulsoGomb4{
+    width: 320px; 
+    height: 50px; 
+    left: 363px; 
+    top: 200px; 
+    position: absolute; 
+    background: black; 
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset; 
+    border-top-left-radius: 5px; 
+    border-top-right-radius: 5px; 
+    border-bottom-right-radius: 20px; 
+    border-bottom-left-radius: 5px; 
+    border: 1.50px #13669C solid;
+    color: #F3F5F5;
+    text-align: center;
+    font-family: Graphie;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.KulsoGomb5{
+    width: 320px; 
+    height: 50px; 
+    left: 23px; 
+    top: 270px; 
+    position: absolute; 
+    background: black; 
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset; 
+    border-top-left-radius: 20px; 
+    border-top-right-radius: 5px; 
+    border-bottom-right-radius: 5px; 
+    border-bottom-left-radius: 5px; 
+    border: 1.50px #13669C solid;
+    color: #F3F5F5;
+    text-align: center;
+    font-family: Graphie;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.BelsoGomb{
+    width: 320px; 
+    height: 50px; 
+    left: 363px; 
+    top: 130px; 
+    position: absolute; 
+    background: black; 
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset; 
+    border-radius: 5px 5px 20px 5px; 
+    border: 1.50px #13669C solid;
+    color: #F3F5F5;
+    text-align: center;
+    font-family: Graphie;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.BelsoGomb2 {
+    width: 320px; 
+    height: 50px; 
+    left: 23px; 
+    top: 130px; 
+    position: absolute; 
+    background: black; 
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset; 
+    border-radius: 20px 5px 5px 5px;
+    border: 1.50px #13669C solid;
+    color: #F3F5F5;
+    text-align: center;
+    font-family: Graphie;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 50px; /* Center text vertically */
+    cursor: pointer; /* Change cursor to pointer */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.BelsoGomb2 .checkbox {
+    display: none;
+}
+
+.BelsoGomb2 .checkbox-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+
+.BelsoGomb3{
+    width: 320px; 
+    height: 50px; 
+    left: 23px; 
+    top: 200px; 
+    position: absolute; 
+    background: black; 
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset; 
+    border-radius: 20px 5px 5px 5px;
+    border: 1.50px #13669C solid;
+    color: #F3F5F5;
+    text-align: center;
+    font-family: Graphie;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.BelsoGomb4{
+    width: 320px; 
+    height: 50px; 
+    left: 363px; 
+    top: 200px; 
+    position: absolute; 
+    background: black; 
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset; 
+    border-radius: 5px 5px 20px 5px; 
+    border: 1.50px #13669C solid;
+    color: #F3F5F5;
+    text-align: center;
+    font-family: Graphie;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.BelsoGomb5{
+    width: 320px; 
+    height: 50px; 
+    left: 23px; 
+    top: 270px; 
+    position: absolute; 
+    background: black; 
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset; 
+    border-radius: 20px 5px 5px 5px;
+    border: 1.50px #13669C solid;
+    color: #F3F5F5;
+    text-align: center;
+    font-family: Graphie;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.BelsoGomb6{
+    width: 320px; 
+    height: 50px; 
+    left: 363px; 
+    top: 270px; 
+    position: absolute; 
+    background: black; 
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset; 
+    border-radius: 5px 5px 20px 5px;
+    border: 1.50px #13669C solid;
+    color: #F3F5F5;
+    text-align: center;
+    font-family: Graphie;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.BelsoGomb7{
+    width: 320px; 
+    height: 50px; 
+    left: 23px; 
+    top: 340px; 
+    position: absolute; 
+    background: black; 
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset; 
+    border-radius: 20px 5px 5px 5px;
+    border: 1.50px #13669C solid;
+    color: #F3F5F5;
+    text-align: center;
+    font-family: Graphie;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.BelsoGomb8{
+    width: 320px; 
+    height: 50px; 
+    left: 363px; 
+    top: 340px; 
+    position: absolute; 
+    background: black; 
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset; 
+    border-radius: 5px 5px 20px 5px;
+    border: 1.50px #13669C solid;
+    color: #F3F5F5;
+    text-align: center;
+    font-family: Graphie;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.FigyelmeztetesKeret{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 35px;
+}
+
+.Figyelmeztetes{
+    width: 1430px; 
+    height: 70px; 
+    background: black; 
+    box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset; 
+    border-radius: 25px; 
+    border: 1.50px #13669C solid;
+    text-align: center;
+}
+
+.Figyelmeztetes p{
+    color: #F3F5F5; 
+    font-size: 23px; 
+    font-family: Graphie; 
+    font-weight: 350; 
+    word-wrap: break-word;
+    margin:18px
+}
+
+.BelsoExtrak {
+    width: 48%; /* Az elemek egymás melletti elrendezése */
+    border: 0.1px solid white;
+    box-shadow: inset 0 0 30px white, 0 0 20px white;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ExtrakAlcim {
+    width: 400px; 
+    height: 50px; 
+    left: 3px; 
+    top: 50px; 
+    position: absolute; 
+    border-radius: 0px 12.5px 25px 0px;
+    background: #13669C;
+}
+/* Két oszlopos elrendezés a belső és külső extrákhoz */
+.BelsoExtrak > div,
+.KulsoExtrak > div {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 10px;
+}
+
+/* Bal oldali elemek */
+.BelsoExtrakBal,
+.KulsoExtrakBal,
+.BelsoExtrakJobb,
+.KulsoExtrakJobb {
+    width: 48%; /* Két oszlop, 10px gap kompenzálásával */
+    height: 50px;
+    border: 0.1px solid white;
+    background-color: transparent; /* Az alapértelmezett gomb stílusok eltávolítása */
+    border-radius: 20px 5px 5px 5px;
+    box-shadow: inset 0 0 30px white, 0 0 20px white;
+    text-align: center;
+    justify-content: center;
+    color: white;
+    margin-bottom: 10px; /* Térköz az elemek között függőlegesen */
+    cursor: pointer; /* Mutató kézkurzor hozzáadása */
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.BelsoExtrakJobb {
+    border-radius: 5px 5px 5px 20px;
+}
+
+/* Az alapértelmezett fókuszkeret eltávolítása */
+.BelsoExtrakBal:focus,
+.KulsoExtrakBal:focus,
+.BelsoExtrakJobb:focus,
+.KulsoExtrakJobb:focus {
+    outline: none;
+}
+
+/* Kiválasztott állapot stílusai */
+.BelsoExtrakBal.selected,
+.KulsoExtrakBal.selected,
+.BelsoExtrakJobb.selected,
+.KulsoExtrakJobb.selected {
+    background-color: #FF4081;
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+
+.EgyebInfo{
+    width: 1430px;
+    height: 100px;
+    border: 0.1px solid white;
+    border-radius: 25px;
+    box-shadow: inset 0 0 30px white, 0 0 20px white;
+    text-align: center;
+}
+
+.EgyebInfo > p{
+    color: white;
+}
+
+.AlcimContainer{
+    width: 9px;
+    height: 103px;
+    left: 202px;
+    top: 3696px;
+    position: absolute;
+    background: #13669C;
+    border-top-left-radius: 60px;
+    border-top-right-radius: 60px;
+    border: 1px #13669C solid;
+}
+
+.AlcimBox{
+    width: 1000px;
+    height: 100px;
+    left: 212px;
+    top: 3696px;
+    position: absolute;
+    background: #13669C;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 30px;
+    border: 1px #13669C solid;
+}
+
+.AlcimSzoveg{
+    width: 861px;
+    height: 66px;
+    left: 285px;
+    top: 3727px;
+    position: absolute;
+    text-align: center;
+    color: black;
+    font-size: 55px;
+    font-family: Owners Wide;
+    font-weight: 500;
+    line-height: 40px;
+    letter-spacing: 3.85px;
+    word-wrap: break-word;
+}
+
+.IdopontContainer {
+    width: 1474px;
+    height: 663px;
+    position: relative;
+    top: 98px;
+}
+
+.IdopontBox{
+    width: 1430px;
+    height: 350px;
+    left: 33px;
+    top: 203px;
+    position: absolute;
+    background: black;
+    box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset;
+    border-radius: 25px;
+    border: 1.50px #13669C solid;
+}
+
+.IdopontLine{
+    width: 1.50px;
+    height: 300px;
+    left: 714px;
+    top: 21px;
+    position: absolute;
+    background: #13669C;
+    box-shadow: 0px 0px 15px 3px rgba(19, 102, 156, 0.50);
+}
+
+.GombBox{
+    position: relative;
+    bottom: 588px;
+    right: 44px;
+}
+
+.IdopontGomb1 {
+    width: 323px; 
+    height: 50px; 
+    left: 791px; 
+    top: 262px; 
+    position: absolute; 
+    background: black; 
+    box-shadow: 0px 0px 10px 3px rgba(124, 242, 218, 0.35) inset; 
+    border-radius: 20px 5px 5px 5px;
+    border: 1.50px #13669C solid;
+    text-align: center; 
+    color: #F3F5F5; 
+    font-size: 30px; 
+    font-family: Graphie; 
+    font-weight: 400; 
+    word-wrap: break-word;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.checkbox {
+    display: none;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.checkbox:checked + .checkbox-label {
+    box-shadow: 0px 0px 10px 3px rgba(124, 242, 218, 0.35) inset;
+    border: 1px rgba(123, 242, 218, 0.90) solid;
+}
+
+
+.IdopontGomb2{
+    width: 323px; 
+    height: 50px; 
+    left: 1126px; 
+    top: 262px; 
+    position: absolute; 
+    background: rgba(255, 0, 0, 0.15); 
+    box-shadow: 0px 0px 10px 3px rgba(255, 0, 0, 0.50) inset; 
+    border-radius: 5px; 
+    border: 1.50px rgba(255, 0, 0, 0.90) solid;
+    text-align: center; 
+    color: #F3F5F5; 
+    font-size: 30px; 
+    font-family: Graphie; 
+    font-weight: 400; 
+    word-wrap: break-word;
+}
+
+.IdopontGomb3{
+    width: 323px; 
+    height: 50px; 
+    left: 791px; 
+    top: 322px; 
+    position: absolute; 
+    background: black; 
+    box-shadow: 0px 0px 10px 3px rgba(124, 242, 218, 0.35) inset; 
+    border-radius: 5px; 
+    border: 1.50px #13669C solid;
+    text-align: center; 
+    color: #F3F5F5; 
+    font-size: 30px; 
+    font-family: Graphie; 
+    font-weight: 400; 
+    word-wrap: break-word;
+}
+
+.IdopontGomb4{
+    width: 323px; 
+    height: 50px; 
+    left: 1126px; 
+    top: 322px; 
+    position: absolute; 
+    background: black; 
+    box-shadow: 0px 0px 5px 3px rgba(19, 102, 156, 0.50); 
+    border-radius: 5px; 
+    border: 1.50px #13669C solid;
+    text-align: center; 
+    color: #F3F5F5; 
+    font-size: 30px; 
+    font-family: Graphie; 
+    font-weight: 400; 
+    word-wrap: break-word;
+}
+
+.IdopontGomb5{
+    width: 323px; 
+    height: 50px; 
+    left: 791px; 
+    top: 381px; 
+    position: absolute; 
+    background: black; 
+    box-shadow: 0px 0px 5px 3px rgba(19, 102, 156, 0.50); 
+    border-radius: 5px; 
+    border: 1.50px #13669C solid;
+    text-align: center; 
+    color: #F3F5F5; 
+    font-size: 30px; 
+    font-family: Graphie; 
+    font-weight: 400; 
+    word-wrap: break-word;
+}
+
+.IdopontGomb6{
+    width: 323px; 
+    height: 50px; 
+    left: 1126px; 
+    top: 381px; 
+    position: absolute; 
+    background: black; 
+    box-shadow: 0px 0px 5px 3px rgba(19, 102, 156, 0.50); 
+    border-radius: 5px; 
+    border: 1.50px #13669C solid;
+    text-align: center; 
+    color: #F3F5F5; 
+    font-size: 30px; 
+    font-family: Graphie; 
+    font-weight: 400; 
+    word-wrap: break-word;
+}
+
+.IdopontGomb7{
+    width: 323px; 
+    height: 50px; 
+    left: 791px; 
+    top: 442px; 
+    position: absolute; 
+    background: black; 
+    box-shadow: 0px 0px 5px 3px rgba(19, 102, 156, 0.50); 
+    border-radius: 5px; 
+    border: 1.50px #13669C solid;
+    text-align: center; 
+    color: #F3F5F5; 
+    font-size: 30px; 
+    font-family: Graphie; 
+    font-weight: 400; 
+    word-wrap: break-word;
+}
+
+.IdopontGomb8{
+    width: 323px; 
+    height: 50px; 
+    left: 1126px; 
+    top: 442px; 
+    position: absolute; 
+    background: black; 
+    box-shadow: 0px 0px 5px 3px rgba(19, 102, 156, 0.50); 
+    border-radius: 5px 5px 20px 5px; 
+    border: 1.50px #13669C solid;
+    text-align: center; 
+    color: #F3F5F5; 
+    font-size: 30px; 
+    font-family: Graphie; 
+    font-weight: 400; 
+    word-wrap: break-word;
+}
+
+.IdopontFigyelmeztetes{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 21px;
+}
+
+.atadas {
+    flex: 1 1 calc(50% - 10px); /* Két oszlop 10px gap kompenzálásával */
+    color: white; /* Példa szöveg szín */
+    padding: 10px; /* Példa padding */
+    border-radius: 5px; /* Példa border radius */
+    box-sizing: border-box; /* Győződj meg róla, hogy a padding és a border is figyelembe van véve */
+    text-align: center; /* Középre igazítás */
+    width: 323px;
+    height: 50px;
+    border: 0.1px solid white;
+    box-shadow: inset 0 0 30px white, 0 0 20px white;
+    background-color: transparent; /* Az alapértelmezett gomb stílusok eltávolítása */
+    cursor: pointer; /* Mutató kézkurzor hozzáadása */
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.atadasElso {
+    border-radius: 20px 5px 5px 5px;
+}
+
+.atadasUtolso {
+    border-radius: 5px 5px 20px 5px;
+}
+
+/* Az alapértelmezett fókuszkeret eltávolítása */
+.atadas:focus {
+    outline: none;
+}
+
+/* Kiválasztott állapot stílusai */
+.atadas.selected {
+    background-color: #FF4081;
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/*naptár*/
+
+.group {
+    position: relative;
+    margin: 30px 20px 50px;
+    bottom: 10px;
+    left: 4px;
+}
+
+/*input {
+    color: #424242;
+    font-size: 1.2em;
+    padding: 10px 10px 5px 5px;
+    display: block;
+    width: 300px;
+    border: none;
+    border-bottom: 1px solid #607D8B;
+}
+input:focus {
+    outline: none;
+}
+
+label.input-label {
+    color: #616161;
+    position: absolute;
+}
+
+input:focus ~ label.input-label {
+    color: #0288D1;
+}
+
+input[readonly] ~ label.input-label {
+    top: -15px;
+    font-size: 0.9em;
+}*/
+
+.bar {
+    position: relative;
+    display: block;
+    width: 315px;
+}
+
+.bar:before,
+.bar:after {
+    background: #0288D1;
+    content: '';
+    height: 2px;
+    width: 0;
+    bottom: 1px;
+    position: absolute;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+.bar:before {
+    left: 50%;
+}
+
+.bar:after {
+    right: 50%;
+}
+
+input:focus ~ .bar:before,
+input:focus ~ .bar:after {
+    width: 50%;
+}
+
+/* egyedi naptár */
+
+#calendar-tomorrow {
+    display: none; /* input mező elrejtése */
+}
+
+.flatpickr-calendar {
+    background: #1E1E3F;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    color: white;
+    width: 658px; /* Szélesség beállítása */
+    height: 300px; /* Magasság beállítása */
+    padding: 0; /* Padding eltávolítása */
+    display: flex;
+    flex-direction: column; /* A naptár függőleges igazítása */
+}
+
+.flatpickr-innerContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+/* Naptár napok */
+.flatpickr-days {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+}
+
+.flatpickr-day {
+    border: 1px solid white;
+    color: white;
+    flex: 1 0 calc(100% / 7); /* A napok egyenlő szélessége (7 oszlop) */
+    height: calc(100% / 6); /* Egyenlő magasság (6 sor) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.flatpickr-day.today {
+    background: #1E1E3F;
+    border-color: #FF4081;
+}
+
+.flatpickr-day.selected {
+    background: #FF4081;
+    border-color: #FF4081;
+}
+
+.flatpickr-day:hover {
+    background: #FF4081;
+    border-color: #FF4081;
+}
+
+/* Hétvégék */
+.flatpickr-day.weekend {
+    color: #FF4081;
+}
+
+/* Naptár fejlécek */
+.flatpickr-months .flatpickr-prev-month,
+.flatpickr-months .flatpickr-next-month {
+    color: white;
+}
+
+.flatpickr-months .flatpickr-current-month {
+    color: white;
+}
+
+/* Esemény gombok */
+.flatpickr-time-container .flatpickr-time {
+    color: white;
+    background: #1E1E3F;
+    border: none;
+}
+
+.flatpickr-time-container .numInputWrapper {
+    border: none;
+}
+
+/* Események */
+.flatpickr-day.today::after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #FF4081;
+}
+
+/* Esemény gomb stílus */
+button.flatpickr-day {
+    background: #1E1E3F;
+    border: 1px solid white;
+    border-radius: 5px;
+    color: white;
+}
+
+button.flatpickr-day:hover,
+button.flatpickr-day:focus {
+    background: #FF4081;
+    border-color: #FF4081;
+    color: white;
+}
+
+.AdatokFelulet {
+    width: 100%;
+    max-width: 1450px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.AdatokInformacio {
+    width: 1430px;
+    height: 80px;
+    border: 1px solid white;
+    border-radius: 25px;
+    display: table; /* Asztali elrendezés a középre igazításhoz */
+    text-align: center; /* Horizontális középre igazítás */
+    margin-bottom: 50px;
+}
+
+.AdatokInformacio > p {
+    font-size: 30px;
+    display: table-cell; /* Asztali cella elrendezés a középre igazításhoz */
+    vertical-align: middle; /* Vertikális középre igazítás */
+    margin: 0; /* Alapértelmezett margó eltávolítása */
+}
+
+
+
+.Rendszam {
+    display: flex;
+    align-items: center;
+    margin: 50px auto;
+    border: 1px solid white;
+    border-radius: 25px;
+    width: 650px;
+    height: 150px;
+}
+
+.Rendszam label {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: white;
+    font-size: 40px;
+    margin: 55px 36px 55px 50px;
+}
+
+.RendszamBemenet::placeholder{
+    font-size: 30px;
+}
+
+.AdatokContainer {
+    width: 1473px;
+    height: 1523px;
+    position: relative;
+}
+
+.MegjegyzesContainer{
+    width: 703px;
+    height: 640px;
+    left: 770px;
+    top: 952px;
+    position: absolute;
+}
+
+.MegjegyzesSzoveg{
+    left: 53px;
+    top: 155px;
+    position: absolute;
+    opacity: 0.50;
+    color: #F3F5F5;
+    font-size: 25px;
+    font-family: Graphie;
+    font-weight: 350;
+    word-wrap: break-word;
+}
+
+.MegjegyzesAlcimContainer{
+    width: 403px;
+    height: 52px;
+    left: 0px;
+    top: 48px;
+    position: absolute;
+}
+
+.MegjegyzesAlcimBox{
+    width: 400px;
+    height: 50px;
+    left: 3px;
+    top: 2px;
+    position: absolute;
+    background: #13669C;
+    border-top-left-radius: 12.50px;
+    border-top-right-radius: 25px;
+}
+
+.MegjegyzesAlcimSzoveg{
+    left: 53px;
+    top: 8px;
+    position: absolute;
+    text-align: center;
+    color: black;
+    font-size: 30px;
+    font-family: Inter;
+    font-weight: 600;
+    word-wrap: break-word;
+}
+
+.SzamlazasiAdatokContainer{
+    width: 703px;
+    height: 640px;
+    left: 40px;
+    top: 952px;
+    position: absolute;
+}
+
+.SzamlazasiAdatokBox{
+    width: 700px;
+    height: 640px;
+    left: 3px;
+    top: 0px;
+    position: absolute;
+    background: black;
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
+    border-radius: 25px;
+    border: 1.50px #13669C solid;
+}
+
+.Email{
+    width: 315px;
+    height: 50px;
+    left: 28px;
+    top: 380px;
+    position: absolute;
+    background: black;
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
+    border-radius: 20px 5px 5px 5px;
+    border: 1.50px #13669C solid;
+    color: white;
+}
+
+.Cegnev{
+    width: 315px;
+    height: 50px;
+    left: 28px;
+    top: 490px;
+    position: absolute;
+    background: black;
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
+    border-radius: 20px 5px 5px 5px;
+    border: 1.50px #13669C solid;
+    color: white;
+}
+
+.Cim{
+    width: 315px;
+    height: 50px;
+    left: 363px;
+    top: 380px;
+    position: absolute;
+    background: black;
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
+    border-radius: 5px 5px 20px 5px;
+    border: 1.50px #13669C solid;
+    color: white;
+}
+
+.KeresztNev{
+    width: 315px;
+    height: 50px;
+    left: 363px;
+    top: 270px;
+    position: absolute;
+    background: black;
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
+    border-radius: 5px 5px 20px 5px;
+    border: 1.50px #13669C solid;
+    color: white;
+}
+
+.Fizetes {
+    width: 320px; 
+    height: 70px; 
+    left: 193px; 
+    top: 160px; 
+    position: absolute; 
+    background: black; 
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset; 
+    border-radius: 20px 20px 0 0; 
+    border: 1.50px #13669C solid;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px;
+}
+
+.dropdown-label {
+    font-size: 16px;
+    color: white;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.dropdown {
+    width: 100%;
+    height: 50px; /* Adjust height to match the previous input fields */
+    background: black;
+    color: white;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    border-radius: 5px 5px 20px 5px;
+    padding-left: 10px;
+    appearance: none; /* Hide the default dropdown arrow */
+    -webkit-appearance: none; /* Hide the default dropdown arrow in Safari */
+    -moz-appearance: none; /* Hide the default dropdown arrow in Firefox */
+}
+
+
+.Adoszam{
+    width: 315px;
+    height: 50px;
+    left: 363px;
+    top: 490px;
+    position: absolute;
+    background: black;
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
+    border-radius: 5px 5px 20px 5px;
+    border: 1.50px #13669C solid;
+    color: white;
+}
+
+.VezetekNev{
+    width: 315px;
+    height: 50px;
+    left: 28px;
+    top: 270px;
+    position: absolute;
+    background: black;
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
+    border-radius: 20px 5px 5px 5px;
+    border: 1.50px #13669C solid;
+    color: white;
+}
+
+.SzamlazasiAlcimContainer{
+    width: 403px;
+    height: 52px;
+    left: 0px;
+    top: 48px;
+    position: absolute;
+}
+
+.SzamlazasiAlcimBox{
+    width: 400px;
+    height: 50px;
+    left: 3px;
+    top: 2px;
+    position: absolute;
+    background: #13669C;
+    border-top-left-radius: 12.50px;
+    border-top-right-radius: 25px;
+}
+
+.SzamlazasiAlcim{
+    left: 46px;
+    top: 9px;
+    position: absolute;
+    text-align: center;
+    color: black;
+    font-size: 30px;
+    font-family: Inter;
+    font-weight: 600;
+    word-wrap: break-word;
+}
+
+.AutoAdatokContainer{
+    width: 703px;
+    height: 420px;
+    left: 770px;
+    top: 500px;
+    position: absolute;
+}
+
+.AutoAdatokBox{
+    width: 700px;
+    height: 420px;
+    left: 3px;
+    top: 0px;
+    position: absolute;
+    background: black;
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
+    border-radius: 25px;
+    border: 1.50px #13669C solid;
+}
+
+.AutoMeret{
+    width: 315px;
+    height: 50px;
+    left: 363px;
+    top: 270px;
+    position: absolute;
+    background: black;
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
+    border-radius: 5px 5px 20px 5px;
+    border: 1.50px #13669C solid;
+    color: white;
+}
+
+.Parkolo{
+    width: 315px;
+    height: 50px;
+    left: 28px;
+    top: 270px;
+    position: absolute;
+    background: black;
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
+    border-radius: 20px 5px 5px 5px;
+    border: 1.50px #13669C solid;
+    color: white;
+}
+
+.Tipus {
+    width: 315px;
+    height: 39px;
+    left: 363px;
+    top: 160px;
+    position: absolute;
+    background: black;
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
+    border-radius: 5px 5px 20px 5px;
+    border: 1.50px #13669C solid;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px;
+}
+
+.dropdown-label {
+    font-size: 20px;
+    color: white;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.dropdown {
+    width: 100%;
+    height: 100%;
+    background: black;
+    color: white;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    border-radius: 5px 5px 20px 5px;
+    padding-left: 10px;
+    appearance: none; /* Hide the default dropdown arrow */
+    -webkit-appearance: none; /* Hide the default dropdown arrow in Safari */
+    -moz-appearance: none; /* Hide the default dropdown arrow in Firefox */
+}
+
+
+.Marka{
+    width: 315px;
+    height: 50px;
+    left: 28px;
+    top: 160px;
+    position: absolute;
+    background: black;
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
+    border-radius: 20px 5px 5px 5px;
+    border: 1.50px #13669C solid;
+    color: white;
+}
+
+.AutoAdatokAlcimContainer{
+    width: 403px;
+    height: 52px;
+    left: 0px;
+    top: 48px;
+    position: absolute;
+}
+
+.AutoAdatokAlcimBox{
+    width: 400px;
+    height: 50px;
+    left: 3px;
+    top: 2px;
+    position: absolute;
+    background: #13669C;
+    border-top-left-radius: 12.50px;
+    border-top-right-radius: 25px;
+}
+
+.AutoAdatokAlcim{
+    left: 50px;
+    top: 9px;
+    position: absolute;
+    text-align: center;
+    color: black;
+    font-size: 30px;
+    font-family: Inter;
+    font-weight: 600;
+    word-wrap: break-word;
+}
+
+.SzemelyesAdatokContainer{
+    width: 703px;
+    height: 420px;
+    left: 40px;
+    top: 500px;
+    position: absolute;
+}
+
+.SzemelyesAdatokBox{
+    width: 700px;
+    height: 420px;
+    left: 3px;
+    top: 0px;
+    position: absolute;
+    background: black;
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
+    border-radius: 25px;
+    border: 1.50px #13669C solid;
+}
+
+.SzemelyesAdatokAlcimContainer{
+    width: 403px;
+    height: 52px;
+    left: 0px;
+    top: 48px;
+    position: absolute;
+}
+
+.SzemelyesAdatokAlcimBox{
+    width: 400px;
+    height: 50px;
+    left: 3px;
+    top: 2px;
+    position: absolute;
+    background: #13669C;
+    border-top-left-radius: 12.50px;
+    border-top-right-radius: 25px;
+}
+
+.SzemelyesAdatokAlcim{
+    left: 50px;
+    top: 9px;
+    position: absolute;
+    text-align: center;
+    color: black;
+    font-size: 30px;
+    font-family: Inter;
+    font-weight: 600;
+    word-wrap: break-word;
+}
+
+.Cegnev2{
+    width: 315px;
+    height: 50px;
+    left: 363px;
+    top: 270px;
+    position: absolute;
+    background: black;
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
+    border-radius: 5px 5px 20px 5px;
+    border: 1.50px #13669C solid;
+    color: white;
+}
+
+.Telefon{
+    width: 315px;
+    height: 50px;
+    left: 28px;
+    top: 270px;
+    position: absolute;
+    background: black;
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
+    border-radius: 20px 5px 5px 5px;
+    border: 1.50px #13669C solid;
+    color: white;
+}
+
+.KeresztNev2{
+    width: 315px;
+    height: 50px;
+    left: 363px;
+    top: 160px;
+    position: absolute;
+    background: black;
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50);
+    border-radius: 5px 5px 20px 5px;
+    border: 1.50px #13669C solid;
+    color: white;
+}
+
+.VezetekNev2{
+    width: 315px;
+    height: 50px;
+    left: 28px;
+    top: 160px;
+    position: absolute;
+    background: black;
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
+    border-radius: 20px 5px 5px 5px;
+    border: 1.50px #13669C solid;
+    color: white;
+}
+
+.AdatokCimContainer {
+    width: 1009px;
+    height: 103px;
+    left: 0px;
+    top: 0px;
+    position: absolute;
+}
+
+.AdatokCim{
+    width: 761px;
+    height: 68px;
+    left: 100px;
+    top: 106px;
+    position: absolute;
+    text-align: center;
+    color: black;
+    font-size: 55px;
+    font-family: Graphie;
+    font-weight: 700;
+    line-height: 40px;
+    letter-spacing: 1.65px;
+    word-wrap: break-word;
+}
+
+.RendszamContainer{
+    width: 700px;
+    height: 200px;
+    left: 408px;
+    top: 268px;
+    position: absolute;
+    background: black;
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
+    border-radius: 25px;
+    border: 1.50px #13669C solid;
+}
+
+.RendszamSzoveg{
+    width: 200px;
+    height: 54px;
+    left: 474px;
+    top: 341px;
+    position: absolute;
+    color: #F3F5F5;
+    font-size: 40px;
+    font-family: Graphie;
+    font-weight: 600;
+    word-wrap: break-word;
+}
+
+.RendszamBemenet {
+    width: 318px;
+    height: 100px;
+    left: 724px;
+    top: 318px;
+    position: absolute;
+    background: black;
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50);
+    border-radius: 30px 5px 30px 5px;
+    border: 1.50px #13669C solid;
+    color: white;
+}
+
+
+.AdatokCimBox{
+    width: 1000px;
+    height: 100px;
+    left: 9px;
+    top: 79px;
+    position: absolute;
+    background: #13669C;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 30px;
+}
+
+.megjegyzes-label {
+    font-size: 20px;
+    color: white;
+    margin-bottom: 10px;
+    text-align: left; /* Adjust text alignment as needed */
+}
+
+.MegjegyzesBemenet {
+    width: 650px;
+    height: 410px;
+    background: black;
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 20px;
+    border: 1.50px #13669C solid;
+    color: white;
+    font-size: 18px;
+    padding: 10px;
+    resize: none;
+    font-family: Graphie;
+    position: absolute;
+    top: 122px;
+    right: 14px;
+}
+
+.MegjegyzesBox{
+    width: 700px;
+    height: 640px;
+    left: 3px;
+    top: 0px;
+    position: absolute;
+    background: black;
+    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
+    border-radius: 25px;
+    border: 1.50px #13669C solid;
+}
+
+.InputWrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.Bal, .Jobb {
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+}
+
+label {
+    font-size: 20px;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.Bemenet {
+    width: 100%;
+    height: 40px;
+    background-color: black;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 5px;
+    margin-bottom: 20px;
+    color: white;
+    padding: 10px;
+    font-size: 18px;
+}
+
+.Bemenet::placeholder {
+    font-size: 25px;
+}
+
+textarea.Bemenet {
+    height: 200px;
+    resize: none;
+}
+
+.Bal .Bemenet {
+    border-radius: 5px 5px 5px 20px;
+}
+
+.Jobb .Bemenet {
+    border-radius: 5px 20px 5px 5px;
+}
+
+.SzemelyesAdatok, .AutoAdatok, .SzamlazasiAdatok, .Megjegyzes {
+    width: calc(50% - 15px); /* Szélesség, hogy figyelembe vegye a gap-et */
+    border: 1px solid rgba(255, 255, 255, 0.6); /* Átlátszó fehér határvonal */
+    border-radius: 25px;
+    padding: 40px 20px 20px 20px; /* Megnövelt felső padding, hogy a cím ne legyen benne */
+    background-color: rgba(81, 81, 101, 0.17); /* #515165 szín 50%-os átlátszósággal */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px; /* Alsó margó hozzáadása */
+}
+
+
+.FoglalasContainer{
+    width: 400px;
+    height: 100px;
+    position: relative;
+    top: 172px;
+    left: 550px;
+}
+
+.Foglalas{
+    width: 400px;
+    height: 100px;
+    flex-shrink: 0;
+    border-radius: 20px 5px;
+    border: 1.5px solid var(--Color, #7CF2DA);
+    background: #000;
+    box-shadow: 0px 0px 15px 3px rgba(124, 242, 218, 0.50), 0px 0px 15px 3px rgba(124, 242, 218, 0.50) inset;
+    text-align: center;
+    color: #F3F5F5;
+    font-size: 55px;
+    font-family: Graphie;
+    font-weight: 600;
+    word-wrap: break-word;
+}
