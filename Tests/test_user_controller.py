@@ -1,4 +1,4 @@
-BLUEPRINT_ROUTE = '/login_test'
+BLUEPRINT_ROUTE = '/user'
 LOGIN = '/login'
 ADD = '/add_user'
 

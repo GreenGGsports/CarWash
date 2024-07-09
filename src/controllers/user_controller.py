@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify, current_app, render_template
 from src.models.user_model import UserModel
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
-user_ctrl = Blueprint('user_ctrl', __name__)
+user_ctrl = Blueprint('user_ctrl', __name__, url_prefix='/user')
 
 
 #only for testing
