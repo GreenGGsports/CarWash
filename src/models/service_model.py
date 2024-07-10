@@ -4,7 +4,8 @@ from .base import BaseModel
 
 class ServiceModel(BaseModel):
     __tablename__ = 'Service'
-    
+
+    id = Column(Integer, primary_key=True)
     service_name = Column(String, nullable=False)
     price_small = Column(Integer, nullable=False)
     price_large = Column(Integer, nullable=False)

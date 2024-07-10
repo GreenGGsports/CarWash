@@ -1,11 +1,10 @@
 import pytest
-from datetime import timedelta
-import datetime
+from datetime import datetime, timedelta
 from src.models.reservation_model import ReservationModel  # Adjust import path as necessary
 from src.models.extra_model import ExtraModel
 
 def test_add_reservation(session):
-    appointment = datetime.datetime.utcnow()
+    appointment = datetime.utcnow()
     reservation = ReservationModel.add_reservation(
         session=session,
         slot_id = 1,
@@ -22,7 +21,7 @@ def test_add_reservation(session):
     assert reservation.car_type == 'large_car'
 
 def test_read_reservation(session):
-    reservation_date = datetime.datetime.utcnow()
+    reservation_date = datetime.utcnow()
     reservation = ReservationModel.add_reservation(
         session=session,
         slot_id=1,
@@ -40,7 +39,7 @@ def test_read_reservation(session):
     assert read_reservation.car_type == 'large_car'
 
 def test_update_reservation(session):
-    appointment = datetime.datetime.utcnow()
+    appointment = datetime.utcnow()
     reservation = ReservationModel.add_reservation(
         session=session,
         slot_id=1,
@@ -62,7 +61,7 @@ def test_update_reservation(session):
     assert updated_reservation.car_type == 'large_car'
 
 def test_delete_reservation(session):
-    appointment = datetime.datetime.utcnow()
+    appointment = datetime.utcnow()
     reservation = ReservationModel.add_reservation(
         session=session,
         slot_id=1,
@@ -87,7 +86,7 @@ def test_add_reservation_slot_unavailable(session):
     service_id = 1
     slot_id = 1
     user_id = 1
-    reservation_date = datetime.datetime.utcnow() + timedelta(days=1)
+    reservation_date = datetime.utcnow() + timedelta(days=1)
     car_type = 'large_car'
     final_price = 100.0
     parking_spot = 1
@@ -124,7 +123,7 @@ def test_add_reservation_slot_unavailable(session):
 def test_is_slot_available(session):
     # Sample data
     slot_id = 1
-    reservation_date = datetime.datetime.now() + timedelta(days=1)
+    reservation_date = datetime.now() + timedelta(days=1)
 
     try:
         # Ensure slot is available initially

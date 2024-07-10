@@ -1,4 +1,7 @@
 import pytest
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from src.models.slot_model import SlotModel
 from setup import create_app
 from src.models.base import BaseModel
 from src.models.reservation_model import ReservationModel
@@ -8,6 +11,8 @@ from src.models.user_model import UserModel
 from src.models.carwash_model import CarWashModel
 from src.models.extra_model import ExtraModel
 from src.models.reservation_extras import reservation_extra
+from src.models.base import BaseModel
+
 
 # Configure an in-memory SQLite database for testing
 from src.models.reservation_extras import reservation_extra
