@@ -12,8 +12,9 @@ class ExtraModel(BaseModel):
     price = Column(Integer, nullable=False)
     extra_type = Column(EtraTypeEnum, nullable=False)
     carwash_id = Column(ForeignKey('Carwash.id'), nullable= False)
-    
     carwash = relationship("CarWashModel")
+    reservations = relationship('ReservationModel', secondary='reservation_extra', back_populates='extras')
+
     @classmethod
     def add_extra(cls, session: Session, service_name: str, price: int, extra_type: str, carwash_id: int):
         extra = cls(

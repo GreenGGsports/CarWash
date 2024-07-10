@@ -1,10 +1,13 @@
-from sqlalchemy import Column, Integer, DateTime, Float, ForeignKey, String
+from sqlalchemy import Column, Integer, DateTime, Float, ForeignKey
 from sqlalchemy.orm import relationship, Session
 from datetime import datetime
 from .base import BaseModel
+from src.models.reservation_extras import reservation_extra
 from sqlalchemy import Enum
 
+
 CarTypeEnum = Enum('small_car', 'large_car', name='car_type_enum')
+
 
 class ReservationModel(BaseModel):
     __tablename__ = 'Reservation'
@@ -14,6 +17,7 @@ class ReservationModel(BaseModel):
     service_id = Column(Integer, ForeignKey('Service.id'), nullable=False)
     company_id = Column(Integer, ForeignKey('Company.id'), nullable=False)
     user_id = Column(Integer, ForeignKey('User.id'), nullable=False)
+
     reservation_date = Column(DateTime, nullable=False)
     parking_spot = Column(Integer)
     car_type = Column(CarTypeEnum, nullable=False)
@@ -23,15 +27,22 @@ class ReservationModel(BaseModel):
     service = relationship("ServiceModel")
     company = relationship("CompanyModel")
     user = relationship("UserModel")
+    extras = relationship('ExtraModel', secondary=reservation_extra, back_populates='reservations')
+
 
     @classmethod
     def add_reservation(cls, session: Session, company_id: int, service_id: int, slot_id: int, 
-                        reservation_date: datetime, user_id: int, car_type, final_price: float, 
+                        reservation_date: datetime, user_id: int, car_type, final_price: float, extras=None,
                         parking_spot: int = None):
-        # Check if the slot is available
+        # Ellenőrizzük, hogy van-e megadva extras paraméter, ha nem, kezeld
+        if extras is None:
+            extras = []  # Alapértelmezetten üres lista, ha nincs extra
+
+        # Ellenőrizzük, hogy a slot elérhető-e
         if not cls.is_slot_available(session, slot_id, reservation_date):
             raise Exception("Slot is not available for reservation")
 
+        # Foglalás létrehozása
         reservation = cls(
             company_id=company_id,
             service_id=service_id,
@@ -40,8 +51,10 @@ class ReservationModel(BaseModel):
             parking_spot=parking_spot,
             reservation_date=reservation_date,
             car_type=car_type,
-            final_price=final_price
+            final_price=final_price,
+            extras=extras  # Hozzáadjuk az extras paramétert
         )
+
         try:
             session.add(reservation)
             session.commit()
@@ -49,6 +62,7 @@ class ReservationModel(BaseModel):
         except Exception as e:
             session.rollback()
             raise e
+
 
     @classmethod
     def is_slot_available(cls, session: Session, slot_id: int, reservation_date: datetime) -> bool:
