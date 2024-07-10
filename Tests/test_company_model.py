@@ -1,35 +1,12 @@
-import pytest
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from src.models.base import Base
 from src.models.company_model import CompanyModel
-
-
-@pytest.fixture(scope='module')
-def engine():
-    return create_engine('sqlite:///:memory:')
-
-
-@pytest.fixture(scope='module')
-def tables(engine):
-    Base.metadata.create_all(engine)
-    yield
-    Base.metadata.drop_all(engine)
-
-@pytest.fixture(scope='function')
-def session(engine):
-    Base.metadata.create_all(engine)
-    Session = sessionmaker(bind=engine)
-    session = Session()
-    yield session
-    session.close()
-    Base.metadata.drop_all(engine)
 
 def test_add_company(session):
     company_name = "Test Company"
     company = CompanyModel.add_company(session, company_name)
     assert company.id is not None
     assert company.company_name == company_name
+    company2 = CompanyModel.add_company(session, company_name, 0.1)
+    assert company2.discount == 0.1
 
 def test_get_company(session):
     company_name = "Test Company"

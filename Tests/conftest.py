@@ -1,54 +1,31 @@
-# tests/conftest.py
-
 import pytest
-from setup import create_app, db
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from src.models.slot_model import SlotModel
 from src.models.reservation_model import ReservationModel
-from src.models.company_model import CompanyModel
 from src.models.service_model import ServiceModel
-import datetime
+from src.models.company_model import CompanyModel
+from src.models.user_model import UserModel
+from src.models.carwash_model import CarWashModel
+from src.models.extra_model import ExtraModel
+from src.models.reservation_extras import reservation_extra
+from src.models.base import BaseModel
 
-@pytest.fixture(scope='module')
-def test_client():
-    flask_app = create_app('testing')
-    testing_client = flask_app.test_client()
 
-    with flask_app.app_context():
-        db.create_all()
+# Configure an in-memory SQLite database for testing
+@pytest.fixture(scope='function')
+def engine():
+    return create_engine('sqlite:///:memory:')
 
-        from pdb import set_trace
-        set_trace()
-        company = CompanyModel(company_name='Test Company')
-        set_trace()
-        service = ServiceModel(service_name='Test Service')
-        db.session.add(company)
-        db.session.add(service)
-        db.session.commit()
+@pytest.fixture(scope='function')
+def tables(engine):
+    BaseModel.metadata.create_all(engine)
+    yield
+    BaseModel.metadata.drop_all(engine)
 
-        reservation = ReservationModel(
-            appointment=datetime.datetime.utcnow(),
-            license_plate='ABC123',
-            name='John Doe',
-            phone_number='123456789',
-            brand='Test Brand',
-            type='Test Type',
-            company_id=company.id,
-            service_id=service.id,
-            parking_spot='A1'
-        )
-        db.session.add(reservation)
-        db.session.commit()
-
-    yield testing_client
-
-    with flask_app.app_context():
-        db.session.remove()
-        db.drop_all()
-
-@pytest.fixture(scope='module')
-def init_database():
-    flask_app = create_app('testing')
-    with flask_app.app_context():
-        db.create_all()
-        yield db
-        db.session.remove()
-        db.drop_all()
+@pytest.fixture(scope='function')
+def session(engine, tables):
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    yield session
+    session.close()
