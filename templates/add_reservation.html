@@ -7,38 +7,84 @@
 </head>
 <body>
     <h1>Create Reservation</h1>
-    <form id="reservationForm">
-        <label for="appointment">Appointment:</label><br>
-        <input type="datetime-local" id="appointment" name="appointment" required><br><br>
+    
+    <!-- Login Section -->
+    <div id="loginForm">
+        <h2>Login</h2>
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" required><br><br>
         
-        <label for="license_plate">License Plate:</label><br>
-        <input type="text" id="license_plate" name="license_plate" required><br><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
         
-        <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name" required><br><br>
-        
-        <label for="phone_number">Phone Number:</label><br>
-        <input type="text" id="phone_number" name="phone_number" required><br><br>
-        
-        <label for="brand">Brand:</label><br>
-        <input type="text" id="brand" name="brand" required><br><br>
-        
-        <label for="type">Type:</label><br>
-        <input type="text" id="type" name="type" required><br><br>
-        
-        <label for="company_id">Company ID:</label><br>
-        <input type="number" id="company_id" name="company_id" required><br><br>
-        
-        <label for="service_id">Service ID:</label><br>
-        <input type="number" id="service_id" name="service_id" required><br><br>
-        
-        <label for="parking_spot">Parking Spot:</label><br>
-        <input type="text" id="parking_spot" name="parking_spot"><br><br>
-        
-        <button type="button" onclick="submitForm()">Submit</button>
-    </form>
+        <button type="button" onclick="login()">Login</button>
+    </div>
+    
+    <!-- Reservation Form -->
+    <div id="reservationSection">
+        <h2>Reservation Form</h2>
+        <form id="reservationForm">
+            <label for="appointment">Appointment:</label><br>
+            <input type="datetime-local" id="appointment" name="appointment" required><br><br>
+            
+            <label for="license_plate">License Plate:</label><br>
+            <input type="text" id="license_plate" name="license_plate" required><br><br>
+            
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" required><br><br>
+            
+            <label for="phone_number">Phone Number:</label><br>
+            <input type="text" id="phone_number" name="phone_number" required><br><br>
+            
+            <label for="brand">Brand:</label><br>
+            <input type="text" id="brand" name="brand" required><br><br>
+            
+            <label for="type">Type:</label><br>
+            <input type="text" id="type" name="type" required><br><br>
+            
+            <label for="company_id">Company ID:</label><br>
+            <input type="number" id="company_id" name="company_id" required><br><br>
+            
+            <label for="service_id">Service ID:</label><br>
+            <input type="number" id="service_id" name="service_id" required><br><br>
+            
+            <label for="parking_spot">Parking Spot:</label><br>
+            <input type="text" id="parking_spot" name="parking_spot"><br><br>
+            
+            <button type="button" onclick="submitForm()">Submit</button>
+        </form>
+    </div>
 
     <script>
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const loginData = {
+                username: username,
+                password: password
+            };
+
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(loginData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Login Success:', data);
+                // Hide login form and show reservation form
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('reservationSection').style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Login Error:', error);
+                // Handle login error here
+            });
+        }
+
         function submitForm() {
             const appointmentInput = document.getElementById('appointment').value;
             // Convert datetime-local format to YYYY-MM-DDTHH:MM format
@@ -70,18 +116,4 @@
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-                // Handle success response here
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                // Handle error here
-            });
-        }
-    </script>
-</body>
-</html>
+                body: JSON.stringify(d

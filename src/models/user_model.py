@@ -1,26 +1,50 @@
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import Session
-from .base import BaseModel  # Adjust the import according to your project structure
+from werkzeug.security import generate_password_hash, check_password_hash
+from .base import BaseModel
 
 class UserModel(BaseModel):
     __tablename__ = 'User'
-
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    username = Column(String, unique=True, nullable=False)
-    email = Column(String, unique=True, nullable=False)
-    full_name = Column(String, nullable=False)
-    phone_number = Column(String, nullable=True)
-    Licence_plate = Column(String, nullable=True)
+    
+    id = Column(Integer, primary_key=True)
+    user_name = Column(String, nullable=False)
+    password_hash = Column(String,nullable=False )
+    
+    def __repr__(self):
+        return f"<UserModel(id={self.id}, user_name='{self.user_name}')>"
 
     @classmethod
-    def add_user(cls, session: Session, username, email, full_name, Licence_plate, phone_number=None):
+    def add_user(cls, session: Session, user_name: str, password: str ):
         user = cls(
-            username=username,
-            email=email,
-            full_name=full_name,
-            phone_number=phone_number,
-            Licence_plate = Licence_plate  
+            user_name = user_name,
+            password_hash = generate_password_hash(password=password)
         )
         session.add(user)
         session.commit()
         return user
+    
+    @classmethod
+    def login(cls,session : Session, user_name: str, password):
+        user = session.query(cls).filter(
+            cls.user_name == user_name
+            ).first()
+        if not user:
+            return False
+        if check_password_hash(user.password_hash,password):
+            return user
+        else:
+            return False
+
+    @classmethod
+    def check_name_taken(cls,session: Session,user_name: str):
+        user_query = session.query(cls).filter(
+            cls.user_name == user_name
+            ).first()
+        if user_query:
+            return True
+        
+        else:
+            return False 
+        
+        
+        

@@ -12,6 +12,18 @@ class DevelopmentConfig(Config):
 class TestingConfig(Config):
     TESTING = True
     DEBUG = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
 
 class ProductionConfig(Config):
     pass
+
+
+def load_configs(app,config_name):
+    if config_name == 'development':
+        app.config.from_object(DevelopmentConfig)
+    elif config_name == 'testing':
+        app.config.from_object(TestingConfig)
+    elif config_name == 'production':
+        app.config.from_object(ProductionConfig)
+    else:
+        raise ValueError("Invalid config name. Use 'development', 'testing', or 'production'.")

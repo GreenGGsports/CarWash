@@ -10,7 +10,7 @@ CarTypeEnum = Enum('small_car', 'large_car', name='car_type_enum')
 
 
 class ReservationModel(BaseModel):
-    __tablename__ = 'reservation'
+    __tablename__ = 'Reservation'
 
     id = Column(Integer, primary_key=True)
     slot_id = Column(Integer, ForeignKey('Slot.id'), nullable=False)

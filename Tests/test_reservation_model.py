@@ -86,7 +86,7 @@ def test_add_reservation_slot_unavailable(session):
     service_id = 1
     slot_id = 1
     user_id = 1
-    reservation_date = datetime.now() + timedelta(days=1)
+    reservation_date = datetime.utcnow() + timedelta(days=1)
     car_type = 'large_car'
     final_price = 100.0
     parking_spot = 1
