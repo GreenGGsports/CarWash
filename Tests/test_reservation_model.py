@@ -224,3 +224,42 @@ def test_add_multiple_extras(session):
 
     # Clean up
     session.close()
+
+def test_correct_final_price_with_extras(session: Session, setup_database):
+    appointment = datetime.utcnow() + timedelta(days=1)
+    car_type = 'large_car'
+    extras = [1, 2]  # Az extra objektumok id-jait adja meg
+
+    # Hozzáadunk egy foglalást
+    reservation = ReservationModel.add_reservation(
+        session=session,
+        company_id=1,
+        service_id=1,
+        slot_id=1,
+        reservation_date=appointment,
+        user_id=1,
+        car_type=car_type,
+        parking_spot='A1',
+        extras=extras
+    )
+
+    assert reservation is not None
+
+    # Szolgáltatás lekérése
+    service = ServiceModel.get_by_id(session, reservation.service_id)
+    assert service is not None
+
+    # Cég lekérése
+    company = CompanyModel.get_by_id(session, reservation.company_id)
+    assert company is not None
+
+    # Extrák lekérése
+    reservation_extras = session.query(ExtraModel).filter(ExtraModel.id.in_(extras)).all()
+    assert len(reservation_extras) == len(extras)
+
+    service_price = 80
+    extra1_price = 10
+    extra2_price = 15
+    dicount = 10
+
+    assert reservation.final_price == (service_price + extra1_price + extra2_price)*(1 - dicount/100)
