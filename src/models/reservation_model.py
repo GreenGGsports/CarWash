@@ -4,7 +4,10 @@ from datetime import datetime
 from .base import BaseModel
 from src.models.reservation_extras import reservation_extra
 from sqlalchemy import Enum
-
+from typing import List, Optional
+from src.models.service_model import ServiceModel
+from src.models.extra_model import ExtraModel
+from src.models.company_model import CompanyModel
 
 CarTypeEnum = Enum('small_car', 'large_car', name='car_type_enum')
 
@@ -31,18 +34,46 @@ class ReservationModel(BaseModel):
 
 
     @classmethod
-    def add_reservation(cls, session: Session, company_id: int, service_id: int, slot_id: int, 
-                        reservation_date: datetime, user_id: int, car_type, final_price: float, extras=None,
-                        parking_spot: int = None):
-        # Ellenőrizzük, hogy van-e megadva extras paraméter, ha nem, kezeld
-        if extras is None:
-            extras = []  # Alapértelmezetten üres lista, ha nincs extra
+    def calculate_final_price(cls, session: Session, service_id: int, car_type: str, extras: Optional[List[int]], company_id: Optional[int]) -> float:
+        # Szolgáltatás árának lekérése az autó típusától függően
+        service = ServiceModel.get_by_id(session, service_id)
+        if car_type == 'large_car':
+            service_price = service.price_large if service else 0
+        else:
+            service_price = service.price_small if service else 0
 
-        # Ellenőrizzük, hogy a slot elérhető-e
+        # Extrák árainak lekérése és összegzése
+        total_extra_price = 0
+        for extra_id in extras:
+            extra = ExtraModel.get_by_id(session, extra_id)
+            if extra:
+                total_extra_price += extra.price
+
+        # Cég kedvezményének alkalmazása (százalékban)
+        company_discount = 0
+        if company_id:
+            company = CompanyModel.get_by_id(session, company_id)
+            company_discount = company.discount if company else 0
+
+        # Végső ár kiszámítása a kedvezmény alkalmazásával (százalékos kedvezmény)
+        discount_multiplier = (100 - company_discount) / 100
+        final_price = (service_price + total_extra_price) * discount_multiplier
+
+        return final_price
+
+    @classmethod
+    def add_reservation(cls, session: Session, company_id: Optional[int], service_id: int, slot_id: int, 
+                        reservation_date: datetime, user_id: int, car_type: str, extras: Optional[List[int]] = None,
+                        parking_spot: Optional[int] = None) -> 'ReservationModel':
+        if extras is None:
+            extras = []
+
         if not cls.is_slot_available(session, slot_id, reservation_date):
             raise Exception("Slot is not available for reservation")
 
-        # Foglalás létrehozása
+        # Végső ár kiszámítása külön függvény használatával
+        final_price = cls.calculate_final_price(session, service_id, car_type, extras, company_id)
+
         reservation = cls(
             company_id=company_id,
             service_id=service_id,
@@ -52,7 +83,7 @@ class ReservationModel(BaseModel):
             reservation_date=reservation_date,
             car_type=car_type,
             final_price=final_price,
-            extras=extras  # Hozzáadjuk az extras paramétert
+            extras=[ExtraModel.get_by_id(session, extra_id) for extra_id in extras]
         )
 
         try:
@@ -62,7 +93,6 @@ class ReservationModel(BaseModel):
         except Exception as e:
             session.rollback()
             raise e
-
 
     @classmethod
     def is_slot_available(cls, session: Session, slot_id: int, reservation_date: datetime) -> bool:
