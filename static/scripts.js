@@ -49,26 +49,50 @@ function loginOrRegister(url, username, password) {
         alert('Hiba történt a kérés során. Kérlek próbáld újra később.');
     });
 }
-
 /*
-Flatpcicker Javascript code 
+CARWASH
 */
-flatpickr('#calendar-tomorrow', {
-    minDate: new Date().fp_incr(1),
-    inline: true // állandó naptár
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('HelyszinekContainer');
+    const template = document.getElementById('helyszinTemplate').content;
+
+    // GET kérés az összes helyszín lekérdezésére
+    fetch('/carwash/list')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(helyszin => {
+                const clone = document.importNode(template, true);
+                clone.querySelector('.box').dataset.id = helyszin.id;
+                clone.querySelector('.cim').innerHTML = helyszin.location;
+                // only for testing add logo
+                clone.querySelector('.helyszin').src = "https://via.placeholder.com/335x100";
+                container.appendChild(clone);
+            });
+
+            // Event listener hozzáadása a helyszínekhez
+            container.querySelectorAll('.box').forEach(box => {
+                box.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const id = event.currentTarget.dataset.id;
+                    sendSelectionToServer(id);
+                });
+            });
+        })
+        .catch(error => console.error('Hiba történt GET kérés során:', error));
+
+    function sendSelectionToServer(id) {
+        fetch('/carwash/select', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id: id }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Sikeres POST kérés:', data);
+        })
+        .catch(error => console.error('Hiba történt POST kérés során:', error));
+    }
 });
 
-flatpickr('#calendar-selectrange', {
-    minDate: new Date().fp_incr(1),
-    maxDate: new Date().fp_incr(7)
-});
-
-flatpickr('#calendar-range', {
-    mode: "range"
-});
-
-// Japanese locale példával
-flatpickr('#calendar-ja', {
-    locale: "ja",
-    dateFormat: "Y/m/d"
-});

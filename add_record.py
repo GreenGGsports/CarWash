@@ -1,34 +1,35 @@
+from config import Config 
+from database import create_database
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from src.models.reservation_model import Reservation
+from src.models.reservation_model import ReservationModel
+from src.models.carwash_model import CarWashModel
 import datetime
 
-# Assuming you have created the database and engine as before
-db_path = 'sqlite:///db/car_wash.db'
+db_path = Config.SQLALCHEMY_DATABASE_URI
 
-# Create the database engine
 engine = create_engine(db_path)
-# Function to create a session
 def create_session():
     Session = sessionmaker(bind=engine)
     return Session()
 
+def add_carwash_test(session):
+    carwash_name_1 = "Sparkle Clean"
+    location_1 = "123 Main St"
+    carwash_name_2 = "Shiny Wash"
+    location_2 = "456 Elm St"
+    CarWashModel.add_carwash(session=session,carwash_name=carwash_name_1, location=location_1)
+    CarWashModel.add_carwash(session=session,carwash_name=carwash_name_2, location=location_2)
+    session.close()
+
+def create_test_db(session):
+    session = create_session()
+    add_carwash_test(session)
+    
+    session.close()
 # Example usage
 if __name__ == '__main__':
     session = create_session()
+    create_database(engine=engine)
     
-    # Create a new reservation
-    new_reservation = Reservation.add_reservation(
-        session,
-        appointment=datetime.datetime.utcnow(),
-        license_plate='ABC123',
-        name='John Doe',
-        phone_number='123-456-7890',
-        brand='Toyota',
-        type='Sedan',
-        company_id=1,
-        service_id=1,
-        parking_spot='A1'
-    )   
-    
-    session.close()
+    add_carwash_test(session=session)
