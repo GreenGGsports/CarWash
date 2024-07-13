@@ -13,8 +13,12 @@ def show_test_form():
 class User(UserMixin):
     def __init__(self, id):
         self.id = id
-        self.reservation_id = None
-
+        self.data = {}
+    def set(self,key,value):
+        self.data[key] = value
+        
+    def get(self,key):
+        return self.data[key]
 
 # Function to initialize LoginManager
 def init_login_manager(app):

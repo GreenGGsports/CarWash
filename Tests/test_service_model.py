@@ -54,3 +54,21 @@ def test_delete_service(session):
     ServiceModel.delete_by_id(session, created_service.id)
     deleted_service = ServiceModel.get_by_id(session, created_service.id)
     assert deleted_service is None
+    
+def test_get_services_by_carwash_id(session):
+    carwash_id = 1
+
+    # Hozzáadunk szolgáltatásokat különböző autómosókhoz
+    ServiceModel.add_service(session, "Service 1", 100, 120, carwash_id)
+    ServiceModel.add_service(session, "Service 2", 200, 200, carwash_id)
+    ServiceModel.add_service(session, "Service 3", 150, 180, carwash_id + 1)  # Másik autómosóhoz tartozó szolgáltatás
+
+    # Lekérdezzük az autómosóhoz tartozó szolgáltatásokat, használva a filter_by_column_value metódust
+    services_carwash_1 = ServiceModel.filter_by_column_value(session, 'carwash_id', carwash_id)
+
+    # Ellenőrzünk
+    assert len(services_carwash_1) == 2
+    assert all(service.carwash_id == carwash_id for service in services_carwash_1)
+
+    # Ellenőrizzük, hogy a másik autómosóhoz tartozó szolgáltatás ne legyen benne
+    assert all(service.carwash_id != carwash_id + 1 for service in services_carwash_1)

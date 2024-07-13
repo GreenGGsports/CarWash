@@ -52,13 +52,39 @@ function loginOrRegister(url, username, password) {
 /*
 CARWASH
 */
+
+function sendSelectionToServer(id, route, callback) {
+    fetch(route, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id: id }),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Sikeres POST kérés:', data);
+        if (callback) callback();  // Callback végrehajtása, ha meg van adva
+    })
+    .catch(error => console.error('Hiba történt POST kérés során:', error));
+}
 document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('HelyszinekContainer');
     const template = document.getElementById('helyszinTemplate').content;
 
     // GET kérés az összes helyszín lekérdezésére
     fetch('/carwash/list')
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
         .then(data => {
             data.forEach(helyszin => {
                 const clone = document.importNode(template, true);
@@ -70,29 +96,51 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             // Event listener hozzáadása a helyszínekhez
-            container.querySelectorAll('.box').forEach(box => {
-                box.addEventListener('click', (event) => {
-                    event.preventDefault();
-                    const id = event.currentTarget.dataset.id;
-                    sendSelectionToServer(id);
-                });
+            container.addEventListener('click', (event) => {
+                const box = event.target.closest('.box');
+                if (box) {
+                    const id = box.dataset.id;
+                    console.log(`Carwash selected: ID=${id}`);
+                    sendSelectionToServer(id, '/carwash/select', listServices);
+                }
             });
         })
         .catch(error => console.error('Hiba történt GET kérés során:', error));
-
-    function sendSelectionToServer(id) {
-        fetch('/carwash/select', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ id: id }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Sikeres POST kérés:', data);
-        })
-        .catch(error => console.error('Hiba történt POST kérés során:', error));
-    }
 });
 
+function listServices() {
+    const container = document.getElementById('CsomagokContainer'); // Update with actual services container ID
+    const template = document.getElementById('CsomagokTemplate').content; // Update with actual service template ID
+
+    // GET kérés az összes szolgáltatás lekérdezésére
+    fetch('/service/list')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            container.innerHTML = ''; // Meglévő szolgáltatások törlése
+            data.forEach(csomag => {
+                const clone = document.importNode(template, true);
+                clone.querySelector('.CsomagokBox').dataset.id = csomag.id;
+                clone.querySelector('.csomag_nev').innerHTML = csomag.name;
+                clone.querySelector('.leiras').innerHTML = csomag.description;
+                // only for testing add logo
+                clone.querySelector('.helyszin').src = "https://via.placeholder.com/335x100";
+                container.appendChild(clone);
+            });
+
+            // Event listener hozzáadása a szolgáltatásokhoz
+            container.addEventListener('click', (event) => {
+                const box = event.target.closest('.CsomagokBox');
+                if (box) {
+                    const id = box.dataset.id;
+                    console.log(`Service selected: ID=${id}`);
+                    sendSelectionToServer(id, '/service/select');
+                }
+            });
+        })
+        .catch(error => console.error('Hiba történt GET kérés során:', error));
+}

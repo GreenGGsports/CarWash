@@ -25,5 +25,6 @@ def select_carwash():
     carwash_id = int(data.get('id'))
     if not carwash_id:
         return jsonify({'message': 'Hiányzó azonosító!'}), 400
-    current_user.carwash_id = carwash_id
+    current_user.set('carwash_id',carwash_id)
+
     return jsonify({'message': 'Helyszín kiválasztva!', 'id': carwash_id}), 200
