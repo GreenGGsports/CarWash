@@ -10,9 +10,11 @@ from src.models.extra_model import ExtraModel
 from src.models.reservation_extras import reservation_extra
 
 
-def create_database(engine,db_path):
+def create_database(engine):
     BaseModel.metadata.create_all(engine)
     print("Database created successfully.")
 
+
 if __name__ == '__main__':
     create_database()
+    
