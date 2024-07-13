@@ -10,7 +10,8 @@ class CompanyModel(BaseModel):
     discount = Column(Double, nullable=False, default=0)
     
     def __repr__(self):
-        return f"<CompanyModel(id={self.id}, company_name='{self.company_name}')>"
+        return f"<CompanyModel(id={self.id}, company_name='{self.company_name}', discount='{self.discount}' )>"
+
 
     @classmethod
     def add_company(cls, session: Session, company_name: str, discount: float = None):

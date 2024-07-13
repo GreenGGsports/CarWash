@@ -8,6 +8,7 @@ from src.controllers.user_controller import user_ctrl, init_login_manager
 from src.controllers.carwash_controller import carwash_ctrl
 from database import create_database
 from add_record import create_test_db
+from src.controllers.admin import init_admin
 
 def create_app(config_name: str):
     app = Flask(__name__)
@@ -18,6 +19,7 @@ def create_app(config_name: str):
     
     with app.app_context():
         create_database(engine)
+        init_admin(app)
     
     init_login_manager(app=app)
     # Register blueprints
@@ -28,6 +30,7 @@ def add_blueprints(app: Flask):
     app.register_blueprint(reservation_ctrl, url_prefix='/reservation')
     app.register_blueprint(user_ctrl,url_prefix='/user')
     app.register_blueprint(carwash_ctrl,url_prefix='/carwash')
+    
     return app 
 
 if __name__ == '__main__':
