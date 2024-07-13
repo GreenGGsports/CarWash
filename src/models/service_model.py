@@ -13,7 +13,7 @@ class ServiceModel(BaseModel):
     
     carwash = relationship("CarWashModel")
     def __repr__(self):
-        return f"<ServiceModel(id={self.id}, service_name='{self.service_name}', service_type={self.service_type})>"
+        return f"<ServiceModel(id={self.id}, service_name='{self.service_name}')>"
 
     @classmethod
     def add_service(cls, session: Session, service_name: str, price_small: int, price_large: int, carwash_id : int):
