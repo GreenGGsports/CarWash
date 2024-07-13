@@ -1,13 +1,14 @@
 from src.models.service_model import ServiceModel 
 from src.models.extra_model import ExtraModel
-from flask import Blueprint, request, jsonify, current_app
+from flask import Blueprint, request, jsonify, current_app, session
 from flask_login import current_user 
 
 service_ctrl = Blueprint('service_ctrl', __name__, url_prefix='/service')
 
 @service_ctrl.route('/list', methods=['GET'])
 def get_service():
-
+    from pdb import set_trace
+    set_trace()
     session = current_app.session_factory.get_session()
     carwash_id = current_user.carwash_id
     services = ServiceModel.filter_by_column_value(session,'carwash_id',carwash_id)

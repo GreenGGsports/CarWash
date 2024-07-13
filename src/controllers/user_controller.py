@@ -11,14 +11,9 @@ def show_test_form():
     return render_template('User.html')
 
 class User(UserMixin):
-    def __init__(self, id):
+    def __init__(self, id=None):
         self.id = id
-        self.data = {}
-    def set(self,key,value):
-        self.data[key] = value
         
-    def get(self,key):
-        return self.data[key]
 
 # Function to initialize LoginManager
 def init_login_manager(app):
@@ -30,7 +25,7 @@ def init_login_manager(app):
     def load_user(user_id):
         if user_id:
             return User(user_id)
-        return None
+        return User()
     
 @user_ctrl.route('/login', methods=['POST'])
 def login():
@@ -41,7 +36,7 @@ def login():
     user = UserModel.login(session=session, user_name=user_name, password=password)
     if user:
         user_obj = User(user.id)
-        login_user(user_obj, remember=True)
+        login_user(user_obj, remember=False)
         return jsonify({'status': 'logged_in'})
     return jsonify({'status': 'failed'})
 
