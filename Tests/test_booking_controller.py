@@ -22,8 +22,7 @@ def test_is_slot_available(session):
         user_id=1,
         reservation_date=start_time,
         parking_spot=1,
-        car_type='small_car',
-        final_price=100.0
+        car_type='small_car'
     )
 
     # Ensure the slot is no longer available after the reservation
@@ -50,8 +49,7 @@ def test_is_slot_available(session):
         user_id=1,
         reservation_date=start_time_2,
         parking_spot=1,
-        car_type='small_car',
-        final_price=120.0
+        car_type='small_car'
     )
 
     # Ensure the new slot is no longer available after the reservation
@@ -91,8 +89,7 @@ def test_double_booking_only_available_or_earlier(session):
         user_id=1,
         reservation_date= reservation_date_1,
         parking_spot=1,
-        car_type='small_car',
-        final_price=120.0
+        car_type='small_car'
     )
 
     # Próbáljunk újra ugyanarra az időpontra foglalni

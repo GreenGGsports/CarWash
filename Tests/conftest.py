@@ -19,7 +19,7 @@ from src.models.reservation_extras import reservation_extra
 from src.models.slot_model import SlotModel
 from sessions import SessionFactory
 from sqlalchemy import create_engine
-from add_record import create_test_db
+
 @pytest.fixture(scope='module')
 def app():
     app = create_app('testing')
@@ -34,7 +34,6 @@ def session(app, engine):
     BaseModel.metadata.create_all(engine)
     Session = SessionFactory(engine)
     session = Session.get_session()
-    create_test_db(session)
     with app.app_context():
         yield session
     session.close()
