@@ -126,7 +126,7 @@ async function listServices() {
         const data = await response.json();
 
         // Meglévő szolgáltatások törlése (opcionális)
-        // container.innerHTML = '';
+        container.innerHTML = '';
 
         data.forEach(csomag => {
             const clone = document.importNode(template, true);

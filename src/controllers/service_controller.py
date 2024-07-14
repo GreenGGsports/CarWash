@@ -6,14 +6,17 @@ from flask_login import current_user
 service_ctrl = Blueprint('service_ctrl', __name__, url_prefix='/service')
 
 @service_ctrl.route('/list', methods=['GET'])
-def get_service():
+def get_service():  
     db_session = current_app.session_factory.get_session()
-    if 'carwash_id' in session:
+    if 'carwash_id' not in session:
         return jsonify(({'status': 'failed no carwash_id selected'}))
     else:
-        carwash_id = 1
-    services = ServiceModel.filter_by_column_value(db_session,'carwash_id',carwash_id)
+        carwash_id = session['carwash_id']
+    
+    
+    services = ServiceModel.filter_by_column_value(db_session,'id',carwash_id)
     response_data = []
+
     for service in services:
         response_data.append(
             dict(
@@ -21,7 +24,7 @@ def get_service():
                 name = service.service_name,
                 description = service.description
             )
-        )     
+        )   
     return jsonify(response_data)
 
 @service_ctrl.route('/select', methods=['POST'])
