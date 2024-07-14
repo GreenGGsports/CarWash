@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, current_app
+from flask import Blueprint, request, jsonify, current_app, session
 from flask_login import current_user 
 from src.models.carwash_model import CarWashModel
 
@@ -6,8 +6,8 @@ carwash_ctrl = Blueprint('carwash_ctrl', __name__, url_prefix='/carwash')
 
 @carwash_ctrl.route('/list', methods=['GET'])
 def get_carwashes():
-    session = current_app.session_factory.get_session()
-    carwashes = CarWashModel.get_all(session=session)
+    db_session = current_app.session_factory.get_session()
+    carwashes = CarWashModel.get_all(session=db_session)
     
     response_data = []
     for carwash in carwashes:
@@ -25,6 +25,6 @@ def select_carwash():
     carwash_id = int(data.get('id'))
     if not carwash_id:
         return jsonify({'message': 'Hiányzó azonosító!'}), 400
-    current_user.set('carwash_id',carwash_id)
-
+    
+    session['carwash_id'] = carwash_id
     return jsonify({'message': 'Helyszín kiválasztva!', 'id': carwash_id}), 200

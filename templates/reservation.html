@@ -54,18 +54,19 @@
             </template>
         </div>
         <h2 class="alcim">Csomagjaink</h2>
-        <template id="CsomagokTemplate">
-        <form action="">
-            <div class="CsomagokContainer">
-                <button class="CsomagokBox">
-                    <!--Lustaságom okán a css-ben így állítottam át fehérre (lsd id= leiras)-->
-                    <div class = 'csomag_nev', id= "leiras">blabla nev </div>
-                    <div class = 'leiras' id="leiras">Leírás</div>
-
-                </button>
+            <div class="CsomagokContainer" id="CsomagokContainer">
+                <template id="CsomagokTemplate">
+                    <form action="">
+                        <button class="CsomagokBox" id="CsomagokBox">
+                            <!--Lustaságom okán a css-ben így állítottam át fehérre (lsd id= leiras)-->
+                            <div class="csomag_nev" id="leiras">blabla nev</div>
+                            <div class="leiras" id="leiras">Leírás</div>
+                        </button>
+                    </form>
+                </template>
             </div>
-        </form>
-    </template>
+
+    
             <h2 class="alcim">Extrák</h2>
             <div class="ExtrakContainers">
                 <div class="ExtrakContainer">

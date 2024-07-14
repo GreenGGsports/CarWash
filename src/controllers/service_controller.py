@@ -7,11 +7,12 @@ service_ctrl = Blueprint('service_ctrl', __name__, url_prefix='/service')
 
 @service_ctrl.route('/list', methods=['GET'])
 def get_service():
-    from pdb import set_trace
-    set_trace()
-    session = current_app.session_factory.get_session()
-    carwash_id = current_user.carwash_id
-    services = ServiceModel.filter_by_column_value(session,'carwash_id',carwash_id)
+    db_session = current_app.session_factory.get_session()
+    if 'carwash_id' in session:
+        return jsonify(({'status': 'failed no carwash_id selected'}))
+    else:
+        carwash_id = 1
+    services = ServiceModel.filter_by_column_value(db_session,'carwash_id',carwash_id)
     response_data = []
     for service in services:
         response_data.append(
@@ -20,7 +21,7 @@ def get_service():
                 name = service.service_name,
                 description = service.description
             )
-        )
+        )     
     return jsonify(response_data)
 
 @service_ctrl.route('/select', methods=['POST'])
@@ -29,5 +30,25 @@ def select_service():
     service_id = int(data.get('id'))
     if not service_id:
         return jsonify({'message': 'Hiányzó azonosító!'}), 400
-    current_user.service_id = service_id
+    session['sevice_id'] = service_id
     return jsonify({'message': 'Csomag kiválasztva!', 'id': service_id}), 200
+
+
+@service_ctrl.route('/list_extra', methods=['GET'])
+def get_extra():
+    db_session = current_app.session_factory.get_session()
+    if 'carwash_id' in session:
+        return jsonify(({'status': 'failed no carwash_id selected'}))
+    else:
+        carwash_id = 1
+    extras = ExtraModel.filter_by_column_value(db_session,'carwash_id',carwash_id)
+    response_data = []
+    for extra in extras:
+        response_data.append(
+            dict(
+                id = extra.id,
+                name = extra.extra_name,
+                type = extra.extra_type
+            )
+        )     
+    return jsonify(response_data)
