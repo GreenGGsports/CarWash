@@ -54,44 +54,46 @@
             </template>
         </div>
         <h2 class="alcim">Csomagjaink</h2>
-            <div class="CsomagokContainer" id="CsomagokContainer">
-                <template id="CsomagokTemplate">
-                    <form action="">
-                        <button class="CsomagokBox" id="CsomagokBox">
-                            <!--Lustaságom okán a css-ben így állítottam át fehérre (lsd id= leiras)-->
-                            <div class="csomag_nev" id="leiras">blabla nev</div>
-                            <div class="leiras" id="leiras">Leírás</div>
-                        </button>
-                    </form>
-                </template>
-            </div>
-
-    
-            <h2 class="alcim">Extrák</h2>
-            <div class="ExtrakContainers">
-                <div class="ExtrakContainer">
-                    <div class="ExtrakKeret">
-                        <div class="ExtrakAlcim">
-                            <div class="KulsoExtrak">Külső Extrák</div>
-                            <label class="KulsoGomb">
-                                <input type="checkbox" class="checkbox">
-                                <span class="checkbox-label">Bogároldás</span>
-                            </label>                                                                                  
-                        </div>
-                    </div>
-                </div>
-                <div class="ExtrakContainer">
-                    <div class="ExtrakKeret">
-                        <div class="ExtrakAlcim">
-                            <div class="KulsoExtrak">Külső Extrák</div>
-                        </div>
-                        <label class="BelsoGomb2">
-                            <input type="checkbox" class="checkbox">
-                            <span class="checkbox-label">Extra porszívózás</span>
-                        </label>
-                    </div>
-                </div>
+        <div class="CsomagokContainer" id="CsomagokContainer">
+            <template id="CsomagokTemplate">
+                <form action="">
+                    <button class="CsomagokBox" id="CsomagokBox">
+                        <!--Lustaságom okán a css-ben így állítottam át fehérre (lsd id= leiras)-->
+                        <div class="csomag_nev" id="leiras">blabla nev</div>
+                        <div class="leiras" id="leiras">Leírás</div>
+                    </button>
+                </form>
+            </template>
         </div>
+        <h2 class="alcim">Extrák</h2>
+        <div class="ExtrakContainers">
+            <div class="ExtrakContainer" id = 'KulsoExtrakContainer'>
+                <div class="ExtrakKeret">
+                    <div class="ExtrakAlcim">
+                        <div class="KulsoExtrak">Külső Extrák</div>
+                        <template id = 'KulsoExtrakTemplate'>
+                        <label class="KulsoGomb">
+                            <input type="checkbox" class="checkbox">
+                            <span class="checkbox-label">Bogároldás</span>
+                        </label> 
+                    </template>                                                                                 
+                    </div>
+                </div>
+            </div>
+            <div class="ExtrakContainer" id = 'BelsoExtrakContainer'>
+                <div class="ExtrakKeret">
+                    <div class="ExtrakAlcim">
+                        <div class="KulsoExtrak">Belső Extrák</div>
+                        <template id = 'BelsoExtrakTemplate'>
+                        <label class="KulsoGomb">
+                            <input type="checkbox" class="checkbox">
+                            <span class="checkbox-label">Bogároldás</span>
+                        </label> 
+                    </template>                                                                                 
+                    </div>
+                </div>
+            </div>
+    </div>
         <div class="FigyelmeztetesKeret">
             <div class="Figyelmeztetes">
                 <p>*Az extra szennyezett autóknál, ha nem választja ki a megfelelő Extra csomagot a foglaláskor, akkor a

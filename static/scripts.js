@@ -53,7 +53,7 @@ function loginOrRegister(url, username, password) {
 CARWASH
 */
 
-async function sendSelectionToServer(id, route, callback) {
+async function sendSelectionToServer(id, route, callbacks) {
     try {
         const response = await fetch(route, {
             method: 'POST',
@@ -70,7 +70,13 @@ async function sendSelectionToServer(id, route, callback) {
         const data = await response.json();
         console.log('Sikeres POST kérés:', data);
 
-        if (callback) callback(); // Callback végrehajtása, ha meg van adva
+        if (Array.isArray(callbacks)) {
+            callbacks.forEach(callback => {
+                if (typeof callback === 'function') {
+                    callback(data); // Callback végrehajtása a válasz adatokkal
+                }
+            });
+        }
     } catch (error) {
         console.error('Hiba történt POST kérés során:', error);
     }
@@ -105,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (box) {
                     const id = box.dataset.id;
                     console.log(`Carwash selected: ID=${id}`);
-                    await sendSelectionToServer(id, '/carwash/select', listServices);
+                    await sendSelectionToServer(id, '/carwash/select', [listServices,listExtras]);
                 }
             });
         })
@@ -153,41 +159,45 @@ async function listServices() {
     }
 }
 
-async function listServicesMock() {
-    console.log('kurva anyád fukció betölt')
-    const container = document.getElementById('CsomagokContainer'); // Update with actual services container ID
-    const template = document.getElementById('CsomagokTemplate').content
-    console.log('kurva anyád template betölt')
+async function listExtras() {
+    const kulsoContainer = document.getElementById('KulsoExtrakContainer');
+    const belsoContainer = document.getElementById('BelsoExtrakContainer');
+    const kulsoTemplate = document.getElementById('KulsoExtrakTemplate');
+    const belsoTemplate = document.getElementById('BelsoExtrakTemplate');
+    console.log('templates and containers found ')
     try {
-        // Hardcode-olt adatok helyett
-        const mockData = [
-            { id: 1, name: 'Szolgáltatás 1', description: 'Ez az első szolgáltatás leírása' },
-            { id: 2, name: 'Szolgáltatás 2', description: 'Ez a második szolgáltatás leírása' },
-            { id: 3, name: 'Szolgáltatás 3', description: 'Ez a harmadik szolgáltatás leírása' }
-        ];
-        console.log('kurva anyád')
-        mockData.forEach(csomag => {
-            const clone = document.importNode(template, true);
-            clone.querySelector('.CsomagokBox').dataset.id = csomag.id;
-            clone.querySelector('.csomag_nev').innerHTML = csomag.name;
-            clone.querySelector('.leiras').innerHTML = csomag.description;
-            container.appendChild(clone);
-        });
+        const response = await fetch('/service/list_extra');
 
-        // Event listener hozzáadása a szolgáltatásokhoz
-        container.addEventListener('click', async (event) => {
-            event.preventDefault(); // Esemény alapértelmezett működésének megakadályozása
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
 
-            const box = event.target.closest('.CsomagokBox');
-            if (box) {
-                const id = box.dataset.id;
-                console.log(`Service selected: ID=${id}`);
-                // Nem valós szerver hívás, csak console log
-                console.log(`Mock server call: Selected service ID=${id}`);
+        const data = await response.json();
+        
+        kulsoContainer.innerHTML = '';
+        belsoContainer.innerHTML = '';
+        data.forEach(extra => {
+            let container;
+            let template;
+
+            if (extra.type === 'exterior') {
+                container = kulsoContainer;
+                template = kulsoTemplate;
+            } else if (extra.type === 'interior') {
+                container = belsoContainer;
+                template = belsoTemplate;
+            }
+
+            if (container && template) {
+                const clone = template.content.cloneNode(true);
+                console.log('content clonenode lefut ')
+                clone.querySelector('.checkbox-label').textContent = extra.id;
+                console.log('.checkbox-label lefut ')
+                container.appendChild(clone);
             }
         });
 
     } catch (error) {
-        console.error('Hiba történt mock adatok kezelése során:', error);
+        console.error('Hiba történt GET kérés során:', error);
     }
 }
