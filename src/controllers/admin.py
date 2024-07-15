@@ -47,31 +47,41 @@ class ReservationModelView(ModelView):
         'extras': _list_extras
     }
 
-    # def create_model(self, form):
-    #     model = self.model()
-    #     form.populate_obj(model)
-    #     session = current_app.session_factory.get_session()
+    @staticmethod
+    def _list_extras(view, context, model, name):
+        return ', '.join([extra.service_name for extra in model.extras])
 
-    #     # Calculate final price
-    #     final_price = ReservationModel.calculate_final_price(
-    #         session,
-    #         model.service_id,
-    #         model.car_type,
-    #         [extra.id for extra in model.extras],
-    #         model.company_id
-    #     )
+    column_formatters = {
+        'extras': _list_extras
+    }
 
-    #     model.final_price = final_price
+    def create_model(self, form):
+        model = self.model()
+        form.populate_obj(model)
+        
+        try:
+            # Számítjuk ki a végső árat a calculate_final_price segítségével
+            final_price = ReservationModel.calculate_final_price(
+                self.session,
+                model.service.id,  # Használjuk a service objektum id attribútumát
+                model.car_type,
+                [extra.id for extra in model.extras],
+                model.company.id  # Használjuk a company objektum id attribútumát
+            )
+            model.final_price = final_price
 
-    #     try:
-    #         session.add(model)
-    #         session.commit()
-    #     except Exception as ex:
-    #         session.rollback()
-    #         raise ex
-    #     finally:
-    #         session.close()
-    
+            self.session.add(model)
+            self.session.commit()
+            return model
+
+        except Exception as ex:
+            self.session.rollback()
+            raise ex
+
+        finally:
+            self.session.close()
+
+
 def init_admin(app):   
     admin = Admin(app, name='Admin Panel', template_mode='bootstrap3')
 
