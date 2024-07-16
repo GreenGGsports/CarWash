@@ -9,6 +9,7 @@ from src.models.user_model import UserModel
 from src.models.carwash_model import CarWashModel
 from src.models.extra_model import ExtraModel
 from src.models.reservation_extras import reservation_extra
+from src.models.customer_model import CustomerModel
 from src.models.base import BaseModel
 
 

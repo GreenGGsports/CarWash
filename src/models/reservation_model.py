@@ -19,7 +19,7 @@ class ReservationModel(BaseModel):
     slot_id = Column(Integer, ForeignKey('Slot.id'), nullable=False)
     service_id = Column(Integer, ForeignKey('Service.id'), nullable=False)
     company_id = Column(Integer, ForeignKey('Company.id'), nullable=False)
-    user_id = Column(Integer, ForeignKey('User.id'), nullable=False)
+    customer_id = Column(Integer, ForeignKey('Customer.id'), nullable=False)
     carwash_id = Column(Integer, ForeignKey('Carwash.id'), nullable=False)
 
     reservation_date = Column(DateTime, nullable=False)
@@ -30,7 +30,7 @@ class ReservationModel(BaseModel):
     slot = relationship("SlotModel")
     service = relationship("ServiceModel")
     company = relationship("CompanyModel")
-    user = relationship("UserModel")
+    customer = relationship("CustomerModel")
     extras = relationship('ExtraModel', secondary=reservation_extra, back_populates='reservations')
     carwash = relationship('CarWashModel')
 
@@ -65,7 +65,7 @@ class ReservationModel(BaseModel):
 
     @classmethod
     def add_reservation(cls, session: Session, company_id: Optional[int], service_id: int, slot_id: int, carwash_id: int,
-                        reservation_date: datetime, user_id: int, car_type: str, extras: Optional[List[int]] = None,
+                        reservation_date: datetime, customer_id: int, car_type: str, extras: Optional[List[int]] = None,
                         parking_spot: Optional[int] = None) -> 'ReservationModel':
         if extras is None:
             extras = []
@@ -80,7 +80,7 @@ class ReservationModel(BaseModel):
             company_id=company_id,
             service_id=service_id,
             slot_id=slot_id,
-            user_id=user_id,
+            customer_id=customer_id,
             carwash_id = carwash_id,
             parking_spot=parking_spot,
             reservation_date=reservation_date,
