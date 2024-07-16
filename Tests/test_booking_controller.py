@@ -20,6 +20,7 @@ def test_is_slot_available(session):
         service_id=1,
         company_id=1,
         user_id=1,
+        carwash_id = 1,
         reservation_date=start_time,
         parking_spot=1,
         car_type='small_car'
@@ -47,6 +48,7 @@ def test_is_slot_available(session):
         service_id=1,
         company_id=1,
         user_id=1,
+        carwash_id = 1,
         reservation_date=start_time_2,
         parking_spot=1,
         car_type='small_car'
@@ -87,6 +89,7 @@ def test_double_booking_only_available_or_earlier(session):
         service_id=1,
         company_id=1,
         user_id=1,
+        carwash_id = 1,
         reservation_date= reservation_date_1,
         parking_spot=1,
         car_type='small_car'

@@ -9,6 +9,7 @@ from src.controllers.carwash_controller import carwash_ctrl
 from src.controllers.service_controller import service_ctrl
 from database import create_database
 from add_record import create_test_db
+from src.controllers.admin import init_admin
 
 def create_app(config_name: str):
     app = Flask(__name__)
@@ -19,6 +20,7 @@ def create_app(config_name: str):
     
     with app.app_context():
         create_database(engine)
+        init_admin(app)
     
     init_login_manager(app=app)
     # Register blueprints

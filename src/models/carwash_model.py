@@ -14,7 +14,7 @@ class CarWashModel(BaseModel):
     
     
     def __repr__(self):
-        return f"<CarWashModel(id={self.id}, carwash_name='{self.carwash_name}')>"
+        return self.carwash_name
 
     @classmethod
     def add_carwash(cls, session: Session, carwash_name: str, location: str):
