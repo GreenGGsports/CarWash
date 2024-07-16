@@ -43,8 +43,6 @@ def get_extra():
         return jsonify(({'status': 'failed no carwash_id selected'}))
     else:
         carwash_id = session['carwash_id']
-    from pdb import set_trace
-    set_trace()
     extras = ExtraModel.filter_by_column_value(db_session,'carwash_id',carwash_id)
     response_data = []
     for extra in extras:

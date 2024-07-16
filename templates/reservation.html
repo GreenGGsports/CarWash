@@ -54,45 +54,51 @@
             </template>
         </div>
         <h2 class="alcim">Csomagjaink</h2>
-        <div class="CsomagokContainer" id="CsomagokContainer">
-            <template id="CsomagokTemplate">
-                <form action="">
-                    <button class="CsomagokBox" id="CsomagokBox">
-                        <!--Lustaságom okán a css-ben így állítottam át fehérre (lsd id= leiras)-->
-                        <div class="csomag_nev" id="leiras">blabla nev</div>
-                        <div class="leiras" id="leiras">Leírás</div>
-                    </button>
-                </form>
-            </template>
-        </div>
+        <div class="CsomagokContainer" id="CsomagokContainer"></div>
+
+        <template id="CsomagokTemplate">
+            <form action="">
+                <button class="CsomagokBox" id="CsomagokBox">
+                    <!-- Lustaságom okán a css-ben így állítottam át fehérre (lsd id= leiras) -->
+                    <div class="csomag_nev" id="leiras">blabla nev</div>
+                    <div class="leiras" id="leiras">Leírás</div>
+                </button>
+            </form>
+        </template>
         <h2 class="alcim">Extrák</h2>
         <div class="ExtrakContainers">
-            <div class="ExtrakContainer" id = 'KulsoExtrakContainer'>
+            <div class="ExtrakContainer" id="KulsoExtrakContainer">
                 <div class="ExtrakKeret">
                     <div class="ExtrakAlcim">
                         <div class="KulsoExtrak">Külső Extrák</div>
-                        <template id = 'KulsoExtrakTemplate'>
-                        <label class="KulsoGomb">
-                            <input type="checkbox" class="checkbox">
-                            <span class="checkbox-label">Bogároldás</span>
-                        </label> 
-                    </template>                                                                                 
                     </div>
+                    <div class="KulsoExtrakItems"></div> <!-- Add this div to hold the items -->
                 </div>
             </div>
-            <div class="ExtrakContainer" id = 'BelsoExtrakContainer'>
+            
+            <div class="ExtrakContainer" id="BelsoExtrakContainer">
                 <div class="ExtrakKeret">
                     <div class="ExtrakAlcim">
                         <div class="KulsoExtrak">Belső Extrák</div>
-                        <template id = 'BelsoExtrakTemplate'>
-                        <label class="KulsoGomb">
-                            <input type="checkbox" class="checkbox">
-                            <span class="checkbox-label">Bogároldás</span>
-                        </label> 
-                    </template>                                                                                 
                     </div>
+                    <div class="BelsoExtrakItems"></div> <!-- Add this div to hold the items -->
                 </div>
             </div>
+            
+            <template id="KulsoExtrakTemplate">
+                <label class="KulsoGomb">
+                    <input type="checkbox" class="checkbox">
+                    <span class="checkbox-label">Bogároldás</span>
+                </label>
+            </template>
+            
+            <template id="BelsoExtrakTemplate">
+                <label class="KulsoGomb">
+                    <input type="checkbox" class="checkbox">
+                    <span class="checkbox-label">Bogároldás</span>
+                </label>
+            </template>
+            
     </div>
         <div class="FigyelmeztetesKeret">
             <div class="Figyelmeztetes">

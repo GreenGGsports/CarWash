@@ -86,6 +86,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('HelyszinekContainer');
     const template = document.getElementById('helyszinTemplate').content;
 
+    // Ellenőrző változó
+    if (!container.eventListenerAdded) {
+        // Event listener hozzáadása csak egyszer
+        container.addEventListener('click', async (event) => {
+            event.preventDefault(); // Esemény alapértelmezett működésének megakadályozása
+            const box = event.target.closest('.box');
+            if (box) {
+                const id = box.dataset.id;
+                console.log(`Carwash selected: ID=${id}`);
+                await sendSelectionToServer(id, '/carwash/select', [listServices, listExtras]);
+            }
+        });
+
+        // Zászló beállítása
+        container.eventListenerAdded = true;
+    }
+
     // GET kérés az összes helyszín lekérdezésére
     fetch('/carwash/list')
         .then(response => {
@@ -102,17 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 // only for testing add logo
                 clone.querySelector('.helyszin').src = "https://via.placeholder.com/335x100";
                 container.appendChild(clone);
-            });
-
-            // Event listener hozzáadása a helyszínekhez
-            container.addEventListener('click', async (event) => {
-                event.preventDefault(); // Esemény alapértelmezett működésének megakadályozása
-                const box = event.target.closest('.box');
-                if (box) {
-                    const id = box.dataset.id;
-                    console.log(`Carwash selected: ID=${id}`);
-                    await sendSelectionToServer(id, '/carwash/select', [listServices,listExtras]);
-                }
             });
         })
         .catch(error => console.error('Hiba történt GET kérés során:', error));
@@ -142,7 +148,7 @@ async function listServices() {
             container.appendChild(clone);
         });
 
-        // Event listener hozzáadása a szolgáltatásokhoz
+        if (!container.eventListenerAdded) {
         container.addEventListener('click', async (event) => {
             event.preventDefault(); // Esemény alapértelmezett működésének megakadályozása
 
@@ -153,6 +159,8 @@ async function listServices() {
                 await sendSelectionToServer(id, '/service/select');
             }
         });
+        }
+        container.eventListenerAdded = true;
 
     } catch (error) {
         console.error('Hiba történt GET kérés során:', error);
@@ -162,9 +170,11 @@ async function listServices() {
 async function listExtras() {
     const kulsoContainer = document.getElementById('KulsoExtrakContainer');
     const belsoContainer = document.getElementById('BelsoExtrakContainer');
-    const kulsoTemplate = document.getElementById('KulsoExtrakTemplate');
-    const belsoTemplate = document.getElementById('BelsoExtrakTemplate');
-    console.log('templates and containers found ')
+    const kulsoTemplate = document.getElementById('KulsoExtrakTemplate').content;
+    const belsoTemplate = document.getElementById('BelsoExtrakTemplate').content;
+
+    console.log('Templates and containers found');
+
     try {
         const response = await fetch('/service/list_extra');
 
@@ -173,9 +183,10 @@ async function listExtras() {
         }
 
         const data = await response.json();
-        
+
         kulsoContainer.innerHTML = '';
         belsoContainer.innerHTML = '';
+
         data.forEach(extra => {
             let container;
             let template;
@@ -189,15 +200,47 @@ async function listExtras() {
             }
 
             if (container && template) {
-                const clone = template.content.cloneNode(true);
-                console.log('content clonenode lefut ')
-                clone.querySelector('.checkbox-label').textContent = extra.id;
-                console.log('.checkbox-label lefut ')
+                const clone = document.importNode(template, true);
+                console.log('Content cloneNode executed');
+
+                // Set checkbox label text
+                clone.querySelector('.checkbox-label').textContent = extra.name;
+                console.log('.checkbox-label executed');
+
+                // Set checkbox id attribute
+                const checkboxId = `checkbox-${extra.id}`; // Assuming extra object has an id property
+                clone.querySelector('.checkbox').id = checkboxId;
+
                 container.appendChild(clone);
             }
         });
-
     } catch (error) {
         console.error('Hiba történt GET kérés során:', error);
     }
 }
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Initialize Flatpickr for date selection
+    const calendarInput = document.getElementById('calendar-tomorrow');
+
+    flatpickr(calendarInput, {
+        minDate: new Date().fp_incr(1), // Minimum date (tomorrow)
+        inline: true, // Display as inline calendar
+        dateFormat: 'Y-m-d', // Date format to send to server
+        onChange: function (selectedDates, dateStr, instance) {
+            // Handle date change here
+            console.log('Selected date:', dateStr);
+            // Call function to send selected date to server
+            sendDateToServer(dateStr);
+        }
+    });
+
+    // Function to send selected date to server
+    async function sendDateToServer(selectedDate) {
+        console.log(selectedDate);
+    };
+    function getCurrentSelectedDate() {
+        return selectedDate;
+    };
+});
