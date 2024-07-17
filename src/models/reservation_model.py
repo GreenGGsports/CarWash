@@ -14,6 +14,7 @@ CarTypeEnum = Enum('small_car', 'large_car', name='car_type_enum')
 
 class ReservationModel(BaseModel):
     __tablename__ = 'Reservation'
+    __tablename__ = 'Reservation'
 
     id = Column(Integer, primary_key=True)
     slot_id = Column(Integer, ForeignKey('Slot.id'), nullable=False)
@@ -26,6 +27,7 @@ class ReservationModel(BaseModel):
     parking_spot = Column(Integer)
     car_type = Column(CarTypeEnum, nullable=False)
     final_price = Column(Float)
+    booking_id = Column(Integer,ForeignKey('Billing.id'),nullable=True)
 
     slot = relationship("SlotModel")
     service = relationship("ServiceModel")

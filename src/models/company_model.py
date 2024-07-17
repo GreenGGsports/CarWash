@@ -13,6 +13,7 @@ class CompanyModel(BaseModel):
         return f"<CompanyModel(id={self.id}, company_name='{self.company_name}')>"
 
     @classmethod
+
     def add_company(cls, session: Session, company_name: str, discount: float = None):
         company = cls(
             company_name = company_name,
