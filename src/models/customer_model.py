@@ -7,15 +7,17 @@ class CustomerModel(BaseModel):
 
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('User.id'), nullable= True)
-    customer_name = Column(String, nullable=False)
+    forname = Column(String, nullable=False)
+    lastname = Column(String, nullable=False)
     phone_number = Column(String, nullable=False)
 
     user = relationship('UserModel')
 
     @classmethod
-    def add_customer(cls, session: Session, customer_name: str, phone_number: str):
+    def add_customer(cls, session: Session, forname: str,lastname: str, phone_number: str):
         customer = cls(
-            customer_name = customer_name,
+            forname = forname,
+            lastname = lastname,
             phone_number = phone_number,
         )
         session.add(customer)
