@@ -218,11 +218,30 @@ async function listExtras() {
         console.error('Hiba történt GET kérés során:', error);
     }
 }
+function listSelectedExtras() {
+    const selectedExtras = [];
+
+    const kulsoContainer = document.getElementById('KulsoExtrakContainer');
+    const belsoContainer = document.getElementById('BelsoExtrakContainer');
+
+    const checkboxes = kulsoContainer.querySelectorAll('.checkbox:checked');
+    checkboxes.forEach(checkbox => {
+        selectedExtras.push(checkbox.id.replace('checkbox-', ''));
+    });
+
+    const belsoCheckboxes = belsoContainer.querySelectorAll('.checkbox:checked');
+    belsoCheckboxes.forEach(checkbox => {
+        selectedExtras.push(checkbox.id.replace('checkbox-', ''));
+    });
+    return selectedExtras
+}
 
 
 document.addEventListener('DOMContentLoaded', function () {
     // Initialize Flatpickr for date selection
     const calendarInput = document.getElementById('calendar-tomorrow');
+
+    let selectedDate; // Variable to hold the selected date
 
     flatpickr(calendarInput, {
         minDate: new Date().fp_incr(1), // Minimum date (tomorrow)
@@ -231,6 +250,7 @@ document.addEventListener('DOMContentLoaded', function () {
         onChange: function (selectedDates, dateStr, instance) {
             // Handle date change here
             console.log('Selected date:', dateStr);
+            selectedDate = dateStr; // Store the selected date
             // Call function to send selected date to server
             sendDateToServer(dateStr);
         }
@@ -238,9 +258,110 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Function to send selected date to server
     async function sendDateToServer(selectedDate) {
-        console.log(selectedDate);
-    };
-    function getCurrentSelectedDate() {
-        return selectedDate;
-    };
+        try {
+            const response = await fetch('/reservation/set_date', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ date: selectedDate })
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const result = await response.json();
+            console.log('Server response:', result);
+        } catch (error) {
+            console.error('Hiba történt az adatküldés során:', error);
+        }
+    }
+
+
 });
+
+
+async function postForm(url, formId) {
+    const form = document.getElementById(formId);
+    console.log(form)
+    // Gyűjtjük az összes form adatot
+    const formData = new FormData(form);
+
+    // Átalakítjuk a form adatait egy objektummá
+    const formObject = {};
+    formData.forEach((value, key) => {
+        formObject[key] = value;
+    });
+
+    // Küldjük a POST kérést
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formObject)
+        });
+
+        if (response.ok) {
+            const jsonResponse = await response.json();
+            console.log('Sikeres kérés:', jsonResponse);
+            return response
+        } else {
+            console.error('Hiba a kérés során:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Hiba történt:', error);
+    }
+}
+
+document.getElementById('FoglalasButton').addEventListener('click', async function() {
+    var checkbox = document.getElementById('ker_szamlat');
+    const formId1 = "foglalasForm"
+    const url1 = '/reservation/add';
+    if(checkbox.checked){
+        const formId2 = 'szamlazasForm';
+        const url2 = '/reservation/add_billing'
+        try {
+            const response1 = await postForm(url1, formId1);
+            const response2 = await postForm(url2, formId2);
+    
+            if (response1.ok && response2.ok) {
+                finalize();
+            } else {
+                console.error('Egy vagy több kérés nem volt sikeres');
+            }
+        } catch (error) {
+            console.error('Hiba történt a kérések során:', error);
+        }
+    }
+
+    else {
+        try {
+            const response1 = await postForm(url1, formId1);
+            console.log('response : ',response1)
+            if (response1.ok) {
+                finalize();
+            } else {
+                console.error('Egy vagy több kérés nem volt sikeres');
+            }
+        } catch (error) {
+            console.error('Hiba történt a kérések során:', error);
+        }
+
+    }
+    console.log(listSelectedExtras())
+    const response = await fetch('/service/select_extras', {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        headers: {
+          'Content-Type': 'application/json'
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify({extra_ids: listSelectedExtras()}) // body data type must match "Content-Type" header
+      });
+      return response.json(); // parses JSON response into native JavaScript objects
+    });
+async function finalize(){
+    console.log('finalize')
+}

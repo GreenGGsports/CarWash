@@ -19,7 +19,7 @@ class ReservationModel(BaseModel):
     slot_id = Column(Integer, ForeignKey('Slot.id'), nullable=False)
     service_id = Column(Integer, ForeignKey('Service.id'), nullable=False)
     company_id = Column(Integer, ForeignKey('Company.id'), nullable=False)
-    user_id = Column(Integer, ForeignKey('User.id'), nullable=False)
+    user_id = Column(Integer, ForeignKey('User.id'), nullable=True)
     carwash_id = Column(Integer, ForeignKey('Carwash.id'), nullable=False)
 
     reservation_date = Column(DateTime, nullable=False)

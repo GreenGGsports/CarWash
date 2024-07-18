@@ -54,3 +54,8 @@ def get_extra():
             )
         )     
     return jsonify(response_data)
+@service_ctrl.route('/select_extras', methods=['POST'])
+def select_extras():
+    data = request.json
+    session['extra_ids'] = [int(i) for i in data.get('extra_ids')]
+    return {}
