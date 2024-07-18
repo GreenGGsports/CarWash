@@ -8,6 +8,7 @@ from typing import List, Optional
 from src.models.service_model import ServiceModel
 from src.models.extra_model import ExtraModel
 from src.models.company_model import CompanyModel
+from src.models.billing_model import BillingModel
 
 CarTypeEnum = Enum('small_car', 'large_car', name='car_type_enum')
 
@@ -19,18 +20,23 @@ class ReservationModel(BaseModel):
     slot_id = Column(Integer, ForeignKey('Slot.id'), nullable=False)
     service_id = Column(Integer, ForeignKey('Service.id'), nullable=False)
     company_id = Column(Integer, ForeignKey('Company.id'), nullable=False)
-    user_id = Column(Integer, ForeignKey('User.id'), nullable=False)
+    customer_id = Column(Integer, ForeignKey('Customer.id'), nullable=False)
+    carwash_id = Column(Integer, ForeignKey('Carwash.id'), nullable=False)
+    billing_id = Column(Integer, ForeignKey('Billing.id'), nullable=True)
 
     reservation_date = Column(DateTime, nullable=False)
     parking_spot = Column(Integer)
     car_type = Column(CarTypeEnum, nullable=False)
     final_price = Column(Float)
+    billing_id = Column(Integer,ForeignKey('Billing.id'),nullable=True)
 
     slot = relationship("SlotModel")
     service = relationship("ServiceModel")
     company = relationship("CompanyModel")
-    user = relationship("UserModel")
+    customer = relationship("CustomerModel")
     extras = relationship('ExtraModel', secondary=reservation_extra, back_populates='reservations')
+    carwash = relationship('CarWashModel')
+    billing = relationship('BillingModel')
 
 
     @classmethod
@@ -62,9 +68,9 @@ class ReservationModel(BaseModel):
         return final_price
 
     @classmethod
-    def add_reservation(cls, session: Session, company_id: Optional[int], service_id: int, slot_id: int, 
-                        reservation_date: datetime, user_id: int, car_type: str, extras: Optional[List[int]] = None,
-                        parking_spot: Optional[int] = None) -> 'ReservationModel':
+    def add_reservation(cls, session: Session, company_id: Optional[int], service_id: int, slot_id: int, carwash_id: int, 
+                        reservation_date: datetime, customer_id: int, car_type: str, extras: Optional[List[int]] = None,
+                        parking_spot: Optional[int] = None, billing_id: int = None,) -> 'ReservationModel':
         if extras is None:
             extras = []
 
@@ -78,12 +84,14 @@ class ReservationModel(BaseModel):
             company_id=company_id,
             service_id=service_id,
             slot_id=slot_id,
-            user_id=user_id,
+            customer_id=customer_id,
+            carwash_id = carwash_id,
             parking_spot=parking_spot,
             reservation_date=reservation_date,
             car_type=car_type,
             final_price=final_price,
-            extras=[ExtraModel.get_by_id(session, extra_id) for extra_id in extras]
+            extras=[ExtraModel.get_by_id(session, extra_id) for extra_id in extras],
+            billing_id = billing_id
         )
 
         try:
