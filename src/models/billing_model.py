@@ -7,8 +7,6 @@ class BillingModel(BaseModel):
     __tablename__ = 'Billing'
     
     id = Column(Integer, primary_key=True)
-    reservation_id = Column(Integer, ForeignKey('Reservation.id'), nullable=False)
-    license_plate = Column(String, nullable=False)
     name = Column(String, nullable= False)
     address = Column(String,nullable=False)
     email = Column(String,nullable=False)
@@ -18,13 +16,10 @@ class BillingModel(BaseModel):
     user_id = Column(Integer, ForeignKey('User.id'), nullable=True)
     
     user = relationship("UserModel")
-    reservation = relationship("ReservationModel")
     
     @classmethod
-    def add_billing_data(cls,session: Session, reservation_id: int, license_plate: str, name: str, address: str, email : str, company_name: str = None, tax_ID: str = None, user_id: int = None):
+    def add_billing_data(cls,session: Session,  name: str, address: str, email : str, company_name: str = None, tax_ID: str = None, user_id: int = None):
         billing_data = cls(
-            reservation_id = reservation_id,
-            license_plate = license_plate,
             name = name,
             address = address,
             email = email,

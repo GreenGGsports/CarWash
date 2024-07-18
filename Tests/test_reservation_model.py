@@ -53,7 +53,7 @@ def test_add_reservation(session: Session, setup_database):
         slot_id=1,
         service_id=1,
         company_id=1,
-        user_id=1,
+        customer_id=1,
         carwash_id = 1,
         reservation_date=appointment,
         parking_spot='A1',
@@ -71,7 +71,7 @@ def test_read_reservation(session: Session, setup_database):
         slot_id=1,
         service_id=1,
         company_id=1,
-        user_id=1,
+        customer_id=1,
         carwash_id = 1,
         reservation_date=reservation_date,
         parking_spot='B2',
@@ -89,7 +89,7 @@ def test_update_reservation(session: Session, setup_database):
         slot_id=1,
         service_id=1,
         company_id=1,
-        user_id=1,
+        customer_id=1,
         carwash_id = 1,
         reservation_date=appointment,
         parking_spot='C3',
@@ -111,7 +111,7 @@ def test_delete_reservation(session: Session, setup_database):
         slot_id=1,
         service_id=1,
         company_id=1,
-        user_id=1,
+        customer_id=1,
         carwash_id = 1,
         reservation_date=appointment,
         parking_spot='D4',
@@ -129,7 +129,7 @@ def test_add_reservation_slot_unavailable(session):
     company_id = 1
     service_id = 1
     slot_id = 1
-    user_id = 1
+    customer_id = 1
     carwash_id = 1
     reservation_date = datetime.utcnow() + timedelta(days=1)
     car_type = 'large_car'
@@ -143,7 +143,7 @@ def test_add_reservation_slot_unavailable(session):
         slot_id=slot_id,
         carwash_id = carwash_id,
         reservation_date=reservation_date,
-        user_id=user_id,
+        customer_id=customer_id,
         car_type=car_type,
         parking_spot=parking_spot
     )
@@ -157,7 +157,7 @@ def test_add_reservation_slot_unavailable(session):
             slot_id=slot_id,
             carwash_id = carwash_id,
             reservation_date=reservation_date,
-            user_id=user_id,
+            customer_id=customer_id,
             car_type=car_type,
             parking_spot=parking_spot
         )
@@ -181,7 +181,7 @@ def test_is_slot_available(session):
             slot_id=slot_id,
             carwash_id = 1,
             reservation_date=reservation_date,
-            user_id=1,
+            customer_id=1,
             car_type='large_car',
             parking_spot=1
         )
@@ -215,7 +215,7 @@ def test_add_multiple_extras(session):
         slot_id=1,
         carwash_id = 1,
         reservation_date=datetime.utcnow(),
-        user_id=1,
+        customer_id=1,
         car_type='large_car',
         parking_spot=1,
         extras=extra_ids  # Pass the IDs of the ExtraModel objects
@@ -247,7 +247,7 @@ def test_correct_final_price_with_extras(session: Session, setup_database):
         slot_id=1,
         carwash_id = 1,
         reservation_date=appointment,
-        user_id=1,
+        customer_id=1,
         car_type=car_type,
         parking_spot='A1',
         extras=extras
