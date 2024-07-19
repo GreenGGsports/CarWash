@@ -32,7 +32,7 @@ def select_service():
     service_id = int(data.get('id'))
     if not service_id:
         return jsonify({'message': 'Hiányzó azonosító!'}), 400
-    session['sevice_id'] = service_id
+    session['service_id'] = service_id
     return jsonify({'message': 'Csomag kiválasztva!', 'id': service_id}), 200
 
 
@@ -49,7 +49,7 @@ def get_extra():
         response_data.append(
             dict(
                 id = extra.id,
-                name = extra.extra_name,
+                name = extra.service_name,
                 type = extra.extra_type
             )
         )     
@@ -57,5 +57,6 @@ def get_extra():
 @service_ctrl.route('/select_extras', methods=['POST'])
 def select_extras():
     data = request.json
-    session['extra_ids'] = [int(i) for i in data.get('extra_ids')]
-    return {}
+    extra_ids =  [int(i) for i in data.get('extra_ids')]
+    session['extra_ids'] = extra_ids
+    return jsonify({'message': 'Extrák kiválasztva!', 'ids': extra_ids}), 200

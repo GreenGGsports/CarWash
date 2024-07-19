@@ -235,13 +235,10 @@ function listSelectedExtras() {
     });
     return selectedExtras
 }
-
-
+let selectedDate; 
 document.addEventListener('DOMContentLoaded', function () {
     // Initialize Flatpickr for date selection
     const calendarInput = document.getElementById('calendar-tomorrow');
-
-    let selectedDate; // Variable to hold the selected date
 
     flatpickr(calendarInput, {
         minDate: new Date().fp_incr(1), // Minimum date (tomorrow)
@@ -255,7 +252,6 @@ document.addEventListener('DOMContentLoaded', function () {
             sendDateToServer(dateStr);
         }
     });
-
     // Function to send selected date to server
     async function sendDateToServer(selectedDate) {
         try {
@@ -280,6 +276,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 });
+function dateSelected() {
+    return !!selectedDate;
+}
 
 
 async function postForm(url, formId) {
@@ -317,6 +316,18 @@ async function postForm(url, formId) {
 }
 
 document.getElementById('FoglalasButton').addEventListener('click', async function() {
+    if (dateSelected() == false){
+        console.log("date")
+        throw "error date not selected"
+    }
+    const response = await fetch('/service/select_extras', {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        headers: {
+          'Content-Type': 'application/json'
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify({extra_ids: listSelectedExtras()}) // body data type must match "Content-Type" header
+      });
     var checkbox = document.getElementById('ker_szamlat');
     const formId1 = "foglalasForm"
     const url1 = '/reservation/add';
@@ -352,15 +363,7 @@ document.getElementById('FoglalasButton').addEventListener('click', async functi
 
     }
     console.log(listSelectedExtras())
-    const response = await fetch('/service/select_extras', {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
-        headers: {
-          'Content-Type': 'application/json'
-          // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: JSON.stringify({extra_ids: listSelectedExtras()}) // body data type must match "Content-Type" header
-      });
-      return response.json(); // parses JSON response into native JavaScript objects
+// parses JSON response into native JavaScript objects
     });
 async function finalize(){
     console.log('finalize')

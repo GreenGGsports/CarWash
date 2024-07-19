@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 from src.models.slot_model import SlotModel
-from src.models.reservation_model import ReservationModel, CarTypeEnum
+from src.models.reservation_model import ReservationModel
 from src.controllers.booking_controller import get_slot_id
 
 def test_is_slot_available(session):
@@ -20,10 +20,12 @@ def test_is_slot_available(session):
         service_id=1,
         company_id=1,
         customer_id=1,
-        carwash_id = 1,
+        carwash_id=1,
         reservation_date=start_time,
         parking_spot=1,
-        car_type='small_car'
+        car_type='small_car',
+        car_brand='Mazda',
+        license_plate='ABC-123'
     )
 
     # Ensure the slot is no longer available after the reservation
@@ -48,10 +50,12 @@ def test_is_slot_available(session):
         service_id=1,
         company_id=1,
         customer_id=1,
-        carwash_id = 1,
+        carwash_id=1,
         reservation_date=start_time_2,
         parking_spot=1,
-        car_type='small_car'
+        car_type='small_car',
+        car_brand='Mazda',
+        license_plate='DEF-456'
     )
 
     # Ensure the new slot is no longer available after the reservation
@@ -70,15 +74,15 @@ def create_hourly_slots(session):
         current_time = slot_end_time
 
 def test_double_booking_only_available_or_earlier(session):
-    # Létrehozzuk az óránkénti slotokat 8:00-tól 17:00-ig
+    # Create hourly slots from 8:00 to 17:00
     create_hourly_slots(session)
 
-    # Foglalás 13:00-ra
+    # Booking for 13:00
     reservation_date_1 = datetime.now().replace(hour=13, minute=0, second=0, microsecond=0)
     slot_id_1 = get_slot_id(session, reservation_date_1)
     assert slot_id_1 is not None
 
-    # Ellenőrizzük, hogy a visszaadott slot ID a 12:00-13:00-as időszakra vonatkozik-e
+    # Check if the returned slot ID corresponds to the 12:00-13:00 period
     reserved_slot_1 = SlotModel.get_by_id(session, slot_id_1)
     assert reserved_slot_1.start_time.hour == 12
     assert reserved_slot_1.end_time.hour == 13
@@ -89,16 +93,18 @@ def test_double_booking_only_available_or_earlier(session):
         service_id=1,
         company_id=1,
         customer_id=1,
-        carwash_id = 1,
-        reservation_date= reservation_date_1,
+        carwash_id=1,
+        reservation_date=reservation_date_1,
         parking_spot=1,
-        car_type='small_car'
+        car_type='small_car',
+        car_brand='Mazda',
+        license_plate='ABC-123'
     )
 
-    # Próbáljunk újra ugyanarra az időpontra foglalni
+    # Attempt to book the same slot again
     slot_id_2 = get_slot_id(session, reservation_date_1)
 
-    # Ellenőrizzük, hogy nem sikerült újra ugyanarra az időpontra foglalni
+    # Ensure the same slot cannot be booked again
     assert slot_id_2 is not None
     assert slot_id_1 == slot_id_2 + 1 
 
@@ -106,12 +112,12 @@ def test_double_booking_only_available_or_earlier(session):
     assert slot2.start_time.hour == 11
     assert slot2.end_time.hour == 12
 
-    # Foglalás 12:00-ra (korábbi időpontra)
+    # Booking for 12:00 (earlier time)
     reservation_date_3 = datetime.now().replace(hour=12, minute=0, second=0, microsecond=0)
     slot_id_3 = get_slot_id(session, reservation_date_3)
     assert slot_id_3 is not None
 
-    # Ellenőrizzük, hogy a visszaadott slot ID a 11:00-12:00-as időszakra vonatkozik-e
+    # Check if the returned slot ID corresponds to the 11:00-12:00 period
     reserved_slot_2 = SlotModel.get_by_id(session, slot_id_3)
     assert reserved_slot_2.start_time.hour == 11
     assert reserved_slot_2.end_time.hour == 12

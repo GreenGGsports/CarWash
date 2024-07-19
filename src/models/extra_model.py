@@ -21,7 +21,7 @@ class ExtraModel(BaseModel):
     @classmethod
     def add_extra(cls, session: Session, service_name: str, price: int, extra_type: str, carwash_id: int):
         extra = cls(
-            extra_name=service_name,
+            service_name=service_name,
             price=price,
             extra_type=extra_type,
             carwash_id=carwash_id,
