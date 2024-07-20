@@ -12,6 +12,7 @@ class CustomerModel(BaseModel):
     phone_number = Column(String, nullable=False)
 
     user = relationship('UserModel')
+    reservations = relationship('ReservationModel', back_populates='customer')
 
     @classmethod
     def add_customer(cls, session: Session, forname: str,lastname: str, phone_number: str, user_id: int = None):

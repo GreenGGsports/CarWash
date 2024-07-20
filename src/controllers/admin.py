@@ -9,6 +9,8 @@ from src.models.service_model import ServiceModel
 from src.models.company_model import CompanyModel
 from src.models.extra_model import ExtraModel
 from src.models.carwash_model import CarWashModel
+from src.models.customer_model import CustomerModel
+
 
 class ServiceModelView(ModelView):
     column_labels = {
@@ -21,24 +23,51 @@ class ServiceModelView(ModelView):
     column_list = ['carwash.carwash_name', 'service_name', 'price_small', 'price_large']
 
 class ReservationModelView(ModelView):
-    column_labels = {
-        'carwash.carwash_name': 'Car Wash Name',
-        'reservation_date': 'Reservation Date',
-        'service.service_name': 'Service Name',
-        'car_type': 'Car Type',
-        'parking_spot': 'Parking Spot',
-        'final_price': 'Final Price',
-        'extras': 'Extras'
-    }
-    column_list = [
-        'carwash.carwash_name', 
-        'reservation_date', 
-        'service.service_name', 
-        'car_type', 
-        'parking_spot', 
+
+
+    column_list = (
+        'reservation_date',
+        'carwash.carwash_name',
+        'service.service_name',
+        'extras',
+        'customer.forname',
+        'customer.lastname',
+        'customer.phone_number',
+        'company.company_name',
         'final_price',
-        'extras'
-    ]
+    )
+
+    column_labels = {
+        'reservation_date': 'Reservation Date',
+        'customer.forname': 'Customer Forename',
+        'customer.lastname': 'Customer Lastname',
+        'customer.phone_number': 'Customer Phone Number',
+        'company.company_name': 'Company Name',
+        'service.service_name': 'Service Name',
+         'extras': 'Extras',
+        'carwash.carwash_name': 'Carwash Name',
+        'final_price': 'Final Price'
+    }
+
+    column_sortable_list = (
+        'reservation_date',
+        ('customer', 'customer.forname'),
+        ('customer', 'customer.lastname'),
+        ('customer', 'customer.phone_number'),
+        ('company', 'company.company_name'),
+        ('service', 'service.service_name'),
+        ('carwash', 'carwash.carwash_name'),
+        'final_price'
+    )
+
+    column_searchable_list = (
+        'customer.forname',
+        'customer.lastname',
+        'customer.phone_number',
+        'company.company_name',
+        'service.service_name',
+        'carwash.carwash_name'
+    )
 
     def _list_extras(view, context, model, name):
         return ', '.join([extra.service_name for extra in model.extras])
@@ -92,3 +121,4 @@ def init_admin(app):
     admin.add_view(ModelView(CompanyModel, app.session_factory.get_session()))
     admin.add_view(ModelView(CarWashModel, app.session_factory.get_session()))
     admin.add_view(ModelView(ExtraModel, app.session_factory.get_session()))
+    admin.add_view(ModelView(CustomerModel, app.session_factory.get_session()))

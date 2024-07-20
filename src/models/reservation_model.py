@@ -19,9 +19,7 @@ class ReservationModel(BaseModel):
     id = Column(Integer, primary_key=True)
     slot_id = Column(Integer, ForeignKey('Slot.id'), nullable=False)
     service_id = Column(Integer, ForeignKey('Service.id'), nullable=False)
-    company_id = Column(Integer, ForeignKey('Company.id'), nullable=True)
-    user_id = Column(Integer, ForeignKey('User.id'), nullable=True)
-    carwash_id = Column(Integer, ForeignKey('Carwash.id'), nullable=False)
+    company_id = Column(Integer, ForeignKey('Company.id'), nullable=False)
     customer_id = Column(Integer, ForeignKey('Customer.id'), nullable=False)
     carwash_id = Column(Integer, ForeignKey('Carwash.id'), nullable=False)
     billing_id = Column(Integer, ForeignKey('Billing.id'), nullable=True)
@@ -37,7 +35,7 @@ class ReservationModel(BaseModel):
     slot = relationship("SlotModel")
     service = relationship("ServiceModel")
     company = relationship("CompanyModel")
-    customer = relationship("CustomerModel")
+    customer = relationship('CustomerModel', back_populates='reservations')
     extras = relationship('ExtraModel', secondary=reservation_extra, back_populates='reservations')
     carwash = relationship('CarWashModel')
     billing = relationship('BillingModel')
@@ -72,9 +70,9 @@ class ReservationModel(BaseModel):
         return final_price
 
     @classmethod
-    def add_reservation(cls, session: Session, service_id: int, slot_id: int, carwash_id: int, 
-                        reservation_date: datetime, customer_id: int, car_type: str, car_brand:str,license_plate:str ,extras: Optional[List[int]] = None,
-                        parking_spot: Optional[int] = None, billing_id: int = None,company_id: Optional[int]= None) -> 'ReservationModel':
+    def add_reservation(cls, session: Session, company_id: Optional[int], service_id: int, slot_id: int, carwash_id: int, 
+                        reservation_date: datetime, customer_id: int, car_type: str, extras: Optional[List[int]] = None,
+                        parking_spot: Optional[int] = None, billing_id: int = None,) -> 'ReservationModel':
         if extras is None:
             extras = []
 
