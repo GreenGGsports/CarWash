@@ -33,7 +33,7 @@ class ReservationModel(BaseModel):
     slot = relationship("SlotModel")
     service = relationship("ServiceModel")
     company = relationship("CompanyModel")
-    customer = relationship("CustomerModel")
+    customer = relationship('CustomerModel', back_populates='reservations')
     extras = relationship('ExtraModel', secondary=reservation_extra, back_populates='reservations')
     carwash = relationship('CarWashModel')
     billing = relationship('BillingModel')

@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 from src.models.slot_model import SlotModel
 from src.models.reservation_model import ReservationModel, CarTypeEnum
 from src.controllers.booking_controller import get_slot_id
+import pytest
 
 def test_is_slot_available(session):
 
@@ -115,3 +116,55 @@ def test_double_booking_only_available_or_earlier(session):
     reserved_slot_2 = SlotModel.get_by_id(session, slot_id_3)
     assert reserved_slot_2.start_time.hour == 11
     assert reserved_slot_2.end_time.hour == 12
+
+def test_slot_unavailable(session):
+    create_hourly_slots(session)
+
+    reservation_time = datetime.now().replace(hour=9, minute=30, second=0, microsecond=0)
+
+    slot_id_1 = get_slot_id(session, reservation_time)
+
+    reservation_1 = ReservationModel.add_reservation(
+        session=session,
+        slot_id=slot_id_1,
+        service_id=1,
+        company_id=1,
+        customer_id=1,
+        carwash_id = 1,
+        reservation_date= reservation_time,
+        parking_spot=1,
+        car_type='small_car'
+    )
+
+    assert SlotModel.get_by_id(session, slot_id_1).start_time.hour == 8
+
+    with pytest.raises(Exception, match="Slot is not available for reservation"):
+        reservation_1 = ReservationModel.add_reservation(
+        session=session,
+        slot_id=slot_id_1,
+        service_id=1,
+        company_id=1,
+        customer_id=1,
+        carwash_id = 1,
+        reservation_date= reservation_time,
+        parking_spot=1,
+        car_type='small_car'
+    )
+        
+    reservation_time2 = datetime.now().replace(hour=9, minute=0, second=0, microsecond=0) + timedelta(days=1)
+
+    slot_id_2  = get_slot_id(session, reservation_time2)
+        
+    reservation_2 = ReservationModel.add_reservation(
+        session=session,
+        slot_id=slot_id_2,
+        service_id=1,
+        company_id=1,
+        customer_id=1,
+        carwash_id = 1,
+        reservation_date= reservation_time2,
+        parking_spot=1,
+        car_type='small_car'
+    )
+
+    assert SlotModel.get_by_id(session, slot_id_1).start_time.hour == 8
