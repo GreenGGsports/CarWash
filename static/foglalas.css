@@ -1,3 +1,9 @@
+/* Hibás mezők stílusai */
+input.error, select.error, textarea.error {
+    border: 2px solid red; /* Piros szegély */
+    background-color: #fdd; /* Világos piros háttér */
+}
+
 #leiras {
     color: white;
 }
