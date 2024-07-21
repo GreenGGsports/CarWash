@@ -11,7 +11,24 @@ class BaseModel(Base):
     __abstract__ = True
     
     id = Column(Integer, primary_key=True, autoincrement=True)
-    
+
+    @classmethod
+    def add(cls, session, **kwargs):
+        try:
+            instance = cls()
+            for key, value in kwargs.items():
+                if not hasattr(instance, key):
+                    raise AttributeError(f"Invalid attribute: {key}")
+                setattr(instance, key, value)
+            session.add(instance)
+            session.commit()
+            return instance
+        except AttributeError as e:
+            print(e)
+        except Exception as e:
+            print("An error occurred: ", e)
+            session.rollback()
+            
     @classmethod
     def get_by_id(cls: Type[T], session: Session, obj_id: int) -> Optional[T]:
         try:

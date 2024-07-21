@@ -15,7 +15,12 @@ def test_add_billing_data(session):
 
     # Act
     billing_data = BillingModel.add_billing_data(
-        session, name, address, email, company_name, tax_ID
+        session=session, 
+        name = name, 
+        address = address, 
+        email = email,
+        company_name = company_name,
+        tax_ID = tax_ID
     )
 
     # Assert
