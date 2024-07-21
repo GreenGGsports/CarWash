@@ -140,7 +140,9 @@ def test_slot_unavailable(session):
         carwash_id = 1,
         reservation_date= reservation_time,
         parking_spot=1,
-        car_type='small_car'
+        car_type='small_car',
+        car_brand='Mazda',
+        license_plate='xxxx',
     )
 
     assert SlotModel.get_by_id(session, slot_id_1).start_time.hour == 8
@@ -155,7 +157,9 @@ def test_slot_unavailable(session):
         carwash_id = 1,
         reservation_date= reservation_time,
         parking_spot=1,
-        car_type='small_car'
+        car_type='small_car',
+        car_brand='Mazda',
+        license_plate='xxxx',
     )
         
     reservation_time2 = datetime.now().replace(hour=9, minute=0, second=0, microsecond=0) + timedelta(days=1)
@@ -171,7 +175,8 @@ def test_slot_unavailable(session):
         carwash_id = 1,
         reservation_date= reservation_time2,
         parking_spot=1,
-        car_type='small_car'
+        car_type='small_car',
+        car_brand='Mazda',
+        license_plate='xxxx',
     )
-
     assert SlotModel.get_by_id(session, slot_id_1).start_time.hour == 8

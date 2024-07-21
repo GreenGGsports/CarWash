@@ -27,6 +27,7 @@ class ReservationModelView(ModelView):
 
     column_list = (
         'reservation_date',
+        'license_plate',
         'carwash.carwash_name',
         'service.service_name',
         'extras',
@@ -39,14 +40,15 @@ class ReservationModelView(ModelView):
 
     column_labels = {
         'reservation_date': 'Reservation Date',
-        'customer.forname': 'Customer Forename',
-        'customer.lastname': 'Customer Lastname',
-        'customer.phone_number': 'Customer Phone Number',
+        'license_plate': 'License Plate',
+        'customer.forname': 'Forename',
+        'customer.lastname': 'Lastname',
+        'customer.phone_number': 'Phone Number',
         'company.company_name': 'Company Name',
         'service.service_name': 'Service Name',
          'extras': 'Extras',
         'carwash.carwash_name': 'Carwash Name',
-        'final_price': 'Final Price'
+        'final_price': 'Final Price',
     }
 
     column_sortable_list = (
@@ -57,16 +59,18 @@ class ReservationModelView(ModelView):
         ('company', 'company.company_name'),
         ('service', 'service.service_name'),
         ('carwash', 'carwash.carwash_name'),
+        'license_plate',
         'final_price'
     )
 
     column_searchable_list = (
+        'license_plate',
         'customer.forname',
         'customer.lastname',
         'customer.phone_number',
         'company.company_name',
         'service.service_name',
-        'carwash.carwash_name'
+        'carwash.carwash_name',
     )
 
     def _list_extras(view, context, model, name):
