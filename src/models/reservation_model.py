@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, DateTime, Float, ForeignKey
+from sqlalchemy import Column, Integer, DateTime, Float, ForeignKey, String
 from sqlalchemy.orm import relationship, Session
 from datetime import datetime
 from .base import BaseModel
@@ -19,28 +19,30 @@ class ReservationModel(BaseModel):
     id = Column(Integer, primary_key=True)
     slot_id = Column(Integer, ForeignKey('Slot.id'), nullable=False)
     service_id = Column(Integer, ForeignKey('Service.id'), nullable=False)
-    company_id = Column(Integer, ForeignKey('Company.id'), nullable=False)
+    company_id = Column(Integer, ForeignKey('Company.id'), nullable=True)
     customer_id = Column(Integer, ForeignKey('Customer.id'), nullable=False)
     carwash_id = Column(Integer, ForeignKey('Carwash.id'), nullable=False)
     billing_id = Column(Integer, ForeignKey('Billing.id'), nullable=True)
 
     reservation_date = Column(DateTime, nullable=False)
+    #car_data
     parking_spot = Column(Integer)
     car_type = Column(CarTypeEnum, nullable=False)
+    car_brand = Column(String,nullable=False)
     final_price = Column(Float)
-    billing_id = Column(Integer,ForeignKey('Billing.id'),nullable=True)
+    license_plate = Column(String,nullable=False)
 
     slot = relationship("SlotModel")
     service = relationship("ServiceModel")
     company = relationship("CompanyModel")
-    customer = relationship("CustomerModel")
+    customer = relationship('CustomerModel', back_populates='reservations')
     extras = relationship('ExtraModel', secondary=reservation_extra, back_populates='reservations')
     carwash = relationship('CarWashModel')
     billing = relationship('BillingModel')
 
 
     @classmethod
-    def calculate_final_price(cls, session: Session, service_id: int, car_type: str, extras: Optional[List[int]], company_id: Optional[int]) -> float:
+    def calculate_final_price(cls, session: Session, service_id: int, car_type: str, extras: Optional[List[int]] = [], company_id: Optional[int] = None) -> float:
         # Szolgáltatás árának lekérése az autó típusától függően
         service = ServiceModel.get_by_id(session, service_id)
         if car_type == 'large_car':
@@ -68,9 +70,9 @@ class ReservationModel(BaseModel):
         return final_price
 
     @classmethod
-    def add_reservation(cls, session: Session, company_id: Optional[int], service_id: int, slot_id: int, carwash_id: int, 
-                        reservation_date: datetime, customer_id: int, car_type: str, extras: Optional[List[int]] = None,
-                        parking_spot: Optional[int] = None, billing_id: int = None,) -> 'ReservationModel':
+    def add_reservation(cls, session: Session, service_id: int, slot_id: int, carwash_id: int, 
+                        reservation_date: datetime, customer_id: int, car_type: str, car_brand:str, license_plate:str, extras: Optional[List[int]] = None,
+                        parking_spot: Optional[int] = None, billing_id: int = None,company_id: Optional[int] = None) -> 'ReservationModel':
         if extras is None:
             extras = []
 
@@ -79,7 +81,6 @@ class ReservationModel(BaseModel):
 
         # Végső ár kiszámítása külön függvény használatával
         final_price = cls.calculate_final_price(session, service_id, car_type, extras, company_id)
-
         reservation = cls(
             company_id=company_id,
             service_id=service_id,
@@ -89,6 +90,8 @@ class ReservationModel(BaseModel):
             parking_spot=parking_spot,
             reservation_date=reservation_date,
             car_type=car_type,
+            license_plate=license_plate,
+            car_brand = car_brand,
             final_price=final_price,
             extras=[ExtraModel.get_by_id(session, extra_id) for extra_id in extras],
             billing_id = billing_id

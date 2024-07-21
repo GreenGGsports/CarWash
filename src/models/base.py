@@ -1,13 +1,15 @@
+from typing import Type, List, TypeVar, Any, Optional
 from sqlalchemy import Column, Integer
 from sqlalchemy.orm import Session, declarative_base
-from typing import Type, TypeVar, List, Optional
+from sqlalchemy import inspect
 
 Base = declarative_base()
-T = TypeVar('T', bound='BaseModel')
+
+T = TypeVar('T')
 
 class BaseModel(Base):
     __abstract__ = True
-
+    
     id = Column(Integer, primary_key=True, autoincrement=True)
     
     @classmethod
@@ -55,6 +57,20 @@ class BaseModel(Base):
                 return True
             else:
                 return False
+        except Exception as e:
+            session.rollback()
+            raise e
+    
+    @classmethod
+    def filter_by_column_value(cls: Type[T], session: Session, column_name: str, value: Any, skip: int = 0, limit: int = 10) -> List[T]:
+        try:
+            mapper = inspect(cls)
+            if column_name not in mapper.columns:
+                raise ValueError(f"Column '{column_name}' does not exist in class '{cls.__name__}'")
+    
+            filter_args = {column_name: value}
+            query = session.query(cls).filter_by(**filter_args).offset(skip).limit(limit).all()
+            return query
         except Exception as e:
             session.rollback()
             raise e

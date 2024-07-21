@@ -15,6 +15,9 @@ class ExtraModel(BaseModel):
     carwash = relationship("CarWashModel")
     reservations = relationship('ReservationModel', secondary='reservation_extra', back_populates='extras')
 
+    def __repr__(self):
+        return self.service_name
+
     @classmethod
     def add_extra(cls, session: Session, service_name: str, price: int, extra_type: str, carwash_id: int):
         extra = cls(

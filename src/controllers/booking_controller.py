@@ -22,3 +22,4 @@ def get_slot_id(session: Session, reservation_date: datetime) -> int:
         return latest_slot.id
     else:
         raise Exception("No available slot before the given date")
+    
