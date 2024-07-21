@@ -27,7 +27,7 @@ class CustomerModel(BaseModel):
         return customer
     
     @classmethod
-    def get_lat_by_user_id(cls, session: Session, user_id: int):
+    def get_last_by_user_id(cls, session: Session, user_id: int):
         return session.query(cls).filter_by(user_id=user_id).order_by(cls.id.desc()).first()
 
 
