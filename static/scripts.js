@@ -241,7 +241,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const calendarInput = document.getElementById('calendar-tomorrow');
 
     flatpickr(calendarInput, {
-        minDate: new Date().fp_incr(1), // Minimum date (tomorrow)
+        minDate: new Date().fp_incr(0), // Minimum date (tomorrow)
         inline: true, // Display as inline calendar
         dateFormat: 'Y-m-d', // Date format to send to server
         onChange: function (selectedDates, dateStr, instance) {
@@ -276,6 +276,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 });
+
+async function get_appointments(){
+    try {
+        const response = await fetch('/booking/get_firts_available');
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+    }
+
+ catch (error) {
+    console.error('Hiba történt GET kérés során:', error);
+}
+}
+
+function mock_get_appointments(){
+    return {'min_time': 10};
+}
+
 function dateSelected() {
     return !!selectedDate;
 }
