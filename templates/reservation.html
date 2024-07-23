@@ -112,7 +112,7 @@
             <div class="IdopontContainer">
                 <div class="IdopontBox">
                     <div class="group">
-                        <input type="text" id="calendar-tomorrow">
+                        <input type="text" id="calendar-tomorrow", required>
                         <span class="bar"></span>
                     </div>
                     <div class="IdopontLine">
@@ -141,16 +141,16 @@
                     <div class="SzamlazasiAdatokContainer">
                         <div class="SzamlazasiAdatokBox">
                             <label for="email">Email</label>
-                            <input type="email" placeholder="Email" class="Email" name="email">
+                            <input type="email" placeholder="Email" class="Email" name="email", id='email'>
                             
                             <label for="cegnev">Cégnév</label>
-                            <input placeholder="Cégnév" class="Cegnev" name="cegnev">
+                            <input placeholder="Cégnév" class="Cegnev" name="cegnev" id = 'cegnev'>
                             
                             <label for="keresztnev">Keresztnév</label>
-                            <input placeholder="Keresztnév" class="KeresztNev" name="keresztnev">
+                            <input placeholder="Keresztnév" class="KeresztNev" name="keresztnev", id = 'keresztnev'>
                             
                             <label for="cim">Cím</label>
-                            <input placeholder="Cím" class="Cim" name="cim">
+                            <input placeholder="Cím" class="Cim" name="cim", id = 'cim'>
                             
                             <div class="Fizetes">
                                 <label for="fizetesi_mod" class="dropdown-label">Fizetési mód</label>
@@ -161,10 +161,10 @@
                             </div>
                             
                             <label for="adoszam">Adószám</label>
-                            <input placeholder="Adószám" class="Adoszam" name="adoszam">
+                            <input placeholder="Adószám" class="Adoszam" name="adoszam", id = 'adoszam'>
                             
                             <label for="vezeteknev">Vezetéknév</label>
-                            <input placeholder="Vezetéknév" class="VezetekNev" name="vezeteknev">
+                            <input placeholder="Vezetéknév" class="VezetekNev" name="vezeteknev", id = 'vezeteknev'>
                             
                             <div class="SzamlazasiAlcimContainer">
                                 <div class="SzamlazasiAlcimBox"></div>
@@ -178,65 +178,65 @@
                         </div>
                     </div>
                 </form>
-                <form id = "foglalasForm">
-                <div class="AutoAdatokContainer">
-                    <div class="AutoAdatokBox"></div>
-                    <label for="auto_meret">Autó méret</label>
-                    <input placeholder="Autó méret" class="AutoMeret" name="auto_meret">
-                    
-                    <label for="parkolo">Parkoló</label>
-                    <input placeholder="Parkoló" class="Parkolo" name="parkolo">
-                    
-                    <div class="Tipus">
-                        <label for="auto_tipus" class="dropdown-label">Autó Típus</label>
-                        <select id="auto_tipus" class="dropdown" name="auto_tipus">
-                            <option value="kis_auto">Kis autó</option>
-                            <option value="nagy_auto">Nagy autó</option>
-                        </select>
+                <form id="foglalasForm">
+                    <div class="AutoAdatokContainer">
+                        <div class="AutoAdatokBox"></div>
+                        <label for="auto_meret">Autó méret</label>
+                        <input placeholder="Autó méret" class="AutoMeret" name="auto_meret" required>
+                        
+                        <label for="parkolo">Parkoló</label>
+                        <input placeholder="Parkoló" class="Parkolo" name="parkolo" required>
+                        
+                        <div class="Tipus">
+                            <label for="auto_tipus" class="dropdown-label">Autó Típus</label>
+                            <select id="auto_tipus" class="dropdown" name="auto_tipus" required>
+                                <option value="kis_auto">Kis autó</option>
+                                <option value="nagy_auto">Nagy autó</option>
+                            </select>
+                        </div>
+                        
+                        <label for="marka">Márka</label>
+                        <input placeholder="Márka" class="Marka" name="marka" required>
+                        
+                        <div class="AutoAdatokAlcimContainer">
+                            <div class="AutoAdatokAlcimBox"></div>
+                            <div class="AutoAdatokAlcim">Autó adatok</div>
+                        </div>
                     </div>
-                    
-                    <label for="marka">Márka</label>
-                    <input placeholder="Márka" class="Marka" name="marka">
-                    
-                    <div class="AutoAdatokAlcimContainer">
-                        <div class="AutoAdatokAlcimBox"></div>
-                        <div class="AutoAdatokAlcim">Autó adatok</div>
+                
+                    <div class="SzemelyesAdatokContainer">
+                        <div class="SzemelyesAdatokBox"></div>
+                        <div class="SzemelyesAdatokAlcimContainer">
+                            <div class="SzemelyesAdatokAlcimBox"></div>
+                            <div class="SzemelyesAdatokAlcim">Személyes adatok</div>
+                        </div>
+                        <label for="cegnev2">Cégnév</label>
+                        <input placeholder="Cégnév" class="Cegnev2" name="cegnev2" required>
+                        
+                        <label for="telefon">Telefonszám</label>
+                        <input type="number" placeholder="Telefonszám" class="Telefon" name="telefon" required>
+                        
+                        <label for="keresztnev2">Keresztnév</label>
+                        <input placeholder="Keresztnév" class="KeresztNev2" name="keresztnev2" required>
+                        
+                        <label for="vezeteknev2">Vezetéknév</label>
+                        <input placeholder="Vezetéknév" class="VezetekNev2" name="vezeteknev2" required>
                     </div>
-                </div>
-            
-                <div class="SzemelyesAdatokContainer">
-                    <div class="SzemelyesAdatokBox"></div>
-                    <div class="SzemelyesAdatokAlcimContainer">
-                        <div class="SzemelyesAdatokAlcimBox"></div>
-                        <div class="SzemelyesAdatokAlcim">Személyes adatok</div>
-                    </div>
-                    <label for="cegnev2">Cégnév</label>
-                    <input placeholder="Cégnév" class="Cegnev2" name="cegnev2">
-                    
-                    <label for="telefon">Telefonszám</label>
-                    <input type="number" placeholder="Telefonszám" class="Telefon" name="telefon">
-                    
-                    <label for="keresztnev2">Keresztnév</label>
-                    <input placeholder="Keresztnév" class="KeresztNev2" name="keresztnev2">
-                    
-                    <label for="vezeteknev2">Vezetéknév</label>
-                    <input placeholder="Vezetéknév" class="VezetekNev2" name="vezeteknev2">
-                </div>
-                <div class="RendszamContainer"></div>
-                <div class="RendszamSzoveg">Rendszám:</div>
-                <input placeholder="Rendszám" class="RendszamBemenet" name= "rendszam">Rendszám</input>
-                    
-
-                <div class="MegjegyzesContainer">
-                    <div class="MegjegyzesBox">
-                        <textarea id="megjegyzes" class="MegjegyzesBemenet" name="megjegyzes" placeholder="Írja be a megjegyzését..."></textarea>
-                        <div class="MegjegyzesAlcimContainer">
-                            <div class="MegjegyzesAlcimBox">
-                                <div class="MegjegyzesAlcimSzoveg">Megjegyzés</div>
+                    <div class="RendszamContainer"></div>
+                    <div class="RendszamSzoveg">Rendszám:</div>
+                    <input placeholder="Rendszám" class="RendszamBemenet" name="rendszam" required>
+                
+                    <div class="MegjegyzesContainer">
+                        <div class="MegjegyzesBox">
+                            <textarea id="megjegyzes" class="MegjegyzesBemenet" name="megjegyzes" placeholder="Írja be a megjegyzését..." ></textarea>
+                            <div class="MegjegyzesAlcimContainer">
+                                <div class="MegjegyzesAlcimBox">
+                                    <div class="MegjegyzesAlcimSzoveg">Megjegyzés</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-            </form>
+                </form>
         </div>
     </div>
     <div class="FoglalasContainer">

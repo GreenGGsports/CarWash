@@ -241,7 +241,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const calendarInput = document.getElementById('calendar-tomorrow');
 
     flatpickr(calendarInput, {
-        minDate: new Date().fp_incr(1), // Minimum date (tomorrow)
+        minDate: new Date().fp_incr(0), // Minimum date (tomorrow)
         inline: true, // Display as inline calendar
         dateFormat: 'Y-m-d', // Date format to send to server
         onChange: function (selectedDates, dateStr, instance) {
@@ -276,44 +276,120 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 });
+
+async function get_appointments(){
+    try {
+        const response = await fetch('/booking/get_firts_available');
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+    }
+
+ catch (error) {
+    console.error('Hiba történt GET kérés során:', error);
+}
+}
+
+function mock_get_appointments(){
+    return {'min_time': 10};
+}
+
 function dateSelected() {
     return !!selectedDate;
 }
+function billing_required() {
+    // Az űrlap elem lekérése
+    var form = document.getElementById('szamlazasForm');
+    
+    // A form elemeinek lekérése az 'id' attribútum alapján
+    var ids = ['email', 'cegnev', 'keresztnev', 'adoszam', 'vezeteknev', 'cim', 'fizetesi_mod'];
+    
+    ids.forEach(function(id) {
+        var element = form.querySelector('#' + id);
+        if (element) {
+            element.setAttribute('required', 'required');
+        }
+    });
+}
 
+function card_payment() {
+    var form = document.getElementById('szamlazasForm');
+    
+    // A form elemeinek lekérése az 'id' attribútum alapján
+    var ids = ['email', 'keresztnev', 'vezeteknev', 'cim', 'fizetesi_mod'];
+    
+    ids.forEach(function(id) {
+        var element = form.querySelector('#' + id);
+        if (element) {
+            element.setAttribute('required', 'required');
+        }
+    });
+}
+
+var pay_by_card = false
+document.getElementById('fizetesi_mod').addEventListener('change', function() {
+    var selectedValue = this.value;
+    if (selectedValue === 'bankkartya') {
+        pay_by_card = true
+        card_payment();
+    }
+    else ( pay_by_card = false)
+});
 
 async function postForm(url, formId) {
     const form = document.getElementById(formId);
-    console.log(form)
-    // Gyűjtjük az összes form adatot
-    const formData = new FormData(form);
 
-    // Átalakítjuk a form adatait egy objektummá
-    const formObject = {};
-    formData.forEach((value, key) => {
-        formObject[key] = value;
-    });
+    // Ellenőrizzük, hogy az űrlap érvényes-e
+    if (form.checkValidity()) {
+        // Gyűjtjük az összes form adatot
+        const formData = new FormData(form);
 
-    // Küldjük a POST kérést
-    try {
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formObject)
+        // Átalakítjuk a form adatait egy objektummá
+        const formObject = {};
+        formData.forEach((value, key) => {
+            formObject[key] = value;
         });
 
-        if (response.ok) {
-            const jsonResponse = await response.json();
-            console.log('Sikeres kérés:', jsonResponse);
-            return response
-        } else {
-            console.error('Hiba a kérés során:', response.statusText);
+        // Küldjük a POST kérést
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formObject)
+            });
+
+            if (response.ok) {
+                const jsonResponse = await response.json();
+                console.log('Sikeres kérés:', jsonResponse);
+                return response;
+            } else {
+                console.error('Hiba a kérés során:', response.statusText)
+                return res;
+            }
+        } catch (error) {
+            console.error('Hiba történt:', error);
         }
-    } catch (error) {
-        console.error('Hiba történt:', error);
+    } else {
+        console.log('Form hiba')
+        // Ha a form nem érvényes, jelentjük a validációs hibákat
+        const inputs = form.querySelectorAll('input, select, textarea');
+        console.log(inputs)
+        inputs.forEach(input => {
+            if (!input.checkValidity()) {
+                // Ha a mező érvénytelen, hozzáadjuk az 'error' osztályt
+                input.classList.add('error');
+            } else {
+                // Ha a mező érvényes, eltávolítjuk az 'error' osztályt
+                input.classList.remove('error');
+            }
+        });
     }
 }
+
 
 document.getElementById('FoglalasButton').addEventListener('click', async function() {
     if (dateSelected() == false){
@@ -329,37 +405,42 @@ document.getElementById('FoglalasButton').addEventListener('click', async functi
         body: JSON.stringify({extra_ids: listSelectedExtras()}) // body data type must match "Content-Type" header
       });
     var checkbox = document.getElementById('ker_szamlat');
+
     const formId1 = "foglalasForm"
     const url1 = '/reservation/add';
     if(checkbox.checked){
+        billing_required()
         const formId2 = 'szamlazasForm';
         const url2 = '/reservation/add_billing'
-        try {
-            const response1 = await postForm(url1, formId1);
-            const response2 = await postForm(url2, formId2);
+        const response1 = await postForm(url1, formId1);
+        const response2 = await postForm(url2, formId2);
     
-            if (response1.ok && response2.ok) {
-                finalize();
-            } else {
-                console.error('Egy vagy több kérés nem volt sikeres');
-            }
-        } catch (error) {
-            console.error('Hiba történt a kérések során:', error);
+        if (response1.ok && response2.ok) {
+            finalize();
+        } 
+        else {
+            console.error('Egy vagy több kérés nem volt sikeres');
         }
     }
+    else if(pay_by_card){
+        const formId2 = 'szamlazasForm';
+        const url2 = '/reservation/add_billing'            
+        const response1 = await postForm(url1, formId1);
+        const response2 = await postForm(url2, formId2);
 
-    else {
-        try {
-            const response1 = await postForm(url1, formId1);
-            console.log('response : ',response1)
-            if (response1.ok) {
+        if (response1.ok && response2.ok) {
                 finalize();
-            } else {
+            } 
+        else {
                 console.error('Egy vagy több kérés nem volt sikeres');
             }
-        } catch (error) {
-            console.error('Hiba történt a kérések során:', error);
         }
+    else {
+        const response1 = await postForm(url1, formId1);
+        console.log('response : ',response1)
+        if (response1.ok) {
+            finalize();
+        } 
 
     }
     console.log(listSelectedExtras())
