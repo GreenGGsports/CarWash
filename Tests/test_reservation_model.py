@@ -6,6 +6,7 @@ from src.models.extra_model import ExtraModel
 from src.models.service_model import ServiceModel
 from src.models.company_model import CompanyModel
 from src.models.carwash_model import CarWashModel
+from src.models.car_model import CarModel
 
 @pytest.fixture
 def setup_database(session: Session):
@@ -24,6 +25,10 @@ def setup_database(session: Session):
     # Adding car washes
     carwash1 = CarWashModel(carwash_name='Car Wash 1', location='Budapest')
     session.add(carwash1)
+    session.commit()
+
+    car1 = CarModel(license_plate='xyz-123', car_type = 'small_car', car_brand = 'Bugatti',company_id = company1.id )
+    session.add(car1)
     session.commit()
 
     # Adding services
@@ -48,24 +53,31 @@ def setup_database(session: Session):
 
 def test_add_reservation_nocompany(session: Session, setup_database):
     appointment = datetime.utcnow()
+
+    # company1 = CompanyModel(company_name='Company 1', discount=10)
+    # session.add(company1)
+
+    # car = CarModel(license_plate='xyz-123', car_type = 'small_car', car_brand = 'Bugatti',company_id = company1.id )
+    # session.add(car)
+    # session.commit()
+
+    # from pdb import set_trace
+    # set_trace()
+    from pdb import set_trace 
+    set_trace()
     reservation = ReservationModel.add_reservation(
         session=session,
         slot_id=1,
         service_id=1,
-        company_id=None,
         customer_id=1,
-        carwash_id=1,
-        reservation_date=appointment,
-        parking_spot='A1',
-        car_type='large_car',
-        car_brand='Mazda',
-        license_plate='ABC-123'
+        carwash_id = 1,
+        reservation_date= appointment,
+        parking_spot=1,
+        car_id = 1,
+        extras=[],
     )
     
     assert reservation.id is not None
-    assert reservation.car_type == 'large_car'
-    assert reservation.car_brand == 'Mazda'
-    assert reservation.license_plate == 'ABC-123'
 
 def test_add_reservation(session: Session, setup_database):
     appointment = datetime.utcnow()
@@ -245,20 +257,19 @@ def test_add_multiple_extras(session):
     # Now get the IDs of the added extras
     extra_ids = [extra.id for extra in extras]
 
+    appointment = datetime.utcnow()
+
     # Add a reservation with the extra IDs
     reservation = ReservationModel.add_reservation(
         session=session,
-        company_id=1,
-        service_id=1,
         slot_id=1,
-        carwash_id=1,
-        reservation_date=datetime.utcnow(),
+        service_id=1,
         customer_id=1,
-        car_type='large_car',
+        carwash_id = 1,
+        reservation_date= appointment,
         parking_spot=1,
-        extras=extra_ids,
-        car_brand='Mazda',
-        license_plate='ABC-123'
+        car_id = 1,
+        extras = extra_ids,
     )
 
     assert reservation is not None

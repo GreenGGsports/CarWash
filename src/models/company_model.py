@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, Double 
 from sqlalchemy.orm import Session
 from .base import BaseModel
+from sqlalchemy.orm import relationship
 
 class CompanyModel(BaseModel):
     __tablename__ = 'Company'
@@ -8,6 +9,7 @@ class CompanyModel(BaseModel):
     id = Column(Integer, primary_key=True)
     company_name = Column(String, nullable=False)
     discount = Column(Double, nullable=False, default=0)
+    cars = relationship('CarModel', back_populates='company')
     
     def __repr__(self):
         return self.company_name

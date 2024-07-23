@@ -1,7 +1,8 @@
-from sqlalchemy import Column, Integer, String , ForeignKey
+from sqlalchemy import Column, Integer, String, Date , ForeignKey
 from sqlalchemy.orm import Session, relationship
 from .base import BaseModel
 from sqlalchemy.exc import SQLAlchemyError
+from src.models.reservation_model import ReservationModel
 
 class BillingModel(BaseModel):
     __tablename__ = 'Billing'
@@ -10,22 +11,22 @@ class BillingModel(BaseModel):
     name = Column(String, nullable= False)
     address = Column(String,nullable=False)
     email = Column(String,nullable=False)
+    date = Column(Date)  
+    reservation_id = Column(Integer, ForeignKey('Reservation.id'))
     
     company_name = Column(String,nullable= True)
     tax_ID = Column(String,nullable=True)
-    user_id = Column(Integer, ForeignKey('User.id'), nullable=True)
+    reservation = relationship('ReservationModel', back_populates='billing')
     
-    user = relationship("UserModel")
     
     @classmethod
-    def add_billing_data(cls,session: Session,  name: str, address: str, email : str, company_name: str = None, tax_ID: str = None, user_id: int = None):
+    def add_billing_data(cls,session: Session,  name: str, address: str, email : str, company_name: str = None, tax_ID: str = None):
         billing_data = cls(
             name = name,
             address = address,
             email = email,
             company_name = company_name,
             tax_ID = tax_ID,
-            user_id = user_id
         )
 
         try:
