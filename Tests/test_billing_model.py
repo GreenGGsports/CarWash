@@ -14,7 +14,7 @@ def test_add_billing_data(session):
     tax_ID = "123456"
 
     # Act
-    billing_data = BillingModel.add_billing_data(
+    billing_data = BillingModel.add(
         session=session, 
         name = name, 
         address = address, 
