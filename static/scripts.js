@@ -3,13 +3,11 @@ Login
 */
 document.getElementById('loginRegisterForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Az alapértelmezett form submit művelet megakadályozása
-
     // Felhasználónevet és jelszót lekérjük
     var username = document.getElementById('Felhasznev').value;
     var password = document.getElementById('Jelszo').value;
-
     // Ellenőrzés, hogy melyik gomb lett megnyomva (Belépés vagy Regisztráció)
-    var action = event.submitter.className;
+    var action = event.submitter.name;
     if (action === 'Belepes') {
         // Belépés gomb megnyomva
         loginOrRegister('/user/login', username, password);

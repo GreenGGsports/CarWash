@@ -4,7 +4,7 @@ from  datetime import datetime
 from flask_login import current_user
 from src.models.billing_model import BillingModel
 from src.models.customer_model import CustomerModel
-
+from src.controllers.booking_controller import get_earliest_available_slot
 reservation_ctrl = Blueprint('reservation_ctrl', __name__, url_prefix='/reservation')
 
 @reservation_ctrl.route('/')
@@ -37,13 +37,23 @@ def create_reservation():
     except AttributeError as e:
         return jsonify({'status': 'error', 'message': str(e)}), 400
     except Exception as e:
+        from pdb import set_trace
+        set_trace()
         return jsonify({'status': 'error', 'message': 'An unexpected error occurred.'}), 500
     
-@reservation_ctrl.route('/set_date', methods= ['POST'])
+@reservation_ctrl.route('/set_date', methods= ["GET",'POST'])
 def set_date():
     data = request.json
-    date = data.get('date')
+    date = datetime.strptime(data.get('date'),'%Y-%m-%d')
     session['reservation_date'] = date
+    
+    db_session = current_app.session_factory.get_session() 
+    min_date = get_earliest_available_slot(
+        db_session= db_session,
+        reservation_date=date
+    )
+    from pdb import set_trace
+    set_trace()
     return {}
 
 @reservation_ctrl.route('/add_billing',methods=['POST'])
@@ -61,6 +71,8 @@ def create_billing():
     except AttributeError as e:
         return jsonify({'status': 'error', 'message': str(e)}), 400
     except Exception as e:
+        from pdb import set_trace
+        set_trace()
         return jsonify({'status': 'error', 'message': 'An unexpected error occurred.'}), 500
     
 def add_customer(data):
@@ -91,7 +103,7 @@ def get_session_data():
     #not implemented
     carwash_id = session.get('carwash_id')
     billing_id = session.get('billing_id') 
-    researvation_date = datetime.strptime(session.get('reservation_date'), '%Y-%m-%d')
+    researvation_date = session.get('reservation_date')
     return slot_id, service_id, extra_ids, carwash_id, billing_id, researvation_date 
 
 

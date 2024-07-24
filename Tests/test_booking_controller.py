@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from src.models.slot_model import SlotModel
 from src.models.reservation_model import ReservationModel
-from src.controllers.booking_controller import get_slot_id
+from src.controllers.booking_controller import get_slot_id, get_earliest_available_slot
 import pytest
 
 def test_is_slot_available(session):
@@ -180,3 +180,53 @@ def test_slot_unavailable(session):
         license_plate='xxxx',
     )
     assert SlotModel.get_by_id(session, slot_id_1).start_time.hour == 8
+    
+
+def test_get_earliest_available_slot(session):
+    create_hourly_slots(session)
+    reservation_date_1 = datetime.now().replace(hour=8, minute=0, second=0, microsecond=0)
+
+    reservation_date_2 = datetime.now().replace(hour=11, minute=0, second=0, microsecond=0)
+    reservation = ReservationModel.add_reservation(
+        session=session,
+        slot_id=1,
+        service_id=1,
+        company_id=1,
+        customer_id=1,
+        carwash_id=1,
+        reservation_date=reservation_date_1,
+        parking_spot=1,
+        car_type='small_car',
+        car_brand='Mazda',
+        license_plate='ABC-123'
+    ) 
+    time = get_earliest_available_slot(db_session = session,
+                                reservation_date=reservation_date_2
+                                )
+    end_time  = SlotModel.get_by_id(session, 2).end_time
+    assert time == end_time
+
+def test_no_available_slots(session):
+    # Create slots and make all of them reserved
+    create_hourly_slots(session)
+    
+    # Reserve all slots
+    for slot in SlotModel.get_all(session):
+        ReservationModel.add_reservation(
+            session=session,
+            slot_id=slot.id,
+            service_id=1,
+            company_id=1,
+            customer_id=1,
+            carwash_id=1,
+            reservation_date=slot.start_time,
+            parking_spot=1,
+            car_type='small_car',
+            car_brand='Mazda',
+            license_plate='AAA-111'
+        )
+
+    reservation_date = datetime.now().replace(hour=9,minute=0, second=0, microsecond=0) + timedelta(hours=1)
+    earliest_available_slot_end_time = get_earliest_available_slot(session, reservation_date)
+
+    assert earliest_available_slot_end_time is None
