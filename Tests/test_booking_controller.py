@@ -3,8 +3,22 @@ from src.models.slot_model import SlotModel
 from src.models.reservation_model import ReservationModel
 from src.controllers.booking_controller import get_slot_id
 import pytest
+from src.models.car_model import CarModel
+from sqlalchemy.orm import Session
 
-def test_is_slot_available(session):
+@pytest.fixture
+def setup_database(session: Session):
+    # Clean up the database before the test starts
+    session.query(ReservationModel).delete()
+    session.commit()
+
+    car1 = CarModel(license_plate='xyz-123', car_type = 'small_car', car_brand = 'Bugatti')
+    session.add(car1)
+    session.commit()
+
+    yield
+
+def test_is_slot_available(session, setup_database):
 
     # Create a slot
     start_time = datetime.now()
@@ -19,14 +33,11 @@ def test_is_slot_available(session):
         session=session,
         slot_id=slot.id,
         service_id=1,
-        company_id=1,
         customer_id=1,
         carwash_id=1,
         reservation_date=start_time,
         parking_spot=1,
-        car_type='small_car',
-        car_brand='Mazda',
-        license_plate='ABC-123'
+        car_id =  1
     )
 
     # Ensure the slot is no longer available after the reservation
@@ -49,14 +60,11 @@ def test_is_slot_available(session):
         session=session,
         slot_id=slot_2.id,
         service_id=1,
-        company_id=1,
         customer_id=1,
         carwash_id=1,
         reservation_date=start_time_2,
         parking_spot=1,
-        car_type='small_car',
-        car_brand='Mazda',
-        license_plate='DEF-456'
+        car_id =  1
     )
 
     # Ensure the new slot is no longer available after the reservation
@@ -74,7 +82,7 @@ def create_hourly_slots(session):
         SlotModel.add_slot(session, start_time=current_time, end_time=slot_end_time)
         current_time = slot_end_time
 
-def test_double_booking_only_available_or_earlier(session):
+def test_double_booking_only_available_or_earlier(session, setup_database):
     # Create hourly slots from 8:00 to 17:00
     create_hourly_slots(session)
 
@@ -92,14 +100,11 @@ def test_double_booking_only_available_or_earlier(session):
         session=session,
         slot_id=slot_id_1,
         service_id=1,
-        company_id=1,
         customer_id=1,
         carwash_id=1,
         reservation_date=reservation_date_1,
         parking_spot=1,
-        car_type='small_car',
-        car_brand='Mazda',
-        license_plate='ABC-123'
+        car_id= 1,
     )
 
     # Attempt to book the same slot again
@@ -124,7 +129,7 @@ def test_double_booking_only_available_or_earlier(session):
     assert reserved_slot_2.end_time.hour == 12
 
 
-def test_slot_unavailable(session):
+def test_slot_unavailable(session, setup_database):
     create_hourly_slots(session)
 
     reservation_time = datetime.now().replace(hour=9, minute=30, second=0, microsecond=0)
@@ -166,7 +171,7 @@ def test_slot_unavailable(session):
         service_id=1,
         customer_id=1,
         carwash_id = 1,
-        reservation_date= reservation_time,
+        reservation_date= reservation_time2,
         parking_spot=1,
         car_id = 1,
     )

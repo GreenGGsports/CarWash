@@ -28,7 +28,7 @@ class ReservationModelView(ModelView):
 
     column_list = (
         'reservation_date',
-        'license_plate',
+        'car.license_plate',
         'carwash.carwash_name',
         'service.service_name',
         'extras',
@@ -41,7 +41,7 @@ class ReservationModelView(ModelView):
 
     column_labels = {
         'reservation_date': 'Reservation Date',
-        'license_plate': 'License Plate',
+        'car.license_plate': 'License Plate',
         'customer.forname': 'Forename',
         'customer.lastname': 'Lastname',
         'customer.phone_number': 'Phone Number',
@@ -58,12 +58,12 @@ class ReservationModelView(ModelView):
         ('customer', 'customer.phone_number'),
         ('service', 'service.service_name'),
         ('carwash', 'carwash.carwash_name'),
-        'license_plate',
+        'car.license_plate',
         'final_price'
     )
 
     column_searchable_list = (
-        'license_plate',
+        'car.license_plate',
         'customer.forname',
         'customer.lastname',
         'customer.phone_number',
