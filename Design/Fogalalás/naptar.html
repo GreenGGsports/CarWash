@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      background-color: black;
+    }
+
+    .input-field {
+      height: 50px;
+      width: 300px;
+      /* Set the width to a consistent value */
+      padding: 10px 25px;
+      /* Padding for top/bottom and left/right */
+      background: rgba(0, 0, 0, 0.01);
+      box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      border-bottom-left-radius: 5px;
+      overflow: hidden;
+      border: 2px #13669C solid;
+      color: #F3F5F5;
+      box-sizing: border-box;
+      /* Include padding and border in the element's width and height */
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .custom-checkbox {
+      display: inline-flex;
+      align-items: center;
+      width: 320px;
+      height: 40px;
+      padding: 10px;
+      background: black;
+      box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      border-bottom-left-radius: 5px;
+      border: 1px #13669C solid;
+      color: #F3F5F5;
+      font-size: 25px;
+      font-family: Graphie;
+      font-weight: 400;
+      word-wrap: break-word;
+      cursor: pointer;
+      /* Change cursor to pointer on hover */
+      justify-content: center;
+      text-align: center;
+    }
+
+    .custom-checkbox input[type="checkbox"] {
+      display: none;
+      /* Hide the default checkbox */
+    }
+
+    .custom-checkbox input[type="checkbox"]:checked+.checkbox-text {
+      box-shadow: 0px 0px 10px 3px rgba(124, 242, 218, 0.50) inset;
+      border: 1.50px rgba(124, 242, 218, 0.90) solid;
+      border-radius: 20px 5px 5px 5px;
+      padding: 10px;
+      width: 100%;
+      background: black;
+      /* Apply the same background */
+    }
+
+    .custom-checkbox input[type="checkbox"]:checked+.checkbox-text {
+      color: #F3F5F5;
+    }
+
+    /*Tartalom css*/
+
+    .fo-tartalom {
+      width: 1920px;
+      height: 6886px;
+      position: relative;
+      background: black;
+    }
+
+    .fejlec-tartalom {
+      width: 1920px;
+      padding: 34px 25px 25px;
+      position: absolute;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .fejlec-bal {
+      border: 1px rgba(255, 0, 0, 0) solid;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .fejlec-kozep {
+      width: 538px;
+      height: 137px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .fejlec-kep {
+      width: 537px;
+      height: 116px;
+    }
+
+    .fejlec-jobb {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-end;
+      gap: 10px;
+    }
+
+    .bejelentkezes-tartalom {
+      position: relative;
+    }
+
+    .ikon-tartalom {
+      width: 60px;
+      height: 60px;
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+
+    .ikon {
+      width: 50px;
+      height: 50px;
+      position: relative;
+    }
+
+    .belso-ikon {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      left: 15px;
+      top: 10px;
+      background: #7BF2DA;
+    }
+
+    .kulso-ikon {
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      background: #7BF2DA;
+    }
+
+    .bejelentkezes-szoveg {
+      position: absolute;
+      left: 70px;
+      top: 12px;
+      text-align: center;
+      color: white;
+      font-size: 30px;
+      font-family: Inter;
+      font-weight: 600;
+      word-wrap: break-word;
+    }
+
+    .elvalaszto-vonal {
+      width: 100%;
+      height: 2px;
+      position: absolute;
+      top: calc(100px + 34px + 25px);
+      /* Adjust the top position based on your header height and padding */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      top: 196px;
+    }
+
+    .forgathato-vonal {
+      width: 100%;
+      height: 2px;
+      background: #F3F5F5;
+      box-shadow: 0px 0px 20px #7CF2DA;
+    }
+
+    .cim-tartalom {
+      padding-top: 100px;
+      padding-left: 450px;
+      padding-right: 450px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cim-szoveg {
+      text-align: center;
+      color: #F4F6F5;
+      font-size: 73px;
+      font-family: Graphie;
+      font-weight: 600;
+      letter-spacing: 4.38px;
+      word-wrap: break-word;
+    }
+
+    .doboz-tartalom {
+      width: 1000px;
+      height: 200px;
+      padding-top: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .belso-doboz {
+      align-self: stretch;
+      height: 100px;
+      padding-left: 100px;
+      background: #13669C;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 30px;
+      overflow: hidden;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .belso-szoveg {
+      color: black;
+      font-size: 55px;
+      font-family: Graphie;
+      font-weight: 700;
+      line-height: 40px;
+      letter-spacing: 1.65px;
+      word-wrap: break-word;
+    }
+
+    .input-csoport {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 40px;
+      display: flex;
+    }
+
+    .cimke-mezo {
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      display: inline-flex;
+    }
+
+    .cimke {
+      padding-left: 25px;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
+      display: inline-flex;
+    }
+
+    .cimke-szoveg {
+      color: white;
+      font-size: 25px;
+      font-family: Graphie;
+      font-weight: 350;
+      word-wrap: break-word;
+    }
+
+    .input-mezo {
+      height: 30px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-left: 25px;
+      padding-right: 102px;
+      background: rgba(0, 0, 0, 0.01);
+      box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      border-bottom-left-radius: 5px;
+      overflow: hidden;
+      border: 2px #13669C solid;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      display: inline-flex;
+      color: #F3F5F5;
+      font-size: 25px;
+      font-family: Graphie;
+      font-weight: 350;
+      word-wrap: break-word;
+    }
+
+    .cimke-szoveg:nth-of-type(2) {
+      color: #F3F5F5;
+    }
+
+    .gomb-csoport {
+      flex: 1 1 0;
+      align-self: stretch;
+      padding: 10px;
+      justify-content: center;
+      align-items: center;
+      gap: 19px;
+      display: flex;
+    }
+
+    .gomb {
+      width: 300px;
+      height: 100px;
+      padding-left: 71px;
+      padding-right: 71px;
+      padding-top: 31px;
+      padding-bottom: 31px;
+      background: black;
+      box-shadow: 0px 0px 10px 3px rgba(123, 242, 218, 0.50);
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      display: flex;
+      text-align: center;
+      color: #F3F5F5;
+      font-size: 40px;
+      font-family: Graphie;
+      font-weight: 600;
+      word-wrap: break-word;
+      border: 2px #7CF2DA solid;
+    }
+
+    .belepes-gomb {
+      border-top-left-radius: 30px;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+
+    .regisztracio-gomb {
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 30px;
+      border-bottom-left-radius: 5px;
+    }
+
+    .elvalaszto-tarto {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+
+    .elvalaszto {
+      width: 2px;
+      height: 120px;
+      background: #13669C;
+      box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
+    }
+
+    .checkbox-csoport {
+      justify-content: center;
+      align-items: center;
+      display: inline-flex;
+    }
+
+    .checkbox-par {
+      padding-left: 50px;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 25px;
+      display: flex;
+    }
+
+    .checkbox {
+      width: 50px;
+      height: 50px;
+      position: relative;
+      background: black;
+      box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset;
+      border-radius: 10px;
+      border: 2px #13669C solid;
+    }
+
+    .checkbox-szoveg {
+      color: white;
+      font-size: 25px;
+      font-family: Graphie;
+      font-weight: 350;
+      word-wrap: break-word;
+    }
+
+    .masodik-checkbox {
+      height: 50px;
+      padding-left: 120px;
+    }
+
+    .masodik-szoveg {
+      flex: 1 1 0;
+      font-weight: 400;
+    }
+
+    .kontener {
+      width: 1000px;
+      height: 250px;
+      padding-top: 150px;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 10px;
+      display: flex;
+    }
+
+    .fejlec {
+      align-self: stretch;
+      height: 100px;
+      padding-left: 100px;
+      background: #13669C;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 30px;
+      overflow: hidden;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
+      display: inline-flex;
+    }
+
+    .fejlec-szoveg {
+      color: black;
+      font-size: 55px;
+      font-family: Graphie;
+      font-weight: 700;
+      line-height: 40px;
+      letter-spacing: 1.65px;
+      word-wrap: break-word;
+    }
+
+    .nagy-gomb {
+      width: 335px;
+      height: 439px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      background: black;
+      box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset;
+      border-top-left-radius: 60px;
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+      border-bottom-left-radius: 10px;
+      overflow: hidden;
+      border: 2px #13669C solid;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 50px;
+      display: inline-flex;
+    }
+
+    .gomb-kep {
+      width: 335px;
+      height: 100px;
+    }
+
+    .kep-hely {
+      width: 79px;
+      height: 79px;
+      position: relative;
+    }
+
+    .feher-doboz {
+      width: 45.53px;
+      height: 65.83px;
+      left: 16.72px;
+      top: 6.58px;
+      position: absolute;
+      background: #F3F5F5;
+    }
+
+    .gomb-szoveg {
+      width: 283px;
+      height: 60px;
+      text-align: center;
+      color: #F3F5F5;
+      font-size: 25px;
+      font-family: Graphie;
+      font-weight: 400;
+      word-wrap: break-word;
+    }
+
+    .csomag-gomb {
+      width: 335px;
+      padding-top: 35px;
+      padding-bottom: 50px;
+      background: black;
+      box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset;
+      border-top-left-radius: 60px;
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+      border-bottom-left-radius: 10px;
+      overflow: hidden;
+      border: 2px #13669C solid;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 50px;
+      display: inline-flex;
+    }
+
+    .csomag-cim {
+      text-align: center;
+      color: #F3F5F5;
+      font-size: 33px;
+      font-family: Graphie;
+      font-weight: 400;
+      word-wrap: break-word;
+    }
+
+    .csomag-tartalom {
+      padding-bottom: 294px;
+      padding-left: 13px;
+      padding-right: 13px;
+      border-left: 1px white solid;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 10px;
+      display: flex;
+    }
+
+    .csomag-elem {
+      text-align: center;
+      color: #F3F5F5;
+      font-size: 27px;
+      font-family: Graphie;
+      font-weight: 350;
+      word-wrap: break-word;
+    }
+
+    .adatok-fejlec {
+      width: 400px;
+      height: 40px;
+      padding-left: 90px;
+      background: #13669C;
+      border-top-left-radius: 12.50px;
+      border-top-right-radius: 25px;
+      overflow: hidden;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 10px;
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    .adatok-cim {
+      text-align: center;
+      color: black;
+      font-size: 30px;
+      font-family: Graphie;
+      font-weight: 700;
+      word-wrap: break-word;
+    }
+
+    .adatok-form {
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      display: inline-flex;
+    }
+
+    .adatok-csoport {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      display: inline-flex;
+    }
+
+    .adatok-mezo {
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      display: flex;
+    }
+
+    .adatok-label {
+      padding-left: 25px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      display: inline-flex;
+      text-align: center;
+      color: #F3F5F5;
+      font-size: 25px;
+      font-family: Graphie;
+      font-weight: 400;
+      word-wrap: break-word;
+    }
+
+    .adatok-input {
+      width: 315px;
+      height: 40px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-left: 25px;
+      background: black;
+      box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
+      overflow: hidden;
+      border: 1px #13669C solid;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
+      display: inline-flex;
+      color: white;
+      font-size: 20px;
+    }
+
+    .kereszt-nev-input {
+      border-top-left-radius: 2px;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 20px;
+      border-bottom-left-radius: 5px;
+    }
+
+    .ceg-nev-input {
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 20px;
+      border-bottom-left-radius: 5px;
+    }
+
+    .adatok-input:not(.kereszt-nev-input):not(.ceg-nev-input) {
+      border-top-left-radius: 20px;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+
+    .fizetesi-mod {
+      height: 80px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      display: flex;
+    }
+
+    .fizetesi-mod-label {
+      padding-left: 25px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      display: inline-flex;
+      text-align: center;
+      color: #F3F5F5;
+      font-size: 25px;
+      font-family: Graphie;
+      font-weight: 400;
+      word-wrap: break-word;
+    }
+
+    .fizetesi-mod-kontener {
+      width: 315px;
+      height: 40px;
+      padding: 10px;
+      background: black;
+      box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      overflow: hidden;
+      border: 1px #13669C solid;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
+      display: inline-flex;
+    }
+
+    .fizetesi-mod-select {
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      color: #F3F5F5;
+      font-size: 25px;
+      font-family: Graphie;
+      font-weight: 350;
+      border: none;
+      outline: none;
+    }
+
+    .fizetesi-mod-select option {
+      background: black;
+    }
+  </style>
+</head>
+
+<body>
+
+  <body>
+    <div class="fo-tartalom">
+      <div class="fejlec-tartalom">
+        <div class="fejlec-bal"></div>
+        <div class="fejlec-kozep">
+          <img class="fejlec-kep" src="https://via.placeholder.com/537x116" alt="Placeholder Image">
+        </div>
+        <div class="fejlec-jobb">
+          <div class="bejelentkezes-tartalom">
+            <div class="ikon-tartalom">
+              <div class="ikon">
+                <div class="belso-ikon"></div>
+                <div class="kulso-ikon"></div>
+              </div>
+            </div>
+            <div class="bejelentkezes-szoveg">Log In</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="elvalaszto-vonal">
+      <div class="forgathato-vonal"></div>
+    </div>
+    <div
+      style="padding-top: 1px; padding-bottom: 1px; left: 174.75px; top: 298px; position: absolute; background: black; box-shadow: 0px 0px 15px 6px #13669C inset; border-top-left-radius: 50px; border-top-right-radius: 10px; border-bottom-right-radius: 50px; border-bottom-left-radius: 10px; overflow: hidden; border: 1px #13669C solid; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
+      <div class="cim-tartalom">
+        <div class="cim-szoveg">Időpont foglalás</div>
+      </div>
+      <div class="doboz-tartalom">
+        <div class="belso-doboz">
+          <div class="belso-szoveg">Belépés & Regisztráció</div>
+        </div>
+      </div>
+      <div
+        style="align-self: stretch; height: 440px; padding-top: 100px; padding-left: 35px; padding-right: 35px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 10px; display: flex">
+        <form>
+          <div
+            style="align-self: stretch; height: 340px; padding: 50px; background: black; box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset; border-radius: 25px; overflow: hidden; border: 2px #13669C solid; flex-direction: column; justify-content: center; align-items: flex-start; gap: 50px; display: flex">
+            <div
+              style="align-self: stretch; justify-content: center; align-items: center; gap: 40px; display: inline-flex">
+              <div class="input-csoport">
+                <div class="cimke-mezo">
+                  <label class="cimke">
+                    <div class="cimke-szoveg">
+                      Felhasználó név
+                    </div>
+                  </label>
+                  <input type="text" placeholder="Felhasználónév" class="input-mezo">
+                </div>
+                <div class="cimke-mezo">
+                  <label class="cimke">
+                    <div class="cimke-szoveg">
+                      Jelszó
+                    </div>
+                  </label>
+                  <input type="password" placeholder="Jelszó" class="input-mezo">
+                </div>
+              </div>
+              <div class="gomb-csoport">
+                <button class="gomb belepes-gomb">
+                  Belépés
+                </button>
+                <div class="elvalaszto-tarto">
+                  <div class="elvalaszto"></div>
+                </div>
+                <button class="gomb regisztracio-gomb">
+                  Regisztráció
+                </button>
+              </div>
+            </div>
+            <div class="checkbox-csoport">
+              <div class="checkbox-par">
+                <input type="checkbox" class="checkbox">
+                <div class="checkbox-szoveg">
+                  *Elfogadom az ÁSZF-et és az Adatvédelmi szabályzatot
+                </div>
+              </div>
+              <div class="checkbox-par masodik-checkbox">
+                <input type="checkbox" class="checkbox">
+                <div class="checkbox-szoveg masodik-szoveg">
+                  Regisztráció nélkül foglalok
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="kontener">
+        <div class="fejlec">
+          <div class="fejlec-szoveg">
+            Autómosóink
+          </div>
+        </div>
+      </div>
+      <form action="">
+        <div
+          style="align-self: stretch; padding-top: 100px; padding-left: 35px; padding-right: 35px; justify-content: center; align-items: center; gap: 30px; display: inline-flex">
+          <button class="nagy-gomb">
+            <img class="gomb-kep" src="https://via.placeholder.com/335x100" />
+            <div class="kep-hely">
+              <div class="feher-doboz"></div>
+            </div>
+            <div class="gomb-szoveg">
+              1097 Budapest,<br />Könyves Kálmán krt. 11.
+            </div>
+          </button>
+        </div>
+      </form>
+      <div class="kontener">
+        <div class="fejlec">
+          <div class="fejlec-szoveg">
+            Csomagjaink
+          </div>
+        </div>
+      </div>
+      <form action="">
+        <div
+          style="align-self: stretch; padding-top: 100px; padding-left: 35px; padding-right: 35px; justify-content: center; align-items: flex-start; gap: 30px; display: inline-flex">
+          <button class="csomag-gomb">
+            <div class="csomag-cim">
+              Külső Alap Csomag
+            </div>
+            <div class="csomag-tartalom">
+              <div class="csomag-elem">
+                Előmosás
+              </div>
+              <div class="csomag-elem">
+                Samponos mosás
+              </div>
+              <div class="csomag-elem">
+                Felni tisztítás
+              </div>
+              <div class="csomag-elem">
+                Öblítés
+              </div>
+              <div class="csomag-elem">
+                Szárítás
+              </div>
+            </div>
+          </button>
+        </div>
+      </form>
+      <div class="kontener">
+        <div class="fejlec">
+          <div class="fejlec-szoveg">
+            Extrák
+          </div>
+        </div>
+      </div>
+      <div
+        style="padding-top: 100px; padding-left: 35px; padding-right: 35px; flex-direction: column; justify-content: flex-start; align-items: center; gap: 30px; display: flex">
+        <div style="justify-content: center; align-items: center; gap: 30px; display: inline-flex">
+          <div
+            style="padding-top: 65px; padding-bottom: 143px; background: black; box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset; border-radius: 20px; overflow: hidden; border: 2px #13669C solid; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 30px; display: inline-flex">
+            <div
+              style="width: 200px; height: 50px; padding-top: 4px; padding-bottom: 4px; padding-left: 90px; padding-right: 135px; background: #13669C; border-top-left-radius: 12.50px; border-top-right-radius: 25px; overflow: hidden; flex-direction: column; justify-content: center; align-items: center; gap: 10px; display: flex">
+              <div
+                style="text-align: center; color: black; font-size: 30px; font-family: Graphie; font-weight: 700; word-wrap: break-word">
+                Külső Extrák</div>
+            </div>
+            <form action="">
+              <div style="justify-content: flex-start; align-items: flex-start; display: inline-flex">
+                <div
+                  style="padding-left: 20px; padding-right: 10px; flex-direction: column; justify-content: center; align-items: center; gap: 20px; display: inline-flex">
+                  <label class="custom-checkbox">
+                    <input type="checkbox">
+                    <span class="checkbox-text">Bogároldás</span>
+                  </label>
+                  <label class="custom-checkbox">
+                    <input type="checkbox">
+                    <span class="checkbox-text">Viaszos kezelés</span>
+                  </label>
+                  <label class="custom-checkbox">
+                    <input type="checkbox">
+                    <span class="checkbox-text">Extra szennyezett*</span>
+                  </label>
+                </div>
+                <div
+                  style="padding-left: 10px; padding-right: 20px; flex-direction: column; justify-content: center; align-items: center; gap: 20px; display: inline-flex">
+                  <label class="custom-checkbox">
+                    <input type="checkbox">
+                    <span class="checkbox-text">Gumiápolás</span>
+                  </label>
+                  <label class="custom-checkbox">
+                    <input type="checkbox">
+                    <span class="checkbox-text">Gyanta oldás</span>
+                  </label>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div
+            style="height: 430px; padding-top: 50px; padding-bottom: 40px; background: black; box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset; border-radius: 20px; overflow: hidden; border: 2px #13669C solid; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 30px; display: inline-flex">
+            <div
+              style="width: 200px; height: 40px; padding-top: 4px; padding-bottom: 4px; padding-left: 90px; padding-right: 135px; background: #13669C; border-top-left-radius: 12.50px; border-top-right-radius: 25px; overflow: hidden; flex-direction: column; justify-content: center; align-items: center; gap: 10px; display: flex">
+              <div
+                style="text-align: center; color: black; font-size: 30px; font-family: Graphie; font-weight: 700; word-wrap: break-word">
+                Belső Extrák</div>
+            </div>
+            <form action="">
+              <div style="justify-content: flex-start; align-items: flex-start; display: inline-flex">
+                <div
+                  style="padding-left: 20px; padding-right: 10px; flex-direction: column; justify-content: center; align-items: center; gap: 20px; display: inline-flex">
+                  <label class="custom-checkbox">
+                    <input type="checkbox">
+                    <span class="checkbox-text">Műanyag mélytisztítás</span>
+                  </label>
+                  <label class="custom-checkbox">
+                    <input type="checkbox">
+                    <span class="checkbox-text">Extra porszívózás</span>
+                  </label>
+                  <label class="custom-checkbox">
+                    <input type="checkbox">
+                    <span class="checkbox-text">Bőr tisztítás</span>
+                  </label>
+                  <label class="custom-checkbox">
+                    <input type="checkbox">
+                    <span class="checkbox-text">Autó parfüm</span>
+                  </label>
+                </div>
+                <div
+                  style="padding-left: 10px; padding-right: 20px; flex-direction: column; justify-content: center; align-items: center; gap: 20px; display: inline-flex">
+                  <label class="custom-checkbox">
+                    <input type="checkbox">
+                    <span class="checkbox-text">Műanyag ápolás</span>
+                  </label>
+                  <label class="custom-checkbox">
+                    <input type="checkbox">
+                    <span class="checkbox-text">Kutyaszőr tisztítás</span>
+                  </label>
+                  <label class="custom-checkbox">
+                    <input type="checkbox">
+                    <span class="checkbox-text">Bőr ápolás</span>
+                  </label>
+                  <label class="custom-checkbox">
+                    <input type="checkbox">
+                    <span class="checkbox-text">Extra szennyezett*</span>
+                  </label>
+                </div>
+              </div>
+          </div>
+          </form>
+        </div>
+        <div
+          style="width: 1430px; height: 70px; padding: 10px; background: black; box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset; border-radius: 25px; overflow: hidden; border: 1px #13669C solid; justify-content: center; align-items: center; gap: 10px; display: inline-flex">
+          <div
+            style="width: 1376px; color: white; font-size: 23px; font-family: Graphie; font-weight: 350; word-wrap: break-word">
+            *Az extra szennyezett autóknál, ha nem választja ki a megfelelő Extra csomagot a foglaláskor, akkor a
+            költség kétszeresét számoljuk fel!</div>
+        </div>
+      </div>
+      <div
+        style="width: 1000px; height: 250px; padding-top: 150px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 10px; display: flex">
+        <div class="kontener">
+          <div class="fejlec">
+            <div class="fejlec-szoveg">
+              Válassz időpontot
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        style="padding-top: 100px; padding-left: 35px; padding-right: 35px; flex-direction: column; justify-content: flex-start; align-items: center; gap: 30px; display: flex">
+        <div
+          style="height: 350px; padding-left: 25px; padding-right: 25px; background: black; box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset; border-radius: 25px; overflow: hidden; border: 1px #13669C solid; justify-content: center; align-items: center; gap: 30px; display: inline-flex">
+          <form action="">
+            <div style="justify-content: center; align-items: center; gap: 25px; display: flex">
+              <div
+                style="width: 658px; height: 250px; position: relative; background: black; box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset; border: 1px #13669C solid">
+              </div>
+              <div
+                style="width: 1.50px; height: 300px; background: #13669C; box-shadow: 0px 0px 15px 3px rgba(19, 102, 156, 0.50)">
+              </div>
+              <div
+                style="flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 10px; display: inline-flex">
+                <label class="custom-checkbox">
+                  <input type="checkbox">
+                  <span class="checkbox-text" style="font-size: 30px; font-weight: 400px;">10 órás átadás</span>
+                </label>
+                <label class="custom-checkbox">
+                  <input type="checkbox">
+                  <span class="checkbox-text" style="font-size: 30px; font-weight: 400px;">11 órás átadás</span>
+                </label>
+                <label class="custom-checkbox">
+                  <input type="checkbox">
+                  <span class="checkbox-text" style="font-size: 30px; font-weight: 400px;">12 órás átadás</span>
+                </label>
+                <label class="custom-checkbox">
+                  <input type="checkbox">
+                  <span class="checkbox-text" style="font-size: 30px; font-weight: 400px;">13 órás átadás</span>
+                </label>
+              </div>
+              <div
+                style="flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 10px; display: inline-flex">
+                <label class="custom-checkbox">
+                  <input type="checkbox">
+                  <span class="checkbox-text" style="font-size: 30px; font-weight: 400px;">14 órás átadás</span>
+                </label>
+                <label class="custom-checkbox">
+                  <input type="checkbox">
+                  <span class="checkbox-text" style="font-size: 30px; font-weight: 400px;">15 órás átadás</span>
+                </label>
+                <label class="custom-checkbox">
+                  <input type="checkbox">
+                  <span class="checkbox-text" style="font-size: 30px; font-weight: 400px;">16 órás átadás</span>
+                </label>
+                <label class="custom-checkbox">
+                  <input type="checkbox">
+                  <span class="checkbox-text" style="font-size: 30px; font-weight: 400px;">17 órás átadás</span>
+                </label>
+              </div>
+            </div>
+        </div>
+        </form>
+        <div
+          style="width: 1430px; height: 70px; padding: 10px; background: black; box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset; border-radius: 25px; overflow: hidden; border: 1px #13669C solid; justify-content: center; align-items: center; gap: 10px; display: inline-flex">
+          <div
+            style="width: 1376px; color: white; font-size: 23px; font-family: Graphie; font-weight: 350; word-wrap: break-word">
+            *Az extra szennyezett autóknál, ha nem választja ki a megfelelő Extra csomagot a foglaláskor, akkor a
+            költség kétszeresét számoljuk fel!</div>
+        </div>
+      </div>
+      <div
+        style="width: 1000px; height: 250px; padding-top: 150px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 10px; display: flex">
+        <div class="kontener">
+          <div class="fejlec">
+            <div class="fejlec-szoveg">
+              Adatok
+            </div>
+          </div>
+        </div>
+      </div>
+      <form action="">
+        <div
+          style="padding-top: 100px; padding-left: 80px; padding-right: 80px; flex-direction: column; justify-content: flex-start; align-items: center; gap: 30px; display: flex">
+          <div
+            style="height: 1090px; background: black; flex-direction: column; justify-content: center; align-items: center; gap: 30px; display: flex">
+            <div style="justify-content: flex-start; align-items: flex-start; gap: 30px; display: inline-flex">
+              <div
+                style="width: 700px; height: 570px; padding: 50px 25px 0 25px; background: black; box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset; border-radius: 20px; overflow: hidden; border: 2px #13669C solid; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 30px; display: inline-flex">
+                <div class="adatok-fejlec">
+                  <div class="adatok-cim">
+                    Személyes adatok
+                  </div>
+                </div>
+                <div
+                  style="height: 300px; flex-direction: column; justify-content: center; align-items: center; gap: 30px; display: flex">
+                  <div class="adatok-form">
+                    <div class="adatok-csoport">
+                      <div class="adatok-mezo">
+                        <label class="adatok-label">
+                          *Vezeték név:
+                        </label>
+                        <input type="text" placeholder="Vezeték név" class="adatok-input">
+                      </div>
+                      <div class="adatok-mezo">
+                        <label class="adatok-label">
+                          *Telefon szám:
+                        </label>
+                        <input type="text" placeholder="+36..." class="adatok-input">
+                      </div>
+                    </div>
+                    <div class="adatok-csoport">
+                      <div class="adatok-mezo">
+                        <label class="adatok-label">
+                          *Kereszt név:
+                        </label>
+                        <input type="text" placeholder="Kereszt név" class="adatok-input kereszt-nev-input">
+                      </div>
+                      <div class="adatok-mezo">
+                        <label class="adatok-label">
+                          Cég név:
+                        </label>
+                        <input type="text" placeholder="Cég név" class="adatok-input ceg-nev-input">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="fizetesi-mod">
+                    <label class="fizetesi-mod-label">
+                      *Fizetési mód:
+                    </label>
+                    <div class="fizetesi-mod-kontener">
+                      <select class="fizetesi-mod-select">
+                        <option value="bankkartyas">Bankkártyás</option>
+                        <option value="keszpenzes">Készpénzes</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                style="width: 700px; height: 530px; padding: 50px 25px 0 25px; padding-bottom: 40px; background: black; box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset; border-radius: 20px; overflow: hidden; border: 2px #13669C solid; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 30px; display: inline-flex">
+                <div class="adatok-fejlec">
+                  <div class="adatok-cim">
+                    Személyes adatok
+                  </div>
+                </div>
+                <div
+                  style="height: 300px; flex-direction: column; justify-content: center; align-items: center; gap: 30px; display: flex">
+                  <div style="justify-content: center; align-items: center; gap: 20px; display: inline-flex">
+                    <div
+                      style="flex-direction: column; justify-content: center; align-items: center; gap: 30px; display: inline-flex">
+                      <div
+                        style="flex-direction: column; justify-content: center; align-items: flex-start; display: flex">
+                        <label
+                          style="padding-left: 25px; justify-content: center; align-items: center; gap: 10px; display: inline-flex;text-align: center; color: #F3F5F5; font-size: 25px; font-family: Graphie; font-weight: 400; word-wrap: break-word">
+                          *Rendszám:
+                        </label>
+                        <input type="text" placeholder="Rendszám"
+                          style="width: 315px; height: 40px; padding-top: 10px; padding-bottom: 10px; padding-left: 25px; background: black; box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset; border-top-left-radius: 20px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; overflow: hidden; border: 1px #13669C solid; justify-content: flex-start; align-items: center; gap: 10px; display: inline-flex">
+                        </input>
+                      </div>
+                      <div
+                        style="flex-direction: column; justify-content: center; align-items: flex-start; display: flex">
+                        <label
+                          style="padding-left: 25px; justify-content: center; align-items: center; gap: 10px; display: inline-flex;text-align: center; color: #F3F5F5; font-size: 25px; font-family: Graphie; font-weight: 400; word-wrap: break-word">
+                          *Típus:
+                        </label>
+                        <input type="text" placeholder="Típus"
+                          style="width: 315px; height: 40px; padding-top: 10px; padding-bottom: 10px; padding-left: 25px; background: black; box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset; border-top-left-radius: 20px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; overflow: hidden; border: 1px #13669C solid; justify-content: flex-start; align-items: center; gap: 10px; display: inline-flex">
+                        </input>
+                      </div>
+                    </div>
+                    <div
+                      style="flex-direction: column; justify-content: center; align-items: flex-start; gap: 30px; display: inline-flex">
+                      <div
+                        style="flex-direction: column; justify-content: center; align-items: flex-start; display: flex">
+                        <label
+                          style="padding-left: 25px; justify-content: center; align-items: center; gap: 10px; display: inline-flex;text-align: center; color: #F3F5F5; font-size: 25px; font-family: Graphie; font-weight: 400; word-wrap: break-word">
+                          *Márka:
+                        </label>
+                        <input type="text" placeholder="Márka"
+                          style="width: 315px; height: 40px; padding-top: 10px; padding-bottom: 10px; padding-left: 25px; background: black; box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 20px; border-bottom-left-radius: 5px; overflow: hidden; border: 1px #13669C solid; justify-content: flex-start; align-items: center; gap: 10px; display: inline-flex">
+                        </input>
+                      </div>
+                      <div
+                        style="flex-direction: column; justify-content: center; align-items: flex-start; display: flex">
+                        <label
+                          style="padding-left: 25px; justify-content: center; align-items: center; gap: 10px; display: inline-flex;text-align: center; color: #F3F5F5; font-size: 25px; font-family: Graphie; font-weight: 400; word-wrap: break-word">
+                          *Parkoló:
+                        </label>
+                        <input type="text" placeholder="Parkoló"
+                          style="width: 315px; height: 40px; padding-top: 10px; padding-bottom: 10px; padding-left: 25px; background: black; box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 20px; border-bottom-left-radius: 5px; overflow: hidden; border: 1px #13669C solid; justify-content: flex-start; align-items: center; gap: 10px; display: inline-flex">
+                        </input>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    style="height: 80px; flex-direction: column; justify-content: center; align-items: flex-start; display: flex">
+                    <label
+                      style="padding-left: 25px; justify-content: center; align-items: center; gap: 10px; display: inline-flex; text-align: center; color: #F3F5F5; font-size: 25px; font-family: Graphie; font-weight: 400; word-wrap: break-word">
+                      *Autó méret:
+                    </label>
+                    <div
+                      style="width: 315px; height: 40px; padding: 10px; background: black; box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset; border-top-left-radius: 20px; border-top-right-radius: 20px; overflow: hidden; border: 1px #13669C solid; justify-content: flex-start; align-items: center; gap: 10px; display: inline-flex">
+                      <select
+                        style="width: 100%; height: 100%; background: transparent; color: #F3F5F5; font-size: 25px; font-family: Graphie; font-weight: 350; border: none; outline: none;">
+                        <option value="bankkartyas" style="background: black;">Kis autó</option>
+                        <option value="keszpenzes" style="background: black;">Közepes autó</option>
+                        <option value="keszpenzes" style="background: black;">Nagy autó</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="justify-content: flex-start; align-items: center; gap: 30px; display: inline-flex">
+              <div
+                style="width: 700px; height: 570px; padding: 50px 25px 0 25px; background: black; box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset; border-radius: 20px; overflow: hidden; border: 2px #13669C solid; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 30px; display: inline-flex">
+                <div
+                  style="width: 400px; height: 40px; padding-left: 90px; background: #13669C; border-top-left-radius: 12.50px; border-top-right-radius: 25px; overflow: hidden; flex-direction: column; justify-content: center; align-items: flex-start; gap: 10px; display: flex; margin-bottom: 20px;">
+                  <div
+                    style="text-align: center; color: black; font-size: 30px; font-family: Graphie; font-weight: 700; word-wrap: break-word">
+                    Számlázási adatok</div>
+                </div>
+                <div
+                  style="height: 300px; flex-direction: column; justify-content: center; align-items: center; gap: 30px; display: flex">
+                  <div style="justify-content: center; align-items: center; gap: 20px; display: inline-flex">
+                    <div
+                      style="flex-direction: column; justify-content: center; align-items: center; gap: 30px; display: inline-flex">
+                      <div
+                        style="flex-direction: column; justify-content: center; align-items: flex-start; display: flex">
+                        <label
+                          style="padding-left: 25px; justify-content: center; align-items: center; gap: 10px; display: inline-flex;text-align: center; color: #F3F5F5; font-size: 25px; font-family: Graphie; font-weight: 400; word-wrap: break-word">
+                          *Vezeték név:
+                        </label>
+                        <input type="text" placeholder="Vezeték név"
+                          style="width: 315px; height: 40px; padding-top: 10px; padding-bottom: 10px; padding-left: 25px; background: black; box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset; border-top-left-radius: 20px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; overflow: hidden; border: 1px #13669C solid; justify-content: flex-start; align-items: center; gap: 10px; display: inline-flex">
+                        </input>
+                      </div>
+                      <div
+                        style="flex-direction: column; justify-content: center; align-items: flex-start; display: flex">
+                        <label
+                          style="padding-left: 25px; justify-content: center; align-items: center; gap: 10px; display: inline-flex; text-align: center; color: #F3F5F5; font-size: 25px; font-family: Graphie; font-weight: 400; word-wrap: break-word">
+                          *E-mail cím:
+                        </label>
+                        <input type="text" placeholder="E-mail cím"
+                          style="width: 315px; height: 40px; padding-top: 10px; padding-bottom: 10px; padding-left: 25px; background: black; box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset; border-top-left-radius: 20px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; overflow: hidden; border: 1px #13669C solid; justify-content: flex-start; align-items: center; gap: 10px; display: inline-flex">
+                        </input>
+                      </div>
+                      <div
+                        style="flex-direction: column; justify-content: center; align-items: flex-start; display: flex">
+                        <label
+                          style="padding-left: 25px; justify-content: center; align-items: center; gap: 10px; display: inline-flex; text-align: center; color: #F3F5F5; font-size: 25px; font-family: Graphie; font-weight: 400; word-wrap: break-word">
+                          Cégnév:
+                        </label>
+                        <input type="text" placeholder="Cégnév"
+                          style="width: 315px; height: 40px; padding-top: 10px; padding-bottom: 10px; padding-left: 25px; background: black; box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset; border-top-left-radius: 20px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; overflow: hidden; border: 1px #13669C solid; justify-content: flex-start; align-items: center; gap: 10px; display: inline-flex">
+                        </input>
+                      </div>
+                    </div>
+                    <div
+                      style="flex-direction: column; justify-content: center; align-items: flex-start; gap: 30px; display: inline-flex">
+                      <div
+                        style="flex-direction: column; justify-content: center; align-items: flex-start; display: flex">
+                        <label
+                          style="padding-left: 25px; justify-content: center; align-items: center; gap: 10px; display: inline-flex; text-align: center; color: #F3F5F5; font-size: 25px; font-family: Graphie; font-weight: 400; word-wrap: break-word">
+                          *Kereszt név:
+                        </label>
+                        <input type="text" placeholder="Kereszt név"
+                          style="width: 315px; height: 40px; padding-top: 10px; padding-bottom: 10px; padding-left: 25px; background: black; box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 20px; border-bottom-left-radius: 5px; overflow: hidden; border: 1px #13669C solid; justify-content: flex-start; align-items: center; gap: 10px; display: inline-flex">
+                        </input>
+                      </div>
+                      <div
+                        style="flex-direction: column; justify-content: center; align-items: flex-start; display: flex">
+                        <label
+                          style="padding-left: 25px; justify-content: center; align-items: center; gap: 10px; display: inline-flex; text-align: center; color: #F3F5F5; font-size: 25px; font-family: Graphie; font-weight: 400; word-wrap: break-word">
+                          *Cím:
+                        </label>
+                        <input type="text" placeholder="Cím"
+                          style="width: 315px; height: 40px; padding-top: 10px; padding-bottom: 10px; padding-left: 25px; background: black; box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 20px; border-bottom-left-radius: 5px; overflow: hidden; border: 1px #13669C solid; justify-content: flex-start; align-items: center; gap: 10px; display: inline-flex">
+                        </input>
+                      </div>
+                      <div
+                        style="flex-direction: column; justify-content: center; align-items: flex-start; display: flex">
+                        <label
+                          style="padding-left: 25px; justify-content: center; align-items: center; gap: 10px; display: inline-flex; text-align: center; color: #F3F5F5; font-size: 25px; font-family: Graphie; font-weight: 400; word-wrap: break-word">
+                          Adószám:
+                        </label>
+                        <input type="text" placeholder="Adószám"
+                          style="width: 315px; height: 40px; padding-top: 10px; padding-bottom: 10px; padding-left: 25px; background: black; box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 20px; border-bottom-left-radius: 5px; overflow: hidden; border: 1px #13669C solid; justify-content: flex-start; align-items: center; gap: 10px; display: inline-flex">
+                        </input>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                style="width: 700px; height: 530px; padding: 50px 25px 0 25px; padding-bottom: 40px; background: black; box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset; border-radius: 20px; overflow: hidden; border: 2px #13669C solid; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 30px; display: inline-flex">
+                <div
+                  style="width: 400px; height: 50px; padding-left: 90px; background: #13669C; border-top-left-radius: 12.50px; border-top-right-radius: 25px; overflow: hidden; flex-direction: column; justify-content: center; align-items: flex-start; gap: 10px; display: flex; margin-bottom: 20px;">
+                  <div
+                    style="text-align: center; color: black; font-size: 30px; font-family: Graphie; font-weight: 700; word-wrap: break-word">
+                    Megjegyzés</div>
+                </div>
+                <div
+                  style="width: 700px; padding-right: 25px; justify-content: center; align-items: center; gap: 20px; display: inline-flex">
+                  <div
+                    style="width: 650px; height: 300px; padding-top: 25px; padding-left: 25px; background: black; box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 50px; border-bottom-left-radius: 20px; overflow: hidden; border: 1px #13669C solid; justify-content: flex-start; align-items: flex-start; gap: 10px; display: flex">
+                    <div
+                      style="opacity: 0.50; text-align: center; color: #F3F5F5; font-size: 25px; font-family: Graphie; font-weight: 350; word-wrap: break-word">
+                      Megjegyzés</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          style="align-self: stretch; padding-top: 200px; padding-bottom: 100px; justify-content: center; align-items: center; gap: 10px; display: inline-flex">
+          <button
+            style="padding-left: 80px; padding-right: 80px; padding-top: 20px; padding-bottom: 20px; background: black; box-shadow: 0px 0px 15px 3px rgba(124, 242, 218, 0.50) inset; border-top-left-radius: 20px; border-top-right-radius: 5px; border-bottom-right-radius: 20px; border-bottom-left-radius: 5px; border: 1px #7CF2DA solid; justify-content: center; align-items: center; gap: 10px; display: flex">
+            <div
+              style="width: 240px; height: 60px; text-align: center; color: #F3F5F5; font-size: 55px; font-family: Graphie; font-weight: 600; word-wrap: break-word">
+              Foglalás</div>
+          </button>
+        </div>
+    </div>
+    </form>
+    </div>
+  </body>
+
+</html>
