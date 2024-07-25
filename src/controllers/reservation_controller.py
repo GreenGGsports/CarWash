@@ -52,9 +52,13 @@ def set_date():
         db_session= db_session,
         reservation_date=date
     )
-    from pdb import set_trace
+    from pdb import set_trace 
     set_trace()
-    return {}
+    if not min_date:
+        return jsonify({'message': 'No slot available for reservation at this date.'})
+    return jsonify({'min_hour': min_date.hour, 
+                    'min_minute': min_date.minute
+                    })
 
 @reservation_ctrl.route('/add_billing',methods=['POST'])
 def create_billing():

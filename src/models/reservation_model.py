@@ -108,13 +108,12 @@ class ReservationModel(BaseModel):
     @classmethod
     def is_slot_available(cls, session: Session, slot_id: int, reservation_date: datetime) -> bool:
         # Convert reservation_date to date object to ignore time part
-        reservation_date_only = reservation_date.date()
-        
         # Check if there is any reservation for the same slot on the same day
         existing_reservation = session.query(cls).filter(
             cls.slot_id == slot_id,
-            cls.reservation_date >= datetime.combine(reservation_date_only, datetime.min.time()),
-            cls.reservation_date <= datetime.combine(reservation_date_only, datetime.max.time())
+            #todo use only = date
+            cls.reservation_date >= datetime.combine(reservation_date, datetime.min.time()),
+            cls.reservation_date <= datetime.combine(reservation_date, datetime.max.time())
         ).first()
         
         if existing_reservation:

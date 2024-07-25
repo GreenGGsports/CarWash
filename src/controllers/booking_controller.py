@@ -1,6 +1,6 @@
 from flask import current_app, Blueprint
 from sqlalchemy.orm import Session
-from datetime import datetime
+from datetime import datetime, timedelta, time
 from src.models.slot_model import SlotModel
 from src.models.reservation_model import ReservationModel
 
@@ -46,4 +46,5 @@ def get_earliest_available_slot(db_session: Session, reservation_date: datetime)
     for slot in available_slots:
         if not earliest_slot or slot.start_time <= earliest_slot.start_time:
             earliest_slot = slot
-    return earliest_slot.end_time
+    earliest_date = datetime.combine(reservation_date.date(), time(hour=0, minute=0)) + timedelta(hours=earliest_slot.end_time.hour, minutes=earliest_slot.end_time.minute)
+    return earliest_date

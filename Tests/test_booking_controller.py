@@ -68,11 +68,7 @@ def test_is_slot_available(session):
 def create_hourly_slots(session):
     start_time = datetime.now().replace(hour=8, minute=0, second=0, microsecond=0)
     end_time = start_time.replace(hour=17)
-    current_time = start_time
-    while current_time < end_time:
-        slot_end_time = current_time + timedelta(hours=1)
-        SlotModel.add_slot(session, start_time=current_time, end_time=slot_end_time)
-        current_time = slot_end_time
+    SlotModel.create_default_slots(session = session, start_time=start_time,end_time=end_time, slot_duration_minutes=60)
 
 def test_double_booking_only_available_or_earlier(session):
     # Create hourly slots from 8:00 to 17:00
