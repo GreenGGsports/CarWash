@@ -233,7 +233,10 @@ function listSelectedExtras() {
     });
     return selectedExtras
 }
-let selectedDate; 
+let selectedDate;
+function dateSelected() {
+    return !!selectedDate;
+} 
 document.addEventListener('DOMContentLoaded', function () {
     // Initialize Flatpickr for date selection
     const calendarInput = document.getElementById('calendar-tomorrow');
@@ -266,6 +269,9 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             const result = await response.json();
+            const min_date = new Date(result['min_date'])
+            generateHourlyButtons(min_date)
+            console.log(min_date)
             console.log('Server response:', result);
         } catch (error) {
             console.error('Hiba történt az adatküldés során:', error);
@@ -275,28 +281,59 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
-async function get_appointments(){
-    try {
-        const response = await fetch('/booking/get_firts_available');
+function generateHourlyButtons(date) {
+    const buttonContainer = document.querySelector('.IdopontLine');
+    buttonContainer.innerHTML = ''; // Korábbi gombok törlése
 
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+    // 24 órás ciklus
+    for (let hour = 9; hour <= 17; hour++) {
+        const buttonDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour);
+        const isFree = buttonDate >= now;
+
+        const button = document.createElement('button');
+        button.classList.add('IdopontGomb', `free-${isFree}`);
+        button.innerText = `${hour}:00`;
+        button.dataset.free = isFree;
+        button.dataset.date = buttonDate.toISOString();
+
+        // Kattintási esemény
+        button.addEventListener('click', function() {
+            event.preventDefault();
+            selectedDate = buttonDate.toLocaleString()
+            console.log(`Kiválasztott időpont: ${buttonDate.toLocaleString()}`);
+            select_appointment(selectedDate)
+        });
+
+        buttonContainer.appendChild(button);
+        async function select_appointment(selectedDate) {
+            try {
+                if (button.dataset.free){
+                    const response = await fetch('/reservation/select_slot', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ date: selectedDate })
+                    });
+                }
+                if(!button.dataset.free){
+                    console.log('appointment is not available')
+                }
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+        
+                console.log(selectedDate)
+            } catch (error) {
+                console.error('Hiba történt az adatküldés során:', error);
+            }
         }
-        const data = await response.json();
     }
-
- catch (error) {
-    console.error('Hiba történt GET kérés során:', error);
-}
 }
 
-function mock_get_appointments(){
-    return {'min_time': 10};
-}
-
-function dateSelected() {
-    return !!selectedDate;
-}
 function billing_required() {
     // Az űrlap elem lekérése
     var form = document.getElementById('szamlazasForm');

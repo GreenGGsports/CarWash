@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify,current_app,render_template, sessi
 from src.models.reservation_model import ReservationModel
 from  datetime import datetime
 from flask_login import current_user
+from src.controllers.booking_controller import get_slot_id
 from src.models.billing_model import BillingModel
 from src.models.customer_model import CustomerModel
 from src.controllers.booking_controller import get_earliest_available_slot
@@ -9,7 +10,7 @@ reservation_ctrl = Blueprint('reservation_ctrl', __name__, url_prefix='/reservat
 
 @reservation_ctrl.route('/')
 def show_reservation_form():
-    return render_template('reservation.html')
+    return render_template('Foglalasi_rendszer.html')
 
 @reservation_ctrl.route('/add', methods=['POST'])
 def create_reservation():
@@ -52,13 +53,34 @@ def set_date():
         db_session= db_session,
         reservation_date=date
     )
-    from pdb import set_trace 
-    set_trace()
     if not min_date:
         return jsonify({'message': 'No slot available for reservation at this date.'})
-    return jsonify({'min_hour': min_date.hour, 
-                    'min_minute': min_date.minute
-                    })
+    return jsonify({'min_date': min_date})
+
+@reservation_ctrl.route('/select_slot', methods=['POST'])
+def select_slot():
+    data = request.json
+    reservation_date = data.get('date')
+    if not reservation_date:
+        return jsonify({'error': 'Date not provided'}), 400
+
+    db_session = current_app.session_factory.get_session() 
+    try:
+        reservation_datetime = datetime.strptime(reservation_date, '%Y. %m. %d. %H:%M:%S')
+        slot_id = get_slot_id(
+            db_session= db_session,
+            reservation_date=reservation_datetime
+        )
+        session['slot_id'] = slot_id
+        return jsonify({'message': 'Slot reserved successfully', 'reservation_date': reservation_datetime.isoformat()}), 200
+
+    except ValueError:
+        # Handle the case where the date format is incorrect
+        return jsonify({'error': 'Invalid date format. Expected format is YYYY. MM. DD. HH:MM:SS'}), 400
+
+    except Exception as e:
+        # Handle unexpected errors
+        return jsonify({'error': str(e)}), 500
 
 @reservation_ctrl.route('/add_billing',methods=['POST'])
 def create_billing():
@@ -104,10 +126,13 @@ def get_session_data():
     slot_id = session.get('slot_id')
     service_id = session.get('service_id')
     extra_ids = session.get('extra_ids')
+
     #not implemented
     carwash_id = session.get('carwash_id')
     billing_id = session.get('billing_id') 
     researvation_date = session.get('reservation_date')
+    from pdb import set_trace
+    set_trace()
     return slot_id, service_id, extra_ids, carwash_id, billing_id, researvation_date 
 
 

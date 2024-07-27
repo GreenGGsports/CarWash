@@ -3,6 +3,16 @@ input.error, select.error, textarea.error {
     border: 2px solid red; /* Piros szegély */
     background-color: #fdd; /* Világos piros háttér */
 }
+/* Stílus, ha a gomb szabad (isFree = true) */
+.IdopontGomb.free-true {
+    background-color: green;
+  }
+  
+  /* Stílus, ha a gomb nem szabad (isFree = false) */
+  .IdopontGomb.free-false {
+    background-color: gray;
+    cursor: not-allowed;
+  }
 
 #leiras {
     color: white;
