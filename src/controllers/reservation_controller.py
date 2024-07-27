@@ -10,7 +10,7 @@ reservation_ctrl = Blueprint('reservation_ctrl', __name__, url_prefix='/reservat
 
 @reservation_ctrl.route('/')
 def show_reservation_form():
-    return render_template('Foglalasi_rendszer.html')
+    return render_template('reservation.html')
 
 @reservation_ctrl.route('/add', methods=['POST'])
 def create_reservation():
