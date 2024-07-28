@@ -131,14 +131,11 @@ def test_slot_unavailable(session):
         session=session,
         slot_id=slot_id_1,
         service_id=1,
-        company_id=1,
         customer_id=1,
         carwash_id = 1,
         reservation_date= reservation_time,
         parking_spot=1,
-        car_type='small_car',
-        car_brand='Mazda',
-        license_plate='xxxx',
+        car_id = 1,
     )
 
     assert SlotModel.get_by_id(session, slot_id_1).start_time.hour == 8
@@ -148,14 +145,11 @@ def test_slot_unavailable(session):
         session=session,
         slot_id=slot_id_1,
         service_id=1,
-        company_id=1,
         customer_id=1,
         carwash_id = 1,
         reservation_date= reservation_time,
         parking_spot=1,
-        car_type='small_car',
-        car_brand='Mazda',
-        license_plate='xxxx',
+        car_id = 1,
     )
         
     reservation_time2 = datetime.now().replace(hour=9, minute=0, second=0, microsecond=0) + timedelta(days=1)
@@ -164,16 +158,13 @@ def test_slot_unavailable(session):
         
     reservation_2 = ReservationModel.add_reservation(
         session=session,
-        slot_id=slot_id_2,
+        slot_id=slot_id_1,
         service_id=1,
-        company_id=1,
         customer_id=1,
         carwash_id = 1,
-        reservation_date= reservation_time2,
+        reservation_date= reservation_time,
         parking_spot=1,
-        car_type='small_car',
-        car_brand='Mazda',
-        license_plate='xxxx',
+        car_id = 1,
     )
     assert SlotModel.get_by_id(session, slot_id_1).start_time.hour == 8
     

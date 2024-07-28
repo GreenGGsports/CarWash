@@ -1,4 +1,5 @@
 from src.models.company_model import CompanyModel
+from src.models.car_model import CarModel
 
 def test_add_company(session):
     company_name = "Test Company"
@@ -42,3 +43,12 @@ def test_delete_company(session):
     CompanyModel.delete_by_id(session, created_company.id)
     deleted_company = CompanyModel.get_by_id(session, created_company.id)
     assert deleted_company is None
+
+def test_add_multiple_cars(session):
+    car1 = CarModel.add_car(session,'xyz-000', 'small_car', 'Ferrari' )
+    car2 = CarModel.add_car(session,'zzz-999', 'small_car', 'Lamborghini' )
+    cars = [car1, car2]
+    
+    company = CompanyModel.add_company(session, 'Test Company')
+    company.cars = cars
+    assert len(cars) == len(company.cars)

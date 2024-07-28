@@ -10,6 +10,7 @@ from src.models.company_model import CompanyModel
 from src.models.extra_model import ExtraModel
 from src.models.carwash_model import CarWashModel
 from src.models.customer_model import CustomerModel
+from src.models.billing_model import BillingModel
 
 
 class ServiceModelView(ModelView):
@@ -34,8 +35,8 @@ class ReservationModelView(ModelView):
         'customer.forname',
         'customer.lastname',
         'customer.phone_number',
-        'company.company_name',
         'final_price',
+        'billing.id'
     )
 
     column_labels = {
@@ -44,7 +45,6 @@ class ReservationModelView(ModelView):
         'customer.forname': 'Forename',
         'customer.lastname': 'Lastname',
         'customer.phone_number': 'Phone Number',
-        'company.company_name': 'Company Name',
         'service.service_name': 'Service Name',
          'extras': 'Extras',
         'carwash.carwash_name': 'Carwash Name',
@@ -56,7 +56,6 @@ class ReservationModelView(ModelView):
         ('customer', 'customer.forname'),
         ('customer', 'customer.lastname'),
         ('customer', 'customer.phone_number'),
-        ('company', 'company.company_name'),
         ('service', 'service.service_name'),
         ('carwash', 'carwash.carwash_name'),
         'license_plate',
@@ -68,7 +67,6 @@ class ReservationModelView(ModelView):
         'customer.forname',
         'customer.lastname',
         'customer.phone_number',
-        'company.company_name',
         'service.service_name',
         'carwash.carwash_name',
     )
@@ -126,3 +124,4 @@ def init_admin(app):
     admin.add_view(ModelView(CarWashModel, app.session_factory.get_session()))
     admin.add_view(ModelView(ExtraModel, app.session_factory.get_session()))
     admin.add_view(ModelView(CustomerModel, app.session_factory.get_session()))
+    admin.add_view(ModelView(BillingModel, app.session_factory.get_session()))
