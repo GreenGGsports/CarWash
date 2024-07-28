@@ -282,6 +282,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function generateHourlyButtons(date) {
+    console.log(date)
     const buttonContainer = document.querySelector('.IdopontLine');
     buttonContainer.innerHTML = ''; // Korábbi gombok törlése
 
