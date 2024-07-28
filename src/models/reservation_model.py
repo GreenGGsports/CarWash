@@ -22,13 +22,10 @@ class ReservationModel(BaseModel):
     customer_id = Column(Integer, ForeignKey('Customer.id'), nullable=False)
     carwash_id = Column(Integer, ForeignKey('Carwash.id'), nullable=False)
     
-
     reservation_date = Column(DateTime, nullable=False)
-    #car_data
     parking_spot = Column(Integer)
     
     final_price = Column(Float)
-    license_plate = Column(String,nullable=False)
 
     car = relationship('CarModel', back_populates='reservations')
     slot = relationship("SlotModel")
@@ -42,8 +39,6 @@ class ReservationModel(BaseModel):
     @classmethod
     def calculate_final_price(cls, session: Session, service_id: int, car_id : int,extras: Optional[List[int]]) -> float:
         # Szolgáltatás árának lekérése az autó típusától függően
-        from pdb import set_trace
-        set_trace()
         car = CarModel.get_by_id(session, car_id)
         car_type = car.car_type
 
@@ -84,11 +79,11 @@ class ReservationModel(BaseModel):
         if not cls.is_slot_available(session, slot_id, reservation_date):
             raise Exception("Slot is not available for reservation")
         
-        
-        
+        if extras is None:
+            extras = []
 
         # Végső ár kiszámítása külön függvény használatával
-        final_price = cls.calculate_final_price(session, service_id , extras, car_id)
+        final_price = cls.calculate_final_price(session, service_id , car_id, extras)
         reservation = cls(
             car_id=car_id,
             service_id=service_id,
@@ -99,7 +94,6 @@ class ReservationModel(BaseModel):
             reservation_date=reservation_date,
             final_price=final_price,
             extras=[ExtraModel.get_by_id(session, extra_id) for extra_id in extras],
-            billing_id = billing_id
         )
         
         try:

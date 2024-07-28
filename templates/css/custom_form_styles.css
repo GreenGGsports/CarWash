@@ -1,0 +1,14 @@
+/* Custom CSS to align custom fields with default fields */
+.form-group {
+    margin-bottom: 1rem; /* Ensure consistent spacing */
+  }
+  
+  .form-group label {
+    font-weight: bold;
+  }
+  
+  .form-group .form-control {
+    border-radius: 0.25rem; /* Match default form control styling */
+    border: 1px solid #ccc;
+  }
+  
