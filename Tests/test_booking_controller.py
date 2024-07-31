@@ -176,30 +176,30 @@ def test_slot_unavailable(session, setup_database):
 
 def test_get_earliest_available_slot(session):
     create_hourly_slots(session)
-    reservation_date_1 = datetime.now().replace(hour=8, minute=0, second=0, microsecond=0)
+    car = CarModel.add_car(session= session, license_plate = 'xx', car_type= 'small_car', car_brand = 'mazda')
+    reservation_date_1 = datetime.now().replace(hour=8, minute=0, second=0, microsecond=0) + timedelta(days=1)
 
-    reservation_date_2 = datetime.now().replace(hour=11, minute=0, second=0, microsecond=0)
+    reservation_date_2 = datetime.now().replace(hour=11, minute=0, second=0, microsecond=0) + timedelta(days=1)
     reservation = ReservationModel.add_reservation(
         session=session,
         slot_id=1,
         service_id=1,
-        company_id=1,
         customer_id=1,
         carwash_id=1,
         reservation_date=reservation_date_1,
+        car_id=car.id,
         parking_spot=1,
-        car_type='small_car',
-        car_brand='Mazda',
-        license_plate='ABC-123'
     ) 
     time = get_earliest_available_slot(db_session = session,
                                 reservation_date=reservation_date_2
                                 )
-    end_time  = SlotModel.get_by_id(session, 2).end_time
+    end_time  = SlotModel.get_by_id(session, 2).end_time + timedelta(days=1)
+
     assert time == end_time
 
 def test_no_available_slots(session):
     # Create slots and make all of them reserved
+    car = CarModel.add_car(session= session, license_plate = 'xx', car_type= 'small_car', car_brand = 'mazda')
     create_hourly_slots(session)
     
     # Reserve all slots
@@ -208,14 +208,11 @@ def test_no_available_slots(session):
             session=session,
             slot_id=slot.id,
             service_id=1,
-            company_id=1,
             customer_id=1,
             carwash_id=1,
             reservation_date=slot.start_time,
+            car_id=car.id,
             parking_spot=1,
-            car_type='small_car',
-            car_brand='Mazda',
-            license_plate='AAA-111'
         )
 
     reservation_date = datetime.now().replace(hour=9,minute=0, second=0, microsecond=0) + timedelta(hours=1)

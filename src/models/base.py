@@ -69,8 +69,10 @@ class BaseModel(Base):
                 raise ValueError(f"Column '{column_name}' does not exist in class '{cls.__name__}'")
     
             filter_args = {column_name: value}
-            query = session.query(cls).filter_by(**filter_args).offset(skip).limit(limit).all()
-            return query
+            query_result = session.query(cls).filter_by(**filter_args).offset(skip).limit(limit).all()
+            if not query_result:
+                return None
+            return query_result
         except Exception as e:
             session.rollback()
             raise e

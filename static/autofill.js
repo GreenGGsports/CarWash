@@ -6,8 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(apiUrl, {
                 method: 'GET',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer YOUR_ACCESS_TOKEN' // Optional: if you have authorization
+                    'Content-Type': 'application/json'
                 }
             });
 
@@ -19,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Data:', data);
 
             // Optionally, you can call a function to handle the fetched data
-            handleAutofillData(data);
+            fill_data(data);
         } catch (error) {
             console.error('Error:', error);
         }

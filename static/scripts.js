@@ -447,7 +447,7 @@ document.getElementById('FoglalasButton').addEventListener('click', async functi
     if(checkbox.checked){
         billing_required()
         const formId2 = 'szamlazasForm';
-        const url2 = '/reservation/add_billing'
+        const url2 = '/billing/add_billing'
         const response1 = await postForm(url1, formId1);
         const response2 = await postForm(url2, formId2);
     

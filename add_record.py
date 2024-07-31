@@ -6,6 +6,7 @@ from src.models.reservation_model import ReservationModel
 from src.models.carwash_model import CarWashModel
 from src.models.service_model import ServiceModel
 from src.models.extra_model import ExtraModel
+from src.models.slot_model import SlotModel
 import datetime
 
 db_path = Config.SQLALCHEMY_DATABASE_URI
@@ -44,6 +45,12 @@ def add_extra_test(session):
     for extra_data in extras_data:
         ExtraModel.add_extra(session=session, **extra_data)
         
+def create_hourly_slots(session):
+    start_time = datetime.datetime.now().replace(hour=8, minute=0, second=0, microsecond=0)
+    end_time = start_time.replace(hour=17)
+    SlotModel.create_default_slots(session = session, start_time=start_time,end_time=end_time, slot_duration_minutes=60)
+    session.close()
+        
 def create_test_db(session):
     session = create_session()
     add_carwash_test(session)
@@ -54,6 +61,7 @@ if __name__ == '__main__':
     session = create_session()
     create_database(engine=engine)
     
+    create_hourly_slots(session)
     add_carwash_test(session=session)
     add_service_test(session)
     add_service_test(session)

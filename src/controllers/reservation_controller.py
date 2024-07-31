@@ -23,13 +23,12 @@ def create_reservation():
     customer_id = add_customer(data)
     slot_id, service_id, extra_ids, carwash_id, billing_id, reservation_date = get_session_data()
     try:
-        ReservationModel.add_reservation(
+        reservation = ReservationModel.add_reservation(
             session=db_session,
             slot_id=slot_id,
             service_id=service_id,
             customer_id=customer_id,
             carwash_id=carwash_id,
-            billing_id=billing_id,
             reservation_date=reservation_date,
             parking_spot=parking_spot,
             car_id=car_id
@@ -53,6 +52,8 @@ def set_date():
         db_session= db_session,
         reservation_date=date
     )
+    from pdb import set_trace 
+    set_trace()
     if not min_date:
         return jsonify({'message': 'No slot available for reservation at this date.'})
     return jsonify({'min_date': min_date})
@@ -72,6 +73,7 @@ def select_slot():
             reservation_date=reservation_datetime
         )
         session['slot_id'] = slot_id
+        session['reservation_date'] = reservation_datetime
         return jsonify({'message': 'Slot reserved successfully', 'reservation_date': reservation_datetime.isoformat()}), 200
 
     except ValueError:
@@ -89,7 +91,7 @@ def create_billing():
     data = parse_billing_data(data)
     try:
         billing_data = BillingModel.add_billing_data(
-            db_session, **data
+            session = db_session, **data
             )
         session['billing_id'] = billing_data.id
         return jsonify({'status': 'success'})
@@ -97,8 +99,6 @@ def create_billing():
     except AttributeError as e:
         return jsonify({'status': 'error', 'message': str(e)}), 400
     except Exception as e:
-        from pdb import set_trace
-        set_trace()
         return jsonify({'status': 'error', 'message': 'An unexpected error occurred.'}), 500
     
 def add_customer(data):
@@ -126,25 +126,26 @@ def add_car(car_type, license_plate, car_brand):
     db_session = current_app.session_factory.get_session()
     
     try:
-        car = CarModel.filter_by_column_value(
+        cars = CarModel.filter_by_column_value(
             session=db_session,
             column_name='license_plate',
             value= license_plate
             )
-        if car:
+        if cars:
+            car = cars[0]
             car = CarModel.update_by_id(
                 session =  db_session,
-                id = car.id,
-                kwargs=dict(
-                    license_plate = license_plate,
-                    car_type = car_type,
-                    car_brand = car_brand,
-                    #not implemented
-                    #company_id = company_id 
+                obj_id = car.id,
+                license_plate = license_plate,
+                car_type = car_type,
+                car_brand = car_brand,
+                #not implemented
+                #company_id = company_id 
                 )
-            )
+                
         else:
             car = CarModel.add_car(
+                session= db_session,
                 license_plate=license_plate,
                 car_type=car_type,
                 car_brand=car_brand
@@ -167,8 +168,6 @@ def get_session_data():
     carwash_id = session.get('carwash_id')
     billing_id = session.get('billing_id') 
     researvation_date = session.get('reservation_date')
-    from pdb import set_trace
-    set_trace()
     return slot_id, service_id, extra_ids, carwash_id, billing_id, researvation_date 
 
 

@@ -1,5 +1,5 @@
 from src.models.billing_model import BillingModel
-from flask import Blueprint, current_app, jsonify, request
+from flask import Blueprint, current_app, jsonify, request ,session
 from flask_login import current_user
 
 billing_ctrl = Blueprint('billing_ctrl', __name__, url_prefix='/billing')
@@ -14,35 +14,35 @@ def get_billing_data():
     else:
         return jsonify({})
 
-billing_ctrl.route('/save_billing_data', methods=['POST'])    
-def save():
+billing_ctrl.route('/add_billing', methods=['POST'])    
+def create_billing():
+    from pdb import set_trace 
+    set_trace()
     data = request.json
-    session = current_app.session_factory.get_session()
+    db_session = current_app.session_factory.get_session()
+    data = parse_billing_data(data)
+    from pdb import set_trace
+    try:
+        billing_data = BillingModel.add_billing_data(
+            db_session, **data
+            )
+        session['billing_id'] = billing_data.id
+        return jsonify({'status': 'success'})
     
-    kwargs = parse_response(data)
-    BillingModel.add_billing_data(
-        session=session, 
-        **kwargs
-                                  )
+    except AttributeError as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 400
+    except Exception as e:
+        from pdb import set_trace
+        set_trace()
+        return jsonify({'status': 'error', 'message': 'An unexpected error occurred.'}), 500
     
 
-def parse_response(data):
-    license_plate = data.get('license_plate')
-    name = data.get('name')
-    address = data.get('address')
-    email = data.get('email')
-    company_name = data.get('company_name')
-    tax_ID =  data.get('tax_id')
-    user_id = current_user.id
-    reservation_id = current_user.reservation_id
-    
+def parse_billing_data(data):
     return dict(
-        license_plate = license_plate,
-        name = name,
-        address = address,
-        email = email,
-        company_name = company_name,
-        tax_ID = tax_ID,
-        user_id = user_id,
-        reserervation_id = reservation_id 
+        name = data.get('vezeteknev') + ' ' + data.get('keresztnev'),
+        address = data.get('cim'),
+        email = data.get('email'),
+        company_name = data.get('cegnev'),
+        tax_ID = data.get('adoszam'), 
+        user_id = session.get('user_id')
     )
