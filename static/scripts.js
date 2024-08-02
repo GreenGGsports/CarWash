@@ -1,52 +1,4 @@
-/*
-Login
-*/
-document.getElementById('loginRegisterForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Az alapértelmezett form submit művelet megakadályozása
-    // Felhasználónevet és jelszót lekérjük
-    var username = document.getElementById('Felhasznev').value;
-    var password = document.getElementById('Jelszo').value;
-    // Ellenőrzés, hogy melyik gomb lett megnyomva (Belépés vagy Regisztráció)
-    var action = event.submitter.name;
-    if (action === 'Belepes') {
-        // Belépés gomb megnyomva
-        loginOrRegister('/user/login', username, password);
-    } else if (action === 'Regisztracio') {
-        // Regisztráció gomb megnyomva
-        loginOrRegister('/user/add_user', username, password);
-    }
-});
 
-function loginOrRegister(url, username, password) {
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ user_name: username, password: password }),
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        if (data.status === 'logged_in') {
-            alert('Belépés sikeres!');
-            // Ide írd meg az utasításokat, amiket szeretnél a belépés után végezni
-        } else if (data.status === 'success') {
-            alert('Regisztráció sikeres!');
-            // Ide írd meg az utasításokat, amiket szeretnél a regisztráció után végezni
-        } else {
-            alert('Sikertelen művelet!');
-        }
-    })
-    .catch(error => {
-        console.error('Hiba történt:', error);
-        alert('Hiba történt a kérés során. Kérlek próbáld újra később.');
-    });
-}
 /*
 CARWASH
 */
@@ -113,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
             data.forEach(helyszin => {
                 const clone = document.importNode(template, true);
                 clone.querySelector('.box').dataset.id = helyszin.id;
-                clone.querySelector('.cim').innerHTML = helyszin.location;
+                clone.querySelector('.MosokCim').textContent = helyszin.location;;
                 // only for testing add logo
                 clone.querySelector('.helyszin').src = "https://via.placeholder.com/335x100";
                 container.appendChild(clone);
@@ -181,9 +133,15 @@ async function listExtras() {
         }
 
         const data = await response.json();
-
+        console.log(data);
         kulsoContainer.innerHTML = '';
         belsoContainer.innerHTML = '';
+
+        if (!Array.isArray(data) || data.length === 0) {
+            console.log('No extras found');
+            return; // Exit the function early since there's nothing to display
+        }
+
 
         data.forEach(extra => {
             let container;
@@ -256,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to send selected date to server
     async function sendDateToServer(selectedDate) {
         try {
-            const response = await fetch('/reservation/set_date', {
+            const response = await fetch('/booking/set_date', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -283,51 +241,60 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function generateHourlyButtons(date) {
     console.log(date)
-    const buttonContainer = document.querySelector('.IdopontLine');
+    const buttonContainer = document.querySelector(".GombBox");
     buttonContainer.innerHTML = ''; // Korábbi gombok törlése
 
-    const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    // A bemeneti dátum (például: datetime.datetime(2024, 7, 30, 9, 0)) helyi idő szerint
+    const min_date = new Date(date);
 
     // 24 órás ciklus
     for (let hour = 9; hour <= 17; hour++) {
+        // A gombhoz tartozó dátum létrehozása
         const buttonDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour);
-        const isFree = buttonDate >= now;
+
+        // Korrigált dátum (ha szükséges)
+        const correctedButtonDate = new Date(buttonDate.getTime() - buttonDate.getTimezoneOffset() * 60 * 1000);
+
+        const isFree = correctedButtonDate >= min_date;
 
         const button = document.createElement('button');
         button.classList.add('IdopontGomb', `free-${isFree}`);
         button.innerText = `${hour}:00`;
         button.dataset.free = isFree;
-        button.dataset.date = buttonDate.toISOString();
+
+        // Helyes időzóna beállítása
+        button.dataset.date = correctedButtonDate.toLocaleString(); // Megjeleníti a helyi időt
 
         // Kattintási esemény
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function (event) {
             event.preventDefault();
-            selectedDate = buttonDate.toLocaleString()
-            console.log(`Kiválasztott időpont: ${buttonDate.toLocaleString()}`);
-            select_appointment(selectedDate)
+            selectedDate = correctedButtonDate.toLocaleString();
+            console.log(`Kiválasztott időpont: ${correctedButtonDate.toLocaleString()}`);
+            select_appointment(selectedDate);
         });
 
         buttonContainer.appendChild(button);
+
         async function select_appointment(selectedDate) {
             try {
-                if (button.dataset.free){
-                    const response = await fetch('/reservation/select_slot', {
+                if (button.dataset.free) {
+                    const response = await fetch('/booking/select_slot', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({ date: selectedDate })
                     });
+
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+
+                    console.log(selectedDate)
                 }
-                if(!button.dataset.free){
+                if (!button.dataset.free) {
                     console.log('appointment is not available')
                 }
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-        
-                console.log(selectedDate)
             } catch (error) {
                 console.error('Hiba történt az adatküldés során:', error);
             }
@@ -433,7 +400,7 @@ document.getElementById('FoglalasButton').addEventListener('click', async functi
         throw "error date not selected"
     }
     const response = await fetch('/service/select_extras', {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
           // 'Content-Type': 'application/x-www-form-urlencoded',
@@ -459,6 +426,7 @@ document.getElementById('FoglalasButton').addEventListener('click', async functi
         }
     }
     else if(pay_by_card){
+        console.log('pay by card ')
         const formId2 = 'szamlazasForm';
         const url2 = '/reservation/add_billing'            
         const response1 = await postForm(url1, formId1);

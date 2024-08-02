@@ -8,6 +8,7 @@ from src.controllers.user_controller import user_ctrl, init_login_manager
 from src.controllers.carwash_controller import carwash_ctrl
 from src.controllers.service_controller import service_ctrl
 from src.controllers.billing_controller import billing_ctrl
+from src.controllers.booking_controller import booking_ctrl
 from database import create_database
 from src.controllers.admin import init_admin
 
@@ -29,11 +30,14 @@ def create_app(config_name: str):
     return app
 
 def add_blueprints(app: Flask):
+    app.register_blueprint(billing_ctrl, url_prefix ='/billing')
     app.register_blueprint(reservation_ctrl, url_prefix='/reservation')
     app.register_blueprint(user_ctrl, url_prefix='/user')
     app.register_blueprint(carwash_ctrl, url_prefix='/carwash')
     app.register_blueprint(service_ctrl, url_prefix='/service')
-    app.register_blueprint(billing_ctrl, url_prefix = '/billing')
+    app.register_blueprint(booking_ctrl, url_prefix = '/booking')
+    for rule in app.url_map.iter_rules():
+        print(rule)
     return app 
 
 if __name__ == '__main__':

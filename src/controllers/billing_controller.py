@@ -4,7 +4,7 @@ from flask_login import current_user
 
 billing_ctrl = Blueprint('billing_ctrl', __name__, url_prefix='/billing')
 
-billing_ctrl.route('/get_billing_data', methods=['GET'])    
+@billing_ctrl.route('/get_billing_data', methods=['GET'])    
 def get_billing_data():
     session = current_app.session_factory.get_session()
     if current_user.is_authenticated:
@@ -14,10 +14,8 @@ def get_billing_data():
     else:
         return jsonify({})
 
-billing_ctrl.route('/add_billing', methods=['POST'])    
+@billing_ctrl.route('/add_billing', methods=['POST'])   
 def create_billing():
-    from pdb import set_trace 
-    set_trace()
     data = request.json
     db_session = current_app.session_factory.get_session()
     data = parse_billing_data(data)
@@ -32,8 +30,6 @@ def create_billing():
     except AttributeError as e:
         return jsonify({'status': 'error', 'message': str(e)}), 400
     except Exception as e:
-        from pdb import set_trace
-        set_trace()
         return jsonify({'status': 'error', 'message': 'An unexpected error occurred.'}), 500
     
 
@@ -43,6 +39,5 @@ def parse_billing_data(data):
         address = data.get('cim'),
         email = data.get('email'),
         company_name = data.get('cegnev'),
-        tax_ID = data.get('adoszam'), 
-        user_id = session.get('user_id')
+        tax_ID = data.get('adoszam')
     )

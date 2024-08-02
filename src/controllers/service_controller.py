@@ -45,15 +45,18 @@ def get_extra():
         carwash_id = session['carwash_id']
     extras = ExtraModel.filter_by_column_value(db_session,'carwash_id',carwash_id)
     response_data = []
-    for extra in extras:
-        response_data.append(
-            dict(
-                id = extra.id,
-                name = extra.service_name,
-                type = extra.extra_type
-            )
-        )     
-    return jsonify(response_data)
+    if extras:
+        for extra in extras:
+            response_data.append(
+                dict(
+                    id = extra.id,
+                    name = extra.service_name,
+                    type = extra.extra_type
+                )
+            )     
+    # Always return a JSON array even if it's empty
+    return jsonify(response_data), 200
+
 @service_ctrl.route('/select_extras', methods=['POST'])
 def select_extras():
     data = request.json
