@@ -48,6 +48,8 @@ def create_reservation():
     except AttributeError as e:
         return jsonify({'status': 'error', 'message': str(e)}), 400
     except Exception as e:
+        from pdb import set_trace
+        set_trace()
         return jsonify({'status': 'error', 'message': 'An unexpected error occurred.'}), 500
     
 def add_customer(data):
@@ -73,7 +75,6 @@ def add_customer(data):
     
 def add_car(car_type, license_plate, car_brand):
     db_session = current_app.session_factory.get_session()
-    
     try:
         cars = CarModel.filter_by_column_value(
             session=db_session,
@@ -120,18 +121,22 @@ def get_session_data():
 
 
 def parse_reservation_data(data):
-    if  data.get('auto_tipus') == 'kis_auto':
+    if  data.get("auto_meret") == 'kis_auto':
         car_type = 'small_car'
-    elif data.get('auto_tipus') == 'nagy_auto':
+    elif data.get("auto_meret") == 'nagy_auto':
         car_type = 'large_car'
         
     license_plate = data.get('rendszam')
     parking_spot = data.get('parkolo')
     car_brand = data.get('marka')
     parking_spot = data.get('parking_spot')
+    #not implemented
+    car_model = data.get('model')
     return car_type, license_plate, parking_spot, car_brand
 
 def parse_customer_data(data):
+    from pdb import set_trace
+    set_trace()
     return dict(
         forname = data.get('vezeteknev2'),
         lastname = data.get('keresztnev2'),

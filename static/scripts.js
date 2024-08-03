@@ -240,20 +240,23 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function generateHourlyButtons(date) {
-    console.log(date)
     const buttonContainer = document.querySelector(".GombBox");
     buttonContainer.innerHTML = ''; // Korábbi gombok törlése
 
-    // A bemeneti dátum (például: datetime.datetime(2024, 7, 30, 9, 0)) helyi idő szerint
-    const min_date = new Date(date);
-
+    // A bemeneti dátum (például: datetime.datetime(2024, 7, 30, 9, 0)) UTC idő szerint
+    const min_date = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours()));
+    /// substract 2 hours bc of timezone mindfuck
+    min_date.setHours(min_date.getHours() -4 )
     // 24 órás ciklus
+    console.log('Bemeneti dátum:', date)
+    console.log('Minimális dátum:', min_date)
+
     for (let hour = 9; hour <= 17; hour++) {
         // A gombhoz tartozó dátum létrehozása
-        const buttonDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour);
+        const buttonDate = new Date(min_date.getFullYear(), min_date.getMonth(), min_date.getDate(), hour);
 
         // Korrigált dátum (ha szükséges)
-        const correctedButtonDate = new Date(buttonDate.getTime() - buttonDate.getTimezoneOffset() * 60 * 1000);
+        const correctedButtonDate = new Date(buttonDate.getTime());
 
         const isFree = correctedButtonDate >= min_date;
 
@@ -274,30 +277,25 @@ function generateHourlyButtons(date) {
         });
 
         buttonContainer.appendChild(button);
+    }
 
-        async function select_appointment(selectedDate) {
-            try {
-                if (button.dataset.free) {
-                    const response = await fetch('/booking/select_slot', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ date: selectedDate })
-                    });
+    async function select_appointment(selectedDate) {
+        try {
+            const response = await fetch('/booking/select_slot', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ date: selectedDate })
+            });
 
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-
-                    console.log(selectedDate)
-                }
-                if (!button.dataset.free) {
-                    console.log('appointment is not available')
-                }
-            } catch (error) {
-                console.error('Hiba történt az adatküldés során:', error);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
             }
+
+            console.log('Selected Date Sent:', selectedDate);
+        } catch (error) {
+            console.error('Hiba történt az adatküldés során:', error);
         }
     }
 }
@@ -371,7 +369,7 @@ async function postForm(url, formId) {
                 return response;
             } else {
                 console.error('Hiba a kérés során:', response.statusText)
-                return res;
+                return response;
             }
         } catch (error) {
             console.error('Hiba történt:', error);
@@ -385,6 +383,7 @@ async function postForm(url, formId) {
                 // Ha a mező érvénytelen, hozzáadjuk az 'error' osztályt
                 input.classList.add('error');
                 console.error(`Érvénytelen mező: ${input.name} - ${input.validationMessage}`);
+                console.log(input.classList)
             } else {
                 // Ha a mező érvényes, eltávolítjuk az 'error' osztályt
                 input.classList.remove('error');

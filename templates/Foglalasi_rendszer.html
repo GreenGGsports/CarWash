@@ -209,33 +209,31 @@ HTML
                                         <div class="input-mezo">
                                             <label for="vezeteknev">*Márka</label>
                                             <input type="text" placeholder="Autó márka" class="VezetekNev left-input"
-                                                name="auto_meret" required>
+                                                name="marka" required>
                                         </div>
                                         <div class="input-mezo">
                                             <label for="keresztnev">Parkoló</label>
                                             <input type="text" placeholder="Parkoló" class="KeresztNev right-input"
-                                                name="Parkolo" required>
+                                                name="Parkolo">
                                         </div>
                                     </div>
                                     <div class="input-container">
                                         <div class="input-mezo">
                                             <label for="Típus">Típus</label>
-                                            <input type="email" placeholder="Típus" class="Email left-input"
-                                                name="Típus" id="email">
+                                            <input type="text" placeholder="Típus" class="Email left-input"
+                                                name="model" id="email" required>
                                         </div>
                                         <div class="input-mezo">
                                             <label for="cim">Rendszam</label>
-                                            <input type="text" placeholder="Cím" class="Cim right-input" name="cim"
-                                                id="cim">
+                                            <input type="text" placeholder="Cím" class="Cim right-input", name="rendszam" required>
                                         </div>
                                     </div>
                                     <div class="input-container">
                                         <div class="input-mezo">
                                             <label for="fizetesi_mod" class="AutoMeretLenyilo-label">Autó méret</label>
-                                            <select id="fizetesi_mod" class="AutoMeretLenyilo" name="fizetesi_mod">
-                                                <option value="keszpenz">Kicsi</option>
-                                                <option value="bankkartya">Közepes</option>
-                                                <option value="bankkartya">Nagy</option>
+                                            <select id="fizetesi_mod" class="AutoMeretLenyilo" name="auto_meret">
+                                                <option value='kis_auto'>Kicsi</option>
+                                                <option value="nagy_auto">Nagy</option>
                                             </select>
                                         </div>
                                     </div>
@@ -252,7 +250,7 @@ HTML
                                         <div class="input-mezo">
                                             <label for="cegnev2">Cégnév</label>
                                             <input type="text" placeholder="Cégnév" class="VezetekNev left-input"
-                                                name="cegnev2" required id="vezeteknev">
+                                                name="cegnev2"  id="vezeteknev">
                                         </div>
                                         <div class="input-mezo">
                                             <label for="Telefon">Telefonszám</label>
@@ -264,7 +262,7 @@ HTML
                                         <div class="input-mezo">
                                             <label for="keresztnev2">Keresztnév</label>
                                             <input type="text" placeholder="Keresztnév" class="Email left-input"
-                                                name="vezeteknev2" required>
+                                                name='keresztnev2' required>
                                         </div>
                                         <div class="input-mezo">
                                             <label for="vezeteknev2">Vezetéknév</label>

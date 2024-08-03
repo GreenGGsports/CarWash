@@ -38,8 +38,6 @@ def select_slot():
         )
         session['slot_id'] = slot_id
         session['reservation_date'] = reservation_datetime
-        from pdb import set_trace
-        set_trace()
         return jsonify({'message': 'Slot reserved successfully', 'reservation_date': reservation_datetime.isoformat()}), 200
 
     except ValueError:
@@ -68,14 +66,18 @@ def get_slot_id(db_session: Session, reservation_date: datetime) -> int:
     available_slots = get_available_slots(
         db_session=db_session,
         date= reservation_date
-    )          
+    )   
+    from pdb import set_trace
+    set_trace()       
     # Find the latest slot before the reservation_date
     latest_slot = None
     for slot in available_slots:
         if not latest_slot or slot.start_time >= latest_slot.start_time:
-            if datetime.combine(reservation_date.date(), time(hour=0, minute=0)) + timedelta(hours=slot.end_time.hour, minutes=slot.end_time.minute) < reservation_date:
+            if datetime.combine(reservation_date.date(), time(hour=0, minute=0)) + timedelta(hours=slot.end_time.hour, minutes=slot.end_time.minute) <= reservation_date:
                 latest_slot = slot
      
+    from pdb import set_trace
+    set_trace() 
     if latest_slot:
         return latest_slot.id
     else:

@@ -20,6 +20,7 @@ def create_billing():
     db_session = current_app.session_factory.get_session()
     data = parse_billing_data(data)
     from pdb import set_trace
+    set_trace()
     try:
         billing_data = BillingModel.add_billing_data(
             db_session, **data
