@@ -13,6 +13,7 @@ from flask_admin.contrib.sqla import ModelView
 from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField, IntegerField, FloatField, DateTimeField
 from wtforms_sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
+from src.controllers.company_admin import  MonthlyInvoiceView
 
 class ServiceModelView(ModelView):
     column_labels = {
@@ -179,5 +180,7 @@ def init_admin(app, session_factory):
     admin.add_view(ModelView(CustomerModel, session))
     admin.add_view(ModelView(BillingModel, session))
     admin.add_view(ModelView(CarModel, session))
+    
+    admin.add_view(MonthlyInvoiceView(session= session, name='Monthly Invoices', endpoint='monthly_invoices'))
 
     session.close()
