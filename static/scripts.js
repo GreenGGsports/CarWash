@@ -377,14 +377,14 @@ async function postForm(url, formId) {
             console.error('Hiba történt:', error);
         }
     } else {
-        console.log('Form hiba')
+        console.log('Form hiba');
         // Ha a form nem érvényes, jelentjük a validációs hibákat
         const inputs = form.querySelectorAll('input, select, textarea');
-        console.log(inputs)
         inputs.forEach(input => {
             if (!input.checkValidity()) {
                 // Ha a mező érvénytelen, hozzáadjuk az 'error' osztályt
                 input.classList.add('error');
+                console.error(`Érvénytelen mező: ${input.name} - ${input.validationMessage}`);
             } else {
                 // Ha a mező érvényes, eltávolítjuk az 'error' osztályt
                 input.classList.remove('error');
@@ -408,11 +408,11 @@ document.getElementById('FoglalasButton').addEventListener('click', async functi
         body: JSON.stringify({extra_ids: listSelectedExtras()}) // body data type must match "Content-Type" header
       });
     var checkbox = document.getElementById('ker_szamlat');
-
     const formId1 = "foglalasForm"
     const url1 = '/reservation/add';
     if(checkbox.checked){
         billing_required()
+        console.log('billing requiered')
         const formId2 = 'szamlazasForm';
         const url2 = '/billing/add_billing'
         const response1 = await postForm(url1, formId1);
@@ -440,6 +440,7 @@ document.getElementById('FoglalasButton').addEventListener('click', async functi
             }
         }
     else {
+        console.log('Nincs számla start post')
         const response1 = await postForm(url1, formId1);
         console.log('response : ',response1)
         if (response1.ok) {

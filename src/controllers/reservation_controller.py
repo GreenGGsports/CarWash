@@ -5,12 +5,23 @@ from flask_login import current_user
 from src.models.billing_model import BillingModel
 from src.models.customer_model import CustomerModel
 from src.models.car_model import CarModel
-
+from src.views.reservation_view import ReservationView
 reservation_ctrl = Blueprint('reservation_ctrl', __name__, url_prefix='/reservation')
 
 @reservation_ctrl.route('/')
 def show_reservation_form():
     return render_template('Foglalasi_rendszer.html')
+
+def show_popup():
+    return ReservationView.generate_popup_html(
+        hely = 'BP', 
+        elerhetosegek = '1111' ,
+        rendszam = 'XD', 
+        csomag = 'XD', 
+        extra = 'fugázás', 
+        idopont = 'p8', 
+        vegosszeg = 100
+    )
 
 @reservation_ctrl.route('/add', methods=['POST'])
 def create_reservation():
