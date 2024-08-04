@@ -1,38 +1,61 @@
-<div id="popup" class="popup">
-    <div class="wrapper">
-        <span id="closePopup" class="close">&times;</span>
-        <div class="popup-content">
-            <div class="popup-header">
-                <div class="popup-title">Összegzés</div>
+<div class="wrapper">
+    <span id="closePopup" class="close">&times;</span>
+    <div style="width: 1500px; height: 900px; background: black; box-shadow: 0px 0px 15px 6px #13669C inset; border-radius: 25px; overflow: hidden; border: 1px #13669C solid; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
+        <div style="width:60%; height: 200px; padding-top: 100px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 10px; display: flex">
+            <div style="align-self: stretch; height: 100px; padding-left: 100px; background: #13669C; border-top-left-radius: 5px; border-top-right-radius: 30px; overflow: hidden; justify-content: flex-start; align-items: center; gap: 10px; display: inline-flex">
+                <div style="color: black; font-size: 55px; font-family: Graphie; font-weight: 700; line-height: 40px; letter-spacing: 1.65px; word-wrap: break-word">
+                    Összegzés</div>
             </div>
-            <div class="popup-body">
-                <div class="popup-item">
-                    <div class="popup-info">
-                        <div class="info-text">Hely: {{ hely }}</div>
-                        <div class="info-text">Elérhetőségek: {{ elerhetosegek }}</div>
-                        <div class="info-text">Rendszám: {{ rendszam }}</div>
-                        <div class="info-text">Csomag: {{ csomag }}</div>
-                        <div class="info-text">Extra: {{ extra }}</div>
-                        <div class="info-text">Időpont: {{ idopont }}</div>
+        </div>
+        <div style="align-self: stretch; height: 650px; padding-top: 100px; padding-bottom: 50px; padding-left: 35px; padding-right: 35px; background: black; flex-direction: column; justify-content: flex-start; align-items: center; gap: 30px; display: flex">
+            <div style="align-self: stretch; flex: 1 1 0; justify-content: center; align-items: center; gap: 30px; display: inline-flex">
+                <div style="flex: 1 1 0; align-self: stretch; padding: 40px; background: black; box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset; border-radius: 20px; overflow: hidden; border: 2px #13669C solid; justify-content: center; align-items: center; gap: 30px; display: flex">
+                    <div style="flex: 1 1 0; align-self: stretch; justify-content: center; align-items: center; gap: 40px; display: flex">
+                        <div style="padding-top: 10px; padding-bottom: 10px; flex-direction: column; justify-content: center; align-items: flex-start; gap: 20px; display: inline-flex">
+                            <div style="flex-direction: column; justify-content: center; align-items: flex-start; gap: 20px; display: flex">
+                                <div style="text-align: center; color: white; font-size: 25px; font-family: Graphie; font-weight: 600; word-wrap: break-word">
+                                    {{hely}}</div>
+                                <div style="color: white; font-size: 25px; font-family: Graphie; font-weight: 600; word-wrap: break-word">
+                                    Elérhetőségek: Kakadú Bálnait, +36 20 69 69 669</div>
+                                <div style="text-align: center; color: white; font-size: 25px; font-family: Graphie; font-weight: 600; word-wrap: break-word">
+                                    {{rendszam}}</div>
+                                <div style="text-align: center; color: white; font-size: 25px; font-family: Graphie; font-weight: 600; word-wrap: break-word">
+                                    {{csomag}}</div>
+                                <div style="text-align: center; color: white; font-size: 25px; font-family: Graphie; font-weight: 600; word-wrap: break-word">
+                                    {{extra}}</div>
+                                <div style="text-align: center; color: white; font-size: 25px; font-family: Graphie; font-weight: 600; word-wrap: break-word">
+                                    {{idopont}}</div>
+                            </div>
+                            <div style="width: 600px; height: 100px; background: black; box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset; border-radius: 20px; overflow: hidden; border: 1.50px #7CF2DA solid; flex-direction: column; justify-content: center; align-items: center; gap: 20px; display: flex">
+                                <div style="text-align: center; color: white; font-size: 45px; font-family: Graphie; font-weight: 600; word-wrap: break-word">
+                                    {{vegosszeg}}</div>
+                            </div>
+                        </div>
+                        <div style="width: 1.50px; height: 450px; transform: rotate(180deg); transform-origin: 0 0; background: #13669C; box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset; border: 1.50px #13669C solid">
+                        </div>
+                        <div style="align-self: stretch; padding-top: 10px; padding-bottom: 10px; flex-direction: column; justify-content: flex-start; align-items: center; gap: 40px; display: inline-flex">
+                            <div style="flex-direction: column; justify-content: center; align-items: flex-start; gap: 20px; display: flex">
+                                <div style="color: white; font-size: 23px; font-family: Graphie; font-weight: 600; word-wrap: break-word">
+                                    Kérjük hozza autóját az átadási időpont előtt 2 órával!<br />Az időpontját, csak ezzel a feltétellel tudjuk garantálni.</div>
+                                <div style="width: 600px; color: white; font-size: 23px; font-family: Graphie; font-weight: 600; word-wrap: break-word">
+                                    Amennyiben az extra szennyezett autóknál nem választja ki a megfelelő Extra csomagot a foglaláskor, akkor a költség kétszeresét számoljuk fel!</div>
+                            </div>
+                            <div style="align-self: stretch; justify-content: flex-start; align-items: center; gap: 25px; display: inline-flex">
+                                <div style="width: 50px; height: 50px; background: black; box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset; border-radius: 15px; border: 1px #13669C solid">
+                                </div>
+                                <div style="width: 463px"><span style="color: white; font-size: 25px; font-family: Graphie; font-weight: 350; word-wrap: break-word">
+                                    Elfogadom az </span><span style="color: white; font-size: 25px; font-family: Graphie; font-weight: 350; text-decoration: underline; word-wrap: break-word">
+                                    ÁSZF-et</span><span style="color: white; font-size: 25px; font-family: Graphie; font-weight: 350; word-wrap: break-word">
+                                    , az </span><span style="color: white; font-size: 25px; font-family: Graphie; font-weight: 350; text-decoration: underline; word-wrap: break-word">
+                                    Adatvédelmi szabályzatot</span><span style="color: white; font-size: 25px; font-family: Graphie; font-weight: 350; word-wrap: break-word">
+                                    és fenti feltételeket.</span></div>
+                            </div>
+                            <div style="width: 400px; height: 100px; background: black; box-shadow: 0px 0px 10px 3px rgba(123, 242, 218, 0.50); border-top-left-radius: 20px; border-top-right-radius: 5px; border-bottom-right-radius: 20px; border-bottom-left-radius: 5px; overflow: hidden; border: 1.50px #7CF2DA solid; flex-direction: column; justify-content: center; align-items: center; gap: 20px; display: flex">
+                                <div style="text-align: center; color: white; font-size: 45px; font-family: Graphie; font-weight: 600; word-wrap: break-word">
+                                    Megerősítés</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="popup-price">
-                        <div class="price-text">Végösszeg: {{ vegosszeg }}</div>
-                    </div>
-                </div>
-                <div class="popup-divider"></div>
-                <div class="popup-note">
-                    <div class="note-text">Kérjük hozza autóját az átadási időpont előtt 2 órával! Az időpontját, csak ezzel a feltétellel tudjuk garantálni.</div>
-                    <div class="note-text">Amennyiben az extra szennyezett autóknál nem választja ki a megfelelő Extra csomagot a foglaláskor, akkor a költség kétszeresét számoljuk fel!</div>
-                </div>
-                <div class="popup-agreement">
-                    <div class="checkbox"></div>
-                    <div class="agreement-text">
-                        <span>Elfogadom az </span><span class="underline">ÁSZF-et</span>,
-                        <span class="underline">Adatvédelmi szabályzatot</span> és fenti feltételeket.
-                    </div>
-                </div>
-                <div class="popup-confirm">
-                    <div class="confirm-text">Megerősítés</div>
                 </div>
             </div>
         </div>

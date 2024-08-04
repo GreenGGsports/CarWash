@@ -2,6 +2,33 @@
 /*
 CARWASH
 */
+document.addEventListener('DOMContentLoaded', function() {
+    const showPopupButton = document.getElementById('show-popup-btn');
+    const popupContainer = document.getElementById('popup-container');
+
+    showPopupButton.addEventListener('click', function() {
+        // AJAX kérés küldése a Flask szerverhez
+        fetch('/get-popup')
+            .then(response => response.json())
+            .then(data => {
+                // A HTML kód beillesztése a popup konténerbe
+                popupContainer.innerHTML = data.html;
+
+                // A popup megjelenítése
+                popupContainer.style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Hiba a popup betöltésekor:', error);
+            });
+    });
+});
+
+// Popup bezárása
+function closePopup() {
+    const popupContainer = document.getElementById('popup-container');
+    popupContainer.style.display = 'none';
+}
+
 
 async function sendSelectionToServer(id, route, callbacks) {
     try {
@@ -32,6 +59,7 @@ async function sendSelectionToServer(id, route, callbacks) {
     }
 }
 
+var CarwashSelected = false
 document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('HelyszinekContainer');
     const template = document.getElementById('helyszinTemplate').content;
@@ -46,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const id = box.dataset.id;
                 console.log(`Carwash selected: ID=${id}`);
                 await sendSelectionToServer(id, '/carwash/select', [listServices, listExtras]);
+                CarwashSelected = true
             }
         });
 
@@ -74,6 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => console.error('Hiba történt GET kérés során:', error));
 });
 
+var ServiceSelected = false;
 async function listServices() {
     const container = document.getElementById('CsomagokContainer'); // Update with actual services container ID
     const template = document.getElementById('CsomagokTemplate').content; // Update with actual service template ID
@@ -107,6 +137,7 @@ async function listServices() {
                 const id = box.dataset.id;
                 console.log(`Service selected: ID=${id}`);
                 await sendSelectionToServer(id, '/service/select');
+                ServiceSelected = true
             }
         });
         }
@@ -239,6 +270,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
+var SlotSelected = false;
 function generateHourlyButtons(date) {
     const buttonContainer = document.querySelector(".GombBox");
     buttonContainer.innerHTML = ''; // Korábbi gombok törlése
@@ -274,6 +306,7 @@ function generateHourlyButtons(date) {
             selectedDate = correctedButtonDate.toLocaleString();
             console.log(`Kiválasztott időpont: ${correctedButtonDate.toLocaleString()}`);
             select_appointment(selectedDate);
+            SlotSelected  = true;
         });
 
         buttonContainer.appendChild(button);
@@ -392,12 +425,43 @@ async function postForm(url, formId) {
     }
 }
 
-
-document.getElementById('FoglalasButton').addEventListener('click', async function() {
-    if (dateSelected() == false){
-        console.log("date")
-        throw "error date not selected"
+function check_reservation() {
+    if (!CarwashSelected)
+        {
+            carwashElement = document.getElementById("HelyszinekContainer")
+            if (carwashElement) {
+                carwashElement.classList.add("error");
+                
+            }
+        return false
+        }
+    if (!ServiceSelected) {
+        serviceElement = document.getElementById("CsomagokContainer")
+            if (serviceElement) {
+                serviceElement.classList.add("error");
+            }
+        return false
     }
+
+    if (!SlotSelected || dateSelected() == false){
+        console.log('Slot not selected')
+        console.log(SlotSelected)
+        console.log(dateSelected())
+        slotElement = document.getElementById("IdopontContainer")
+        if (slotElement) {
+            slotElement.classList.add("error")
+        }
+        return false
+    }
+
+    else {
+        return true
+    }
+
+}
+document.getElementById('FoglalasButton').addEventListener('click', async function() {
+    if (!check_reservation()){ return; }
+
     const response = await fetch('/service/select_extras', {
         method: 'POST',
         headers: {
@@ -447,9 +511,44 @@ document.getElementById('FoglalasButton').addEventListener('click', async functi
         } 
 
     }
-    console.log(listSelectedExtras())
 // parses JSON response into native JavaScript objects
-    });
-async function finalize(){
-    console.log('finalize')
+ });
+
+ async function finalize() {
+    console.log('finalize');
+    try {
+        // AJAX kérés küldése a Flask szerverhez a popup tartalmának lekéréséhez
+        const response = await fetch('/reservation/popup');
+        console.log(response);
+        
+        if (response.ok) {
+            const data = await response.json();
+            const popupContainer = document.getElementById('popup');
+            console.log('response', data);
+            
+            // A HTML kód beillesztése a popup konténerbe
+            popupContainer.innerHTML = data.html;
+
+            // A popup megjelenítése
+            popupContainer.style.display = 'block';
+
+            // Popup bezárása eseménykezelő beállítása
+            const closeButton = document.getElementById('closePopup');
+            if (closeButton) {
+                closeButton.addEventListener('click', closePopup);
+            }
+        } else {
+            console.error('Hiba a popup tartalom lekérésekor:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Hiba történt:', error);
+    }
+}
+
+// Popup bezárása
+function closePopup() {
+    const popupContainer = document.getElementById('popup');
+    if (popupContainer) {
+        popupContainer.style.display = 'none';
+    }
 }

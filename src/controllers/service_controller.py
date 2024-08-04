@@ -28,13 +28,18 @@ def get_service():
 
 @service_ctrl.route('/select', methods=['POST'])
 def select_service():
+    db_session = current_app.session_factory.get_session()
     data = request.json
     service_id = int(data.get('id'))
     if not service_id:
         return jsonify({'message': 'Hiányzó azonosító!'}), 400
-    session['service_id'] = service_id
-    return jsonify({'message': 'Csomag kiválasztva!', 'id': service_id}), 200
-
+    try:
+        service = ServiceModel.get_by_id(session=db_session,obj_id=service_id)
+        session['service_id'] = service.id
+        session['service_name'] = service.service_name
+        return jsonify({'message': 'Csomag kiválasztva!', 'id': service_id}), 200
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': f'No service found for id {service.id} {e}'})
 
 @service_ctrl.route('/list_extra', methods=['GET'])
 def get_extra():

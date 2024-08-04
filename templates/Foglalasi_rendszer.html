@@ -110,15 +110,15 @@ HTML
         </div>
         <h2 class="alcim">Válassz időpntot</h2>
         <form style="padding: 25px;">
-            <div class="IdopontContainer">
-                <div class="IdopontBox">
+            <div class="IdopontContainer", id="IdopontContainer">
+                <div class="IdopontBox" >
                     <div class="group">
                         <input type="text" id="calendar-tomorrow" , required>
                         <span class="bar"></span>
                     </div>
                     <div class="IdopontLine">
                     </div>
-                    <div class="GombBox">
+                    <div class="GombBox" id = "GombBox">
                     <template id = "idopontok">
                         <button class="IdopontGomb1", id = 'IdopontGomb'>
                             <input type="checkbox" class="checkbox">
@@ -295,6 +295,7 @@ HTML
             <button class="Foglalas" id="FoglalasButton">Foglalás</button>
         </div>
     </div>
+    <div id="popup" class="popup"></div>
     <div class="footer">
         <div class="footer-content">
             <div class="footer-section">

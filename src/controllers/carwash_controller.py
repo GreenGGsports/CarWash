@@ -21,10 +21,12 @@ def get_carwashes():
 
 @carwash_ctrl.route('/select', methods=['POST'])
 def select_carwash():
+    db_session = current_app.session_factory.get_session()
     data = request.json
     carwash_id = int(data.get('id'))
     if not carwash_id:
         return jsonify({'message': 'Hiányzó azonosító!'}), 400
     
-    session['carwash_id'] = carwash_id
+    carwash = CarWashModel.get_by_id(session=db_session, obj_id= carwash_id)
+    session['carwash_id'] = carwash.id
     return jsonify({'message': 'Helyszín kiválasztva!', 'id': carwash_id}), 200

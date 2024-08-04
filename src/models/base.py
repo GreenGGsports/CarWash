@@ -2,6 +2,7 @@ from typing import Type, List, TypeVar, Any, Optional
 from sqlalchemy import Column, Integer
 from sqlalchemy.orm import Session, declarative_base
 from sqlalchemy import inspect
+from sqlalchemy.exc import NoResultFound
 
 Base = declarative_base()
 
@@ -73,6 +74,31 @@ class BaseModel(Base):
             if not query_result:
                 return None
             return query_result
+        except Exception as e:
+            session.rollback()
+            raise e
+        
+    @classmethod
+    def get_value_by_id(cls: Type[T], session: Session, obj_id: int, column_name: str) -> Optional[Any]:
+        try:
+            # Inspect the class to ensure the column exists
+            mapper = inspect(cls)
+            if column_name not in mapper.columns:
+                raise ValueError(f"Column '{column_name}' does not exist in class '{cls.__name__}'")
+            
+            # Fetch the record by ID
+            obj = session.query(cls).filter_by(id=obj_id).one_or_none()
+            if obj is None:
+                return None
+            
+            # Retrieve the value of the specified column
+            column = getattr(obj, column_name, None)
+            if column is None:
+                raise ValueError(f"Column '{column_name}' does not exist in the record.")
+            
+            return column
+        except NoResultFound:
+            return None
         except Exception as e:
             session.rollback()
             raise e

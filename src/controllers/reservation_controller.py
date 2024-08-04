@@ -4,24 +4,73 @@ from  datetime import datetime
 from flask_login import current_user
 from src.models.billing_model import BillingModel
 from src.models.customer_model import CustomerModel
-from src.models.car_model import CarModel
+from src.models.service_model import ServiceModel
+from src.models.carwash_model import CarWashModel
+from src.models.extra_model import ExtraModel
+from src.models.car_model import CarModel, CarTypeEnum
 from src.views.reservation_view import ReservationView
+from jinja2 import Template
 reservation_ctrl = Blueprint('reservation_ctrl', __name__, url_prefix='/reservation')
 
 @reservation_ctrl.route('/')
 def show_reservation_form():
     return render_template('Foglalasi_rendszer.html')
 
-def show_popup():
-    return ReservationView.generate_popup_html(
-        hely = 'BP', 
-        elerhetosegek = '1111' ,
-        rendszam = 'XD', 
-        csomag = 'XD', 
-        extra = 'fugázás', 
-        idopont = 'p8', 
-        vegosszeg = 100
+def get_popup_data():
+    slot_id, service_id, extra_ids, carwash_id, researvation_date = get_session_data()
+    db_session = current_app.session_factory.get_session()
+    reservation_id = session.get('reservation_id')
+    
+    car_id = session.get('car_id')
+    car = CarModel.get_by_id(session=db_session, obj_id=car_id) 
+    
+    car_size = car.car_type
+    license_plate = car.license_plate
+    location = CarWashModel.get_value_by_id(session=db_session,obj_id = carwash_id, column_name='location')
+    service_name = ServiceModel.get_value_by_id(session=db_session, obj_id=service_id, column_name= 'service_name')
+    
+    if car_size == CarTypeEnum.small_car:
+        service_price = ServiceModel.get_value_by_id(session=db_session, obj_id=service_id, column_name= 'price_small')
+    
+    elif car_size == CarTypeEnum.large_car:
+        service_price = ServiceModel.get_value_by_id(session=db_session, obj_id=service_id, column_name= 'price_small')
+        
+    final_price = ReservationModel.get_value_by_id(session=db_session, obj_id=reservation_id, column_name= 'final_price')
+    researvation_date = session.get('reservation_date')
+    
+    extra_price = 0
+    extra_names = ""
+    if extra_ids:
+        extra_price = 0
+        extra_names = []
+        for i in extra_ids:
+            extra = ExtraModel.get_value_by_id(session=db_session,obj_id= extra_ids[0])
+            extra_price += extra.price
+            extra_names.append(extra.extra_name)
+
+    return location , license_plate, researvation_date, service_name, service_price, extra_names, extra_price, final_price
+
+@reservation_ctrl.route('/popup')
+def get_popup():
+    location , license_plate, researvation_date, service_name, service_price, extra_names, extra_price, final_price = get_popup_data()
+    # Load the HTML template
+    with open('templates/popup.html', 'r', encoding='utf-8') as file:
+        html_template = file.read()
+
+    # Create a Jinja2 Template object
+    template = Template(html_template)
+    
+    # Render the template with replacements
+    rendered_html = template.render(
+        hely=f'Helyszín: {location}',
+        rendszam=f'Rendszám:  {license_plate}',
+        csomag=  f'Csomag: {service_name} Ár: {service_price}',
+        extra= f' Extrák : {extra_names}',
+        idopont= f'Átvétel: {researvation_date}',
+        vegosszeg= f'Teljes Ár: {final_price}',
     )
+        
+    return jsonify({'html': rendered_html})
 
 @reservation_ctrl.route('/add', methods=['POST'])
 def create_reservation():
@@ -44,6 +93,7 @@ def create_reservation():
             car_id=car_id, 
             extras= extra_ids,
         )
+        session['reservation_id'] = reservation.id
         return jsonify({'status': 'success'})
     except AttributeError as e:
         return jsonify({'status': 'error', 'message': str(e)}), 400
@@ -102,6 +152,7 @@ def add_car(car_type, license_plate, car_brand):
                 #not implemented
                 #company_id = company_id 
             )
+        session['car_id'] = car.id
         return car.id
     except Exception as e:
         db_session.rollback()

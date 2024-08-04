@@ -2329,3 +2329,41 @@ button.flatpickr-day:focus {
     }
 }
 
+
+#popup-container {
+    display: none; /* Kezdetben rejtve van */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: 20px;
+}
+
+.popup {
+    padding: 20px;
+    text-align: left;
+}
+
+.popup h2 {
+    margin-top: 0;
+}
+
+.popup button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.popup button:hover {
+    background-color: #0056b3;
+}
