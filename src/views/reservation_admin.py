@@ -147,6 +147,8 @@ class ReservationAdminView(ModelView):
                 if form.extras.data:
                     model.extras = [session.merge(ExtraModel(id=extra.id)) for extra in form.extras.data]
 
+
+
                 # Handle new customer
                 if form.new_customer_forname.data and form.new_customer_lastname.data and form.new_customer_phone_number.data:
                     customer = session.query(CustomerModel).filter_by(
@@ -183,7 +185,10 @@ class ReservationAdminView(ModelView):
                     model.car_id = car.id
                     model.car = car
                 
-                model.final_price = ReservationModel.calculate_final_price(session, service_id=model.service.id,car_id= model.car.id, extras=model.extras)
+                model.final_price = ReservationModel.calculate_final_price(session, 
+                                                                           service_id=model.service.id,
+                                                                           car_id= model.car.id, 
+                                                                           extras=[extra.id for extra in model.extras])
 
                 # Flush changes manually
                 session.flush()
