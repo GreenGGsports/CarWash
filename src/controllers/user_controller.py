@@ -23,9 +23,18 @@ def init_login_manager(app):
 
     @login_manager.user_loader
     def load_user(user_id):
-        if user_id:
-            return User(user_id)
-        return User()
+        if user_id is None:
+            return None
+        
+        try:
+            user_data = UserModel.get_by_id(user_id)
+            if user_data:
+                return User(user_id=user_id)
+            else:
+                return None
+        except Exception as e:
+            current_app.logger.error(f"Error loading user {user_id}: {e}")
+            return None
     
 @user_ctrl.route('/login', methods=['POST'])
 def login():
@@ -34,19 +43,32 @@ def login():
     user_name = data.get('user_name')
     password = data.get('password')
     user = UserModel.login(session=db_session, user_name=user_name, password=password)
-    if user:
-        user_obj = User(user.id)
-        login_user(user_obj, remember=False)
-        session['user_id'] = user.id
-        return jsonify({'status': 'logged_in'})
-    return jsonify({'status': 'failed'})
+    try:
+        user = UserModel.login(session=db_session, user_name=user_name, password=password)
+        if user:
+            user_obj = User(user.id)
+            login_user(user_obj, remember=False)
+            session['user_id'] = user.id
+            current_app.logger.info(f"User {user_name} logged in successfully.")
+            return jsonify({'status': 'logged_in'}), 200
+        else:
+            current_app.logger.warning(f"Failed login attempt for user {user_name}.")
+            return jsonify({'status': 'failed'}), 401
+    except Exception as e:
+        current_app.logger.error(f"Error during login: {e}")
+        return jsonify({'status': 'error', 'message': 'Internal server error.'}), 500
 
 
 @user_ctrl.route('/logout', methods=['POST'])
 @login_required
 def logout():
-    logout_user()
-    return jsonify({'status': 'logged_out'})
+    try:
+        logout_user()
+        current_app.logger.info(f"User {current_user.id} logged out successfully.")
+        return jsonify({'status': 'logged_out'}), 200
+    except Exception as e:
+        current_app.logger.error(f"Error during logout: {e}")
+        return jsonify({'status': 'error', 'message': 'Internal server error.'}), 500
 
 
 @user_ctrl.route('/add_user', methods=['POST'])
@@ -55,14 +77,16 @@ def add_user():
     data = request.json
     user_name = data.get('user_name')
     password = data.get('password')
-    if not UserModel.check_name_taken(session=db_session, user_name=user_name):
-        UserModel.add_user(session=db_session, user_name=user_name, password=password)
-        return jsonify({'status': 'success'})
-    return jsonify({'status': 'failed'})
+    
+    try:
+        if UserModel.check_name_taken(session=db_session, user_name=user_name):
+            current_app.logger.warning(f"Attempt to add a user with a taken name: {user_name}.")
+            return jsonify({'status': 'failed', 'message': 'Username is already taken.'}), 400
 
-# Test output route
-@user_ctrl.route('/test', methods=['GET'])
-def test_output():
-    if current_user.is_authenticated:
-        return jsonify({'vicc': 'mi az 3 lábá van de nem szék?'})
-    return jsonify({'status': 'not_authenticated'})
+        UserModel.add_user(session=db_session, user_name=user_name, password=password)
+        current_app.logger.info(f"User {user_name} added successfully.")
+        return jsonify({'status': 'success'}), 201
+    except Exception as e:
+        current_app.logger.error(f"Error adding user {user_name}: {e}")
+        return jsonify({'status': 'error', 'message': 'Internal server error.'}), 500
+

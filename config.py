@@ -4,17 +4,25 @@ class Config:
     TESTING = False
     SECRET_KEY = 'your_secret_key'
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(os.getcwd(), 'db', 'car_wash.db')
+    LOG_LEVEL = 'DEBUG'
+    
 class DevelopmentConfig(Config):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(os.getcwd(), 'db', 'car_wash.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    LOG_LEVEL = 'DEBUG'
     
 class TestingConfig(Config):
     TESTING = True
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
+    LOG_LEVEL = 'INFO'
 
 class ProductionConfig(Config):
+    DEBUG = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(os.getcwd(), 'db', 'car_wash.db')
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    LOG_LEVEL = 'WARNING'
     pass
 
 

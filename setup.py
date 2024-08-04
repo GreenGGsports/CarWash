@@ -12,11 +12,22 @@ from src.controllers.booking_controller import booking_ctrl
 from database import create_database
 from src.controllers.admin import init_admin
 
+
+from logger import setup_logging
+from database import check_database_connection
 def create_app(config_name: str):
     app = Flask(__name__)
     
     load_configs(app, config_name)
+    
+    setup_logging(app)
     engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
+
+    # Check engine connection
+    if check_database_connection(engine, app):
+        app.logger.info("Database connection initialized successfully.")
+    else:
+        app.logger.error("Failed to initialize database connection.")
     session_factory = SessionFactory(engine)
     app.session_factory = session_factory
     
@@ -27,6 +38,7 @@ def create_app(config_name: str):
     init_login_manager(app=app)
     # Register blueprints
     app = add_blueprints(app)
+    app.logger.info(f"Application started with configuration: {config_name}")
     return app
 
 def add_blueprints(app: Flask):
@@ -37,7 +49,8 @@ def add_blueprints(app: Flask):
     app.register_blueprint(service_ctrl, url_prefix='/service')
     app.register_blueprint(booking_ctrl, url_prefix = '/booking')
     for rule in app.url_map.iter_rules():
-        print(rule)
+        # Log the URL map rules
+        app.logger.debug(f"Registered URL rule: {rule}")
     return app 
 
 if __name__ == '__main__':

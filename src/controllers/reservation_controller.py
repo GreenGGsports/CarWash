@@ -17,60 +17,66 @@ def show_reservation_form():
     return render_template('Foglalasi_rendszer.html')
 
 def get_popup_data():
-    slot_id, service_id, extra_ids, carwash_id, researvation_date = get_session_data()
-    db_session = current_app.session_factory.get_session()
-    reservation_id = session.get('reservation_id')
-    
-    car_id = session.get('car_id')
-    car = CarModel.get_by_id(session=db_session, obj_id=car_id) 
-    
-    car_size = car.car_type
-    license_plate = car.license_plate
-    location = CarWashModel.get_value_by_id(session=db_session,obj_id = carwash_id, column_name='location')
-    service_name = ServiceModel.get_value_by_id(session=db_session, obj_id=service_id, column_name= 'service_name')
-    
-    if car_size == CarTypeEnum.small_car:
-        service_price = ServiceModel.get_value_by_id(session=db_session, obj_id=service_id, column_name= 'price_small')
-    
-    elif car_size == CarTypeEnum.large_car:
-        service_price = ServiceModel.get_value_by_id(session=db_session, obj_id=service_id, column_name= 'price_small')
+    try:
+        slot_id, service_id, extra_ids, carwash_id, researvation_date = get_session_data()
+        db_session = current_app.session_factory.get_session()
+        reservation_id = session.get('reservation_id')
         
-    final_price = ReservationModel.get_value_by_id(session=db_session, obj_id=reservation_id, column_name= 'final_price')
-    researvation_date = session.get('reservation_date')
-    
-    extra_price = 0
-    extra_names = ""
-    if extra_ids:
+        car_id = session.get('car_id')
+        car = CarModel.get_by_id(session=db_session, obj_id=car_id) 
+        
+        car_size = car.car_type
+        license_plate = car.license_plate
+        location = CarWashModel.get_value_by_id(session=db_session,obj_id = carwash_id, column_name='location')
+        service_name = ServiceModel.get_value_by_id(session=db_session, obj_id=service_id, column_name= 'service_name')
+        
+        if car_size == CarTypeEnum.small_car:
+            service_price = ServiceModel.get_value_by_id(session=db_session, obj_id=service_id, column_name= 'price_small')
+        
+        elif car_size == CarTypeEnum.large_car:
+            service_price = ServiceModel.get_value_by_id(session=db_session, obj_id=service_id, column_name= 'price_small')
+            
+        final_price = ReservationModel.get_value_by_id(session=db_session, obj_id=reservation_id, column_name= 'final_price')
+        researvation_date = session.get('reservation_date')
+        
         extra_price = 0
-        extra_names = []
-        for i in extra_ids:
-            extra = ExtraModel.get_value_by_id(session=db_session,obj_id= extra_ids[0])
-            extra_price += extra.price
-            extra_names.append(extra.extra_name)
-
+        extra_names = ""
+        if extra_ids:
+            extra_price = 0
+            extra_names = []
+            for i in extra_ids:
+                extra = ExtraModel.get_value_by_id(session=db_session,obj_id= extra_ids[0])
+                extra_price += extra.price
+                extra_names.append(extra.extra_name)
+    except Exception as e:
+        current_app.logger.error(f"Error occurred while generating data for popup HTML: {e}")
     return location , license_plate, researvation_date, service_name, service_price, extra_names, extra_price, final_price
 
 @reservation_ctrl.route('/popup')
 def get_popup():
-    location , license_plate, researvation_date, service_name, service_price, extra_names, extra_price, final_price = get_popup_data()
-    # Load the HTML template
-    with open('templates/popup.html', 'r', encoding='utf-8') as file:
-        html_template = file.read()
+    try:
+        location , license_plate, researvation_date, service_name, service_price, extra_names, extra_price, final_price = get_popup_data()
+        # Load the HTML template
+        with open('templates/popup.html', 'r', encoding='utf-8') as file:
+            html_template = file.read()
 
-    # Create a Jinja2 Template object
-    template = Template(html_template)
-    
-    # Render the template with replacements
-    rendered_html = template.render(
-        hely=f'Helyszín: {location}',
-        rendszam=f'Rendszám:  {license_plate}',
-        csomag=  f'Csomag: {service_name} Ár: {service_price}',
-        extra= f' Extrák : {extra_names}',
-        idopont= f'Átvétel: {researvation_date}',
-        vegosszeg= f'Teljes Ár: {final_price}',
-    )
+        # Create a Jinja2 Template object
+        template = Template(html_template)
         
-    return jsonify({'html': rendered_html})
+        # Render the template with replacements
+        rendered_html = template.render(
+            hely=f'Helyszín: {location}',
+            rendszam=f'Rendszám:  {license_plate}',
+            csomag=  f'Csomag: {service_name} Ár: {service_price}',
+            extra= f' Extrák : {extra_names}',
+            idopont= f'Átvétel: {researvation_date}',
+            vegosszeg= f'Teljes Ár: {final_price}',
+        )
+            
+        return jsonify({'html': rendered_html})
+    except Exception as e:
+        current_app.logger.error(f"Error occurred while generating popup HTML: {e}")
+        return jsonify({'error': 'An unexpected error occurred.'}), 500
 
 @reservation_ctrl.route('/add', methods=['POST'])
 def create_reservation():
@@ -94,12 +100,19 @@ def create_reservation():
             extras= extra_ids,
         )
         session['reservation_id'] = reservation.id
-        return jsonify({'status': 'success'})
+        current_app.logger.info(f"Reservation created successfully with ID {reservation.id}.")
+        return jsonify({'status': 'success'}), 200
+    
     except AttributeError as e:
+        current_app.logger.error(f"AttributeError while creating reservation: {e}")
         return jsonify({'status': 'error', 'message': str(e)}), 400
+    
+    except ValueError as e:
+        current_app.logger.error(f"ValueError while creating reservation: {e}")
+        return jsonify({'status': 'error', 'message': 'Invalid data format.'}), 400
+    
     except Exception as e:
-        from pdb import set_trace
-        set_trace()
+        current_app.logger.error(f"Unexpected error while creating reservation: {e}")
         return jsonify({'status': 'error', 'message': 'An unexpected error occurred.'}), 500
     
 def add_customer(data):
@@ -108,55 +121,72 @@ def add_customer(data):
     user_id = session.get('user_id')
 
     try:
-        if user_id and CustomerModel.get_last_by_user_id(session=db_session, user_id=user_id):
-            customer = CustomerModel.update_by_id(session=db_session, **customer_data)
+        if user_id:
+            # Check if the user already has a customer record
+            existing_customer = CustomerModel.get_last_by_user_id(session=db_session, user_id=user_id)
+            if existing_customer:
+                customer = CustomerModel.update_by_id(session=db_session, **customer_data)
+                current_app.logger.info(f"Customer record updated for user_id {user_id}.")
+            else:
+                customer = CustomerModel.add_customer(db_session, **customer_data)
+                current_app.logger.info(f"New customer record added for user_id {user_id}.")
         else:
             customer = CustomerModel.add_customer(db_session, **customer_data)
+            current_app.logger.info("New customer record added with no associated user_id.")
+        
         db_session.commit()
         return customer.id
+    
     except AttributeError as e:
         db_session.rollback()
-        print(f"AttributeError: {e}")
+        current_app.logger.error(f"AttributeError while adding/updating customer: {e}")
         raise
+    
     except Exception as e:
         db_session.rollback()
-        print(f"An error occurred: {e}")
+        current_app.logger.error(f"Unexpected error while adding/updating customer: {e}")
         raise
     
 def add_car(car_type, license_plate, car_brand):
     db_session = current_app.session_factory.get_session()
     try:
+        # Check if the car with the same license plate already exists
         cars = CarModel.filter_by_column_value(
             session=db_session,
             column_name='license_plate',
-            value= license_plate
-            )
+            value=license_plate
+        )
+        
         if cars:
             car = cars[0]
-            car = CarModel.update_by_id(
-                session =  db_session,
-                obj_id = car.id,
-                license_plate = license_plate,
-                car_type = car_type,
-                car_brand = car_brand,
-                #not implemented
-                #company_id = company_id 
-                )
-                
-        else:
-            car = CarModel.add_car(
-                session= db_session,
+            # Update the existing car record
+            CarModel.update_by_id(
+                session=db_session,
+                obj_id=car.id,
                 license_plate=license_plate,
                 car_type=car_type,
                 car_brand=car_brand
-                #not implemented
-                #company_id = company_id 
+                # Add company_id if implemented
             )
+            current_app.logger.info(f"Updated car record with license_plate {license_plate}.")
+        else:
+            # Add a new car record
+            car = CarModel.add_car(
+                session=db_session,
+                license_plate=license_plate,
+                car_type=car_type,
+                car_brand=car_brand
+                # Add company_id if implemented
+            )
+            current_app.logger.info(f"Added new car record with license_plate {license_plate}.")
+        
+        # Store the car ID in the session
         session['car_id'] = car.id
         return car.id
+
     except Exception as e:
         db_session.rollback()
-        print(f"An error occurred: {e}")
+        current_app.logger.error(f"An error occurred while adding/updating car: {e}")
         raise
     
     
@@ -186,8 +216,6 @@ def parse_reservation_data(data):
     return car_type, license_plate, parking_spot, car_brand
 
 def parse_customer_data(data):
-    from pdb import set_trace
-    set_trace()
     return dict(
         forname = data.get('vezeteknev2'),
         lastname = data.get('keresztnev2'),
