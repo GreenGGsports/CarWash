@@ -9,7 +9,7 @@
         <div class="form-group">
             <label for="year">Year:</label>
             <select id="year" name="year" class="form-control">
-                {% for y in range(2020, datetime.now().year + 1) %}
+                {% for y in range(2020, now.year + 1) %}
                 <option value="{{ y }}" {% if y == selected_year %}selected{% endif %}>{{ y }}</option>
                 {% endfor %}
             </select>
@@ -39,6 +39,7 @@
         <thead>
             <tr>
                 <th>Company Name</th>
+                <th>License Plate</th>
                 <th>Customer Forename</th>
                 <th>Customer Lastname</th>
                 <th>Service Name</th>
@@ -50,6 +51,7 @@
             {% for invoice in invoices %}
             <tr>
                 <td>{{ invoice.company_name }}</td>
+                <td>{{ invoice.licence_plate }}</td>
                 <td>{{ invoice.customer_forename }}</td>
                 <td>{{ invoice.customer_lastname }}</td>
                 <td>{{ invoice.service_name }}</td>
@@ -63,5 +65,8 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <!-- Összesített ár megjelenítése -->
+    <h2>Total Amount: {{ total_amount }}</h2>
 </div>
 {% endblock %}
