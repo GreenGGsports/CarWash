@@ -15,6 +15,7 @@ from src.controllers.admin import init_admin
 
 from logger import setup_logging
 from database import check_database_connection
+
 def create_app(config_name: str):
     app = Flask(__name__)
     
