@@ -16,19 +16,29 @@ class MonthlyInvoiceView(BaseView):
     
     @expose('/', methods=['GET', 'POST'])
     def index(self):
-        year = datetime.now().year
-        month = datetime.now().month
-        company_name = request.form.get('company_name', '')
+        now = datetime.now()
+        year = now.year
+        month = now.month
+        company_name = ''
 
         if request.method == 'POST':
             year = int(request.form.get('year', year))
             month = int(request.form.get('month', month))
-            company_name = request.form.get('company_name', company_name)
-        
+            company_name = request.form.get('company_name', '')
+
         invoices = self.get_monthly_invoices(self.session, year, month, company_name)
-        
-        # Átadjuk a `datetime`-ot és az egyéb változókat a sablonhoz
-        return self.render('admin/invoice.html', invoices=invoices, selected_year=year, selected_month=month, selected_company_name=company_name, datetime=datetime, companies=self.get_companies())
+        total_amount = self.get_total_amount(self.session, year, month, company_name)
+
+        companies = self.session.query(CompanyModel.company_name).all()
+
+        return self.render('admin/invoice.html', 
+                           invoices=invoices, 
+                           total_amount=total_amount,
+                           companies=companies, 
+                           selected_year=year, 
+                           selected_month=month, 
+                           selected_company_name=company_name,
+                           now=now)
     
     def get_monthly_invoices(self, session, year, month, company_name):
         start_date = datetime(year, month, 1)
@@ -60,7 +70,8 @@ class MonthlyInvoiceView(BaseView):
         reservations = session.query(ReservationModel).options(
             joinedload(ReservationModel.customer),
             joinedload(ReservationModel.service),
-            joinedload(ReservationModel.extras)
+            joinedload(ReservationModel.extras),
+            joinedload(ReservationModel.car)
         ).filter(
             ReservationModel.id.in_(reservation_ids)
         ).all()
@@ -74,6 +85,7 @@ class MonthlyInvoiceView(BaseView):
             reservation = reservation_dict.get(invoice[1])
             result.append({
                 'company_name': invoice.company_name,
+                'licence_plate':reservation.car.license_plate if reservation.car else None,
                 'customer_forename': reservation.customer.forname if reservation.customer else None,
                 'customer_lastname': reservation.customer.lastname if reservation.customer else None,
                 'service_name': reservation.service.service_name if reservation.service else None,
@@ -82,6 +94,26 @@ class MonthlyInvoiceView(BaseView):
             })
         
         return result
+    def get_total_amount(self, session, year, month, company_name):
+        start_date = datetime(year, month, 1)
+        if month == 12:
+            end_date = datetime(year + 1, 1, 1)
+        else:
+            end_date = datetime(year, month + 1, 1)
+        
+        query = session.query(
+            func.sum(ReservationModel.final_price).label('total_amount')
+        ).join(CarModel).join(CompanyModel).filter(
+            ReservationModel.reservation_date >= start_date,
+            ReservationModel.reservation_date < end_date
+        )
+        
+        if company_name:
+            query = query.filter(CompanyModel.company_name.like(f'%{company_name}%'))
+        
+        total_amount = query.scalar()
+        
+        return total_amount or 0
 
     def get_companies(self):
         # Lekérdezzük az összes céget a legördülő menühöz
