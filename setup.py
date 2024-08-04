@@ -7,6 +7,7 @@ from src.controllers.reservation_controller import reservation_ctrl
 from src.controllers.user_controller import user_ctrl, init_login_manager
 from src.controllers.carwash_controller import carwash_ctrl
 from src.controllers.service_controller import service_ctrl
+from src.controllers.autocomplete import car_ctrl
 from database import create_database
 from src.controllers.admin import init_admin
 
@@ -32,6 +33,7 @@ def add_blueprints(app: Flask):
     app.register_blueprint(user_ctrl, url_prefix='/user')
     app.register_blueprint(carwash_ctrl, url_prefix='/carwash')
     app.register_blueprint(service_ctrl, url_prefix='/service')
+    app.register_blueprint(car_ctrl, url_prefix='/api/car')
     return app 
 
 if __name__ == '__main__':

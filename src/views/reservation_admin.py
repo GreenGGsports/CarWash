@@ -83,6 +83,8 @@ class ReservationForm(FlaskForm):
 
 class ReservationAdminView(ModelView):
     form = ReservationForm
+    create_template = 'admin/reservation_form.html'
+    
     column_list = (
         'reservation_date',
         'car.license_plate',
