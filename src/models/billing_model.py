@@ -12,7 +12,7 @@ class BillingModel(BaseModel):
     address = Column(String,nullable=False)
     email = Column(String,nullable=False)
     date = Column(Date)  
-    reservation_id = Column(Integer, ForeignKey('Reservation.id'))
+    reservation_id = Column(Integer, ForeignKey('Reservation.id'),nullable=False)
     
     company_name = Column(String,nullable= True)
     tax_ID = Column(String,nullable=True)
@@ -20,9 +20,10 @@ class BillingModel(BaseModel):
     
     
     @classmethod
-    def add_billing_data(cls,session: Session,  name: str, address: str, email : str, company_name: str = None, tax_ID: str = None):
+    def add_billing_data(cls,session: Session, reservation_id: int,  name: str, address: str, email : str, company_name: str = None, tax_ID: str = None):
         billing_data = cls(
             name = name,
+            reservation_id = reservation_id,
             address = address,
             email = email,
             company_name = company_name,

@@ -59,9 +59,9 @@ def create_test_db(session):
 # Example usage
 if __name__ == '__main__':
     session = create_session()
-    create_database(engine=engine)
+    #create_database(engine=engine)
     
     create_hourly_slots(session)
-    add_carwash_test(session=session)
-    add_service_test(session)
-    add_service_test(session)
+    #add_carwash_test(session=session)
+    #add_service_test(session)
+    #add_service_test(session)

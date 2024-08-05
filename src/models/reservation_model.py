@@ -35,7 +35,6 @@ class ReservationModel(BaseModel):
     carwash = relationship('CarWashModel')
     billing = relationship('BillingModel', back_populates='reservation')
 
-
     @classmethod
     def calculate_final_price(cls, session: Session, service_id: int, car_id : int,extras: Optional[List[int]]) -> float:
         # Szolgáltatás árának lekérése az autó típusától függően

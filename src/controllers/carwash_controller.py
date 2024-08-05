@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify, current_app, session
 from flask_login import current_user 
 from src.models.carwash_model import CarWashModel
+import re
 
 carwash_ctrl = Blueprint('carwash_ctrl', __name__, url_prefix='/carwash')
 
@@ -9,12 +10,17 @@ def get_carwashes():
     try:
         db_session = current_app.session_factory.get_session()
         carwashes = CarWashModel.get_all(session=db_session)
-        
-        response_data = [{'id': carwash.id, 'location': carwash.location} for carwash in carwashes]
-        
+
+        # Send image_src to the frontend
+        response_data = [{
+            'id': carwash.id,
+            'location': carwash.location,
+            'image_name': carwash.image_name
+        } for carwash in carwashes]
+
         current_app.logger.info("Retrieved carwashes successfully.")
         return jsonify(response_data)
-    
+
     except Exception as e:
         current_app.logger.error(f"Error retrieving carwashes: {e}")
         return jsonify({'error': 'Failed to retrieve carwashes.'}), 500

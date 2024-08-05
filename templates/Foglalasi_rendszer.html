@@ -24,17 +24,17 @@ HTML
         <h2 class="alcim">Automosóink</h2>
         <div class="HelyszinekContainer" id="HelyszinekContainer">
             <!-- Template element that is hidden -->
+            <div class="box" id = "box">
             <template id="helyszinTemplate">
-            <div class="box">
-                <button class="keret">
+                <button class="keret" id = "keret">
                     <img class="helyszin" src="https://via.placeholder.com/335x100" />
                     <div class="IkonKeret">
                         <div class="ikon"></div>
                     </div>
                     <div class="MosokCim">1097 Budapest,<br />Könyves Kálmán krt. 11.</div>
                 </button>
-            </div>
             </template>
+        </div>
         </div>
         <h2 class="alcim">Csomagjaink</h2>
         <div class="CsomagokContainer" id="CsomagokContainer">
@@ -231,7 +231,7 @@ HTML
                                     <div class="input-container">
                                         <div class="input-mezo">
                                             <label for="fizetesi_mod" class="AutoMeretLenyilo-label">Autó méret</label>
-                                            <select id="fizetesi_mod" class="AutoMeretLenyilo" name="auto_meret">
+                                            <select class="AutoMeretLenyilo" name="auto_meret">
                                                 <option value='kis_auto'>Kicsi</option>
                                                 <option value="nagy_auto">Nagy</option>
                                             </select>

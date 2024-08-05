@@ -11,6 +11,7 @@ class CarWashModel(BaseModel):
     id = Column(Integer, primary_key=True)
     carwash_name = Column(String, nullable=False)
     location = Column(String, nullable=False)
+    image_name = Column(String, nullable = True)
     
     
     def __repr__(self):

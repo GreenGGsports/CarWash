@@ -45,9 +45,9 @@ def get_popup_data():
             extra_price = 0
             extra_names = []
             for i in extra_ids:
-                extra = ExtraModel.get_value_by_id(session=db_session,obj_id= extra_ids[0])
+                extra = ExtraModel.get_by_id(session=db_session,obj_id= extra_ids[0])
                 extra_price += extra.price
-                extra_names.append(extra.extra_name)
+                extra_names.append(extra.service_name)
     except Exception as e:
         current_app.logger.error(f"Error occurred while generating data for popup HTML: {e}")
     return location , license_plate, researvation_date, service_name, service_price, extra_names, extra_price, final_price

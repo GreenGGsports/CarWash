@@ -8,6 +8,7 @@ from src.models.reservation_model import ReservationModel
 from src.models.car_model import CarModel
 from src.models.service_model import ServiceModel
 from src.models.extra_model import ExtraModel
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
 class MonthlyInvoiceView(BaseView):
     def __init__(self, session, *args, **kwargs):

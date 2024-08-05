@@ -21,7 +21,8 @@ def create_billing():
     db_session = current_app.session_factory.get_session()
     data = parse_billing_data(data)
     try:
-        billing_data = BillingModel.add_billing_data(db_session, **data)
+        reservation_id = session.get('reservation_id')
+        billing_data = BillingModel.add_billing_data(db_session, reservation_id = reservation_id,**data)
         session['billing_id'] = billing_data.id
         return jsonify({'status': 'success'})
     except AttributeError as e:

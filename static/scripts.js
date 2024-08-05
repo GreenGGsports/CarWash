@@ -2,33 +2,6 @@
 /*
 CARWASH
 */
-document.addEventListener('DOMContentLoaded', function() {
-    const showPopupButton = document.getElementById('show-popup-btn');
-    const popupContainer = document.getElementById('popup-container');
-
-    showPopupButton.addEventListener('click', function() {
-        // AJAX kérés küldése a Flask szerverhez
-        fetch('/get-popup')
-            .then(response => response.json())
-            .then(data => {
-                // A HTML kód beillesztése a popup konténerbe
-                popupContainer.innerHTML = data.html;
-
-                // A popup megjelenítése
-                popupContainer.style.display = 'block';
-            })
-            .catch(error => {
-                console.error('Hiba a popup betöltésekor:', error);
-            });
-    });
-});
-
-// Popup bezárása
-function closePopup() {
-    const popupContainer = document.getElementById('popup-container');
-    popupContainer.style.display = 'none';
-}
-
 
 async function sendSelectionToServer(id, route, callbacks) {
     try {
@@ -59,27 +32,27 @@ async function sendSelectionToServer(id, route, callbacks) {
     }
 }
 
-var CarwashSelected = false
+var CarwashSelected = false;
 document.addEventListener('DOMContentLoaded', () => {
-    const container = document.getElementById('HelyszinekContainer');
+    const boxContainer = document.getElementById('box'); // Fő konténer
     const template = document.getElementById('helyszinTemplate').content;
 
-    // Ellenőrző változó
-    if (!container.eventListenerAdded) {
+    // Ellenőrző változó az eseménykezelő hozzáadásának elkerülésére
+    if (!boxContainer.eventListenerAdded) {
         // Event listener hozzáadása csak egyszer
-        container.addEventListener('click', async (event) => {
+        boxContainer.addEventListener('click', async (event) => {
             event.preventDefault(); // Esemény alapértelmezett működésének megakadályozása
-            const box = event.target.closest('.box');
-            if (box) {
-                const id = box.dataset.id;
+            const button = event.target.closest('.keret'); // Legközelebbi keret keresése
+            if (button) {
+                const id = button.dataset.id;
                 console.log(`Carwash selected: ID=${id}`);
                 await sendSelectionToServer(id, '/carwash/select', [listServices, listExtras]);
-                CarwashSelected = true
+                CarwashSelected = true;
             }
         });
 
         // Zászló beállítása
-        container.eventListenerAdded = true;
+        boxContainer.eventListenerAdded = true;
     }
 
     // GET kérés az összes helyszín lekérdezésére
@@ -92,16 +65,24 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then(data => {
             data.forEach(helyszin => {
-                const clone = document.importNode(template, true);
-                clone.querySelector('.box').dataset.id = helyszin.id;
-                clone.querySelector('.MosokCim').textContent = helyszin.location;;
-                // only for testing add logo
-                clone.querySelector('.helyszin').src = "https://via.placeholder.com/335x100";
-                container.appendChild(clone);
+                const clone = document.importNode(template, true); // Klónozás
+                clone.querySelector('.keret').dataset.id = helyszin.id; // Button ID beállítása
+                clone.querySelector('.MosokCim').textContent = helyszin.location; // Cím beállítása
+
+                // Kép URL létrehozása
+                const imageFolderPath = '/static/images/';
+                const imageUrl = helyszin.image_name ? (imageFolderPath + helyszin.image_name) : "https://via.placeholder.com/335x100";
+
+                // Kép beállítása
+                clone.querySelector('.helyszin').src = imageUrl;
+
+                // Hozzáadás a konténerhez
+                boxContainer.appendChild(clone);
             });
         })
         .catch(error => console.error('Hiba történt GET kérés során:', error));
 });
+
 
 var ServiceSelected = false;
 async function listServices() {
@@ -349,6 +330,7 @@ function billing_required() {
 }
 
 function card_payment() {
+    pay_by_card = true
     var form = document.getElementById('szamlazasForm');
     
     // A form elemeinek lekérése az 'id' attribútum alapján
@@ -362,21 +344,30 @@ function card_payment() {
     });
 }
 
-var pay_by_card = false
-document.getElementById('fizetesi_mod').addEventListener('change', function() {
-    var selectedValue = this.value;
-    if (selectedValue === 'bankkartya') {
-        pay_by_card = true
-        card_payment();
-    }
-    else ( pay_by_card = false)
-});
-
-async function postForm(url, formId) {
-    const form = document.getElementById(formId);
-
+// Validálja az űrlapot és visszaadja a validált eredményt
+function validateForm(form) {
     // Ellenőrizzük, hogy az űrlap érvényes-e
-    if (form.checkValidity()) {
+    if (!form.checkValidity()) {
+        // Ha a form nem érvényes, jelentjük a validációs hibákat
+        const inputs = form.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+            if (!input.checkValidity()) {
+                // Ha a mező érvénytelen, hozzáadjuk az 'error' osztályt
+                input.classList.add('error');
+                console.error(`Érvénytelen mező: ${input.name} - ${input.validationMessage}`);
+            } else {
+                // Ha a mező érvényes, eltávolítjuk az 'error' osztályt
+                input.classList.remove('error');
+            }
+        });
+        return false;
+    }
+    return true;
+}
+
+// POST kérést küld az űrlap adataival
+async function postForm(url, form) {
+    if (validateForm(form)) {
         // Gyűjtjük az összes form adatot
         const formData = new FormData(form);
 
@@ -399,29 +390,18 @@ async function postForm(url, formId) {
             if (response.ok) {
                 const jsonResponse = await response.json();
                 console.log('Sikeres kérés:', jsonResponse);
-                return response;
+                return jsonResponse;
             } else {
-                console.error('Hiba a kérés során:', response.statusText)
-                return response;
+                console.error('Hiba a kérés során:', response.statusText);
+                return null;
             }
         } catch (error) {
             console.error('Hiba történt:', error);
+            return null;
         }
     } else {
         console.log('Form hiba');
-        // Ha a form nem érvényes, jelentjük a validációs hibákat
-        const inputs = form.querySelectorAll('input, select, textarea');
-        inputs.forEach(input => {
-            if (!input.checkValidity()) {
-                // Ha a mező érvénytelen, hozzáadjuk az 'error' osztályt
-                input.classList.add('error');
-                console.error(`Érvénytelen mező: ${input.name} - ${input.validationMessage}`);
-                console.log(input.classList)
-            } else {
-                // Ha a mező érvényes, eltávolítjuk az 'error' osztályt
-                input.classList.remove('error');
-            }
-        });
+        return null;
     }
 }
 
@@ -471,29 +451,36 @@ document.getElementById('FoglalasButton').addEventListener('click', async functi
         body: JSON.stringify({extra_ids: listSelectedExtras()}) // body data type must match "Content-Type" header
       });
     var checkbox = document.getElementById('ker_szamlat');
-    const formId1 = "foglalasForm"
-    const url1 = '/reservation/add';
+    var pay_by_card = document.getElementById("fizetesi_mod").value == "bankkartya"
+
+    const reservationForm = document.getElementById("foglalasForm")
+    const billingForm = document.getElementById('szamlazasForm')
+
+    const reservationUrl = '/reservation/add';
+    const billingUrl = '/billing/add_billing'
     if(checkbox.checked){
         billing_required()
         console.log('billing requiered')
-        const formId2 = 'szamlazasForm';
-        const url2 = '/billing/add_billing'
-        const response1 = await postForm(url1, formId1);
-        const response2 = await postForm(url2, formId2);
-    
-        if (response1.ok && response2.ok) {
-            finalize();
-        } 
-        else {
-            console.error('Egy vagy több kérés nem volt sikeres');
+        is_valid_res = validateForm(reservationForm)
+        is_valid_bill = validateForm(billingForm)
+        if (is_valid_bill && is_valid_res){
+            const response1 = await postForm(reservationUrl, reservationForm);
+            const response2 = await postForm(billingUrl, billingForm);
+            if (response1.ok && response2.ok) {
+                finalize();
+            } 
+            else {
+                console.error('Egy vagy több kérés nem volt sikeres');
+            }
         }
+        else {return}
+
     }
     else if(pay_by_card){
         console.log('pay by card ')
-        const formId2 = 'szamlazasForm';
-        const url2 = '/reservation/add_billing'            
-        const response1 = await postForm(url1, formId1);
-        const response2 = await postForm(url2, formId2);
+        card_payment()          
+        const response1 = await postForm(reservationUrl, reservationForm);
+        const response2 = await postForm(billingUrl, billingForm);
 
         if (response1.ok && response2.ok) {
                 finalize();
@@ -504,7 +491,7 @@ document.getElementById('FoglalasButton').addEventListener('click', async functi
         }
     else {
         console.log('Nincs számla start post')
-        const response1 = await postForm(url1, formId1);
+        const response1 = await postForm(reservationUrl, reservationForm);
         console.log('response : ',response1)
         if (response1.ok) {
             finalize();
@@ -546,9 +533,30 @@ document.getElementById('FoglalasButton').addEventListener('click', async functi
 }
 
 // Popup bezárása
+
 function closePopup() {
     const popupContainer = document.getElementById('popup');
     if (popupContainer) {
         popupContainer.style.display = 'none';
     }
 }
+document.addEventListener('DOMContentLoaded', function() {
+    const showPopupButton = document.getElementById('show-popup-btn');
+    const popupContainer = document.getElementById('popup-container');
+
+    showPopupButton.addEventListener('click', function() {
+        // AJAX kérés küldése a Flask szerverhez
+        fetch('/get-popup')
+            .then(response => response.json())
+            .then(data => {
+                // A HTML kód beillesztése a popup konténerbe
+                popupContainer.innerHTML = data.html;
+
+                // A popup megjelenítése
+                popupContainer.style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Hiba a popup betöltésekor:', error);
+            });
+    });
+});

@@ -25,7 +25,6 @@ class ServiceModelView(ModelView):
 
 
 
-
 def init_admin(app, session_factory):
     admin = Admin(app, name='Admin Panel', template_mode='bootstrap3')
 
