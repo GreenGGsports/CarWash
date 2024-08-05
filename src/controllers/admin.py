@@ -12,6 +12,7 @@ from src.models.extra_model import ExtraModel
 from flask_admin.contrib.sqla import ModelView
 from src.views.company_admin import  MonthlyInvoiceView
 from src.views.reservation_admin import ReservationAdminView
+from src.controllers.admin_index_view import MyAdminIndexView
 
 class ServiceModelView(ModelView):
     column_labels = {
@@ -27,7 +28,7 @@ class ServiceModelView(ModelView):
 
 
 def init_admin(app, session_factory):
-    admin = Admin(app, name='Admin Panel', template_mode='bootstrap3')
+    admin = Admin(app, name='Admin Panel', template_mode='bootstrap3', index_view=MyAdminIndexView())
 
     session = session_factory.get_session()
 
