@@ -5,14 +5,14 @@
 /* Normalization styles */
 @import url('path/to/normalize.css');
 
-/* HibĂˇs mezĹ‘k stĂ­lusai */
+/* Hibás mezők stílusai */
 input.error,
 select.error,
 textarea.error {
     border: 2px solid red;
-    /* Piros szegĂ©ly */
+    /* Piros szegély */
     background-color: #fdd;
-    /* VilĂˇgos piros hĂˇttĂ©r */
+    /* Világos piros háttér */
 }
 
 body {
@@ -43,17 +43,17 @@ button {
     height: 1px;
     background-color: white;
     margin-bottom: 113px;
-    /* IgĂ©ny szerint ĂˇllĂ­thatĂł tĂˇvolsĂˇg a logĂłtĂłl */
+    /* Igény szerint állítható távolság a logótól */
 }
 
 .FoglalasiFelulet {
     width: 100%;
-    /* Vagy egy specifikus szĂ©lessĂ©g, mint pl. 1500px */
+    /* Vagy egy specifikus szélesség, mint pl. 1500px */
     max-width: 1500px;
-    /* MaximĂˇlis szĂ©lessĂ©g korlĂˇtozĂˇsa */
+    /* Maximális szélesség korlátozása */
     margin: 101px auto;
     padding: 20px;
-    /* Adjunk hozzĂˇ padding-et, hogy a belsĹ‘ tartalom ne Ă©rje el a szĂ©leit */
+    /* Adjunk hozzá padding-et, hogy a belső tartalom ne érje el a széleit */
     box-sizing: border-box;
     box-shadow: 0px 0px 15px 1.5px #13669C, 0px 0px 15px 6px #13669C inset;
 }
@@ -63,9 +63,6 @@ button {
     text-align: center;
     margin: 100px auto 103px;
     font-size: 83px;
-    font-family: "graphie", sans-serif;
-    font-weight: 700;
-    font-style: normal;
 }
 
 .alcim {
@@ -77,27 +74,23 @@ button {
     margin-top: 150px;
     border-radius: 0px 5px 25px 0px;
     background: #13669C;
-    font-family: "graphie", sans-serif;
-    font-weight: 700;
-    font-style: normal;
-    margin-left: -20px;
 }
 
 .HelyszinekContainer {
     display: flex;
     flex-wrap: wrap;
-    /* Gyermekelemek tĂ¶bb sorba tĂ¶rnek, ha nem fĂ©rnek el egy sorban */
+    /* Gyermekelemek több sorba törnek, ha nem férnek el egy sorban */
     justify-content: space-evenly;
     gap: 20px;
-    /* TĂˇvolsĂˇg a gombok kĂ¶zĂ¶tt */
+    /* Távolság a gombok között */
 }
 
 .box {
     display: flex;
     flex-wrap: wrap;
-    /* Gyermekelemek tĂ¶bb sorba tĂ¶rnek, ha nem fĂ©rnek el egy sorban */
+    /* Gyermekelemek több sorba törnek, ha nem férnek el egy sorban */
     gap: 30px;
-    /* TĂˇvolsĂˇg a gombok kĂ¶zĂ¶tt */
+    /* Távolság a gombok között */
     justify-content: center;
 }
 
@@ -115,19 +108,14 @@ button {
     flex-direction: column;
     align-items: center;
     overflow: hidden;
-    /* Tartalom tĂşllĂ©pĂ©sĂ©nek elrejtĂ©se */
+    /* Tartalom túllépésének elrejtése */
     position: relative;
-    /* Elemek pozicionĂˇlĂˇsĂˇhoz */
+    /* Elemek pozicionálásához */
     padding-bottom: 50px;
     border-radius: 10px;
     border: 1.5px solid var(--A-kk, #13669C);
     background: #000;
     box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50), 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset;
-}
-
-.fas{
-    color: white;
-    font-size: 80px;
 }
 
 .keret:hover {
@@ -147,9 +135,9 @@ button {
     width: 100%;
     height: 100px;
     object-fit: cover;
-    /* A kĂ©p kitĂ¶ltĂ©se a keret mĂ©retĂ©hez igazĂ­tva */
+    /* A kép kitöltése a keret méretéhez igazítva */
     margin-top: 50px;
-    /* 50px tĂˇvolsĂˇg a keret tetejĂ©tĹ‘l */
+    /* 50px távolság a keret tetejétől */
 }
 
 .MosokCim {
@@ -157,12 +145,11 @@ button {
     height: 60px;
     color: #F3F5F5;
     font-size: 25px;
+    font-family: Inter;
+    font-weight: 600;
     word-wrap: break-word;
     margin-top: auto;
     padding-top: 10px;
-    font-family: "graphie", sans-serif;
-    font-weight: 700;
-    font-style: normal;
 }
 
 .IkonKeret {
@@ -170,11 +157,11 @@ button {
     height: 79px;
     position: absolute;
     top: calc(100px + 50px + 50px);
-    /* 100px (kĂ©p magassĂˇga) + 50px (kĂ©p Ă©s ikon kĂ¶zĂ¶tti tĂˇvolsĂˇg) + 50px (keret tetejĂ©tĹ‘l valĂł tĂˇvolsĂˇg) */
+    /* 100px (kép magassága) + 50px (kép és ikon közötti távolság) + 50px (keret tetejétől való távolság) */
     left: 50%;
-    /* KĂ¶zĂ©pre helyezĂ©s vĂ­zszintesen */
+    /* Középre helyezés vízszintesen */
     transform: translateX(-50%);
-    /* VĂ­zszintesen kĂ¶zĂ©pre igazĂ­tĂˇs */
+    /* Vízszintesen középre igazítás */
 }
 
 .ikon {
@@ -225,9 +212,8 @@ button {
     text-align: center;
     color: #F3F5F5;
     font-size: 33px;
-    font-family: graphie, sans-serif;
-    font-weight: 500;
-    font-style: normal;
+    font-family: Graphie;
+    font-weight: 400;
     word-wrap: break-word;
     margin-bottom: 50px;
     /* Space between the title and the list */
@@ -252,9 +238,8 @@ button {
     text-align: center;
     color: #F3F5F5;
     font-size: 27px;
-    font-family: graphie, sans-serif;
-    font-weight: 400;
-    font-style: normal;
+    font-family: Graphie;
+    font-weight: 350;
     word-wrap: break-word;
 }
 
@@ -306,9 +291,8 @@ button {
 .KulsoExtrak {
     color: black;
     font-size: 30px;
-    font-family: graphie, sans-serif;
-    font-weight: 700;
-    font-style: normal;
+    font-family: Inter;
+    font-weight: 600;
     text-align: center;
 }
 
@@ -321,20 +305,20 @@ button {
 
 .KulsoGomb {
     flex: 1 1 calc(48% - 20px);
-    /* KĂ©t oszlopba rendezĂ©s */
+    /* Két oszlopba rendezés */
     height: 50px;
-    /* A gombok magassĂˇga */
+    /* A gombok magassága */
     background: black;
     box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50), 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
     border: 1.5px #13669C solid;
     color: #F3F5F5;
     text-align: center;
-    font-family: graphie, sans-serif;
-    font-weight: 500;
-    font-style: normal;
+    font-family: Graphie;
     font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
     line-height: 60px;
-    /* A szĂ¶veg vertikĂˇlis kĂ¶zĂ©pre igazĂ­tĂˇsa */
+    /* A szöveg vertikális középre igazítása */
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -368,20 +352,17 @@ button {
     justify-content: center;
     width: 100%;
     height: 100%;
-    font-family: graphie, sans-serif;
-    font-weight: 500;
-    font-style: normal;
 }
 
 
-/* Bal oldal ellenĹ‘rzĂ¶tt Ăˇllapotban */
+/* Bal oldal ellenőrzött állapotban */
 .KulsoGomb:nth-child(odd) .checkbox:checked+.checkbox-label {
     box-shadow: 0px 0px 10px 3px rgba(124, 242, 218, 0.50) inset;
     border: 1.5px rgba(124, 242, 218, 0.90) solid;
     border-radius: 20px 10px 10px 10px;
 }
 
-/* Jobb oldal ellenĹ‘rzĂ¶tt Ăˇllapotban */
+/* Jobb oldal ellenőrzött állapotban */
 .KulsoGomb:nth-child(even) .checkbox:checked+.checkbox-label {
     box-shadow: 0px 0px 10px 3px rgba(124, 242, 218, 0.50) inset;
     border: 1.5px rgba(124, 242, 218, 0.90) solid;
@@ -392,37 +373,36 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* HorizontĂˇlisan kĂ¶zĂ©pre igazĂ­tja a tartalmat */
+    /* Horizontálisan középre igazítja a tartalmat */
     flex-direction: column;
     margin-top: 35px;
     padding: 0 25px;
 }
 
 .Figyelmeztetes {
-    width: 103%;
-    height: 120px;
+    width: 100%;
+    height: 70px;
     background: black;
     box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50), 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset;
     border-radius: 25px;
     border: 1.50px #13669C solid;
     display: flex;
-    /* Flexbox hasznĂˇlata a kĂ¶zĂ©pre igazĂ­tĂˇshoz */
+    /* Flexbox használata a középre igazításhoz */
     align-items: center;
-    /* VertikĂˇlisan kĂ¶zĂ©pre igazĂ­tja a tartalmat */
+    /* Vertikálisan középre igazítja a tartalmat */
     justify-content: center;
-    /* HorizontĂˇlisan kĂ¶zĂ©pre igazĂ­tja a tartalmat */
+    /* Horizontálisan középre igazítja a tartalmat */
     text-align: center;
 }
 
 .Figyelmeztetes p {
     color: #F3F5F5;
     font-size: 23px;
-    font-family: graphie, sans-serif;
-    font-weight: 400;
-    font-style: normal;
+    font-family: Graphie;
+    font-weight: 350;
     word-wrap: break-word;
     margin: 0;
-    /* TĂˇvolĂ­tsd el a margin-t a pontos kĂ¶zĂ©pre igazĂ­tĂˇshoz */
+    /* Távolítsd el a margin-t a pontos középre igazításhoz */
 }
 
 .IdopontContainer {
@@ -445,7 +425,7 @@ button {
 
 .group {
     flex: 1;
-    /* Foglalja el a rendelkezĂ©sre ĂˇllĂł helyet */
+    /* Foglalja el a rendelkezésre álló helyet */
     position: relative;
     margin: 0 20px 0 0;
 }
@@ -489,23 +469,23 @@ input:focus~.bar:after {
 .GombBox {
     display: flex;
     flex-wrap: wrap;
-    /* LehetĹ‘vĂ© teszi a tĂ¶bb soros elrendezĂ©st */
+    /* Lehetővé teszi a több soros elrendezést */
     gap: 10px;
-    /* TĂˇvolsĂˇg az elemek kĂ¶zĂ¶tt */
+    /* Távolság az elemek között */
     justify-content: space-between;
-    /* Egyenletes elosztĂˇs a sorban */
+    /* Egyenletes elosztás a sorban */
     align-items: center;
-    /* IgazĂ­tĂˇs felĂĽlre */
+    /* Igazítás felülre */
     align-content: center;
     height: 100%;
-    /* TĂ¶ltsĂ©k ki a rendelkezĂ©sre ĂˇllĂł teret */
+    /* Töltsék ki a rendelkezésre álló teret */
 }
 
 .IdopontGomb1 {
     flex: 1 1 calc(48% - 10px);
-    /* A gombok kĂ©t oszlopban jelennek meg */
+    /* A gombok két oszlopban jelennek meg */
     height: 50px;
-    /* A gombok magassĂˇga 50px */
+    /* A gombok magassága 50px */
     background: black;
     box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50), 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
     border-radius: 20px 5px 5px 5px;
@@ -541,9 +521,9 @@ input:focus~.bar:after {
 
 .IdopontGomb {
     flex: 1 1 calc(50% - 10px);
-    /* A gombok kĂ©t oszlopban jelennek meg */
+    /* A gombok két oszlopban jelennek meg */
     height: 50px;
-    /* A gombok magassĂˇga 50px */
+    /* A gombok magassága 50px */
     background: black;
     box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50), 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
     border-radius: 20px 5px 5px 5px;
@@ -588,24 +568,24 @@ input:focus~.bar:after {
 
 #calendar-tomorrow {
     display: none;
-    /* input mezĹ‘ elrejtĂ©se */
+    /* input mező elrejtése */
 }
 
 .flatpickr-calendar {
-    background: black;
+    background: #1E1E3F;
     border: none;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     color: white;
     width: 658px;
-    /* SzĂ©lessĂ©g beĂˇllĂ­tĂˇsa */
+    /* Szélesség beállítása */
     height: 300px;
-    /* MagassĂˇg beĂˇllĂ­tĂˇsa */
+    /* Magasság beállítása */
     padding: 0;
-    /* Padding eltĂˇvolĂ­tĂˇsa */
+    /* Padding eltávolítása */
     display: flex;
     flex-direction: column;
-    /* A naptĂˇr fĂĽggĹ‘leges igazĂ­tĂˇsa */
+    /* A naptár függőleges igazítása */
 }
 
 .flatpickr-innerContainer {
@@ -615,7 +595,7 @@ input:focus~.bar:after {
     color: white;
 }
 
-/* NaptĂˇr napok */
+/* Naptár napok */
 .flatpickr-days {
     display: flex;
     flex-wrap: wrap;
@@ -627,9 +607,9 @@ input:focus~.bar:after {
     border: 1px solid white;
     color: white;
     flex: 1 0 calc(100% / 7);
-    /* A napok egyenlĹ‘ szĂ©lessĂ©ge (7 oszlop) */
+    /* A napok egyenlő szélessége (7 oszlop) */
     height: calc(100% / 6);
-    /* EgyenlĹ‘ magassĂˇg (6 sor) */
+    /* Egyenlő magasság (6 sor) */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -651,12 +631,12 @@ input:focus~.bar:after {
     border-color: #FF4081;
 }
 
-/* HĂ©tvĂ©gĂ©k */
+/* Hétvégék */
 .flatpickr-day.weekend {
     color: #FF4081;
 }
 
-/* NaptĂˇr fejlĂ©cek */
+/* Naptár fejlécek */
 .flatpickr-months .flatpickr-prev-month,
 .flatpickr-months .flatpickr-next-month {
     color: white;
@@ -666,7 +646,7 @@ input:focus~.bar:after {
     color: white;
 }
 
-/* EsemĂ©ny gombok */
+/* Esemény gombok */
 .flatpickr-time-container .flatpickr-time {
     color: white;
     background: #1E1E3F;
@@ -677,7 +657,7 @@ input:focus~.bar:after {
     border: none;
 }
 
-/* EsemĂ©nyek */
+/* Események */
 .flatpickr-day.today::after {
     content: "";
     display: block;
@@ -691,7 +671,7 @@ input:focus~.bar:after {
     background: #FF4081;
 }
 
-/* EsemĂ©ny gomb stĂ­lus */
+/* Esemény gomb stílus */
 button.flatpickr-day {
     background: #1E1E3F;
     border: 1px solid white;
@@ -782,9 +762,8 @@ button.flatpickr-day:focus {
     text-align: center;
     color: black;
     font-size: 30px;
-    font-family: graphie, sans-serif;
-    font-weight: 700;
-    font-style: normal;
+    font-family: Inter;
+    font-weight: 600;
     margin-left: -25px;
 }
 
@@ -817,7 +796,7 @@ button.flatpickr-day:focus {
     display: flex;
     flex-direction: column;
     gap: 0px;
-    /* TĂˇvolsĂˇg eltĂˇvolĂ­tĂˇsa */
+    /* Távolság eltávolítása */
     width: 100%;
 }
 
@@ -842,9 +821,6 @@ button.flatpickr-day:focus {
     font-size: 18px;
     box-sizing: border-box;
     appearance: none;
-    font-family: graphie, sans-serif;
-    font-weight: 500;
-    font-style: normal;
     -webkit-appearance: none;
     -moz-appearance: none;
 }
@@ -859,9 +835,6 @@ button.flatpickr-day:focus {
     color: white;
     padding: 10px;
     font-size: 18px;
-    font-family: graphie, sans-serif;
-    font-weight: 500;
-    font-style: normal;
     box-sizing: border-box;
     appearance: none;
     -webkit-appearance: none;
@@ -927,16 +900,16 @@ button.flatpickr-day:focus {
 
 .AdatvedelemPipa {
     margin-right: 10px;
-    /* SzĂĽksĂ©g szerint ĂˇllĂ­thatĂł */
+    /* Szükség szerint állítható */
 }
 
 .Fizetes {
     display: flex;
     flex: 1;
     justify-content: space-between;
-    /* Egyenletes elosztĂˇs a kĂ©t elem kĂ¶zĂ¶tt */
+    /* Egyenletes elosztás a két elem között */
     align-items: center;
-    /* KĂ¶zĂ©pen igazĂ­tja az elemeket vertikĂˇlisan */
+    /* Középen igazítja az elemeket vertikálisan */
 }
 
 .adatvedelem-container {
@@ -949,12 +922,7 @@ button.flatpickr-day:focus {
     font-size: 20px;
     color: white;
     margin-left: 15px;
-    font-family: graphie, sans-serif;
-    font-weight: 500;
-    font-style: normal;
 }
-
-.AdatokContainer::placeholder
 
 .MegjegyzesBox {
     display: flex;
@@ -999,75 +967,31 @@ button.flatpickr-day:focus {
     text-align: center;
     color: #F3F5F5;
     font-size: 55px;
-    font-family: graphie, sans-serif;
-    font-weight: 700;
-    font-style: normal;
+    font-family: Graphie;
+    font-weight: 600;
     word-wrap: break-word;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    /* Mivel a body szĂ©lessĂ©ge fix, a wrapper szĂ©lessĂ©ge is 100% */
-    width: 100%;
-}
-
-.popup {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
-    z-index: 1000; /* Sit on top */
-}
-
-/* Popup content */
-.popup-content {
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    width: 50%; /* Could be more or less, depending on screen size */
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-/* Close button */
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
 .footer {
-    width: 1920px;
-    height: 407.12px;
+    width: 100vw; /* Use full viewport width */
+    height: 45vh; /* Use viewport height for flexibility */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    gap: 50px;
+    gap: 3vh; /* Use viewport height for gap */
 }
 
 .footer-content {
     align-self: stretch;
-    height: 254px;
+    height: 30vh; /* Use viewport height for flexibility */
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 90px;
+    gap: 5vw; /* Use viewport width for gap */
 }
 
 .footer-section {
@@ -1075,128 +999,378 @@ button.flatpickr-day:focus {
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    gap: 25px;
+    gap: 1.5vh; /* Use viewport height for gap */
 }
 
 .footer-box {
-    padding: 10px;
-    border-left: 3px #13669C solid;
+    padding: 0.5em; /* Use em for padding */
+    border-left: 0.15em #13669C solid; /* Use em for border */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    gap: 5px;
+    gap: 0.3em; /* Use em for gap */
 }
 
 .footer-box img {
-    width: 120px;
-    height: 100px;
+    width: 6vw; /* Use viewport width for flexibility */
+    height: auto; /* Maintain aspect ratio */
 }
 
 .footer-text {
     color: white;
-    font-size: 33px;
-    font-family: graphie, sans-serif;
-    font-weight: 400;
-    font-style: normal;
+    font-size: 1.8rem; /* Use rem for consistent font sizing */
+    font-family: Graphie, sans-serif;
+    font-weight: 350;
     word-wrap: break-word;
 }
 
 .footer-socials {
-    height: 82px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 15px;
-    border-left: 3px #13669C solid;
+    height: 8vh; /* Use viewport height for flexibility */
+    padding-top: 0.5vh; /* Use viewport height for padding */
+    padding-bottom: 0.5vh; /* Use viewport height for padding */
+    padding-left: 0.8vw; /* Use viewport width for padding */
+    border-left: 0.15em #13669C solid; /* Use em for border */
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 0.8vw; /* Use viewport width for gap */
 }
 
 .footer-socials .social-icon {
-    width: 42px;
-    height: 42px;
+    width: 2vw; /* Use viewport width for flexibility */
+    height: 2vw; /* Use viewport width for flexibility */
     background: white;
 }
 
 .footer-powered {
-    width: 1820px;
+    width: 95vw; /* Use viewport width for flexibility */
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 1vw; /* Use viewport width for gap */
 }
 
 .footer-powered-content {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    margin-top: 50px;
+    gap: 0.5vw; /* Use viewport width for gap */
 }
 
 .footer-powered-text {
     color: white;
-    font-size: 40px;
-    font-family: graphie, sans-serif;
-    font-weight: 400;
-    font-style: normal;
+    font-size: 2rem; /* Use rem for consistent font sizing */
+    font-family: Graphie, sans-serif;
+    font-weight: 350;
     word-wrap: break-word;
 }
 
 .footer-powered-image {
-    width: 100px;
-    height: 103.12px;
+    width: 5vw; /* Use viewport width for flexibility */
+    height: auto; /* Maintain aspect ratio */
 }
 
-.footer-socials {
-    height: 82px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 15px;
-    border-left: 3px #13669C solid;
+/*Popup menu*/
+.container {
+    width: 93.75rem; /* 1500px in rem, rugalmas szélesség */
+    height: 56.25rem; /* 900px in rem, rugalmas magasság */
+    background: black;
+    box-shadow: 0 0 0.9375rem 0.375rem #13669C inset; /* 15px 6px */
+    border-radius: 1.5625rem; /* 25px */
+    overflow: hidden;
+    border: 0.0625rem solid #13669C; /* 1px */
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    display: inline-flex;
+}
+
+.header {
+    height: 12.5rem; /* 200px */
+    padding-top: 6.25rem; /* 100px */
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0.625rem; /* 10px */
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
 }
 
-.social-icon {
-    width: 42px;
-    height: 42px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: white;
-    border-radius: 50%;
-    color: #13669C;
-    text-decoration: none;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.social-icon i {
-    font-size: 20px;
-}
-
-.social-icon:hover {
+.title-bar {
+    align-self: stretch;
+    height: 6.25rem; /* 100px */
+    padding-left: 6.25rem; /* 100px */
     background: #13669C;
-    color: white;
+    border-top-left-radius: 0.3125rem; /* 5px */
+    border-top-right-radius: 1.875rem; /* 30px */
+    overflow: hidden;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.625rem; /* 10px */
+    display: inline-flex;
 }
+
+.title-text {
+    color: black;
+    font-size: 3.4375rem; /* 55px */
+    font-family: Graphie, sans-serif;
+    font-weight: 700;
+    line-height: 2.5rem; /* 40px */
+    letter-spacing: 0.103125rem; /* 1.65px */
+    word-wrap: break-word;
+}
+
+.content {
+    align-self: stretch;
+    height: 40.625rem; /* 650px */
+    padding: 6.25rem 2.1875rem 3.125rem 2.1875rem; /* 100px 35px 50px 35px */
+    background: black;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1.875rem; /* 30px */
+    display: flex;
+}
+
+.flex-container {
+    align-self: stretch;
+    flex: 1 1 0;
+    justify-content: center;
+    align-items: center;
+    gap: 1.875rem; /* 30px */
+    display: inline-flex;
+}
+
+.flex-box {
+    flex: 1 1 0;
+    align-self: stretch;
+    padding: 2.5rem; /* 40px */
+    background: black;
+    box-shadow: 0 0 0.9375rem 0.375rem rgba(19, 102, 156, 0.50) inset; /* 15px 6px */
+    border-radius: 1.25rem; /* 20px */
+    overflow: hidden;
+    border: 0.125rem solid #13669C; /* 2px */
+    justify-content: center;
+    align-items: center;
+    gap: 1.875rem; /* 30px */
+    display: flex;
+}
+
+.info-container {
+    flex: 1 1 0;
+    align-self: stretch;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem; /* 40px */
+    display: flex;
+}
+
+.info-column {
+    padding-top: 0.625rem; /* 10px */
+    padding-bottom: 0.625rem; /* 10px */
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1.25rem; /* 20px */
+    display: inline-flex;
+}
+
+.info-list {
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1.25rem; /* 20px */
+    display: flex;
+}
+
+.info-text {
+    text-align: center;
+    color: white;
+    font-size: 1.5625rem; /* 25px */
+    font-family: Graphie, sans-serif;
+    font-weight: 600;
+    word-wrap: break-word;
+}
+
+.price-box {
+    width: 37.5rem; /* 600px */
+    height: 6.25rem; /* 100px */
+    background: black;
+    box-shadow: 0 0 0.9375rem 0.375rem rgba(19, 102, 156, 0.50) inset; /* 15px 6px */
+    border-radius: 1.25rem; /* 20px */
+    overflow: hidden;
+    border: 0.09375rem solid #13669C; /* 1.5px */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem; /* 20px */
+    display: flex;
+}
+
+.price-text {
+    color: white;
+    font-size: 2.8125rem; /* 45px */
+    font-family: Graphie, sans-serif;
+    font-weight: 600;
+    word-wrap: break-word;
+}
+
+.divider {
+    width: 0.09375rem; /* 1.5px */
+    height: 28.125rem; /* 450px */
+    transform: rotate(180deg);
+    transform-origin: 0 0;
+    background: #13669C;
+    box-shadow: 0 0 0.625rem 0.1875rem rgba(19, 102, 156, 0.50) inset; /* 10px 3px */
+    border: 0.09375rem solid #13669C; /* 1.5px */
+}
+
+.warning-column {
+    align-self: stretch;
+    padding-top: 0.625rem; /* 10px */
+    padding-bottom: 0.625rem; /* 10px */
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2.5rem; /* 40px */
+    display: inline-flex;
+}
+
+.warning-list {
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1.25rem; /* 20px */
+    display: flex;
+}
+
+.warning-text {
+    color: white;
+    font-size: 1.4375rem; /* 23px */
+    font-family: Graphie, sans-serif;
+    font-weight: 600;
+    word-wrap: break-word;
+}
+
+.warning-box {
+    width: 37.5rem; /* 600px */
+    color: white;
+    font-size: 1.4375rem; /* 23px */
+    font-family: Graphie, sans-serif;
+    font-weight: 600;
+    word-wrap: break-word;
+}
+
+.agreement-container {
+    align-self: stretch;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1.5625rem; /* 25px */
+    display: inline-flex;
+}
+
+.checkbox {
+    width: 3.125rem; /* 50px */
+    height: 3.125rem; /* 50px */
+    background: black;
+    box-shadow: 0 0 0.625rem 0.1875rem rgba(19, 102, 156, 0.50) inset; /* 10px 3px */
+    border-radius: 0.9375rem; /* 15px */
+    border: 0.0625rem solid #13669C; /* 1px */
+}
+
+.agreement-text {
+    width: 28.9375rem; /* 463px */
+    color: white;
+    font-size: 1.5625rem; /* 25px */
+    font-family: Graphie, sans-serif;
+    font-weight: 350;
+    word-wrap: break-word;
+}
+
+.confirm-button {
+    width: 25rem; /* 400px */
+    height: 6.25rem; /* 100px */
+    background: black;
+    box-shadow: 0 0 0.625rem 0.1875rem rgba(123, 242, 218, 0.50); /* 10px 3px */
+    border-top-left-radius: 1.25rem; /* 20px */
+    border-top-right-radius: 0.3125rem; /* 5px */
+    border-bottom-right-radius: 1.25rem; /* 20px */
+    border-bottom-left-radius: 0.3125rem; /* 5px */
+    overflow: hidden;
+    border: 0.09375rem solid #7CF2DA; /* 1.5px */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem; /* 20px */
+    display: flex;
+}
+
+.confirm-text {
+    text-align: center;
+    color: white;
+    font-size: 2.8125rem; /* 45px */
+    font-family: Graphie, sans-serif;
+    font-weight: 600;
+    word-wrap: break-word;
+}
+
+/* Modal alapértelmezett stílusok */
+.modal {
+    display: none; /* Kezdetben rejtett */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7); /* Háttér szín */
+  }
+  
+  /* Modal tartalom */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Szélesség */
+    max-width: 60rem; /* Maximális szélesség */
+    border-radius: 1.25rem; /* Lekerekített sarkok */
+    background: black;
+    color: white;
+  }
+  
+  /* Bezáró gomb */
+  .close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .close-button:hover,
+  .close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+
 
 /*Reszponziv oldal*/
 
-/* Nagyobb kĂ©pernyĹ‘k (1920px vagy annĂˇl nagyobb) */
+/* Nagyobb képernyők (1920px vagy annál nagyobb) */
 @media only screen and (min-width: 1920px) {
     body {
         max-width: 1920px;
         margin: 0 auto;
     }
 
-    /* A fĹ‘ tartalom szĂ©lesebbre igazĂ­tĂˇsa */
+    /* A fő tartalom szélesebbre igazítása */
     .FoglalasiFelulet {
         min-width: 100%;
-        /* SzĂ©lesebb, mint az elĹ‘zĹ‘ 80% */
+        /* Szélesebb, mint az előző 80% */
         padding: 20px;
         box-sizing: border-box;
     }
@@ -1208,51 +1382,51 @@ button.flatpickr-day:focus {
         justify-content: space-between;
         /* Egyenletesen elosztja a gyermekelemeket */
         gap: 20px;
-        /* TĂˇvolsĂˇg a gombok kĂ¶zĂ¶tt */
+        /* Távolság a gombok között */
         padding: 0 25px;
     }
 
     .box {
         width: 100%;
-        /* A box kontĂ©ner kitĂ¶lti a rendelkezĂ©sre ĂˇllĂł terĂĽletet */
+        /* A box konténer kitölti a rendelkezésre álló területet */
         display: flex;
         justify-content: space-between;
         /* A gombokat egyenletesen elosztja */
         gap: 20px;
-        /* TĂˇvolsĂˇg a gombok kĂ¶zĂ¶tt */
+        /* Távolság a gombok között */
     }
 
     .keret {
         flex: 1 1 calc(25% - 20px);
-        /* Rugalmas szĂ©lessĂ©g, hogy mind a 4 gomb egymĂˇs mellĂ© fĂ©rjen */
+        /* Rugalmas szélesség, hogy mind a 4 gomb egymás mellé férjen */
         max-width: calc(25% - 20px);
-        /* MaximĂˇlis szĂ©lessĂ©g korlĂˇtozĂˇsa */
+        /* Maximális szélesség korlátozása */
         height: 600px;
-        /* MagassĂˇg nĂ¶velĂ©se az ĂˇllĂł tĂ©glalap forma megtartĂˇsĂˇhoz */
+        /* Magasság növelése az álló téglalap forma megtartásához */
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        /* Elem elhelyezĂ©se a kontĂ©ner aljĂˇn */
+        /* Elem elhelyezése a konténer alján */
         align-items: center;
-        /* KĂ¶zĂ©pre igazĂ­tĂˇs vĂ­zszintesen */
+        /* Középre igazítás vízszintesen */
         padding-bottom: 50px;
         padding-top: 20px;
-        /* Adjunk egy kis tĂˇvolsĂˇgot felĂĽl is */
+        /* Adjunk egy kis távolságot felül is */
     }
 
     .helyszin {
-        height: 140px;
-        /* KĂ©p magassĂˇgĂˇnak nĂ¶velĂ©se */
+        height: 200px;
+        /* Kép magasságának növelése */
         width: 100%;
-        /* A kĂ©p teljes szĂ©lessĂ©get elfoglalja */
+        /* A kép teljes szélességet elfoglalja */
         object-fit: cover;
-        /* A kĂ©p kitĂ¶ltĂ©se a keret mĂ©retĂ©hez igazĂ­tva */
+        /* A kép kitöltése a keret méretéhez igazítva */
     }
 
     .IkonKeret {
         top: auto;
         bottom: 140px;
-        /* IgazĂ­tja az ikont a kĂ­vĂˇnt helyre */
+        /* Igazítja az ikont a kívánt helyre */
         left: 50%;
         transform: translateX(-50%);
     }
@@ -1260,7 +1434,7 @@ button.flatpickr-day:focus {
     .MosokCim {
         margin-top: auto;
         margin-bottom: 20px;
-        /* Adjunk egy kis tĂˇvolsĂˇgot alul */
+        /* Adjunk egy kis távolságot alul */
         text-align: center;
         font-size: 30px;
     }
@@ -1272,53 +1446,53 @@ button.flatpickr-day:focus {
         justify-content: space-between;
         /* Egyenletesen elosztja a gyermekelemeket */
         gap: 25px;
-        /* Gap a csomagok kĂ¶zĂ¶tt */
+        /* Gap a csomagok között */
         padding: 0 25px;
-        /* 25px tĂˇvolsĂˇg a szĂ©lĂ©tĹ‘l */
+        /* 25px távolság a szélétől */
     }
 
     .CsomagokBox {
         flex: 1 1 calc(25% - 25px);
-        /* Rugalmas szĂ©lessĂ©g */
+        /* Rugalmas szélesség */
         max-width: calc(25% - 25px);
-        /* MaximĂˇlis szĂ©lessĂ©g korlĂˇtozĂˇsa */
+        /* Maximális szélesség korlátozása */
         margin-bottom: 30px;
-        /* TĂˇvolsĂˇg az elemek kĂ¶zĂ¶tt */
+        /* Távolság az elemek között */
         padding: 50px 20px;
-        /* NĂ¶velt padding */
+        /* Növelt padding */
     }
 
     .csomag_nev {
         font-size: 48px;
-        /* NĂ¶velt betĹ±mĂ©ret */
+        /* Növelt betűméret */
         margin-bottom: 30px;
-        /* NĂ¶velt tĂˇvolsĂˇg a cĂ­m Ă©s a lista kĂ¶zĂ¶tt */
+        /* Növelt távolság a cím és a lista között */
     }
 
     .leiras li {
         font-size: 35px;
-        /* NĂ¶velt betĹ±mĂ©ret a listĂˇban */
+        /* Növelt betűméret a listában */
     }
 
     .ExtrakContainers {
         display: flex;
         justify-content: center;
         gap: 30px;
-        /* TĂˇvolsĂˇg az ExtraContainer elemek kĂ¶zĂ¶tt */
+        /* Távolság az ExtraContainer elemek között */
         padding: 0 25px;
         height: 482px;
     }
 
     .ExtrakContainer {
         width: 50%;
-        /* Az ExtraContainer szĂ©lessĂ©gĂ©nek nĂ¶velĂ©se */
+        /* Az ExtraContainer szélességének növelése */
     }
 
     .ExtrakKeret {
         width: 100%;
-        /* Az ExtraKeret szĂ©lessĂ©gĂ©nek nĂ¶velĂ©se */
+        /* Az ExtraKeret szélességének növelése */
         height: auto;
-        /* Automatikus magassĂˇg a tartalom alapjĂˇn */
+        /* Automatikus magasság a tartalom alapján */
         background: black;
         box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset;
         border-radius: 25px;
@@ -1346,16 +1520,16 @@ button.flatpickr-day:focus {
         flex-wrap: wrap;
         justify-content: space-between;
         gap: 20px;
-        /* TĂˇvolsĂˇg a gombok kĂ¶zĂ¶tt */
+        /* Távolság a gombok között */
         width: 100%;
-        /* Teljes szĂ©lessĂ©g kihasznĂˇlĂˇsa */
+        /* Teljes szélesség kihasználása */
     }
 
     .KulsoGomb {
         flex: 1 1 calc(49% - 20px);
-        /* KĂ©t oszlopba rendezĂ©s */
+        /* Két oszlopba rendezés */
         height: 60px;
-        /* A gombok magassĂˇga */
+        /* A gombok magassága */
         background: black;
         box-shadow: 0px 0px 10px 3px rgba(124, 242, 218, 0.35) inset;
         border: 1.5px #13669C solid;
@@ -1366,7 +1540,7 @@ button.flatpickr-day:focus {
         font-style: normal;
         font-weight: 400;
         line-height: 60px;
-        /* A szĂ¶veg vertikĂˇlis kĂ¶zĂ©pre igazĂ­tĂˇsa */
+        /* A szöveg vertikális középre igazítása */
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -1397,7 +1571,7 @@ button.flatpickr-day:focus {
 
     .IdopontGomb1 {
         height: 60px;
-        /* A gombok magassĂˇga 50px */
+        /* A gombok magassága 50px */
         font-size: 35px;
     }
 
@@ -1431,9 +1605,6 @@ button.flatpickr-day:focus {
 
     ::placeholder {
         text-align: left;
-        font-family: graphie, sans-serif;
-        font-weight: 400;
-        font-style: normal;
     }
 
     label {
@@ -1455,12 +1626,6 @@ button.flatpickr-day:focus {
         font-size: 26px;
     }
 
-    .MegjegyzesBox {
-        display: flex;
-        flex-direction: column-reverse;
-        margin-right: 40px;
-    }
-
 
     .Foglalas {
         width: 600px;
@@ -1475,7 +1640,7 @@ button.flatpickr-day:focus {
     }
 
     .footer-content {
-        gap: 120px;
+        gap: 174px;
     }
 
     .footer-powered {
@@ -1497,7 +1662,7 @@ button.flatpickr-day:focus {
     }
 }
 
-/* KĂ¶zepes mĂ©retĹ± kĂ©pernyĹ‘k (1024px - 1920px kĂ¶zĂ¶tti) */
+/* Közepes méretű képernyők (1024px - 1920px közötti) */
 @media only screen and (min-width: 1024px) and (max-width: 1919px) {
     body {
         margin: 0 auto;
@@ -1506,10 +1671,10 @@ button.flatpickr-day:focus {
         align-items: center;
     }
 
-    /* A fĹ‘ tartalom szĂ©lesebbre igazĂ­tĂˇsa */
+    /* A fő tartalom szélesebbre igazítása */
     .FoglalasiFelulet {
         width: 95%;
-        /* A tablet mĂ©rethez igazĂ­tva */
+        /* A tablet mérethez igazítva */
         padding: 20px;
         box-sizing: border-box;
     }
@@ -1521,51 +1686,51 @@ button.flatpickr-day:focus {
         justify-content: space-between;
         /* Egyenletesen elosztja a gyermekelemeket */
         gap: 20px;
-        /* TĂˇvolsĂˇg a gombok kĂ¶zĂ¶tt */
+        /* Távolság a gombok között */
         padding: 0 25px;
     }
 
     .box {
         width: 100%;
-        /* A box kontĂ©ner kitĂ¶lti a rendelkezĂ©sre ĂˇllĂł terĂĽletet */
+        /* A box konténer kitölti a rendelkezésre álló területet */
         display: flex;
         justify-content: space-between;
         /* A gombokat egyenletesen elosztja */
         gap: 20px;
-        /* TĂˇvolsĂˇg a gombok kĂ¶zĂ¶tt */
+        /* Távolság a gombok között */
     }
 
     .keret {
         flex: 1 1 calc(25% - 20px);
-        /* Rugalmas szĂ©lessĂ©g, hogy mind a 4 gomb egymĂˇs mellĂ© fĂ©rjen */
+        /* Rugalmas szélesség, hogy mind a 4 gomb egymás mellé férjen */
         max-width: calc(25% - 20px);
-        /* MaximĂˇlis szĂ©lessĂ©g korlĂˇtozĂˇsa */
+        /* Maximális szélesség korlátozása */
         height: 500px;
-        /* MagassĂˇg nĂ¶velĂ©se az ĂˇllĂł tĂ©glalap forma megtartĂˇsĂˇhoz */
+        /* Magasság növelése az álló téglalap forma megtartásához */
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        /* Elem elhelyezĂ©se a kontĂ©ner aljĂˇn */
+        /* Elem elhelyezése a konténer alján */
         align-items: center;
-        /* KĂ¶zĂ©pre igazĂ­tĂˇs vĂ­zszintesen */
+        /* Középre igazítás vízszintesen */
         padding-bottom: 50px;
         padding-top: 20px;
-        /* Adjunk egy kis tĂˇvolsĂˇgot felĂĽl is */
+        /* Adjunk egy kis távolságot felül is */
     }
 
     .helyszin {
         height: 140px;
-        /* KĂ©p magassĂˇgĂˇnak nĂ¶velĂ©se */
+        /* Kép magasságának növelése */
         width: 100%;
-        /* A kĂ©p teljes szĂ©lessĂ©get elfoglalja */
+        /* A kép teljes szélességet elfoglalja */
         object-fit: cover;
-        /* A kĂ©p kitĂ¶ltĂ©se a keret mĂ©retĂ©hez igazĂ­tva */
+        /* A kép kitöltése a keret méretéhez igazítva */
     }
 
     .IkonKeret {
         top: auto;
         bottom: 140px;
-        /* IgazĂ­tja az ikont a kĂ­vĂˇnt helyre */
+        /* Igazítja az ikont a kívánt helyre */
         left: 50%;
         transform: translateX(-50%);
     }
@@ -1573,7 +1738,7 @@ button.flatpickr-day:focus {
     .MosokCim {
         margin-top: auto;
         margin-bottom: 20px;
-        /* Adjunk egy kis tĂˇvolsĂˇgot alul */
+        /* Adjunk egy kis távolságot alul */
         text-align: center;
         font-size: 28px;
     }
@@ -1581,45 +1746,45 @@ button.flatpickr-day:focus {
     .CsomagokContainer {
         display: flex;
         flex-wrap: wrap;
-        /* TĂ¶bb sorba rendezi a gyermekelemeket */
+        /* Több sorba rendezi a gyermekelemeket */
         justify-content: space-between;
         /* Egyenletesen elosztja a gyermekelemeket */
         gap: 25px;
-        /* Gap a csomagok kĂ¶zĂ¶tt */
+        /* Gap a csomagok között */
         padding: 0 25px;
-        /* 25px tĂˇvolsĂˇg a szĂ©lĂ©tĹ‘l */
+        /* 25px távolság a szélétől */
     }
 
     .CsomagokBox {
         flex: 1 1 calc(25% - 25px);
-        /* Rugalmas szĂ©lessĂ©g */
+        /* Rugalmas szélesség */
         max-width: calc(33% - 25px);
-        /* MaximĂˇlis szĂ©lessĂ©g korlĂˇtozĂˇsa */
+        /* Maximális szélesség korlátozása */
         margin-bottom: 30px;
-        /* TĂˇvolsĂˇg az elemek kĂ¶zĂ¶tt */
+        /* Távolság az elemek között */
         padding: 40px 20px;
-        /* NĂ¶velt padding */
+        /* Növelt padding */
     }
 
     .csomag_nev {
         font-size: 35px;
-        /* NĂ¶velt betĹ±mĂ©ret */
+        /* Növelt betűméret */
         margin-bottom: 30px;
-        /* NĂ¶velt tĂˇvolsĂˇg a cĂ­m Ă©s a lista kĂ¶zĂ¶tt */
+        /* Növelt távolság a cím és a lista között */
     }
 
     .leiras li {
         font-size: 30px;
-        /* NĂ¶velt betĹ±mĂ©ret a listĂˇban */
+        /* Növelt betűméret a listában */
     }
 
     .ExtrakContainers {
         display: flex;
         flex-wrap: wrap;
-        /* TĂ¶bb sorba rendezi az ExtraContainer elemeket */
+        /* Több sorba rendezi az ExtraContainer elemeket */
         justify-content: space-between;
         gap: 30px;
-        /* TĂˇvolsĂˇg az ExtraContainer elemek kĂ¶zĂ¶tt */
+        /* Távolság az ExtraContainer elemek között */
         padding: 0 25px;
         height: auto;
         margin-bottom: 35px;
@@ -1627,14 +1792,14 @@ button.flatpickr-day:focus {
 
     .ExtrakContainer {
         width: 48%;
-        /* Az ExtraContainer szĂ©lessĂ©gĂ©nek nĂ¶velĂ©se */
+        /* Az ExtraContainer szélességének növelése */
     }
 
     .ExtrakKeret {
         width: 100%;
-        /* Az ExtraKeret szĂ©lessĂ©gĂ©nek nĂ¶velĂ©se */
+        /* Az ExtraKeret szélességének növelése */
         height: auto;
-        /* Automatikus magassĂˇg a tartalom alapjĂˇn */
+        /* Automatikus magasság a tartalom alapján */
         background: black;
         box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset;
         border-radius: 25px;
@@ -1660,16 +1825,16 @@ button.flatpickr-day:focus {
         flex-wrap: wrap;
         justify-content: space-between;
         gap: 20px;
-        /* TĂˇvolsĂˇg a gombok kĂ¶zĂ¶tt */
+        /* Távolság a gombok között */
         width: 100%;
-        /* Teljes szĂ©lessĂ©g kihasznĂˇlĂˇsa */
+        /* Teljes szélesség kihasználása */
     }
 
     .KulsoGomb {
         flex: 1 1 calc(48% - 20px);
-        /* KĂ©t oszlopba rendezĂ©s */
+        /* Két oszlopba rendezés */
         height: 55px;
-        /* A gombok magassĂˇga */
+        /* A gombok magassága */
         background: black;
         box-shadow: 0px 0px 10px 3px rgba(124, 242, 218, 0.35) inset;
         border: 1.5px #13669C solid;
@@ -1680,7 +1845,7 @@ button.flatpickr-day:focus {
         font-style: normal;
         font-weight: 400;
         line-height: 50px;
-        /* A szĂ¶veg vertikĂˇlis kĂ¶zĂ©pre igazĂ­tĂˇsa */
+        /* A szöveg vertikális középre igazítása */
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -1715,13 +1880,13 @@ button.flatpickr-day:focus {
 
     .IdopontGomb1 {
         height: 50px;
-        /* A gombok magassĂˇga 50px */
+        /* A gombok magassága 50px */
         font-size: 30px;
     }
 
     .IdopontGomb {
         height: 50px;
-        /* A gombok magassĂˇga 50px */
+        /* A gombok magassága 50px */
         font-size: 30px;
     }
 
@@ -1780,12 +1945,6 @@ button.flatpickr-day:focus {
         font-size: 20px;
     }
 
-    .MegjegyzesBox {
-        display: flex;
-        flex-direction: column-reverse;
-        margin-right: 40px;
-    }
-
     .Foglalas {
         width: 500px;
         height: 120px;
@@ -1824,7 +1983,7 @@ button.flatpickr-day:focus {
     }
 }
 
-/* Kisebb kĂ©pernyĹ‘k (1024px alatti) */
+/* Kisebb képernyők (1024px alatti) */
 @media only screen and (min-width: 758px) and (max-width: 1023px) {
     body {
         margin: 0 auto;
@@ -1833,7 +1992,7 @@ button.flatpickr-day:focus {
         align-items: center;
     }
 
-    /* A fĹ‘ tartalom szĂ©lesebbre igazĂ­tĂˇsa */
+    /* A fő tartalom szélesebbre igazítása */
     .FoglalasiFelulet {
         width: 95%;
         padding: 10px;
@@ -2070,12 +2229,6 @@ button.flatpickr-day:focus {
         font-size: 24px;
     }
 
-    .MegjegyzesBox {
-        display: flex;
-        flex-direction: column-reverse;
-        margin-right: 40px;
-    }
-
     .Foglalas {
         width: 30%;
         height: 100px;
@@ -2117,7 +2270,7 @@ button.flatpickr-day:focus {
     }
 }
 
-/* Kisebb mĂ©retĹ± kĂ©pernyĹ‘k (758px alatti) */
+/* Kisebb méretű képernyők (758px alatti) */
 @media only screen and (min-width: 480px) and (max-width: 757px) {
     body {
         margin: 0 auto;
@@ -2126,7 +2279,7 @@ button.flatpickr-day:focus {
         align-items: center;
     }
 
-    /* A fĹ‘ tartalom szĂ©lesebbre igazĂ­tĂˇsa */
+    /* A fő tartalom szélesebbre igazítása */
     .FoglalasiFelulet {
         width: 95%;
         padding: 10px;
@@ -2157,7 +2310,7 @@ button.flatpickr-day:focus {
     }
 
     .helyszin {
-        height: 140px;
+        height: 150px;
         width: 100%;
         object-fit: cover;
     }
@@ -2414,12 +2567,6 @@ button.flatpickr-day:focus {
         font-size: 30px;
     }
 
-    .MegjegyzesBox {
-        display: flex;
-        flex-direction: column-reverse;
-        margin-right: 40px;
-    }
-
     .Foglalas {
         width: 40%;
         height: 100px;
@@ -2462,3 +2609,4 @@ button.flatpickr-day:focus {
         text-align: center;
     }
 }
+
