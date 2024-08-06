@@ -1,5 +1,5 @@
 # Dockerfile
-FROM python:3.9.17-bookworm
+FROM python:3.11
 # Allow statements and log messages to immediately appear in the logs
 ENV PYTHONUNBUFFERED True
 # Copy local code to the container image.

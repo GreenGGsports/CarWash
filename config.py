@@ -1,4 +1,7 @@
-import os 
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 class Config:
     DEBUG = False
     TESTING = False
@@ -8,10 +11,20 @@ class Config:
     
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(os.getcwd(), 'db', 'car_wash.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     LOG_LEVEL = 'DEBUG'
     
+class DeploymentConfig(Config):
+    DEBUG = True
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    LOG_LEVEL = 'DEBUG'
+    
+    # Construct the database URI from environment variables
+    SQLALCHEMY_DATABASE_URI = (
+        f"postgresql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@"
+        f"{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/"
+        f"{os.getenv('DB_NAME')}"
+    )    
 class TestingConfig(Config):
     TESTING = True
     DEBUG = True
@@ -33,5 +46,7 @@ def load_configs(app,config_name):
         app.config.from_object(TestingConfig)
     elif config_name == 'production':
         app.config.from_object(ProductionConfig)
+    elif config_name == 'deployment':
+        app.config.from_object(DeploymentConfig)
     else:
         raise ValueError("Invalid config name. Use 'development', 'testing', or 'production'.")

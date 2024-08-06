@@ -15,7 +15,13 @@
   }
 *, *::before, *::after {
     box-sizing: border-box;
+
 }
+.IdopontGomb.selected {
+    background-color: #7CF2DA  !important;
+    border: #000 !important;
+}
+
 
 /* Normalization styles */
 @import url('path/to/normalize.css');

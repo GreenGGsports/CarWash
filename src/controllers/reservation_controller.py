@@ -44,8 +44,8 @@ def get_popup_data():
         if extra_ids:
             extra_price = 0
             extra_names = []
-            for i in extra_ids:
-                extra = ExtraModel.get_by_id(session=db_session,obj_id= extra_ids[0])
+            for extra_id in extra_ids:
+                extra = ExtraModel.get_by_id(session=db_session,obj_id= extra_id)
                 extra_price += extra.price
                 extra_names.append(extra.service_name)
     except Exception as e:
@@ -65,12 +65,14 @@ def get_popup():
         
         # Render the template with replacements
         rendered_html = template.render(
-            hely=f'Helyszín: {location}',
-            rendszam=f'Rendszám:  {license_plate}',
-            csomag=  f'Csomag: {service_name} Ár: {service_price}',
-            extra= f' Extrák : {extra_names}',
-            idopont= f'Átvétel: {researvation_date}',
-            vegosszeg= f'Teljes Ár: {final_price}',
+            hely=location,
+            rendszam= license_plate,
+            csomag=  service_name,
+            service_price = service_price,
+            extra= extra_names,
+            extra_price = extra_price,
+            idopont= researvation_date,
+            vegosszeg= final_price,
         )
             
         return jsonify({'html': rendered_html})

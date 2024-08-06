@@ -3,5 +3,6 @@ README.md
 *.pyc
 *.pyo
 *.pyd
+*myvenv
 __pycache__
 .pytest_cache

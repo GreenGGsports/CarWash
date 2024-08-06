@@ -88,7 +88,7 @@ var ServiceSelected = false;
 async function listServices() {
     const container = document.getElementById('CsomagokContainer'); // Update with actual services container ID
     const template = document.getElementById('CsomagokTemplate').content; // Update with actual service template ID
-
+    container.innerHTML = '';
     try {
         const response = await fetch('/service/list');
 
@@ -99,13 +99,29 @@ async function listServices() {
         const data = await response.json();
 
         // Meglévő szolgáltatások törlése (opcionális)
-        container.innerHTML = '';
+        
 
         data.forEach(csomag => {
             const clone = document.importNode(template, true);
             clone.querySelector('.CsomagokBox').dataset.id = csomag.id;
-            clone.querySelector('.csomag_nev').innerHTML = csomag.name;
-            clone.querySelector('.leiras').innerHTML = csomag.description;
+            clone.querySelector('.csomag_nev').textContent = csomag.name; // Text content to avoid HTML injection
+
+            // Leírás pontok felsorolása
+            const descriptionList = csomag.description.split(';').map(item => item.trim());
+            const ul = document.createElement('ul');
+
+            descriptionList.forEach(item => {
+                if (item) { // Csak nem üres elemek
+                    const li = document.createElement('li');
+                    li.textContent = item; // Biztonságos szöveg beillesztése
+                    ul.appendChild(li);
+                }
+            });
+
+            const descriptionContainer = clone.querySelector('.leiras');
+            descriptionContainer.innerHTML = ''; // Meglévő tartalom törlése
+            descriptionContainer.appendChild(ul); // Lista beillesztése
+            descriptionContainer.classList.add('leiras')
             container.appendChild(clone);
         });
 
@@ -136,7 +152,8 @@ async function listExtras() {
     const belsoTemplate = document.getElementById('BelsoExtrakTemplate').content;
 
     console.log('Templates and containers found');
-
+    kulsoContainer.innerHTML = '';
+    belsoContainer.innerHTML = '';
     try {
         const response = await fetch('/service/list_extra');
 
@@ -146,8 +163,6 @@ async function listExtras() {
 
         const data = await response.json();
         console.log(data);
-        kulsoContainer.innerHTML = '';
-        belsoContainer.innerHTML = '';
 
         if (!Array.isArray(data) || data.length === 0) {
             console.log('No extras found');
@@ -284,10 +299,16 @@ function generateHourlyButtons(date) {
         // Kattintási esemény
         button.addEventListener('click', function (event) {
             event.preventDefault();
-            selectedDate = correctedButtonDate.toLocaleString();
-            console.log(`Kiválasztott időpont: ${correctedButtonDate.toLocaleString()}`);
-            select_appointment(selectedDate);
-            SlotSelected  = true;
+            if (isFree)
+                {
+                const allButtons = document.querySelectorAll('.IdopontGomb');
+                allButtons.forEach(btn => btn.classList.remove('selected'));
+                this.classList.add('IdopontGomb', 'selected');
+                selectedDate = correctedButtonDate.toLocaleString();
+                console.log(`Kiválasztott időpont: ${correctedButtonDate.toLocaleString()}`);
+                select_appointment(selectedDate);
+                SlotSelected  = true;
+            }
         });
 
         buttonContainer.appendChild(button);
@@ -480,20 +501,22 @@ document.getElementById('FoglalasButton').addEventListener('click', async functi
         console.log('pay by card ')
         card_payment()          
         const response1 = await postForm(reservationUrl, reservationForm);
-        const response2 = await postForm(billingUrl, billingForm);
-
-        if (response1.ok && response2.ok) {
+        if (response1.status === 'success'){
+            const response2 = await postForm(billingUrl, billingForm);
+            if(response2.status === 'success') {
                 finalize();
-            } 
+                }    
         else {
                 console.error('Egy vagy több kérés nem volt sikeres');
             }
         }
+        }
+
     else {
         console.log('Nincs számla start post')
         const response1 = await postForm(reservationUrl, reservationForm);
         console.log('response : ',response1)
-        if (response1.ok) {
+        if (response1.status === 'success') {
             finalize();
         } 
 
