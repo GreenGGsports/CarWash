@@ -25,24 +25,30 @@ def init_login_manager(app):
     @login_manager.user_loader
     def load_user(user_id):
         db_session = current_app.session_factory.get_session()
-        user = db_session.query(UserModel).get(user_id)
-        if user:
-            return User(user)
-        return None
+        try:
+            user = db_session.query(UserModel).get(user_id)
+            if user:
+                return User(user)
+            return None
+        finally:
+            db_session.close()
 
 @user_ctrl.route('/login', methods=['POST'])
 def login():
     db_session = current_app.session_factory.get_session()
-    data = request.json
-    user_name = data.get('user_name')
-    password = data.get('password')
-    user = UserModel.login(session=db_session, user_name=user_name, password=password)
-    if user:
-        user_obj = User(user)
-        login_user(user_obj, remember=False)
-        identity_changed.send(current_app._get_current_object(), identity=Identity(user.id))
-        return jsonify({'status': 'logged_in'})
-    return jsonify({'status': 'failed'})
+    try:
+        data = request.json
+        user_name = data.get('user_name')
+        password = data.get('password')
+        user = UserModel.login(session=db_session, user_name=user_name, password=password)
+        if user:
+            user_obj = User(user)
+            login_user(user_obj, remember=False)
+            identity_changed.send(current_app._get_current_object(), identity=Identity(user.id))
+            return jsonify({'status': 'logged_in'})
+        return jsonify({'status': 'failed'})
+    finally:
+        db_session.close()
 
 @user_ctrl.route('/logout', methods=['POST'])
 @login_required
@@ -53,14 +59,17 @@ def logout():
 @user_ctrl.route('/add_user', methods=['POST'])
 def add_user():
     db_session = current_app.session_factory.get_session()
-    data = request.json
-    user_name = data.get('user_name')
-    password = data.get('password')
-    role = data.get('role', 'user')
-    if not UserModel.check_name_taken(session=db_session, user_name=user_name):
-        UserModel.add_user(session=db_session, user_name=user_name, password=password, role=role)
-        return jsonify({'status': 'success'})
-    return jsonify({'status': 'failed'})
+    try:
+        data = request.json
+        user_name = data.get('user_name')
+        password = data.get('password')
+        role = data.get('role', 'user')
+        if not UserModel.check_name_taken(session=db_session, user_name=user_name):
+            UserModel.add_user(session=db_session, user_name=user_name, password=password, role=role)
+            return jsonify({'status': 'success'})
+        return jsonify({'status': 'failed'})
+    finally:
+        db_session.close()
 
 # Test output route
 @user_ctrl.route('/test', methods=['GET'])
