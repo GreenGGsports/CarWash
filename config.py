@@ -19,12 +19,15 @@ class DeploymentConfig(Config):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     LOG_LEVEL = 'DEBUG'
     
-    # Construct the database URI from environment variables
+    DB_USER = os.getenv('DB_USER')
+    DB_PASSWORD = os.getenv('DB_PASSWORD')
+    DB_HOST = os.getenv('DB_HOST')
+    DB_PORT = os.getenv('DB_PORT')
+    DB_NAME = os.getenv('DB_NAME')
+    
     SQLALCHEMY_DATABASE_URI = (
-        f"postgresql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@"
-        f"{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/"
-        f"{os.getenv('DB_NAME')}"
-    )    
+        f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+    )
 class TestingConfig(Config):
     TESTING = True
     DEBUG = True
@@ -49,4 +52,4 @@ def load_configs(app,config_name):
     elif config_name == 'deployment':
         app.config.from_object(DeploymentConfig)
     else:
-        raise ValueError("Invalid config name. Use 'development', 'testing', or 'production'.")
+        raise ValueError("Invalid config name. Use 'development', 'testing', 'deployment', or 'production'.")
