@@ -5,3 +5,13 @@ entrypoint: gunicorn -b :$PORT app:app
 handlers:
 - url: /.*
   script: auto
+
+beta_settings:
+  cloud_sql_instances: "winged-moon-431714-f5:europe-central2:cwsandbox"
+
+env_variables:
+  DB_USER: "User1"
+  DB_PASSWORD: "Arcsibald89"
+  DB_HOST:  "winged-moon-431714-f5:europe-central2:cwsandbox"
+  DB_PORT: "3306"
+  DB_NAME: "carwash_db"

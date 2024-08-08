@@ -22,6 +22,7 @@ def create_app(config_name: str):
     load_configs(app, config_name)
     
     setup_logging(app)
+    app.logger.info(f'DB uri:{app.config["SQLALCHEMY_DATABASE_URI"]}')
     engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
 
     # Check engine connection
