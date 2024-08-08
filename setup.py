@@ -8,8 +8,9 @@ from src.controllers.carwash_controller import carwash_ctrl
 from src.controllers.service_controller import service_ctrl
 from src.controllers.autocomplete import car_ctrl
 from src.controllers.admin_controller import admin_ctrl
+from src.controllers.local_admin_controller import local_admin_ctrl
 from database import create_database
-from src.controllers.admin import init_admin
+from src.controllers.admin import init_admin, init_local_admin
 from src.models.user_model import UserModel
 
 
@@ -24,6 +25,7 @@ def create_app(config_name: str):
     with app.app_context():
         create_database(engine)
         init_admin(app, session_factory)
+        init_local_admin(app, session_factory)
         create_default_users(session_factory.get_session())
 
     init_login_manager(app)
@@ -45,7 +47,8 @@ def add_blueprints(app: Flask):
     app.register_blueprint(carwash_ctrl, url_prefix='/carwash')
     app.register_blueprint(service_ctrl, url_prefix='/service')
     app.register_blueprint(car_ctrl, url_prefix='/api/car')
-    app.register_blueprint(admin_ctrl, url_prefix='/admin')
+    app.register_blueprint(admin_ctrl, url_prefix='/admin', name='admin_blueprint')
+    app.register_blueprint(local_admin_ctrl, url_prefix='/local-admin', name='local_admin_blueprint')
     return app 
 
 if __name__ == '__main__':
