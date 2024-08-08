@@ -9,7 +9,7 @@ from src.controllers.carwash_controller import carwash_ctrl
 from src.controllers.service_controller import service_ctrl
 from src.controllers.billing_controller import billing_ctrl
 from src.controllers.booking_controller import booking_ctrl
-from database import create_database
+from database import create_database, connect_unix_socket
 from src.controllers.admin import init_admin
 
 
@@ -23,8 +23,8 @@ def create_app(config_name: str):
     
     setup_logging(app)
     app.logger.info(f'DB uri:{app.config["SQLALCHEMY_DATABASE_URI"]}')
-    engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
-
+    #engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
+    engine = connect_unix_socket()
     # Check engine connection
     if check_database_connection(engine, app):
         app.logger.info("Database connection initialized successfully.")
