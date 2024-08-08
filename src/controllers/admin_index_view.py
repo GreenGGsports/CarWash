@@ -4,7 +4,7 @@ from flask import redirect, url_for
 
 class MyAdminIndexView(AdminIndexView):
     def is_accessible(self):
-        return current_user.is_authenticated and current_user.role == 'admin'
+        return current_user.is_authenticated and current_user.role in ['admin', 'local_admin']
 
     def inaccessible_callback(self, name, **kwargs):
         return redirect(url_for('user_ctrl.login'))

@@ -10,6 +10,7 @@ from src.models.extra_model import ExtraModel
 from src.models.reservation_model import ReservationModel
 from flask_admin.contrib.sqla import ModelView, filters
 from datetime import datetime, timedelta
+from flask_login import current_user
 
 class DateRangeFilter(filters.BaseSQLAFilter):
     def __init__(self, column, label, start_date, end_date):
@@ -54,14 +55,24 @@ class ReservationForm(FlaskForm):
     def __init__(self, session, *args, **kwargs):
         super(ReservationForm, self).__init__(*args, **kwargs)
         self.session = session
+
+        # Filtering options based on the current user
+        if current_user.role == 'local_admin':
+            self.carwash.query_factory = lambda: self.session.query(CarWashModel).filter_by(id=current_user.carwash.id).all()
+            self.service.query_factory = lambda: self.session.query(ServiceModel).filter_by(id=current_user.carwash.id).all()
+            self.extras.query_factory = lambda: self.session.query(ExtraModel).filter_by(id=current_user.carwash.id).all()
+
+        else:
+            self.carwash.query_factory = lambda: self.session.query(CarWashModel).all()
+            self.service.query_factory = lambda: self.session.query(ServiceModel).all()
+            
+            self.extras.query_factory = lambda: self.session.query(ExtraModel).all()
+
+        self.slot.query_factory = lambda: self.session.query(SlotModel).all()
         self.car.query_factory = lambda: self.session.query(CarModel).all()
         self.customer.query_factory = lambda: self.session.query(CustomerModel).all()
-        self.service.query_factory = lambda: self.session.query(ServiceModel).all()
-        self.carwash.query_factory = lambda: self.session.query(CarWashModel).all()
-        self.slot.query_factory = lambda: self.session.query(SlotModel).all()
-        self.extras.query_factory = lambda: self.session.query(ExtraModel).all()
-
-
+        
+    # Form fields
     new_car_license_plate = StringField('New Car License Plate')
     new_car_type = SelectField('New Car Type', choices=[(t.name, t.name) for t in CarTypeEnum])
     new_car_brand = StringField('New Car Brand')
@@ -125,13 +136,15 @@ class ReservationAdminView(ModelView):
     def create_form(self, obj=None):
         form = super(ReservationAdminView, self).create_form(obj)
         form.session = self.session
+        form.user_role = current_user.role if current_user.is_authenticated else None  # Pass user role to form
         return form
 
     def edit_form(self, obj=None):
         form = super(ReservationAdminView, self).edit_form(obj)
         form.session = self.session
+        form.user_role = current_user.role if current_user.is_authenticated else None  # Pass user role to form
         return form
-
+    
     def on_model_change(self, form, model, is_created):
         session = form.session
 
@@ -165,25 +178,31 @@ class ReservationAdminView(ModelView):
                             phone_number=form.new_customer_phone_number.data
                         )
                         session.add(customer)
-                        session.commit()  # Commit to get the customer_id
+                    
                     model.customer_id = customer.id
                     model.customer = customer
-
+                
                 # Handle new car
-                if form.new_car_license_plate.data and form.new_car_type.data and form.new_car_brand.data:
+                if form.new_car_license_plate.data:
                     car = session.query(CarModel).filter_by(
-                        license_plate=form.new_car_license_plate.data,
-                        car_type=CarTypeEnum[form.new_car_type.data],
-                        car_brand=form.new_car_brand.data
+                        license_plate=form.new_car_license_plate.data
                     ).first()
-                    if not car:
+
+                    if car:
+                        # Ha az autó már létezik, frissítsük a típusát és márkáját
+                        car.car_type = CarTypeEnum[form.new_car_type.data]
+                        car.car_brand = form.new_car_brand.data
+                    else:
+                        # Ha nem létezik, hozzuk létre az újat
                         car = CarModel(
                             license_plate=form.new_car_license_plate.data,
                             car_type=CarTypeEnum[form.new_car_type.data],
                             car_brand=form.new_car_brand.data
                         )
                         session.add(car)
-                        session.commit()
+                    
+                    # Commit után a model-hez rendeljük a car_id-t és car objektumot
+                    session.commit()
                     model.car_id = car.id
                     model.car = car
                 

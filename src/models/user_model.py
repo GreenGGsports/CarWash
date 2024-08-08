@@ -1,6 +1,7 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import Session
 from werkzeug.security import generate_password_hash, check_password_hash
+from sqlalchemy.orm import relationship
 from .base import BaseModel
 
 class UserModel(BaseModel):
@@ -10,16 +11,21 @@ class UserModel(BaseModel):
     user_name = Column(String, nullable=False)
     password_hash = Column(String, nullable=False)
     role = Column(String, nullable=False, default='user')  # Added role field
+    carwash_id = Column(Integer, ForeignKey('Carwash.id'), nullable=True)  # Nullable for general admins
+
+    carwash = relationship("CarWashModel")
+
     
     def __repr__(self):
         return f"<UserModel(id={self.id}, user_name='{self.user_name}')>"
 
     @classmethod
-    def add_user(cls, session: Session, user_name: str, password: str, role: str = 'user'):
+    def add_user(cls, session: Session, user_name: str, password: str, role: str = 'user', carwash_id=None):
         user = cls(
             user_name=user_name,
             password_hash=generate_password_hash(password=password),
-            role=role
+            role=role,
+            carwash_id = carwash_id
         )
         session.add(user)
         session.commit()

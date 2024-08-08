@@ -15,6 +15,8 @@ class User(UserMixin):
         self.id = user.id
         self.user_name = user.user_name
         self.role = user.role
+        self.carwash_id = user.carwash_id
+        self.carwash = user.carwash
 
 # Function to initialize LoginManager
 def init_login_manager(app):
@@ -64,8 +66,9 @@ def add_user():
         user_name = data.get('user_name')
         password = data.get('password')
         role = data.get('role', 'user')
+        carwash_id = data.get('carwash_id') if role == 'local_admin' else None
         if not UserModel.check_name_taken(session=db_session, user_name=user_name):
-            UserModel.add_user(session=db_session, user_name=user_name, password=password, role=role)
+            UserModel.add_user(session=db_session, user_name=user_name, password=password, role=role, carwash_id=carwash_id)
             return jsonify({'status': 'success'})
         return jsonify({'status': 'failed'})
     finally:
