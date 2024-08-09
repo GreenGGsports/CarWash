@@ -27,9 +27,13 @@ def create_app(config_name: str):
     
     setup_logging(app)
     app.logger.info(f'DB uri:{app.config["SQLALCHEMY_DATABASE_URI"]}')
-    #engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
-    engine = connect_unix_socket()
-    # Check engine connection
+    
+    if config_name == 'development':
+        engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
+    
+    else:
+        engine = connect_unix_socket()
+
     if check_database_connection(engine, app):
         app.logger.info("Database connection initialized successfully.")
     else:
