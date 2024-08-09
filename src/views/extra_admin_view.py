@@ -2,15 +2,14 @@ from flask_admin.contrib.sqla import ModelView
 from flask_login import current_user
 from flask import redirect, url_for
 
-class ServiceModelView(ModelView):
+class ExtraModelView(ModelView):
     column_labels = {
         'carwash.carwash_name': 'Car Wash Name',
         'service_name': 'Service Name',
-        'price_small': 'Price (Small)',
-        'price_large': 'Price (Large)'
+        'price': 'Price',
     }
 
-    column_list = ['carwash.carwash_name', 'service_name', 'price_small', 'price_large']
+    column_list = ['carwash.carwash_name', 'service_name', 'price']
 
     def is_accessible(self):
         # Ellenőrizzük, hogy a felhasználó be van-e jelentkezve és admin szerepe van-e
@@ -28,11 +27,11 @@ class ServiceModelView(ModelView):
     def _handle_view(self, name, **kwargs):
         if not self.is_accessible():
             return redirect(url_for('user_ctrl.login'))
-        return super(ServiceModelView, self)._handle_view(name, **kwargs)
+        return super(ExtraModelView, self)._handle_view(name, **kwargs)
     
     def get_query(self):
         # Alapértelmezett szűrő beállítása az aktuális carwash-ra
-        query = super(ServiceModelView, self).get_query()
+        query = super(ExtraModelView, self).get_query()
         if current_user.role == 'local_admin' and current_user.carwash_id:
             query = query.filter_by(carwash_id=current_user.carwash_id)
         return query

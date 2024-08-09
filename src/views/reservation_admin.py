@@ -69,26 +69,22 @@ class ReservationForm(FlaskForm):
             self.extras.query_factory = lambda: self.session.query(ExtraModel).all()
 
         self.slot.query_factory = lambda: self.session.query(SlotModel).all()
-        self.car.query_factory = lambda: self.session.query(CarModel).all()
-        self.customer.query_factory = lambda: self.session.query(CustomerModel).all()
         
     # Form fields
-    new_car_license_plate = StringField('New Car License Plate')
-    new_car_type = SelectField('New Car Type', choices=[(t.name, t.name) for t in CarTypeEnum])
-    new_car_brand = StringField('New Car Brand')
-    car = QuerySelectField('Car', allow_blank=True, query_factory=lambda: [])
+    new_car_license_plate = StringField('Rendszám')
+    new_car_type = SelectField('Méret', choices=[(t.name, t.name) for t in CarTypeEnum])
+    new_car_brand = StringField('Márka')
 
-    new_customer_forname = StringField('New Customer Forname')
-    new_customer_lastname = StringField('New Customer Lastname')
-    new_customer_phone_number = StringField('New Customer Phone Number')
-    customer = QuerySelectField('Customer', allow_blank=True, query_factory=lambda: [])
+    new_customer_forname = StringField('Keresztnév')
+    new_customer_lastname = StringField('Vezetéknév')
+    new_customer_phone_number = StringField('Telefonszám')
 
-    service = QuerySelectField('Service', allow_blank=False, query_factory=lambda: [])
-    extras = QuerySelectMultipleField('Extras', get_label='service_name')
+    service = QuerySelectField('Csomag', allow_blank=False, query_factory=lambda: [])
+    extras = QuerySelectMultipleField('Extrák', get_label='service_name')
 
-    reservation_date = DateTimeField('Reservation Date', format='%Y-%m-%d %H:%M:%S')
-    parking_spot = IntegerField('Parking Spot')
-    carwash = QuerySelectField('Carwash', allow_blank=False, query_factory=lambda: [])
+    reservation_date = DateTimeField('Időpont', format='%Y-%m-%d %H:%M:%S')
+    parking_spot = IntegerField('Parkolóhely')
+    carwash = QuerySelectField('Autómosó', allow_blank=False, query_factory=lambda: [])
     slot = QuerySelectField('Slot', allow_blank=False, query_factory=lambda: [])
 
 
@@ -110,15 +106,15 @@ class ReservationAdminView(ModelView):
     )
 
     column_labels = {
-        'reservation_date': 'Reservation Date',
-        'car.license_plate': 'License Plate',
-        'customer.forname': 'Forename',
-        'customer.lastname': 'Lastname',
-        'customer.phone_number': 'Phone Number',
-        'service.service_name': 'Service Name',
-        'extras': 'Extras',
-        'carwash.carwash_name': 'Carwash Name',
-        'final_price': 'Final Price',
+        'reservation_date': 'Időpont',
+        'car.license_plate': 'Rendszám',
+        'customer.forname': 'Kersztnév',
+        'customer.lastname': 'Vezetéknév',
+        'customer.phone_number': 'Telefonszám',
+        'service.service_name': 'Csomag',
+        'extras': 'Extrák',
+        'carwash.carwash_name': 'Autómosó',
+        'final_price': 'Ár',
     }
 
     column_filters = [

@@ -15,6 +15,7 @@ from src.views.reservation_admin import ReservationAdminView
 from src.views.service_admin import ServiceModelView
 from src.controllers.admin_index_view import AdminIndexView
 from src.controllers.local_admin_index_view import LocalAdminIndexView
+from src.views.extra_admin_view import ExtraModelView
 
 def init_admin(app, session_factory):
     admin = Admin(
@@ -27,13 +28,13 @@ def init_admin(app, session_factory):
     session = session_factory.get_session()
 
     # Admin view registration
-    admin.add_view(ReservationAdminView(ReservationModel, session, name='ReservationModelAdmin', endpoint='reservation_admin'))
+    admin.add_view(ReservationAdminView(ReservationModel, session, name='Foglalások', endpoint='reservation_admin'))
     admin.add_view(ModelView(UserModel, session, name='UserModelAdmin', endpoint='user_admin'))
     admin.add_view(ModelView(SlotModel, session, name='SlotModelAdmin', endpoint='slot_admin'))
     admin.add_view(ServiceModelView(ServiceModel, session, name='ServiceModelAdmin', endpoint='service_admin'))
     admin.add_view(ModelView(CompanyModel, session, name='CompanyModelAdmin', endpoint='company_admin'))
     admin.add_view(ModelView(CarWashModel, session, name='CarWashModelAdmin', endpoint='carwash_admin'))
-    admin.add_view(ModelView(ExtraModel, session, name='ExtraModelAdmin', endpoint='extra_admin'))
+    admin.add_view(ExtraModelView(ExtraModel, session, name='ExtraModelAdmin', endpoint='extra_admin'))
     admin.add_view(ModelView(CustomerModel, session, name='CustomerModelAdmin', endpoint='customer_admin'))
     admin.add_view(ModelView(BillingModel, session, name='BillingModelAdmin', endpoint='billing_admin'))
     admin.add_view(ModelView(CarModel, session, name='CarModelAdmin', endpoint='car_admin'))
@@ -53,8 +54,8 @@ def init_local_admin(app, session_factory):
     session = session_factory.get_session()
 
     # Local Admin view registration
-    local_admin.add_view(ReservationAdminView(ReservationModel, session, name='LocalReservationModelAdmin', endpoint='local_reservation_admin'))
-    local_admin.add_view(ServiceModelView(ServiceModel, session, name='LocalServiceModelAdmin', endpoint='local_service_admin'))
-    local_admin.add_view(ModelView(ExtraModel, session, name='LocalExtraModelAdmin', endpoint='local_extra_admin'))
+    local_admin.add_view(ReservationAdminView(ReservationModel, session, name='Foglalások', endpoint='local_reservation_admin'))
+    local_admin.add_view(ServiceModelView(ServiceModel, session, name='Csomagok', endpoint='local_service_admin'))
+    local_admin.add_view(ExtraModelView(ExtraModel, session, name='Extrák', endpoint='local_extra_admin'))
 
     session.close()
