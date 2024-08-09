@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing page</title>
+    <link rel= "stylesheet" href= "{{ url_for('static',filename='landing_page.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <div class="header">
+            <div class="inner-container-1"></div>
+            <div class="inner-container-2">
+                <img class="image" src="https://via.placeholder.com/537x116" alt="">
+            </div>
+            <div class="inner-container-3">
+                <i class="fas fa-user"></i>
+                <button type="button" class="login-toggle">Log in</button>
+            </div>
+        </div>
+        <!--modal-->
+        <div id="login-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <div class="Reg-container">
+                    <h1>User Controller</h1>
+                    
+                    <!-- Login Form -->
+                    <div>
+                        <h2>Login</h2>
+                        <form id="login-form">
+                            <div class="form-group">
+                                <label for="login-username">Username:</label>
+                                <input type="text" id="login-username" name="user_name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="login-password">Password:</label>
+                                <input type="password" id="login-password" name="password" required>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit">Login</button>
+                            </div>
+                            <div class="message" id="login-message"></div>
+                        </form>
+                    </div>
+                    <!-- Register Form -->
+                    <div>
+                        <h2>Register</h2>
+                        <form id="register-form">
+                            <div class="form-group">
+                                <label for="register-username">Username:</label>
+                                <input type="text" id="register-username" name="user_name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="register-password">Password:</label>
+                                <input type="password" id="register-password" name="password" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="register-role">Role:</label>
+                                <input type="text" id="register-role" name="role" placeholder="user or admin" required>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit">Register</button>
+                            </div>
+                            <div class="message" id="register-message"></div>
+                        </form>
+                    </div>
+            
+                    <!-- Logout Form -->
+                    <div>
+                        <h2>Logout</h2>
+                        <form id="logout-form">
+                            <div class="form-group">
+                                <button type="submit">Logout</button>
+                            </div>
+                            <div class="message" id="logout-message"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>        
+        <div class="divider"></div> <!-- Divider line -->
+        <hr>
+        <div class="slider-container">
+            <div class="slider">
+                <img src="gallery1.png" alt="Slide 1">
+                <img src="Gallery2.png" alt="Slide 2">
+                <img src="Gallery3.png" alt="Slide 3">
+                <!-- Additional slides as needed -->
+            </div>
+            <div class="text-overlay">
+                <p>Küldetésünk, autókozmetikai minőséget nyújtani a céges flottáknak.</p>
+            </div>
+        </div>
+        <div class="content">
+            <div class="Foglalas">
+                <button class="FoglalasGomb">Online időpont foglalás</button>
+                <div class="tooltip">Lépj be, vagy regisztrálj az online időpont foglaláshoz az oldal tetején.</div>
+            </div>
+            <div class="main-container">
+                <div class="title-container">
+                    <div class="title">Árlisták</div>
+                </div>
+                <div class="HelyszinekContainer" id="HelyszinekContainer">
+                    <div class="box">
+                        <button class="keret">
+                            <img class="helyszin" src="https://via.placeholder.com/335x100" />
+                            <div class="IkonKeret">
+                                <div class="ikon"></div>
+                            </div>
+                            <div class="MosokCim">1097 Budapest,<br />Könyves Kálmán krt. 11.</div>
+                        </button>
+                        <button class="keret">
+                            <img class="helyszin" src="https://via.placeholder.com/335x100" />
+                            <div class="IkonKeret">
+                                <div class="ikon"></div>
+                            </div>
+                            <div class="MosokCim">1097 Budapest,<br />Könyves Kálmán krt. 11.</div>
+                        </button>
+                        <button class="keret">
+                            <img class="helyszin" src="https://via.placeholder.com/335x100" />
+                            <div class="IkonKeret">
+                                <div class="ikon"></div>
+                            </div>
+                            <div class="MosokCim">1097 Budapest,<br />Könyves Kálmán krt. 11.</div>
+                        </button>
+                        <button class="keret">
+                            <img class="helyszin" src="https://via.placeholder.com/335x100" />
+                            <div class="IkonKeret">
+                                <div class="ikon"></div>
+                            </div>
+                            <div class="MosokCim">1097 Budapest,<br />Könyves Kálmán krt. 11.</div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="main-Carousel-container">
+                <div class="carousel-container">
+                    <button class="carousel-button prev" onclick="prevImage()">&#10094;</button>
+                    <div class="carousel-wrapper">
+                        <div class="carousel">
+                            <img src="gallery1.png" alt="Image 1" class="carousel-image">
+                            <img src="gallery1.png" alt="Image 1" class="carousel-image">
+                            <img src="gallery1.png" alt="Image 1" class="carousel-image">
+                            <img src="gallery1.png" alt="Image 1" class="carousel-image">
+                            <img src="gallery1.png" alt="Image 1" class="carousel-image">
+                            <img src="gallery1.png" alt="Image 1" class="carousel-image">
+                            <!-- Add more images as needed -->
+                        </div>
+                    </div>
+                    <button class="carousel-button next" onclick="nextImage()">&#10095;</button>
+                </div>
+            </div>
+            <div class="Supports">
+                <div class="Supports-container-1">
+                    <img src="support1.png" alt="">
+                </div>
+                <div class="Supports-container-2">
+                    <img src="support2.png" alt="">
+                </div>
+                <div class="Supports-container-3">
+                    <img src="support1.png" alt="">
+                </div>
+            </div>
+            <div class="footer">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <div class="footer-box">
+                            <img class="footer-image" src="https://via.placeholder.com/120x100" />
+                            <div class="footer-text">+36 20 69 69 669</div>
+                        </div>
+                        <div class="footer-box">
+                            <div class="footer-text">© 2024 Eliteshine<br />Minden jog fenntartva</div>
+                        </div>
+                    </div>
+                    <div class="footer-section">
+                        <div class="footer-box">
+                            <img class="footer-image" src="https://via.placeholder.com/250x100" />
+                            <div class="footer-text">+36 20 69 69 669</div>
+                        </div>
+                        <div class="footer-box">
+                            <div class="footer-text">Adatvédelmi nyilatkozat<br />Általános szerződési feltételek</div>
+                        </div>
+                    </div>
+                    <div class="footer-section">
+                        <div class="footer-box">
+                            <img class="footer-image" src="https://via.placeholder.com/320x100" />
+                            <div class="footer-text">+36 20 69 69 669</div>
+                        </div>
+                        <div class="footer-box">
+                            <div class="footer-text">eliteshine@shine.com<br />+36 20 69 69 669</div>
+                        </div>
+                    </div>
+                    <div class="footer-section">
+                        <div class="footer-box">
+                            <img class="footer-image" src="https://via.placeholder.com/287x98" />
+                            <div class="footer-text">+36 20 69 69 669</div>
+                        </div>
+                        <div class="footer-socials">
+                            <div class="social-icon"></div>
+                            <div class="social-icon"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-powered">
+                    <div class="footer-powered-content">
+                        <div class="footer-powered-text">Powered by GG_Solutions & </div>
+                        <img class="footer-powered-image" src="https://via.placeholder.com/100x103" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /*Gallery*/
+        let currentIndex = 0;
+
+        function updateCarousel() {
+            const carousel = document.querySelector('.carousel');
+            const images = document.querySelectorAll('.carousel-image');
+            const totalImages = images.length;
+
+            // Calculate the offset for the current set of images
+            const visibleImages = 3; // Number of images visible at a time
+            const offset = -currentIndex * (100 / visibleImages);
+            carousel.style.transform = `translateX(${offset}%)`;
+        }
+
+        function prevImage() {
+            const images = document.querySelectorAll('.carousel-image');
+            const totalImages = images.length;
+            const visibleImages = 3; // Number of images visible at a time
+
+            currentIndex = (currentIndex === 0) ? totalImages - visibleImages : currentIndex - 1;
+            updateCarousel();
+        }
+
+        function nextImage() {
+            const images = document.querySelectorAll('.carousel-image');
+            const totalImages = images.length;
+            const visibleImages = 3; // Number of images visible at a time
+
+            currentIndex = (currentIndex >= totalImages - visibleImages) ? 0 : currentIndex + 1;
+            updateCarousel();
+        }
+
+        // Initialize carousel position
+        updateCarousel();
+
+
+        /*slider*/
+
+        function startSlider() {
+            const slides = document.querySelectorAll('.slider img');
+            const totalSlides = slides.length;
+
+            setInterval(() => {
+                currentIndex++;
+                if (currentIndex >= totalSlides) {
+                    currentIndex = 0;
+                }
+                const offset = currentIndex * -100 / totalSlides;
+                document.querySelector('.slider').style.transform = `translateX(${offset}%)`;
+            }, 3000); // Change image every 3000 milliseconds (3 seconds)
+        }
+
+        window.onload = startSlider;
+
+        /*log in*/
+        document.addEventListener('DOMContentLoaded', function() {
+    var modal = document.getElementById('login-modal');
+    var btn = document.querySelector('.login-toggle');
+    var span = document.querySelector('.close-button');
+
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+});
+
+
+
+    </script>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            fetch('/user/login', {
+                method: 'POST',
+                body: JSON.stringify(Object.fromEntries(formData)),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const messageElement = document.getElementById('login-message');
+                if (data.status === 'logged_in') {
+                    messageElement.textContent = 'Login successful!';
+                    messageElement.style.color = 'green';
+                } else {
+                    messageElement.textContent = 'Login failed.';
+                    messageElement.style.color = 'red';
+                }
+            });
+        });
+
+        document.getElementById('register-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            fetch('/user/add_user', {
+                method: 'POST',
+                body: JSON.stringify(Object.fromEntries(formData)),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const messageElement = document.getElementById('register-message');
+                if (data.status === 'success') {
+                    messageElement.textContent = 'Registration successful!';
+                    messageElement.style.color = 'green';
+                } else {
+                    messageElement.textContent = 'Registration failed.';
+                    messageElement.style.color = 'red';
+                }
+            });
+        });
+
+        document.getElementById('logout-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            fetch('/user/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const messageElement = document.getElementById('logout-message');
+                if (data.status === 'logged_out') {
+                    messageElement.textContent = 'Logout successful!';
+                    messageElement.style.color = 'green';
+                } else {
+                    messageElement.textContent = 'Logout failed.';
+                    messageElement.style.color = 'red';
+                }
+            });
+        });
+    </script>
+</body>
+
+
+</html>

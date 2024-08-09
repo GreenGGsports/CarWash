@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from sqlalchemy import create_engine
 from sessions import SessionFactory
 from config import load_configs
@@ -62,6 +62,9 @@ def create_default_users(session):
         UserModel.add_user(session, 'user', 'userpass', role='user')
 
 def add_blueprints(app: Flask):
+    @app.route('/')
+    def home():
+        return render_template('Landing_page.html')
     app.register_blueprint(billing_ctrl, url_prefix ='/billing')
     app.register_blueprint(reservation_ctrl, url_prefix='/reservation')
     app.register_blueprint(user_ctrl, url_prefix='/user')
