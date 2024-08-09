@@ -8,7 +8,6 @@ from src.models.service_model import ServiceModel
 from src.models.carwash_model import CarWashModel
 from src.models.extra_model import ExtraModel
 from src.models.car_model import CarModel, CarTypeEnum
-from src.views.reservation_view import ReservationView
 from jinja2 import Template
 reservation_ctrl = Blueprint('reservation_ctrl', __name__, url_prefix='/reservation')
 

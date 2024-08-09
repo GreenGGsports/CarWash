@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from sqlalchemy import create_engine
 from sessions import SessionFactory
 
@@ -30,6 +30,10 @@ def create_app(config_name: str):
     return app
 
 def add_blueprints(app: Flask):
+    @app.route('/')
+    def home():
+        return render_template('Landing_page.html')
+    
     app.register_blueprint(billing_ctrl, url_prefix ='/billing')
     app.register_blueprint(reservation_ctrl, url_prefix='/reservation')
     app.register_blueprint(user_ctrl, url_prefix='/user')
