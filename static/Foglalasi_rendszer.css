@@ -23,18 +23,32 @@
 }
 
 
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 /* Normalization styles */
 @import url('path/to/normalize.css');
 
+/* Hibás mezők stílusai */
+input.error,
+select.error,
+textarea.error {
+    border: 2px solid red;
+    /* Piros szegély */
+    background-color: #fdd;
+    /* Világos piros háttér */
+}
 
 body {
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
     line-height: 1.6;
     background-color: black;
-    width: 1920px;
+    width: 100%; /* Szélesség rugalmas */
+    max-width: 1920px; /* Maximum szélesség korlátozása nagy kijelzőkön */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -47,25 +61,26 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 30px auto 25px;
+    margin: 2rem auto; /* Rugalmas margó */
+}
+
+.logo img{
+    width: 450px;
+    height: auto;
 }
 
 .line {
-    width: 1710px;
+    width: 90%; /* Szélesség százalékban */
     height: 1px;
     background-color: white;
-    margin-bottom: 113px;
-    /* Igény szerint állítható távolság a logótól */
+    margin-bottom: 5rem; /* Rugalmas margó */
 }
 
 .FoglalasiFelulet {
-    width: 100%;
-    /* Vagy egy specifikus szélesség, mint pl. 1500px */
-    max-width: 1500px;
-    /* Maximális szélesség korlátozása */
-    margin: 101px auto;
-    padding: 20px;
-    /* Adjunk hozzá padding-et, hogy a belső tartalom ne érje el a széleit */
+    width: 90%; /* Rugalmas szélesség */
+    max-width: 1500px; /* Maximális szélesség korlátozása */
+    margin: 5rem auto; /* Rugalmas margó */
+    padding: 2rem; /* Rugalmas padding */
     box-sizing: border-box;
     box-shadow: 0px 0px 15px 1.5px #13669C, 0px 0px 15px 6px #13669C inset;
 }
@@ -73,237 +88,218 @@ button {
 .focim {
     color: white;
     text-align: center;
-    margin: 100px auto 103px;
-    font-size: 83px;
+    margin: 5rem auto; /* Rugalmas margó */
+    font-size: 5rem; /* Rugalmas betűméret */
 }
 
 .alcim {
-    width: 1009px;
-    height: 103px;
-    font-size: 60px;
+    width: 80%; /* Szélesség százalékban */
+    max-width: 75%; /* Maximális szélesség korlátozása */
+    height: auto; /* Automatikus magasság a tartalomhoz igazodva */
+    font-size: 3.75rem; /* Rugalmas betűméret */
     text-align: center;
-    margin-bottom: 100px;
-    margin-top: 150px;
+    margin: 5rem 0 5rem -2rem;
     border-radius: 0px 5px 25px 0px;
     background: #13669C;
 }
 
+
 .HelyszinekContainer {
     display: flex;
     flex-wrap: wrap;
-    /* Gyermekelemek több sorba törnek, ha nem férnek el egy sorban */
     justify-content: space-evenly;
-    gap: 20px;
-    /* Távolság a gombok között */
+    gap: 1.25rem; /* Rugalmas távolság a gombok között */
 }
 
 .box {
     display: flex;
     flex-wrap: wrap;
-    /* Gyermekelemek több sorba törnek, ha nem férnek el egy sorban */
-    gap: 30px;
-    /* Távolság a gombok között */
+    gap: 1.875rem; /* Rugalmas távolság a gombok között */
     justify-content: center;
 }
 
 .keret {
-    width: 335px;
-    height: 430px;
+    width: 90%; /* Rugalmas szélesség */
+    max-width: 335px; /* Maximális szélesség korlátozása */
+    height: auto; /* Automatikus magasság a tartalomhoz igazodva */
     background: black;
-    box-shadow: 0px 0px 15px 3px rgba(124, 242, 218, 0.45), 0px 0px 15px 3px rgba(124, 242, 218, 0.45) inset;
-    border-top-left-radius: 60px;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border: 1.50px #13669C solid;
+    box-shadow: 0px 0px 0.9375rem 0.1875rem rgba(124, 242, 218, 0.45), 0px 0px 0.9375rem 0.1875rem rgba(124, 242, 218, 0.45) inset;
+    border-radius: 0.625rem; /* Rugalmas kerekítés */
+    border: 0.09375rem solid var(--A-kk, #13669C);
     display: flex;
     flex-direction: column;
     align-items: center;
     overflow: hidden;
-    /* Tartalom túllépésének elrejtése */
     position: relative;
-    /* Elemek pozicionálásához */
-    padding-bottom: 50px;
-    border-radius: 10px;
-    border: 1.5px solid var(--A-kk, #13669C);
-    background: #000;
-    box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50), 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset;
+    padding-bottom: 3.125rem; /* Rugalmas padding */
 }
 
 .keret:hover {
-    border: 1.5px solid var(--A-kk, #13669C);
+    border: 0.09375rem solid var(--A-kk, #13669C);
     background: #000;
-    box-shadow: 0px 0px 15px 3px rgba(124, 242, 218, 0.50), 0px 0px 15px 3px rgba(124, 242, 218, 0.45) inset;
+    box-shadow: 0px 0px 0.9375rem 0.1875rem rgba(124, 242, 218, 0.50), 0px 0px 0.9375rem 0.1875rem rgba(124, 242, 218, 0.45) inset;
 }
 
 .keret:active {
-    border: 1.5px solid rgba(124, 242, 218, 0.90);
+    border: 0.09375rem solid rgba(124, 242, 218, 0.90);
     background: #000;
-    box-shadow: 0px 0px 15px 6px rgba(124, 242, 218, 0.50), 0px 0px 15px 6px rgba(124, 242, 218, 0.50) inset;
+    box-shadow: 0px 0px 0.9375rem 0.375rem rgba(124, 242, 218, 0.50), 0px 0px 0.9375rem 0.375rem rgba(124, 242, 218, 0.50) inset;
 }
-
 
 .helyszin {
     width: 100%;
-    height: 100px;
+    height: 6.25rem; /* Rugalmas magasság */
     object-fit: cover;
-    /* A kép kitöltése a keret méretéhez igazítva */
-    margin-top: 50px;
-    /* 50px távolság a keret tetejétől */
+    margin-top: 3.125rem; /* Rugalmas margó */
+    margin-bottom: 9rem;
 }
 
 .MosokCim {
-    width: 283px;
-    height: 60px;
+    width: 80%; /* Rugalmas szélesség */
+    max-width: 283px; /* Maximális szélesség korlátozása */
+    height: auto; /* Automatikus magasság a tartalomhoz igazodva */
     color: #F3F5F5;
-    font-size: 25px;
-    font-family: Inter;
+    font-size: 1.5625rem; /* Rugalmas betűméret */
+    font-family: Inter, sans-serif;
     font-weight: 600;
     word-wrap: break-word;
     margin-top: auto;
-    padding-top: 10px;
+    padding-top: 0.625rem; /* Rugalmas padding */
 }
 
 .IkonKeret {
-    width: 79px;
-    height: 79px;
+    width: 4.9375rem; /* Rugalmas szélesség */
+    height: 4.9375rem; /* Rugalmas magasság */
     position: absolute;
-    top: calc(100px + 50px + 50px);
-    /* 100px (kép magassága) + 50px (kép és ikon közötti távolság) + 50px (keret tetejétől való távolság) */
+    top: calc(10.25rem + 3.125rem); /* Dinamikus elhelyezés */
     left: 50%;
-    /* Középre helyezés vízszintesen */
     transform: translateX(-50%);
-    /* Vízszintesen középre igazítás */
 }
 
 .ikon {
-    width: 45.53px;
-    height: 65.83px;
+    width: 2.846875rem; /* Rugalmas szélesség */
+    height: 4.114375rem; /* Rugalmas magasság */
     background: #F3F5F5;
     margin: auto;
 }
 
+
 .CsomagokContainer {
     display: flex;
     justify-content: space-evenly;
+    flex-wrap: wrap; /* Több sorban is elférjenek az elemek kisebb képernyőkön */
+    gap: 1.25rem; /* Távolság az elemek között */
 }
 
 .CsomagokBox {
-    width: 335px;
-    min-height: 643px;
-    /* Ensure all buttons have the same minimum height */
+    width: 90%; /* Rugalmas szélesség */
+    max-width: 335px; /* Maximális szélesség korlátozása nagyobb képernyőkön */
+    min-height: 40rem; /* Rugalmas minimális magasság */
     background: black;
-    border-top-left-radius: 60px;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border: 1.50px #13669C solid;
+    border-radius: 0.625rem; /* Rugalmas kerekítés */
+    border: 0.09375rem solid #13669C;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 35px 13px 50px 13px;
-    /* Top, right, bottom, left padding */
+    padding: 2.1875rem 0.8125rem 3.125rem 0.8125rem; /* Rugalmas padding (felső, jobb, alsó, bal) */
     box-sizing: border-box;
-    /* Include padding in the element's total width and height */
-    box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50), 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset;
+    box-shadow: 0px 0px 0.9375rem 0.375rem rgba(19, 102, 156, 0.50), 0px 0px 0.9375rem 0.375rem rgba(19, 102, 156, 0.50) inset;
 }
 
 .CsomagokBox:hover {
-    border: 1.5px solid var(--A-kk, #13669C);
+    border: 0.09375rem solid var(--A-kk, #13669C);
     background: #000;
-    box-shadow: 0px 0px 15px 3px rgba(124, 242, 218, 0.50), 0px 0px 15px 3px rgba(124, 242, 218, 0.45) inset;
+    box-shadow: 0px 0px 0.9375rem 0.1875rem rgba(124, 242, 218, 0.50), 0px 0px 0.9375rem 0.1875rem rgba(124, 242, 218, 0.45) inset;
 }
 
 .CsomagokBox:active {
-    border: 1.5px solid rgba(124, 242, 218, 0.90);
+    border: 0.09375rem solid rgba(124, 242, 218, 0.90);
     background: #000;
-    box-shadow: 0px 0px 15px 6px rgba(124, 242, 218, 0.50), 0px 0px 15px 6px rgba(124, 242, 218, 0.50) inset;
+    box-shadow: 0px 0px 0.9375rem 0.375rem rgba(124, 242, 218, 0.50), 0px 0px 0.9375rem 0.375rem rgba(124, 242, 218, 0.50) inset;
 }
 
 .csomag_nev {
     text-align: center;
     color: #F3F5F5;
-    font-size: 33px;
-    font-family: Graphie;
+    font-size: 2.0625rem; /* Rugalmas betűméret */
+    font-family: Graphie, sans-serif;
     font-weight: 400;
     word-wrap: break-word;
-    margin-bottom: 50px;
-    /* Space between the title and the list */
+    margin-bottom: 3.125rem; /* Rugalmas margó */
 }
 
 .leiras {
     list-style-type: none;
-    /* Remove bullet points */
-    padding: 0 0 0 13px;
-    margin-bottom: 30px;
+    padding: 0 0 0 0.8125rem; /* Rugalmas padding */
+    margin-bottom: 1.875rem; /* Rugalmas margó */
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    gap: 10px;
+    gap: 0.625rem; /* Rugalmas távolság az elemek között */
     display: flex;
     flex-grow: 1;
-    /* Allow the list to grow and fill the available space */
-    border-left: 1px white solid;
+    border-left: 0.0625rem solid white; /* Rugalmas vastagság */
 }
 
 .leiras li {
     text-align: center;
     color: #F3F5F5;
-    font-size: 27px;
-    font-family: Graphie;
+    font-size: 1.6875rem; /* Rugalmas betűméret */
+    font-family: Graphie, sans-serif;
     font-weight: 350;
     word-wrap: break-word;
 }
 
+
 .ExtrakContainers {
     display: flex;
     justify-content: center;
-    gap: 30px;
-    /* Adjust the gap between the two blocks */
-    height: 426px;
+    gap: 1.875rem; /* Rugalmas távolság az elemek között */
+    flex-wrap: wrap; /* Több sorban is elférjenek az elemek kisebb képernyőkön */
+    height: auto; /* Rugalmas magasság */
 }
 
 .ExtrakContainer {
-    width: 703px;
-    height: 430px;
+    width: 90%; /* Rugalmas szélesség */
+    max-width: 703px; /* Maximális szélesség korlátozása */
+    height: auto; /* Automatikus magasság */
     position: relative;
+    margin-bottom: 27rem;
 }
 
 .ExtrakKeret {
-    width: 700px;
-    height: 430px;
-    left: 3px;
-    top: 0px;
+    width: 100%; /* A szülő elem szélességéhez igazodva */
+    max-width: 700px; /* Maximális szélesség korlátozása */
+    height: auto; /* Automatikus magasság */
+    left: 0.1875rem; /* Kis eltolás */
     position: absolute;
     background: black;
-    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50), 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset;
-    border-radius: 25px;
-    border: 1.50px #13669C solid;
+    box-shadow: 0px 0px 0.625rem 0.1875rem rgba(19, 102, 156, 0.50), 0px 0px 0.9375rem 0.375rem rgba(19, 102, 156, 0.50) inset;
+    border-radius: 1.5625rem; /* Rugalmas kerekítés */
+    border: 0.09375rem solid #13669C;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 40px 40px 40px;
+    padding: 0 2.5rem 2.5rem; /* Rugalmas padding */
     box-sizing: border-box;
 }
 
 .ExtrakAlcim {
-    width: 400px;
-    height: 50px;
-    margin-bottom: 20px;
-    border-radius: 0px 12.5px 25px 0px;
+    width: 60%; /* Rugalmas szélesség */
+    max-width: 400px; /* Maximális szélesség korlátozása */
+    height: auto; /* Automatikus magasság */
+    margin: 3.125rem 20.50rem 1.875rem 0; /* Rugalmas margók */
+    border-radius: 0 0.78125rem 1.5625rem 0;
     background: #13669C;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: -297px;
-    margin-bottom: 30px;
-    margin: 50px 300px 30px 0px;
 }
 
 .KulsoExtrak {
     color: black;
-    font-size: 30px;
-    font-family: Inter;
+    font-size: 1.875rem; /* Rugalmas betűméret */
+    font-family: Inter, sans-serif;
     font-weight: 600;
     text-align: center;
 }
@@ -312,46 +308,41 @@ button {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 1.25rem; /* Rugalmas távolság az elemek között */
 }
 
 .KulsoGomb {
-    flex: 1 1 calc(48% - 20px);
-    /* Két oszlopba rendezés */
-    height: 50px;
-    /* A gombok magassága */
+    flex: 1 1 calc(48% - 1.25rem); /* Két oszlopba rendezés rugalmasan */
+    height: 3.125rem; /* Rugalmas magasság */
     background: black;
-    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50), 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
-    border: 1.5px #13669C solid;
+    box-shadow: 0px 0px 0.625rem 0.1875rem rgba(19, 102, 156, 0.50), 0px 0px 0.625rem 0.1875rem rgba(19, 102, 156, 0.50) inset;
+    border: 0.09375rem solid #13669C;
     color: #F3F5F5;
     text-align: center;
-    font-family: Graphie;
-    font-size: 30px;
-    font-style: normal;
+    font-family: Graphie, sans-serif;
+    font-size: 1.875rem; /* Rugalmas betűméret */
     font-weight: 400;
-    line-height: 60px;
-    /* A szöveg vertikális középre igazítása */
+    line-height: 3.75rem; /* Rugalmas vonalmagasság a vertikális középre igazításhoz */
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-
 .KulsoGomb:hover {
-    border: 1.5px solid var(--A-kk, #13669C);
+    border: 0.09375rem solid var(--A-kk, #13669C);
     background: #000;
-    box-shadow: 0px 0px 15px 3px rgba(124, 242, 218, 0.50), 0px 0px 15px 3px rgba(124, 242, 218, 0.45) inset;
+    box-shadow: 0px 0px 0.9375rem 0.1875rem rgba(124, 242, 218, 0.50), 0px 0px 0.9375rem 0.1875rem rgba(124, 242, 218, 0.45) inset;
 }
 
 /* Bal oldal */
 .KulsoGomb:nth-child(odd) {
-    border-radius: 20px 10px 10px 10px;
+    border-radius: 1.25rem 0.625rem 0.625rem 0.625rem; /* Rugalmas kerekítés */
 }
 
 /* Jobb oldal */
 .KulsoGomb:nth-child(even) {
-    border-radius: 10px 10px 20px 10px;
+    border-radius: 0.625rem 0.625rem 1.25rem 0.625rem; /* Rugalmas kerekítés */
 }
 
 .checkbox {
@@ -366,80 +357,75 @@ button {
     height: 100%;
 }
 
-
 /* Bal oldal ellenőrzött állapotban */
 .KulsoGomb:nth-child(odd) .checkbox:checked+.checkbox-label {
-    box-shadow: 0px 0px 10px 3px rgba(124, 242, 218, 0.50) inset;
-    border: 1.5px rgba(124, 242, 218, 0.90) solid;
-    border-radius: 20px 10px 10px 10px;
+    box-shadow: 0px 0px 0.625rem 0.1875rem rgba(124, 242, 218, 0.50) inset;
+    border: 0.09375rem solid rgba(124, 242, 218, 0.90);
+    border-radius: 1.25rem 0.625rem 0.625rem 0.625rem; /* Rugalmas kerekítés */
 }
 
 /* Jobb oldal ellenőrzött állapotban */
 .KulsoGomb:nth-child(even) .checkbox:checked+.checkbox-label {
-    box-shadow: 0px 0px 10px 3px rgba(124, 242, 218, 0.50) inset;
-    border: 1.5px rgba(124, 242, 218, 0.90) solid;
-    border-radius: 10px 10px 20px 10px;
+    box-shadow: 0px 0px 0.625rem 0.1875rem rgba(124, 242, 218, 0.50) inset;
+    border: 0.09375rem solid rgba(124, 242, 218, 0.90);
+    border-radius: 0.625rem 0.625rem 1.25rem 0.625rem; /* Rugalmas kerekítés */
 }
 
 .FigyelmeztetesKeret {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Horizontálisan középre igazítja a tartalmat */
     flex-direction: column;
-    margin-top: 35px;
-    padding: 0 25px;
+    margin-top: 2.1875rem; /* Rugalmas margó */
+    padding: 0 1.5625rem; /* Rugalmas padding */
 }
 
 .Figyelmeztetes {
     width: 100%;
-    height: 70px;
+    height: 4.375rem; /* Rugalmas magasság */
     background: black;
-    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50), 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset;
-    border-radius: 25px;
-    border: 1.50px #13669C solid;
+    box-shadow: 0px 0px 0.625rem 0.1875rem rgba(19, 102, 156, 0.50), 0px 0px 0.9375rem 0.375rem rgba(19, 102, 156, 0.50) inset;
+    border-radius: 1.5625rem; /* Rugalmas kerekítés */
+    border: 0.09375rem solid #13669C;
     display: flex;
-    /* Flexbox használata a középre igazításhoz */
     align-items: center;
-    /* Vertikálisan középre igazítja a tartalmat */
     justify-content: center;
-    /* Horizontálisan középre igazítja a tartalmat */
     text-align: center;
+    padding: 3rem;
 }
 
 .Figyelmeztetes p {
     color: #F3F5F5;
-    font-size: 23px;
-    font-family: Graphie;
+    font-size: 1.4375rem; /* Rugalmas betűméret */
+    font-family: Graphie, sans-serif;
     font-weight: 350;
     word-wrap: break-word;
     margin: 0;
-    /* Távolítsd el a margin-t a pontos középre igazításhoz */
 }
+
 
 .IdopontContainer {
     width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 1.875rem; /* Rugalmas margó */
 }
 
 .IdopontBox {
     display: flex;
-    height: 350px;
-    padding: 0px 25px;
+    height: 21.875rem; /* Rugalmas magasság */
+    padding: 0 1.5625rem; /* Rugalmas padding */
     justify-content: center;
     align-items: center;
-    gap: 30px;
-    border-radius: 25px;
-    border: 1px solid var(--A-kk, #13669C);
+    gap: 1.875rem; /* Rugalmas távolság az elemek között */
+    border-radius: 1.5625rem; /* Rugalmas kerekítés */
+    border: 0.0625rem solid var(--A-kk, #13669C);
     background: #000;
-    box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50), 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset;
+    box-shadow: 0px 0px 0.9375rem 0.375rem rgba(19, 102, 156, 0.50), 0px 0px 0.9375rem 0.375rem rgba(19, 102, 156, 0.50) inset;
 }
 
 .group {
-    flex: 1;
-    /* Foglalja el a rendelkezésre álló helyet */
+    flex: 1; /* Foglalja el a rendelkezésre álló helyet */
     position: relative;
-    margin: 0 20px 0 0;
+    margin: 0 1.25rem 0 0; /* Rugalmas margó */
 }
 
 .bar {
@@ -451,9 +437,9 @@ button {
 .bar:after {
     background: #0288D1;
     content: '';
-    height: 2px;
+    height: 0.125rem; /* Rugalmas magasság */
     width: 0;
-    bottom: 1px;
+    bottom: 0.0625rem; /* Rugalmas eltolás */
     position: absolute;
     transition: 0.2s ease all;
 }
@@ -472,40 +458,33 @@ input:focus~.bar:after {
 }
 
 .IdopontLine {
-    width: 1.50px;
+    width: 0.09375rem; /* Rugalmas vastagság */
     height: 100%;
     background: #13669C;
-    box-shadow: 0px 0px 15px 3px rgba(19, 102, 156, 0.50), 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
+    box-shadow: 0px 0px 0.9375rem 0.1875rem rgba(19, 102, 156, 0.50), 0px 0px 0.625rem 0.1875rem rgba(19, 102, 156, 0.50) inset;
 }
 
 .GombBox {
     display: flex;
     flex-wrap: wrap;
-    /* Lehetővé teszi a több soros elrendezést */
-    gap: 10px;
-    /* Távolság az elemek között */
+    gap: 0.625rem; /* Rugalmas távolság az elemek között */
     justify-content: space-between;
-    /* Egyenletes elosztás a sorban */
     align-items: center;
-    /* Igazítás felülre */
     align-content: center;
     height: 100%;
-    /* Töltsék ki a rendelkezésre álló teret */
 }
 
 .IdopontGomb1 {
-    flex: 1 1 calc(48% - 10px);
-    /* A gombok két oszlopban jelennek meg */
-    height: 50px;
-    /* A gombok magassága 50px */
+    flex: 1 1 calc(48% - 0.625rem); /* A gombok két oszlopban jelennek meg */
+    height: 3.125rem; /* Rugalmas magasság */
     background: black;
-    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50), 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
-    border-radius: 20px 5px 5px 5px;
-    border: 1.50px #13669C solid;
+    box-shadow: 0px 0px 0.625rem 0.1875rem rgba(19, 102, 156, 0.50), 0px 0px 0.625rem 0.1875rem rgba(19, 102, 156, 0.50) inset;
+    border-radius: 1.25rem 0.3125rem 0.3125rem 0.3125rem; /* Rugalmas kerekítés */
+    border: 0.09375rem solid #13669C;
     text-align: center;
     color: #F3F5F5;
-    font-size: 30px;
-    font-family: Graphie;
+    font-size: 1.875rem; /* Rugalmas betűméret */
+    font-family: Graphie, sans-serif;
     font-weight: 700;
     word-wrap: break-word;
     display: flex;
@@ -514,17 +493,16 @@ input:focus~.bar:after {
     cursor: pointer;
     font-style: normal;
     line-height: normal;
-    font-size: 30px;
 }
 
 /* Bal oldal */
 .IdopontGomb1:nth-child(odd) {
-    border-radius: 20px 10px 10px 10px;
+    border-radius: 1.25rem 0.625rem 0.625rem 0.625rem; /* Rugalmas kerekítés */
 }
 
 /* Jobb oldal */
 .IdopontGomb1:nth-child(even) {
-    border-radius: 10px 10px 20px 10px;
+    border-radius: 0.625rem 0.625rem 1.25rem 0.625rem; /* Rugalmas kerekítés */
 }
 
 .free-false {
@@ -532,18 +510,16 @@ input:focus~.bar:after {
 }
 
 .IdopontGomb {
-    flex: 1 1 calc(50% - 10px);
-    /* A gombok két oszlopban jelennek meg */
-    height: 50px;
-    /* A gombok magassága 50px */
+    flex: 1 1 calc(50% - 0.625rem); /* A gombok két oszlopban jelennek meg */
+    height: 3.125rem; /* Rugalmas magasság */
     background: black;
-    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50), 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
-    border-radius: 20px 5px 5px 5px;
-    border: 1.50px #13669C solid;
+    box-shadow: 0px 0px 0.625rem 0.1875rem rgba(19, 102, 156, 0.50), 0px 0px 0.625rem 0.1875rem rgba(19, 102, 156, 0.50) inset;
+    border-radius: 1.25rem 0.3125rem 0.3125rem 0.3125rem; /* Rugalmas kerekítés */
+    border: 0.09375rem solid #13669C;
     text-align: center;
     color: #F3F5F5;
-    font-size: 30px;
-    font-family: Graphie;
+    font-size: 1.875rem; /* Rugalmas betűméret */
+    font-family: Graphie, sans-serif;
     font-weight: 700;
     word-wrap: break-word;
     display: flex;
@@ -552,19 +528,18 @@ input:focus~.bar:after {
     cursor: pointer;
     font-style: normal;
     line-height: normal;
-    font-size: 30px;
 }
 
 .IdopontGomb1:hover {
-    border: 1.5px solid var(--A-kk, #13669C);
+    border: 0.09375rem solid var(--A-kk, #13669C);
     background: #000;
-    box-shadow: 0px 0px 15px 3px rgba(124, 242, 218, 0.50), 0px 0px 15px 3px rgba(124, 242, 218, 0.45) inset;
+    box-shadow: 0px 0px 0.9375rem 0.1875rem rgba(124, 242, 218, 0.50), 0px 0px 0.9375rem 0.1875rem rgba(124, 242, 218, 0.45) inset;
 }
 
 .IdopontGomb1:active {
-    border: 1.5px solid rgba(124, 242, 218, 0.90);
+    border: 0.09375rem solid rgba(124, 242, 218, 0.90);
     background: #000;
-    box-shadow: 0px 0px 15px 6px rgba(124, 242, 218, 0.50), 0px 0px 15px 6px rgba(124, 242, 218, 0.50) inset;
+    box-shadow: 0px 0px 0.9375rem 0.375rem rgba(124, 242, 218, 0.50), 0px 0px 0.9375rem 0.375rem rgba(124, 242, 218, 0.50) inset;
 }
 
 .checkbox {
@@ -575,29 +550,23 @@ input:focus~.bar:after {
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin: 21px;
 }
 
 #calendar-tomorrow {
     display: none;
-    /* input mező elrejtése */
 }
 
 .flatpickr-calendar {
     background: #1E1E3F;
     border: none;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 0.625rem; /* Rugalmas kerekítés */
+    box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.5);
     color: white;
-    width: 658px;
-    /* Szélesség beállítása */
-    height: 300px;
-    /* Magasság beállítása */
+    width: 41.125rem; /* Rugalmas szélesség */
+    height: 18.75rem; /* Rugalmas magasság */
     padding: 0;
-    /* Padding eltávolítása */
     display: flex;
     flex-direction: column;
-    /* A naptár függőleges igazítása */
 }
 
 .flatpickr-innerContainer {
@@ -607,7 +576,6 @@ input:focus~.bar:after {
     color: white;
 }
 
-/* Naptár napok */
 .flatpickr-days {
     display: flex;
     flex-wrap: wrap;
@@ -616,12 +584,10 @@ input:focus~.bar:after {
 }
 
 .flatpickr-day {
-    border: 1px solid white;
+    border: 0.0625rem solid white; /* Rugalmas vastagság */
     color: white;
-    flex: 1 0 calc(100% / 7);
-    /* A napok egyenlő szélessége (7 oszlop) */
-    height: calc(100% / 6);
-    /* Egyenlő magasság (6 sor) */
+    flex: 1 0 calc(100% / 7); /* A napok egyenlő szélessége (7 oszlop) */
+    height: calc(100% / 6); /* Egyenlő magasság (6 sor) */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -643,12 +609,10 @@ input:focus~.bar:after {
     border-color: #FF4081;
 }
 
-/* Hétvégék */
 .flatpickr-day.weekend {
     color: #FF4081;
 }
 
-/* Naptár fejlécek */
 .flatpickr-months .flatpickr-prev-month,
 .flatpickr-months .flatpickr-next-month {
     color: white;
@@ -658,7 +622,6 @@ input:focus~.bar:after {
     color: white;
 }
 
-/* Esemény gombok */
 .flatpickr-time-container .flatpickr-time {
     color: white;
     background: #1E1E3F;
@@ -669,7 +632,6 @@ input:focus~.bar:after {
     border: none;
 }
 
-/* Események */
 .flatpickr-day.today::after {
     content: "";
     display: block;
@@ -677,17 +639,16 @@ input:focus~.bar:after {
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 4px;
-    height: 4px;
+    width: 0.25rem; /* Rugalmas szélesség */
+    height: 0.25rem; /* Rugalmas magasság */
     border-radius: 50%;
     background: #FF4081;
 }
 
-/* Esemény gomb stílus */
 button.flatpickr-day {
     background: #1E1E3F;
-    border: 1px solid white;
-    border-radius: 5px;
+    border: 0.0625rem solid white; /* Rugalmas vastagság */
+    border-radius: 0.3125rem; /* Rugalmas kerekítés */
     color: white;
 }
 
@@ -698,20 +659,21 @@ button.flatpickr-day:focus {
     color: white;
 }
 
+
 .AdatokContainer {
     width: 100%;
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 0px;
+    gap: 0;
 }
 
 .FormsContainer {
     display: flex;
     flex-direction: column-reverse;
-    gap: 30px;
+    gap: 1.875rem; /* Rugalmas távolság */
     align-items: center;
-    padding: 0 35px;
+    padding: 0 2.1875rem; /* Rugalmas padding */
 }
 
 .TopContainer,
@@ -719,7 +681,7 @@ button.flatpickr-day:focus {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    gap: 30px;
+    gap: 1.875rem; /* Rugalmas távolság */
 }
 
 .szamlazasForm,
@@ -727,7 +689,7 @@ button.flatpickr-day:focus {
     width: 100%;
     display: flex;
     flex-direction: row;
-    gap: 30px;
+    gap: 1.875rem; /* Rugalmas távolság */
 }
 
 .szamlazasForm {
@@ -742,13 +704,13 @@ button.flatpickr-day:focus {
 .AutoAdatokContainer,
 .SzemelyesAdatokContainer,
 .MegjegyzesContainer {
-    width: calc(50% - 15px);
+    width: calc(50% - 0.9375rem); /* Rugalmas szélesség */
     background: black;
-    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50), 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
-    border-radius: 25px;
-    border: 1.50px #13669C solid;
+    box-shadow: 0px 0px 0.625rem 0.1875rem rgba(19, 102, 156, 0.50), 0px 0px 0.625rem 0.1875rem rgba(19, 102, 156, 0.50) inset;
+    border-radius: 1.5625rem; /* Rugalmas kerekítés */
+    border: 0.09375rem solid #13669C;
     box-sizing: border-box;
-    padding: 50px 25px 50px 25px;
+    padding: 3.125rem 1.5625rem; /* Rugalmas padding */
 }
 
 .SzamlazasiAlcimContainer,
@@ -757,38 +719,38 @@ button.flatpickr-day:focus {
 .MegjegyzesAlcimContainer {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem; /* Rugalmas margó */
 }
 
 .SzamlazasiAlcimBox,
 .AutoAdatokAlcimBox,
 .SzemelyesAdatokAlcimBox,
 .MegjegyzesAlcimBox {
-    width: 53%;
-    height: 50px;
+    width: 53%; /* Marad a fix százalékos szélesség */
+    height: 3.125rem; /* Rugalmas magasság */
     background: #13669C;
-    border-radius: 0px 12.5px 25px 0px;
+    border-radius: 0 0.78125rem 1.5625rem 0; /* Rugalmas kerekítés */
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: black;
-    font-size: 30px;
-    font-family: Inter;
+    font-size: 1.875rem; /* Rugalmas betűméret */
+    font-family: Inter, sans-serif;
     font-weight: 600;
-    margin-left: -25px;
+    margin-left: -1.5625rem; /* Rugalmas eltolás */
 }
 
 .input-outer-container {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 1.875rem; /* Rugalmas távolság */
 }
 
 .input-container {
     display: flex;
     justify-content: space-between;
-    gap: 20px;
+    gap: 1.25rem; /* Rugalmas távolság */
 }
 
 .input-mezo.Fizetes,
@@ -801,36 +763,35 @@ button.flatpickr-day:focus {
 
 .dropdown-label,
 .Adatvedelem {
-    margin-bottom: 5px;
+    margin-bottom: 0.3125rem; /* Rugalmas margó */
 }
 
 .input-mezo {
     display: flex;
     flex-direction: column;
-    gap: 0px;
-    /* Távolság eltávolítása */
+    gap: 0; /* Távolság eltávolítása */
     width: 100%;
 }
 
 .AdatvedelemPipa {
-    margin-right: 10px;
+    margin-right: 0.625rem; /* Rugalmas margó */
 }
 
 .Adatvedelem {
-    font-size: 20px;
+    font-size: 1.25rem; /* Rugalmas betűméret */
     color: white;
 }
 
 .dropdown {
     width: 100%;
-    height: 50px;
+    height: 3.125rem; /* Rugalmas magasság */
     background: black;
-    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50), 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
-    border-radius: 20px 20px 0 0;
-    border: 1.50px #13669C solid;
+    box-shadow: 0px 0px 0.625rem 0.1875rem rgba(19, 102, 156, 0.50), 0px 0px 0.625rem 0.1875rem rgba(19, 102, 156, 0.50) inset;
+    border-radius: 1.25rem 1.25rem 0 0;
+    border: 0.09375rem solid #13669C;
     color: white;
-    padding: 10px;
-    font-size: 18px;
+    padding: 0.625rem; /* Rugalmas padding */
+    font-size: 1.125rem; /* Rugalmas betűméret */
     box-sizing: border-box;
     appearance: none;
     -webkit-appearance: none;
@@ -838,15 +799,15 @@ button.flatpickr-day:focus {
 }
 
 .AutoMeretLenyilo {
-    width: 45%;
-    height: 50px;
+    width: 45%; /* Megmarad a százalékos szélesség */
+    height: 3.125rem; /* Rugalmas magasság */
     background: black;
-    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50), 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
-    border-radius: 20px 20px 0 0;
-    border: 1.50px #13669C solid;
+    box-shadow: 0px 0px 0.625rem 0.1875rem rgba(19, 102, 156, 0.50), 0px 0px 0.625rem 0.1875rem rgba(19, 102, 156, 0.50) inset;
+    border-radius: 1.25rem 1.25rem 0 0;
+    border: 0.09375rem solid #13669C;
     color: white;
-    padding: 10px;
-    font-size: 18px;
+    padding: 0.625rem; /* Rugalmas padding */
+    font-size: 1.125rem; /* Rugalmas betűméret */
     box-sizing: border-box;
     appearance: none;
     -webkit-appearance: none;
@@ -856,9 +817,9 @@ button.flatpickr-day:focus {
 
 .AutoMeretLenyilo-label,
 .dropdown-label {
-    font-size: 16px;
+    font-size: 1rem; /* Rugalmas betűméret */
     color: white;
-    margin-bottom: 5px;
+    margin-bottom: 0.3125rem; /* Rugalmas margó */
     text-align: center;
 }
 
@@ -869,27 +830,27 @@ button.flatpickr-day:focus {
 .Cegnev.left-input,
 .Adoszam.left-input {
     width: 100%;
-    height: 50px;
+    height: 3.125rem; /* Rugalmas magasság */
     background: black;
-    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50), 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
-    border-radius: 20px 5px 5px 5px;
-    border: 1.50px #13669C solid;
+    box-shadow: 0px 0px 0.625rem 0.1875rem rgba(19, 102, 156, 0.50), 0px 0px 0.625rem 0.1875rem rgba(19, 102, 156, 0.50) inset;
+    border-radius: 1.25rem 0.3125rem 0.3125rem 0.3125rem; /* Rugalmas kerekítés */
+    border: 0.09375rem solid #13669C;
     color: white;
-    padding: 10px;
-    font-size: 18px;
+    padding: 0.625rem; /* Rugalmas padding */
+    font-size: 1.125rem; /* Rugalmas betűméret */
     box-sizing: border-box;
 }
 
 .dropdown.left-input {
     width: 100%;
-    height: 50px;
+    height: 3.125rem; /* Rugalmas magasság */
     background: black;
-    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50), 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
-    border-radius: 20px 20px 0 0;
-    border: 1.50px #13669C solid;
+    box-shadow: 0px 0px 0.625rem 0.1875rem rgba(19, 102, 156, 0.50), 0px 0px 0.625rem 0.1875rem rgba(19, 102, 156, 0.50) inset;
+    border-radius: 1.25rem 1.25rem 0 0;
+    border: 0.09375rem solid #13669C;
     color: white;
-    padding: 10px;
-    font-size: 18px;
+    padding: 0.625rem; /* Rugalmas padding */
+    font-size: 1.125rem; /* Rugalmas betűméret */
     box-sizing: border-box;
 }
 
@@ -899,29 +860,26 @@ button.flatpickr-day:focus {
 .Adoszam.right-input,
 .dropdown.right-input {
     width: 100%;
-    height: 50px;
+    height: 3.125rem; /* Rugalmas magasság */
     background: black;
-    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50), 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
-    border-radius: 5px 5px 20px 5px;
-    border: 1.50px #13669C solid;
+    box-shadow: 0px 0px 0.625rem 0.1875rem rgba(19, 102, 156, 0.50), 0px 0px 0.625rem 0.1875rem rgba(19, 102, 156, 0.50) inset;
+    border-radius: 0.3125rem 0.3125rem 1.25rem 0.3125rem; /* Rugalmas kerekítés */
+    border: 0.09375rem solid #13669C;
     color: white;
-    padding: 10px;
-    font-size: 18px;
+    padding: 0.625rem; /* Rugalmas padding */
+    font-size: 1.125rem; /* Rugalmas betűméret */
     box-sizing: border-box;
 }
 
 .AdatvedelemPipa {
-    margin-right: 10px;
-    /* Szükség szerint állítható */
+    margin-right: 0.625rem; /* Rugalmas margó */
 }
 
 .Fizetes {
     display: flex;
     flex: 1;
     justify-content: space-between;
-    /* Egyenletes elosztás a két elem között */
     align-items: center;
-    /* Középen igazítja az elemeket vertikálisan */
 }
 
 .adatvedelem-container {
@@ -931,55 +889,54 @@ button.flatpickr-day:focus {
 }
 
 .AdatokContainer label {
-    font-size: 20px;
+    font-size: 1.25rem; /* Rugalmas betűméret */
     color: white;
-    margin-left: 15px;
+    margin-left: 0.9375rem; /* Rugalmas margó */
 }
 
 .MegjegyzesBox {
     display: flex;
     flex-direction: column-reverse;
-    margin-right: 40px;
+    margin-right: 2.5rem; /* Rugalmas margó */
 }
 
 .MegjegyzesBemenet {
     width: 100%;
-    height: 410px;
+    height: 25.625rem; /* Rugalmas magasság */
     background: black;
-    box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 50px;
-    border-bottom-left-radius: 20px;
-    border: 1.50px #13669C solid;
+    box-shadow: 0px 0px 0.625rem 0.1875rem rgba(19, 102, 156, 0.50) inset;
+    border-radius: 1.25rem 1.25rem 3.125rem 1.25rem; /* Rugalmas kerekítés */
+    border: 0.09375rem solid #13669C;
     color: white;
-    font-size: 18px;
-    padding: 10px;
+    font-size: 1.125rem; /* Rugalmas betűméret */
+    padding: 0.625rem; /* Rugalmas padding */
     resize: none;
-    font-family: Graphie;
-    padding-right: 25px;
+    font-family: Graphie, sans-serif;
+    padding-right: 1.5625rem; /* Rugalmas padding */
 }
+
 
 .FoglalasContainer {
     display: flex;
-    padding: 100px 0px;
+    padding: 6.25rem 0; /* Rugalmas padding */
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    align-self: stretch;
+    gap: 0.625rem; /* Rugalmas távolság az elemek között */
+    width: 100%; /* Az elemek teljes szélesség kihasználása */
 }
 
 .Foglalas {
-    width: 400px;
-    height: 100px;
-    border-radius: 20px 5px;
-    border: 1.5px solid var(--Color, #7CF2DA);
+    width: 90%; /* Rugalmas szélesség, alkalmazkodik a konténerhez */
+    max-width: 25rem; /* Maximális szélesség nagyobb képernyőkön */
+    height: 6.25rem; /* Rugalmas magasság */
+    border-radius: 1.25rem 0.3125rem; /* Rugalmas kerekítés */
+    border: 0.09375rem solid var(--Color, #7CF2DA); /* Rugalmas keretvastagság */
     background: #000;
-    box-shadow: 0px 0px 15px 3px rgba(124, 242, 218, 0.50), 0px 0px 15px 3px rgba(124, 242, 218, 0.50) inset;
+    box-shadow: 0px 0px 0.9375rem 0.1875rem rgba(124, 242, 218, 0.50), 0px 0px 0.9375rem 0.1875rem rgba(124, 242, 218, 0.50) inset;
     text-align: center;
     color: #F3F5F5;
-    font-size: 55px;
-    font-family: Graphie;
+    font-size: 3.4375rem; /* Rugalmas betűméret */
+    font-family: Graphie, sans-serif;
     font-weight: 600;
     word-wrap: break-word;
     display: flex;
@@ -987,23 +944,26 @@ button.flatpickr-day:focus {
     justify-content: center;
 }
 
+
 .footer {
-    width: 1920px;
-    height: 407.12px;
+    width: 100%; /* Rugalmas szélesség, alkalmazkodik a nézetablakhoz */
+    max-width: 120rem; /* Maximális szélesség nagyobb képernyőkön */
+    height: auto; /* Rugalmas magasság */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    gap: 50px;
+    gap: 3.125rem; /* Rugalmas távolság az elemek között */
+    padding: 2rem; /* Rugalmas padding, hogy némi helyet biztosítson az oldalsó széleknél */
 }
 
 .footer-content {
     align-self: stretch;
-    height: 254px;
+    height: 15.875rem; /* Rugalmas magasság */
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 90px;
+    gap: 0.625rem; /* Rugalmas távolság az elemek között */
 }
 
 .footer-section {
@@ -1011,1365 +971,265 @@ button.flatpickr-day:focus {
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    gap: 25px;
+    gap: 1.5625rem; /* Rugalmas távolság az elemek között */
 }
 
 .footer-box {
-    padding: 10px;
-    border-left: 3px #13669C solid;
+    padding: 0.625rem; /* Rugalmas padding */
+    border-left: 0.1875rem #13669C solid; /* Rugalmas vastagság */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    gap: 5px;
+    gap: 0.3125rem; /* Rugalmas távolság az elemek között */
 }
 
 .footer-box img {
-    width: 120px;
-    height: 100px;
+    width: 7.5rem; /* Rugalmas szélesség */
+    height: 6.25rem; /* Rugalmas magasság */
 }
 
 .footer-text {
     color: white;
-    font-size: 33px;
-    font-family: Graphie;
+    font-size: 2.0625rem; /* Rugalmas betűméret */
+    font-family: Graphie, sans-serif;
     font-weight: 350;
     word-wrap: break-word;
 }
 
 .footer-socials {
-    height: 82px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 15px;
-    border-left: 3px #13669C solid;
+    height: 8.125rem; /* Rugalmas magasság */
+    padding-top: 0.625rem; /* Rugalmas padding */
+    padding-bottom: 0.625rem; /* Rugalmas padding */
+    padding-left: 0.9375rem; /* Rugalmas padding */
+    border-left: 0.1875rem #13669C solid; /* Rugalmas vastagság */
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 0.9375rem; /* Rugalmas távolság az elemek között */
 }
 
 .footer-socials .social-icon {
-    width: 42px;
-    height: 42px;
+    width: 2.625rem; /* Rugalmas szélesség */
+    height: 2.625rem; /* Rugalmas magasság */
     background: white;
 }
 
 .footer-powered {
-    width: 1820px;
+    width: 95%; /* Rugalmas szélesség, alkalmazkodik a nézetablakhoz */
+    max-width: 113.75rem; /* Maximális szélesség nagyobb képernyőkön */
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 1.25rem; /* Rugalmas távolság az elemek között */
 }
 
 .footer-powered-content {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 0.625rem; /* Rugalmas távolság az elemek között */
 }
 
 .footer-powered-text {
     color: white;
-    font-size: 40px;
-    font-family: Graphie;
+    font-size: 2.5rem; /* Rugalmas betűméret */
+    font-family: Graphie, sans-serif;
     font-weight: 350;
     word-wrap: break-word;
 }
 
 .footer-powered-image {
-    width: 100px;
-    height: 103.12px;
+    width: 6.25rem; /* Rugalmas szélesség */
+    height: 6.445rem; /* Rugalmas magasság */
 }
+
 
 /*Reszponziv oldal*/
 
-/* Nagyobb képernyők (1920px vagy annál nagyobb) */
-@media only screen and (min-width: 1920px) {
-    body {
-        max-width: 1920px;
-        margin: 0 auto;
-    }
-
-    /* A fő tartalom szélesebbre igazítása */
-    .FoglalasiFelulet {
-        min-width: 100%;
-        /* Szélesebb, mint az előző 80% */
-        padding: 20px;
-        box-sizing: border-box;
-    }
-
-    .HelyszinekContainer {
-        display: flex;
-        flex-wrap: nowrap;
-        /* Egy sorba rendezi a gyermekelemeket */
-        justify-content: space-between;
-        /* Egyenletesen elosztja a gyermekelemeket */
-        gap: 20px;
-        /* Távolság a gombok között */
-        padding: 0 25px;
-    }
-
-    .box {
-        width: 100%;
-        /* A box konténer kitölti a rendelkezésre álló területet */
-        display: flex;
-        justify-content: space-between;
-        /* A gombokat egyenletesen elosztja */
-        gap: 20px;
-        /* Távolság a gombok között */
-    }
-
-    .keret {
-        flex: 1 1 calc(25% - 20px);
-        /* Rugalmas szélesség, hogy mind a 4 gomb egymás mellé férjen */
-        max-width: calc(25% - 20px);
-        /* Maximális szélesség korlátozása */
-        height: 600px;
-        /* Magasság növelése az álló téglalap forma megtartásához */
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        /* Elem elhelyezése a konténer alján */
-        align-items: center;
-        /* Középre igazítás vízszintesen */
-        padding-bottom: 50px;
-        padding-top: 20px;
-        /* Adjunk egy kis távolságot felül is */
-    }
-
-    .helyszin {
-        height: 200px;
-        /* Kép magasságának növelése */
-        width: 100%;
-        /* A kép teljes szélességet elfoglalja */
-        object-fit: cover;
-        /* A kép kitöltése a keret méretéhez igazítva */
-    }
-
-    .IkonKeret {
-        top: auto;
-        bottom: 140px;
-        /* Igazítja az ikont a kívánt helyre */
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
-    .MosokCim {
-        margin-top: auto;
-        margin-bottom: 20px;
-        /* Adjunk egy kis távolságot alul */
-        text-align: center;
-        font-size: 30px;
-    }
-
-    .CsomagokContainer {
-        display: flex;
-        flex-wrap: nowrap;
-        /* Egy sorba rendezi a gyermekelemeket */
-        justify-content: space-between;
-        /* Egyenletesen elosztja a gyermekelemeket */
-        gap: 25px;
-        /* Gap a csomagok között */
-        padding: 0 25px;
-        /* 25px távolság a szélétől */
-    }
-
-    .CsomagokBox {
-        flex: 1 1 calc(25% - 25px);
-        /* Rugalmas szélesség */
-        max-width: calc(25% - 25px);
-        /* Maximális szélesség korlátozása */
-        margin-bottom: 30px;
-        /* Távolság az elemek között */
-        padding: 50px 20px;
-        /* Növelt padding */
-    }
-
-    .csomag_nev {
-        font-size: 48px;
-        /* Növelt betűméret */
-        margin-bottom: 30px;
-        /* Növelt távolság a cím és a lista között */
-    }
-
-    .leiras li {
-        font-size: 35px;
-        /* Növelt betűméret a listában */
-    }
-
-    .ExtrakContainers {
-        display: flex;
-        justify-content: center;
-        gap: 30px;
-        /* Távolság az ExtraContainer elemek között */
-        padding: 0 25px;
-        height: 482px;
-    }
-
-    .ExtrakContainer {
-        width: 50%;
-        /* Az ExtraContainer szélességének növelése */
-    }
-
-    .ExtrakKeret {
-        width: 100%;
-        /* Az ExtraKeret szélességének növelése */
-        height: auto;
-        /* Automatikus magasság a tartalom alapján */
-        background: black;
-        box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset;
-        border-radius: 25px;
-        border: 1.50px #13669C solid;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        box-sizing: border-box;
-    }
-
-    .KulsoExtrak {
-        font-size: 40px;
-        font-weight: 700px;
-    }
-
-    .ExtrakAlcim {
-        width: 500px;
-        height: 60px;
-        margin-left: -496px;
-        margin: 50px 300px 30px -100px;
-    }
-
-    .KulsoExtrakItems {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        gap: 20px;
-        /* Távolság a gombok között */
-        width: 100%;
-        /* Teljes szélesség kihasználása */
-    }
-
-    .KulsoGomb {
-        flex: 1 1 calc(49% - 20px);
-        /* Két oszlopba rendezés */
-        height: 60px;
-        /* A gombok magassága */
-        background: black;
-        box-shadow: 0px 0px 10px 3px rgba(124, 242, 218, 0.35) inset;
-        border: 1.5px #13669C solid;
-        color: #F3F5F5;
-        text-align: center;
-        font-family: Graphie;
-        font-size: 35px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 60px;
-        /* A szöveg vertikális középre igazítása */
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .Figyelmeztetes p {
-        font-size: 30px;
-    }
-
-    .KulsoExtrak {
-        color: black;
-        font-size: 40px;
-        font-family: Inter;
-        font-weight: 780;
-        text-align: center;
+@media only screen and (max-width: 1627px) {
+    .CsomagokContainer{
+        gap: 3.25rem;
     }
 
     .IdopontBox {
-        flex-direction: row;
-    }
-
-    .GombBox {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-
-    .IdopontGomb1 {
-        height: 60px;
-        /* A gombok magassága 50px */
-        font-size: 35px;
-    }
-
-    .SzamlazasiAlcimBox,
-    .AutoAdatokAlcimBox,
-    .SzemelyesAdatokAlcimBox,
-    .MegjegyzesAlcimBox {
-        height: 60px;
-        font-size: 40px;
-    }
-
-    .KeresztNev.right-input,
-    .Email.right-input,
-    .Cim.right-input,
-    .Adoszam.right-input,
-    .dropdown.right-input {
-        height: 60px;
-        font-size: 24px;
-    }
-
-    .VezetekNev.left-input,
-    .KeresztNev.left-input,
-    .Email.left-input,
-    .Cim.left-input,
-    .Cegnev.left-input,
-    .Adoszam.left-input,
-    .dropdown.left-input {
-        height: 60px;
-        font-size: 24px;
-    }
-
-    ::placeholder {
-        text-align: left;
-    }
-
-    label {
-        font-size: 24px;
-    }
-
-    .AutoMeretLenyilo-label,
-    .dropdown-label {
-        font-size: 24px;
-    }
-
-    .AutoMeretLenyilo {
-        width: 50%;
-        height: 60px;
-        font-size: 24px;
-    }
-
-    .MegjegyzesBemenet {
-        font-size: 26px;
-    }
-
-
-    .Foglalas {
-        width: 600px;
-        height: 150px;
-        font-size: 80px;
-    }
-
-    .footer {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-
-    .footer-content {
-        gap: 174px;
-    }
-
-    .footer-powered {
-        width: 1920px;
-    }
-
-    .footer-box img {
-        width: auto;
-        height: auto;
-    }
-
-    .focim {
-        font-size: 90px;
-    }
-
-    .alcim {
-        font-size: 60px;
-        min-width: 65%;
-    }
-}
-
-/* Közepes méretű képernyők (1024px - 1920px közötti) */
-@media only screen and (min-width: 1024px) and (max-width: 1919px) {
-    body {
-        margin: 0 auto;
-        display: flex;
         flex-direction: column;
-        align-items: center;
-    }
-
-    /* A fő tartalom szélesebbre igazítása */
-    .FoglalasiFelulet {
-        width: 95%;
-        /* A tablet mérethez igazítva */
-        padding: 20px;
-        box-sizing: border-box;
-    }
-
-    .HelyszinekContainer {
-        display: flex;
-        flex-wrap: nowrap;
-        /* Egy sorba rendezi a gyermekelemeket */
-        justify-content: space-between;
-        /* Egyenletesen elosztja a gyermekelemeket */
-        gap: 20px;
-        /* Távolság a gombok között */
-        padding: 0 25px;
-    }
-
-    .box {
-        width: 100%;
-        /* A box konténer kitölti a rendelkezésre álló területet */
-        display: flex;
-        justify-content: space-between;
-        /* A gombokat egyenletesen elosztja */
-        gap: 20px;
-        /* Távolság a gombok között */
-    }
-
-    .keret {
-        flex: 1 1 calc(25% - 20px);
-        /* Rugalmas szélesség, hogy mind a 4 gomb egymás mellé férjen */
-        max-width: calc(25% - 20px);
-        /* Maximális szélesség korlátozása */
-        height: 500px;
-        /* Magasság növelése az álló téglalap forma megtartásához */
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        /* Elem elhelyezése a konténer alján */
-        align-items: center;
-        /* Középre igazítás vízszintesen */
-        padding-bottom: 50px;
-        padding-top: 20px;
-        /* Adjunk egy kis távolságot felül is */
-    }
-
-    .helyszin {
-        height: 140px;
-        /* Kép magasságának növelése */
-        width: 100%;
-        /* A kép teljes szélességet elfoglalja */
-        object-fit: cover;
-        /* A kép kitöltése a keret méretéhez igazítva */
-    }
-
-    .IkonKeret {
-        top: auto;
-        bottom: 140px;
-        /* Igazítja az ikont a kívánt helyre */
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
-    .MosokCim {
-        margin-top: auto;
-        margin-bottom: 20px;
-        /* Adjunk egy kis távolságot alul */
-        text-align: center;
-        font-size: 28px;
-    }
-
-    .CsomagokContainer {
-        display: flex;
-        flex-wrap: wrap;
-        /* Több sorba rendezi a gyermekelemeket */
-        justify-content: space-between;
-        /* Egyenletesen elosztja a gyermekelemeket */
-        gap: 25px;
-        /* Gap a csomagok között */
-        padding: 0 25px;
-        /* 25px távolság a szélétől */
-    }
-
-    .CsomagokBox {
-        flex: 1 1 calc(25% - 25px);
-        /* Rugalmas szélesség */
-        max-width: calc(33% - 25px);
-        /* Maximális szélesség korlátozása */
-        margin-bottom: 30px;
-        /* Távolság az elemek között */
-        padding: 40px 20px;
-        /* Növelt padding */
-    }
-
-    .csomag_nev {
-        font-size: 35px;
-        /* Növelt betűméret */
-        margin-bottom: 30px;
-        /* Növelt távolság a cím és a lista között */
-    }
-
-    .leiras li {
-        font-size: 30px;
-        /* Növelt betűméret a listában */
-    }
-
-    .ExtrakContainers {
-        display: flex;
-        flex-wrap: wrap;
-        /* Több sorba rendezi az ExtraContainer elemeket */
-        justify-content: space-between;
-        gap: 30px;
-        /* Távolság az ExtraContainer elemek között */
-        padding: 0 25px;
         height: auto;
-        margin-bottom: 35px;
-    }
-
-    .ExtrakContainer {
-        width: 48%;
-        /* Az ExtraContainer szélességének növelése */
-    }
-
-    .ExtrakKeret {
-        width: 100%;
-        /* Az ExtraKeret szélességének növelése */
-        height: auto;
-        /* Automatikus magasság a tartalom alapján */
-        background: black;
-        box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset;
-        border-radius: 25px;
-        border: 1.50px #13669C solid;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        box-sizing: border-box;
         padding: 40px;
     }
 
+    .SzamlazasiAlcimContainer, .AutoAdatokAlcimContainer, .SzemelyesAdatokAlcimContainer, .MegjegyzesAlcimContainer{
+        width: 100%;
+    }
+
+    .SzamlazasiAlcimBox, .AutoAdatokAlcimBox, .SzemelyesAdatokAlcimBox, .MegjegyzesAlcimBox{
+        width: 75%;
+        line-height: 2.25rem;
+        height: auto;
+        padding: 0.5rem;
+    }
+
+    .footer-text{
+        font-size: 1.5rem;
+    }
+
+    .footer-socials{
+        height: 6.125rem;
+    }
+}
+
+@media only screen and (max-width: 1200px){
+    .foglalasForm, .szamlazasForm{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .SzamlazasiAdatokContainer, .AutoAdatokContainer, .SzemelyesAdatokContainer, .MegjegyzesContainer{
+        width: 100%;
+    }
+
+    .footer-text{
+        font-size: 1rem;
+    }
+
+    .footer-socials{
+        height: 4.35rem;
+    }
+
+    .footer-content{
+        gap: 2.5rem;;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .Figyelmeztetes{
+        height: auto;
+    }
+
+    .alcim{
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    
+}
+
+@media (max-width: 940px) {
     .ExtrakAlcim {
-        width: 70%;
-        height: 50px;
+        margin-left: -2.5rem; /* A bal margót automatikusra állítjuk */
+        margin-right: auto; /* A jobb margót eltávolítjuk */
+    }
+
+    .GombBox{
+        flex-wrap: nowrap;
+        flex-direction: column;
+        width: 75%;
+    }
+
+    .IdopontGomb{
+        width: 75%;
+        height: auto;
+        padding: 1rem;
+    }
+    
+    .IdopontGomb1{
+        width: 75%;
+        height: auto;
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .KulsoExtrakItems{
+        flex-wrap: nowrap;
+        flex-direction: column;
+    }
+
+    .ExtrakContainer{
+        padding-bottom: 24rem;
+    }
+
+    .alcim{
+        font-size: 2.75rem;
+    }
+
+}
+
+
+@media (max-width: 540px) {
+    .logo img{
+        width: 280px;
+    }
+
+    .focim{
+        font-size: 4rem;
+    }
+
+    .alcim{
+        font-size: 1.75rem;
+        width: 90%;
+        max-width: 100%;  
+    }
+
+    .leiras li{
+        font-size: 1.25rem;
+    }
+
+    .ExtrakAlcim{
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .KulsoExtrak{
+        font-size: 1.5rem;
+    }
+
+    .KulsoGomb{
+        font-size: 1.3rem;
+    }
+
+    .IdopontGomb1{
+        width: 100%;
+        font-size: 1.2rem;
+    }
+
+    .SzamlazasiAlcimBox, .AutoAdatokAlcimBox, .SzemelyesAdatokAlcimBox, .MegjegyzesAlcimBox{
+        width: 100%;
+        font-size: 1.2rem;
+        line-height: 1.25rem;
+    }
+
+    .input-container{
+        flex-direction: column;
+    }
+
+    .AdatokContainer label{
+        font-size: 1rem;
+    }
+
+    input::placeholder{
+        font-size: 1rem;
+    }
+
+    .AutoMeretLenyilo{
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    .AutoMeretLenyilo label{
         margin-left: 0;
-        margin: 30px 0;
-        text-align: center;
-        margin-left: -259px;
     }
 
-    .KulsoExtrakItems {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        gap: 20px;
-        /* Távolság a gombok között */
-        width: 100%;
-        /* Teljes szélesség kihasználása */
+    .MegjegyzesAlcimBox{
+        width: 180%;
     }
 
-    .KulsoGomb {
-        flex: 1 1 calc(48% - 20px);
-        /* Két oszlopba rendezés */
-        height: 55px;
-        /* A gombok magassága */
-        background: black;
-        box-shadow: 0px 0px 10px 3px rgba(124, 242, 218, 0.35) inset;
-        border: 1.5px #13669C solid;
-        color: #F3F5F5;
-        text-align: center;
-        font-family: Graphie;
-        font-size: 30px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 50px;
-        /* A szöveg vertikális középre igazítása */
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    .MegjegyzesBemenet{
+        width: 110%;
     }
 
-    .Figyelmeztetes p {
-        font-size: 25px;
+    .Foglalas{
+        font-size: 2.438rem;
     }
 
-    .KulsoExtrak {
-        color: black;
-        font-size: 35px;
-        font-family: Inter;
-        font-weight: 700;
-        text-align: center;
-    }
-
-    .FigyelmeztetesKeret {
-        margin-top: 85px;
-    }
-
-    .IdopontBox {
-        flex-direction: row;
-    }
-
-    .GombBox {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-
-    .IdopontGomb1 {
-        height: 50px;
-        /* A gombok magassága 50px */
-        font-size: 30px;
-    }
-
-    .IdopontGomb {
-        height: 50px;
-        /* A gombok magassága 50px */
-        font-size: 30px;
-    }
-
-    .IdopontFigyelmeztetes {
-        margin: 0;
-    }
-
-    .SzamlazasiAlcimBox,
-    .AutoAdatokAlcimBox,
-    .SzemelyesAdatokAlcimBox,
-    .MegjegyzesAlcimBox {
-        height: 50px;
-        font-size: 35px;
-    }
-
-    .KeresztNev.right-input,
-    .Email.right-input,
-    .Cim.right-input,
-    .Adoszam.right-input,
-    .dropdown.right-input {
-        height: 50px;
-        font-size: 20px;
-    }
-
-    .VezetekNev.left-input,
-    .KeresztNev.left-input,
-    .Email.left-input,
-    .Cim.left-input,
-    .Cegnev.left-input,
-    .Adoszam.left-input,
-    .dropdown.left-input {
-        height: 50px;
-        font-size: 20px;
-    }
-
-    ::placeholder {
-        text-align: left;
-    }
-
-    label {
-        font-size: 20px;
-    }
-
-    .AutoMeretLenyilo-label,
-    .dropdown-label {
-        font-size: 20px;
-    }
-
-    .AutoMeretLenyilo {
-        width: 50%;
-        height: 50px;
-        font-size: 20px;
-    }
-
-    .MegjegyzesBemenet {
-        font-size: 20px;
-    }
-
-    .Foglalas {
-        width: 500px;
-        height: 120px;
-        font-size: 60px;
-    }
-
-    .footer {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        padding: 0 25px;
-        justify-content: center;
-    }
-
-    .footer-content {
-        gap: 35px;
-    }
-
-    .footer-powered {
-        width: 100%;
-        padding: 0 25px;
-    }
-
-    .footer-box img {
-        width: auto;
-        height: auto;
-    }
-
-    .focim {
-        font-size: 80px;
-    }
-
-    .alcim {
-        font-size: 60px;
-        min-width: 65%;
-    }
-}
-
-/* Kisebb képernyők (1024px alatti) */
-@media only screen and (min-width: 758px) and (max-width: 1023px) {
-    body {
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    /* A fő tartalom szélesebbre igazítása */
-    .FoglalasiFelulet {
-        width: 95%;
-        padding: 10px;
-        box-sizing: border-box;
-    }
-
-    .HelyszinekContainer {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        gap: 10px;
-        padding: 0 25px;
-    }
-
-    .box {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        gap: 13px;
-    }
-
-    .keret {
-        flex: 1 1 calc(25% - 10px);
-        max-width: calc(25% - 10px);
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        padding-bottom: 30px;
-        padding-top: 10px;
-    }
-
-    .helyszin {
-        height: 100px;
-        width: 100%;
-        object-fit: cover;
-    }
-
-    .IkonKeret {
-        top: auto;
-        bottom: 105px;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
-    .MosokCim {
-        margin-top: 160px;
-        margin-bottom: 0;
-        text-align: center;
-        font-size: 22px;
-    }
-
-    .CsomagokContainer {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        gap: 20px;
-        padding: 0 25px;
-    }
-
-    .CsomagokBox {
-        flex: 1 1 calc(25% - 15px);
-        max-width: calc(25% - 15px);
-        margin-bottom: 20px;
-        padding: 20px 15px;
-    }
-
-    .csomag_nev {
-        font-size: 35px;
-        margin-bottom: 20px;
-    }
-
-    .leiras li {
-        font-size: 28px;
-    }
-
-    .ExtrakContainers {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        gap: 20px;
-        padding: 0 25px;
-        height: auto;
-    }
-
-    .ExtrakContainer {
-        width: 49%;
-    }
-
-    .ExtrakKeret {
-        width: 100%;
-        height: auto;
-        background: black;
-        box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset;
-        border-radius: 25px;
-        border: 1.50px #13669C solid;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        box-sizing: border-box;
-        padding: 40px;
-    }
-
-    .ExtrakAlcim {
-        width: 75%;
-        height: 50px;
-        margin: 30px 0 30px -236px;
-        text-align: center;
-    }
-
-    .KulsoExtrakItems {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        gap: 10px;
-        width: 100%;
-    }
-
-    .KulsoGomb {
-        flex: 1 1 calc(48% - 10px);
-        height: 50px;
-        background: black;
-        box-shadow: 0px 0px 10px 3px rgba(124, 242, 218, 0.35) inset;
-        border: 1.5px #13669C solid;
-        color: #F3F5F5;
-        text-align: center;
-        font-family: Graphie;
-        font-size: 22px;
-        line-height: 45px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .Figyelmeztetes p {
-        font-size: 25px;
-    }
-
-    .KulsoExtrak {
-        color: black;
-        font-size: 35px;
-        font-family: Inter;
-        font-weight: 700;
-        text-align: center;
-    }
-
-    .FigyelmeztetesKeret {
-        margin-top: 20px;
-    }
-
-    .IdopontBox {
-        flex-direction: row;
-    }
-
-    .GombBox {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-
-    .IdopontGomb1 {
-        height: 60px;
-        font-size: 30px;
-    }
-
-    .IdopontGomb {
-        height: 60px;
-        font-size: 30px;
-    }
-
-    .IdopontFigyelmeztetes {
-        margin: 0;
-    }
-
-    .SzamlazasiAlcimBox,
-    .AutoAdatokAlcimBox,
-    .SzemelyesAdatokAlcimBox,
-    .MegjegyzesAlcimBox {
-        height: 50px;
-        font-size: 33px;
-    }
-
-    .KeresztNev.right-input,
-    .Email.right-input,
-    .Cim.right-input,
-    .Adoszam.right-input,
-    .dropdown.right-input {
-        height: 60px;
-        font-size: 24px;
-    }
-
-    .VezetekNev.left-input,
-    .KeresztNev.left-input,
-    .Email.left-input,
-    .Cim.left-input,
-    .Cegnev.left-input,
-    .Adoszam.left-input,
-    .dropdown.left-input {
-        height: 60px;
-        font-size: 24px;
-    }
-
-    ::placeholder {
-        text-align: left;
-    }
-
-    label {
-        font-size: 18px;
-    }
-
-    .AutoMeretLenyilo-label,
-    .dropdown-label {
-        font-size: 22px;
-    }
-
-    .AutoMeretLenyilo {
-        width: 50%;
-        height: 60px;
-        font-size: 22px;
-    }
-
-    .AdatokContainer label {
-        font-size: 22px;
-    }
-
-    option {
-        font-size: 15px;
-    }
-
-    .MegjegyzesBemenet {
-        font-size: 24px;
-    }
-
-    .Foglalas {
-        width: 30%;
-        height: 100px;
-        font-size: 55px;
-    }
-
-    .footer {
-        flex-direction: column;
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 0 15px;
-    }
-
-    .footer-content {
-        gap: 20px;
-        flex-direction: row;
-        align-items: center;
-    }
-
-    .footer-powered {
-        width: 100%;
-        padding: 0 15px;
-        text-align: center;
-    }
-
-    .footer-box img {
-        width: auto;
-        height: auto;
-    }
-
-    .focim {
-        font-size: 80px;
-    }
-
-    .alcim {
-        font-size: 60px;
-        min-width: 75%;
-        text-align: center;
-    }
-}
-
-/* Kisebb méretű képernyők (758px alatti) */
-@media only screen and (min-width: 480px) and (max-width: 757px) {
-    body {
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    /* A fő tartalom szélesebbre igazítása */
-    .FoglalasiFelulet {
-        width: 95%;
-        padding: 10px;
-        box-sizing: border-box;
-    }
-
-    .HelyszinekContainer,
-    .box {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 30px;
-        align-items: center;
-        padding: 0 25px 0 25px;
-    }
-
-    .keret {
-        flex: 1 1 calc(35% - 5px);
-        max-width: calc(35% - 5px);
-        height: 578px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        padding-bottom: 30px;
-        padding-top: 10px;
-        margin-bottom: 10px;
-    }
-
-    .helyszin {
-        height: 150px;
-        width: 100%;
-        object-fit: cover;
-    }
-
-    .IkonKeret {
-        transform: translateX(-50%);
-        margin-top: 97px;
-    }
-
-    .MosokCim {
-        margin-top: auto;
-        margin-bottom: 67px;
-        text-align: center;
-        font-size: 38px;
-    }
-
-    .CsomagokContainer {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 30px;
-        padding: 0 15px;
-    }
-
-    .CsomagokBox {
-        flex: 1 1 calc(35% - 15px);
-        max-width: calc(35% - 15px);
-        margin-bottom: 15px;
-        padding: 15px 10px;
-        height: auto;
-    }
-
-    .csomag_nev {
-        font-size: 50px;
-        margin-bottom: 30px;
-    }
-
-    .leiras li {
-        font-size: 35px;
-
-    }
-
-    .ExtrakContainers {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        gap: 161px;
-        padding: 0 25px;
-        height: auto;
-    }
-
-    .ExtrakContainer {
-        width: 100%;
-        /* Egy oszlop */
-    }
-
-    .ExtrakKeret {
-        width: 100%;
-        height: auto;
-        background: black;
-        box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset;
-        border-radius: 25px;
-        border: 1.50px #13669C solid;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        box-sizing: border-box;
-        padding: 25px;
-    }
-
-    .ExtrakAlcim {
-        width: 75%;
-        height: 75px;
-        margin: 30px 0 30px -393px;
-        text-align: center;
-    }
-
-    .KulsoExtrak {
-        color: black;
-        font-size: 55px;
-        font-family: Inter;
-        font-weight: 700;
-        text-align: center;
-    }
-
-    .KulsoExtrakItems {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        gap: 20px;
-        width: 100%;
-    }
-
-    .KulsoGomb {
-        flex: 1 1 calc(33% - 10px);
-        height: 75px;
-        background: black;
-        box-shadow: 0px 0px 10px 3px rgba(124, 242, 218, 0.35) inset;
-        border: 1.5px #13669C solid;
-        color: #F3F5F5;
-        text-align: center;
-        font-family: Graphie;
-        font-size: 40px;
-        line-height: 45px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .FigyelmeztetesKeret {
-        margin-top: 160px;
-    }
-
-    .Figyelmeztetes {
-        width: 100%;
-        height: 168px;
-        background: black;
-        box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50), 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset;
-        border-radius: 25px;
-        border: 1.50px #13669C solid;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
-
-    .Figyelmeztetes p {
-        font-size: 35px;
-    }
-
-    .IdopontBox {
-        flex-direction: column;
-        height: auto;
-        padding: 40px;
-    }
-
-    .GombBox {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        gap: 25px;
-    }
-
-    .IdopontGomb1 {
-        height: 75px;
-        font-size: 40px;
-    }
-
-    .IdopontGomb {
-        height: 75px;
-        font-size: 40px;
-    }
-
-    .IdopontFigyelmeztetes {
-        margin: 0;
-    }
-
-    .FormsContainer {
-        display: flex;
-        flex-direction: column-reverse;
-        gap: 30px;
-        align-items: center;
-        padding: 0 35px;
-    }
-
-    .TopContainer, .BottomContainer {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        gap: 30px;
-    }
-
-    .szamlazasForm {
-        flex-direction: column;
-        display: flex;
-        align-items: center;
-    }
-
-    .foglalasForm {
-        flex-direction: column-reverse;
-        display: flex;
-        align-items: center;
-    }
-
-    .SzamlazasiAdatokContainer, .AutoAdatokContainer, .SzemelyesAdatokContainer, .MegjegyzesContainer {
-        width: calc(66% - 15px);
-        background: black;
-        box-shadow: 0px 0px 10px 3px rgba(19, 102, 156, 0.50), 0px 0px 10px 3px rgba(19, 102, 156, 0.50) inset;
-        border-radius: 25px;
-        border: 1.50px #13669C solid;
-        box-sizing: border-box;
-        padding: 50px 25px 50px 25px;
-
-    }
-
-    .SzamlazasiAlcimBox,
-    .AutoAdatokAlcimBox,
-    .SzemelyesAdatokAlcimBox,
-    .MegjegyzesAlcimBox {
-        height: 60px;
-        font-size: 50px;
-        width: 75%;
-    }
-
-    .KeresztNev.right-input,
-    .Email.right-input,
-    .Cim.right-input,
-    .Adoszam.right-input,
-    .dropdown.right-input {
-        height: 70px;
-        font-size: 30px;
-    }
-
-    .VezetekNev.left-input,
-    .KeresztNev.left-input,
-    .Email.left-input,
-    .Cim.left-input,
-    .Cegnev.left-input,
-    .Adoszam.left-input,
-    .dropdown.left-input {
-        height: 70px;
-        font-size: 30px;
-    }
-
-    ::placeholder {
-        text-align: left;
-    }
-
-    label {
-        font-size: 18px;
-    }
-
-    .AutoMeretLenyilo-label,
-    .dropdown-label {
-        font-size: 20px;
-    }
-
-    .AutoMeretLenyilo {
-        width: 100%;
-        height: 70px;
-        font-size: 30px;
-    }
-
-    .AdatokContainer label {
-        font-size: 30px;
-    }
-
-    option {
-        font-size: 15px;
-    }
-
-    .MegjegyzesBemenet {
-        font-size: 30px;
-    }
-
-    .Foglalas {
-        width: 40%;
-        height: 100px;
-        font-size: 65px;
-    }
-
-    .footer {
-        flex-direction: column;
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 0 15px;
-        display: flex;
-        align-content: center;
-    }
-
-    .footer-content {
-        gap: 40px;
-        flex-direction: row;
-        align-items: center;
-    }
-
-    .footer-powered {
-        width: 100%;
-        padding: 0 15px;
-        text-align: center;
-    }
-
-    .footer-box img {
-        width: auto;
-        height: auto;
-    }
-
-    .focim {
-        font-size: 80px;
-    }
-
-    .alcim {
-        font-size: 65px;
-        min-width: 75%;
-        text-align: center;
-    }
-}
-
-
-#popup-container {
-    display: none; /* Kezdetben rejtve van */
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 300px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    padding: 20px;
-}
-
-.popup {
-    padding: 20px;
-    text-align: left;
-}
-
-.popup h2 {
-    margin-top: 0;
-}
-
-.popup button {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.popup button:hover {
-    background-color: #0056b3;
 }
