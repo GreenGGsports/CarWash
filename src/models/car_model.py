@@ -12,9 +12,9 @@ class CarModel(BaseModel):
     __tablename__ = 'Car'
     
     id = Column(Integer, primary_key=True)
-    license_plate = Column(String, nullable=False)
+    license_plate = Column(String(15), nullable=False)
     car_type = Column(SqlEnum(CarTypeEnum), nullable=False)
-    car_brand = Column(String,nullable=False)
+    car_brand = Column(String(30),nullable=False)
     company_id = Column(Integer, ForeignKey('Company.id'), nullable=True)
 
 

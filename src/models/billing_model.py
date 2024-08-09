@@ -8,14 +8,14 @@ class BillingModel(BaseModel):
     __tablename__ = 'Billing'
     
     id = Column(Integer, primary_key=True)
-    name = Column(String, nullable= False)
-    address = Column(String,nullable=False)
-    email = Column(String,nullable=False)
+    name = Column(String(30), nullable= False)
+    address = Column(String(100),nullable=False)
+    email = Column(String(30),nullable=False)
     date = Column(Date)  
     reservation_id = Column(Integer, ForeignKey('Reservation.id'),nullable=False)
     
-    company_name = Column(String,nullable= True)
-    tax_ID = Column(String,nullable=True)
+    company_name = Column(String(30),nullable= True)
+    tax_ID = Column(String(30),nullable=True)
     reservation = relationship('ReservationModel', back_populates='billing')
     
     

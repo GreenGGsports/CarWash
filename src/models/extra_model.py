@@ -8,7 +8,7 @@ class ExtraModel(BaseModel):
     __tablename__ = 'Extra'
     
     id = Column(Integer, primary_key=True)
-    service_name = Column(String, nullable=False)
+    service_name = Column(String(20), nullable=False)
     price = Column(Integer, nullable=False)
     extra_type = Column(EtraTypeEnum, nullable=False)
     carwash_id = Column(ForeignKey('Carwash.id'), nullable= False)

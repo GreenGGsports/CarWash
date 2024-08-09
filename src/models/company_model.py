@@ -7,7 +7,7 @@ class CompanyModel(BaseModel):
     __tablename__ = 'Company'
     
     id = Column(Integer, primary_key=True)
-    company_name = Column(String, nullable=False)
+    company_name = Column(String(30), nullable=False)
     discount = Column(Double, nullable=False, default=0)
     cars = relationship('CarModel', back_populates='company')
     

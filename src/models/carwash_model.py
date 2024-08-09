@@ -7,9 +7,9 @@ class CarWashModel(BaseModel):
     __tablename__ = 'Carwash'
     
     id = Column(Integer, primary_key=True)
-    carwash_name = Column(String, nullable=False)
-    location = Column(String, nullable=False)
-    image_name = Column(String, nullable = True)
+    carwash_name = Column(String(30), nullable=False)
+    location = Column(String(100), nullable=False)
+    image_name = Column(String(30), nullable = True)
     
     
     def __repr__(self):

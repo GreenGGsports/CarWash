@@ -8,9 +8,9 @@ class UserModel(BaseModel):
     __tablename__ = 'User'
     
     id = Column(Integer, primary_key=True)
-    user_name = Column(String, nullable=False)
-    password_hash = Column(String, nullable=False)
-    role = Column(String, nullable=False, default='user')  # Added role field
+    user_name = Column(String(30), nullable=False)
+    password_hash = Column(String(512), nullable=False)
+    role = Column(String(20), nullable=False, default='user')  # Added role field
     carwash_id = Column(Integer, ForeignKey('Carwash.id'), nullable=True)  # Nullable for general admins
 
     carwash = relationship("CarWashModel")

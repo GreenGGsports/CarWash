@@ -6,10 +6,10 @@ class ServiceModel(BaseModel):
     __tablename__ = 'Service'
 
     id = Column(Integer, primary_key=True)
-    service_name = Column(String, nullable=False)
+    service_name = Column(String(20), nullable=False)
     price_small = Column(Integer, nullable=False)
     price_large = Column(Integer, nullable=False)
-    description = Column(String,nullable=True )
+    description = Column(String(100),nullable=True )
     carwash_id = Column(Integer, ForeignKey('Carwash.id'), nullable=True)
     
     carwash = relationship("CarWashModel")

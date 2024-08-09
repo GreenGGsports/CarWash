@@ -7,9 +7,9 @@ class CustomerModel(BaseModel):
 
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('User.id'), nullable= True)
-    forname = Column(String, nullable=False)
-    lastname = Column(String, nullable=False)
-    phone_number = Column(String, nullable=False)
+    forname = Column(String(30), nullable=False)
+    lastname = Column(String(30), nullable=False)
+    phone_number = Column(String(30), nullable=False)
 
     user = relationship('UserModel')
     reservations = relationship('ReservationModel', back_populates='customer')
