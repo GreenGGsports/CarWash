@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            margin-top: 50px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+        .message {
+            text-align: center;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>User Controller</h1>
+        
+        <!-- Login Form -->
+        <div>
+            <h2>Login</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-username">Username:</label>
+                    <input type="text" id="login-username" name="user_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password:</label>
+                    <input type="password" id="login-password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Login</button>
+                </div>
+                <div class="message" id="login-message"></div>
+            </form>
+        </div>
+
+        <!-- Register Form -->
+        <div>
+            <h2>Register</h2>
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="register-username">Username:</label>
+                    <input type="text" id="register-username" name="user_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Password:</label>
+                    <input type="password" id="register-password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-role">Role:</label>
+                    <input type="text" id="register-role" name="role" placeholder="user or admin" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Register</button>
+                </div>
+                <div class="message" id="register-message"></div>
+            </form>
+        </div>
+
+        <!-- Logout Form -->
+        <div>
+            <h2>Logout</h2>
+            <form id="logout-form">
+                <div class="form-group">
+                    <button type="submit">Logout</button>
+                </div>
+                <div class="message" id="logout-message"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            fetch('/user/login', {
+                method: 'POST',
+                body: JSON.stringify(Object.fromEntries(formData)),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const messageElement = document.getElementById('login-message');
+                if (data.status === 'logged_in') {
+                    messageElement.textContent = 'Login successful!';
+                    messageElement.style.color = 'green';
+                } else {
+                    messageElement.textContent = 'Login failed.';
+                    messageElement.style.color = 'red';
+                }
+            });
+        });
+
+        document.getElementById('register-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            fetch('/user/add_user', {
+                method: 'POST',
+                body: JSON.stringify(Object.fromEntries(formData)),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const messageElement = document.getElementById('register-message');
+                if (data.status === 'success') {
+                    messageElement.textContent = 'Registration successful!';
+                    messageElement.style.color = 'green';
+                } else {
+                    messageElement.textContent = 'Registration failed.';
+                    messageElement.style.color = 'red';
+                }
+            });
+        });
+
+        document.getElementById('logout-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            fetch('/user/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const messageElement = document.getElementById('logout-message');
+                if (data.status === 'logged_out') {
+                    messageElement.textContent = 'Logout successful!';
+                    messageElement.style.color = 'green';
+                } else {
+                    messageElement.textContent = 'Logout failed.';
+                    messageElement.style.color = 'red';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

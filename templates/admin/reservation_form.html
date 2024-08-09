@@ -1,120 +1,74 @@
+<!-- templates/admin/my_form.html -->
 {% extends 'admin/model/edit.html' %}
 
-{% block head_css %}
+{% block tail %}
     {{ super() }}
-    <style>
-        .navbar {
-            border-color: #019ced;
-            border-width: 1px;
-            border-radius: 0;
-            border-bottom-left-radius: 20px;
-            border-bottom-right-radius: 20px;
-            border-top: none;
-            box-shadow: none;
-        }
-        #extras-list label {
-            display: block;
-            margin-bottom: 5px;
-        }
-    </style>
+    <!-- Add JQuery and JQuery UI -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <!-- Link to the external script -->
+    <script src="/static/admin/scripts/scripts.js"></script>
 {% endblock %}
 
-{% block body %}
-    <form method="POST" action="">
-        {{ form.hidden_tag() }}
-
-        <div>
-            <label for="{{ form.new_car_license_plate.id }}">{{ form.new_car_license_plate.label.text }}</label>
-            {{ form.new_car_license_plate() }}
-        </div>
-
-        <div>
-            <label for="{{ form.new_car_type.id }}">{{ form.new_car_type.label.text }}</label>
-            {{ form.new_car_type() }}
-        </div>
-
-        <div>
-            <label for="{{ form.new_car_brand.id }}">{{ form.new_car_brand.label.text }}</label>
-            {{ form.new_car_brand() }}
-        </div>
-
-        <div>
-            <label for="{{ form.car.id }}">{{ form.car.label.text }}</label>
-            {{ form.car() }}
-        </div>
-
-        <div>
-            <label for="{{ form.new_customer_forname.id }}">{{ form.new_customer_forname.label.text }}</label>
-            {{ form.new_customer_forname() }}
-        </div>
-
-        <div>
-            <label for="{{ form.new_customer_lastname.id }}">{{ form.new_customer_lastname.label.text }}</label>
-            {{ form.new_customer_lastname() }}
-        </div>
-
-        <div>
-            <label for="{{ form.new_customer_phone_number.id }}">{{ form.new_customer_phone_number.label.text }}</label>
-            {{ form.new_customer_phone_number() }}
-        </div>
-
-        <div>
-            <label for="{{ form.customer.id }}">{{ form.customer.label.text }}</label>
-            {{ form.customer() }}
-        </div>
-
-        <div>
-            <label for="{{ form.service.id }}">{{ form.service.label.text }}</label>
-            {{ form.service() }}
-        </div>
-
-        <div>
-            <label>{{ form.extras.label.text }}</label>
-            <div id="extras-list">
-                {{ form.extras() }}
-            </div>
-        </div>
-
-        <div>
-            <label for="{{ form.reservation_date.id }}">{{ form.reservation_date.label.text }}</label>
-            {{ form.reservation_date() }}
-        </div>
-
-        <div>
-            <label for="{{ form.parking_spot.id }}">{{ form.parking_spot.label.text }}</label>
-            {{ form.parking_spot() }}
-        </div>
-
-        <div>
-            <label for="{{ form.final_price.id }}">{{ form.final_price.label.text }}</label>
-            {{ form.final_price() }}
-        </div>
-
-        <div>
-            <label for="{{ form.carwash.id }}">{{ form.carwash.label.text }}</label>
-            {{ form.carwash() }}
-        </div>
-
-        <div>
-            <label for="{{ form.slot.id }}">{{ form.slot.label.text }}</label>
-            {{ form.slot() }}
-        </div>
-
-        <button type="submit">Submit</button>
-    </form>
-{% endblock %}
-
-{% block script %}
+{% block form %}
     {{ super() }}
-    <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            const extrasList = document.getElementById('extras-list');
+    <div>
+        <label for="new_car_license_plate">{{ form.new_car_license_plate.label.text }}</label>
+        <input type="text" id="new_car_license_plate" name="new_car_license_plate" value="{{ form.new_car_license_plate.data }}">
+    </div>
 
-            extrasList.addEventListener('click', function(e) {
-                if (e.target.tagName === 'INPUT' && e.target.type === 'checkbox') {
-                    e.target.checked = !e.target.checked; // Toggle the checkbox state
-                }
-            });
-        });
-    </script>
+    <div>
+        <label for="{{ form.new_car_type.id }}">{{ form.new_car_type.label.text }}</label>
+        {{ form.new_car_type() }}
+    </div>
+
+    <div>
+        <label for="{{ form.new_car_brand.id }}">{{ form.new_car_brand.label.text }}</label>
+        {{ form.new_car_brand() }}
+    </div>
+
+    <div>
+        <label for="{{ form.new_customer_forname.id }}">{{ form.new_customer_forname.label.text }}</label>
+        {{ form.new_customer_forname() }}
+    </div>
+
+    <div>
+        <label for="{{ form.new_customer_lastname.id }}">{{ form.new_customer_lastname.label.text }}</label>
+        {{ form.new_customer_lastname() }}
+    </div>
+
+    <div>
+        <label for="{{ form.new_customer_phone_number.id }}">{{ form.new_customer_phone_number.label.text }}</label>
+        {{ form.new_customer_phone_number() }}
+    </div>
+
+    <div>
+        <label for="{{ form.service.id }}">{{ form.service.label.text }}</label>
+        {{ form.service() }}
+    </div>
+
+    <div>
+        <label for="{{ form.extras.id }}">{{ form.extras.label.text }}</label>
+        {{ form.extras() }}
+    </div>
+
+    <div>
+        <label for="{{ form.reservation_date.id }}">{{ form.reservation_date.label.text }}</label>
+        {{ form.reservation_date() }}
+    </div>
+
+    <div>
+        <label for="{{ form.parking_spot.id }}">{{ form.parking_spot.label.text }}</label>
+        {{ form.parking_spot() }}
+    </div>
+
+    <div>
+        <label for="{{ form.carwash.id }}">{{ form.carwash.label.text }}</label>
+        {{ form.carwash() }}
+    </div>
+
+    <div>
+        <label for="{{ form.slot.id }}">{{ form.slot.label.text }}</label>
+        {{ form.slot() }}
+    </div>
 {% endblock %}

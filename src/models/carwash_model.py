@@ -3,8 +3,6 @@ from sqlalchemy.orm import Session
 from .base import BaseModel
 
 
-
-
 class CarWashModel(BaseModel):
     __tablename__ = 'Carwash'
     

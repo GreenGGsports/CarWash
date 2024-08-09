@@ -1,16 +1,20 @@
 from flask import Flask
 from sqlalchemy import create_engine
 from sessions import SessionFactory
-
 from config import load_configs
 from src.controllers.reservation_controller import reservation_ctrl
-from src.controllers.user_controller import user_ctrl, init_login_manager
+from src.controllers.user_controller import user_ctrl, init_login_manager, init_principal
 from src.controllers.carwash_controller import carwash_ctrl
 from src.controllers.service_controller import service_ctrl
+from src.controllers.autocomplete import car_ctrl
+from src.controllers.admin_controller import admin_ctrl
+from src.controllers.local_admin_controller import local_admin_ctrl
 from src.controllers.billing_controller import billing_ctrl
 from src.controllers.booking_controller import booking_ctrl
 from database import create_database, connect_unix_socket
-from src.controllers.admin import init_admin
+from src.controllers.admin import init_admin, init_local_admin
+from src.models.user_model import UserModel
+
 
 
 from logger import setup_logging
@@ -36,12 +40,22 @@ def create_app(config_name: str):
     with app.app_context():
         create_database(engine)
         init_admin(app, session_factory)
-    
-    init_login_manager(app=app)
+        init_local_admin(app, session_factory)
+        create_default_users(session_factory.get_session())
+
+    init_login_manager(app)
+    init_principal(app)  # Ensure this is called
+
     # Register blueprints
     app = add_blueprints(app)
     app.logger.info(f"Application started with configuration: {config_name}")
     return app
+
+def create_default_users(session):
+    if not UserModel.check_name_taken(session, 'admin'):
+        UserModel.add_user(session, 'admin', 'adminpass', role='admin')
+    if not UserModel.check_name_taken(session, 'user'):
+        UserModel.add_user(session, 'user', 'userpass', role='user')
 
 def add_blueprints(app: Flask):
     app.register_blueprint(billing_ctrl, url_prefix ='/billing')
@@ -53,8 +67,11 @@ def add_blueprints(app: Flask):
     for rule in app.url_map.iter_rules():
         # Log the URL map rules
         app.logger.debug(f"Registered URL rule: {rule}")
+    app.register_blueprint(car_ctrl, url_prefix='/api/car')
+    app.register_blueprint(admin_ctrl, url_prefix='/admin', name='admin_blueprint')
+    app.register_blueprint(local_admin_ctrl, url_prefix='/local-admin', name='local_admin_blueprint')
     return app 
 
 if __name__ == '__main__':
     app = create_app('development')
-    app.run()
+    app.run(debug=True)
