@@ -552,113 +552,121 @@ input:focus~.bar:after {
     flex-direction: column;
 }
 
-#calendar-tomorrow {
-    display: none;
-}
+/*naptár*/
 
-.flatpickr-calendar {
-    background: #1E1E3F;
-    border: none;
-    border-radius: 0.625rem; /* Rugalmas kerekítés */
-    box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.5);
+/* Az aktív dátum háttérszínének és színének megváltoztatása */
+.flatpickr-day.selected, .flatpickr-day.selected:hover {
+    background-color: #4CAF50; /* Zöld háttér */
     color: white;
-    width: 41.125rem; /* Rugalmas szélesség */
-    height: 18.75rem; /* Rugalmas magasság */
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-}
-
-.flatpickr-innerContainer {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    color: white;
-}
-
-.flatpickr-days {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    height: 100%;
-}
-
-.flatpickr-day {
-    border: 0.0625rem solid white; /* Rugalmas vastagság */
-    color: white;
-    flex: 1 0 calc(100% / 7); /* A napok egyenlő szélessége (7 oszlop) */
-    height: calc(100% / 6); /* Egyenlő magasság (6 sor) */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-}
-
-.flatpickr-day.today {
-    background: #1E1E3F;
-    border-color: #FF4081;
-}
-
-.flatpickr-day.selected {
-    background: #FF4081;
-    border-color: #FF4081;
-}
-
-.flatpickr-day:hover {
-    background: #FF4081;
-    border-color: #FF4081;
-}
-
-.flatpickr-day.weekend {
-    color: #FF4081;
-}
-
-.flatpickr-months .flatpickr-prev-month,
-.flatpickr-months .flatpickr-next-month {
-    color: white;
-}
-
-.flatpickr-months .flatpickr-current-month {
-    color: white;
-}
-
-.flatpickr-time-container .flatpickr-time {
-    color: white;
-    background: #1E1E3F;
-    border: none;
-}
-
-.flatpickr-time-container .numInputWrapper {
-    border: none;
-}
-
-.flatpickr-day.today::after {
-    content: "";
-    display: block;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0.25rem; /* Rugalmas szélesség */
-    height: 0.25rem; /* Rugalmas magasság */
     border-radius: 50%;
-    background: #FF4081;
-}
+  }
+  
+  /* Az aktuális nap kiemelése */
+  .flatpickr-day.today {
+    border: 2px solid #2196F3; /* Kék keret */
+  }
+  
+  /* Hétvégék színe */
+  .flatpickr-day.weekend {
+    color: #FF5722; /* Narancssárga szöveg */
+  }
+/* Az egész dátumválasztó betűmérete és betűtípusa */
+.flatpickr-calendar {
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+  }
+  
+  /* A hónap és év címsorának stílusa */
+  .flatpickr-month {
+    font-size: 16px;
+    font-weight: bold;
+  }
+/* Előző és következő hónap gombok stílusa */
+.flatpickr-prev-month, .flatpickr-next-month {
+    color: #FFFFFF;
+    background-color: #333333;
+    border-radius: 4px;
+    padding: 5px;
+  }
+  
+  .flatpickr-prev-month:hover, .flatpickr-next-month:hover {
+    background-color: #555555;
+  }
 
-button.flatpickr-day {
-    background: #1E1E3F;
-    border: 0.0625rem solid white; /* Rugalmas vastagság */
-    border-radius: 0.3125rem; /* Rugalmas kerekítés */
+  #datepicker {
+    display: none; /* vagy visibility: hidden; */
+  }
+
+  .flatpickr-input{
+    display: none;
+  }
+
+  .flatpickr-calendar{
+    width: 37rem;
+    max-width: 37rem;
+    background: black;
+  }
+
+  .flatpickr-calendar .animate .inline{
+    border: none;
+  }
+
+  .flatpickr-months .flatpickr-month {
     color: white;
-}
+  }
 
-button.flatpickr-day:hover,
-button.flatpickr-day:focus {
-    background: #FF4081;
-    border-color: #FF4081;
+  .flatpickr-current-month .flatpickr-monthDropdown-months{
+    background: black;
+  }
+
+  .flatpickr-next-month{
+    background: white;
+  }
+
+  .flatpickr-weekdays{
+    width: 37rem;
+    max-width: 37rem;
+  }
+
+  span.flatpickr-weekday{
     color: white;
-}
+    font-size: 1.4em;
+  }
 
+  .dayContainer {
+    width: 37rem;
+    min-width: 37rem;
+  }
+
+  .flatpickr-days{
+    width: 37rem;
+    max-width: 37rem;
+  }
+
+  .flatpickr-day{
+    max-width: 75px;
+    border-radius: 0.5em;
+    color: white;
+    font-size: 1.3em;
+  }
+
+  .flatpickr-day:hover{
+    border-radius: 0.5em;
+    border: 0.1em solid rgba(123, 242, 218, 0.90);
+    box-shadow: 0px 0px 17px 0px rgba(124, 242, 218, 0.50);
+    background-color: black;
+  }
+
+  .flatpickr-day.flatpickr-disabled, .flatpickr-day.flatpickr-disabled:hover {
+    color: gray;
+  }
+
+  .flatpickr-day.selected, .flatpickr-day.selected:hover{
+    border-radius: 0.5em;
+    border: 0.1em solid rgba(123, 242, 218, 0.90);
+    box-shadow: 0px 0px 17px 0px rgba(124, 242, 218, 0.50);
+    background-color: black;
+  }
 
 .AdatokContainer {
     width: 100%;

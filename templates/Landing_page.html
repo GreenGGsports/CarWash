@@ -97,7 +97,7 @@
         </div>
         <div class="content">
             <div class="Foglalas">
-                <button class="FoglalasGomb">Online időpont foglalás</button>
+                <button class="FoglalasGomb" id = 'bookingButton'>Online időpont foglalás</button>
                 <div class="tooltip">Lépj be, vagy regisztrálj az online időpont foglaláshoz az oldal tetején.</div>
             </div>
             <div class="main-container">
@@ -291,6 +291,9 @@
     }
 });
 
+document.getElementById('bookingButton').addEventListener('click', function() {
+    window.location.href = '/reservation';
+});
 
 
     </script>
