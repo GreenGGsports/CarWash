@@ -27,10 +27,11 @@ def create_app(config_name: str):
     
     setup_logging(app)
     app.logger.info(f'DB uri:{app.config["SQLALCHEMY_DATABASE_URI"]}')
-    if config_name == 'development' or 'testing':
+    if config_name == 'development' or config_name == 'testing':
         engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
     
     else:
+        #gcloud mysql connection
         engine = connect_unix_socket()
 
     if check_database_connection(engine, app):
@@ -80,4 +81,5 @@ def add_blueprints(app: Flask):
 
 if __name__ == '__main__':
     app = create_app('development')
-    app.run(debug=True)
+    #app.run(debug=True)
+    app.run(host='0.0.0.0', port=8080)

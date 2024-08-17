@@ -102,6 +102,7 @@ async function listServices() {
         
 
         data.forEach(csomag => {
+            console.log(csomag)
             const clone = document.importNode(template, true);
             clone.querySelector('.CsomagokBox').dataset.id = csomag.id;
             clone.querySelector('.csomag_nev').textContent = csomag.name; // Text content to avoid HTML injection
@@ -113,7 +114,6 @@ async function listServices() {
             descriptionList.forEach(item => {
                 if (item) { // Csak nem üres elemek
                     const li = document.createElement('li');
-                    this.classList.add('leiras li')
                     li.textContent = item; // Biztonságos szöveg beillesztése
                     ul.appendChild(li);
                 }
