@@ -1,0 +1,338 @@
+HTML
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='Foglalasv2.css') }}">
+    <link rel="stylesheet" href="path/to/normalize.css">
+    <link rel="stylesheet" href="path/to/your-styles.css">
+    <title>Foglalás</title>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img style="width: 450px; height: 95px" src="Logo2.png" />
+        </div>
+        <div class="line"></div>
+    </header>
+    <div class="FoglalasiFelulet">
+        <h1 class="focim">Időpont foglalás</h1>
+        <h2 class="alcim">Automosóink</h2>
+        <div class="HelyszinekContainer" id="HelyszinekContainer">
+            <!-- Template element that is hidden -->
+            <div class="box" id = "box">
+            <template id="helyszinTemplate">
+                <button class="keret" id = "keret">
+                    <img class="helyszin" src="https://via.placeholder.com/335x100" />
+                    <div class="IkonKeret">
+                        <div class="ikon"></div>
+                    </div>
+                    <div class="MosokCim">1097 Budapest,<br />Könyves Kálmán krt. 11.</div>
+                </button>
+            </template>
+        </div>
+        </div>
+        <h2 class="alcim">Csomagjaink</h2>
+        <div class="CsomagokContainer" id="CsomagokContainer"></div>
+            <template id="CsomagokTemplate">
+                <button class="CsomagokBox" id="CsomagokBox">
+                    <div class="csomag_nev">Külső Alap Csomag</div>
+                    <ul class="leiras">
+                        <li>Előmosás</li>
+                        <li>Samponos mosás</li>
+                        <li>Felni tisztítás</li>
+                        <li>Öblítés</li>
+                        <li>Szárítás</li>
+                    </ul>
+                </button>
+            </template>
+        
+        <h2 class="alcim">Extrák</h2>
+        <div class="ExtrakContainers">
+            <div class="ExtrakContainer">
+                <div class="ExtrakKeret">
+                    <div class="ExtrakAlcim">
+                        <div class="KulsoExtrak">Külső Extrák</div>
+                    </div>
+                    <div class="KulsoExtrakItems" id="KulsoExtrakContainer"></div>
+                        <!-- Template element that is hidden -->
+                        <template id="KulsoExtrakTemplate">
+                        <label class="KulsoGomb">
+                            <input type="checkbox" class="checkbox">
+                            <span class="checkbox-label">Bogároldás</span>
+                        </label>
+                        </template>
+                    
+                    <!-- Add this div to hold the items -->
+                </div>
+            </div>            
+
+            <div class="ExtrakContainer">
+                <div class="ExtrakKeret">
+                    <div class="ExtrakAlcim">
+                        <div class="KulsoExtrak">Belső Extrák</div>
+                    </div>
+                    <div class="KulsoExtrakItems" id="BelsoExtrakContainer"> </div>
+                        <!-- Template element that is hidden -->
+                        <template id="BelsoExtrakTemplate">
+                        <label class="KulsoGomb">
+                            <input type="checkbox" class="checkbox">
+                            <span class="checkbox-label">Bogároldás</span>
+                        </label>
+                        </template>
+                   
+                    <!-- Add this div to hold the items -->
+                </div>
+            </div>
+
+            <!--<template id="KulsoExtrakTemplate">
+            <label class="KulsoGomb">
+                <input type="checkbox" class="checkbox">
+                <span class="checkbox-label">Bogároldás</span>
+            </label>
+
+            <label class="KulsoGomb">
+                <input type="checkbox" class="checkbox">
+                <span class="checkbox-label">Bogároldás</span>
+            </label>
+            </template>-->
+
+        </div>
+        <div class="FigyelmeztetesKeret">
+            <div class="Figyelmeztetes">
+                <p>*Az extra szennyezett autóknál, ha nem választja ki a megfelelő Extra csomagot a foglaláskor, akkor a
+                    költség kétszeresét számoljuk fel!</p>
+            </div>
+        </div>
+        <h2 class="alcim">Válassz időpntot</h2>
+        <form style="padding: 25px;">
+            <div class="IdopontContainer", id="IdopontContainer">
+                <div class="IdopontBox" >
+                    <div class="group">
+                        <input type="text" id="calendar-tomorrow" , required>
+                        <span class="bar"></span>
+                    </div>
+                    <div class="IdopontLine">
+                    </div>
+                    <div class="GombBox" id = "GombBox">
+                    <template id = "idopontok">
+                        <button class="IdopontGomb1", id = 'IdopontGomb'>
+                            <input type="checkbox" class="checkbox">
+                            <span class="checkbox-label">10 órás átadás</span>
+                        </button>                 
+                    </template>     
+                </div>    
+                </div>
+            </div>
+            <div class="IdopontFigyelmeztetes">
+                <div class="Figyelmeztetes">
+                    <p>*Az extra szennyezett autóknál, ha nem választja ki a megfelelő Extra csomagot a foglaláskor,
+                        akkor a
+                        költség kétszeresét számoljuk fel!</p>
+                </div>
+            </div>
+        </form>
+
+        <div class="AdatokOuterContainer">
+            <div class="AdatokContainer">
+                <form id="foglalasForm">
+               <div class="SzamlazasiAdatokBox">
+                   <div class="SzamlazasiAlcimContainer">
+                       <div class="AlcimBox">Személyes adatok</div>
+                   </div>
+                   
+                   <div class="input-outer-container">
+                       <div class="input-mezo">
+                         <label for="cegnev2" class="input_title">Cégnév</label>
+                         <input type="text" placeholder="Cégnév" class="input_" name="cegnev2" id="cegnev2">
+                       </div>
+                       <div class="input-mezo">
+                         <label for="telefon" class="input_title">Telefonszám</label>
+                         <input type="text" placeholder="Telefonszám" class="input_" name="telefon" id="telefon" required>
+                       </div>
+                       <div class="input-mezo">
+                         <label for="keresztnev2" class="input_title">Keresztnév</label>
+                         <input type="text" placeholder="Keresztnév" class="input_" name="keresztnev2" id="keresztnev2" required>
+                       </div>
+                       <div class="input-mezo">
+                         <label for="vezeteknev2" class="input_title">Vezetéknév</label>
+                         <input type="text" placeholder="Vezetéknév" class="input_" name="vezeteknev2" id="vezeteknev2" required>
+                       </div>
+                       <div class="input-mezo">
+                         <label for="fizetesi_mod" class="input_title dropdown-label">Fizetési mód</label>
+                         <select id="fizetesi_mod" class="input_" name="fizetesi_mod">
+                           <option value="keszpenz">Készpénz</option>
+                           <option value="bankkartya">Bankkártya</option>
+                         </select>
+                       </div>
+                       <div class="input-mezo">
+                         <div class="adatvedelem-container">
+                           <input type="checkbox" class="AdatvedelemPipa" id="ker_szamlat" name="ker_szamlat">
+                           <label for="ker_szamlat" class="Adatvedelem">Kér számlát?</label>
+                         </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+           <div class="AdatokContainer">
+                   <div class="SzamlazasiAlcimContainer">
+                       <div class="AlcimBox">Autó adatok</div>
+                   </div>
+                   <div class="input-outer-container">
+                           <div class="input-mezo">
+                               <label for="marka"class="input_title">Márka</label>
+                               <input type="text" placeholder="Autó márka" class="input_" name="marka" required>
+                           </div>
+                           <div class="input-mezo">
+                               <label for="Parkolo"class="input_title">Parkoló</label>
+                               <input type="text" placeholder="Parkoló" class="input_" name="Parkolo">
+                           </div>
+                           <div class="input-mezo">
+                               <label for="model"class="input_title">Típus</label>
+                               <input type="text" placeholder="Típus" class="input_" name="model" id="model" required>
+                           </div>
+                           <div class="input-mezo">
+                               <label for="rendszam"class="input_title">Rendszám</label>
+                               <input type="text" placeholder="Rendszám" class="input_" name="rendszam" required>
+                           </div>
+                           <div class="input-mezo">
+                               <label for="auto_meret" class="AutoMeretLenyilo-label">Autó méret</label>
+                               <select class="input_" name="auto_meret">
+                                   <option value="kis_auto">Kicsi</option>
+                                   <option value="nagy_auto">Nagy</option>
+                               </select>
+                           </div>
+                 </div>
+           </div>
+            <div class="AdatokContainer">
+                <div class="MegjegyzesAlcimContainer">
+                    <div class="AlcimBox">Megjegyzés</div>
+                    </div>
+                    <div class="MegjegyzesBox">
+                    <textarea id="megjegyzes" class="MegjegyzesBemenet" name="megjegyzes"
+                            placeholder="Írja be a megjegyzését..."></textarea>
+            </div>
+        </div>
+        </form>
+        <div class="AdatokContainer">
+            <form id="szamlazasForm">
+                <div class="SzamlazasiAlcimContainer">
+                    <div class="AlcimBox">Számlázási adatok</div>
+                </div>
+                <div class="input-outer-container">
+                    <div class="input-mezo">
+                        <label for="vezeteknev" class = "input_title">Vezetéknév</label>
+                        <input type="text" placeholder="Vezetéknév" class="input_" name="vezeteknev" id="vezeteknev">
+                    </div>
+                    <div class="input-mezo">
+                        <label for="keresztnev" class = "input_title">Keresztnév</label>
+                        <input type="text" placeholder="Keresztnév" class="input_" name="keresztnev" id="keresztnev">
+                    </div>
+                    <div class="input-mezo">
+                        <label for="email" class = "input_title">Email</label>
+                        <input type="email" placeholder="Email" class="input_" name="email" id="email">
+                    </div>
+                    <div class="input-mezo">
+                        <label for="cim" class = "input_title">Cím</label>
+                        <input type="text" placeholder="Cím" class="input_" name="cim" id="cim">
+                    </div>
+                    <div class="input-mezo">
+                        <label for="cegnev" class = "input_title">Cégnév</label>
+                        <input type="text" placeholder="Cégnév" class="input_" name="cegnev" id="cegnev">
+                    </div>      
+                    <div class="input-mezo">
+                        <label for="adoszam" class = "input_title">Adószám</label>
+                        <input type="text" placeholder="Adószám" class="input_" name="adoszam" id="adoszam">
+                    </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+        <div class="FoglalasContainer">
+            <button class="Foglalas" id="FoglalasButton">Foglalás</button>
+        </div>
+    <div id="popup" class="popup"></div>
+    <div class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-box">
+                    <img class="footer-image" src="https://via.placeholder.com/120x100" />
+                    <div class="footer-text">+36 20 69 69 669</div>
+                </div>
+                <div class="footer-box">
+                    <div class="footer-text">© 2024 Eliteshine<br />Minden jog fenntartva</div>
+                </div>
+            </div>
+            <div class="footer-section">
+                <div class="footer-box">
+                    <img class="footer-image" src="https://via.placeholder.com/250x100" />
+                    <div class="footer-text">+36 20 69 69 669</div>
+                </div>
+                <div class="footer-box">
+                    <div class="footer-text">Adatvédelmi nyilatkozat<br />Általános szerződési feltételek</div>
+                </div>
+            </div>
+            <div class="footer-section">
+                <div class="footer-box">
+                    <img class="footer-image" src="https://via.placeholder.com/320x100" />
+                    <div class="footer-text">+36 20 69 69 669</div>
+                </div>
+                <div class="footer-box">
+                    <div class="footer-text">eliteshine@shine.com<br />+36 20 69 69 669</div>
+                </div>
+            </div>
+            <div class="footer-section">
+                <div class="footer-box">
+                    <img class="footer-image" src="https://via.placeholder.com/287x98" />
+                    <div class="footer-text">+36 20 69 69 669</div>
+                </div>
+                <div class="footer-socials">
+                    <div class="social-icon"></div>
+                    <div class="social-icon"></div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-powered">
+            <div class="footer-powered-content">
+                <div class="footer-powered-text">Powered by GG_Solutions & </div>
+                <img class="footer-powered-image" src="https://via.placeholder.com/100x103" />
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <!-- Localization -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ja.js"></script>
+    <!-- Külön JavaScript fájl -->
+    <script>
+        // Inicializálja a Flatpickr-t a megadott input mezőkhöz
+        flatpickr('#calendar-tomorrow', {
+            minDate: new Date().fp_incr(1),
+            inline: true // állandó naptár
+        });
+
+        flatpickr('#calendar-selectrange', {
+            minDate: new Date().fp_incr(1),
+            maxDate: new Date().fp_incr(7)
+        });
+
+        flatpickr('#calendar-range', {
+            mode: "range"
+        });
+
+        // Japanese locale példával
+        flatpickr('#calendar-ja', {
+            locale: "ja",
+            dateFormat: "Y/m/d"
+        });
+    </script>
+</body>
+
+</html>

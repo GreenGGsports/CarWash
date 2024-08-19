@@ -14,7 +14,7 @@ reservation_ctrl = Blueprint('reservation_ctrl', __name__, url_prefix='/reservat
 
 @reservation_ctrl.route('/')
 def show_reservation_form():
-    return render_template('Foglalasi_rendszer.html')
+    return render_template('Foglalas.html')
 
 def get_popup_data():
     try:
