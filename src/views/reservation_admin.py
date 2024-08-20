@@ -59,8 +59,8 @@ class ReservationForm(FlaskForm):
         # Filtering options based on the current user
         if current_user.role == 'local_admin':
             self.carwash.query_factory = lambda: self.session.query(CarWashModel).filter_by(id=current_user.carwash.id).all()
-            self.service.query_factory = lambda: self.session.query(ServiceModel).filter_by(id=current_user.carwash.id).all()
-            self.extras.query_factory = lambda: self.session.query(ExtraModel).filter_by(id=current_user.carwash.id).all()
+            self.service.query_factory = lambda: self.session.query(ServiceModel).filter_by(carwash_id=current_user.carwash.id).all()
+            self.extras.query_factory = lambda: self.session.query(ExtraModel).filter_by(carwash_id=current_user.carwash.id).all()
 
         else:
             self.carwash.query_factory = lambda: self.session.query(CarWashModel).all()

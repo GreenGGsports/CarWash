@@ -24,7 +24,7 @@ from sqlalchemy import create_engine
 
 @pytest.fixture(scope='module')
 def app():
-    app = create_app('testing')
+    app = create_app('development')
     return app
 
 @pytest.fixture(scope='function')
