@@ -7,6 +7,7 @@ from src.models.billing_model import BillingModel  # Adjust the import path as p
 # Test cases for BillingModel
 def test_add_billing_data(session):
     # Arrange
+    reservation_id = 1
     name = "John Doe"
     address = "123 Main St"
     email = "john.doe@example.com"
@@ -15,7 +16,7 @@ def test_add_billing_data(session):
 
     # Act
     billing_data = BillingModel.add_billing_data(
-        session, name, address, email, company_name, tax_ID
+        session,reservation_id, name, address, email, company_name, tax_ID
     )
 
     # Assert
