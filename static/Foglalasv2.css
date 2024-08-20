@@ -121,9 +121,9 @@ button {
 }
 
 .box {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.875rem; /* Rugalmas távolság a gombok között */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.0; /* Rugalmas távolság a gombok között */
     justify-content: center;
 }
 
@@ -140,7 +140,7 @@ button {
     align-items: center;
     overflow: hidden;
     position: relative;
-    padding-bottom: 3.125rem; /* Rugalmas padding */
+    padding-bottom: 1.85rem; /* Rugalmas padding */
 }
 
 .keret:hover {
@@ -273,7 +273,7 @@ button {
     max-width: 703px; /* Maximális szélesség korlátozása */
     height: auto; /* Automatikus magasság */
     position: relative;
-    margin-bottom: 27rem;
+    margin-bottom: 10rem;
 }
 
 .ExtrakKeret {
@@ -751,7 +751,6 @@ input:focus~.bar:after {
     margin-left: -1.5625rem; /* Rugalmas eltolás */
     white-space: nowrap;
     box-sizing: border-box;
-    overflow: hidden; 
 }
 
 .input-outer-container {
@@ -777,6 +776,7 @@ input:focus~.bar:after {
 
 .AdatokOuterContainer {
     display: grid;
+    place-items: center; 
     grid-template-columns: 1fr  1fr;
 }
 
@@ -802,6 +802,10 @@ input:focus~.bar:after {
 
 @media (max-width: 1200px) {
     .AdatokOuterContainer{
+        grid-template-columns: 1fr;
+        width: 100%;
+    }
+    .input-outer-container{
         grid-template-columns: 1fr;
     }
   .AlcimBox{
@@ -969,7 +973,7 @@ input:focus~.bar:after {
 
 @media only screen and (max-width: 1200px){
 
-    .SzamlazasiAdatokContainer, .AutoAdatokContainer, .SzemelyesAdatokContainer, .MegjegyzesContainer{
+    .AdatokContainer{
         width: 100%;
     }
 
