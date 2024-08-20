@@ -41,6 +41,7 @@ textarea.error {
 }
 
 body {
+    vertical-align: middle;
     margin: 0 auto;
     padding: 0;
     box-sizing: border-box;
@@ -203,7 +204,7 @@ button {
 .CsomagokBox {
     width: 90%; /* Rugalmas szélesség */
     max-width: 335px; /* Maximális szélesség korlátozása nagyobb képernyőkön */
-    min-height: 40rem; /* Rugalmas minimális magasság */
+
     background: black;
     border-radius: 0.625rem; /* Rugalmas kerekítés */
     border: 0.09375rem solid #13669C;
@@ -269,7 +270,7 @@ button {
 }
 
 .ExtrakContainer {
-    width: 90%; /* Rugalmas szélesség */
+    width: 100%; /* Rugalmas szélesség */
     max-width: 703px; /* Maximális szélesség korlátozása */
     height: auto; /* Automatikus magasság */
     position: relative;
@@ -1033,11 +1034,6 @@ input:focus~.bar:after {
         flex-wrap: nowrap;
         flex-direction: column;
     }
-
-    .ExtrakContainer{
-        padding-bottom: 24rem;
-    }
-
     .alcim{
         font-size: 2.75rem;
     }
