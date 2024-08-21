@@ -70,10 +70,10 @@ button {
 }
 
 .line {
-    width: 90%; /* Szélesség százalékban */
+    width: 100%; /* Szélesség százalékban */
     height: 1px;
     background-color: white;
-    margin-bottom: 5rem; /* Rugalmas margó */
+    margin-bottom: 2rem auto; /* Rugalmas margó */
 }
 
 
@@ -89,7 +89,7 @@ button {
 .focim {
     color: white;
     text-align: center;
-    margin: 5rem auto; /* Rugalmas margó */
+    margin: 2rem auto; /* Rugalmas margó */
     font-size: 5rem; /* Rugalmas betűméret */
 }
 

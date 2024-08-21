@@ -110,17 +110,17 @@ async function listServices() {
             // Leírás pontok felsorolása
             const descriptionList = csomag.description.split(';').map(item => item.trim());
             const ul = document.createElement('ul');
-
+            ul.classList.add('leiras')
             descriptionList.forEach(item => {
                 if (item) { // Csak nem üres elemek
                     const li = document.createElement('li');
                     li.textContent = item; // Biztonságos szöveg beillesztése
+                    li.classList.add('leiras_li');
                     ul.appendChild(li);
                 }
             });
 
-            const descriptionContainer = clone.querySelector('.leiras');
-            descriptionContainer.innerHTML = ''; // Meglévő tartalom törlése
+            const descriptionContainer = clone.querySelector('.CsomagokBox');
             descriptionContainer.appendChild(ul); // Lista beillesztése
             descriptionContainer.classList.add('leiras')
             container.appendChild(clone);
