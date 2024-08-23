@@ -13,7 +13,7 @@ from src.models.customer_model import CustomerModel
 from src.models.car_model import CarModel
 
 from sqlalchemy import text  # Import the text function for executing raw SQL queries
-from sqlalchemy.exc import SQLAlchemyError 
+from sqlalchemy.exc import SQLAlchemyError , OperationalError
 import os 
 import sqlalchemy
 
@@ -45,37 +45,46 @@ def check_database_connection(engine, app):
         app.logger.error(f"Database connection failed: {e}")
         return False
     
-def connect_unix_socket() -> sqlalchemy.engine.base.Engine:
-    """Initializes a Unix socket connection pool for a Cloud SQL instance of MySQL."""
+def connect_tcp_socket() -> sqlalchemy.engine.base.Engine:
+    """Initializes a TCP connection pool for a MySQL instance."""
     
     # Fetch database connection parameters from environment variables
     try:
-        db_user = os.environ["DB_USER"]  # e.g. 'my-database-user'
-        db_pass = os.environ["DB_PASSWORD"]  # e.g. 'my-database-password'
-        db_name = os.environ["DB_NAME"]     # e.g. 'my-database'
-        
-        # Construct the Unix socket path
-        unix_socket_path = f"/cloudsql/winged-moon-431714-f5:europe-central2:cwsandbox"
+        db_user = os.environ["DB_USER"]        # e.g., 'my-database-user'
+        db_pass = os.environ["DB_PASSWORD"]    # e.g., 'my-database-password'
+        db_name = os.environ["DB_NAME"]        # e.g., 'my-database'
+        db_host = os.environ["DB_HOST"]        # e.g., 'db'
+        db_port = os.environ.get("DB_PORT", 3306)  # e.g., 3306; default to 3306 if not set
         
         # For logging and debugging
-        print(f"Connecting to database '{db_name}' with user '{db_user}' at '{unix_socket_path}'")
+        print(f"Connecting to database '{db_name}' with user '{db_user}' at '{db_host}:{db_port}'")
     
     except KeyError as e:
         raise EnvironmentError(f"Missing required environment variable: {e}")
 
     # Create a SQLAlchemy Engine using a connection pool
     pool = sqlalchemy.create_engine(
-            # Equivalent URL:
-            # mysql+pymysql://<db_user>:<db_pass>@/<db_name>?unix_socket=<socket_path>/<cloud_sql_instance_name>
-            sqlalchemy.engine.url.URL.create(
-                drivername="mysql+pymysql",
-                username=db_user,
-                password=db_pass,
-                database=db_name,
-                query={"unix_socket": unix_socket_path},
-            ),
-            # ...
-        )
+        sqlalchemy.engine.url.URL.create(
+            drivername="mysql+pymysql",
+            username=db_user,
+            password=db_pass,
+            host=db_host,
+            port=db_port,
+            database=db_name
+        ),
+        pool_size=5,
+        max_overflow=2,
+        pool_timeout=30,  # 30 seconds
+        pool_recycle=1800,  # 30 minutes
+    )
+
+    # Test connection
+    try:
+        with pool.connect() as connection:
+            print("Database connection successfully established!")
+    except OperationalError as e:
+        print(f"An error occurred while connecting to the database: {e}")
+
     return pool
     
 if __name__ == '__main__':

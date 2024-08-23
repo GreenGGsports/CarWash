@@ -1,6 +1,0 @@
-2024-08-06 17:58:23,187 - setup - INFO - Logging is set up. Level: DEBUG, Log file: app.log
-2024-08-06 17:58:46,201 - setup - ERROR - Database connection failed: (psycopg2.OperationalError) connection to server at "35.246.4.88", port 5432 failed: Connection timed out (0x0000274C/10060)
-	Is the server running on that host and accepting TCP/IP connections?
-
-(Background on this error at: https://sqlalche.me/e/20/e3q8)
-2024-08-06 17:58:46,203 - setup - ERROR - Failed to initialize database connection.

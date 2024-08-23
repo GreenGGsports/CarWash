@@ -12,7 +12,7 @@ from src.controllers.local_admin_controller import local_admin_ctrl
 from src.controllers.billing_controller import billing_ctrl
 from src.controllers.booking_controller import booking_ctrl
 from src.controllers.developer_controller import developer_ctrl
-from database import create_database, connect_unix_socket
+from database import create_database, connect_tcp_socket
 from src.controllers.admin import init_admin, init_local_admin, init_developer_admin
 from src.models.user_model import UserModel
 
@@ -27,13 +27,11 @@ def create_app(config_name: str):
     load_configs(app, config_name)
     
     setup_logging(app)
-    app.logger.info(f'DB uri:{app.config["SQLALCHEMY_DATABASE_URI"]}')
     if config_name == 'development' or config_name == 'testing':
         engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
     
     else:
-        #gcloud mysql connection
-        engine = connect_unix_socket()
+        engine = connect_tcp_socket()
 
     if check_database_connection(engine, app):
         app.logger.info("Database connection initialized successfully.")
