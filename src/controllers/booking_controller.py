@@ -54,7 +54,7 @@ def select_slot():
 
     reservation_date_str = data.get('date')
     try:
-        reservation_datetime = datetime.strptime(reservation_date_str, '%Y. %m. %d. %H:%M:%S')
+        reservation_datetime = datetime.fromisoformat(reservation_date_str.replace('Z', ''))
     except ValueError as ve:
         current_app.logger.error(f"Date parsing error: {ve}")
         return jsonify({'error': 'Invalid date format. Expected format is YYYY. MM. DD. HH:MM:SS'}), 400

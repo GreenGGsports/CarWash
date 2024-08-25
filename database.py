@@ -73,7 +73,7 @@ def connect_tcp_socket() -> sqlalchemy.engine.base.Engine:
             database=db_name
         ),
         pool_size=5,
-        max_overflow=2,
+        max_overflow=5,
         pool_timeout=30,  # 30 seconds
         pool_recycle=1800,  # 30 minutes
     )

@@ -275,7 +275,8 @@ function generateHourlyButtons(date) {
     // A bemeneti dátum (például: datetime.datetime(2024, 7, 30, 9, 0)) UTC idő szerint
     const min_date = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours()));
     /// substract 2 hours bc of timezone mindfuck
-    min_date.setHours(min_date.getHours() -4 )
+    min_date.setHours(min_date.getHours()-2); // CET eltérés, nyári időszakban CEST 1 óra
+
     // 24 órás ciklus
     console.log('Bemeneti dátum:', date)
     console.log('Minimális dátum:', min_date)
@@ -283,9 +284,9 @@ function generateHourlyButtons(date) {
     for (let hour = 9; hour <= 17; hour++) {
         // A gombhoz tartozó dátum létrehozása
         const buttonDate = new Date(min_date.getFullYear(), min_date.getMonth(), min_date.getDate(), hour);
-
-        // Korrigált dátum (ha szükséges)
-        const correctedButtonDate = new Date(buttonDate.getTime());
+        buttonDate.setHours(buttonDate.getHours()+2);   
+        correctedButtonDate = buttonDate
+        console.log(correctedButtonDate)
 
         const isFree = correctedButtonDate >= min_date;
 
@@ -295,7 +296,7 @@ function generateHourlyButtons(date) {
         button.dataset.free = isFree;
 
         // Helyes időzóna beállítása
-        button.dataset.date = correctedButtonDate.toLocaleString(); // Megjeleníti a helyi időt
+        button.dataset.date = correctedButtonDate.toISOString();
 
         // Kattintási esemény
         button.addEventListener('click', function (event) {
@@ -305,8 +306,8 @@ function generateHourlyButtons(date) {
                 const allButtons = document.querySelectorAll('.IdopontGomb');
                 allButtons.forEach(btn => btn.classList.remove('selected'));
                 this.classList.add('IdopontGomb', 'selected');
-                selectedDate = correctedButtonDate.toLocaleString();
-                console.log(`Kiválasztott időpont: ${correctedButtonDate.toLocaleString()}`);
+                selectedDate = button.dataset.date;
+                console.log(`Kiválasztott időpont: ${correctedButtonDate.toISOString()}`);
                 select_appointment(selectedDate);
                 SlotSelected  = true;
             }
