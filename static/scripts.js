@@ -224,48 +224,48 @@ function dateSelected() {
     return !!selectedDate;
 } 
 document.addEventListener('DOMContentLoaded', function () {
-    // Initialize Flatpickr for date selection
-    const calendarInput = document.getElementById('calendar-tomorrow');
-
-    flatpickr(calendarInput, {
-        minDate: new Date().fp_incr(0), // Minimum date (tomorrow)
-        inline: true, // Display as inline calendar
-        dateFormat: 'Y-m-d', // Date format to send to server
-        onChange: function (selectedDates, dateStr, instance) {
-            // Handle date change here
-            console.log('Selected date:', dateStr);
-            selectedDate = dateStr; // Store the selected date
-            // Call function to send selected date to server
-            sendDateToServer(dateStr);
-        }
+    var calendarEl = document.getElementById('calendar');
+  
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',  // Kezdeti nézet beállítása (pl. havi nézet)
+      height: 'auto',  // Naptár magasságának beállítása
+      width: 'auto',   // Naptár szélességének beállítása
+      dateClick: function (info) {
+        // Eseménykezelő, amikor egy napra kattintanak
+        console.log('Selected date:', info.dateStr);
+        sendDateToServer(info.dateStr); // Küldjük el a kiválasztott dátumot a szervernek
+      },
+      // Egyéb beállítások
     });
-    // Function to send selected date to server
+  
+    calendar.render();  // A naptár megjelenítése
+  
+    // Funkció a kiválasztott dátum küldésére a szervernek
     async function sendDateToServer(selectedDate) {
-        try {
-            const response = await fetch('/booking/set_date', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ date: selectedDate })
-            });
-
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-
-            const result = await response.json();
-            const min_date = new Date(result['min_date'])
-            generateHourlyButtons(min_date)
-            console.log(min_date)
-            console.log('Server response:', result);
-        } catch (error) {
-            console.error('Hiba történt az adatküldés során:', error);
+      try {
+        const response = await fetch('/booking/set_date', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ date: selectedDate })
+        });
+  
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
         }
+  
+        const result = await response.json();
+        const min_date = new Date(result['min_date']);
+        generateHourlyButtons(min_date);
+        console.log(min_date);
+        console.log('Server response:', result);
+      } catch (error) {
+        console.error('Hiba történt az adatküldés során:', error);
+      }
     }
-
-
-});
+  
+  });
 
 var SlotSelected = false;
 function generateHourlyButtons(date) {

@@ -5,7 +5,6 @@ HTML
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='Foglalasv2.css') }}">
     <link rel="stylesheet" href="path/to/normalize.css">
     <link rel="stylesheet" href="path/to/your-styles.css">
@@ -103,10 +102,9 @@ HTML
         <h2 class="alcim">Válassz időpntot</h2>
             <div class="IdopontContainer", id="IdopontContainer">
                 <div class="IdopontBox" >
-                    <div class="group">
-                        <input type="text" id="calendar-tomorrow" , required>
-                        <span class="bar"></span>
-                    </div>
+                    <div class="calendar-container">
+                        <div id="calendar"></div>
+                      </div>
                     <div class="IdopontLine">
                     </div>
                     <div class="GombBox" id = "GombBox">
@@ -297,32 +295,8 @@ HTML
     </div>
 
     <script src="{{ url_for('static', filename='scripts.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <!-- Localization -->
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ja.js"></script>
-    <!-- Külön JavaScript fájl -->
-    <script>
-        // Inicializálja a Flatpickr-t a megadott input mezőkhöz
-        flatpickr('#calendar-tomorrow', {
-            minDate: new Date().fp_incr(1),
-            inline: true // állandó naptár
-        });
-
-        flatpickr('#calendar-selectrange', {
-            minDate: new Date().fp_incr(1),
-            maxDate: new Date().fp_incr(7)
-        });
-
-        flatpickr('#calendar-range', {
-            mode: "range"
-        });
-
-        // Japanese locale példával
-        flatpickr('#calendar-ja', {
-            locale: "ja",
-            dateFormat: "Y/m/d"
-        });
-    </script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css' rel='stylesheet' />
 </body>
 
 </html>

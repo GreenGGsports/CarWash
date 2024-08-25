@@ -417,14 +417,14 @@ button {
 
 
 .IdopontContainer {
-    width: 100%;
+    width: auto;
     margin-bottom: 1.875rem; /* Rugalmas margó */
 }
 
 .IdopontBox {
     display: flex;
-    height: 21.875rem; /* Rugalmas magasság */
-    padding: 0 1.5625rem; /* Rugalmas padding */
+    height:auto; /* Rugalmas magasság */
+    padding: 0; /* Rugalmas padding */
     justify-content: center;
     align-items: center;
     gap: 1.875rem; /* Rugalmas távolság az elemek között */
@@ -480,22 +480,14 @@ input:focus~.bar:after {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 0.625rem; /* Rugalmas távolság az elemek között */
+    justify-items: center;
     justify-content: space-between;
     align-items: center;
     align-content: center;
     height: 100%;
+    width: 100%
 }
 
-
-/* Bal oldal */
-.IdopontGomb1:nth-child(odd) {
-    border-radius: 1.25rem 0.625rem 0.625rem 0.625rem; /* Rugalmas kerekítés */
-}
-
-/* Jobb oldal */
-.IdopontGomb1:nth-child(even) {
-    border-radius: 0.625rem 0.625rem 1.25rem 0.625rem; /* Rugalmas kerekítés */
-}
 
 .free-false {
     background-color: darkgray;
@@ -504,11 +496,11 @@ input:focus~.bar:after {
 
 /* not used */
 .IdopontGomb {
-    flex: 1 1 calc(50% - 0.625rem); /* A gombok két oszlopban jelennek meg */
+    display: flex;
     height: 3.125rem; /* Rugalmas magasság */
     background: black;
-    box-shadow: 0px 0px 0.625rem 0.1875rem rgba(19, 102, 156, 0.50), 0px 0px 0.625rem 0.1875rem rgba(19, 102, 156, 0.50) inset;
-    border-radius: 1.25rem 0.3125rem 0.3125rem 0.3125rem; /* Rugalmas kerekítés */
+    box-shadow: 0px 0px 0.625rem 0.1875rem rgba(19, 102, 156, 0.50), 0px 0px 0.625rem 0.1875rem rgba(103, 129, 146, 0.5) inset;
+    border-radius: 0.3125rem 0.3125rem 0.3125rem 0.3125rem; /* Rugalmas kerekítés */
     border: 0.09375rem solid #13669C;
     text-align: center;
     color: #F3F5F5;
@@ -522,15 +514,16 @@ input:focus~.bar:after {
     cursor: pointer;
     font-style: normal;
     line-height: normal;
+    width: 100%;
 }
 
-.IdopontGomb1:hover {
+.IdopontGomb:hover {
     border: 0.09375rem solid var(--A-kk, #13669C);
     background: #000;
     box-shadow: 0px 0px 0.9375rem 0.1875rem rgba(124, 242, 218, 0.50), 0px 0px 0.9375rem 0.1875rem rgba(124, 242, 218, 0.45) inset;
 }
 
-.IdopontGomb1:active {
+.IdopontGomb.free-true {
     border: 0.09375rem solid rgba(124, 242, 218, 0.90);
     background: #000;
     box-shadow: 0px 0px 0.9375rem 0.375rem rgba(124, 242, 218, 0.50), 0px 0px 0.9375rem 0.375rem rgba(124, 242, 218, 0.50) inset;
@@ -547,120 +540,48 @@ input:focus~.bar:after {
 }
 
 /*naptár*/
-
-/* Az aktív dátum háttérszínének és színének megváltoztatása */
-.flatpickr-day.selected, .flatpickr-day.selected:hover {
-    background-color: #4CAF50; /* Zöld háttér */
-    color: white;
-    border-radius: 50%;
-  }
-  
-  /* Az aktuális nap kiemelése */
-  .flatpickr-day.today {
-    border: 2px solid #2196F3; /* Kék keret */
-  }
-  
-  /* Hétvégék színe */
-  .flatpickr-day.weekend {
-    color: #FF5722; /* Narancssárga szöveg */
-  }
-/* Az egész dátumválasztó betűmérete és betűtípusa */
-.flatpickr-calendar {
+.calendar-container {
+    display: flex;
+    height: 100%;
+    width: 100%;  /* Állítsd be a kívánt szélességet, pl. 80% vagy egy konkrét érték, pl. 600px */
+    max-width: 800px; /* Maximális szélesség beállítása */
     font-family: 'Arial', sans-serif;
-    font-size: 14px;
-  }
-  
-  /* A hónap és év címsorának stílusa */
-  .flatpickr-month {
-    font-size: 16px;
-    font-weight: bold;
-  }
-/* Előző és következő hónap gombok stílusa */
-.flatpickr-prev-month, .flatpickr-next-month {
-    color: #FFFFFF;
-    background-color: #333333;
-    border-radius: 4px;
-    padding: 5px;
-  }
-  
-  .flatpickr-prev-month:hover, .flatpickr-next-month:hover {
-    background-color: #555555;
+    margin: 0 auto; /* Középre igazítás */
+    border: 1px solid  ; /* Vékony szegély a konténer körül */
+    padding: 1.85rem; /* Némi belső margó a konténerben */
+    box-shadow: 0.09375rem solid var(--A-kk, #13669C); /* Árnyék a konténer körül */
+    font-weight: 500;
   }
 
-  #datepicker {
-    display: none; /* vagy visibility: hidden; */
-  }
+/* Naptár stílus módosítása a sötét témához */
+.fc-theme-standard {
+    background-color: black; /* Naptár háttérszín */
+}
 
-  .flatpickr-input{
-    display: none;
-  }
-
-  .flatpickr-calendar{
-    width: 37rem;
-    max-width: 37rem;
-    background: black;
-  }
-
-  .flatpickr-calendar .animate .inline{
-    border: none;
-  }
-
-  .flatpickr-months .flatpickr-month {
-    color: white;
-  }
-
-  .flatpickr-current-month .flatpickr-monthDropdown-months{
-    background: black;
-  }
-
-  .flatpickr-next-month{
-    background: white;
-  }
-
-  .flatpickr-weekdays{
-    width: 37rem;
-    max-width: 37rem;
-  }
-
-  span.flatpickr-weekday{
-    color: white;
-    font-size: 1.4em;
-  }
-
-  .dayContainer {
-    width: 37rem;
-    min-width: 37rem;
-  }
-
-  .flatpickr-days{
-    width: 37rem;
-    max-width: 37rem;
-  }
-
-  .flatpickr-day{
-    max-width: 75px;
+.fc-toolbar, .fc-button, .fc-button-primary {
+    background-color: black; /* Gombok háttérszíne */
     border-radius: 0.5em;
-    color: white;
-    font-size: 1.3em;
-  }
+    border: 0.1em solid white;
+    color: white !important; /* Gombok szövegszíne */
+}
 
-  .flatpickr-day:hover{
-    border-radius: 0.5em;
+.fc-button-primary:not(:disabled):hover {
     border: 0.1em solid rgba(123, 242, 218, 0.90);
-    box-shadow: 0px 0px 17px 0px rgba(124, 242, 218, 0.50);
-    background-color: black;
-  }
+    background-color: red; /* Gombok háttérszíne hover esetén */
+}
 
-  .flatpickr-day.flatpickr-disabled, .flatpickr-day.flatpickr-disabled:hover {
-    color: gray;
-  }
+.fc-daygrid-day {
+    background-color: black; /* Napok háttere */
+    color: white;
+}
 
-  .flatpickr-day.selected, .flatpickr-day.selected:hover{
-    border-radius: 0.5em;
-    border: 0.1em solid rgba(123, 242, 218, 0.90);
-    box-shadow: 0px 0px 17px 0px rgba(124, 242, 218, 0.50);
-    background-color: black;
-  }
+.fc-day-today {
+    background-color: blue !important; /* Mai nap háttérszíne */
+    border-color: rgba(123, 242, 218, 0.90) !important; 
+}
+
+
+
 
 .AdatvedelemPipa {
     margin-right: 0.625rem; /* Rugalmas margó */
@@ -928,7 +849,6 @@ input:focus~.bar:after {
     .IdopontBox {
         flex-direction: column;
         height: auto;
-        padding: 40px;
     }
 
     .SzamlazasiAlcimContainer, .AutoAdatokAlcimContainer, .SzemelyesAdatokAlcimContainer, .MegjegyzesAlcimContainer{
@@ -988,13 +908,6 @@ input:focus~.bar:after {
         margin-left: -2.5rem; /* A bal margót automatikusra állítjuk */
         margin-right: auto; /* A jobb margót eltávolítjuk */
     }
-
-
-    .IdopontGomb{
-        width: 75%;
-        height: auto;
-        padding: 1rem;
-    }
     
     .IdopontGomb1{
         width: 75%;
@@ -1026,6 +939,10 @@ input:focus~.bar:after {
 }
 
 @media (max-width: 700px) {
+    #calendar{
+        height: 20%; /* Nagyon kis képernyőn még kisebb magasság */
+        font-size: 0.8rem; /* Nagyon kis szövegméret mobil nézetben */
+    }
     .KulsoExtrakItems{
         flex-wrap: nowrap;
         flex-direction: column;
@@ -1069,8 +986,7 @@ input:focus~.bar:after {
         font-size: 1.3rem;
     }
 
-    .IdopontGomb1{
-        width: 100%;
+    .IdopontGomb{
         font-size: 1.2rem;
     }
 
