@@ -39,20 +39,26 @@ textarea.error {
     background-color: #fdd;
     /* Világos piros háttér */
 }
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
 
 body {
-    vertical-align: middle;
-    margin: 0 auto;
+    margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
     line-height: 1.6;
     background-color: black;
-    width: 97%; /* Szélesség rugalmas */
-    max-width: 1920px; /* Maximum szélesség korlátozása nagy kijelzőkön */
+    width: 100%; /* Teljes szélesség */
+    max-width: 1920px; /* Maximum szélesség korlátozása */
+    overflow-x: hidden; /* Vízszintes scrollozás letiltása */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
 
 button {
     cursor: pointer;
@@ -90,6 +96,7 @@ button {
 }
 .FoglalasContainer {
     display: flex;
+    margin: 1rem auto; 
     padding: 1rem;
     justify-content: center;
     padding-bottom: 1.85rem;
@@ -171,7 +178,7 @@ button {
     max-width: 335px; /* Maximális szélesség korlátozása */
     height: auto; /* Automatikus magasság a tartalomhoz igazodva */
     color: #F3F5F5;
-    font-size: 1.5625rem; /* Rugalmas betűméret */
+    font-size: 1.25rem; /* Rugalmas betűméret */
     font-family: Inter, sans-serif;
     font-weight: 600;
     word-wrap:normal;
@@ -725,9 +732,7 @@ input:focus~.bar:after {
     font-size: 1.5rem;
   }
 
-  .body{
-    width: 100%; 
-  }
+
 }
 
 
