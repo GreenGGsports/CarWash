@@ -84,7 +84,7 @@ button {
     margin: 5rem auto; /* Rugalmas margó */
     margin-bottom: 1rem;
     padding: 2rem; /* Rugalmas padding */
-    padding-bottom: 0rem;
+    padding-bottom: 2rem;
     box-sizing: border-box;
     box-shadow: 0px 0px 15px 1.5px #13669C, 0px 0px 15px 6px #13669C inset;
 }
@@ -110,9 +110,9 @@ button {
     height: auto; /* Automatikus magasság a tartalomhoz igazodva */
     font-size: 3.75rem; /* Rugalmas betűméret */
     text-align: center;
-    margin: 5rem 0 5rem -2rem;
     border-radius: 0px 5px 25px 0px;
     background: #13669C;
+    margin: 5rem 0 5rem -2rem;
 }
 
 
@@ -389,7 +389,6 @@ button {
     justify-content: center;
     flex-direction: column;
     margin-top: 2.1875rem; /* Rugalmas margó */
-    padding: 0 1.5625rem; /* Rugalmas padding */
 }
 
 .Figyelmeztetes {
@@ -411,7 +410,7 @@ button {
     font-size: 1.4375rem; /* Rugalmas betűméret */
     font-family: Graphie, sans-serif;
     font-weight: 350;
-    word-wrap: break-word;
+    word-wrap:normal;
     margin: 0;
 }
 
@@ -427,7 +426,7 @@ button {
     padding: 0; /* Rugalmas padding */
     justify-content: center;
     align-items: center;
-    gap: 1.875rem; /* Rugalmas távolság az elemek között */
+    gap: 0.5rem; /* Rugalmas távolság az elemek között */
     border-radius: 1.5625rem; /* Rugalmas kerekítés */
     border: 0.0625rem solid var(--A-kk, #13669C);
     background: #000;
@@ -485,7 +484,9 @@ input:focus~.bar:after {
     align-items: center;
     align-content: center;
     height: 100%;
-    width: 100%
+    width: 100%;
+    padding: 1.85rem;
+    padding-top: 0%;
 }
 
 
@@ -504,7 +505,7 @@ input:focus~.bar:after {
     border: 0.09375rem solid #13669C;
     text-align: center;
     color: #F3F5F5;
-    font-size: 1.875rem; /* Rugalmas betűméret */
+    font-size: 1.25rem; /* Rugalmas betűméret */
     font-family: Graphie, sans-serif;
     font-weight: 700;
     word-wrap: break-word;
@@ -514,7 +515,7 @@ input:focus~.bar:after {
     cursor: pointer;
     font-style: normal;
     line-height: normal;
-    width: 100%;
+    width: 90%;
 }
 
 .IdopontGomb:hover {
@@ -535,23 +536,26 @@ input:focus~.bar:after {
 
 .IdopontFigyelmeztetes {
     display: flex;
-    align-items: center;
-    flex-direction: column;
+    padding-bottom: 1.85rem;
 }
-
 /*naptár*/
 .calendar-container {
     display: flex;
-    height: 100%;
+    height: 40rem;
     width: 100%;  /* Állítsd be a kívánt szélességet, pl. 80% vagy egy konkrét érték, pl. 600px */
-    max-width: 800px; /* Maximális szélesség beállítása */
+    max-width: 1000px; /* Maximális szélesség beállítása */
     font-family: 'Arial', sans-serif;
     margin: 0 auto; /* Középre igazítás */
     border: 1px solid  ; /* Vékony szegély a konténer körül */
     padding: 1.85rem; /* Némi belső margó a konténerben */
     box-shadow: 0.09375rem solid var(--A-kk, #13669C); /* Árnyék a konténer körül */
     font-weight: 500;
+    justify-content: center;
   }
+
+#calendar{
+    width: 100%;
+}
 
 /* Naptár stílus módosítása a sötét témához */
 .fc-theme-standard {
@@ -573,6 +577,7 @@ input:focus~.bar:after {
 .fc-daygrid-day {
     background-color: black; /* Napok háttere */
     color: white;
+    border-radius: 0.5rem;
 }
 
 .fc-day-today {
@@ -616,7 +621,8 @@ input:focus~.bar:after {
 }
 
 .AdatokContainer{
-    width: calc(100% - 1.85rem); /* Rugalmas szélesség */
+    width: 100%; /* Rugalmas szélesség */
+    height: 100%;
     background: black;
     box-shadow: 0px 0px 0.625rem 0.1875rem rgba(19, 102, 156, 0.50), 0px 0px 0.625rem 0.1875rem rgba(19, 102, 156, 0.50) inset;
     border-radius: 1.5625rem; /* Rugalmas kerekítés */
@@ -681,7 +687,9 @@ input:focus~.bar:after {
 .AdatokOuterContainer {
     display: grid;
     place-items: center; 
-    grid-template-columns: 1fr  1fr;
+    grid-template-columns: repeat(2, 1fr); /* Két egyenlő szélességű oszlop */
+    grid-template-rows: repeat(2, 1fr); /* Két egyenlő magasságú sor */
+    gap: 1.00rem;
 }
 
 .MegjegyzesBemenet {
@@ -713,7 +721,8 @@ input:focus~.bar:after {
         grid-template-columns: 1fr;
     }
   .AlcimBox{
-    width: 100%
+    width: 100%;
+    font-size: 1.5rem;
   }
 
   .body{
@@ -939,9 +948,8 @@ input:focus~.bar:after {
 }
 
 @media (max-width: 700px) {
-    #calendar{
-        height: 20%; /* Nagyon kis képernyőn még kisebb magasság */
-        font-size: 0.8rem; /* Nagyon kis szövegméret mobil nézetben */
+    .calendar-container{
+        height: 30rem;
     }
     .KulsoExtrakItems{
         flex-wrap: nowrap;
@@ -949,6 +957,15 @@ input:focus~.bar:after {
     }
     .alcim{
         font-size: 2.75rem;
+        padding:0rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+    .Figyelmeztetes p {
+        font-size: 1rem;
+    }
+    .FoglalasiFelulet{
+        padding-bottom: 0.5rem;
     }
 
 }
@@ -964,7 +981,7 @@ input:focus~.bar:after {
     }
 
     .alcim{
-        font-size: 1.25rem;
+        font-size: 1.75rem;
         width: 90%;
         max-width: 100%;  
     }

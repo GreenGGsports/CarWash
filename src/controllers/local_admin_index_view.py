@@ -6,5 +6,5 @@ class LocalAdminIndexView(AdminIndexView):
     @expose('/')
     def index(self):
         if not (current_user.is_authenticated and current_user.role == 'local_admin'):
-            return redirect(url_for('user_ctrl.login'))
+            return redirect('/user')
         return super(LocalAdminIndexView, self).index()

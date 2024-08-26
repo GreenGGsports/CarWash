@@ -228,8 +228,8 @@ document.addEventListener('DOMContentLoaded', function () {
   
     var calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: 'dayGridMonth',  // Kezdeti nézet beállítása (pl. havi nézet)
-      height: 'auto',  // Naptár magasságának beállítása
-      width: 'auto',   // Naptár szélességének beállítása
+      height: '100%',  // Naptár magasságának beállítása
+      width: '100%',   // Naptár szélességének beállítása
       dateClick: function (info) {
         // Eseménykezelő, amikor egy napra kattintanak
         console.log('Selected date:', info.dateStr);
