@@ -75,7 +75,8 @@ def connect_tcp_socket() -> sqlalchemy.engine.base.Engine:
         pool_size=5,
         max_overflow=5,
         pool_timeout=30,  # 30 seconds
-        pool_recycle=1800,  # 30 minutes
+        pool_recycle=1800,# 30 minutes
+        pool_pre_ping=True,
     )
 
     # Test connection
