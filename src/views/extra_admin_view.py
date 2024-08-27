@@ -1,8 +1,8 @@
-from flask_admin.contrib.sqla import ModelView
 from flask_login import current_user
 from flask import redirect, url_for
+from src.views.my_modelview import MyModelView
 
-class ExtraModelView(ModelView):
+class ExtraModelView(MyModelView):
     column_labels = {
         'carwash.carwash_name': 'Car Wash Name',
         'service_name': 'Service Name',

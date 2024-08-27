@@ -9,7 +9,6 @@ from src.models.slot_model import SlotModel
 from src.models.user_model import UserModel
 from src.models.carwash_model import CarWashModel
 from src.models.extra_model import ExtraModel
-from flask_admin.contrib.sqla import ModelView
 from src.views.company_admin import  MonthlyInvoiceView
 from src.views.reservation_admin import ReservationAdminView
 from src.views.service_admin import ServiceModelView
@@ -17,6 +16,7 @@ from src.controllers.admin_index_view import AdminIndexView
 from src.controllers.local_admin_index_view import LocalAdminIndexView
 from src.views.extra_admin_view import ExtraModelView
 from src.controllers.developer_index_view import DeveloperIndexView
+from src.views.my_modelview import MyModelView
 
 def init_admin(app, session_factory):
     admin = Admin(
@@ -32,10 +32,10 @@ def init_admin(app, session_factory):
     admin.add_view(ReservationAdminView(ReservationModel, session, name='Foglalások', endpoint='reservation_admin'))
     admin.add_view(ServiceModelView(ServiceModel, session, name='Csomagok', endpoint='service_admin'))
     admin.add_view(ExtraModelView(ExtraModel, session, name='Extrák', endpoint='extra_admin'))
-    admin.add_view(ModelView(CompanyModel, session, name='Cégek', endpoint='company_admin'))
-    admin.add_view(ModelView(CarWashModel, session, name='Autómosók', endpoint='carwash_admin'))
+    admin.add_view(MyModelView(CompanyModel, session, name='Cégek', endpoint='company_admin'))
+    admin.add_view(MyModelView(CarWashModel, session, name='Autómosók', endpoint='carwash_admin'))
 
-    admin.add_view(ModelView(BillingModel, session, name='Számlák', endpoint='billing_admin'))
+    admin.add_view(MyModelView(BillingModel, session, name='Számlák', endpoint='billing_admin'))
     
     admin.add_view(MonthlyInvoiceView(session=session, name='Havi számlázás', endpoint='monthly_invoices'))
 
@@ -67,16 +67,16 @@ def init_developer_admin(app, session_factory):
         template_mode='bootstrap3',
         index_view=DeveloperIndexView(url='/developer', endpoint='developer')
     )
-    developer_admin.add_view(ModelView(ReservationModel, session, name='Reservation', endpoint='reservation_developer'))
-    developer_admin.add_view(ModelView(UserModel, session, name='User', endpoint='user_developer'))
-    developer_admin.add_view(ModelView(SlotModel, session, name='Slot', endpoint='slot_developer'))
-    developer_admin.add_view(ModelView(ServiceModel, session, name='Service', endpoint='service_developer'))
-    developer_admin.add_view(ModelView(CompanyModel, session, name='Company', endpoint='company_developer'))
-    developer_admin.add_view(ModelView(CarWashModel, session, name='Carwash', endpoint='carwash_developer'))
-    developer_admin.add_view(ModelView(ExtraModel, session, name='Extras', endpoint='extra_developer'))
-    developer_admin.add_view(ModelView(CustomerModel, session, name='Customer', endpoint='customer_developer'))
-    developer_admin.add_view(ModelView(BillingModel, session, name='Billing', endpoint='billing_developer'))
-    developer_admin.add_view(ModelView(CarModel, session, name='Car', endpoint='car_developer'))
+    developer_admin.add_view(MyModelView(ReservationModel, session, name='Reservation', endpoint='reservation_developer'))
+    developer_admin.add_view(MyModelView(UserModel, session, name='User', endpoint='user_developer'))
+    developer_admin.add_view(MyModelView(SlotModel, session, name='Slot', endpoint='slot_developer'))
+    developer_admin.add_view(MyModelView(ServiceModel, session, name='Service', endpoint='service_developer'))
+    developer_admin.add_view(MyModelView(CompanyModel, session, name='Company', endpoint='company_developer'))
+    developer_admin.add_view(MyModelView(CarWashModel, session, name='Carwash', endpoint='carwash_developer'))
+    developer_admin.add_view(MyModelView(ExtraModel, session, name='Extras', endpoint='extra_developer'))
+    developer_admin.add_view(MyModelView(CustomerModel, session, name='Customer', endpoint='customer_developer'))
+    developer_admin.add_view(MyModelView(BillingModel, session, name='Billing', endpoint='billing_developer'))
+    developer_admin.add_view(MyModelView(CarModel, session, name='Car', endpoint='car_developer'))
     
     developer_admin.add_view(MonthlyInvoiceView(session=session, name='Monthly Invoices', endpoint='monthly_invoices_developer'))
 
