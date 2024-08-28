@@ -245,7 +245,41 @@ HTML
         <div class="FoglalasContainer">
             <button class="Foglalas" id="FoglalasButton">Foglalás</button>
         </div>
-    <div id="popup" class="popup"></div>
+   <!-- Button to trigger the popup -->
+   <button onclick="showPopup()">Show Reservation Details</button>
+
+   <!-- Popup overlay -->
+   <div class="overlay" id="popupOverlay">
+       <!-- Popup content -->
+       <div class="popup">
+         <div class = "popup_alcim">Összegzés</div>
+         <div class = "popup_data">
+         <div class = summary_container>
+           <p><strong>Hely:</strong> <span id="hely"></span></p>
+           <p><strong>Rendszám:</strong> <span id="rendszam"></span></p>
+           <p><strong>Csomag:</strong> <span id="csomag"></span></p>
+           <p><strong>Ár:</strong> <span id="service_price"></span></p>
+           <p><strong>Extrák:</strong> <span id="extra"></span></p>
+           <p><strong>Extra Ár:</strong> <span id="extra_price"></span></p>
+           <p><strong>Dátum:</strong> <span id="idopont"></span></p>
+           <!-- Button to close the popup -->
+         </div>
+         <div class = "megjegyzescontainer">
+           <p>Kérjük hozza autóját az átadási időpont előtt 2 órával!<br />Az időpontját, csak ezzel a feltétellel tudjuk garantálni. <span id="hely"></span>
+           <p>Amennyiben az extra szennyezett autóknál nem választja ki a megfelelő Extra csomagot a foglaláskor, akkor a költség kétszeresét számoljuk fel!</p>
+           <p>
+             <input type="checkbox" class="AdatvedelemPipa" id="ker_szamlat"</input>
+             Elfogadom az ÁSZF-et, az Adatvédelmi szabályzatot és a fenti feltételeket.
+           </p>
+           
+         </div>
+       </div>
+         <div class = "button-container">
+         <label class  = "price" onclick="hidePopup()">Teljes Ár: &nbsp <span id="vegosszeg"> 696969</span></label>
+         <button class = "finalize" onclick="hidePopup()">Megerősítés</button>
+          </div>
+     </div>
+   </div>
     <div class="footer">
         <div class="footer-content">
             <div class="footer-section">

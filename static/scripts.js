@@ -557,31 +557,33 @@ document.getElementById('FoglalasButton').addEventListener('click', async functi
     }
 }
 
-// Popup bezárása
+// Function to show the popup
+function showPopup() {
+    document.getElementById('popupOverlay').style.display = 'flex';
+    
+    // Sample data for demonstration purposes
+    var hely = "Budapest";
+    var rendszam = "ABC-123";
+    var csomag = "Premium Wash";
+    var service_price = "30 EUR";
+    var extra = "Tire Shine";
+    var extra_price = "5 EUR";
+    var idopont = "2024-09-01 10:00";
+    var vegosszeg = "35 EUR";
 
-function closePopup() {
-    const popupContainer = document.getElementById('popup');
-    if (popupContainer) {
-        popupContainer.style.display = 'none';
-    }
+    // Assigning values to the popup elements
+    document.getElementById('hely').innerText = hely;
+    document.getElementById('rendszam').innerText = rendszam;
+    document.getElementById('csomag').innerText = csomag;
+    document.getElementById('service_price').innerText = service_price;
+    document.getElementById('extra').innerText = extra;
+    document.getElementById('extra_price').innerText = extra_price;
+    document.getElementById('idopont').innerText = idopont;
+    document.getElementById('vegosszeg').innerText = vegosszeg;
 }
-document.addEventListener('DOMContentLoaded', function() {
-    const showPopupButton = document.getElementById('show-popup-btn');
-    const popupContainer = document.getElementById('popup-container');
 
-    showPopupButton.addEventListener('click', function() {
-        // AJAX kérés küldése a Flask szerverhez
-        fetch('/get-popup')
-            .then(response => response.json())
-            .then(data => {
-                // A HTML kód beillesztése a popup konténerbe
-                popupContainer.innerHTML = data.html;
+// Function to hide the popup
+function hidePopup() {
+    document.getElementById('popupOverlay').style.display = 'none';
+}
 
-                // A popup megjelenítése
-                popupContainer.style.display = 'block';
-            })
-            .catch(error => {
-                console.error('Hiba a popup betöltésekor:', error);
-            });
-    });
-});
