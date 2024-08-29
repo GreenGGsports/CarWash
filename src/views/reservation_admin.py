@@ -11,6 +11,7 @@ from src.models.reservation_model import ReservationModel
 from flask_admin.contrib.sqla import ModelView, filters
 from datetime import datetime, timedelta
 from flask_login import current_user
+from flask import current_app
 
 class DateRangeFilter(filters.BaseSQLAFilter):
     def __init__(self, column, label, start_date, end_date):
@@ -210,8 +211,8 @@ class ReservationAdminView(ModelView):
                 # Flush changes manually
                 session.flush()
 
-        except Exception as e:
-            print(f"Exception occurred: {e}")
-            raise
+        except Exception as  e :
+                self.session.rollback()
+                current_app.logger.error(e)
 
         return super(ReservationAdminView, self).on_model_change(form, model, is_created)
