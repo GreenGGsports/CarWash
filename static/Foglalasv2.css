@@ -1,3 +1,6 @@
+form {
+    display: contents; /* vagy flex, attól függ, hogy hogyan szeretnéd kezelni a belső elemeket */
+  }
 .overlay {
     position: relative;
     top: 0;

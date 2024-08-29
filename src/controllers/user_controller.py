@@ -49,6 +49,9 @@ def login():
             identity_changed.send(current_app._get_current_object(), identity=Identity(user.id))
             return jsonify({'status': 'logged_in'})
         return jsonify({'status': 'failed'})
+    except Exception as e:
+        db_session.rollback()
+        current_app.logger.error(e)
     finally:
         db_session.close()
 
@@ -71,6 +74,9 @@ def add_user():
             UserModel.add_user(session=db_session, user_name=user_name, password=password, role=role, carwash_id=carwash_id)
             return jsonify({'status': 'success'})
         return jsonify({'status': 'failed'})
+    except Exception as e:
+        db_session.rollback()
+        current_app.logger.error(e)
     finally:
         db_session.close()
 

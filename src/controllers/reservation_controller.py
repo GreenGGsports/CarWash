@@ -16,70 +16,6 @@ reservation_ctrl = Blueprint('reservation_ctrl', __name__, url_prefix='/reservat
 def show_reservation_form():
     return render_template('Foglalas.html')
 
-def get_popup_data():
-    try:
-        slot_id, service_id, extra_ids, carwash_id, researvation_date = get_session_data()
-        db_session = current_app.session_factory.get_session()
-        reservation_id = session.get('reservation_id')
-        
-        car_id = session.get('car_id')
-        car = CarModel.get_by_id(session=db_session, obj_id=car_id) 
-        
-        car_size = car.car_type
-        license_plate = car.license_plate
-        location = CarWashModel.get_value_by_id(session=db_session,obj_id = carwash_id, column_name='location')
-        service_name = ServiceModel.get_value_by_id(session=db_session, obj_id=service_id, column_name= 'service_name')
-        
-        if car_size == CarTypeEnum.small_car:
-            service_price = ServiceModel.get_value_by_id(session=db_session, obj_id=service_id, column_name= 'price_small')
-        
-        elif car_size == CarTypeEnum.large_car:
-            service_price = ServiceModel.get_value_by_id(session=db_session, obj_id=service_id, column_name= 'price_small')
-            
-        final_price = ReservationModel.get_value_by_id(session=db_session, obj_id=reservation_id, column_name= 'final_price')
-        researvation_date = session.get('reservation_date')
-        
-        extra_price = 0
-        extra_names = ""
-        if extra_ids:
-            extra_price = 0
-            extra_names = []
-            for extra_id in extra_ids:
-                extra = ExtraModel.get_by_id(session=db_session,obj_id= extra_id)
-                extra_price += extra.price
-                extra_names.append(extra.service_name)
-    except Exception as e:
-        current_app.logger.error(f"Error occurred while generating data for popup HTML: {e}")
-    return location , license_plate, researvation_date, service_name, service_price, extra_names, extra_price, final_price
-
-@reservation_ctrl.route('/popup')
-def get_popup():
-    try:
-        location , license_plate, researvation_date, service_name, service_price, extra_names, extra_price, final_price = get_popup_data()
-        # Load the HTML template
-        with open('templates/popup.html', 'r', encoding='utf-8') as file:
-            html_template = file.read()
-
-        # Create a Jinja2 Template object
-        template = Template(html_template)
-        
-        # Render the template with replacements
-        rendered_html = template.render(
-            hely=location,
-            rendszam= license_plate,
-            csomag=  service_name,
-            service_price = service_price,
-            extra= extra_names,
-            extra_price = extra_price,
-            idopont= researvation_date,
-            vegosszeg= final_price,
-        )
-            
-        return jsonify({'html': rendered_html})
-    except Exception as e:
-        current_app.logger.error(f"Error occurred while generating popup HTML: {e}")
-        return jsonify({'error': 'An unexpected error occurred.'}), 500
-
 @reservation_ctrl.route('/add', methods=['POST'])
 def create_reservation():
     db_session = current_app.session_factory.get_session()
@@ -224,7 +160,63 @@ def parse_customer_data(data):
         phone_number = data.get('telefon'),
         
     )
+            
+def get_popup_data():
+    try:
+        slot_id, service_id, extra_ids, carwash_id, researvation_date = get_session_data()
+        db_session = current_app.session_factory.get_session()
+        reservation_id = session.get('reservation_id')
         
+        car_id = session.get('car_id')
+        car = CarModel.get_by_id(session=db_session, obj_id=car_id) 
         
+        car_size = car.car_type
+        license_plate = car.license_plate
+        location = CarWashModel.get_value_by_id(session=db_session,obj_id = carwash_id, column_name='location')
+        service_name = ServiceModel.get_value_by_id(session=db_session, obj_id=service_id, column_name= 'service_name')
+        
+        if car_size == CarTypeEnum.small_car:
+            service_price = ServiceModel.get_value_by_id(session=db_session, obj_id=service_id, column_name= 'price_small')
+        
+        elif car_size == CarTypeEnum.large_car:
+            service_price = ServiceModel.get_value_by_id(session=db_session, obj_id=service_id, column_name= 'price_small')
+            
+        final_price = ReservationModel.get_value_by_id(session=db_session, obj_id=reservation_id, column_name= 'final_price')
+        researvation_date = session.get('reservation_date')
+        
+        extra_price = 0
+        extra_names = ""
+        if extra_ids:
+            extra_price = 0
+            extra_names = []
+            for extra_id in extra_ids:
+                extra = ExtraModel.get_by_id(session=db_session,obj_id= extra_id)
+                extra_price += extra.price
+                extra_names.append(extra.service_name)
+    except Exception as e:
+        current_app.logger.error(f"Error occurred while generating data for popup HTML: {e}")
+    return location , license_plate, researvation_date, service_name, service_price, extra_names, extra_price, final_price
+
+
+@reservation_ctrl.route('/popup')
+def get_popup():
+    try:
+        location , license_plate, researvation_date, service_name, service_price, extra_names, extra_price, final_price = get_popup_data()
+        # Render the template with replacements
+        data = dict(
+            hely=location,
+            rendszam= license_plate,
+            csomag=  service_name,
+            service_price = service_price,
+            extra = extra_names,
+            extra_price = extra_price,
+            idopont= researvation_date,
+            vegosszeg= final_price,
+        )
+            
+        return jsonify({data})
+    except Exception as e:
+        current_app.logger.error(f"Error occurred while generating popup HTML: {e}")
+        return jsonify({'error': 'An unexpected error occurred.'}), 500
         
 
