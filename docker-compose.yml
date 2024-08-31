@@ -1,3 +1,4 @@
+#Note: do not build prod docker and database container on dev-branches 
 version: '3.8'
 
 services:
