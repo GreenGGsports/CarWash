@@ -380,6 +380,7 @@ function validateForm(form) {
                 console.error(`Érvénytelen mező: ${input.name} - ${input.validationMessage}`);
             } else {
                 // Ha a mező érvényes, eltávolítjuk az 'error' osztályt
+                console.log(`jóóóóóó mező: ${input.name} - ${input.validationMessage}`)
                 input.classList.remove('error');
             }
         });
@@ -390,40 +391,35 @@ function validateForm(form) {
 
 // POST kérést küld az űrlap adataival
 async function postForm(url, form) {
-    if (validateForm(form)) {
-        // Gyűjtjük az összes form adatot
-        const formData = new FormData(form);
+    // Gyűjtjük az összes form adatot
+    const formData = new FormData(form);
 
-        // Átalakítjuk a form adatait egy objektummá
-        const formObject = {};
-        formData.forEach((value, key) => {
-            formObject[key] = value;
+    // Átalakítjuk a form adatait egy objektummá
+    const formObject = {};
+    formData.forEach((value, key) => {
+        formObject[key] = value;
+    });
+
+    // Küldjük a POST kérést
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formObject)
         });
 
-        // Küldjük a POST kérést
-        try {
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formObject)
-            });
-
-            if (response.ok) {
-                const jsonResponse = await response.json();
-                console.log('Sikeres kérés:', jsonResponse);
-                return jsonResponse;
-            } else {
-                console.error('Hiba a kérés során:', response.statusText);
-                return null;
-            }
-        } catch (error) {
-            console.error('Hiba történt:', error);
+        if (response.ok) {
+            const jsonResponse = await response.json();
+            console.log('Sikeres kérés:', jsonResponse);
+            return jsonResponse;
+        } else {
+            console.error('Hiba a kérés során:', response.statusText);
             return null;
         }
-    } else {
-        console.log('Form hiba');
+    } catch (error) {
+        console.error('Hiba történt:', error);
         return null;
     }
 }
@@ -490,7 +486,7 @@ document.getElementById('FoglalasButton').addEventListener('click', async functi
             const response1 = await postForm(reservationUrl, reservationForm);
             const response2 = await postForm(billingUrl, billingForm);
             if (response1.ok && response2.ok) {
-                finalize();
+                showPopup();
             } 
             else {
                 console.error('Egy vagy több kérés nem volt sikeres');
@@ -501,17 +497,20 @@ document.getElementById('FoglalasButton').addEventListener('click', async functi
     }
     else if(pay_by_card){
         console.log('pay by card ')
-        card_payment()          
-        const response1 = await postForm(reservationUrl, reservationForm);
-        if (response1.status === 'success'){
+        card_payment()     
+        is_valid_res = validateForm(reservationForm)
+        is_valid_bill = validateForm(billingForm)
+        if (is_valid_bill && is_valid_res){
+            const response1 = await postForm(reservationUrl, reservationForm);
             const response2 = await postForm(billingUrl, billingForm);
-            if(response2.status === 'success') {
-                finalize();
-                }    
-        else {
+            if (response1.ok && response2.ok) {
+                showPopup();
+            } 
+            else {
                 console.error('Egy vagy több kérés nem volt sikeres');
             }
         }
+        else {return}
         }
 
     else {
@@ -519,69 +518,80 @@ document.getElementById('FoglalasButton').addEventListener('click', async functi
         const response1 = await postForm(reservationUrl, reservationForm);
         console.log('response : ',response1)
         if (response1.status === 'success') {
-            finalize();
+            showPopup();
         } 
 
     }
 // parses JSON response into native JavaScript objects
  });
 
- async function finalize() {
-    console.log('finalize');
-    try {
-        // AJAX kérés küldése a Flask szerverhez a popup tartalmának lekéréséhez
-        const response = await fetch('/reservation/popup');
-        console.log(response);
-        
-        if (response.ok) {
-            const data = await response.json();
-            const popupContainer = document.getElementById('popup');
-            console.log('response', data);
-            
-            // A HTML kód beillesztése a popup konténerbe
-            popupContainer.innerHTML = data.html;
+ function showPopup() {
+    // Display the popup overlay
+    document.getElementById('popupOverlay').style.display = 'flex';
 
-            // A popup megjelenítése
-            popupContainer.style.display = 'block';
-
-            // Popup bezárása eseménykezelő beállítása
-            const closeButton = document.getElementById('closePopup');
-            if (closeButton) {
-                closeButton.addEventListener('click', closePopup);
+    // Make an API request to get the data
+    fetch('/reservation/popup')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
             }
-        } else {
-            console.error('Hiba a popup tartalom lekérésekor:', response.statusText);
-        }
-    } catch (error) {
-        console.error('Hiba történt:', error);
-    }
+            return response.json(); // Parse the JSON data from the response
+        })
+        .then(data => {
+            // Assuming the API returns a JSON object with keys matching your variables
+            var hely = data.hely;
+            var rendszam = data.rendszam;
+            var csomag = data.csomag;
+            var service_price = data.service_price;
+            var extra = data.extra;
+            var extra_price = data.extra_price;
+            var idopont = data.idopont;
+            var vegosszeg = data.vegosszeg;
+
+            // Assigning values to the popup elements
+            document.getElementById('hely').innerText = hely;
+            document.getElementById('rendszam').innerText = rendszam;
+            document.getElementById('csomag').innerText = csomag;
+            document.getElementById('service_price').innerText = service_price;
+            document.getElementById('extra').innerText = extra;
+            document.getElementById('extra_price').innerText = extra_price;
+            document.getElementById('idopont').innerText = idopont;
+            document.getElementById('vegosszeg').innerText = vegosszeg;
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            // Optionally, handle the error and display a user-friendly message
+        });
 }
 
-// Popup bezárása
 
-function closePopup() {
-    const popupContainer = document.getElementById('popup');
-    if (popupContainer) {
-        popupContainer.style.display = 'none';
-    }
+// Function to show the popup
+function showPopup() {
+    document.getElementById('popupOverlay').style.display = 'flex';
+    
+    // Sample data for demonstration purposes
+    var hely = "Budapest";
+    var rendszam = "ABC-123";
+    var csomag = "Premium Wash";
+    var service_price = "30 EUR";
+    var extra = "Tire Shine";
+    var extra_price = "5 EUR";
+    var idopont = "2024-09-01 10:00";
+    var vegosszeg = "35 EUR";
+
+    // Assigning values to the popup elements
+    document.getElementById('hely').innerText = hely;
+    document.getElementById('rendszam').innerText = rendszam;
+    document.getElementById('csomag').innerText = csomag;
+    document.getElementById('service_price').innerText = service_price;
+    document.getElementById('extra').innerText = extra;
+    document.getElementById('extra_price').innerText = extra_price;
+    document.getElementById('idopont').innerText = idopont;
+    document.getElementById('vegosszeg').innerText = vegosszeg;
 }
-document.addEventListener('DOMContentLoaded', function() {
-    const showPopupButton = document.getElementById('show-popup-btn');
-    const popupContainer = document.getElementById('popup-container');
 
-    showPopupButton.addEventListener('click', function() {
-        // AJAX kérés küldése a Flask szerverhez
-        fetch('/get-popup')
-            .then(response => response.json())
-            .then(data => {
-                // A HTML kód beillesztése a popup konténerbe
-                popupContainer.innerHTML = data.html;
+// Function to hide the popup
+function hidePopup() {
+    document.getElementById('popupOverlay').style.display = 'none';
+}
 
-                // A popup megjelenítése
-                popupContainer.style.display = 'block';
-            })
-            .catch(error => {
-                console.error('Hiba a popup betöltésekor:', error);
-            });
-    });
-});

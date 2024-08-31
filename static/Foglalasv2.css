@@ -1,3 +1,105 @@
+form {
+    display: contents; /* vagy flex, attól függ, hogy hogyan szeretnéd kezelni a belső elemeket */
+  }
+.overlay {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 5rem;
+}
+
+/* Style for the popup container */
+.popup {
+  height: 100%;
+  background: black;
+  padding: 1.85rem;
+  border: 0.39375rem solid #13669C;
+  border-radius: 1.25rem 0.3125rem; /* Rugalmas kerekítés */
+  width: 50%; /* Rugalmas szélesség, alkalmazkodik a konténerhez */
+  color: #F3F5F5;
+  font-size: 1.25rem; /* Rugalmas betűméret */
+  font-family: Graphie, sans-serif;
+  box-shadow: 0px 0px 0.9375rem 0.1875rem #13669C;;
+}
+
+.popup_data{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 0.21375rem solid #13669C;
+  padding: 1.0rem;
+  border-radius: 0.625rem; /* Rugalmas kerekítés */
+  box-shadow: 0px 0px .625rem 0.1875rem rgba(19, 102, 156, 0.50), 0px 0px 0.625rem 0.1875rem rgba(19, 102, 156, 0.50) inset;
+}
+
+
+.popup h2 {
+    margin-top: 0;
+}
+
+.popup_alcim {
+    width: 53%; /* Szélesség százalékban */
+    max-width: 75%; /* Maximális szélesség korlátozása */
+    height: auto; /* Automatikus magasság a tartalomhoz igazodva */
+    font-size: 3.75rem; /* Rugalmas betűméret */
+    text-align: center;
+    border-radius: 0px 5px 25px 0px;
+    background: #13669C;
+    margin: 0rem 0 2rem -2rem;
+    color: black;
+}
+
+.summary_container {
+  border-right: 2px solid #F3F5F5; /* Vertical line between the columns */
+  padding-right: 15px; /* Padding to space out the content from the border */
+  margin-right: 10px; /* Margin to create space between the border and the next column */
+}
+
+.price{
+    font-family: Graphie, sans-serif;
+    width: 100%;
+    height: 5.125rem; /* Rugalmas magasság */
+    background: black;
+    box-shadow: 0px 0px 0.9375rem 0.1875rem rgba(19, 102, 156, 0.50), 0px 0px 0.625rem 0.1875rem rgba(19, 102, 156, 0.50) inset;
+    border-radius: 0.7rem 0.7rem 0.7rem 0.7rem; /* Rugalmas kerekítés */
+    border: 0.09375rem solid #13669C;
+    color: white;
+    font-size: 2.5rem; /* Rugalmas betűméret */
+    box-sizing: border-box;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.finalize {
+    width: 100%; /* Rugalmas szélesség, alkalmazkodik a konténerhez */
+    height: 5.125rem; /* Rugalmas magasság */
+    border-radius: 0.7rem 0.7rem 0.7rem 0.7rem; /* Rugalmas kerekítés */
+    border: 0.09375rem solid var(--Color, #7CF2DA); /* Rugalmas keretvastagság */
+    background: #000;
+    box-shadow: 0px 0px 0.9375rem 0.1875rem rgba(124, 242, 218, 0.50), 0px 0px 0.9375rem 0.1875rem rgba(124, 242, 218, 0.50) inset;
+    text-align: center;
+    color: #F3F5F5;
+    font-size: 2.5rem; /* Rugalmas betűméret */
+    font-family: Graphie, sans-serif;
+    font-weight: 600;
+    word-wrap: break-word;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .button-container {
+      padding-top: 2rem;
+      display: grid; /* Use flexbox to align items horizontally */
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem; /* Add some space between the buttons */
+    }
 .error {
     border: 2px solid red !important;
     background-color: #fdd !important;
@@ -42,7 +144,9 @@ textarea.error {
 html, body {
     margin: 0;
     padding: 0;
+    /* Center content horizontally */
     overflow-x: hidden;
+    
 }
 
 body {
@@ -54,7 +158,6 @@ body {
     background-color: black;
     width: 100%; /* Teljes szélesség */
     max-width: 1920px; /* Maximum szélesség korlátozása */
-    overflow-x: hidden; /* Vízszintes scrollozás letiltása */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -274,7 +377,7 @@ button {
 .ExtrakContainers {
     display: flex;
     justify-content: center;
-    gap: 1.875rem; /* Rugalmas távolság az elemek között */
+    gap: 1rem; /* Rugalmas távolság az elemek között */
     flex-wrap: wrap; /* Több sorban is elférjenek az elemek kisebb képernyőkön */
     height: auto; /* Rugalmas magasság */
 }
@@ -883,6 +986,23 @@ input:focus~.bar:after {
     .footer-socials{
         height: 6.125rem;
     }
+
+    .price{
+        font-size: 1.75rem;
+    }
+
+    .finalize{
+        font-size: 1.75rem;
+    }
+
+    .popup_alcim{
+        font-size: 2.5rem;
+
+    }
+
+    .popup{
+        width: 90%;
+    }
 }
 
 @media only screen and (max-width: 1200px){
@@ -971,6 +1091,14 @@ input:focus~.bar:after {
     }
     .FoglalasiFelulet{
         padding-bottom: 0.5rem;
+    }
+
+    .button-container{
+        grid-template-columns: 1fr;
+    }
+
+    .popup_data{
+        grid-template-columns: 1fr;
     }
 
 }
