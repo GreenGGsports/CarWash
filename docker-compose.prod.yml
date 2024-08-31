@@ -1,19 +1,20 @@
+version: '3.8'
 services:
   app:
     build:
       context: .
       dockerfile: app.dockerfile
-    image: cw_app_dev  # Specify the image name for the app
-    container_name: cw_app_dev1  # Specify the container name for the app
+    image: cw_app_prod  # Image name for production
+    container_name: cw_app_prod1  # Container name for production
     environment:
-      - PORT=8000  # A gunicorn indítási portja
+      - PORT=8080  # Use a different port for production (e.g., 8080)
       - DB_USER=testuser
       - DB_PASSWORD=testpassword
       - DB_NAME=testdb
-      - DB_HOST=db  # Docker szolgáltatás neve a MySQL adatbázishoz
-      - DB_PORT=3306
+      - DB_HOST=db
+      - DB_PORT=3306  # Keep internal MySQL port as 3306
     ports:
-      - "8000:8000"
+      - "8080:8080"  # Map production app to a different external port
     depends_on:
       - db
     networks:
@@ -23,15 +24,15 @@ services:
     build:
       context: .
       dockerfile: db.dockerfile
-    image: cw_db_dev  # Specify the image name for the database
-    container_name: cw_db_dev1 # Specify the container name for the database
+    image: cw_db_prod  # Image name for production
+    container_name: cw_db_prod1  # Container name for production
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: testdb
       MYSQL_USER: testuser
       MYSQL_PASSWORD: testpassword
     ports:
-      - "3306:3306"
+      - "3307:3306"  # Map external port 3307 to internal port 3306
     networks:
       - app-network
 
