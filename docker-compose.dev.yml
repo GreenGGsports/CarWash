@@ -1,0 +1,40 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: app.dockerfile
+    image: cw_app_dev  # Specify the image name for the app
+    container_name: cw_app_dev1  # Specify the container name for the app
+    environment:
+      - PORT=8000  # A gunicorn indítási portja
+      - DB_USER=testuser
+      - DB_PASSWORD=testpassword
+      - DB_NAME=testdb
+      - DB_HOST=db  # Docker szolgáltatás neve a MySQL adatbázishoz
+      - DB_PORT=3306
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  db:
+    build:
+      context: .
+      dockerfile: db.dockerfile
+    image: cw_db_dev  # Specify the image name for the database
+    container_name: cw_db_dev1 # Specify the container name for the database
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: testdb
+      MYSQL_USER: testuser
+      MYSQL_PASSWORD: testpassword
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
