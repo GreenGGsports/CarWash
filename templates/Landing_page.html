@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Landing page</title>
     <link rel= "stylesheet" href= "{{ url_for('static',filename='landing_page.css') }}">
+    <link rel="stylesheet" href="https://use.typekit.net/gnm3icp.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
@@ -14,11 +15,13 @@
         <div class="header">
             <div class="inner-container-1"></div>
             <div class="inner-container-2">
-                <img class="image" src="https://via.placeholder.com/537x116" alt="">
+                <img class="image" src="logo2.png" alt="">
             </div>
             <div class="inner-container-3">
-                <i class="fas fa-user"></i>
-                <button type="button" class="login-toggle">Log in</button>
+                <button type="button" class="login-toggle">
+                    <i class="fas fa-user"></i>
+                    <p>Log in</p>
+                </button>
             </div>
         </div>
         <!--modal-->
@@ -83,12 +86,11 @@
             </div>
         </div>        
         <div class="divider"></div> <!-- Divider line -->
-        <hr>
         <div class="slider-container">
             <div class="slider">
-                <img src="gallery1.png" alt="Slide 1">
-                <img src="Gallery2.png" alt="Slide 2">
-                <img src="Gallery3.png" alt="Slide 3">
+                <img src="gallery6.png" alt="Slide 1">
+                <img src="Gallery6.png" alt="Slide 2">
+                <img src="Gallery6.png" alt="Slide 3">
                 <!-- Additional slides as needed -->
             </div>
             <div class="text-overlay">
@@ -97,8 +99,9 @@
         </div>
         <div class="content">
             <div class="Foglalas">
-                <button class="FoglalasGomb" id = 'bookingButton'>Online időpont foglalás</button>
-                <div class="tooltip">Lépj be, vagy regisztrálj az online időpont foglaláshoz az oldal tetején.</div>
+                <button class="FoglalasGomb"id = 'bookingButton'>Online időpont foglalás
+                    <div class="tooltip">Lépj be, vagy regisztrálj az online időpont foglaláshoz az oldal tetején.</div>
+                </button>
             </div>
             <div class="main-container">
                 <div class="title-container">
@@ -109,51 +112,53 @@
                         <button class="keret">
                             <img class="helyszin" src="https://via.placeholder.com/335x100" />
                             <div class="IkonKeret">
-                                <div class="ikon"></div>
+                                <img src="map.svg" alt="" class="ikon">
                             </div>
                             <div class="MosokCim">1097 Budapest,<br />Könyves Kálmán krt. 11.</div>
                         </button>
                         <button class="keret">
                             <img class="helyszin" src="https://via.placeholder.com/335x100" />
                             <div class="IkonKeret">
-                                <div class="ikon"></div>
+                                <img src="map.svg" alt="" class="ikon">
                             </div>
                             <div class="MosokCim">1097 Budapest,<br />Könyves Kálmán krt. 11.</div>
                         </button>
                         <button class="keret">
                             <img class="helyszin" src="https://via.placeholder.com/335x100" />
                             <div class="IkonKeret">
-                                <div class="ikon"></div>
+                                <img src="map.svg" alt="" class="ikon">
                             </div>
                             <div class="MosokCim">1097 Budapest,<br />Könyves Kálmán krt. 11.</div>
                         </button>
                         <button class="keret">
                             <img class="helyszin" src="https://via.placeholder.com/335x100" />
                             <div class="IkonKeret">
-                                <div class="ikon"></div>
+                                <img src="map.svg" alt="" class="ikon">
                             </div>
                             <div class="MosokCim">1097 Budapest,<br />Könyves Kálmán krt. 11.</div>
                         </button>
                     </div>
                 </div>
             </div>
-            <div class="main-Carousel-container">
-                <div class="carousel-container">
-                    <button class="carousel-button prev" onclick="prevImage()">&#10094;</button>
-                    <div class="carousel-wrapper">
-                        <div class="carousel">
-                            <img src="gallery1.png" alt="Image 1" class="carousel-image">
-                            <img src="gallery1.png" alt="Image 1" class="carousel-image">
-                            <img src="gallery1.png" alt="Image 1" class="carousel-image">
-                            <img src="gallery1.png" alt="Image 1" class="carousel-image">
-                            <img src="gallery1.png" alt="Image 1" class="carousel-image">
-                            <img src="gallery1.png" alt="Image 1" class="carousel-image">
-                            <!-- Add more images as needed -->
+
+                <div class="main-Carousel-container">
+                    Galéria
+                    <div class="carousel-container">
+                        <button class="carousel-button prev" onclick="prevImage()">&#10094;</button>
+                        <div class="carousel-wrapper">
+                            <div class="carousel">
+                                <img src="gallery1.png" alt="Image 1" class="carousel-image">
+                                <img src="gallery1.png" alt="Image 1" class="carousel-image">
+                                <img src="gallery1.png" alt="Image 1" class="carousel-image">
+                                <img src="gallery1.png" alt="Image 1" class="carousel-image">
+                                <img src="gallery1.png" alt="Image 1" class="carousel-image">
+                                <img src="gallery1.png" alt="Image 1" class="carousel-image">
+                                <!-- Add more images as needed -->
+                            </div>
                         </div>
+                        <button class="carousel-button next" onclick="nextImage()">&#10095;</button>
                     </div>
-                    <button class="carousel-button next" onclick="nextImage()">&#10095;</button>
                 </div>
-            </div>
             <div class="Supports">
                 <div class="Supports-container-1">
                     <img src="support1.png" alt="">
@@ -161,43 +166,36 @@
                 <div class="Supports-container-2">
                     <img src="support2.png" alt="">
                 </div>
-                <div class="Supports-container-3">
-                    <img src="support1.png" alt="">
-                </div>
             </div>
             <div class="footer">
                 <div class="footer-content">
-                    <div class="footer-section">
+                    <div class="Footer-washes">
                         <div class="footer-box">
                             <img class="footer-image" src="https://via.placeholder.com/120x100" />
                             <div class="footer-text">+36 20 69 69 669</div>
                         </div>
                         <div class="footer-box">
-                            <div class="footer-text">© 2024 Eliteshine<br />Minden jog fenntartva</div>
-                        </div>
-                    </div>
-                    <div class="footer-section">
-                        <div class="footer-box">
                             <img class="footer-image" src="https://via.placeholder.com/250x100" />
                             <div class="footer-text">+36 20 69 69 669</div>
                         </div>
-                        <div class="footer-box">
-                            <div class="footer-text">Adatvédelmi nyilatkozat<br />Általános szerződési feltételek</div>
-                        </div>
-                    </div>
-                    <div class="footer-section">
                         <div class="footer-box">
                             <img class="footer-image" src="https://via.placeholder.com/320x100" />
                             <div class="footer-text">+36 20 69 69 669</div>
                         </div>
                         <div class="footer-box">
-                            <div class="footer-text">eliteshine@shine.com<br />+36 20 69 69 669</div>
-                        </div>
-                    </div>
-                    <div class="footer-section">
-                        <div class="footer-box">
                             <img class="footer-image" src="https://via.placeholder.com/287x98" />
                             <div class="footer-text">+36 20 69 69 669</div>
+                        </div>
+                    </div>
+                    <div class="footer-texts">
+                        <div class="footer-box">
+                            <div class="footer-text">© 2024 Eliteshine<br />Minden jog fenntartva</div>
+                        </div>
+                        <div class="footer-box">
+                            <div class="footer-text">Adatvédelmi nyilatkozat<br />Általános szerződési feltételek</div>
+                        </div>
+                        <div class="footer-box">
+                            <div class="footer-text">eliteshine@shine.com<br />+36 20 69 69 669</div>
                         </div>
                         <div class="footer-socials">
                             <div class="social-icon"></div>
@@ -207,8 +205,7 @@
                 </div>
                 <div class="footer-powered">
                     <div class="footer-powered-content">
-                        <div class="footer-powered-text">Powered by GG_Solutions & </div>
-                        <img class="footer-powered-image" src="https://via.placeholder.com/100x103" />
+                        <div class="footer-powered-text">Powered by GG_Solutions & MindMakers</div>
                     </div>
                 </div>
             </div>
@@ -219,37 +216,36 @@
         /*Gallery*/
         let currentIndex = 0;
 
-        function updateCarousel() {
-            const carousel = document.querySelector('.carousel');
-            const images = document.querySelectorAll('.carousel-image');
-            const totalImages = images.length;
+function showImage(index) {
+    const carousel = document.querySelector('.carousel');
+    const images = document.querySelectorAll('.carousel-image');
+    const imageWidth = images[0].clientWidth;
+    
+    carousel.style.transform = `translateX(${-index * imageWidth}px)`;
+}
 
-            // Calculate the offset for the current set of images
-            const visibleImages = 3; // Number of images visible at a time
-            const offset = -currentIndex * (100 / visibleImages);
-            carousel.style.transform = `translateX(${offset}%)`;
-        }
+function nextImage() {
+    const images = document.querySelectorAll('.carousel-image');
+    if (currentIndex < images.length - 1) {
+        currentIndex++;
+    } else {
+        currentIndex = 0;
+    }
+    showImage(currentIndex);
+}
 
-        function prevImage() {
-            const images = document.querySelectorAll('.carousel-image');
-            const totalImages = images.length;
-            const visibleImages = 3; // Number of images visible at a time
+function prevImage() {
+    if (currentIndex > 0) {
+        currentIndex--;
+    } else {
+        currentIndex = document.querySelectorAll('.carousel-image').length - 1;
+    }
+    showImage(currentIndex);
+}
 
-            currentIndex = (currentIndex === 0) ? totalImages - visibleImages : currentIndex - 1;
-            updateCarousel();
-        }
-
-        function nextImage() {
-            const images = document.querySelectorAll('.carousel-image');
-            const totalImages = images.length;
-            const visibleImages = 3; // Number of images visible at a time
-
-            currentIndex = (currentIndex >= totalImages - visibleImages) ? 0 : currentIndex + 1;
-            updateCarousel();
-        }
-
-        // Initialize carousel position
-        updateCarousel();
+window.addEventListener('resize', () => {
+    showImage(currentIndex); // Adjust the image position on resize
+});
 
 
         /*slider*/
@@ -290,12 +286,6 @@
         }
     }
 });
-
-document.getElementById('bookingButton').addEventListener('click', function() {
-    window.location.href = '/reservation';
-});
-
-
     </script>
     <script>
         document.getElementById('login-form').addEventListener('submit', function(event) {
@@ -363,6 +353,9 @@ document.getElementById('bookingButton').addEventListener('click', function() {
                     messageElement.style.color = 'red';
                 }
             });
+        });
+        document.getElementById('bookingButton').addEventListener('click', function() {
+            window.location.href = '/reservation';
         });
     </script>
 </body>

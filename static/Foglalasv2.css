@@ -144,7 +144,9 @@ textarea.error {
 html, body {
     margin: 0;
     padding: 0;
+    /* Center content horizontally */
     overflow-x: hidden;
+    
 }
 
 body {
@@ -156,7 +158,6 @@ body {
     background-color: black;
     width: 100%; /* Teljes szélesség */
     max-width: 1920px; /* Maximum szélesség korlátozása */
-    overflow-x: hidden; /* Vízszintes scrollozás letiltása */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -376,7 +377,7 @@ button {
 .ExtrakContainers {
     display: flex;
     justify-content: center;
-    gap: 1.875rem; /* Rugalmas távolság az elemek között */
+    gap: 1rem; /* Rugalmas távolság az elemek között */
     flex-wrap: wrap; /* Több sorban is elférjenek az elemek kisebb képernyőkön */
     height: auto; /* Rugalmas magasság */
 }

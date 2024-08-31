@@ -15,23 +15,22 @@ body {
     margin: 0;
     /* Remove default body margin */
 }
+html, body {
+    margin: 0;
+    padding: 0;
+    /* Center content horizontally */
+    overflow-x: hidden;
+    
+}
 
 .page-wrapper {
-    width: calc(100vw - 6.25rem);
-    /* 50px each side converted to rem, 100vw - 100px */
-    min-height: calc(100vh - 6.25rem);
-    /* 50px each side converted to rem, 100vh - 100px */
-    margin: 3.125rem auto;
-    /* 50px in rem for top/bottom and sides */
-    border: 5px solid #13669C;
     border-radius: 10px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    overflow: hidden;
-    background-color: #000;
+    margin-left: 0.5rem;
 }
 
 .header {
@@ -66,7 +65,7 @@ body {
 .inner-container-3 i {
     margin-right: 8px;
     color: #7CF2DA;
-    font-size: 1.5em;
+    font-size: 2.5em;
 }
 
 .inner-container-3 {
@@ -78,8 +77,15 @@ body {
     background: none;
     border: none;
     color: #0af;
-    font-size: 16px;
+    font-size: 1.6em;
     cursor: pointer;
+    font-family: "graphie", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .Reg-container {
@@ -136,6 +142,7 @@ body {
     border-radius: 20px 5px 5px 5px;
     border: 1.5px solid var(--A-kk, #13669C);
     background: #000;
+    color: white;
 }
 
 .Reg-container form {
@@ -206,6 +213,7 @@ body {
     height: 2px;
     background-color: #13669C;
     margin: 0.5rem 0;
+    margin-bottom: 4rem;
 }
 
 .slider-container {
@@ -240,6 +248,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: "graphie", sans-serif;
+    font-weight: 500;
+    font-style: normal;
 }
 
 .text-overlay p {
@@ -253,6 +264,7 @@ body {
     display: flex;
     justify-content: center;
     position: relative;
+    margin-top: 3rem;
     /* Needed to position the tooltip correctly */
 }
 
@@ -263,24 +275,28 @@ body {
     box-shadow: 0px 0px 15px 3px rgba(124, 242, 218, 0.50), 0px 0px 15px 3px rgba(124, 242, 218, 0.50) inset;
     color: white;
     display: flex;
-    width: 1000px;
-    height: 150px;
+    width: 60rem;
+    height: 10rem;
     justify-content: center;
     align-items: center;
     gap: 10px;
     font-size: 4em;
     cursor: pointer;
     /* Add cursor to indicate it's clickable */
+    position: relative; /* Needed to position the tooltip relative to the button */
+    font-family: "graphie", sans-serif;
+    font-weight: 700;
+    font-style: normal;
 }
 
 .tooltip {
     visibility: hidden;
-    width: 50%;
-    height: 60px;
+    width: 100%;
+    height: 6rem;
     background-color: black;
     color: white;
     border-radius: 6px;
-    padding: 10px;
+    padding: 5px;
     position: absolute;
     z-index: 10;
     top: 110%;
@@ -289,18 +305,16 @@ body {
     margin-top: 10px;
     box-sizing: border-box;
     border: 1px solid red;
-    font-size: 1.5em;
+    font-size: 0.45em;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: "graphie", sans-serif;
+    font-weight: 500;
+    font-style: normal;
 }
 
-.Foglalas:hover .tooltip {
-    visibility: visible;
-}
-
-
-.Foglalas:hover .tooltip {
+.FoglalasGomb:hover .tooltip {
     visibility: visible;
 }
 
@@ -314,7 +328,7 @@ body {
     align-items: center;
     gap: 3vh;
     display: flex;
-    margin: 8rem 0;
+    margin-top: 8rem;
 }
 
 .title-container {
@@ -326,15 +340,16 @@ body {
     align-items: center;
     gap: 1vh;
     display: flex;
+    margin-bottom: 2.5rem;
 }
 
 .title {
     text-align: center;
     color: white;
     font-size: 4rem;
-    font-family: Inter, sans-serif;
-    font-weight: 400;
-    word-wrap: break-word;
+    font-family: "graphie", sans-serif;
+    font-weight: 600;
+    font-style: normal;
 }
 
 .HelyszinekContainer {
@@ -349,29 +364,22 @@ body {
 .box {
     display: flex;
     flex-wrap: wrap;
-    /* Gyermekelemek több sorba törnek, ha nem férnek el egy sorban */
-    gap: 30px;
-    /* Távolság a gombok között */
+    gap: 2rem;
     justify-content: center;
+    transform: scale(0.5); /* 1.0 is 100%, 1.5 is 150%, 0.5 is 50%, etc. */
 }
 
 .keret {
-    width: 335px;
-    height: 430px;
+    width: 21rem;
+    height: 29rem;
     background: black;
     box-shadow: 0px 0px 15px 3px rgba(124, 242, 218, 0.45), 0px 0px 15px 3px rgba(124, 242, 218, 0.45) inset;
-    border-top-left-radius: 60px;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
     border: 1.50px #13669C solid;
     display: flex;
     flex-direction: column;
     align-items: center;
     overflow: hidden;
-    /* Tartalom túllépésének elrejtése */
     position: relative;
-    /* Elemek pozicionálásához */
     padding-bottom: 50px;
     border-radius: 10px;
     border: 1.5px solid var(--A-kk, #13669C);
@@ -396,39 +404,33 @@ body {
     width: 100%;
     height: 100px;
     object-fit: cover;
-    /* A kép kitöltése a keret méretéhez igazítva */
-    margin-top: 50px;
-    /* 50px távolság a keret tetejétől */
+    margin-top: 3rem;
 }
 
 .MosokCim {
-    width: 283px;
-    height: 60px;
+    width: 21rem;
+    height: 5rem;
     color: #F3F5F5;
-    font-size: 25px;
-    font-family: Inter;
-    font-weight: 600;
+    font-size: 2em;
+    font-family: "graphie", sans-serif;
+    font-weight: 500;
+    font-style: normal;
     word-wrap: break-word;
     margin-top: auto;
-    padding-top: 10px;
 }
 
 .IkonKeret {
-    width: 79px;
-    height: 79px;
+    width: 22rem;
+    height: 6rem;
     position: absolute;
-    top: calc(100px + 50px + 50px);
-    /* 100px (kép magassága) + 50px (kép és ikon közötti távolság) + 50px (keret tetejétől való távolság) */
+    top: calc(10rem + 3rem + 3rem);
     left: 50%;
-    /* Középre helyezés vízszintesen */
     transform: translateX(-50%);
-    /* Vízszintesen középre igazítás */
 }
 
 .ikon {
-    width: 45.53px;
-    height: 65.83px;
-    background: #F3F5F5;
+    width: 10rem;
+    height: 5rem;
     margin: auto;
 }
 
@@ -437,13 +439,19 @@ body {
     width: 100%;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    color: white;
+    font-size: 4em;
+    font-family: "graphie", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    margin-top: 20rem;
 }
 
 .carousel-container {
     width: 90%;
     max-width: 1200px;
     border: 3px solid #13669C;
-    /* Blue border */
     border-radius: 10px;
     overflow: hidden;
     display: flex;
@@ -451,6 +459,7 @@ body {
     align-items: center;
     background-color: white;
     position: relative;
+    margin-top: 3rem;
 }
 
 .carousel-wrapper {
@@ -503,8 +512,7 @@ body {
 }
 
 .Supports-container-1,
-.Supports-container-2,
-.Supports-container-3 {
+.Supports-container-2 {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -514,26 +522,20 @@ body {
 }
 
 .Supports-container-1 {
-    width: 20%;
+    width: 49%;
     height: auto;
 }
 
 .Supports-container-2 {
-    width: 45%;
-    height: auto;
-    padding: 1rem;
-}
-
-.Supports-container-3 {
-    width: 20%;
+    width: 49%;
     height: auto;
     padding: 1rem;
 }
 
 .Supports img {
-    width: 100%;
+    width: 80%;
     /* Image fills container width */
-    height: 100%;
+    height: auto;
     /* Image fills container height */
     object-fit: cover;
     /* Ensures image maintains aspect ratio */
@@ -556,7 +558,22 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     gap: 5vw;
+}
+
+.Footer-washes{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.footer-texts{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .footer-section {
@@ -585,8 +602,9 @@ body {
 .footer-text {
     color: white;
     font-size: 1.8rem;
-    font-family: Graphie, sans-serif;
-    font-weight: 350;
+    font-family: "graphie", sans-serif;
+    font-weight: 400;
+    font-style: normal;
     word-wrap: break-word;
 }
 
@@ -614,6 +632,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 1vw;
+    margin-bottom: 3rem;
 }
 
 .footer-powered-content {
@@ -621,13 +640,15 @@ body {
     justify-content: center;
     align-items: center;
     gap: 0.5vw;
+    margin-top: 9rem;
 }
 
 .footer-powered-text {
     color: white;
     font-size: 2rem;
-    font-family: Graphie, sans-serif;
-    font-weight: 350;
+    font-family: "graphie", sans-serif;
+    font-weight: 400;
+    font-style: normal;
     word-wrap: break-word;
 }
 
@@ -635,3 +656,816 @@ body {
     width: 5vw;
     height: auto;
 }
+
+@media only screen and (min-width: 2600px) {
+    .inner-container-3 i{
+        font-size: 3.5em;
+    }
+
+    .login-toggle{
+        font-size: 2.5em;
+    }
+
+    .text-overlay p{
+        font-size: 4.5em;
+    }
+
+    .FoglalasGomb{
+        width: 92rem;
+        font-size: 6em;
+        height: 13rem;
+    }
+
+    .tooltip{
+        width: 114%;
+        height: 7rem;
+    }
+
+    .main-container{
+        margin-top: 10.8rem;
+    }
+
+    .title{
+        font-size: 6.1rem;
+    }
+
+    .title-container{
+        margin-bottom: 4.5rem;
+    }
+
+    .box{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7rem;
+        justify-content: center;
+    }
+
+    .keret{
+        width: 33rem;
+        height: 45rem;
+        background: black;
+        box-shadow: 0px 0px 15px 3px rgba(124, 242, 218, 0.45), 0px 0px 15px 3px rgba(124, 242, 218, 0.45) inset;
+        border: 1.50px #13669C solid;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+        padding-bottom: 50px;
+        border-radius: 10px;
+        border: 1.5px solid var(--A-kk, #13669C);
+        background: #000;
+        box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50), 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset;
+    }
+
+    .IkonKeret{
+        width: 27rem;
+        height: 13rem;
+        top: calc(14rem + 6rem + 3rem);
+    }
+
+    .ikon{
+        width: 7rem;
+        height: 10rem;
+    }
+
+    .MosokCim{
+        width: 32rem;
+        height: 6rem;
+        color: #F3F5F5;
+        font-size: 2.8em;
+        font-family: "graphie", sans-serif;
+        font-weight: 500;
+        font-style: normal;
+        word-wrap: break-word;
+        padding-top: 26rem;
+    }
+    
+    .main-Carousel-container{
+        margin-top: 26em;
+        font-size: 6.1em;
+    }
+
+    .footer-text{
+        font-size: 2.8em;
+    }
+
+    .footer-powered{
+        margin-top: 2rem;
+    }
+
+    .footer-powered-text{
+        font-size: 2.8em;
+    }
+}
+
+@media only screen and (min-width: 2300px) and (max-width: 2600px) {
+    .inner-container-3 i {
+        font-size: 2em;
+    }
+
+    .login-toggle{
+        font-size: 1.7em;
+    }
+
+    .text-overlay p {
+        font-size: 3.5em;
+    }
+
+    .FoglalasGomb {
+        width: 81rem;
+        height: 12rem;
+        font-size: 5.5em;
+    }
+
+    .tooltip{
+        width: 115%;
+        height: 8rem;
+        font-size: 0.47em;
+    }
+
+    .main-container{
+        margin-top: 11.5rem;
+    }
+
+    .title{
+        font-size: 6em;
+    }
+
+    .box{
+        gap: 5rem;
+    }
+
+    .keret{
+        width: 27rem;
+        height: 39rem;
+    }
+
+    .IkonKeret{
+    width: 27rem;
+    height: 13rem;
+    top: calc(14rem + 3rem + 3rem);
+    }
+
+    .ikon{
+        width: 7rem;
+        height: 10rem;
+    }
+
+    .MosokCim{
+        margin-top: 22rem;
+    }
+
+    .main-Carousel-container{
+        font-size: 6em;
+        margin-top: 26rem;
+    }
+
+    .footer-text{
+        font-size: 2.5em;
+    }
+
+    .footer-powered {
+        margin-top: 4rem;
+    }
+
+    .footer-powered-text{
+        font-size: 2.5em;
+    }
+    
+}
+
+@media only screen and (min-width: 1920px) and (max-width:2300px) {
+    .inner-container-3 i{
+        font-size: 2em;
+    }
+
+    .login-toggle{
+        font-size: 1.5em
+    }
+
+    .text-overlay p{
+        font-size: 3.2em;
+    }
+
+    .FoglalasGomb{
+        width: 62rem;
+        height: 9rem;
+    }
+
+    .tooltip{
+        width: 120%;
+        height: 6.4rem;
+        font-size: 0.5em;
+    }
+
+    .main-container{
+        margin-top: 9.4rem;
+        height: 45rem;
+    }
+
+    .title-container{
+        margin-bottom: 3.5rem;
+    }
+
+    .box{
+        gap: 5rem;
+    }
+
+    .keret{
+        width: 22rem;
+        height: 30rem;
+    }
+
+    .IkonKeret{
+        width: 22rem;
+        height: 6rem;
+        top: calc(9.4rem + 3rem + 3rem);
+    }
+
+    .ikon{
+        width: 10rem;
+        height: 5rem;
+    }
+
+    .MosokCim{
+        margin-top: 13rem;
+    }
+
+    .main-Carousel-container{
+        margin-top: 5rem;
+    }
+
+    .footer-text{
+        font-size: 2.1em;
+    }
+
+    .footer-powered {
+        margin-top: 4rem;
+    }
+}
+
+@media only screen and (min-width: 1540px) and (max-width:1920px) {
+    .inner-container-3 i{
+        margin-left: 0;
+        font-size: 1.4em;
+    }
+    
+    .login-toggle{
+        font-size: 1.6em;
+        width: 10rem;
+    }
+
+    .text-overlay p{
+        font-size: 2.7rem;
+    }
+
+    .FoglalasGomb{
+        width: 54rem;
+        font-size: 3.8em;
+    }
+
+    .tooltip{
+        width: 115%;
+    }
+
+    .main-container{
+        margin-top: 7rem;
+    }
+
+    .title{
+        font-size: 3.5rem;
+    }
+
+    .title-container{
+        margin-bottom: 2rem;
+    }
+
+    .main-container{
+        height: 65vh;
+    }
+
+    .box{
+        gap: 4rem;
+    }
+
+    .keret{
+        width: 19rem;
+        height: 30rem;
+    }
+
+    .IkonKeret{
+        top: calc(10rem + 4rem + 3rem);
+    }
+
+    .MosokCim{
+        margin-top: 16rem;
+        font-size: 1.7em;
+    }
+
+    .main-Carousel-container{
+        margin-top: 20.5rem;
+        font-size: 3.5em;
+    }
+
+    .footer-text{
+        font-size: 1.7em;
+    }
+
+    .footer-powered{
+        margin-top: 2rem;
+    }
+}
+
+@media only screen and (min-width: 1024px) and (max-width:1540px) {
+    .Reg-container h1{
+        font-size: 38px;
+    }
+    
+    .Reg-container h2{
+        font-size: 25px;
+    }
+
+    .Reg-container label {
+        font-size: 18px;
+    }
+
+    .Reg-container button{
+        font-size: 1.2em;
+    }
+
+    .login-toggle p{
+        display: none;
+    }
+
+    .inner-container-3 i{
+        font-size: 1.5em;
+    }
+
+    .text-overlay p{
+        font-size: 1.8em;
+    }
+
+    .FoglalasGomb{
+        width: 37rem;
+        font-size: 3em;
+        height: 8rem;
+    }
+
+    .tooltip{
+        width: 115%;
+        font-size: 0.42em;
+        height: 5rem;
+    }
+
+    .main-container{
+        margin-top: 5.7rem;
+        height: 92vh;
+    }
+
+    .title-container{
+        margin-bottom: 0.5rem;
+    }
+
+    .title{
+        font-size: 3.4em;
+    }
+
+    .box{
+        gap: 9rem;
+    }
+
+    .keret{
+        height: 31rem;
+        width: 24rem;
+    }
+
+    .IkonKeret{
+        top: calc(10rem + 4rem + 3rem);
+    }
+
+    .MosokCim{
+        font-size: 1.8em;
+        margin-top: 16rem;
+    }
+
+    .main-Carousel-container{
+        font-size: 3.5em;
+        margin-top: 50rem;
+    }
+
+    .footer-text{
+        font-size: 1.1em;
+    }
+
+}
+
+@media only screen and (min-width: 764px) and (max-width:1024px) {
+    .Reg-container h1{
+        font-size: 30px;
+    }
+    
+    .Reg-container h2{
+        font-size: 25px;
+    }
+
+    .Reg-container label {
+        font-size: 18px;
+    }
+
+    .Reg-container input{
+        height: 40px;
+    }
+
+    .Reg-container button{
+        font-size: 1.2em;
+        width: 125px;
+        height: 40px;
+    }
+    
+    .inner-container-3 i{
+        font-size: 1.6em;
+    }
+
+    .login-toggle{
+        font-size: 1em;
+    }
+
+    .login-toggle p{
+        display: none;
+    }
+
+    .text-overlay p{
+        font-size: 1.3em;
+    }
+
+    .FoglalasGomb{
+        width: 27rem;
+        height: 6rem;
+        font-size: 2em;
+    }
+
+    .tooltip{
+        width: 115%;
+        height: 4rem;
+        font-size: 0.43em;
+    }
+
+    .main-container{
+        margin-top: 4.5rem;
+        height: 76vh;
+    }
+
+    .title{
+        font-size: 3em;
+    }
+
+    .title-container{
+        margin-bottom: 0.5rem;
+    }
+
+    .box{
+        gap: 4rem;
+    }
+
+    .keret{
+        width: 17rem;
+        height: 27rem;
+    }
+
+    .IkonKeret{
+        top: calc(10rem + 1rem + 3rem);
+    }
+
+    .MosokCim{
+        font-size: 1.5em;
+        margin-top: 13rem;
+    }
+
+    .main-Carousel-container{
+        margin-top: 41rem;
+    }
+
+    .Supports{
+        display: flex;
+        flex-direction: column;
+        align-content: space-around;
+        align-items: center;
+    }
+
+    .Supports-container-1, .Supports-container-2{
+        width: 90%;
+    }
+
+    .footer-content{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .Footer-washes {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .footer-texts {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+}
+
+@media only screen and (min-width: 380px) and (max-width:764px) {
+    .page-wrapper{
+        margin-left: 2.5rem;
+    }
+
+    .Reg-container h1{
+        font-size: 16px;
+    }
+    
+    .Reg-container h2{
+        font-size: 16px;
+    }
+
+    .Reg-container label {
+        font-size: 10px;
+    }
+
+    .Reg-container input{
+        height: 30px;
+    }
+
+    .Reg-container button{
+        font-size: 1em;
+        width: 110px;
+        height: 30px;
+        border-radius: 15px 5px 5px 5px;
+    }
+    
+    .inner-container-3{
+        font-size: 0.3em;
+    }
+
+    .login-toggle p{
+        display: none;
+    }
+
+    .text-overlay{
+        height: 50px;
+    }
+
+    .text-overlay p{
+        font-size: 0.7em;
+    }
+
+    .FoglalasGomb{
+        width: 15rem;
+        height: 4rem;
+        font-size: 1em;
+    }
+
+    .tooltip{
+        width: 115%;
+        height: 3rem;
+        font-size: 0.5em;
+    }
+
+    .title{
+        font-size: 2em;
+    }
+
+    .main-container{
+        margin-top: 3.5rem;
+    }
+
+    .keret{
+        width: 10rem;
+        height: 20rem;
+    }
+
+    .helyszin{
+        height: 50%;
+    }
+
+    .IkonKeret{
+        top: calc(5rem + 3rem + 3rem);
+    }
+
+    .ikon{
+        width: 4rem;
+        height: 5rem;
+    }
+
+    .MosokCim{
+        width: 10rem;
+        height: 5rem;
+        font-size: 0.9em;
+        margin-top: 11rem;
+    }
+
+    .main-Carousel-container {
+        margin-top: 24rem;
+        font-size: 2em;
+    }
+
+    .carousel-image {
+        width: 100%; /* Show one image at a time */
+    }
+
+    .Supports{
+        flex-direction: column;
+    }
+
+    .Supports-container-1, .Supports-container-2{
+        width: 100%;
+    }
+
+    .footer-content{
+        flex-direction: row;
+    }
+
+    .Footer-washes{
+        width: 49%;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer-texts{
+        width: 49%;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer-text{
+        font-size: 1em;
+    }
+
+    .footer-powered-content{
+        margin-top: 5rem;
+    }
+
+    .footer-powered-text{
+        font-size: 1em;
+    }
+
+}
+
+@media only screen and (min-width: 200px) and (max-width:380px) {
+    body{
+        width: 200%;
+    }
+
+    .page-wrapper{
+        margin-left: 2.5rem;
+    }
+
+    .Reg-container h1{
+        font-size: 14px;
+    }
+    
+    .Reg-container h2{
+        font-size: 13px;
+    }
+
+    .Reg-container label {
+        font-size: 10px;
+    }
+
+    .Reg-container input{
+        height: 25px;
+    }
+
+    .Reg-container button{
+        font-size: 0.8em;
+        width: 100px;
+        height: 25px;
+        border-radius: 10px 5px 5px 5px;
+    }
+
+    .login-toggle{
+        font-size: 0.6em;
+    }
+
+    .login-toggle p{
+        display: none;
+    }
+
+    .text-overlay{
+        height: 65px;
+    }
+
+    .text-overlay p{
+        font-size: 0.7em;
+    }
+
+    .FoglalasGomb{
+        width: 14rem;
+        height: 3rem;
+        font-size: 1em;
+    }
+
+    .tooltip{
+        width: 120%;
+        height: 3rem;
+    }
+
+    .main-container{
+        margin-top: 3.5em;
+    }
+
+    .title{
+        font-size: 2.5em;
+    }
+
+    .box{
+        gap: 3rem;
+    }
+
+    .keret{
+        width: 8rem;
+        height: 17rem;
+    }
+
+    .IkonKeret{
+        top: calc(10rem + -5rem + 3rem);
+    }
+
+    .ikon{
+        width: 3rem;
+        height: 5rem;
+    }
+
+    .MosokCim{
+        font-size: 0.7em;
+        margin-top: 8rem;
+    }
+
+    .main-Carousel-container{
+        font-size: 2.5em;
+    }
+
+    .carousel-image {
+        width: 100%; /* Show one image at a time */
+    }
+
+    .Supports{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 5rem auto;
+    }
+
+    .Supports-container-1, .Supports-container-2{
+        width: 100%;
+    }
+
+    .footer{
+        margin: auto;
+        width: auto;
+    }
+
+    .footer-content{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: stretch;
+        margin: auto;
+    }
+
+    .Footer-washes{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .footer-texts{
+        display: flex;
+        flex-direction: column;
+        width: 49%;
+        align-items: flex-start;
+    }
+
+    .footer-text{
+        font-size: 0.8em;
+    }
+
+    .footer-powered{
+        width: auto;
+        margin: auto;
+    }
+
+    .footer-powered-content{
+        margin-top: 2rem;
+    }
+
+    .footer-powered-text{
+        font-size: 1em;
+    }
+
+}
+
