@@ -1,38 +1,17 @@
-#Note: do not build prod docker and database container on dev-branches 
-version: '3.8'
-
-services:
-  app_prod:
+ervices:
+  app:
     build:
       context: .
-      dockerfile: app.dockerfile  # Production Dockerfile használata
+      dockerfile: app.dockerfile
     environment:
-      - PORT=8001
+      - PORT=8000  # A gunicorn indítási portja
       - DB_USER=testuser
       - DB_PASSWORD=testpassword
-      - DB_NAME=proddb
-      - DB_HOST=db
+      - DB_NAME=testdb
+      - DB_HOST=db  # Docker szolgáltatás neve a MySQL adatbázishoz
       - DB_PORT=3306
     ports:
-      - "8001:8000"
-    depends_on:
-      - db
-    networks:
-      - app-network
-
-  app_dev:
-    build:
-      context: .
-      dockerfile: app.dockerfile  # Development Dockerfile használata
-    environment:
-      - PORT=8002
-      - DB_USER=testuser
-      - DB_PASSWORD=testpassword
-      - DB_NAME=devdb
-      - DB_HOST=db
-      - DB_PORT=3306
-    ports:
-      - "8002:8000"
+      - "8000:8000"
     depends_on:
       - db
     networks:
@@ -44,7 +23,7 @@ services:
       dockerfile: db.dockerfile
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: proddb
+      MYSQL_DATABASE: testdb
       MYSQL_USER: testuser
       MYSQL_PASSWORD: testpassword
     ports:
