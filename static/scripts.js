@@ -86,9 +86,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 var ServiceSelected = false;
 async function listServices() {
-    const container = document.getElementById('CsomagokContainer'); // Update with actual services container ID
-    const template = document.getElementById('CsomagokTemplate').content; // Update with actual service template ID
+    const container = document.getElementById('CsomagokContainer');
+    const template = document.getElementById('CsomagokTemplate').content;
     container.innerHTML = '';
+
     try {
         const response = await fetch('/service/list');
 
@@ -98,53 +99,51 @@ async function listServices() {
 
         const data = await response.json();
 
-        // Meglévő szolgáltatások törlése (opcionális)
-        
-
         data.forEach(csomag => {
-            console.log(csomag)
             const clone = document.importNode(template, true);
             clone.querySelector('.CsomagokBox').dataset.id = csomag.id;
-            clone.querySelector('.csomag_nev').textContent = csomag.name; // Text content to avoid HTML injection
+            clone.querySelector('.csomag_nev').textContent = csomag.name;
 
-            // Leírás pontok felsorolása
-            const descriptionList = csomag.description.split(';').map(item => item.trim());
-            const ul = document.createElement('ul');
-            ul.classList.add('leiras')
-            descriptionList.forEach(item => {
-                if (item) { // Csak nem üres elemek
-                    const li = document.createElement('li');
-                    li.textContent = item; // Biztonságos szöveg beillesztése
-                    li.classList.add('leiras_li');
-                    ul.appendChild(li);
-                }
-            });
+            if (csomag.description) { // Only create description list if there's a description
+                const descriptionList = csomag.description.split(';').map(item => item.trim());
+                const ul = document.createElement('ul');
+                ul.classList.add('leiras');
 
-            const descriptionContainer = clone.querySelector('.CsomagokBox');
-            descriptionContainer.appendChild(ul); // Lista beillesztése
-            descriptionContainer.classList.add('leiras')
+                descriptionList.forEach(item => {
+                    if (item) { // Only add non-empty items
+                        const li = document.createElement('li');
+                        li.textContent = item;
+                        li.classList.add('leiras_li');
+                        ul.appendChild(li);
+                    }
+                });
+
+                clone.querySelector('.CsomagokBox').appendChild(ul);
+            }
+
             container.appendChild(clone);
         });
 
         if (!container.eventListenerAdded) {
-        container.addEventListener('click', async (event) => {
-            event.preventDefault(); // Esemény alapértelmezett működésének megakadályozása
+            container.addEventListener('click', async (event) => {
+                event.preventDefault();
 
-            const box = event.target.closest('.CsomagokBox');
-            if (box) {
-                const id = box.dataset.id;
-                console.log(`Service selected: ID=${id}`);
-                await sendSelectionToServer(id, '/service/select');
-                ServiceSelected = true
-            }
-        });
+                const box = event.target.closest('.CsomagokBox');
+                if (box) {
+                    const id = box.dataset.id;
+                    console.log(`Service selected: ID=${id}`);
+                    await sendSelectionToServer(id, '/service/select');
+                    ServiceSelected = true;
+                }
+            });
+            container.eventListenerAdded = true;
         }
-        container.eventListenerAdded = true;
 
     } catch (error) {
         console.error('Hiba történt GET kérés során:', error);
     }
 }
+
 
 async function listExtras() {
     const kulsoContainer = document.getElementById('KulsoExtrakContainer');
