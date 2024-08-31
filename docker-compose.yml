@@ -1,19 +1,37 @@
 version: '3.8'
 
 services:
-  app:
+  app_prod:
     build:
       context: .
-      dockerfile: app.dockerfile
+      dockerfile: app.dockerfile  # Production Dockerfile használata
     environment:
-      - PORT=8000  # A gunicorn indítási portja
+      - PORT=8001
       - DB_USER=testuser
       - DB_PASSWORD=testpassword
-      - DB_NAME=testdb
-      - DB_HOST=db  # Docker szolgáltatás neve a MySQL adatbázishoz
+      - DB_NAME=proddb
+      - DB_HOST=db
       - DB_PORT=3306
     ports:
-      - "8000:8000"
+      - "8001:8000"
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  app_dev:
+    build:
+      context: .
+      dockerfile: app.dockerfile  # Development Dockerfile használata
+    environment:
+      - PORT=8002
+      - DB_USER=testuser
+      - DB_PASSWORD=testpassword
+      - DB_NAME=devdb
+      - DB_HOST=db
+      - DB_PORT=3306
+    ports:
+      - "8002:8000"
     depends_on:
       - db
     networks:
@@ -25,7 +43,7 @@ services:
       dockerfile: db.dockerfile
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: testdb
+      MYSQL_DATABASE: proddb
       MYSQL_USER: testuser
       MYSQL_PASSWORD: testpassword
     ports:
@@ -36,3 +54,4 @@ services:
 networks:
   app-network:
     driver: bridge
+
