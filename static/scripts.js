@@ -544,8 +544,21 @@ document.getElementById('FoglalasButton').addEventListener('click', async functi
             var service_price = data.service_price;
             var extra = data.extra;
             var extra_price = data.extra_price;
-            var idopont = data.idopont;
+            var idopont = data.idopont;  // This is the date string from the server
             var vegosszeg = data.vegosszeg;
+
+            // Parse the date string into a Date object
+            var dateObj = new Date(idopont);
+
+            // Format the date as "YYYY-MM-DD HH:MM"
+            var year = dateObj.getFullYear();
+            var month = String(dateObj.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+            var day = String(dateObj.getDate()).padStart(2, '0');
+            var hours = String(dateObj.getHours()).padStart(2, '0');
+            var minutes = String(dateObj.getMinutes()).padStart(2, '0');
+
+            // Combine the formatted parts
+            var formattedDate = `${year}-${month}-${day} ${hours}:${minutes}`;
 
             // Assigning values to the popup elements
             document.getElementById('hely').innerText = hely;
@@ -554,7 +567,7 @@ document.getElementById('FoglalasButton').addEventListener('click', async functi
             document.getElementById('service_price').innerText = service_price;
             document.getElementById('extra').innerText = extra;
             document.getElementById('extra_price').innerText = extra_price;
-            document.getElementById('idopont').innerText = idopont;
+            document.getElementById('idopont').innerText = formattedDate;  // Display the formatted date
             document.getElementById('vegosszeg').innerText = vegosszeg;
         })
         .catch(error => {
@@ -563,34 +576,9 @@ document.getElementById('FoglalasButton').addEventListener('click', async functi
         });
 }
 
-
-// Function to show the popup
-function showPopup() {
-    document.getElementById('popupOverlay').style.display = 'flex';
-    
-    // Sample data for demonstration purposes
-    var hely = "Budapest";
-    var rendszam = "ABC-123";
-    var csomag = "Premium Wash";
-    var service_price = "30 EUR";
-    var extra = "Tire Shine";
-    var extra_price = "5 EUR";
-    var idopont = "2024-09-01 10:00";
-    var vegosszeg = "35 EUR";
-
-    // Assigning values to the popup elements
-    document.getElementById('hely').innerText = hely;
-    document.getElementById('rendszam').innerText = rendszam;
-    document.getElementById('csomag').innerText = csomag;
-    document.getElementById('service_price').innerText = service_price;
-    document.getElementById('extra').innerText = extra;
-    document.getElementById('extra_price').innerText = extra_price;
-    document.getElementById('idopont').innerText = idopont;
-    document.getElementById('vegosszeg').innerText = vegosszeg;
-}
-
 // Function to hide the popup
 function hidePopup() {
     document.getElementById('popupOverlay').style.display = 'none';
 }
+
 

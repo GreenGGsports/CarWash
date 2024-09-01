@@ -214,7 +214,7 @@ def get_popup():
             vegosszeg= final_price,
         )
             
-        return jsonify({data})
+        return jsonify(data)
     except Exception as e:
         current_app.logger.error(f"Error occurred while generating popup HTML: {e}")
         return jsonify({'error': 'An unexpected error occurred.'}), 500
