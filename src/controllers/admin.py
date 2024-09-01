@@ -39,8 +39,6 @@ def init_admin(app, session_factory):
     
     admin.add_view(MonthlyInvoiceView(session=session, name='Havi számlázás', endpoint='monthly_invoices'))
 
-    session.close()
-
 def init_local_admin(app, session_factory):
     local_admin = Admin(
         app,
@@ -55,8 +53,6 @@ def init_local_admin(app, session_factory):
     local_admin.add_view(ReservationAdminView(ReservationModel, session, name='Foglalások', endpoint='local_reservation_admin'))
     local_admin.add_view(ServiceModelView(ServiceModel, session, name='Csomagok', endpoint='local_service_admin'))
     local_admin.add_view(ExtraModelView(ExtraModel, session, name='Extrák', endpoint='local_extra_admin'))
-
-    session.close()
 
 def init_developer_admin(app, session_factory):
     session = session_factory.get_session()
@@ -79,7 +75,4 @@ def init_developer_admin(app, session_factory):
     developer_admin.add_view(MyModelView(CarModel, session, name='Car', endpoint='car_developer'))
     
     developer_admin.add_view(MonthlyInvoiceView(session=session, name='Monthly Invoices', endpoint='monthly_invoices_developer'))
-
-    session.close()
-
 
