@@ -222,6 +222,7 @@ let selectedDate;
 function dateSelected() {
     return !!selectedDate;
 } 
+var previouslySelectedDate = false
 document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
   
@@ -230,8 +231,20 @@ document.addEventListener('DOMContentLoaded', function () {
       height: '100%',  // Naptár magasságának beállítása
       width: '100%',   // Naptár szélességének beállítása
       dateClick: function (info) {
-        // Eseménykezelő, amikor egy napra kattintanak
-        console.log('Selected date:', info.dateStr);
+        // Remove class from previously selected date
+        if (previouslySelectedDate) {
+            previouslySelectedDate.classList.remove('selected-date');
+          }
+  
+          // Log the selected date
+          console.log('Selected date:', info.dateStr);
+  
+          // Add class to the currently clicked date
+          info.dayEl.classList.add('selected-date');
+  
+          // Update the previously selected date reference
+          previouslySelectedDate = info.dayEl;
+        
         sendDateToServer(info.dateStr); // Küldjük el a kiválasztott dátumot a szervernek
       },
       // Egyéb beállítások

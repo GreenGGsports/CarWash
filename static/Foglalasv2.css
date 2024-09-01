@@ -661,6 +661,13 @@ input:focus~.bar:after {
     width: 100%;
 }
 
+
+.fc .fc-daygrid {
+  border-radius: 10px; /* Adjust the value as needed */
+  border: 0.2em solid gray;
+  overflow: hidden;
+}
+
 /* Naptár stílus módosítása a sötét témához */
 .fc-theme-standard {
     background-color: black; /* Naptár háttérszín */
@@ -668,29 +675,34 @@ input:focus~.bar:after {
 
 .fc-toolbar, .fc-button, .fc-button-primary {
     background-color: black; /* Gombok háttérszíne */
-    border-radius: 0.5em;
-    border: 0.1em solid white;
+    border-radius: 0.5rem;
+    border: 0.1em solid grey;
     color: white !important; /* Gombok szövegszíne */
 }
 
-.fc-button-primary:not(:disabled):hover {
+.fc .fc-daygrid-day:hover {
     border: 0.1em solid rgba(123, 242, 218, 0.90);
-    background-color: red; /* Gombok háttérszíne hover esetén */
-}
+    cursor: pointer; /* Changes cursor to pointer on hover */
+  }
 
 .fc-daygrid-day {
     background-color: black; /* Napok háttere */
     color: white;
-    border-radius: 0.5rem;
+
+}
+.fc .selected-date {
+    background-color:  rgba(123, 242, 218, 0.90); /* Light coral background color */
+    border: 0.1em solid rgba(123, 242, 218, 0.90);
 }
 
 .fc-day-today {
-    background-color: blue !important; /* Mai nap háttérszíne */
-    border-color: rgba(123, 242, 218, 0.90) !important; 
+    background-color: grey !important; /* Mai nap háttérszíne */
 }
 
-
-
+.fc .fc-col-header-cell {
+    color: white;
+    background: black; /* Set your desired color */
+  }
 
 .AdatvedelemPipa {
     margin-right: 0.625rem; /* Rugalmas margó */
@@ -1045,10 +1057,6 @@ input:focus~.bar:after {
     .CsomagokContainer {
         grid-template-columns: 1fr 1fr;
     }
-    .CsomagokBox {
-        max-width: 150px;
-    }
-
     .csomag_nev{
         font-size: 1.5rem;
         text-align: left;

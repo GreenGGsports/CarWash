@@ -49,6 +49,6 @@ class BillingModel(BaseModel):
                 return billing_data
             return None  # Return None instead of False for more idiomatic Python
         except SQLAlchemyError as e:
-            # Log the exception here if needed
+            session.rollback()
             return None
         
