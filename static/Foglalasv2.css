@@ -363,7 +363,7 @@ button {
 }
 
 .leiras_li {
-    text-align: center;
+    text-align:left;
     color: #F3F5F5;
     font-size: 1.6875rem; /* Rugalmas betűméret */
     font-family: Graphie, sans-serif;

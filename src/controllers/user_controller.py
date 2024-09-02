@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, current_app, render_template, session
+from flask import Blueprint, request, jsonify, current_app, render_template, session, redirect, url_for
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_principal import Principal, Identity, RoleNeed, UserNeed, identity_changed, identity_loaded
 from src.models.user_model import UserModel
@@ -7,8 +7,13 @@ user_ctrl = Blueprint('user_ctrl', __name__, url_prefix='/user')
 
 # Only for testing
 @user_ctrl.route('/')
-def show_test_form():
+def show_login_form():
     return render_template('User.html')
+
+@user_ctrl.route('/redirect')
+def redirect_form():
+    """Redirect to the test form page."""
+    return redirect(url_for('user_ctrl.show_login_form'))
 
 class User(UserMixin):
     def __init__(self, user):
