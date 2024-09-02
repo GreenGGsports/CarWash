@@ -1,7 +1,15 @@
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import scoped_session, sessionmaker
 class SessionFactory:
     def __init__(self, engine):
-        self.Session = sessionmaker(bind=engine)
+        # Create a sessionmaker bound to the engine
+        self.session_factory = sessionmaker(bind=engine)
+        # Create a scoped session using the sessionmaker
+        self.Session = scoped_session(self.session_factory)
         
     def get_session(self):
+        # Return the scoped session instance
         return self.Session()
+        
+    def remove(self):
+        # Remove the current scoped session
+        self.Session.remove()

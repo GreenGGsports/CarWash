@@ -40,6 +40,12 @@ def create_app(config_name: str):
     session_factory = SessionFactory(engine)
     app.session_factory = session_factory
     
+    @app.teardown_request
+    def app_teardown(response_or_exc):
+        # Remove the session
+        app.session_factory.remove()
+        return response_or_exc
+    
     with app.app_context():
         create_database(engine)
         init_admin(app, session_factory)
@@ -61,10 +67,13 @@ def create_default_users(session):
     if not UserModel.check_name_taken(session, 'user'):
         UserModel.add_user(session, 'user', 'userpass', role='user')
 
+
+
 def add_blueprints(app: Flask):
     @app.route('/')
     def home():
         return render_template('Landing_page.html')
+    
     app.register_blueprint(billing_ctrl, url_prefix ='/billing')
     app.register_blueprint(reservation_ctrl, url_prefix='/reservation')
     app.register_blueprint(user_ctrl, url_prefix='/user')
