@@ -56,17 +56,17 @@ def create_reservation():
 def add_customer(data):
     db_session = current_app.session_factory.get_session()
     customer_data = parse_customer_data(data)
-    user_id = session.get('user_id')
 
     try:
-        if user_id:
+        if current_user.is_authenticated:
+            user_id = int(current_user.id)
             # Check if the user already has a customer record
             existing_customer = CustomerModel.get_last_by_user_id(session=db_session, user_id=user_id)
             if existing_customer:
                 customer = CustomerModel.update_by_id(session=db_session, **customer_data)
                 current_app.logger.info(f"Customer record updated for user_id {user_id}.")
             else:
-                customer = CustomerModel.add_customer(db_session, **customer_data)
+                customer = CustomerModel.add_customer(db_session,user_id=user_id, **customer_data)
                 current_app.logger.info(f"New customer record added for user_id {user_id}.")
         else:
             customer = CustomerModel.add_customer(db_session, **customer_data)

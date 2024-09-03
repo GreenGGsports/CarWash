@@ -12,6 +12,7 @@ from src.controllers.local_admin_controller import local_admin_ctrl
 from src.controllers.billing_controller import billing_ctrl
 from src.controllers.booking_controller import booking_ctrl
 from src.controllers.developer_controller import developer_ctrl
+from src.controllers.reservation_autofill import reservation_autofill_ctrl
 from database import create_database, connect_tcp_socket
 from src.controllers.admin import init_admin, init_local_admin, init_developer_admin
 from src.models.user_model import UserModel
@@ -80,6 +81,7 @@ def add_blueprints(app: Flask):
     app.register_blueprint(carwash_ctrl, url_prefix='/carwash')
     app.register_blueprint(service_ctrl, url_prefix='/service')
     app.register_blueprint(booking_ctrl, url_prefix = '/booking')
+    app.register_blueprint(reservation_autofill_ctrl, url_prefix = '/reservation_autofill')
     for rule in app.url_map.iter_rules():
         # Log the URL map rules
         app.logger.debug(f"Registered URL rule: {rule}")

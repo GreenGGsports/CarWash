@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const apiUrl = '/reservation/autofill';
+    const apiUrl = '/reservation_autofill/get_data';
 
     async function getReservationAutofill() {
         try {
