@@ -3,11 +3,24 @@
 
 {% block tail %}
     {{ super() }}
-    <!-- Add JQuery and JQuery UI -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <!-- Link to the external script -->
+    <!-- Include Flatpickr CSS and JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    
+    <!-- Link to the external script (if you have any additional scripts) -->
     <script src="/static/admin/scripts/scripts.js"></script>
+
+    <!-- Initialize Flatpickr -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            flatpickr('#{{ form.reservation_date.id }}', {
+                enableTime: true,              // Enable time picker
+                dateFormat: "Y-m-d H:i:S",     // Desired date format: YYYY-MM-DD HH:mm:ss
+                time_24hr: true,               // Use 24-hour time format
+                enableSeconds: true            // Enable seconds in the time picker
+            });
+        });
+    </script>
 {% endblock %}
 
 {% block form %}
@@ -52,9 +65,10 @@
         {{ form.extras() }}
     </div>
 
+    <!-- Updated datetime input using Flatpickr -->
     <div>
         <label for="{{ form.reservation_date.id }}">{{ form.reservation_date.label.text }}</label>
-        {{ form.reservation_date() }}
+        <input type="text" id="{{ form.reservation_date.id }}" name="{{ form.reservation_date.name }}" value="{{ form.reservation_date.data }}">
     </div>
 
     <div>
