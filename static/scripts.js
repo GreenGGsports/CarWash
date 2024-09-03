@@ -526,12 +526,15 @@ document.getElementById('FoglalasButton').addEventListener('click', async functi
         }
 
     else {
-        console.log('Nincs számla start post')
-        const response1 = await postForm(reservationUrl, reservationForm);
-        console.log('response : ',response1)
-        if (response1.status === 'success') {
-            showPopup();
-        } 
+        is_valid_res = validateForm(reservationForm)
+        if (is_valid_res) {
+            console.log('Nincs számla start post')
+            const response1 = await postForm(reservationUrl, reservationForm);
+            console.log('response : ',response1)
+            if (response1.status === 'success') {
+                showPopup();
+            } 
+        }
 
     }
 // parses JSON response into native JavaScript objects
