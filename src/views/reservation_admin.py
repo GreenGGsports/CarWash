@@ -84,7 +84,7 @@ class ReservationForm(FlaskForm):
     extras = QuerySelectMultipleField('Extrák', get_label='service_name')
 
     reservation_date = DateTimeField('Időpont', format='%Y-%m-%d %H:%M:%S')
-    parking_spot = IntegerField('Parkolóhely')
+    parking_spot = StringField('Parkolóhely')
     carwash = QuerySelectField('Autómosó', allow_blank=False, query_factory=lambda: [])
     slot = QuerySelectField('Slot', allow_blank=False, query_factory=lambda: [])
 
