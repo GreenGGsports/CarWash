@@ -172,29 +172,29 @@ HTML
                        <div class="AlcimBox">Autó adatok</div>
                    </div>
                    <div class="input-outer-container">
-                           <div class="input-mezo">
-                               <label for="marka"class="input_title">Márka</label>
-                               <input type="text" placeholder="Autó márka" class="input_" name="marka" required>
-                           </div>
-                           <div class="input-mezo">
-                               <label for="Parkolo"class="input_title">Parkoló</label>
-                               <input type="text" placeholder="Parkoló" class="input_" name="Parkolo">
-                           </div>
-                           <div class="input-mezo">
-                               <label for="model"class="input_title">Típus</label>
-                               <input type="text" placeholder="Típus" class="input_" name="model" id="model" required>
-                           </div>
-                           <div class="input-mezo">
-                               <label for="rendszam"class="input_title">Rendszám</label>
-                               <input type="text" placeholder="Rendszám" class="input_" name="rendszam" required>
-                           </div>
-                           <div class="input-mezo">
-                               <label for="auto_meret" class="AutoMeretLenyilo-label">Autó méret</label>
-                               <select class="input_" name="auto_meret">
-                                   <option value="kis_auto">Kicsi</option>
-                                   <option value="nagy_auto">Nagy</option>
-                               </select>
-                           </div>
+                    <div class="input-mezo">
+                        <label for="car_brand" class="input_title">Márka</label>
+                        <input type="text" placeholder="Autó márka" class="input_" name="car_brand" required>
+                    </div>
+                    <div class="input-mezo">
+                        <label for="parking_spot" class="input_title">Parkoló</label>
+                        <input type="text" placeholder="Parkoló" class="input_" name="parking_spot">
+                    </div>
+                    <div class="input-mezo">
+                        <label for="car_model" class="input_title">Típus</label>
+                        <input type="text" placeholder="Típus" class="input_" name="car_model" id="car_model" required>
+                    </div>
+                    <div class="input-mezo">
+                        <label for="license_plate" class="input_title">Rendszám</label>
+                        <input type="text" placeholder="Rendszám" class="input_" name="license_plate" required>
+                    </div>
+                    <div class="input-mezo">
+                        <label for="car_type" class="AutoMeretLenyilo-label">Autó méret</label>
+                        <select class="input_" name="car_type">
+                            <option value="kis_auto">Kicsi</option>
+                            <option value="nagy_auto">Nagy</option>
+                        </select>
+                    </div>
                  </div>
            </div>
             <div class="AdatokContainer">
@@ -328,6 +328,7 @@ HTML
     </div>
 
     <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+    <script src="{{ url_for('static', filename='autofill.js') }}"></script>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
     <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css' rel='stylesheet' />
 </body>
