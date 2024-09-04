@@ -1,6 +1,8 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import Session, relationship
 from .base import BaseModel
+from sqlalchemy.exc import SQLAlchemyError
+from typing import Type, Optional
 
 class CustomerModel(BaseModel):
     __tablename__ = 'Customer'
@@ -26,8 +28,15 @@ class CustomerModel(BaseModel):
         session.commit()
         return customer
     
-    @classmethod
-    def get_last_by_user_id(cls, session: Session, user_id: int):
-        return session.query(cls).filter_by(user_id=user_id).order_by(cls.id.desc()).first()
+    def get_last_by_user_id(cls: Type['BaseModel'], session: Session, user_id: int) -> Optional['BaseModel']:
+        try:
+            # Query to get the latest customer by user_id, ordered by id in descending order
+            latest_customer = session.query(cls).filter_by(user_id=user_id).order_by(cls.id.desc()).first()
+            return latest_customer
+        except SQLAlchemyError as e:
+            # Rollback the session in case of an error
+            session.rollback()
+            print(f"An error occurred: {e}")
+            return None
 
 

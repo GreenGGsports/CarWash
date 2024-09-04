@@ -229,7 +229,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: 'dayGridMonth',  // Kezdeti nézet beállítása (pl. havi nézet)
       height: '100%',  // Naptár magasságának beállítása
-      width: '100%',   // Naptár szélességének beállítása
+      width: '100%', 
+      weekends: false,  // Naptár szélességének beállítása
       dateClick: function (info) {
         // Remove class from previously selected date
         if (previouslySelectedDate) {
