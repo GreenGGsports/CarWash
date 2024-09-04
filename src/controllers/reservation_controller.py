@@ -63,7 +63,7 @@ def add_customer(data):
             # Check if the user already has a customer record
             existing_customer = CustomerModel.get_last_by_user_id(session=db_session, user_id=user_id)
             if existing_customer:
-                customer = CustomerModel.update_by_id(session=db_session, **customer_data)
+                customer = CustomerModel.update_by_id(session=db_session,obj_id=existing_customer.id, **customer_data)
                 current_app.logger.info(f"Customer record updated for user_id {user_id}.")
             else:
                 customer = CustomerModel.add_customer(db_session,user_id=user_id, **customer_data)
@@ -140,17 +140,19 @@ def get_session_data():
 
 
 def parse_reservation_data(data):
-    if  data.get("auto_meret") == 'kis_auto':
+    # Az új HTML form adatokkal összhangban
+    if data.get("car_type") == 'kis_auto':
         car_type = 'small_car'
-    elif data.get("auto_meret") == 'nagy_auto':
+    elif data.get("car_type") == 'nagy_auto':
         car_type = 'large_car'
-        
-    license_plate = data.get('rendszam')
-    parking_spot = data.get('parkolo')
-    car_brand = data.get('marka')
+    else:
+        car_type = 'large_car'
+
+    license_plate = data.get('license_plate')
     parking_spot = data.get('parking_spot')
-    #not implemented
-    car_model = data.get('model')
+    car_brand = data.get('car_brand')
+    car_model = data.get('car_model')
+
     return car_type, license_plate, parking_spot, car_brand
 
 def parse_customer_data(data):
