@@ -27,4 +27,4 @@ RUN pip install --no-cache-dir --upgrade pip && \
 COPY . .
 
 # Run the web service on container startup
-CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 30 app:app
+CMD exec gunicorn --bind :$PORT --workers 2 --threads 8 --timeout 30 app:app
