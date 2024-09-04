@@ -283,52 +283,63 @@ document.addEventListener('DOMContentLoaded', function () {
 var SlotSelected = false;
 function generateHourlyButtons(date) {
     const buttonContainer = document.querySelector(".GombBox");
-    buttonContainer.innerHTML = ''; // Korábbi gombok törlése
+    buttonContainer.innerHTML = ''; // Clear previous buttons
 
-    // A bemeneti dátum (például: datetime.datetime(2024, 7, 30, 9, 0)) UTC idő szerint
+    // Input date (e.g., datetime.datetime(2024, 7, 30, 9, 0)) in UTC
     const min_date = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours()));
-    /// substract 2 hours bc of timezone mindfuck
-    min_date.setHours(min_date.getHours()-2); // CET eltérés, nyári időszakban CEST 1 óra
+    // Subtract 2 hours due to timezone adjustment
+    min_date.setHours(min_date.getHours() - 2); // CET difference, 1 hour in summer for CEST
 
-    // 24 órás ciklus
-    console.log('Bemeneti dátum:', date)
-    console.log('Minimális dátum:', min_date)
+    console.log('Input date:', date);
+    console.log('Minimum date:', min_date);
 
-    for (let hour = 9; hour <= 17; hour++) {
-        // A gombhoz tartozó dátum létrehozása
-        const buttonDate = new Date(min_date.getFullYear(), min_date.getMonth(), min_date.getDate(), hour);
-        buttonDate.setHours(buttonDate.getHours()+2);   
-        correctedButtonDate = buttonDate
-        console.log(correctedButtonDate)
+    // Start and end times for buttons
+    const startHour = 9;
+    const startMinute = 45;
+    const endHour = 17;
+    const intervalMinutes = 40;
+
+    // Calculate total number of buttons to create
+    const totalButtons = Math.floor(((endHour - startHour) * 60 + 60 - startMinute) / intervalMinutes);
+
+    for (let i = 0; i < totalButtons; i++) {
+        // Calculate the hour and minute for each button
+        const totalMinutes = startMinute + i * intervalMinutes;
+        const hour = startHour + Math.floor(totalMinutes / 60);
+        const minutes = totalMinutes % 60;
+
+        // Create the date for the button
+        const buttonDate = new Date(min_date.getFullYear(), min_date.getMonth(), min_date.getDate(), hour, minutes);
+        buttonDate.setHours(buttonDate.getHours() + 2);   
+        const correctedButtonDate = buttonDate;
+        console.log(correctedButtonDate);
 
         const isFree = correctedButtonDate >= min_date;
 
         const button = document.createElement('button');
         button.classList.add('IdopontGomb', `free-${isFree}`);
-        button.innerText = `${hour}:00`;
+        button.innerText = `${hour}:${minutes.toString().padStart(2, '0')}`;
         button.dataset.free = isFree;
 
-        // Helyes időzóna beállítása
+        // Set correct timezone
         button.dataset.date = correctedButtonDate.toISOString();
 
-        // Kattintási esemény
+        // Click event
         button.addEventListener('click', function (event) {
             event.preventDefault();
-            if (isFree)
-                {
+            if (isFree) {
                 const allButtons = document.querySelectorAll('.IdopontGomb');
                 allButtons.forEach(btn => btn.classList.remove('selected'));
                 this.classList.add('IdopontGomb', 'selected');
                 selectedDate = button.dataset.date;
-                console.log(`Kiválasztott időpont: ${correctedButtonDate.toISOString()}`);
+                console.log(`Selected time: ${correctedButtonDate.toISOString()}`);
                 select_appointment(selectedDate);
-                SlotSelected  = true;
+                SlotSelected = true;
             }
         });
 
         buttonContainer.appendChild(button);
     }
-
     async function select_appointment(selectedDate) {
         try {
             const response = await fetch('/booking/select_slot', {
