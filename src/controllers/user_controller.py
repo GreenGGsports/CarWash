@@ -35,6 +35,7 @@ def init_login_manager(app):
         try:
             user = db_session.query(UserModel).get(user_id)
             if user:
+                current_app.logger.info('authentication succesfull')
                 return User(user)
             return None
         finally:
@@ -48,6 +49,7 @@ def login():
         user_name = data.get('user_name')
         password = data.get('password')
         user = UserModel.login(session=db_session, user_name=user_name, password=password)
+        current_app.logger.info('loggin sucessfull')
         if user:
             user_obj = User(user)
             login_user(user_obj, remember=False)

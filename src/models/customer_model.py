@@ -28,6 +28,7 @@ class CustomerModel(BaseModel):
         session.commit()
         return customer
     
+    @classmethod
     def get_last_by_user_id(cls: Type['BaseModel'], session: Session, user_id: int) -> Optional['BaseModel']:
         try:
             # Query to get the latest customer by user_id, ordered by id in descending order
