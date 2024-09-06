@@ -17,6 +17,7 @@ from src.controllers.local_admin_index_view import LocalAdminIndexView
 from src.views.extra_admin_view import ExtraModelView
 from src.controllers.developer_index_view import DeveloperIndexView
 from src.views.my_modelview import MyModelView
+from src.views.carwash_modelview import CarwashAdminView
 
 def init_admin(app, session_factory):
     admin = Admin(
@@ -33,7 +34,7 @@ def init_admin(app, session_factory):
     admin.add_view(ServiceModelView(ServiceModel, session, name='Csomagok', endpoint='service_admin'))
     admin.add_view(ExtraModelView(ExtraModel, session, name='Extrák', endpoint='extra_admin'))
     admin.add_view(MyModelView(CompanyModel, session, name='Cégek', endpoint='company_admin'))
-    admin.add_view(MyModelView(CarWashModel, session, name='Autómosók', endpoint='carwash_admin'))
+    admin.add_view(CarwashAdminView(CarWashModel, session, name='Autómosók', endpoint='carwash_admin'))
 
     admin.add_view(MyModelView(BillingModel, session, name='Számlák', endpoint='billing_admin'))
     
