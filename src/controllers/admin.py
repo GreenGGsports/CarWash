@@ -12,18 +12,17 @@ from src.models.extra_model import ExtraModel
 from src.views.company_admin import  MonthlyInvoiceView
 from src.views.reservation_admin import ReservationAdminView
 from src.views.service_admin import ServiceModelView
-from src.controllers.admin_index_view import AdminIndexView
-from src.controllers.local_admin_index_view import LocalAdminIndexView
+from src.controllers.admin_index_view import BaseAdminIndexView
 from src.views.extra_admin_view import ExtraModelView
-from src.controllers.developer_index_view import DeveloperIndexView
 from src.views.my_modelview import MyModelView
+from src.views.carwash_modelview import CarwashAdminView
 
 def init_admin(app, session_factory):
     admin = Admin(
         app,
         name='Admin Panel',
         template_mode='bootstrap3',
-        index_view=AdminIndexView(url='/admin', endpoint='admin')
+        index_view=BaseAdminIndexView(role='admin',url='/admin', endpoint='admin')
     )
 
     session = session_factory.get_session()
@@ -33,7 +32,7 @@ def init_admin(app, session_factory):
     admin.add_view(ServiceModelView(ServiceModel, session, name='Csomagok', endpoint='service_admin'))
     admin.add_view(ExtraModelView(ExtraModel, session, name='Extrák', endpoint='extra_admin'))
     admin.add_view(MyModelView(CompanyModel, session, name='Cégek', endpoint='company_admin'))
-    admin.add_view(MyModelView(CarWashModel, session, name='Autómosók', endpoint='carwash_admin'))
+    admin.add_view(CarwashAdminView(CarWashModel, session, name='Autómosók', endpoint='carwash_admin'))
 
     admin.add_view(MyModelView(BillingModel, session, name='Számlák', endpoint='billing_admin'))
     
@@ -44,7 +43,7 @@ def init_local_admin(app, session_factory):
         app,
         name='Local Admin Panel',
         template_mode='bootstrap3',
-        index_view=LocalAdminIndexView(url='/local-admin', endpoint='local_admin')
+        index_view=BaseAdminIndexView(role='local_admin',url='/local-admin', endpoint='local_admin')
     )
 
     session = session_factory.get_session()
@@ -61,7 +60,7 @@ def init_developer_admin(app, session_factory):
         app,
         name = 'Developer Admin Panel',
         template_mode='bootstrap3',
-        index_view=DeveloperIndexView(url='/developer', endpoint='developer')
+        index_view=BaseAdminIndexView(role='developer', url='/developer', endpoint='developer')
     )
     developer_admin.add_view(MyModelView(ReservationModel, session, name='Reservation', endpoint='reservation_developer'))
     developer_admin.add_view(MyModelView(UserModel, session, name='User', endpoint='user_developer'))
