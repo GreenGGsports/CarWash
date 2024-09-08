@@ -40,9 +40,13 @@ class CarwashAdminView(ModelView):
         """
         try:
             if is_created:
-                # Ha új Carwash-t hozunk létre, akkor create_default_slots
+                # Először mentsük el a carwash-t
+                self.session.add(model)
+                self.session.commit()  # Először commit, hogy a model.id elérhető legyen
+
+                # Ezután hozd létre a slotokat
                 model.create_default_slots(
-                    session=self.session,
+                    session=self.session,  # AdminView által biztosított session
                     start_time=form.start_time.data,
                     end_time=form.end_time.data,
                     slot_count=form.slot_count.data
