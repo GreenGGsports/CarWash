@@ -2,7 +2,7 @@ body {
     width: 100%;
     height: 100%;
     font-family: 'Arial', sans-serif;
-    background-image: url(Background-image.png);
+    background-image: url('/static/images/background-image.png'); /* Itt add meg a háttérképed elérési útvonalát */
     background-repeat: no-repeat;
     background-size: cover;
     color: #333;
@@ -211,7 +211,7 @@ body {
 .slide-img {
     width: 100%;
     height: 100%; /* Vagy a kívánt magasság */
-    background-image: url('slide-car.jfif'); /* Itt add meg a háttérképed elérési útvonalát */
+    background-image: url('/static/images/slide-car.png'); /* Itt add meg a háttérképed elérési útvonalát */
     background-size: cover; /* A kép méretét úgy állítja be, hogy a container teljesen kitöltse a képet torzítás nélkül */
     background-position: center; /* A háttérképet középre igazítja */
     background-repeat: no-repeat; /* Nem ismétli meg a háttérképet */
