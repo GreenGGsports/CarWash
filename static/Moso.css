@@ -1,0 +1,2260 @@
+body {
+    width: 100%;
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+    background-image: url(Background-image.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #333;
+    /*display: flex;
+    justify-content: center;
+    align-items: center;*/
+    margin: 0;
+    /* Remove default body margin */
+}
+
+.header {
+    display: flex;
+    width: 100%;
+    background-color: black;
+}
+
+.inner-container-1 {
+    display: flex;
+    width: 10%;
+}
+
+.inner-container-2 {
+    display: flex;
+    width: 80%;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.image {
+    width: 28vw;
+    height: auto;
+}
+
+.inner-container-3 {
+    display: flex;
+    align-items: flex-end;
+    font-size: 1.2em;
+    color: white;
+}
+
+.inner-container-3 i {
+    margin-right: 8px;
+    color: #7CF2DA;
+    font-size: 2.5em;
+}
+
+.inner-container-3 {
+    position: relative;
+    cursor: pointer;
+}
+
+.login-toggle {
+    background: none;
+    border: none;
+    color: #0af;
+    font-size: 0.6em;
+    cursor: pointer;
+    font-family: "graphie", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-toggle p{
+    font-size: 1.6em;
+    font-family: "graphie", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.Reg-container {
+    width: 50%;
+    margin: 0 auto;
+    background: none;
+    padding: 15px;
+}
+
+.Reg-container h1 {
+    text-align: center;
+    color: #FFF;
+    font-family: Graphie;
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.Reg-container h2 {
+    text-align: center;
+    color: #FFF;
+    font-family: Graphie;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    width: 90%;
+}
+
+.Reg-container label {
+    color: #F3F5F5;
+    font-family: Graphie;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-left: 1.5rem;
+}
+
+.Reg-container input {
+    display: flex;
+    width: 95%;
+    height: 50px;
+    padding-left: 25px;
+    align-items: center;
+    gap: 10px;
+    border-radius: 20px 5px 5px 5px;
+    border: 1.5px solid var(--A-kk, #13669C);
+    background: #000;
+    color: white;
+}
+
+.Reg-container form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.Reg-container button {
+    display: flex;
+    width: 150px;
+    height: 50px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 20px 5px 5px 5px;
+    border: 1px solid var(--Color, #7CF2DA);
+    background: none;
+    box-shadow: 0px 0px 5px 3px rgba(123, 242, 218, 0.50) inset, 0px 0px 5px 3px rgba(123, 242, 218, 0.50);
+    color: white;
+    font-size: 1.5em;
+    margin: 0 auto;
+}
+
+.modal {
+    display: none; /* Elrejtve, amíg aktiválva nem lesz */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    border: 1px solid #13669C;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50), 0px 0px 15px 6px rgba(19, 102, 156, 0.50);
+    background-color: black;
+    margin: 15% auto;
+    padding: 20px;
+    width: 50%; /* Állítsd be a megfelelő szélességre */
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.content{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px 50px 50px 10px;
+    margin: auto;
+    gap: 1rem;
+    margin-top: 4rem;
+}
+
+.slide-img {
+    width: 100%;
+    height: 100%; /* Vagy a kívánt magasság */
+    background-image: url('slide-car.jfif'); /* Itt add meg a háttérképed elérési útvonalát */
+    background-size: cover; /* A kép méretét úgy állítja be, hogy a container teljesen kitöltse a képet torzítás nélkül */
+    background-position: center; /* A háttérképet középre igazítja */
+    background-repeat: no-repeat; /* Nem ismétli meg a háttérképet */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px 50px 50px 10px;
+}
+
+.slide-img img{
+    width: 20vw;
+}
+
+.slide-text{
+    font-size: 1em;
+    color: white;
+    font-family: "graphie", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.Location{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    padding-right: 16rem;
+}
+
+.map-text{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.ikon{
+    width: 6rem;
+    height: 5rem;
+    padding-right: 1.1rem;
+}
+
+.map-text p{
+    font-size: 1em;
+    color: white;
+    text-align: center;
+    font-family: "graphie", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.map{
+    width: 60%;
+
+}
+
+.Foglalas {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-top: 3rem;
+    /* Needed to position the tooltip correctly */
+}
+
+.FoglalasGomb {
+    border-radius: 20px 5px;
+    border: 1.5px solid #7CF2DA;
+    background: #000;
+    box-shadow: 0px 0px 15px 3px rgba(124, 242, 218, 0.50), 0px 0px 15px 3px rgba(124, 242, 218, 0.50) inset;
+    color: white;
+    display: flex;
+    width: 45rem;
+    height: 9rem;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 3.4em;
+    cursor: pointer;
+    position: relative;
+    font-family: "graphie", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.tooltip {
+    visibility: hidden;
+    width: 115%;
+    height: 6rem;
+    background-color: black;
+    color: white;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 10;
+    top: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 10px;
+    box-sizing: border-box;
+    border: 1px solid red;
+    font-size: 0.45em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "graphie", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.FoglalasGomb:hover .tooltip {
+    visibility: visible;
+}
+
+.Video-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    width: 100%;
+    margin-top: 4rem;
+}
+
+.Video-and-text{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    width: 80%;
+    gap: 3rem;
+}
+
+.video-text{
+    text-align: left;
+    line-height: 2em;
+    font-family: "graphie", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.4em;
+}
+
+.video-hr{
+    height: 27rem;
+    margin-top: 1rem;
+}
+
+h1{
+    font-size: 2.5em;
+    text-align: center;
+    font-family: "graphie", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+h2{
+    font-family: "graphie", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.all-Service{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-top: 7rem;
+}
+
+.second-all-Service{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-top: 1rem;
+}
+
+.third-all-Service{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-top: 1rem;
+}
+
+.services{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.service{
+    width: 45%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.cosmetic-service{
+    width: 45%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.titles{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.services-list{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-height: 12rem;
+}
+
+.cosmetic-services-list{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-height: 17rem;
+}
+
+.last-services-list{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-height: 17rem;
+}
+
+.services-list{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-height: 18rem;
+}
+
+.services-list p{
+    margin: 0.5rem 4rem 0.5rem 0;
+    font-family: "graphie", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.last-services-list p{
+    margin: 0.5rem 4rem 0.5rem 0;
+    font-family: "graphie", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.cosmetic-services-list p{
+    margin: 0.5rem 4rem 0.5rem 0;
+    font-family: "graphie", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+hr{
+    width: 0.2em;
+    background-color: white;
+    border: none;
+    transform: rotate(180deg);
+    margin: 4.6rem 1rem 0 1rem;
+}
+
+.last-hr{
+    width: 0.2em;
+    background-color: white;
+    border: none;
+    transform: rotate(180deg);
+    margin: 4.5rem 1rem 0 1rem;
+}
+
+.description{
+    width: 45%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.text{
+    text-align: left;
+    padding-right: 6rem;
+    line-height: 2em;
+    margin-top: 2.2rem;
+    font-family: "graphie", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.cosmetic-text{
+    text-align: left;
+    padding-right: 6rem;
+    line-height: 2em;
+    margin-top: 0.2rem;
+    font-family: "graphie", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+}
+
+.cosmetic-text1{
+    text-align: left;
+    padding-right: 6rem;
+    line-height: 2em;
+    margin-top: 4.5rem;
+    font-family: "graphie", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+}
+
+.cosmetic-text2{
+    text-align: left;
+    padding-right: 6rem;
+    line-height: 2em;
+    margin-top: 0.5rem;
+    font-family: "graphie", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+}
+
+.cosmetic-text3{
+    text-align: left;
+    padding-right: 6rem;
+    line-height: 2em;
+    margin-top: -2.8rem;
+    font-family: "graphie", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+}
+
+.last-text{
+    text-align: left;
+    padding-right: 6rem;
+    line-height: 2em;
+    margin-top: 0.2rem;
+}
+
+.info{
+    text-align: center;
+    width: 100%;
+    font-family: "graphie", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.Extra-hr{
+    width: 0.2em;
+    background-color: white;
+    border: none;
+    transform: rotate(180deg);
+    margin: 1rem 1rem 0 1rem;
+}
+
+footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-logo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+}
+
+.logo-text{
+    font-family: "graphie", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.jogok{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    font-family: "graphie", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.jogok-box{
+    display: flex;
+    border-left: 1px solid white;
+    padding-left: 1rem;
+    max-width: 25%;
+    height: 4rem;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+i{
+    font-size: 1.7em;
+    margin-right: 0.5rem;
+}
+
+.powered{
+    font-size: 1.3em;
+    font-family: "graphie", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+@media only screen and (min-width: 2600px) {
+    .inner-container-3 i{
+        font-size: 3.5em;
+    }
+
+    .login-toggle{
+        font-size: 2.5em;
+    }
+
+    .text-overlay p{
+        font-size: 4.5em;
+    }
+
+    .FoglalasGomb{
+        width: 92rem;
+        font-size: 6em;
+        height: 13rem;
+    }
+
+    .tooltip{
+        width: 114%;
+        height: 7rem;
+    }
+
+    .slide-text{
+        font-size: 5em;
+    }
+
+    .map-text{
+        height: 19rem;
+    }
+
+    .ikon{
+        height: 6rem;
+        padding-right: 3.1rem;
+        padding-top: 9rem;
+    }
+
+    .map-text p{
+        font-size: 1.5em;
+    }
+
+    iframe{
+        width: 65rem;
+        height: 19rem;
+    }
+
+    video{
+        width: 60rem;
+        height: auto;
+    }
+
+    .video-text{
+        font-size: 2.2em;
+    }
+
+    .video-hr{
+        height: 40rem;
+        margin-top: 1rem;
+    }
+
+    h1{
+        font-size: 5.5em;
+    }
+
+    h2{
+        font-size: 3.5em;
+    }
+
+    .services-list p{
+        font-size: 2em;
+        margin-top: 9rem;
+    }
+
+    .extra-services-list p{
+        font-size: 2em;
+    }
+    
+    .last-services-list p{
+        font-size: 2em;
+    }
+    
+    .cosmetic-services-list p{
+        font-size: 2em;
+    }
+
+    hr{
+        margin: 8.6rem 1rem 0 1rem;
+    }
+
+    .services-list{
+        max-height: 15rem;
+    }
+
+    .text{
+        font-size: 2em;
+    }
+
+    .last-services-list{
+        max-height: 23rem;
+    }
+
+    .last-hr{
+        margin: 10.5rem 1rem 0 1rem;
+    }
+
+    .last-text{
+        margin-top: 8.2rem;
+        font-size: 2em;
+    }
+
+    .info{
+        font-size: 2.2em;
+    }
+
+    .cosmetic-services-list{
+        max-height: 23rem;
+    }
+
+    .cosmetic-text{
+        margin-top: 6.2rem;
+        font-size: 2em;
+    }
+
+    .cosmetic-text1{
+        margin-top: 7.9rem;
+        font-size: 2em;
+    }
+
+    .cosmetic-text2{
+        margin-top: 5.5rem;
+        font-size: 2em;
+    }
+
+    footer{
+        font-size: 2em;
+    }
+
+    .logo img{
+        width: 12rem;
+    }
+
+    i{
+        font-size: 2.6em;
+    }
+    
+    .powered{
+        font-size: 1.7em;
+    }
+}
+
+@media only screen and (min-width: 2300px) and (max-width: 2600px) {
+    .inner-container-3 i {
+        font-size: 2em;
+    }
+
+    .login-toggle{
+        font-size: 1.7em;
+    }
+
+    .text-overlay p {
+        font-size: 3.5em;
+    }
+
+    .login-toggle p{
+        font-size: 1.3em;
+    }
+
+    .FoglalasGomb {
+        width: 81rem;
+        height: 12rem;
+        font-size: 5.5em;
+    }
+
+    .tooltip{
+        width: 115%;
+        height: 8rem;
+        font-size: 0.47em;
+    }
+
+    .slide-text{
+        font-size: 4em;
+    }
+
+    .map-text{
+        height: 19rem;
+    }
+
+    .ikon{
+        height: 6rem;
+        padding-right: 3.1rem;
+        padding-top: 9rem;
+    }
+
+    .map-text p{
+        font-size: 1.5em;
+    }
+
+    iframe{
+        width: 65rem;
+        height: 19rem;
+    }
+
+    video{
+        width: 57rem;
+        height: auto;
+    }
+
+    .video-text{
+        font-size: 2em;
+    }
+
+    .video-hr{
+        height: 37rem;
+        margin-top: 1rem;
+    }
+
+    h1{
+        font-size: 4.5em;
+    }
+
+    h2{
+        font-size: 2.5em;
+    }
+
+    .services-list p{
+        font-size: 1.7em;
+    }
+
+    .extra-services-list p{
+        font-size: 1.2em;
+    }
+    
+    .last-services-list p{
+        font-size: 1.7em;
+    }
+    
+    .cosmetic-services-list p{
+        font-size: 1.7em;
+    }
+
+    hr{
+        margin: 8.6rem 1rem 0 1rem;
+    }
+
+    .services-list{
+        max-height: 17rem;
+    }
+
+    .text{
+        font-size: 1.7em;
+        margin-top: 8.2rem;
+    }
+
+    .last-services-list{
+        max-height: 21rem;
+    }
+
+    .last-hr{
+        margin: 7.5rem 1rem 0 1rem;
+    }
+
+    .last-text{
+        margin-top: 6.2rem;
+        font-size: 1.7em;
+    }
+
+    .info{
+        font-size: 1.9em;
+    }
+
+    .cosmetic-services-list{
+        max-height: 21rem;
+    }
+
+    .cosmetic-text{
+        margin-top: 5.2rem;
+        font-size: 1.7em;
+    }
+
+    .cosmetic-text1{
+        margin-top: 6.9rem;
+        font-size: 1.7em;
+    }
+
+    .cosmetic-text2{
+        margin-top: 4.5rem;
+        font-size: 1.7em;
+    }
+
+    .cosmetic-text3{
+        font-size: 1.7em;
+    }
+
+    .extra-services-list{
+        font-size: 1.7em;
+    }
+
+    footer{
+        font-size: 1.7em;
+    }
+
+    .logo img{
+        width: 10rem;
+    }
+
+    i{
+        font-size: 2.1em;
+    }
+
+    .powered{
+        font-size: 1.5em;
+    }
+}
+
+@media only screen and (min-width: 1920px) and (max-width:2300px) {
+    .inner-container-3 i{
+        font-size: 2em;
+    }
+
+    .login-toggle{
+        font-size: 1.5em
+    }
+
+    .login-toggle p{
+        font-size: 1em;
+    }
+
+    .text-overlay p{
+        font-size: 3.2em;
+    }
+
+    .FoglalasGomb{
+        width: 62rem;
+        height: 9rem;
+        font-size: 4.5em;
+    }
+
+    .tooltip{
+        width: 120%;
+        height: 6.4rem;
+        font-size: 0.5em;
+    }
+
+    .slide-text{
+        font-size: 3em;
+    }
+
+    .map-text{
+        height: 19rem;
+    }
+
+    .ikon{
+        height: 6rem;
+        padding-right: 3.1rem;
+        padding-top: 9rem;
+    }
+
+    .map-text p{
+        font-size: 1.5em;
+    }
+
+    iframe{
+        width: 50rem;
+        height: 19rem;
+    }
+
+    video{
+        width: 50rem;
+        height: auto;
+    }
+
+    .video-text{
+        font-size: 1.8em;
+    }
+
+    .video-hr{
+        height: 33rem;
+        margin-top: 1rem;
+    }
+
+    h1{
+        font-size: 4.5em;
+    }
+
+    h2{
+        font-size: 2.4em;
+    }
+
+    .services-list p{
+        font-size: 1.7em;
+    }
+
+    .extra-services-list p{
+        font-size: 1.7em;
+    }
+    
+    .last-services-list p{
+        font-size: 1.7em;
+    }
+    
+    .cosmetic-services-list p{
+        font-size: 1.7em;
+    }
+
+    hr{
+        margin: 6.6rem 1rem 0 1rem;
+    }
+
+    .services-list{
+        max-height: 17rem;
+    }
+
+    .text{
+        font-size: 1.7em;
+        margin-top: 6.6rem;
+    }
+
+    .last-services-list{
+        max-height: 21rem;
+    }
+
+    .last-hr{
+        margin: 7.5rem 1rem 0 1rem;
+    }
+
+    .last-text{
+        margin-top: 7.2rem;
+        font-size: 1.7em;
+    }
+
+    .info{
+        font-size: 1.9em;
+    }
+
+    .cosmetic-services-list{
+        max-height: 21rem;
+    }
+
+    .cosmetic-text{
+        margin-top: 6.7rem;
+        font-size: 1.7em;
+    }
+
+    .cosmetic-text1{
+        margin-top: 6.9rem;
+        font-size: 1.7em;
+    }
+
+    .cosmetic-text2{
+        margin-top: 7rem;
+        font-size: 1.7em;
+    }
+
+    .cosmetic-text3{
+        font-size: 1.7em;
+    }
+
+    .extra-services-list{
+        font-size: 1.7em;
+    }
+
+    footer{
+        font-size: 1.7em;
+    }
+
+    .logo img{
+        width: 10rem;
+    }
+
+    i{
+        font-size: 2.1em;
+    }
+
+    .powered{
+        font-size: 1.5em;
+    }
+}
+
+@media only screen and (min-width: 1540px) and (max-width:1920px) {
+    .inner-container-3 i{
+        margin-left: 0;
+        font-size: 1.4em;
+    }
+    
+    .login-toggle{
+        font-size: 1.6em;
+        width: 10rem;
+    }
+
+    .login-toggle p{
+        font-size: 1em;
+    }
+
+    .text-overlay p{
+        font-size: 2.7rem;
+    }
+
+    .FoglalasGomb{
+        width: 54rem;
+        font-size: 3.8em;
+    }
+
+    .tooltip{
+        width: 115%;
+    }
+
+    .slide-text{
+        font-size: 2.5em;
+    }
+
+    .map-text{
+        height: 19rem;
+    }
+
+    .ikon{
+        height: 6rem;
+        padding-right: 3.1rem;
+        padding-top: 9rem;
+    }
+
+    .map-text p{
+        font-size: 1.5em;
+    }
+
+    iframe{
+        width: 50rem;
+        height: 19rem;
+    }
+
+    video{
+        width: 45rem;
+        height: auto;
+    }
+
+    .video-text{
+        font-size: 1.5em;
+    }
+
+    .video-hr{
+        height: 31rem;
+        margin-top: 1rem;
+    }
+
+    h1{
+        font-size: 4em;
+    }
+
+    h2{
+        font-size: 1.92em;
+    }
+
+    .services-list p{
+        font-size: 1.6em;
+    }
+    
+    .last-services-list p{
+        font-size: 1.6em;
+    }
+    
+    .cosmetic-services-list p{
+        font-size: 1.6em;
+    }
+
+    hr{
+        margin: 5.6rem 1rem 0 1rem;
+    }
+
+    .services-list{
+        max-height: 17rem;
+    }
+
+    .text{
+        font-size: 1.7em;
+        margin-top: 5.4rem;
+    }
+
+    .last-services-list{
+        max-height: 21rem;
+    }
+
+    .last-hr{
+        margin: 5.5rem 1rem 0 1rem;
+    }
+
+    .last-text{
+        margin-top: 5.2rem;
+        font-size: 1.6em;
+    }
+
+    .info{
+        font-size: 1.55em;
+    }
+
+    .cosmetic-services-list{
+        max-height: 21rem;
+    }
+
+    .cosmetic-text{
+        margin-top: 5.7rem;
+        font-size: 1.6em;
+    }
+
+    .cosmetic-text1{
+        margin-top: 5.2rem;
+        font-size: 1.6em;
+    }
+
+    .cosmetic-text2{
+        margin-top: 5.3rem;
+        font-size: 1.6em;
+    }
+
+    .cosmetic-text3{
+        font-size: 1.6em;
+        margin-top: -1rem;
+    }
+
+    .extra-services-list{
+        font-size: 1.6em;
+    }
+
+    footer{
+        font-size: 1.6em;
+    }
+
+    .logo img{
+        width: 10rem;
+    }
+
+    i{
+        font-size: 2.1em;
+    }
+
+    .powered{
+        font-size: 1.4em;
+    }
+}
+
+@media only screen and (min-width: 1024px) and (max-width:1540px) {
+    .Reg-container h1{
+        font-size: 38px;
+    }
+    
+    .Reg-container h2{
+        font-size: 25px;
+    }
+
+    .Reg-container label {
+        font-size: 18px;
+    }
+
+    .Reg-container button{
+        font-size: 1.2em;
+    }
+
+    .login-toggle p{
+        display: none;
+    }
+
+    .inner-container-3 i{
+        font-size: 3.5em;
+    }
+
+    .text-overlay p{
+        font-size: 1.8em;
+    }
+
+    .FoglalasGomb{
+        width: 37rem;
+        font-size: 2.6em;
+        height: 6rem;
+    }
+
+    .tooltip{
+        width: 120%;
+        font-size: 0.47em;
+        height: 4rem;
+    }
+
+    .map-text{
+        height: 15rem;
+    }
+
+    .slide-text{
+        font-size: 2em;
+    }
+
+    .ikon{
+        height: 5rem;
+        padding-right: 2rem;
+        padding-top: 7rem;
+    }
+
+    .map-text p{
+        font-size: 1.5em;
+    }
+
+    iframe{
+        width: 37rem;
+        height: 15rem;
+    }
+
+    video{
+        width: 30rem;
+        height: auto;
+    }
+
+    .video-text{
+        font-size: 0.9em;
+    }
+
+    .video-hr{
+        height: 22rem;
+        margin-top: 1rem;
+    }
+
+    h1{
+        font-size: 3em;
+    }
+
+    h2{
+        font-size: 1.28em;
+    }
+
+    .second-all-Service{
+        margin-top: 14rem;
+    }
+
+    .services{
+        row-gap: 5rem;
+    }
+
+    .services-list p{
+        font-size: 1.3em;
+    }
+
+    .extra-services-list p{
+        font-size: 1.1em;
+    }
+    
+    .last-services-list p{
+        font-size: 1.1em;
+    }
+    
+    .cosmetic-services-list p{
+        font-size: 1.1em;
+    }
+
+    hr{
+        margin: 3.6rem 1rem 0 1rem;
+        height: 30rem;
+    }
+
+    .services-list{
+        flex-wrap: nowrap;
+    }
+
+    .text{
+        font-size: 1.1em;
+        margin-top: -13.3rem;
+        padding-right: 0;
+    }
+
+    .last-services-list{
+        flex-wrap: nowrap;
+    }
+
+    .last-hr{
+        margin: 3.5rem 1rem 0 1rem;
+    }
+
+    .last-text{
+        margin-top: -8.2rem;
+        font-size: 1.1em;
+        padding-right: 0;
+    }
+
+    .info{
+        font-size: 1.03em;
+    }
+
+    .cosmetic-services-list{
+        flex-wrap: nowrap;
+    }
+
+    .cosmetic-text{
+        margin-top: -8.5rem;
+        font-size: 1.1em;
+        padding-right: 0;
+    }
+
+    .cosmetic-text1{
+        margin-top: -5.4rem;
+        font-size: 1.1em;
+        padding-right: 0;
+    }
+
+    .cosmetic-text2{
+        margin-top: -10.2rem;
+        font-size: 1.1em;
+        padding-right: 0;
+    }
+
+    .cosmetic-text3{
+        font-size: 1.1em;
+        margin-top: -22rem;
+        padding-right: 0;
+    }
+
+    .extra-services-list{
+        flex-wrap: nowrap;
+    }
+
+    footer{
+        font-size: 1em;
+    }
+
+    .logo img{
+        width: 10rem;
+    }
+
+    i{
+        font-size: 2.1em;
+    }
+
+    .powered{
+        font-size: 1.4em;
+    }
+}
+
+@media only screen and (min-width: 764px) and (max-width:1024px) {
+    .Reg-container h1{
+        font-size: 30px;
+    }
+    
+    .Reg-container h2{
+        font-size: 25px;
+    }
+
+    .Reg-container label {
+        font-size: 18px;
+    }
+
+    .Reg-container input{
+        height: 40px;
+    }
+
+    .Reg-container button{
+        font-size: 1.2em;
+        width: 125px;
+        height: 40px;
+    }
+    
+    .inner-container-3 i{
+        font-size: 1.6em;
+    }
+
+    .login-toggle{
+        font-size: 1em;
+    }
+
+    .login-toggle p{
+        display: none;
+    }
+
+    .text-overlay p{
+        font-size: 1.8em;
+    }
+
+    .FoglalasGomb{
+        width: 37rem;
+        font-size: 2.6em;
+        height: 6rem;
+    }
+
+    .tooltip{
+        width: 120%;
+        font-size: 0.47em;
+        height: 4rem;
+    }
+
+    .Location{
+        flex-wrap: wrap;
+        flex-direction: column-reverse;
+        gap: 1rem;
+        justify-content: center;
+        padding-right: 0;
+    }
+
+    .map{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .map-text{
+        height: 15rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .slide-text{
+        font-size: 1.5em;
+    }
+
+    .ikon{
+        height: 5rem;
+        padding-right: 0;
+    }
+
+    .map-text p{
+        font-size: 1.5em;
+    }
+
+    iframe{
+        width: 37rem;
+        height: 15rem;
+    }
+    
+    .Video-and-text{
+        flex-direction: column;
+    }
+
+    video{
+        width: 35rem;
+        height: auto;
+    }
+
+    .video-text{
+        font-size: 1em;
+        text-align: center;
+    }
+
+    .video-hr{
+        display: none;
+    }
+
+    h1{
+        font-size: 2.2em;
+    }
+
+    h2{
+        font-size: 0.95em;
+    }
+
+    .services{
+        row-gap: 5rem;
+        column-gap: 0;
+    }
+
+    .services-list p{
+        font-size: 0.8em;
+    }
+
+    .extra-services-list p{
+        font-size: 0.8em;
+    }
+    
+    .last-services-list p{
+        font-size: 0.8em;
+    }
+    
+    .cosmetic-services-list p{
+        font-size: 0.8em;
+    }
+
+    hr{
+        margin: 3rem 1rem 0 1rem;
+    }
+
+    .services-list{
+        flex-wrap: nowrap;
+        max-height: 23rem;
+    }
+
+    .text{
+        font-size: 0.8em;
+        margin-top: 0.4rem;
+    }
+
+    .last-services-list{
+        flex-wrap: nowrap;
+        max-height: 23rem;
+    }
+
+    .last-hr{
+        margin: 3rem 1rem 0 1rem;
+    }
+
+    .last-text{
+        margin-top: -0.9rem;
+        font-size: 0.8em;
+    }
+
+    .second-all-Service{
+        margin-top: 5rem;
+    }
+
+    .info{
+        font-size: 0.77em;
+    }
+
+    .cosmetic-services-list{
+        flex-wrap: nowrap;
+        max-height: 23rem;
+    }
+
+    .cosmetic-text{
+        margin-top: -1rem;
+        font-size: 0.8em;
+    }
+
+    .cosmetic-text1{
+        margin-top: 2.9rem;
+        font-size: 0.8em;
+    }
+
+    .cosmetic-text2{
+        margin-top: 3rem;
+        font-size: 0.8em;
+    }
+
+    .cosmetic-text3{
+        font-size: 0.8em;
+        margin-top: -2.1rem;
+    }
+
+    .extra-services-list{
+        flex-wrap: nowrap;
+    }
+
+    footer{
+        font-size: 0.8em;
+    }
+
+    .logo img{
+        width: 10rem;
+    }
+
+    .jogok-box{
+        height: 3rem;
+    }
+
+    i{
+        font-size: 1.8em;
+    }
+
+    .powered{
+        font-size: 1.2em;
+    }
+}
+
+@media only screen and (min-width: 380px) and (max-width:764px) {
+    .page-wrapper{
+        margin-left: 2.5rem;
+    }
+
+    .Reg-container h1{
+        font-size: 16px;
+    }
+    
+    .Reg-container h2{
+        font-size: 16px;
+    }
+
+    .Reg-container label {
+        font-size: 10px;
+    }
+
+    .Reg-container input{
+        height: 30px;
+    }
+
+    .Reg-container button{
+        font-size: 1em;
+        width: 110px;
+        height: 30px;
+        border-radius: 15px 5px 5px 5px;
+    }
+    
+    .inner-container-3{
+        font-size: 0.3em;
+    }
+
+    .inner-container-3 i{
+        font-size: 8.5em;
+    }
+
+    .login-toggle p{
+        display: none;
+    }
+
+    .text-overlay{
+        height: 50px;
+    }
+
+    .text-overlay p{
+        font-size: 0.7em;
+    }
+
+    .FoglalasGomb{
+        width: 17rem;
+        height: 4rem;
+        font-size: 1.3em;
+    }
+
+    .tooltip{
+        width: 129%;
+        height: 3rem;
+        font-size: 0.5em;
+    }
+
+    .Location{
+        flex-wrap: wrap;
+        flex-direction: column-reverse;
+        gap: 1rem;
+        justify-content: center;
+        padding-right: 0;
+    }
+
+    .map{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .map-text{
+        height: 15rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .slide-text{
+        font-size: 1.5em;
+    }
+
+    .ikon{
+        height: 5rem;
+        padding-right: 0;
+    }
+
+    .map-text p{
+        font-size: 1.5em;
+    }
+
+    iframe{
+        width: 37rem;
+        height: 15rem;
+    }
+
+    .Video-and-text{
+        flex-direction: column;
+    }
+
+    video{
+        width: 20rem;
+        height: auto;
+    }
+
+    .video-text{
+        font-size: 0.8em;
+        text-align: center;
+    }
+
+    .video-hr{
+        display: none;
+    }
+
+    h1{
+        font-size: 2em;
+    }
+
+    h2{
+        font-size: 1em;
+    }
+
+    .services{
+        row-gap: 2rem;
+        column-gap: 0;
+        flex-direction: column;
+    }
+
+    .service{
+        width: 100%;
+    }
+
+    .titles{
+        align-items: center;
+    }
+
+    .description{
+        width: 100%;
+    }
+
+    .services-list p{
+        font-size: 0.8em;
+    }
+
+    .extra-services-list p{
+        font-size: 0.8em;
+    }
+    
+    .last-services-list p{
+        font-size: 0.8em;
+    }
+    
+    .cosmetic-services-list p{
+        font-size: 0.8em;
+    }
+
+    hr{
+       display: none;
+    }
+
+    .services-list{
+        flex-wrap: nowrap;
+        max-height: 23rem;
+    }
+
+    .text{
+        font-size: 0.8em;
+        margin-top: 0.4rem;
+        text-align: center;
+        padding-right: 0;
+    }
+
+    .last-services-list{
+        flex-wrap: nowrap;
+        max-height: 23rem;
+    }
+
+    .last-hr{
+        margin: 3rem 1rem 0 1rem;
+    }
+
+    .last-text{
+        margin-top: -0.9rem;
+        font-size: 0.8em;
+        padding-right: 0;
+        text-align: center;
+    }
+
+    .second-all-Service{
+        margin-top: 5rem;
+    }
+
+    .info{
+        font-size: 0.7em;
+    }
+
+    .cosmetic-service{
+        width: 100%;
+    }
+
+    .cosmetic-services-list{
+        flex-wrap: nowrap;
+        max-height: 23rem;
+    }
+
+    .cosmetic-text{
+        margin-top: -1rem;
+        font-size: 0.8em;
+        text-align: center;
+        padding-right: 0;
+        text-align: center;
+    }
+
+    .cosmetic-text1{
+        margin-top: 2.9rem;
+        font-size: 0.8em;
+        text-align: center;
+        padding-right: 0;
+        text-align: center;
+    }
+
+    .cosmetic-text2{
+        margin-top: 3rem;
+        font-size: 0.8em;
+        text-align: center;
+        padding-right: 0;
+        text-align: center;
+    }
+
+    .cosmetic-text3{
+        font-size: 0.8em;
+        margin-top: -2.1rem;
+        text-align: center;
+        padding-right: 0;
+        text-align: center;
+        margin: auto;
+    }
+
+    .extra-services-list{
+        flex-wrap: nowrap;
+    }
+
+    footer{
+        font-size: 0.8em;
+    }
+
+    .logo img{
+        width: 10rem;
+    }
+
+    .jogok{
+        flex-wrap: wrap;
+    }
+
+    .jogok-box{
+        height: 3rem;
+        max-width: 50%;
+    }
+
+    i{
+        font-size: 1.8em;
+    }
+
+    .powered{
+        font-size: 1.3em;
+    }
+}
+
+@media only screen and (min-width: 200px) and (max-width:380px) {
+    body{
+        width: 200%;
+    }
+
+    .image{
+        width: 50vw;
+    }
+
+    .page-wrapper{
+        margin-left: 2.5rem;
+    }
+
+    .Reg-container h1{
+        font-size: 14px;
+    }
+    
+    .Reg-container h2{
+        font-size: 13px;
+    }
+
+    .Reg-container label {
+        font-size: 10px;
+    }
+
+    .Reg-container input{
+        height: 25px;
+    }
+
+    .Reg-container button{
+        font-size: 0.8em;
+        width: 100px;
+        height: 25px;
+        border-radius: 10px 5px 5px 5px;
+    }
+
+    .login-toggle{
+        font-size: 0.6em;
+    }
+
+    .login-toggle p{
+        display: none;
+    }
+
+    .inner-container-3 i{
+        font-size: 2em;
+    }
+
+    .text-overlay{
+        height: 65px;
+    }
+
+    .text-overlay p{
+        font-size: 0.7em;
+    }
+
+    .FoglalasGomb{
+        width: 14rem;
+        height: 3rem;
+        font-size: 1em;
+    }
+
+    .tooltip{
+        width: 120%;
+        height: 3rem;
+    }
+
+    .Location{
+        flex-wrap: wrap;
+        flex-direction: column-reverse;
+        gap: 1rem;
+        justify-content: center;
+        padding-right: 0;
+    }
+
+    .map{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .map-text{
+        height: 15rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .slide-text{
+        font-size: 1.5em;
+    }
+
+    .ikon{
+        height: 5rem;
+        padding-right: 0;
+    }
+
+    .map-text p{
+        font-size: 1.5em;
+    }
+
+    iframe{
+        width: 37rem;
+        height: 15rem;
+    }
+
+    .Video-and-text{
+        flex-direction: column;
+    }
+
+    video{
+        width: 20rem;
+        height: auto;
+    }
+
+    .video-text{
+        font-size: 0.8em;
+        text-align: center;
+    }
+
+    .video-hr{
+        display: none;
+    }
+
+    h1{
+        font-size: 2em;
+    }
+
+    h2{
+        font-size: 1em;
+    }
+
+    .all-Service{
+        margin-top: 3rem;
+    }
+
+    .services{
+        row-gap: 2rem;
+        column-gap: 0;
+        flex-direction: column;
+    }
+
+    .service{
+        width: 100%;
+    }
+
+    .titles{
+        align-items: center;
+    }
+
+    .description{
+        width: 100%;
+    }
+
+    .services-list p{
+        font-size: 0.8em;
+    }
+
+    .extra-services-list p{
+        font-size: 0.8em;
+    }
+    
+    .last-services-list p{
+        font-size: 0.8em;
+    }
+    
+    .cosmetic-services-list p{
+        font-size: 0.8em;
+    }
+
+    hr{
+       display: none;
+    }
+
+    .services-list{
+        flex-wrap: nowrap;
+        max-height: 23rem;
+    }
+
+    .text{
+        font-size: 0.8em;
+        margin-top: 0.4rem;
+        text-align: center;
+        padding-right: 0;
+    }
+
+    .last-services-list{
+        flex-wrap: nowrap;
+        max-height: 23rem;
+    }
+
+    .last-hr{
+        margin: 3rem 1rem 0 1rem;
+    }
+
+    .last-text{
+        margin-top: -0.9rem;
+        font-size: 0.8em;
+        padding-right: 0;
+        text-align: center;
+    }
+
+    .second-all-Service{
+        margin-top: 5rem;
+    }
+
+    .info{
+        font-size: 0.7em;
+    }
+
+    .cosmetic-service{
+        width: 100%;
+    }
+
+    .cosmetic-services-list{
+        flex-wrap: nowrap;
+        max-height: 23rem;
+    }
+
+    .cosmetic-text{
+        margin-top: -1rem;
+        font-size: 0.8em;
+        text-align: center;
+        padding-right: 0;
+        text-align: center;
+    }
+
+    .cosmetic-text1{
+        margin-top: 2.9rem;
+        font-size: 0.8em;
+        text-align: center;
+        padding-right: 0;
+        text-align: center;
+    }
+
+    .cosmetic-text2{
+        margin-top: 3rem;
+        font-size: 0.8em;
+        text-align: center;
+        padding-right: 0;
+        text-align: center;
+    }
+
+    .cosmetic-text3{
+        font-size: 0.8em;
+        margin-top: -2.1rem;
+        text-align: center;
+        padding-right: 0;
+        text-align: center;
+        margin: auto;
+    }
+
+    .extra-services-list{
+        flex-wrap: nowrap;
+    }
+
+    footer{
+        font-size: 0.8em;
+    }
+
+    .logo img{
+        width: 10rem;
+    }
+
+    .jogok{
+        flex-wrap: wrap;
+    }
+
+    .jogok-box{
+        height: 3rem;
+        max-width: 50%;
+    }
+
+    i{
+        font-size: 1.8em;
+    }
+
+    .powered{
+        font-size: 1.3em;
+    }
+}

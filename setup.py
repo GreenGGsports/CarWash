@@ -75,6 +75,15 @@ def add_blueprints(app: Flask):
     def home():
         return render_template('Landing_page.html')
     
+    @app.route('/carwash_sites/<site_name>')
+    def carwash_site(site_name):
+        try:
+            # This will look for the corresponding HTML file inside templates/carwash_sites
+            return render_template(f'carwash_sites/{site_name}.html')
+        except:
+            # Return a 404 error if the file does not exist
+            return "Car wash site not found", 404
+    
     app.register_blueprint(billing_ctrl, url_prefix ='/billing')
     app.register_blueprint(reservation_ctrl, url_prefix='/reservation')
     app.register_blueprint(user_ctrl, url_prefix='/user')
@@ -82,9 +91,8 @@ def add_blueprints(app: Flask):
     app.register_blueprint(service_ctrl, url_prefix='/service')
     app.register_blueprint(booking_ctrl, url_prefix = '/booking')
     app.register_blueprint(reservation_autofill_ctrl, url_prefix = '/reservation_autofill')
-    for rule in app.url_map.iter_rules():
-        # Log the URL map rules
-        app.logger.debug(f"Registered URL rule: {rule}")
+
+
     app.register_blueprint(car_ctrl, url_prefix='/api/car')
     app.register_blueprint(admin_ctrl, url_prefix='/admin', name='admin_blueprint')
     app.register_blueprint(local_admin_ctrl, url_prefix='/local-admin', name='local_admin_blueprint')

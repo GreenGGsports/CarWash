@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel= "stylesheet" href= "{{ url_for('static',filename='Moso.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://use.typekit.net/uzv0akr.css">
+    <script src="{{ url_for('static', filename='customer_login.js') }}"></script>
+    <html lang="hu">
+</head>
+
+<body>
+    <div class="header">
+        <div class="inner-container-1"></div>
+        <div class="inner-container-2">
+            <img class="image" src="logo2.png" alt="">
+        </div>
+        <div class="inner-container-3">
+            <button type="button" class="login-toggle">
+                <i class="fas fa-user"></i>
+                <p>Belépés</p>
+            </button>
+        </div>
+    </div>
+    <!--modal-->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div class="Reg-container">
+                <h1>Belépés és Regisztráció</h1>
+
+                <!-- Login Form -->
+                <div>
+                    <h2>Belépés</h2>
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="login-username">Felhasználónév:</label>
+                            <input type="text" id="login-username" name="user_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Jelszó:</label>
+                            <input type="password" id="login-password" name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit">Belépés</button>
+                        </div>
+                        <div class="message" id="login-message"></div>
+                    </form>
+                </div>
+                <!-- Register Form -->
+                <div>
+                    <h2>Regisztráció</h2>
+                    <form id="register-form">
+                        <div class="form-group">
+                            <label for="register-username">Felhasználónév:</label>
+                            <input type="text" id="register-username" name="user_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-password">Jelszó:</label>
+                            <input type="password" id="register-password" name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-role">Role:</label>
+                            <input type="text" id="register-role" name="role" placeholder="user or admin" required>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit">Regisztráció</button>
+                        </div>
+                        <div class="message" id="register-message"></div>
+                    </form>
+                </div>
+
+                <!-- Logout Form -->
+                <div>
+                    <h2>Kilépés</h2>
+                    <form id="logout-form">
+                        <div class="form-group">
+                            <button type="submit">Kilépés</button>
+                        </div>
+                        <div class="message" id="logout-message"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="slide-img">
+            <img src="NC.png" alt="">
+            <p class="slide-text">+36 20 69 69 669</p>
+        </div>
+        <div class="Location">
+            <div class="map-text">
+                <img src="map.svg" alt="" class="ikon">
+                <p>1117 Budapest<br> Budafoki út 91-93 </p>
+            </div>
+            <div class="map">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2696.84707079089!2d19.09488767604931!3d47.47340949716596!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4741dcdf1da43f93%3A0x708147312591e327!2sN%C3%A9pliget%20Center%20Business%20Center!5e0!3m2!1shu!2shu!4v1724865443246!5m2!1shu!2shu"
+                    width="500rem" height="200rem" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+        <div class="Foglalas">
+            <button class="FoglalasGomb"id = 'bookingButton'>Online időpont foglalás
+                <div class="tooltip">Lépj be, vagy regisztrálj az online időpont foglaláshoz az oldal tetején.</div>
+            </button>
+        </div>
+        <div class="all-Service">
+            <h1>Csomagok</h1>
+            <div class="services">
+                <div class="service">
+                    <div class="titles">
+                        <h2>Külső Alap Csomag: 4000 Ft</h2>
+                        <div class="services-list">
+                            <p>Előmosás</p>
+                            <p>Samponos mosás</p>
+                            <p>Felni tisztítás</p>
+                            <p>Öblítés</p>
+                            <p>Szárítás</p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="service">
+                    <div class="titles">
+                        <h2>Belső Alap Csomag: 4000 Ft</h2>
+                        <div class="services-list">
+                            <p>Felni tisztítás</p>
+                            <p>Műanyag tisztítás</p>
+                            <p>Ablak tisztítás</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="service">
+                    <div class="titles">
+                        <h2>Külső-Belső Csomag: 5000 Ft</h2>
+                        <div class="services-list">
+                            <p>Előmosás</p>
+                            <p>Samponos mosás</p>
+                            <p>Felni tisztítás</p>
+                            <p>Öblítés</p>
+                            <p>Szárítás</p>
+                            <p>Porszívózás</p>
+                            <p>Műanyag tisztítás</p>
+                            <p>Ablak tisztítás </p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="description">
+                    <p class="text">A szakszerű kézi autómosás egy alapos és kíméletes módja az autó tisztításnak.
+                        Különös figyelmet helyezünk a részletekre autód külső és belső tisztítása során.</p>
+                </div>
+                <div class="service">
+                    <div class="titles">
+                        <h2>Kényeztető Csomag: 5500 Ft</h2>
+                        <div class="last-services-list">
+                            <p>Előmosás</p>
+                            <p>Samponos mosás</p>
+                            <p>Felni tisztítás</p>
+                            <p>Öblítés</p>
+                            <p><strong>Viaszos kezelés</strong></p>
+                            <p>Szárítás</p>
+                            <p>Gumiápolás</p>
+                            <p>Porszívózás</p>
+                            <p>Műanyag tisztítás</p>
+                            <p><strong>Műanyag ápolás</strong></p>
+                            <p>Ablak tisztítás</p>
+                            <p><strong>Autó parfüm</strong></p>
+                        </div>
+                    </div>
+                </div>
+                <hr class="last-hr">
+                <div class="description">
+                    <p class="last-text">Az alapos külső-belső tisztításon kívül a gumikat is leápoljuk és vízlepergető
+                        viaszos utókezelést is csinálunk az autódon. A belső műanyagokat leápoljuk, majd az általad
+                        kiválasztott autó parfümmel illatosítjuk az utasteret.</p>
+                </div>
+            </div>
+        </div>
+        <div class="second-all-Service">
+            <h1>Autó kozmetikai szolgáltatások</h1>
+            <p class="info">Autókozmetikai szolgáltatásainkat csak felmérés után vállaljuk. (A felmérésnek nincs plusz
+                költsége.)<br>Keresd kollégáinkat telefonon, vagy személyesen üzletünkben.</p>
+            <div class="services">
+                <div class="cosmetic-service">
+                    <div class="titles">
+                        <h2>Csillog-Villog Csomag: 6000 Ft-tól</h2>
+                        <div class="cosmetic-services-list">
+                            <p>Előmosás</p>
+                            <p>Samponos mosás</p>
+                            <p>Felni tisztítás</p>
+                            <p>Öblítés</p>
+                            <p>Szárítás</p>
+                            <p><b>Kemény waxolás</b></p>
+                            <p><strong>Gumiápolás</strong></p>
+                            <p>Porszívózás</p>
+                            <p>Műanyag tisztítás</p>
+                            <p><strong>Műanyag ápolás</strong></p>
+                            <p>Ablak tisztítás</p>
+                            <p><strong>Autó parfüm</strong></p>
+                        </div>
+                    </div>
+                </div>
+                <hr class="last-hr">
+                <div class="description">
+                    <p class="cosmetic-text">Az autód külsejére kemény waxot aplikálunk, ami 6 hónapig tartó hidrofób
+                        védőréteget
+                        képez, mélyfényű ragyogással.Belül a műanyag felületeket leápljuk, majd az általad kiválasztott
+                        autó parfümmel illatosítjuk az utasteret.</p>
+                </div>
+                <div class="cosmetic-service">
+                    <div class="titles">
+                        <h2>Kerámia Bevonat</h2>
+                        <div class="cosmetic-services-list">
+                            <p>Bogár kerámia: 5000 Ft-tól</p>
+                            <p>Szélvédő kerámia: 5000 Ft-tól</p>
+                            <p>Teljes kerámia: 5000 Ft-tól</p>
+                        </div>
+                    </div>
+                </div>
+                <hr class="last-hr">
+                <div class="description">
+                    <p class="cosmetic-text1">Egy 9H keménységű nano bevonatot aplikálunk autód külsejére, ami 3 évig
+                        garantáltan védeni fogja a lakkréteget a karcoktól és a savaktól.A bevonat exra hidrofób
+                        felületet képez, ami optikailag üvegbe mártott színmélységet és csillogást ad.</p>
+                </div>
+                <div class="cosmetic-service">
+                    <div class="titles">
+                        <h2>Kárpit Tisztítás</h2>
+                        <div class="cosmetic-services-list">
+                            <p>Szövet szőnyeg: 5000 Ft-tól</p>
+                            <p>1 ülés: 5000 Ft-tól</p>
+                            <p>Első ülés sor: 5000 Ft-tól</p>
+                            <p>Hátsó ülés sor: 5000 Ft-tól</p>
+                            <p>Csak ülés: 5000 Ft-tól</p>
+                            <p>Teljes kárpit: 5000 Ft-tól</p>
+                        </div>
+                    </div>
+                </div>
+                <hr class="last-hr">
+                <div class="description">
+                    <p class="cosmetic-text2">Kárpit Tisztítást csak felmérés után vállalunk. Az autót minimum 24 óráig
+                        nálunk kell maradnia a szárítás idejéig. A felmérés egyeztetéséért keresd kollegánkat telefonon,
+                        vagy üzletünkben.</p>
+                </div>
+                <div class="cosmetic-service">
+                    <div class="titles">
+                        <h2>Polírozás</h2>
+                        <div class="cosmetic-services-list">
+                            <p>Lakk tisztító polír: 5000 Ft-tól</p>
+                            <p>Fényesítő polír: 5000 Ft-tól</p>
+                            <p>Korrekciós polír: 5000 Ft-tól</p>
+                            <p>Fényszoro polír: 5000 Ft-tól</p>
+                            <p>Bogár polír: 5000 Ft-tól</p>
+                        </div>
+                    </div>
+                </div>
+                <hr class="last-hr">
+                <div class="description">
+                    <p class="cosmetic-text3">Polírozást csak felmérés után vállalunk.</p>
+                </div>
+            </div>
+        </div>
+        <div class="third-all-Service">
+            <h1>Extrák</h1>
+            <div class="services">
+                <div class="service">
+                    <div class="titles">
+                        <h2>Külső Extrák</h2>
+                        <div class="extra-services-list">
+                            <p>Bogároldás: 1000 Ft</p>
+                            <p>Gumiápolás: 1000 Ft</p>
+                            <p>Viaszos kezelés: 1000 Ft</p>
+                            <p>Gyanta oldás: 1000 Ft</p>
+                            <p>Extra szennyezett: 1000 Ft</p>
+                        </div>
+                    </div>
+                </div>
+                <hr class="Extra-hr">
+                <div class="service">
+                    <div class="titles">
+                        <h2>Belső Extrák</h2>
+                        <div class="extra-services-list">
+                            <p>Műanyag mélytisztítás: 1000 Ft</p>
+                            <p>Műanyag ápolás: 1000 Ft</p>
+                            <p>Extra porszívózás: 1000 Ft</p>
+                            <p>Kutyaszőr tisztítás: 1000 Ft</p>
+                            <p>Bőr tisztítás: 1000 Ft</p>
+                            <p>Bőr ápolás: 1000 Ft</p>
+                            <p>Autó parfüm: 1000 Ft</p>
+                            <p>Extra szennyezett: 1000 Ft</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="footer-logo">
+                <div class="logo"><img src="NC.png" alt="" style="width: 8rem;"></div>
+                <div class="logo-text">+36 20 69 69 669</div>
+            </div>
+            <div class="jogok">
+                <div class="jogok-box">© 2024 Eliteshine
+                    Minden jog fenntartva</div>
+                <div class="jogok-box">Adatvédelmi nyilatkozat
+                    Általános szerződési feltételek</div>
+                <div class="jogok-box">eliteshine@shine.com<br>
+                    +36 20 69 69 669</div>
+                <div class="jogok-box"> 
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                </div>
+            </div>
+            <div class="powered">Powered by GG_Solutions & MindMakers</div>
+        </footer>
+    </div>
+
+    <script>
+        /*log in*/
+        document.addEventListener('DOMContentLoaded', function () {
+            var modal = document.getElementById('login-modal');
+            var btn = document.querySelector('.login-toggle');
+            var span = document.querySelector('.close-button');
+
+            btn.onclick = function () {
+                modal.style.display = "block";
+            }
+
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        });
+    </script>
+    <script>
+        document.getElementById('bookingButton').addEventListener('click', function() {
+            window.location.href = '/reservation';
+        });
+    </script>
+
+</body>
+
+</html>

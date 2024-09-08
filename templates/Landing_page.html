@@ -8,6 +8,7 @@
     <link rel= "stylesheet" href= "{{ url_for('static',filename='landing_page.css') }}">
     <link rel="stylesheet" href="https://use.typekit.net/gnm3icp.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="{{ url_for('static', filename='customer_login.js') }}"></script>
 </head>
 
 <body>
@@ -102,6 +103,27 @@
                 </div>
                 <div class="HelyszinekContainer" id="HelyszinekContainer">
                     <div class="box">
+                        <a  href="{{ url_for('carwash_site', site_name='Nepliget') }}">
+                            <button class="keret">
+                                <img class="helyszin" src="https://via.placeholder.com/335x100" />
+                                <div class="IkonKeret">
+                                    <img src="map.svg" alt="" class="ikon">
+                                </div>
+                                <div class="MosokCim">1097 Budapest,<br />Könyves Kálmán krt. 11.</div>
+                            </button>
+                        </a>
+
+                        <a  href="{{ url_for('carwash_site', site_name='IP-west') }}">
+                        <button class="keret">
+                            <img class="helyszin" src="https://via.placeholder.com/335x100" />
+                            <div class="IkonKeret">
+                                <img src="map.svg" alt="" class="ikon">
+                            </div>
+                            <div class="MosokCim">1097 Budapest,<br />Könyves Kálmán krt. 11.</div>
+                        
+                        </button>
+                        </a>
+                        <a  href="{{ url_for('carwash_site', site_name='City-Gate') }}">
                         <button class="keret">
                             <img class="helyszin" src="https://via.placeholder.com/335x100" />
                             <div class="IkonKeret">
@@ -109,6 +131,8 @@
                             </div>
                             <div class="MosokCim">1097 Budapest,<br />Könyves Kálmán krt. 11.</div>
                         </button>
+                        </a>
+                        <a  href="{{ url_for('carwash_site', site_name='Capital-square') }}">
                         <button class="keret">
                             <img class="helyszin" src="https://via.placeholder.com/335x100" />
                             <div class="IkonKeret">
@@ -116,20 +140,7 @@
                             </div>
                             <div class="MosokCim">1097 Budapest,<br />Könyves Kálmán krt. 11.</div>
                         </button>
-                        <button class="keret">
-                            <img class="helyszin" src="https://via.placeholder.com/335x100" />
-                            <div class="IkonKeret">
-                                <img src="map.svg" alt="" class="ikon">
-                            </div>
-                            <div class="MosokCim">1097 Budapest,<br />Könyves Kálmán krt. 11.</div>
-                        </button>
-                        <button class="keret">
-                            <img class="helyszin" src="https://via.placeholder.com/335x100" />
-                            <div class="IkonKeret">
-                                <img src="map.svg" alt="" class="ikon">
-                            </div>
-                            <div class="MosokCim">1097 Budapest,<br />Könyves Kálmán krt. 11.</div>
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -281,72 +292,6 @@ window.addEventListener('resize', () => {
 });
     </script>
     <script>
-        document.getElementById('login-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const formData = new FormData(this);
-            fetch('/user/login', {
-                method: 'POST',
-                body: JSON.stringify(Object.fromEntries(formData)),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                const messageElement = document.getElementById('login-message');
-                if (data.status === 'logged_in') {
-                    messageElement.textContent = 'Login successful!';
-                    messageElement.style.color = 'green';
-                } else {
-                    messageElement.textContent = 'Login failed.';
-                    messageElement.style.color = 'red';
-                }
-            });
-        });
-
-        document.getElementById('register-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const formData = new FormData(this);
-            fetch('/user/add_user', {
-                method: 'POST',
-                body: JSON.stringify(Object.fromEntries(formData)),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                const messageElement = document.getElementById('register-message');
-                if (data.status === 'success') {
-                    messageElement.textContent = 'Registration successful!';
-                    messageElement.style.color = 'green';
-                } else {
-                    messageElement.textContent = 'Registration failed.';
-                    messageElement.style.color = 'red';
-                }
-            });
-        });
-
-        document.getElementById('logout-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            fetch('/user/logout', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                const messageElement = document.getElementById('logout-message');
-                if (data.status === 'logged_out') {
-                    messageElement.textContent = 'Logout successful!';
-                    messageElement.style.color = 'green';
-                } else {
-                    messageElement.textContent = 'Logout failed.';
-                    messageElement.style.color = 'red';
-                }
-            });
-        });
         document.getElementById('bookingButton').addEventListener('click', function() {
             window.location.href = '/reservation';
         });
