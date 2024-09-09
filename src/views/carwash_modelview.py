@@ -1,9 +1,9 @@
-from flask_admin.contrib.sqla import ModelView
+from src.views.my_modelview import MyModelView
 from wtforms import TimeField, IntegerField
 from wtforms.validators import DataRequired
 from flask import flash, current_app
 
-class CarwashAdminView(ModelView):
+class CarwashAdminView(MyModelView):
     form_extra_fields = {
         'start_time': TimeField('Nyitás', validators=[DataRequired()]),
         'end_time': TimeField('Zárás', validators=[DataRequired()]),
@@ -40,9 +40,13 @@ class CarwashAdminView(ModelView):
         """
         try:
             if is_created:
-                # Ha új Carwash-t hozunk létre, akkor create_default_slots
+                # Először mentsük el a carwash-t
+                self.session.add(model)
+                self.session.commit()  # Először commit, hogy a model.id elérhető legyen
+
+                # Ezután hozd létre a slotokat
                 model.create_default_slots(
-                    session=self.session,
+                    session=self.session,  # AdminView által biztosított session
                     start_time=form.start_time.data,
                     end_time=form.end_time.data,
                     slot_count=form.slot_count.data
