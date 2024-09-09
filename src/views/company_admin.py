@@ -41,6 +41,14 @@ class MonthlyInvoiceView(BaseView):
                            selected_company_name=company_name,
                            now=now)
     
+    def is_accessible(self):
+        # Check if the user is authenticated and has the required role
+        if not current_user.is_authenticated:
+            return False
+        if current_user.role != 'admin' or current_user.role != 'developer':
+            return True
+        return False
+
     def get_monthly_invoices(self, session, year, month, company_name):
         start_date = datetime(year, month, 1)
         if month == 12:
