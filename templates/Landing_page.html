@@ -19,7 +19,7 @@
         <div class="header">
             <div class="inner-container-1"></div>
             <div class="inner-container-2">
-                <img class="image" src="static/images/logo2.png" alt="">
+                <img class="image" src="{{ url_for('static', filename='images/Logo2.png')}}" alt="">
             </div>
             <div class="inner-container-3">
                 <button type="button" class="login-toggle">
@@ -85,9 +85,9 @@
         <div class="divider"></div> <!-- Divider line -->
         <div class="slider-container">
             <div class="slider">
-                <img src="static/images/gallery6.png" alt="Slide 1">
-                <img src="static/images/Gallery6.png" alt="Slide 2">
-                <img src="static/images/Gallery6.png" alt="Slide 3">
+                <img src="{{ url_for('static', filename='images/gallery6.png')}}" alt="Slide 1">
+                <img src="{{ url_for('static', filename='images/gallery6.png')}}" alt="Slide 2">
+                <img src="{{ url_for('static', filename='images/gallery6.png')}}" alt="Slide 3">
                 <!-- Additional slides as needed -->
             </div>
             <div class="text-overlay">
@@ -106,46 +106,47 @@
                 </div>
                 <div class="HelyszinekContainer" id="HelyszinekContainer">
                     <div class="box">
-                        <a  href="{{ url_for('carwash_site', site_name='Nepliget') }}">
+                        <a href="{{ url_for('carwash_site', site_name='Nepliget') }}">
                             <button class="keret">
-                                <img class="helyszin" src="static/images/Nepliget-center.png" />
+                                <img class="helyszin" src="{{ url_for('static', filename='images/Nepliget-center.png') }}" />
                                 <div class="IkonKeret">
-                                    <img src="static/images/map.svg" alt="" class="ikon">
+                                    <img src="{{ url_for('static', filename='images/map.svg') }}" alt="" class="ikon">
                                 </div>
                                 <div class="MosokCim">1097 Budapest,<br />Könyves Kálmán krt. 11.</div>
                             </button>
                         </a>
-
-                        <a  href="{{ url_for('carwash_site', site_name='IP-west') }}">
-                        <button class="keret">
-                            <img class="helyszin" src="static/images/IP-west.png" />
-                            <div class="IkonKeret">
-                                <img src="static/images/map.svg" alt="" class="ikon">
-                            </div>
-                            <div class="MosokCim">1097 Budapest,<br />Könyves Kálmán krt. 11.</div>
-                        
-                        </button>
+                    
+                        <a href="{{ url_for('carwash_site', site_name='IP-west') }}">
+                            <button class="keret">
+                                <img class="helyszin" src="{{ url_for('static', filename='images/IP-west.png') }}" />
+                                <div class="IkonKeret">
+                                    <img src="{{ url_for('static', filename='images/map.svg') }}" alt="" class="ikon">
+                                </div>
+                                <div class="MosokCim">1097 Budapest,<br />Könyves Kálmán krt. 11.</div>
+                            </button>
                         </a>
-                        <a  href="{{ url_for('carwash_site', site_name='City-Gate') }}">
-                        <button class="keret">
-                            <img class="helyszin" src="static/images/City-gate.png" />
-                            <div class="IkonKeret">
-                                <img src="static/images/map.svg" alt="" class="ikon">
-                            </div>
-                            <div class="MosokCim">1097 Budapest,<br />Könyves Kálmán krt. 11.</div>
-                        </button>
+                    
+                        <a href="{{ url_for('carwash_site', site_name='City-Gate') }}">
+                            <button class="keret">
+                                <img class="helyszin" src="{{ url_for('static', filename='images/City-gate.png') }}" />
+                                <div class="IkonKeret">
+                                    <img src="{{ url_for('static', filename='images/map.svg') }}" alt="" class="ikon">
+                                </div>
+                                <div class="MosokCim">1097 Budapest,<br />Könyves Kálmán krt. 11.</div>
+                            </button>
                         </a>
-                        <a  href="{{ url_for('carwash_site', site_name='Capital-square') }}">
-                        <button class="keret">
-                            <img class="helyszin" src="static/images/Capital-square.png" />
-                            <div class="IkonKeret">
-                                <img src="static/images/map.svg" alt="" class="ikon">
-                            </div>
-                            <div class="MosokCim">1097 Budapest,<br />Könyves Kálmán krt. 11.</div>
-                        </button>
+                    
+                        <a href="{{ url_for('carwash_site', site_name='Capital-square') }}">
+                            <button class="keret">
+                                <img class="helyszin" src="{{ url_for('static', filename='images/Capital-square.png') }}" />
+                                <div class="IkonKeret">
+                                    <img src="{{ url_for('static', filename='images/map.svg') }}" alt="" class="ikon">
+                                </div>
+                                <div class="MosokCim">1097 Budapest,<br />Könyves Kálmán krt. 11.</div>
+                            </button>
                         </a>
-                    </div>
-                </div>
+                    </div>     
+                </div>               
             </div>
 
                 <div class="main-Carousel-container">
@@ -154,12 +155,12 @@
                         <button class="carousel-button prev" onclick="prevImage()">&#10094;</button>
                         <div class="carousel-wrapper">
                             <div class="carousel">
-                                <img src="static/images/Gallery6.png" alt="Image 1" class="carousel-image">
-                                <img src="static/images/Gallery6.png" alt="Image 1" class="carousel-image">
-                                <img src="static/images/Gallery6.png" alt="Image 1" class="carousel-image">
-                                <img src="static/images/Gallery6.png" alt="Image 1" class="carousel-image">
-                                <img src="static/images/Gallery6.png" alt="Image 1" class="carousel-image">
-                                <img src="static/images/Gallery6.png" alt="Image 1" class="carousel-image">                                
+                                <img src="{{ url_for('static', filename='images/Gallery6.png') }}" alt="Image 1" class="carousel-image">
+                                <img src="{{ url_for('static', filename='images/Gallery6.png') }}" alt="Image 1" class="carousel-image">
+                                <img src="{{ url_for('static', filename='images/Gallery6.png') }}" alt="Image 1" class="carousel-image">
+                                <img src="{{ url_for('static', filename='images/Gallery6.png') }}" alt="Image 1" class="carousel-image">
+                                <img src="{{ url_for('static', filename='images/Gallery6.png') }}" alt="Image 1" class="carousel-image">
+                                <img src="{{ url_for('static', filename='images/Gallery6.png') }}" alt="Image 1" class="carousel-image">                                
                                 <!-- Add more images as needed -->
                             </div>
                         </div>
@@ -168,31 +169,31 @@
                 </div>
             <div class="Supports">
                 <div class="Supports-container-1">
-                    <img src="static/images/support1.png" alt="">
+                    <img src="{{ url_for('static', filename='images/support1.png') }}" alt="">
                 </div>
                 <div class="Supports-container-2">
-                    <img src="static/images/logo2.png" alt="">
-                </div>
+                    <img src="{{ url_for('static', filename='images/Logo2.png') }}" alt="">
+                </div>                
             </div>
             <div class="footer">
                 <div class="footer-content">
                     <div class="Footer-washes">
                         <div class="footer-box">
-                            <img class="footer-image" src="static/images/Nepliget-center.png" />
+                            <img class="footer-image" src="{{ url_for('static', filename='images/Nepliget-center.png') }}" />
                             <div class="footer-text">+36 20 69 69 669</div>
                         </div>
                         <div class="footer-box">
-                            <img class="footer-image" src="static/images/IP-west.png" />
+                            <img class="footer-image" src="{{ url_for('static', filename='images/IP-west.png') }}" />
                             <div class="footer-text">+36 20 69 69 669</div>
                         </div>
                         <div class="footer-box">
-                            <img class="footer-image" src="static/images/City-gate.png" />
+                            <img class="footer-image" src="{{ url_for('static', filename='images/City-gate.png') }}" />
                             <div class="footer-text">+36 20 69 69 669</div>
                         </div>
                         <div class="footer-box">
-                            <img class="footer-image" src="static/images/Capital-square.png" />
+                            <img class="footer-image" src="{{ url_for('static', filename='images/Capital-square.png') }}" />
                             <div class="footer-text">+36 20 69 69 669</div>
-                        </div>
+                        </div>                        
                     </div>
                     <div class="footer-texts">
                         <div class="footer-box">
