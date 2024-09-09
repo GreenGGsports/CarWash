@@ -6,13 +6,13 @@ from src.models.slot_model import SlotModel
 from src.models.carwash_model import CarWashModel
 from src.models.extra_model import ExtraModel
 from src.models.reservation_model import ReservationModel
-from flask_admin.contrib.sqla import ModelView
+from src.views.my_modelview import MyModelView
 from flask_login import current_user
 from flask import current_app
 from src.views.filters import ThisMonthFilter, ThisWeekFilter, TodayFilter
 from src.views.reservation_form import ReservationForm
 
-class ReservationAdminView(ModelView):
+class ReservationAdminView(MyModelView):
     form = ReservationForm
     create_template = 'admin/reservation_form.html'
     

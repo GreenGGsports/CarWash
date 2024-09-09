@@ -1,9 +1,9 @@
-from flask_admin.contrib.sqla import ModelView
+from src.views.my_modelview import MyModelView
 from wtforms import TimeField, IntegerField
 from wtforms.validators import DataRequired
 from flask import flash, current_app
 
-class CarwashAdminView(ModelView):
+class CarwashAdminView(MyModelView):
     form_extra_fields = {
         'start_time': TimeField('Nyitás', validators=[DataRequired()]),
         'end_time': TimeField('Zárás', validators=[DataRequired()]),
