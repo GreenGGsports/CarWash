@@ -15,7 +15,7 @@
     <div class="header">
         <div class="inner-container-1"></div>
         <div class="inner-container-2">
-            <img class="image" src="logo2.png" alt="">
+            <img class="image"  src="{{ url_for('static', filename='images/Logo2.png')}}" alt="">
         </div>
         <div class="inner-container-3">
             <button type="button" class="login-toggle">
@@ -87,12 +87,12 @@
     </div>
     <div class="content">
         <div class="slide-img">
-            <img src="NC.png" alt="">
+            <img  src="{{ url_for('static', filename='images/IP-west.png')}}" alt="">
             <p class="slide-text">+36 20 69 69 669</p>
         </div>
         <div class="Location">
             <div class="map-text">
-                <img src="map.svg" alt="" class="ikon">
+                <img  src="{{ url_for('static', filename='images/map.svg')}}" alt="" class="ikon">
                 <p>1117 Budapest<br> Budafoki út 91-93 </p>
             </div>
             <div class="map">
@@ -299,7 +299,7 @@
         </div>
         <footer>
             <div class="footer-logo">
-                <div class="logo"><img src="NC.png" alt="" style="width: 8rem;"></div>
+                <div class="logo"><img  src="{{ url_for('static', filename='images/IP-west.png')}}" alt="" style="width: 8rem;"></div>
                 <div class="logo-text">+36 20 69 69 669</div>
             </div>
             <div class="jogok">

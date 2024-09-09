@@ -64,3 +64,4 @@ document.getElementById('logout-form').addEventListener('submit', function(event
         }
     });
 });
+
