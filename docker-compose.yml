@@ -28,6 +28,12 @@ services:
       MYSQL_DATABASE: testdb
       MYSQL_USER: testuser
       MYSQL_PASSWORD: testpassword
+
+      # MySQL timeout settings
+      MYSQL_INITDB_SKIP_TZINFO: '1'
+      MYSQL_WAIT_TIMEOUT: 10  # Wait timeout for testing (in seconds)
+      MYSQL_INTERACTIVE_TIMEOUT: 10  # Interactive timeout for testing (in seconds)
+
     ports:
       - "3306:3306"
     networks:
