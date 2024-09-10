@@ -42,14 +42,17 @@ def create_reservation():
         return jsonify({'status': 'success'}), 200
     
     except AttributeError as e:
+        db_session.rollback()
         current_app.logger.error(f"AttributeError while creating reservation: {e}")
         return jsonify({'status': 'error', 'message': str(e)}), 400
     
     except ValueError as e:
+        db_session.rollback()
         current_app.logger.error(f"ValueError while creating reservation: {e}")
         return jsonify({'status': 'error', 'message': 'Invalid data format.'}), 400
     
     except Exception as e:
+        db_session.rollback()
         current_app.logger.error(f"Unexpected error while creating reservation: {e}")
         return jsonify({'status': 'error', 'message': 'An unexpected error occurred.'}), 500
     
@@ -195,7 +198,9 @@ def get_popup_data():
                 extra = ExtraModel.get_by_id(session=db_session,obj_id= extra_id)
                 extra_price += extra.price
                 extra_names.append(extra.service_name)
+                
     except Exception as e:
+        db_session.rollback()
         current_app.logger.error(f"Error occurred while generating data for popup HTML: {e}")
     return location , license_plate, researvation_date, service_name, service_price, extra_names, extra_price, final_price
 

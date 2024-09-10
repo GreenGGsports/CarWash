@@ -63,4 +63,5 @@ class CarwashAdminView(MyModelView):
                 flash(f'Slots successfully updated for {model.carwash_name}', 'success')
         except Exception as e:
             flash(f'Error during slot handling: {str(e)}', 'error')
+            self.session.rollback()
             raise

@@ -5,15 +5,28 @@ from sqlalchemy.exc import SQLAlchemyError
 import logging
 billing_ctrl = Blueprint('billing_ctrl', __name__, url_prefix='/billing')
 
-@billing_ctrl.route('/get_billing_data', methods=['GET'])    
+@billing_ctrl.route('/get_billing_data', methods=['GET'])
 def get_billing_data():
-    session = current_app.session_factory.get_session()
-    if current_user.is_authenticated:
-        user_id = current_user.id
-        data = BillingModel.get_last_by_user_id(session=session, user_id=user_id).__dict__
-        return jsonify(data) if data else jsonify({})
-    else:
-        return jsonify({})
+    try:
+        # Obtain a database session
+        session = current_app.session_factory.get_session()
+        
+        if current_user.is_authenticated:
+            user_id = current_user.id
+            
+            data = BillingModel.get_last_by_user_id(session=session, user_id=user_id)
+            data_dict = data.__dict__ if data else {}
+            return jsonify(data_dict)
+        else:
+            return jsonify({'error': 'User not authenticated'}), 401
+
+    except SQLAlchemyError as e:
+        current_app.logger.error(f"Database error: {e}")
+        return jsonify({'error': 'A database error occurred'}), 500
+
+    except Exception as e:
+        current_app.logger.error(f"Unexpected error: {e}")
+        return jsonify({'error': 'An unexpected error occurred'}), 500
 
 @billing_ctrl.route('/add_billing', methods=['POST'])   
 def create_billing():
@@ -26,14 +39,19 @@ def create_billing():
         session['billing_id'] = billing_data.id
         return jsonify({'status': 'success'})
     except AttributeError as e:
+        db_session.rollback()
         current_app.logger.error(f"AttributeError in create_billing: {e}")
         return jsonify({'status': 'error', 'message': str(e)}), 400
+
     except SQLAlchemyError as e:
+        db_session.rollback()
         current_app.logger.error(f"Database error in create_billing: {e}")
         return jsonify({'status': 'error', 'message': 'Failed to add billing data.'}), 500
+
     except Exception as e:
+        db_session.rollback()
         current_app.logger.error(f"Unexpected error in create_billing: {e}")
-        return jsonify({'status': 'error', 'message': 'An unexpected error occurred.'}), 500   
+        return jsonify({'status': 'error', 'message': 'An unexpected error occurred.'}), 500
 
 def parse_billing_data(data):
     return dict(

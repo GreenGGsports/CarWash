@@ -47,10 +47,12 @@ def select_service():
         return jsonify({'status': 'success', 'message': 'Service selected!', 'id': service.id}), 200
     
     except ValueError:
+        db_session.rollback()
         current_app.logger.error('Invalid service ID format.')
         return jsonify({'status': 'error', 'message': 'Invalid service ID format.'}), 400
     
     except Exception as e:
+        db_session.rollback()
         current_app.logger.error(f"Error selecting service with ID {service_id}: {e}")
         return jsonify({'status': 'error', 'message': 'Failed to select service.'}), 500
 
@@ -74,6 +76,7 @@ def get_extra():
         return jsonify(response_data), 200
     
     except Exception as e:
+        db_session.rollback()
         current_app.logger.error(f"Error retrieving extras: {e}")
         return jsonify({'status': 'error', 'message': 'Failed to retrieve extras.'}), 500
 

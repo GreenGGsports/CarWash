@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template ,  g
 from sqlalchemy import create_engine
 from sessions import SessionFactory
 from config import load_configs
@@ -42,10 +42,9 @@ def create_app(config_name: str):
     app.session_factory = session_factory
     
     @app.teardown_request
-    def app_teardown(response_or_exc):
-        # Remove the session
-        app.session_factory.remove()
-        return response_or_exc
+    def teardown_request(exception=None):
+        if hasattr(g, 'session'):
+            g.session.remove()
     
     with app.app_context():
         create_database(engine)
