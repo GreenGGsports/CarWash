@@ -13,7 +13,7 @@ from src.controllers.billing_controller import billing_ctrl
 from src.controllers.booking_controller import booking_ctrl
 from src.controllers.developer_controller import developer_ctrl
 from src.controllers.reservation_autofill import reservation_autofill_ctrl
-from database import create_database, connect_tcp_socket
+from database import create_database, get_db, close_db
 from src.controllers.admin import init_admin, init_local_admin, init_developer_admin
 from src.models.user_model import UserModel
 
@@ -32,12 +32,15 @@ def create_app(config_name: str):
         engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
     
     else:
-        engine = connect_tcp_socket()
+        engine = get_db()
 
     if check_database_connection(engine, app):
         app.logger.info("Database connection initialized successfully.")
     else:
         app.logger.error("Failed to initialize database connection.")
+        
+    app.teardown_appcontext(close_db)
+    
     session_factory = SessionFactory(engine)
     app.session_factory = session_factory
     
@@ -79,7 +82,7 @@ def add_blueprints(app: Flask):
         try:
             # This will look for the corresponding HTML file inside templates/carwash_sites
             return render_template(f'carwash_sites/{site_name}.html')
-        except:
+        except :
             # Return a 404 error if the file does not exist
             return "Car wash site not found", 404
     

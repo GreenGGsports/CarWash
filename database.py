@@ -16,54 +16,27 @@ from sqlalchemy import text  # Import the text function for executing raw SQL qu
 from sqlalchemy.exc import SQLAlchemyError , OperationalError
 import os 
 import sqlalchemy
-
+from flask import g, current_app
 
 def create_database(engine):
     BaseModel.metadata.create_all(engine)
-    print("Database created successfully.")
+    print("Database schema created successfully.")
 
-def check_database_connection(engine, app):
-    """
-    Check if the SQLAlchemy engine is properly connected to the database.
-    
-    Parameters:
-        engine: SQLAlchemy Engine instance.
-        app: Flask app instance for logging.
-
-    Returns:
-        bool: True if the connection is successful, False otherwise.
-    """
-    try:
-        # Attempt to connect and execute a simple query
-        with engine.connect() as connection:
-            # Use the 'text' function to execute a raw SQL query
-            result = connection.execute(text("SELECT 1"))
-            app.logger.debug(f"Database connection check result: {result.fetchone()}")
-        return True
-    except SQLAlchemyError as e:
-        # Log any errors that occur during the connection check
-        app.logger.error(f"Database connection failed: {e}")
-        return False
-    
 def connect_tcp_socket() -> sqlalchemy.engine.base.Engine:
     """Initializes a TCP connection pool for a MySQL instance."""
-    
-    # Fetch database connection parameters from environment variables
     try:
-        db_user = os.environ["DB_USER"]        # e.g., 'my-database-user'
-        db_pass = os.environ["DB_PASSWORD"]    # e.g., 'my-database-password'
-        db_name = os.environ["DB_NAME"]        # e.g., 'my-database'
-        db_host = os.environ["DB_HOST"]        # e.g., 'db'
-        db_port = os.environ.get("DB_PORT", 3306)  # e.g., 3306; default to 3306 if not set
+        db_user = os.environ["DB_USER"]
+        db_pass = os.environ["DB_PASSWORD"]
+        db_name = os.environ["DB_NAME"]
+        db_host = os.environ["DB_HOST"]
+        db_port = int(os.environ.get("DB_PORT", 3306))
         
-        # For logging and debugging
-        print(f"Connecting to database '{db_name}' with user '{db_user}' at '{db_host}:{db_port}'")
+        print(f"Connecting to database '{db_name}' at '{db_host}:{db_port}'")
     
     except KeyError as e:
         raise EnvironmentError(f"Missing required environment variable: {e}")
 
-    # Create a SQLAlchemy Engine using a connection pool
-    pool = sqlalchemy.create_engine(
+    engine = sqlalchemy.create_engine(
         sqlalchemy.engine.url.URL.create(
             drivername="mysql+pymysql",
             username=db_user,
@@ -74,20 +47,34 @@ def connect_tcp_socket() -> sqlalchemy.engine.base.Engine:
         ),
         pool_size=5,
         max_overflow=5,
-        pool_timeout=30,  # 30 seconds
-        pool_recycle=1800,# 30 minutes
-        pool_pre_ping=True,
+        pool_timeout=30,
+        pool_recycle=1800,  # Recycle connections every 30 minutes
+        pool_pre_ping=True,  # Ping connections before using them
     )
 
-    # Test connection
-    try:
-        with pool.connect() as connection:
-            print("Database connection successfully established!")
-    except OperationalError as e:
-        print(f"An error occurred while connecting to the database: {e}")
+    return engine
 
-    return pool
+def get_db():
+    """Get or create the database connection."""
+    if 'db' not in g:
+        g.db = connect_tcp_socket()
+    return g.db
+
+def close_db(e=None):
+    """Close the database connection after each request."""
+    db = g.pop('db', None)
+    if db is not None:
+        db.dispose()
+
+def check_database_connection(engine, app):
+    """Check if the engine can connect to the database."""
+    try:
+        with engine.connect() as connection:
+            result = connection.execute(text("SELECT 1"))
+            print(f"Connection check result: {result.fetchone()}")
+        return True
+    except SQLAlchemyError as e:
+        current_app.logger.error(f"Database connection failed: {e}")
+        return False
     
-if __name__ == '__main__':
-    create_database()
     
