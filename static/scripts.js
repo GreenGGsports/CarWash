@@ -269,9 +269,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
   
         const result = await response.json();
-        const min_date = new Date(result['min_date']);
-        generateHourlyButtons(min_date);
-        console.log(min_date);
+        
+        generateHourlyButtons(result["min_date"]);
         console.log('Server response:', result);
       } catch (error) {
         console.error('Hiba történt az adatküldés során:', error);
@@ -281,24 +280,32 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
 var SlotSelected = false;
-function generateHourlyButtons(date) {
+function generateHourlyButtons(date_response) {
     const buttonContainer = document.querySelector(".GombBox");
     buttonContainer.innerHTML = ''; // Clear previous buttons
-
-    // Input date (e.g., datetime.datetime(2024, 7, 30, 9, 0)) in UTC
-    const min_date = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours()));
-    // Subtract 2 hours due to timezone adjustment
-    min_date.setHours(min_date.getHours() - 2); // CET difference, 1 hour in summer for CEST
-
+    let min_date; // Define min_date here
+    if (date_response === false) {
+        min_date = false
+    }
+    else {
+        date  = new Date(date_response)
+        console.log(date_response)
+        min_date = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours()));
+        // Subtract 2 hours due to timezone adjustment
+        min_date.setHours(min_date.getHours() - 2); // CET difference, 1 hour in summer for CEST
+        console.log('Minimum date:', min_date);
+    }
     console.log('Input date:', date);
     console.log('Minimum date:', min_date);
 
     // Start and end times for buttons
     const startHour = 9;
-    const startMinute = 45;
+    const startMinute = 30;
     const endHour = 17;
     const intervalMinutes = 40;
 
+    console.log(Date(min_date.getFullYear(), min_date.getMonth(), min_date.getDate(), startHour, startMinute))
+    console.log(min_date.getDate())
     // Calculate total number of buttons to create
     const totalButtons = Math.floor(((endHour - startHour) * 60 + 60 - startMinute) / intervalMinutes);
 
@@ -307,14 +314,13 @@ function generateHourlyButtons(date) {
         const totalMinutes = startMinute + i * intervalMinutes;
         const hour = startHour + Math.floor(totalMinutes / 60);
         const minutes = totalMinutes % 60;
-
+        
         // Create the date for the button
         const buttonDate = new Date(min_date.getFullYear(), min_date.getMonth(), min_date.getDate(), hour, minutes);
         buttonDate.setHours(buttonDate.getHours() + 2);   
         const correctedButtonDate = buttonDate;
-        console.log(correctedButtonDate);
 
-        const isFree = correctedButtonDate >= min_date;
+        isFree = isFree_date(correctedButtonDate,min_date);
 
         const button = document.createElement('button');
         button.classList.add('IdopontGomb', `free-${isFree}`);
@@ -360,7 +366,15 @@ function generateHourlyButtons(date) {
         }
     }
 }
+function isFree_date(correctedButtonDate,min_date) {
+    if (min_date === false){
+        return false
+    }
+    else {
+        return correctedButtonDate >= min_date
+        }
 
+}
 function billing_required() {
     // Az űrlap elem lekérése
     var form = document.getElementById('szamlazasForm');

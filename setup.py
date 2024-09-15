@@ -32,7 +32,8 @@ def create_app(config_name: str):
         engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
     
     else:
-        engine = get_db()
+        with app.app_context():
+            engine = get_db()
 
     if check_database_connection(engine, app):
         app.logger.info("Database connection initialized successfully.")

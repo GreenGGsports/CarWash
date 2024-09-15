@@ -40,7 +40,8 @@ def set_date():
         )
         if min_date is None:
             response['message'] = 'No slot available for reservation at this date.'
-            return jsonify(response), 404
+            response['min_date'] = datetime.combine(date, time.max) - timedelta(hours=2)
+            return jsonify(response)
 
         response = {'status': 'success', 'min_date': min_date}
         return jsonify(response)
