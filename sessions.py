@@ -13,3 +13,6 @@ class SessionFactory:
     def remove(self):
         # Remove the current scoped session
         self.Session.remove()
+
+    def expire_all(self):
+        self.Session.expire_all()
