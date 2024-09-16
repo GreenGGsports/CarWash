@@ -4,7 +4,7 @@ from src.models.slot_model import SlotModel
 from src.models.carwash_model import CarWashModel
 from src.models.extra_model import ExtraModel
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, DateTimeField
+from wtforms import StringField, SelectField, DateTimeField, BooleanField
 from wtforms_sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
 from flask_login import current_user
 
@@ -44,3 +44,4 @@ class ReservationForm(FlaskForm):
     parking_spot = StringField('Parkolóhely')
     carwash = QuerySelectField('Autómosó', allow_blank=False, query_factory=lambda: [])
     slot = QuerySelectField('Slot', allow_blank=False, query_factory=lambda: [])
+    is_completed = BooleanField('Kész?')

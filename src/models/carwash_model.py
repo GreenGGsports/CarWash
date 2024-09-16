@@ -13,6 +13,9 @@ class CarWashModel(BaseModel):
     carwash_name = Column(String(30), nullable=False)
     location = Column(String(100), nullable=False)
     image_name = Column(String(30), nullable=True)
+    
+    close_start = Column(DateTime(),nullable=True)
+    close_end = Column(DateTime(),nullable=True)
 
     slots = relationship('SlotModel', back_populates='carwash')  # Kapcsolat a SlotModel-lel
 
@@ -92,3 +95,9 @@ class CarWashModel(BaseModel):
         self.archive_current_slots(session)
         # Új slotok létrehozása
         self.create_default_slots(session, start_time, end_time, slot_count)
+        
+    def is_open(self, session: Session, date: datetime) -> bool:
+        if self.close_start and self.close_end:
+            if self.close_start <= date <= self.close_end:
+                return False
+        return True

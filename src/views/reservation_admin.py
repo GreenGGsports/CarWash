@@ -15,6 +15,7 @@ from src.views.reservation_form import ReservationForm
 class ReservationAdminView(MyModelView):
     form = ReservationForm
     create_template = 'admin/reservation_form.html'
+    list_template = 'admin/reservation_list.html' 
     
     column_list = (
         'reservation_date',
@@ -26,7 +27,8 @@ class ReservationAdminView(MyModelView):
         'customer.lastname',
         'customer.phone_number',
         'final_price',
-        'billing.id'
+        'billing.id',
+        'is_completed'
     )
 
     column_labels = {
@@ -39,10 +41,11 @@ class ReservationAdminView(MyModelView):
         'extras': 'Extrák',
         'carwash.carwash_name': 'Autómosó',
         'final_price': 'Ár',
+        'is_completed': 'Kész?'
     }
 
     form_excluded_columns = ['billing']
-
+    
     column_filters = [
         TodayFilter(ReservationModel.reservation_date),
         ThisWeekFilter(ReservationModel.reservation_date),
@@ -52,7 +55,7 @@ class ReservationAdminView(MyModelView):
     def __init__(self, model, session, *args, **kwargs):
         self.session = session
         super(ReservationAdminView, self).__init__(model, session, *args, **kwargs)
-
+        
     def get_list(self, *args, **kwargs):
     # Fetch the count and query from the base ModelView method
         count, query = super().get_list(*args, **kwargs)
@@ -60,12 +63,15 @@ class ReservationAdminView(MyModelView):
         if current_user is current_user.is_authenticated:
             if  hasattr(current_user, 'carwash_id'): 
                 query = [item for item in query if item.carwash_id == current_user.carwash_id]
-                from pdb import set_trace
-                set_trace()
             if current_user.role == 'admin':
                 query = [item for item in query]
         return count, query
-
+    
+    def scaffold_list(self, *args, **kwargs):
+        result = super(ReservationAdminView, self).scaffold_list(*args, **kwargs)
+        for row in result:
+            row['data-is-completed'] = row.get('is_completed', False)  # Adjust based on your data structure
+        return result
 
     def create_form(self, obj=None):
         form = super(ReservationAdminView, self).create_form(obj)

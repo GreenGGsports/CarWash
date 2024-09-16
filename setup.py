@@ -44,7 +44,10 @@ def create_app(config_name: str):
     
     session_factory = SessionFactory(engine)
     app.session_factory = session_factory
-    
+    @app.before_request
+    def before_request():
+        g.session = app.session_factory
+        
     @app.teardown_request
     def teardown_request(exception=None):
         if hasattr(g, 'session'):

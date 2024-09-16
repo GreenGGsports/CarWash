@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, DateTime, Float, ForeignKey, String
+from sqlalchemy import Column, Integer, DateTime, Float, ForeignKey, String, Boolean
 from sqlalchemy.orm import relationship, Session
 from datetime import datetime
 from .base import BaseModel
@@ -26,6 +26,7 @@ class ReservationModel(BaseModel):
     parking_spot = Column(Integer)
     
     final_price = Column(Float)
+    is_completed = Column(Boolean, default=False)
 
     car = relationship('CarModel', back_populates='reservations')
     slot = relationship("SlotModel")
@@ -34,7 +35,7 @@ class ReservationModel(BaseModel):
     extras = relationship('ExtraModel', secondary=reservation_extra, back_populates='reservations')
     carwash = relationship('CarWashModel')
     billing = relationship('BillingModel', back_populates='reservation')
-
+    
     @classmethod
     def calculate_final_price(cls, session: Session, service_id: int, car_id : int,extras: Optional[List[int]]) -> float:
         # Szolgáltatás árának lekérése az autó típusától függően

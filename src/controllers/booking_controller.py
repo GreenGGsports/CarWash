@@ -2,6 +2,7 @@ from flask import current_app, Blueprint, request, session, jsonify
 from sqlalchemy.orm import Session
 from datetime import datetime, timedelta, time
 from src.models.slot_model import SlotModel
+from src.models.carwash_model import CarWashModel
 from src.models.reservation_model import ReservationModel
 from sqlalchemy.exc import SQLAlchemyError
 
@@ -33,12 +34,15 @@ def set_date():
     
     try:
         db_session = current_app.session_factory.get_session()
+        carwash = CarWashModel.get_by_id(db_session, carwash_id)
+        is_open = carwash.is_open(db_session,date)
+        
         min_date = get_earliest_available_slot(
             db_session=db_session,
             reservation_date=date,
             carwash_id = carwash_id
         )
-        if min_date is None:
+        if min_date is None or is_open == False:
             response['message'] = 'No slot available for reservation at this date.'
             response['min_date'] = datetime.combine(date, time.max) - timedelta(hours=2)
             return jsonify(response)
@@ -120,6 +124,7 @@ def get_available_slots(db_session: Session, date: datetime, carwash_id: int) ->
     except Exception as e:
         current_app.logger.error(f"Error fetching available slots: {e}")
         raise
+
 
 def get_slot_id(db_session: Session, reservation_date: datetime, carwash_id: int) -> int:
     try:
