@@ -10,6 +10,8 @@ class SessionFactory:
         # Return the scoped session instance
         return self.Session()
         
-    def remove(self):
+    def remove(self, exception = None):
         # Remove the current scoped session
+        if exception: 
+            self.Session.rollback()
         self.Session.remove()

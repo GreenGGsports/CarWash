@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template ,  g
+from flask import Flask, request, render_template ,  current_app
 from sqlalchemy import create_engine
 from sessions import SessionFactory
 from config import load_configs
@@ -44,21 +44,17 @@ def create_app(config_name: str):
     
     session_factory = SessionFactory(engine)
     app.session_factory = session_factory
-    @app.before_request
-    def before_request():
-        g.session = app.session_factory
         
     @app.teardown_request
     def teardown_request(exception=None):
-        if hasattr(g, 'session'):
-            g.session.remove()
-    
+        current_app.session_factory.remove(exception)
+        
     with app.app_context():
         create_database(engine)
         init_admin(app, session_factory)
         init_local_admin(app, session_factory)
         init_developer_admin(app, session_factory)
-        create_default_users(session_factory.get_session())
+        create_default_users(app)
 
     init_login_manager(app)
     init_principal(app)  # Ensure this is called
@@ -68,11 +64,13 @@ def create_app(config_name: str):
     app.logger.info(f"Application started with configuration: {config_name}")
     return app
 
-def create_default_users(session):
+def create_default_users(app):
+    session = app.session_factory.get_session()
     if not UserModel.check_name_taken(session, 'admin'):
         UserModel.add_user(session, 'admin', 'adminpass', role='admin')
     if not UserModel.check_name_taken(session, 'user'):
-        UserModel.add_user(session, 'user', 'userpass', role='user')
+        UserModel.add_user(session, 'user', 'userpass', role='user')  
+    app.session_factory.remove()
 
 
 
