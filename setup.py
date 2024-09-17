@@ -54,8 +54,7 @@ def create_app(config_name: str):
         init_admin(app, session_factory)
         init_local_admin(app, session_factory)
         init_developer_admin(app, session_factory)
-        create_default_users(app)
-
+        
     init_login_manager(app)
     init_principal(app)  # Ensure this is called
 
@@ -63,16 +62,6 @@ def create_app(config_name: str):
     app = add_blueprints(app)
     app.logger.info(f"Application started with configuration: {config_name}")
     return app
-
-def create_default_users(app):
-    session = app.session_factory.get_session()
-    if not UserModel.check_name_taken(session, 'admin'):
-        UserModel.add_user(session, 'admin', 'adminpass', role='admin')
-    if not UserModel.check_name_taken(session, 'user'):
-        UserModel.add_user(session, 'user', 'userpass', role='user')  
-    app.session_factory.remove()
-
-
 
 def add_blueprints(app: Flask):
     @app.route('/')
