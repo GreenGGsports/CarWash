@@ -5,9 +5,10 @@
 
 body {
     width: 100%;
-    height: 100;
+    height: 100%;
     font-family: 'Arial', sans-serif;
-    background-image: url('/static/images/background-image.png'); /* Itt add meg a háttérképed elérési útvonalát */
+    background-image: url('/static/images/background-image.png');;
+    /* Itt add meg a háttérképed elérési útvonalát */
     background-repeat: no-repeat;
     background-size: cover;
     color: #333;
@@ -18,7 +19,7 @@ body {
     /* Remove default body margin */
 }
 
-i{
+i {
     font-size: 1.7em;
     margin-right: 0.5rem;
     color: white;
@@ -31,12 +32,13 @@ i{
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    margin-left: 0.5rem;
 }
 
 .header {
     display: flex;
     width: 100%;
+    background-image: linear-gradient( to right, black 50%, #141414);
+    padding: 1rem 0;
 }
 
 .inner-container-1 {
@@ -116,7 +118,7 @@ i{
     line-height: normal;
 }
 
-.form-group{
+.form-group {
     display: flex;
     flex-direction: column;
     gap: 0rem;
@@ -173,7 +175,8 @@ i{
 }
 
 .modal {
-    display: none; /* Elrejtve, amíg aktiválva nem lesz */
+    display: none;
+    /* Elrejtve, amíg aktiválva nem lesz */
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -191,7 +194,8 @@ i{
     background-color: black;
     margin: 15% auto;
     padding: 20px;
-    width: 50%; /* Állítsd be a megfelelő szélességre */
+    width: 50%;
+    /* Állítsd be a megfelelő szélességre */
 }
 
 .close-button {
@@ -209,20 +213,12 @@ i{
     cursor: pointer;
 }
 
-.divider {
-    width: 100%;
-    height: 2px;
-    background-color: #13669C;
-    margin: 0.5rem 0;
-    margin-bottom: 4rem;
-}
-
 .slider-container {
     width: 100%;
     height: 100%;
     position: relative;
     overflow: hidden;
-    border-radius: 50px 10px 25px 25px;
+    box-shadow: 9px 18px 9px rgba(0, 0, 0, 0.3);
 }
 
 .slider {
@@ -234,7 +230,6 @@ i{
 .slider img {
     width: 33.33%;
     height: auto;
-    border-radius: 50px 10px 25px 25px;
 }
 
 .text-overlay {
@@ -245,7 +240,7 @@ i{
     padding: 20px;
     box-sizing: border-box;
     text-align: center;
-    height: 150px;
+    height: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -284,7 +279,8 @@ i{
     font-size: 4em;
     cursor: pointer;
     /* Add cursor to indicate it's clickable */
-    position: relative; /* Needed to position the tooltip relative to the button */
+    position: relative;
+    /* Needed to position the tooltip relative to the button */
     font-family: "graphie", sans-serif;
     font-weight: 700;
     font-style: normal;
@@ -303,7 +299,6 @@ i{
     top: 110%;
     left: 50%;
     transform: translateX(-50%);
-    margin-top: 10px;
     box-sizing: border-box;
     border: 1px solid red;
     font-size: 0.45em;
@@ -373,7 +368,6 @@ i{
     width: 21rem;
     height: 29rem;
     background: black;
-    box-shadow: 0px 0px 15px 3px rgba(124, 242, 218, 0.45), 0px 0px 15px 3px rgba(124, 242, 218, 0.45) inset;
     border: 1.50px #13669C solid;
     display: flex;
     flex-direction: column;
@@ -388,9 +382,9 @@ i{
 }
 
 .keret:hover {
-    border: 1.5px solid var(--A-kk, #13669C);
+    border: 1.5px solid rgba(124, 242, 218, 0.90);
     background: #000;
-    box-shadow: 0px 0px 15px 3px rgba(124, 242, 218, 0.50), 0px 0px 15px 3px rgba(124, 242, 218, 0.45) inset;
+    box-shadow: 0px 0px 15px 6px rgba(124, 242, 218, 0.50), 0px 0px 15px 6px rgba(124, 242, 218, 0.50) inset;
 }
 
 .keret:active {
@@ -450,7 +444,7 @@ i{
 
 .carousel-container {
     width: 90%;
-    max-width: 1200px;
+    max-width: 2200px;
     border: 3px solid #13669C;
     border-radius: 10px;
     overflow: hidden;
@@ -460,6 +454,7 @@ i{
     background-color: white;
     position: relative;
     margin-top: 3rem;
+    box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50), 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset;
 }
 
 .carousel-wrapper {
@@ -508,7 +503,7 @@ i{
     display: flex;
     width: 100%;
     justify-content: space-between;
-    margin: 10rem 0;
+    margin: 4rem 0;
 }
 
 .Supports-container-1,
@@ -562,18 +557,20 @@ i{
     gap: 5vw;
 }
 
-.Footer-washes{
+.Footer-washes {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: stretch;
+    gap: 5.4rem;
 }
 
-.footer-texts{
+.footer-texts {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    gap: 5.9rem;
 }
 
 .footer-section {
@@ -587,6 +584,15 @@ i{
 .footer-box {
     padding: 0.5em;
     border-left: 0.15em #13669C solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.3em;
+}
+
+.footer-box1 {
+    padding: 0.5em;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -613,7 +619,6 @@ i{
     padding-top: 0.5vh;
     padding-bottom: 0.5vh;
     padding-left: 0.8vw;
-    border-left: 0.15em #13669C solid;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -633,8 +638,7 @@ i{
     justify-content: center;
     align-items: center;
     gap: 1vw;
-    margin-bottom: 3rem;
-    background-color: #000;
+    margin-bottom: 5rem;
 }
 
 .footer-powered-content {
@@ -642,12 +646,12 @@ i{
     justify-content: center;
     align-items: center;
     gap: 0.5vw;
-    margin-top: 9rem;
+    margin-top: 1rem;
 }
 
 .footer-powered-text {
     color: white;
-    font-size: 2rem;
+    font-size: 1.3rem;
     font-family: "graphie", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -660,50 +664,58 @@ i{
 }
 
 @media only screen and (min-width: 2600px) {
-    .inner-container-3 i{
-        font-size: 3.5em;
+    .inner-container-3 i {
+        font-size: 1.5em;
     }
 
-    .login-toggle{
+    .login-toggle {
         font-size: 2.5em;
     }
 
-    .text-overlay p{
+    .text-overlay p {
         font-size: 4.5em;
     }
 
-    .FoglalasGomb{
+    .slider-container{
+        height: 54rem;
+    }
+
+    .text-overlay{
+        height: 170px;
+    }
+
+    .FoglalasGomb {
         width: 92rem;
         font-size: 6em;
         height: 13rem;
     }
 
-    .tooltip{
+    .tooltip {
         width: 114%;
         height: 7rem;
     }
 
-    .main-container{
+    .main-container {
         margin-top: 10.8rem;
     }
 
-    .title{
+    .title {
         font-size: 6.1rem;
     }
 
-    .title-container{
+    .title-container {
         margin-bottom: 4.5rem;
     }
 
-    .box{
+    .box {
         display: flex;
         flex-wrap: wrap;
-        gap: 7rem;
+        gap: 6rem;
         justify-content: center;
     }
 
-    .keret{
-        width: 33rem;
+    .keret {
+        width: 30rem;
         height: 45rem;
         background: black;
         box-shadow: 0px 0px 15px 3px rgba(124, 242, 218, 0.45), 0px 0px 15px 3px rgba(124, 242, 218, 0.45) inset;
@@ -720,18 +732,18 @@ i{
         box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50), 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset;
     }
 
-    .IkonKeret{
+    .IkonKeret {
         width: 27rem;
         height: 13rem;
         top: calc(14rem + 6rem + 3rem);
     }
 
-    .ikon{
+    .ikon {
         width: 7rem;
         height: 10rem;
     }
 
-    .MosokCim{
+    .MosokCim {
         width: 32rem;
         height: 6rem;
         color: #F3F5F5;
@@ -742,21 +754,25 @@ i{
         word-wrap: break-word;
         padding-top: 26rem;
     }
-    
-    .main-Carousel-container{
-        margin-top: 26em;
+
+    .main-Carousel-container {
+        margin-top: 15rem;
         font-size: 6.1em;
     }
 
-    .footer-text{
+    i{
+        font-size: 3em;
+    }
+
+    .footer-text {
         font-size: 2.8em;
     }
 
-    .footer-powered{
-        margin-top: -4rem;
+    .footer-powered {
+        margin-top: 2rem;
     }
 
-    .footer-powered-text{
+    .footer-powered-text {
         font-size: 2.8em;
     }
 }
@@ -766,12 +782,20 @@ i{
         font-size: 2em;
     }
 
-    .login-toggle{
+    .login-toggle {
         font-size: 1.7em;
     }
 
+    .text-overlay{
+        height: 210px;
+    }
+
     .text-overlay p {
-        font-size: 3.5em;
+        font-size: 4.5em;
+    }
+
+    .slider-container{
+        height: 77rem;
     }
 
     .FoglalasGomb {
@@ -780,50 +804,55 @@ i{
         font-size: 5.5em;
     }
 
-    .tooltip{
+    .tooltip {
         width: 115%;
         height: 8rem;
         font-size: 0.47em;
     }
 
-    .main-container{
+    .main-container {
         margin-top: 11.5rem;
     }
 
-    .title{
+    .title {
         font-size: 6em;
     }
 
-    .box{
+    .box {
         gap: 5rem;
     }
 
-    .keret{
+    .keret {
+        width: 30rem;
+        height: 43rem;
+    }
+
+    .IkonKeret {
         width: 27rem;
-        height: 39rem;
+        height: 13rem;
+        top: calc(14rem + 5rem + 3rem);
     }
 
-    .IkonKeret{
-    width: 27rem;
-    height: 13rem;
-    top: calc(14rem + 3rem + 3rem);
-    }
-
-    .ikon{
+    .ikon {
         width: 7rem;
         height: 10rem;
     }
 
-    .MosokCim{
-        margin-top: 22rem;
+    .MosokCim {
+        margin-top: 24rem;
+        font-size: 2.3em;
     }
 
-    .main-Carousel-container{
+    .main-Carousel-container {
         font-size: 6em;
-        margin-top: 26rem;
+        margin-top: 5rem;
     }
 
-    .footer-text{
+    .footer-socials i{
+        font-size: 4em;
+    }
+
+    .footer-text {
         font-size: 2.5em;
     }
 
@@ -831,160 +860,197 @@ i{
         margin-top: 2rem;
     }
 
-    .footer-powered-text{
+    .footer-powered-text {
         font-size: 2.5em;
     }
-    
+
 }
 
 @media only screen and (min-width: 1920px) and (max-width:2300px) {
-    .inner-container-3 i{
+    .inner-container-3 i {
         font-size: 2em;
     }
 
-    .login-toggle{
+    .login-toggle {
         font-size: 1.5em
     }
 
-    .text-overlay p{
+    .text-overlay p {
         font-size: 3.2em;
     }
 
-    .FoglalasGomb{
+    .slider-container{
+        width: 100%;
+        height: 56rem;
+    }
+
+    .text-overlay{
+        height: 140px;
+    }
+
+    .FoglalasGomb {
         width: 62rem;
         height: 9rem;
     }
 
-    .tooltip{
+    .tooltip {
         width: 120%;
         height: 6.4rem;
         font-size: 0.5em;
     }
 
-    .main-container{
+    .main-container {
         margin-top: 9.4rem;
         height: 45rem;
     }
 
-    .title-container{
+    .title-container {
         margin-bottom: 3.5rem;
     }
 
-    .box{
+    .box {
         gap: 5rem;
     }
 
-    .keret{
-        width: 22rem;
-        height: 30rem;
+    .keret {
+        width: 23rem;
+        height: 35rem;
     }
 
-    .IkonKeret{
+    .IkonKeret {
         width: 22rem;
         height: 6rem;
-        top: calc(9.4rem + 3rem + 3rem);
+        top: calc(9.4rem + 7rem + 3rem);
     }
 
-    .ikon{
+    .ikon {
         width: 10rem;
-        height: 5rem;
+        height: 6rem;
     }
 
-    .MosokCim{
-        margin-top: 13rem;
+    .MosokCim {
+        margin-top: 19rem;
     }
 
-    .main-Carousel-container{
-        margin-top: 5rem;
+    .main-Carousel-container {
+        margin-top: 14rem;
     }
 
-    .footer-text{
+    .footer-socials i{
+        font-size: 3em;
+    }
+
+    .footer-text {
         font-size: 2.1em;
     }
 
     .footer-powered {
-        margin-top: -1rem;
+        margin-top: 2rem;
+    }
+
+    .footer-powered-text{
+        font-size: 1.8em;
     }
 }
 
 @media only screen and (min-width: 1540px) and (max-width:1920px) {
-    .inner-container-3 i{
+    .inner-container-3 i {
         margin-left: 0;
         font-size: 1.4em;
     }
-    
-    .login-toggle{
+
+    .login-toggle {
         font-size: 1.6em;
         width: 10rem;
     }
 
-    .text-overlay p{
-        font-size: 2.7rem;
+    .slider-container{
+        height: 57rem;
     }
 
-    .FoglalasGomb{
+    .text-overlay{
+        height: 160px;
+    }
+
+    .text-overlay p {
+        font-size: 3.3em;
+    }
+
+    .FoglalasGomb {
         width: 54rem;
         font-size: 3.8em;
     }
 
-    .tooltip{
+    .tooltip {
         width: 115%;
     }
 
-    .main-container{
+    .main-container {
         margin-top: 7rem;
     }
 
-    .title{
+    .title {
         font-size: 3.5rem;
     }
 
-    .title-container{
+    .title-container {
         margin-bottom: 2rem;
     }
 
-    .main-container{
+    .main-container {
         height: 65vh;
     }
 
-    .box{
+    .box {
         gap: 4rem;
     }
 
-    .keret{
-        width: 19rem;
-        height: 30rem;
+    .keret {
+        width: 22rem;
+        height: 34rem;
     }
 
-    .IkonKeret{
-        top: calc(10rem + 4rem + 3rem);
+    .IkonKeret {
+        top: calc(10rem + 5rem + 3rem);
     }
 
-    .MosokCim{
-        margin-top: 16rem;
+    .MosokCim {
+        margin-top: 18rem;
         font-size: 1.7em;
     }
 
-    .main-Carousel-container{
-        margin-top: 20.5rem;
+    .main-Carousel-container {
+        margin-top: 11.5rem;
         font-size: 3.5em;
     }
 
-    .footer-text{
+    .carousel-container{
+        max-width: 1600px;
+    }
+
+    .footer-text {
         font-size: 1.7em;
     }
 
-    .footer-powered{
-        margin-top: -2rem;
+    .footer-socials i{
+        font-size: 2.5em;
+    }
+
+    .footer-powered {
+        margin-top: 1rem;
+    }
+
+    .footer-powered-text{
+        font-size: 2em;
     }
 }
 
 @media only screen and (min-width: 1024px) and (max-width:1540px) {
-    .Reg-container h1{
+    .Reg-container h1 {
         font-size: 38px;
     }
-    
-    .Reg-container h2{
+
+    .Reg-container h2 {
         font-size: 25px;
     }
 
@@ -992,82 +1058,105 @@ i{
         font-size: 18px;
     }
 
-    .Reg-container button{
+    .Reg-container button {
         font-size: 1.2em;
     }
 
-    .login-toggle p{
+    .login-toggle p {
         display: none;
     }
 
-    .inner-container-3 i{
-        font-size: 1.5em;
+    .inner-container-3 i {
+        font-size: 0.9em;
+        margin-bottom: 0.9rem;
     }
 
-    .text-overlay p{
+    .slider-container{
+        height: 36.2rem;
+    }
+
+    .text-overlay p {
         font-size: 1.8em;
     }
 
-    .FoglalasGomb{
+    .FoglalasGomb {
         width: 37rem;
         font-size: 3em;
         height: 8rem;
     }
 
-    .tooltip{
+    .tooltip {
         width: 115%;
         font-size: 0.42em;
         height: 5rem;
     }
 
-    .main-container{
+    .main-container {
         margin-top: 5.7rem;
         height: 92vh;
     }
 
-    .title-container{
+    .title-container {
         margin-bottom: 0.5rem;
     }
 
-    .title{
+    .title {
         font-size: 3.4em;
     }
 
-    .box{
-        gap: 9rem;
+    .box {
+        gap: 3.2rem;
     }
 
-    .keret{
-        height: 31rem;
-        width: 24rem;
+    .keret {
+        height: 22rem;
+        width: 14rem;
     }
 
-    .IkonKeret{
-        top: calc(10rem + 4rem + 3rem);
+    .IkonKeret {
+        top: calc(10rem + -3rem + 3rem);
     }
 
-    .MosokCim{
-        font-size: 1.8em;
-        margin-top: 16rem;
+    .ikon {
+        width: 4rem;
+        height: 5rem;
+        margin: auto;
     }
 
-    .main-Carousel-container{
+    .MosokCim {
+        font-size: 1.2em;
+        margin-top: 9rem;
+    }
+
+    .main-Carousel-container {
         font-size: 3.5em;
-        margin-top: 50rem;
+        margin-top: -3rem;
     }
 
-    .footer-text{
+    .carousel-container{
+        max-width: 1050px;
+    }
+
+    .footer-text {
         font-size: 1.1em;
+    }
+
+    .footer-socials i{
+        font-size: 2em;
+    }
+
+    .footer-powered{
+        margin-top: 2rem;
     }
 
 }
 
 @media only screen and (min-width: 764px) and (max-width:1024px) {
-    .Reg-container h1{
+    .Reg-container h1 {
         font-size: 30px;
     }
-    
-    .Reg-container h2{
+
+    .Reg-container h2 {
         font-size: 25px;
     }
 
@@ -1075,95 +1164,109 @@ i{
         font-size: 18px;
     }
 
-    .Reg-container input{
+    .Reg-container input {
         height: 40px;
     }
 
-    .Reg-container button{
+    .Reg-container button {
         font-size: 1.2em;
         width: 125px;
         height: 40px;
     }
-    
-    .inner-container-3 i{
+
+    .inner-container-3 i {
         font-size: 1.6em;
     }
 
-    .login-toggle{
+    .login-toggle {
         font-size: 1em;
     }
 
-    .login-toggle p{
+    .login-toggle p {
         display: none;
     }
 
-    .text-overlay p{
+    .slider-container{
+        height: 25rem;
+    }
+
+    .text-overlay p {
         font-size: 1.3em;
     }
 
-    .FoglalasGomb{
+    .FoglalasGomb {
         width: 27rem;
         height: 6rem;
         font-size: 2em;
     }
 
-    .tooltip{
+    .tooltip {
         width: 115%;
         height: 4rem;
         font-size: 0.43em;
     }
 
-    .main-container{
+    .main-container {
         margin-top: 4.5rem;
         height: 76vh;
     }
 
-    .title{
+    .title {
         font-size: 3em;
     }
 
-    .title-container{
+    .title-container {
         margin-bottom: 0.5rem;
     }
 
-    .box{
+    .box {
         gap: 4rem;
     }
 
-    .keret{
+    .keret {
         width: 17rem;
         height: 27rem;
     }
 
-    .IkonKeret{
+    .IkonKeret {
         top: calc(10rem + 1rem + 3rem);
     }
 
-    .MosokCim{
+    .MosokCim {
         font-size: 1.5em;
         margin-top: 13rem;
     }
 
-    .main-Carousel-container{
-        margin-top: 41rem;
+    .main-Carousel-container {
+        margin-top: 24rem;
     }
 
-    .Supports{
+    .Supports {
         display: flex;
         flex-direction: column;
         align-content: space-around;
         align-items: center;
     }
 
-    .Supports-container-1, .Supports-container-2{
+    .Supports-container-1,
+    .Supports-container-2 {
         width: 90%;
     }
 
-    .footer-content{
+    .footer{
+        margin-top: 14rem;
+        margin-bottom: 5rem;    
+    }
+
+    .footer-content {
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
+    }
+
+    .footer-box{
+        border: none;
     }
 
     .Footer-washes {
@@ -1179,18 +1282,24 @@ i{
         justify-content: space-between;
         align-items: flex-start;
     }
+
+    .footer-powered{
+        margin-top: 8rem;
+        margin-bottom: 0;
+    }
+
+    .footer-socials i{
+        font-size: 2.2em;
+        margin-right: 1rem;
+    }
 }
 
 @media only screen and (min-width: 380px) and (max-width:764px) {
-    .page-wrapper{
-        margin-left: 2.5rem;
-    }
-
-    .Reg-container h1{
+    .Reg-container h1 {
         font-size: 16px;
     }
-    
-    .Reg-container h2{
+
+    .Reg-container h2 {
         font-size: 16px;
     }
 
@@ -1198,224 +1307,98 @@ i{
         font-size: 10px;
     }
 
-    .Reg-container input{
+    .Reg-container input {
         height: 30px;
     }
 
-    .Reg-container button{
+    .Reg-container button {
         font-size: 1em;
         width: 110px;
         height: 30px;
         border-radius: 5px 5px 5px 5px;
     }
-    
-    .inner-container-3{
+
+    .inner-container-3 {
         font-size: 0.3em;
     }
 
-    .login-toggle p{
-        display: none;
+    .inner-container-3 i{
+        font-size: 4.5em;
+        margin-bottom: 1rem;
     }
 
-    .text-overlay{
-        height: 50px;
-    }
-
-    .text-overlay p{
-        font-size: 0.7em;
-    }
-
-    .FoglalasGomb{
-        width: 15rem;
-        height: 4rem;
-        font-size: 1em;
-    }
-
-    .tooltip{
-        width: 115%;
-        height: 3rem;
-        font-size: 0.5em;
-    }
-
-    .title{
-        font-size: 2em;
-    }
-
-    .main-container{
-        margin-top: 3.5rem;
-    }
-
-    .keret{
-        width: 10rem;
-        height: 20rem;
-    }
-
-    .helyszin{
-        height: 50%;
-    }
-
-    .IkonKeret{
-        top: calc(5rem + 3rem + 3rem);
-    }
-
-    .ikon{
-        width: 4rem;
-        height: 5rem;
-    }
-
-    .MosokCim{
-        width: 10rem;
-        height: 5rem;
-        font-size: 0.9em;
-        margin-top: 11rem;
-    }
-
-    .main-Carousel-container {
-        margin-top: 24rem;
-        font-size: 2em;
-    }
-
-    .carousel-image {
-        width: 100%; /* Show one image at a time */
-    }
-
-    .Supports{
-        flex-direction: column;
-    }
-
-    .Supports-container-1, .Supports-container-2{
-        width: 100%;
-    }
-
-    .footer-content{
-        flex-direction: row;
-    }
-
-    .Footer-washes{
-        width: 49%;
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .footer-texts{
-        width: 49%;
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .footer-text{
-        font-size: 1em;
-    }
-
-    .footer-powered-content{
-        margin-top: 5rem;
-    }
-
-    .footer-powered-text{
-        font-size: 1em;
-    }
-
-}
-
-@media only screen and (min-width: 200px) and (max-width:380px) {
-    body{
-        width: 200%;
-    }
-
-    .page-wrapper{
-        margin-left: 2.5rem;
-    }
-
-    .Reg-container h1{
-        font-size: 14px;
-    }
-    
-    .Reg-container h2{
-        font-size: 13px;
-    }
-
-    .Reg-container label {
-        font-size: 10px;
-    }
-
-    .Reg-container input{
-        height: 25px;
-    }
-
-    .Reg-container button{
-        font-size: 0.8em;
-        width: 100px;
-        height: 25px;
-        border-radius: 5px 5px 5px 5px;
-    }
-
-    .login-toggle{
+    .login-toggle {
         font-size: 0.6em;
     }
 
-    .login-toggle p{
+    .login-toggle p {
         display: none;
     }
 
-    .text-overlay{
-        height: 65px;
+    .slider-container{
+        height: 13rem;
     }
 
-    .text-overlay p{
+    .text-overlay {
+        height: 40px;
+    }
+
+    .text-overlay p {
         font-size: 0.7em;
     }
 
-    .FoglalasGomb{
+    .FoglalasGomb {
         width: 14rem;
         height: 3rem;
         font-size: 1em;
     }
 
-    .tooltip{
+    .tooltip {
         width: 120%;
         height: 3rem;
     }
 
-    .main-container{
+    .main-container {
         margin-top: 3.5em;
     }
 
-    .title{
+    .title {
         font-size: 2.5em;
     }
 
-    .box{
+    .box {
         gap: 3rem;
     }
 
-    .keret{
+    .keret {
         width: 8rem;
         height: 17rem;
     }
 
-    .IkonKeret{
+    .IkonKeret {
         top: calc(10rem + -5rem + 3rem);
     }
 
-    .ikon{
+    .ikon {
         width: 3rem;
         height: 5rem;
     }
 
-    .MosokCim{
+    .MosokCim {
         font-size: 0.7em;
         margin-top: 8rem;
     }
 
-    .main-Carousel-container{
+    .main-Carousel-container {
         font-size: 2.5em;
     }
 
     .carousel-image {
-        width: 100%; /* Show one image at a time */
+        width: 100%;
+        /* Show one image at a time */
     }
 
-    .Supports{
+    .Supports {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -1423,16 +1406,200 @@ i{
         margin: 5rem auto;
     }
 
-    .Supports-container-1, .Supports-container-2{
+    .Supports-container-1,
+    .Supports-container-2 {
         width: 100%;
     }
 
-    .footer{
+    .footer {
         margin: auto;
         width: auto;
     }
 
-    .footer-content{
+    .footer-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: stretch;
+        margin: auto;
+        gap: 3vw;
+    }
+
+    .Footer-washes {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .footer-texts {
+        display: flex;
+        flex-direction: column;
+        width: 49%;
+        align-items: flex-start;
+    }
+
+    .footer-text {
+        font-size: 0.8em;
+    }
+
+    .footer-texts{
+        gap: 0.9rem;
+    }
+
+    .Footer-washes{
+        gap: 1.4rem;
+    }
+
+    .footer-box{
+        border: none;
+    }
+
+    .footer-powered {
+        width: auto;
+        margin-top: 1rem;
+    }
+
+    .footer-powered-content {
+        margin-top: 2rem;
+    }
+
+    .footer-powered-text {
+        font-size: 1em;
+    }
+
+}
+
+@media only screen and (min-width: 200px) and (max-width:380px) {
+    body {
+        width: 200%;
+    }
+
+    .image{
+        width: 40vw;
+    }
+
+    .Reg-container h1 {
+        font-size: 14px;
+    }
+
+    .Reg-container h2 {
+        font-size: 13px;
+    }
+
+    .Reg-container label {
+        font-size: 10px;
+    }
+
+    .Reg-container input {
+        height: 25px;
+    }
+
+    .Reg-container button {
+        font-size: 0.8em;
+        width: 100px;
+        height: 25px;
+        border-radius: 5px 5px 5px 5px;
+    }
+
+    .inner-container-3 {
+        font-size: 0.3em;
+    }
+
+    .inner-container-3 i{
+        font-size: 4.5em;
+        margin-bottom: 1rem;
+    }
+
+    .login-toggle {
+        font-size: 0.6em;
+    }
+
+    .login-toggle p {
+        display: none;
+    }
+
+    .slider-container{
+        height: 24rem;
+    }
+
+    .text-overlay {
+        height: 70px;
+    }
+
+    .text-overlay p {
+        font-size: 1.3em;
+    }
+
+    .FoglalasGomb {
+        width: 14rem;
+        height: 3rem;
+        font-size: 1em;
+    }
+
+    .tooltip {
+        width: 120%;
+        height: 3rem;
+    }
+
+    .main-container {
+        margin-top: 3.5em;
+    }
+
+    .title {
+        font-size: 2.5em;
+    }
+
+    .box {
+        gap: 3rem;
+    }
+
+    .keret {
+        width: 8rem;
+        height: 17rem;
+    }
+
+    .IkonKeret {
+        top: calc(10rem + -5rem + 3rem);
+    }
+
+    .ikon {
+        width: 3rem;
+        height: 5rem;
+    }
+
+    .MosokCim {
+        font-size: 0.7em;
+        margin-top: 8rem;
+    }
+
+    .main-Carousel-container {
+        font-size: 2.5em;
+        margin-top: 0;
+    }
+
+    .carousel-image {
+        width: 100%;
+        /* Show one image at a time */
+    }
+
+    .Supports {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 5rem auto;
+    }
+
+    .Supports-container-1,
+    .Supports-container-2 {
+        width: 100%;
+    }
+
+    .footer {
+        margin: auto;
+        width: auto;
+    }
+
+    .footer-content {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -1440,34 +1607,45 @@ i{
         margin: auto;
     }
 
-    .Footer-washes{
+    .Footer-washes {
         display: flex;
         flex-direction: column;
     }
 
-    .footer-texts{
+    .footer-texts {
         display: flex;
         flex-direction: column;
         width: 49%;
         align-items: flex-start;
     }
 
-    .footer-text{
+    .footer-text {
         font-size: 0.8em;
     }
 
-    .footer-powered{
-        width: auto;
-        margin: auto;
+    .footer-texts{
+        gap: 0.9rem;
     }
 
-    .footer-powered-content{
+    .Footer-washes{
+        gap: 1.4rem;
+    }
+
+    .footer-box{
+        border: none;
+    }
+
+    .footer-powered {
+        width: auto;
+        margin-top: 1rem;
+    }
+
+    .footer-powered-content {
         margin-top: 2rem;
     }
 
-    .footer-powered-text{
+    .footer-powered-text {
         font-size: 1em;
     }
 
 }
-
