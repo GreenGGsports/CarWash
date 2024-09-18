@@ -10,13 +10,13 @@ from src.views.my_modelview import MyModelView
 from flask_login import current_user
 from flask import current_app
 from src.views.filters import ThisMonthFilter, ThisWeekFilter, TodayFilter
+from flask_admin.contrib.sqla.filters import DateBetweenFilter
 from src.views.reservation_form import ReservationForm
 
 class ReservationAdminView(MyModelView):
     form = ReservationForm
     create_template = 'admin/reservation_form.html'
-    list_template = 'admin/reservation_list.html' 
-    
+
     column_list = (
         'reservation_date',
         'car.license_plate',
@@ -50,6 +50,7 @@ class ReservationAdminView(MyModelView):
         TodayFilter(ReservationModel.reservation_date),
         ThisWeekFilter(ReservationModel.reservation_date),
         ThisMonthFilter(ReservationModel.reservation_date),
+        DateBetweenFilter(ReservationModel.reservation_date, "Custom date")
     ]
 
     def __init__(self, model, session, *args, **kwargs):
@@ -66,12 +67,6 @@ class ReservationAdminView(MyModelView):
             if current_user.role == 'admin':
                 query = [item for item in query]
         return count, query
-    
-    def scaffold_list(self, *args, **kwargs):
-        result = super(ReservationAdminView, self).scaffold_list(*args, **kwargs)
-        for row in result:
-            row['data-is-completed'] = row.get('is_completed', False)  # Adjust based on your data structure
-        return result
 
     def create_form(self, obj=None):
         form = super(ReservationAdminView, self).create_form(obj)
