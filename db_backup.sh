@@ -5,7 +5,7 @@ DATE=$(date +%F-%H%M%S)
 
 # Backup directory on the host
 BACKUP_DIR="/var/backups/database_backups"
-
+mkdir -p $BACKUP_DIR
 # Database credentials and details
 DB_HOST="db"  # Docker service name of the MySQL container in your Compose file
 DB_USER="testuser"  # From the Compose file
