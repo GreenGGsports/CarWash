@@ -8,11 +8,11 @@ BACKUP_DIR="/var/backups/database_backups"
 mkdir -p $BACKUP_DIR
 
 # Database credentials and details
-DB_HOST="db"  # Docker service name of the MySQL container in your Compose file
-DB_USER="testuser"  # From the Compose file
-DB_PASSWORD="testpassword"  # From the Compose file
-DB_NAME="testdb"  # From the Compose file
-NETWORK="app-network"  # Custom network defined in the Compose file
+DB_HOST="172.19.0.2"  # MySQL container IP address
+DB_USER="testuser"
+DB_PASSWORD="testpassword"
+DB_NAME="testdb"
+NETWORK="app-network"
 
 # Docker image version of MySQL
 MYSQL_IMAGE="mysql:8.0"
