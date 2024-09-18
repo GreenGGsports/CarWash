@@ -48,6 +48,8 @@ def create_app(config_name: str):
     @app.teardown_request
     def teardown_request(exception=None):
         current_app.session_factory.remove(exception)
+        if exception:
+            current_app.logger.error(exception)
         
     with app.app_context():
         create_database(engine)

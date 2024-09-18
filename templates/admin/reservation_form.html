@@ -87,4 +87,9 @@
         <label for="{{ form.slot.id }}">{{ form.slot.label.text }}</label>
         {{ form.slot() }}
     </div>
+    <div>
+        <label for="{{form.is_completed}}">{{ form.is_completed.label.text }}</label>
+            {{ form.is_completed() }}
+    </div>
+
 {% endblock %}
