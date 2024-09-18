@@ -5,6 +5,7 @@ from sqlalchemy import inspect
 from sqlalchemy.exc import NoResultFound
 
 Base = declarative_base()
+metadata = Base.metadata
 
 T = TypeVar('T')
 
