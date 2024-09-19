@@ -45,8 +45,8 @@ def connect_tcp_socket() -> sqlalchemy.engine.base.Engine:
             port=db_port,
             database=db_name
         ),
-        pool_size=1,
-        max_overflow=0,
+        pool_size=5,
+        max_overflow=10,
         pool_timeout=30,
         pool_recycle=600,  # Recycle connections every 10 minutes
         pool_pre_ping=True,  # Ping connections before using them
