@@ -8,7 +8,7 @@ class SessionFactory:
         
     def get_session(self):
         # Return the scoped session instance
-        return self.Session()
+        return self.Session
         
     def remove(self, exception = None):
         # Remove the current scoped session
