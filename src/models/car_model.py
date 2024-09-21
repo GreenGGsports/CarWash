@@ -7,6 +7,7 @@ from sqlalchemy.exc import SQLAlchemyError
 
 class CarTypeEnum(PyEnum):
     small_car = "small_car"
+    medium_car = "medium_car"
     large_car = "large_car"
 
 class CarModel(BaseModel):
@@ -16,19 +17,24 @@ class CarModel(BaseModel):
     license_plate = Column(String(15), nullable=False)
     car_type = Column(SqlEnum(CarTypeEnum), nullable=False)
     car_brand = Column(String(30),nullable=False)
+    car_model = Column(String(30), nullable=False)
     company_id = Column(Integer, ForeignKey('Company.id'), nullable=True)
 
 
     reservations = relationship('ReservationModel', back_populates='car')
     company = relationship('CompanyModel', back_populates='cars')
+    
+    def __repr__(self):
+        return self.license_plate
 
     @classmethod
-    def add_car(cls, session: Session, license_plate: str, car_type: str, car_brand: str, company_id: int = None):
+    def add_car(cls, session: Session, license_plate: str, car_type: str, car_brand: str,car_model: str ,company_id: int = None):
         try:
             car = cls(
                 license_plate=license_plate,
                 car_type=car_type,
                 car_brand=car_brand,
+                car_model = car_model,
                 company_id=company_id,
             )
             

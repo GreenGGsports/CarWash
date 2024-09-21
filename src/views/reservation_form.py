@@ -32,6 +32,7 @@ class ReservationForm(FlaskForm):
     new_car_license_plate = StringField('Rendszám')
     new_car_type = SelectField('Méret', choices=[(t.name, t.name) for t in CarTypeEnum])
     new_car_brand = StringField('Márka')
+    new_car_model = StringField('Típus')
 
     new_customer_forname = StringField('Keresztnév')
     new_customer_lastname = StringField('Vezetéknév')

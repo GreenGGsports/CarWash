@@ -18,29 +18,28 @@ class ReservationAdminView(MyModelView):
     create_template = 'admin/reservation_form.html'
 
     column_list = (
+        'carwash.carwash_name',
         'reservation_date',
         'car.license_plate',
-        'carwash.carwash_name',
+        'car.car_brand',
+        'car.car_model',
         'service.service_name',
         'extras',
-        'customer.forname',
-        'customer.lastname',
-        'customer.phone_number',
         'final_price',
-        'billing.id',
+        'customer.phone_number',
         'is_completed'
     )
 
     column_labels = {
-        'reservation_date': 'Időpont',
+        'carwash.carwash_name': 'Hely',
+        'reservation_date': 'Dátum',
         'car.license_plate': 'Rendszám',
-        'customer.forname': 'Kersztnév',
-        'customer.lastname': 'Vezetéknév',
-        'customer.phone_number': 'Telefonszám',
+        'car.car_brand': 'Márka',
+        'car.car_model': 'Típus',
         'service.service_name': 'Csomag',
-        'extras': 'Extrák',
-        'carwash.carwash_name': 'Autómosó',
+        'extras': 'Extra',
         'final_price': 'Ár',
+        'customer.phone_number': 'Tel',
         'is_completed': 'Kész?'
     }
 
@@ -125,12 +124,14 @@ class ReservationAdminView(MyModelView):
                         # Ha az autó már létezik, frissítsük a típusát és márkáját
                         car.car_type = CarTypeEnum[form.new_car_type.data]
                         car.car_brand = form.new_car_brand.data
+                        car.car_model = form.new_car_model.data
                     else:
                         # Ha nem létezik, hozzuk létre az újat
                         car = CarModel(
                             license_plate=form.new_car_license_plate.data,
                             car_type=CarTypeEnum[form.new_car_type.data],
-                            car_brand=form.new_car_brand.data
+                            car_brand=form.new_car_brand.data,
+                            car_model = form.new_car_model.data
                         )
                         session.add(car)
                     

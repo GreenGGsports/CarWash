@@ -530,7 +530,8 @@ button {
 }
 
 .IdopontBox {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     height:auto; /* Rugalmas magasság */
     padding: 0; /* Rugalmas padding */
     justify-content: center;
@@ -596,7 +597,7 @@ input:focus~.bar:after {
     height: 100%;
     width: 100%;
     padding: 1.85rem;
-    padding-top: 0%;
+    padding-top: 1.85rem;
 }
 
 
@@ -652,7 +653,6 @@ input:focus~.bar:after {
     max-width: 1000px; /* Maximális szélesség beállítása */
     font-family: 'Arial', sans-serif;
     margin: 0 auto; /* Középre igazítás */
-    border: 1px solid  ; /* Vékony szegély a konténer körül */
     padding: 1.85rem; /* Némi belső margó a konténerben */
     box-shadow: 0.09375rem solid var(--A-kk, #13669C); /* Árnyék a konténer körül */
     font-weight: 500;
@@ -973,7 +973,7 @@ input:focus~.bar:after {
 @media only screen and (max-width: 1627px) {
 
     .IdopontBox {
-        flex-direction: column;
+        grid-template-columns: 1fr;
         height: auto;
     }
 

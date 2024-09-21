@@ -7,10 +7,11 @@ class ServiceModelView(MyModelView):
         'carwash.carwash_name': 'Car Wash Name',
         'service_name': 'Service Name',
         'price_small': 'Price (Small)',
-        'price_large': 'Price (Large)'
+        'price_medium': 'Price (Medium)',
+        'price_large': 'Price (Large)', 
     }
 
-    column_list = ['carwash.carwash_name', 'service_name', 'price_small', 'price_large']
+    column_list = ['carwash.carwash_name', 'service_name', 'price_small', 'price_medium', 'price_large']
 
     def is_accessible(self):
         # Ellenőrizzük, hogy a felhasználó be van-e jelentkezve és admin szerepe van-e

@@ -1,5 +1,5 @@
 from src.views.my_modelview import MyModelView
-from wtforms import TimeField, IntegerField
+from wtforms import TimeField, IntegerField, DateTimeField
 from wtforms.validators import DataRequired
 from flask import flash, current_app
 
@@ -7,7 +7,8 @@ class CarwashAdminView(MyModelView):
     form_extra_fields = {
         'start_time': TimeField('Nyitás', validators=[DataRequired()]),
         'end_time': TimeField('Zárás', validators=[DataRequired()]),
-        'slot_count': IntegerField('Kapacitás', validators=[DataRequired()])
+        'slot_count': IntegerField('Kapacitás', validators=[DataRequired()]), 
+        'close_start': DateTimeField('Tiltás (-tól)'),
     }
 
     form_excluded_columns = ['slots']
@@ -24,7 +25,9 @@ class CarwashAdminView(MyModelView):
         'carwash_name': 'Név',
         'location': 'Helyszín',
         'image_name': 'Kép',
-        'capacity': 'Kapacitás'  # A slot_count nevének megjelenítése
+        'capacity': 'Kapacitás',  # A slot_count nevének megjelenítése
+        'close_start': 'Tiltás (-tól)',
+        'close_end': 'Tiltás (-ig)'
     }
 
     def scaffold_list_columns(self):

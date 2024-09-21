@@ -21,8 +21,8 @@ def create_reservation():
     db_session = current_app.session_factory.get_session()
     data = request.json
     data = {key: value for key, value in data.items() if value != ''}
-    car_type, license_plate, parking_spot, car_brand = parse_reservation_data(data)
-    car_id = add_car(car_type, license_plate, car_brand)
+    car_type, license_plate, parking_spot, car_brand, car_model = parse_reservation_data(data)
+    car_id = add_car(car_type, license_plate, car_brand, car_model)
     customer_id = add_customer(data)
     slot_id, service_id, extra_ids, carwash_id,  reservation_date = get_session_data()
     try:
@@ -88,7 +88,7 @@ def add_customer(data):
         current_app.logger.error(f"Unexpected error while adding/updating customer: {e}")
         raise
     
-def add_car(car_type, license_plate, car_brand):
+def add_car(car_type, license_plate, car_brand, car_model):
     db_session = current_app.session_factory.get_session()
     try:
         # Check if the car with the same license plate already exists
@@ -106,7 +106,8 @@ def add_car(car_type, license_plate, car_brand):
                 obj_id=car.id,
                 license_plate=license_plate,
                 car_type=car_type,
-                car_brand=car_brand
+                car_brand=car_brand,
+                car_model=car_model
                 # Add company_id if implemented
             )
             current_app.logger.info(f"Updated car record with license_plate {license_plate}.")
@@ -116,7 +117,8 @@ def add_car(car_type, license_plate, car_brand):
                 session=db_session,
                 license_plate=license_plate,
                 car_type=car_type,
-                car_brand=car_brand
+                car_brand=car_brand,
+                car_model=car_model
                 # Add company_id if implemented
             )
             current_app.logger.info(f"Added new car record with license_plate {license_plate}.")
@@ -149,14 +151,14 @@ def parse_reservation_data(data):
     elif data.get("car_type") == 'nagy_auto':
         car_type = 'large_car'
     else:
-        car_type = 'large_car'
+        car_type = 'medium_car'
 
     license_plate = data.get('license_plate')
     parking_spot = data.get('parking_spot')
     car_brand = data.get('car_brand')
     car_model = data.get('car_model')
 
-    return car_type, license_plate, parking_spot, car_brand
+    return car_type, license_plate, parking_spot, car_brand, car_model
 
 def parse_customer_data(data):
     return dict(
@@ -184,7 +186,10 @@ def get_popup_data():
             service_price = ServiceModel.get_value_by_id(session=db_session, obj_id=service_id, column_name= 'price_small')
         
         elif car_size == CarTypeEnum.large_car:
-            service_price = ServiceModel.get_value_by_id(session=db_session, obj_id=service_id, column_name= 'price_small')
+            service_price = ServiceModel.get_value_by_id(session=db_session, obj_id=service_id, column_name= 'price_large')
+            
+        elif car_size == CarTypeEnum.medium_car:
+            service_price = ServiceModel.get_value_by_id(session=db_session, obj_id=service_id, column_name= 'price_large')        
             
         final_price = ReservationModel.get_value_by_id(session=db_session, obj_id=reservation_id, column_name= 'final_price')
         researvation_date = session.get('reservation_date')
