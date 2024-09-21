@@ -182,7 +182,7 @@
                     </div>
                     <div class="input-mezo">
                         <label for="license_plate" class="input_title">Rendszám</label>
-                        <input type="text" placeholder="Rendszám" class="input_" name="license_plate" required>
+                        <input type="text" placeholder="Rendszám" class="input_" name="license_plate" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();" required>
                     </div>
                     <div class="input-mezo">
                         <label for="car_type" class="AutoMeretLenyilo-label">Autó méret</label>
