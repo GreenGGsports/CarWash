@@ -7,34 +7,20 @@ class CarwashAdminView(MyModelView):
     form_extra_fields = {
         'start_time': TimeField('Nyitás', validators=[DataRequired()]),
         'end_time': TimeField('Zárás', validators=[DataRequired()]),
-        'slot_count': IntegerField('Kapacitás', validators=[DataRequired()]), 
-        'close_start': DateTimeField('Tiltás (-tól)'),
     }
 
     form_excluded_columns = ['slots']
-
-    def _list_thumbnail(view, context, model, name):
-        # Ez a funkció az oszlop adatainak megjelenítéséért felelős
-        return getattr(model, name, '')
-
-    column_formatters = {
-        'capacity': _list_thumbnail
-    }
-
+    
     column_labels = {
         'carwash_name': 'Név',
         'location': 'Helyszín',
         'image_name': 'Kép',
-        'capacity': 'Kapacitás',  # A slot_count nevének megjelenítése
         'close_start': 'Tiltás (-tól)',
-        'close_end': 'Tiltás (-ig)'
+        'close_end': 'Tiltás (-ig)',
+        'start_time': 'Nyitás',
+        'end_time': 'Zárás',
+        'capacity': 'Kapacitás',  # A slot_count nevének megjelenítése
     }
-
-    def scaffold_list_columns(self):
-        columns = super().scaffold_list_columns()
-        if 'capacity' not in columns:
-            columns.append('capacity')
-        return columns
 
     def on_model_change(self, form, model, is_created):
         """
@@ -52,7 +38,7 @@ class CarwashAdminView(MyModelView):
                     session=self.session,  # AdminView által biztosított session
                     start_time=form.start_time.data,
                     end_time=form.end_time.data,
-                    slot_count=form.slot_count.data
+                    slot_count=model.capacity,
                 )
                 flash(f'Slots successfully created for {model.carwash_name}', 'success')
             else:
@@ -61,10 +47,11 @@ class CarwashAdminView(MyModelView):
                     session=self.session,
                     start_time=form.start_time.data,
                     end_time=form.end_time.data,
-                    slot_count=form.slot_count.data
+                    slot_count =model.capacity
                 )
                 flash(f'Slots successfully updated for {model.carwash_name}', 'success')
         except Exception as e:
             flash(f'Error during slot handling: {str(e)}', 'error')
+            current_app.logger.error(e)
             self.session.rollback()
             raise

@@ -46,3 +46,11 @@ class ReservationForm(FlaskForm):
     carwash = QuerySelectField('Autómosó', allow_blank=False, query_factory=lambda: [])
     slot = QuerySelectField('Slot', allow_blank=False, query_factory=lambda: [])
     is_completed = BooleanField('Kész?')
+    
+    
+    billing_required = BooleanField('Számlát kér')
+    billing_name = StringField('Név (számla)')
+    address = StringField('Cím')
+    email = StringField('E-mail')
+    company_name = StringField('Cégnév')
+    tax_ID = StringField('Adószám')

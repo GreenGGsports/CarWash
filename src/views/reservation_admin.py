@@ -6,6 +6,7 @@ from src.models.slot_model import SlotModel
 from src.models.carwash_model import CarWashModel
 from src.models.extra_model import ExtraModel
 from src.models.reservation_model import ReservationModel
+from src.models.billing_model import BillingModel
 from src.views.my_modelview import MyModelView
 from flask_login import current_user
 from flask import current_app
@@ -27,7 +28,7 @@ class ReservationAdminView(MyModelView):
         'extras',
         'final_price',
         'customer.phone_number',
-        'is_completed'
+        'is_completed',
     )
 
     column_labels = {
@@ -145,6 +146,12 @@ class ReservationAdminView(MyModelView):
                                                                            car_id= model.car.id, 
                                                                            extras=[extra.id for extra in model.extras])
 
+                if form.billing_required.data:
+                    BillingModel.add_billing_data(
+                        session=session,
+                        
+                    )
+                    
                 # Flush changes manually
                 session.flush()
 

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, Boolean
+from sqlalchemy import Column, Integer, String, DateTime, Boolean, Time
 from sqlalchemy.orm import relationship, Session
 from .base import BaseModel
 from datetime import timedelta, datetime
@@ -16,13 +16,11 @@ class CarWashModel(BaseModel):
     
     close_start = Column(DateTime(),nullable=True)
     close_end = Column(DateTime(),nullable=True)
-
+    
+    start_time = Column(Time, nullable=False)
+    end_time = Column(Time, nullable=False)
+    capacity = Column(Integer, nullable= False)
     slots = relationship('SlotModel', back_populates='carwash')  # Kapcsolat a SlotModel-lel
-
-    @property
-    def capacity(self):
-        # Számolja ki a kapacitást a kapcsolódó slotokból
-        return len([slot for slot in self.slots if slot.live])
 
     def __repr__(self):
         return self.carwash_name
