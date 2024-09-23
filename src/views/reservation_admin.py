@@ -50,7 +50,8 @@ class ReservationAdminView(MyModelView):
         TodayFilter(ReservationModel.reservation_date),
         ThisWeekFilter(ReservationModel.reservation_date),
         ThisMonthFilter(ReservationModel.reservation_date),
-        DateBetweenFilter(ReservationModel.reservation_date, "Custom date")
+        DateBetweenFilter(ReservationModel.reservation_date, "Custom date"),
+        'car.license_plate'
     ]
 
     def __init__(self, model, session, *args, **kwargs):
@@ -145,14 +146,18 @@ class ReservationAdminView(MyModelView):
                                                                            service_id=model.service.id,
                                                                            car_id= model.car.id, 
                                                                            extras=[extra.id for extra in model.extras])
-
                 if form.billing_required.data:
                     BillingModel.add_billing_data(
                         session=session,
-                        
+                        reservation_id=model.id,
+                        name=form.billing_name.data,
+                        address=form.address.data,
+                        email=form.email.data,
+                        company_name=form.company_name.data,
+                        tax_ID=form.tax_ID.data
                     )
                     
-                # Flush changes manually
+
                 session.flush()
 
         except Exception as  e :
@@ -160,3 +165,22 @@ class ReservationAdminView(MyModelView):
                 current_app.logger.error(e)
 
         return super(ReservationAdminView, self).on_model_change(form, model, is_created)
+    
+    def on_model_delete(self, model):
+        try:
+            # Ellenőrizzük, hogy van-e kapcsolódó számla
+            billing = model.billing
+            if billing:
+                # Töröljük a számlát a foglalás törlése előtt
+                self.session.delete(billing)
+                self.session.commit()
+
+            # Foglalás törlése
+            self.session.delete(model)
+            self.session.commit()
+            
+        except Exception as e:
+            self.session.rollback()
+            current_app.logger.error(f"Hiba történt a foglalás vagy a számla törlése közben: {str(e)}")
+        
+        return super(ReservationAdminView, self).on_model_delete(model)

@@ -16,7 +16,7 @@ from src.controllers.admin_index_view import BaseAdminIndexView
 from src.views.extra_admin_view import ExtraModelView
 from src.views.my_modelview import MyModelView
 from src.views.carwash_modelview import CarwashAdminView
-
+from src.views.invoice_admin_view import InvoiceModelView
 def init_admin(app, session_factory):
     admin = Admin(
         app,
@@ -28,15 +28,14 @@ def init_admin(app, session_factory):
     session = session_factory.get_session()
 
     # Admin view registration
+    
     admin.add_view(ReservationAdminView(ReservationModel, session, name='Foglalások', endpoint='reservation_admin'))
     admin.add_view(ServiceModelView(ServiceModel, session, name='Csomagok', endpoint='service_admin'))
     admin.add_view(ExtraModelView(ExtraModel, session, name='Extrák', endpoint='extra_admin'))
     admin.add_view(MyModelView(CompanyModel, session, name='Cégek', endpoint='company_admin'))
     admin.add_view(CarwashAdminView(CarWashModel, session, name='Autómosók', endpoint='carwash_admin'))
-
-    admin.add_view(MyModelView(BillingModel, session, name='Számlák', endpoint='billing_admin'))
-    
     admin.add_view(MonthlyInvoiceView(session=session, name='Havi számlázás', endpoint='monthly_invoices'))
+    admin.add_view(InvoiceModelView(BillingModel, session, name='Számlák', endpoint='billing_admin'))
 
 def init_local_admin(app, session_factory):
     local_admin = Admin(

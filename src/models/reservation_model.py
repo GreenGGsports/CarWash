@@ -25,7 +25,7 @@ class ReservationModel(BaseModel):
     reservation_date = Column(DateTime, nullable=False)
     parking_spot = Column(Integer)
     
-    final_price = Column(Float)
+    final_price = Column(Integer)
     is_completed = Column(Boolean, default=False)
 
     car = relationship('CarModel', back_populates='reservations')
@@ -34,7 +34,7 @@ class ReservationModel(BaseModel):
     customer = relationship('CustomerModel', back_populates='reservations')
     extras = relationship('ExtraModel', secondary=reservation_extra, back_populates='reservations')
     carwash = relationship('CarWashModel')
-    billing = relationship('BillingModel', back_populates='reservation')
+    billing = relationship('BillingModel', back_populates='reservation', uselist=False)
     
     @classmethod
     def calculate_final_price(cls, session: Session, service_id: int, car_id : int,extras: Optional[List[int]]) -> float:
@@ -64,7 +64,7 @@ class ReservationModel(BaseModel):
 
         # Végső ár kiszámítása a kedvezmény alkalmazásával (százalékos kedvezmény)
         discount_multiplier = (100 - company_discount) / 100
-        final_price = (service_price + total_extra_price) * discount_multiplier
+        final_price = int((service_price + total_extra_price) * discount_multiplier)
 
         return final_price
 

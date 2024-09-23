@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Date , ForeignKey
+from sqlalchemy import Column, Integer, String , ForeignKey
 from sqlalchemy.orm import Session, relationship
 from .base import BaseModel
 from sqlalchemy.exc import SQLAlchemyError
@@ -11,7 +11,6 @@ class BillingModel(BaseModel):
     name = Column(String(30), nullable= False)
     address = Column(String(100),nullable=False)
     email = Column(String(30),nullable=False)
-    date = Column(Date)  
     reservation_id = Column(Integer, ForeignKey('Reservation.id'),nullable=False)
     
     company_name = Column(String(30),nullable= True)
@@ -36,6 +35,7 @@ class BillingModel(BaseModel):
             return billing_data 
         except Exception as e:
             session.rollback()
+            print(e)
             raise e 
                
     @classmethod
