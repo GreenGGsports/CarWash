@@ -51,7 +51,9 @@ class ReservationAdminView(MyModelView):
         ThisWeekFilter(ReservationModel.reservation_date),
         ThisMonthFilter(ReservationModel.reservation_date),
         DateBetweenFilter(ReservationModel.reservation_date, "Custom date"),
-        'car.license_plate'
+        'car.license_plate',
+        'service.service_name',
+        'carwash.carwash_name',
     ]
 
     def __init__(self, model, session, *args, **kwargs):
