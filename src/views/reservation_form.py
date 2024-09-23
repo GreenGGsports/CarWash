@@ -20,14 +20,13 @@ class ReservationForm(FlaskForm):
             self.carwash.query_factory = lambda: self.session.query(CarWashModel).filter_by(id=current_user.carwash.id).all()
             self.service.query_factory = lambda: self.session.query(ServiceModel).filter_by(carwash_id=current_user.carwash.id).all()
             self.extras.query_factory = lambda: self.session.query(ExtraModel).filter_by(carwash_id=current_user.carwash.id).all()
-            self.slot.query_factory = lambda: self.session.query(SlotModel).filter_by(carwash_id=current_user.carwash.id, live=True).all()
         else:
             self.carwash.query_factory = lambda: self.session.query(CarWashModel).all()
             self.service.query_factory = lambda: self.session.query(ServiceModel).all()
             
             self.extras.query_factory = lambda: self.session.query(ExtraModel).all()
 
-            self.slot.query_factory = lambda: self.session.query(SlotModel).filter_by(live=True).all()
+        self.slot.query_factory = lambda: []
         
     # Form fields
     new_car_license_plate = StringField('Rendszám', validators=[DataRequired()])

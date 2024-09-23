@@ -184,3 +184,22 @@ def get_earliest_available_slot(db_session: Session, reservation_date: datetime,
     except Exception as e:
         current_app.logger.error(f"Error finding the earliest available slot: {e}")
         raise
+
+@booking_ctrl.route('/api/carwash/get_slots', methods=['POST'])
+def get_carwash_slots():
+    try:
+        db_session = current_app.session_factory.get_session()
+        data = request.get_json()
+        date = datetime.strptime(data['date'], '%Y-%m-%d %H:%M:%S')
+        carwash_id = int(data['carwash_id'])
+
+        available_slots = get_available_slots(db_session, date, carwash_id)
+        
+        # Convert slot objects to a list of dictionaries for JSON response
+        slots_data = [{'id': slot.id, 'start_time': slot.start_time.strftime('%H:%M'), 'end_time': slot.end_time.strftime('%H:%M')} for slot in available_slots]
+        
+        return jsonify({'success': True, 'slots': slots_data})
+
+    except Exception as e:
+        current_app.logger.error(f"Error fetching carwash slots: {e}")
+        return jsonify({'success': False, 'error': str(e)})

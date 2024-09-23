@@ -38,4 +38,41 @@ $(document).ready(function() {
         },
         minLength: 3
     });
+    function fetchAvailableSlots() {
+        const carwashId = $('#carwash').val();
+        const reservationDate = $('#reservation_date').val();
+
+        if (carwashId && reservationDate) {
+            $.ajax({
+                url: '/booking/api/carwash/get_slots',  // Frissített URL
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    carwash_id: carwashId,
+                    date: reservationDate
+                }),
+                success: function(response) {
+                    if (response.success) {
+                        let slots = response.slots;
+                        let slotOptions = '';
+
+                        slots.forEach(function(slot) {
+                            slotOptions += `<option value="${slot.id}">${slot.start_time} - ${slot.end_time}</option>`;
+                        });
+
+                        $('#slot').html(slotOptions);
+                    } else {
+                        alert('Hiba történt a slotok lekérdezésekor: ' + response.error);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+        }
+    }
+
+    // Eseményfigyelők a carwash és a dátum mezők változására
+    $('#carwash').on('change', fetchAvailableSlots);
+    $('#reservation_date').on('change', fetchAvailableSlots);
 });
