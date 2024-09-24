@@ -36,6 +36,7 @@ def autocomplete():
                 'reservation_date': reservation.reservation_date.strftime('%Y-%m-%d %H:%M:%S'),
                 'parking_spot': reservation.parking_spot,
                 'carwash': reservation.carwash.carwash_name,
+                'new_car_model': reservation.car.car_model,
             }
             return jsonify(response)
         else:
