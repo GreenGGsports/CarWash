@@ -26,8 +26,9 @@ class ReservationAdminView(MyModelView):
         'car.car_model',
         'service.service_name',
         'extras',
-        'final_price',
         'customer.phone_number',
+        'payment_method',
+        'final_price',
         'is_completed',
     )
 
@@ -40,6 +41,7 @@ class ReservationAdminView(MyModelView):
         'service.service_name': 'Csomag',
         'extras': 'Extra',
         'final_price': 'Ár',
+        'payment_method': 'Fizetési mód',
         'customer.phone_number': 'Tel',
         'is_completed': 'Kész?'
     }

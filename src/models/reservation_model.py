@@ -1,16 +1,21 @@
-from sqlalchemy import Column, Integer, DateTime, Float, ForeignKey, String, Boolean
+from sqlalchemy import Column, Integer, DateTime, Float, ForeignKey, String, Boolean, Enum as SqlEnum
 from sqlalchemy.orm import relationship, Session
 from datetime import datetime
 from .base import BaseModel
 from src.models.reservation_extras import reservation_extra
-from sqlalchemy import Enum
+from enum import Enum as PyEnum
 from typing import List, Optional
 from src.models.service_model import ServiceModel
 from src.models.extra_model import ExtraModel
 from src.models.company_model import CompanyModel
 from src.models.car_model import CarModel
 
-
+class PaymentEnum(PyEnum):
+    card = "bankkárya"
+    cash = "készpénz"
+    list = "listás"
+    transaction = 'utalás'
+    
 
 class ReservationModel(BaseModel):
     __tablename__ = 'Reservation'
@@ -26,6 +31,7 @@ class ReservationModel(BaseModel):
     parking_spot = Column(Integer)
     
     final_price = Column(Integer)
+    payment_method = Column(SqlEnum(PaymentEnum, nullable = False))
     is_completed = Column(Boolean, default=False)
 
     car = relationship('CarModel', back_populates='reservations')
@@ -71,7 +77,7 @@ class ReservationModel(BaseModel):
 
     @classmethod
     def add_reservation(cls, session: Session, service_id: int, slot_id: int, carwash_id: int, car_id : int,
-                        reservation_date: datetime, customer_id: int, extras: Optional[List[int]] = None,
+                        reservation_date: datetime, customer_id: int, payment_method = str ,extras: Optional[List[int]] = None,
                         parking_spot: Optional[int] = None, billing_id: int = None) -> 'ReservationModel':
         
         
@@ -93,6 +99,7 @@ class ReservationModel(BaseModel):
             parking_spot=parking_spot,
             reservation_date=reservation_date,
             final_price=final_price,
+            payment_method = payment_method,
             extras=[ExtraModel.get_by_id(session, extra_id) for extra_id in extras],
         )
         
