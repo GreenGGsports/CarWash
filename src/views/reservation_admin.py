@@ -17,7 +17,7 @@ from src.views.reservation_form import ReservationForm
 class ReservationAdminView(MyModelView):
     form = ReservationForm
     create_template = 'admin/reservation_form.html'
-
+    list_template = 'admin/list_template.html'
     column_list = (
         'carwash.carwash_name',
         'reservation_date',
@@ -26,8 +26,9 @@ class ReservationAdminView(MyModelView):
         'car.car_model',
         'service.service_name',
         'extras',
-        'final_price',
         'customer.phone_number',
+        'payment_method',
+        'final_price',
         'is_completed',
     )
 
@@ -40,6 +41,7 @@ class ReservationAdminView(MyModelView):
         'service.service_name': 'Csomag',
         'extras': 'Extra',
         'final_price': 'Ár',
+        'payment_method': 'Fizetési mód',
         'customer.phone_number': 'Tel',
         'is_completed': 'Kész?'
     }
@@ -186,3 +188,14 @@ class ReservationAdminView(MyModelView):
             current_app.logger.error(f"Hiba történt a foglalás vagy a számla törlése közben: {str(e)}")
         
         return super(ReservationAdminView, self).on_model_delete(model)
+    
+    def render(self, template, **kwargs):
+        # Append summary data to kwargs
+        kwargs['summary_data'] = [
+            {
+                'title': 'Összeg (filtered)',
+                'final_price': self.get_sum('final_price'),
+            },
+        ]
+
+        return super(ReservationAdminView, self).render(template, **kwargs)

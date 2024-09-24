@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify, current_app, render_template, session
-from src.models.reservation_model import ReservationModel
+from src.models.reservation_model import ReservationModel, PaymentEnum
 from  datetime import datetime
 from flask_login import current_user
 from src.models.billing_model import BillingModel
@@ -20,7 +20,7 @@ def create_reservation():
     db_session = current_app.session_factory.get_session()
     data = request.json
     data = {key: value for key, value in data.items() if value != ''}
-    car_type, license_plate, parking_spot, car_brand, car_model = parse_reservation_data(data)
+    car_type, license_plate, parking_spot, car_brand, car_model, payment_method  = parse_reservation_data(data)
     car_id = add_car(car_type, license_plate, car_brand, car_model)
     customer_id = add_customer(data)
     slot_id, service_id, extra_ids, carwash_id,  reservation_date = get_session_data()
@@ -35,6 +35,7 @@ def create_reservation():
             parking_spot=parking_spot,
             car_id=car_id, 
             extras= extra_ids,
+            payment_method=payment_method,
         )
         session['reservation_id'] = reservation.id
         current_app.logger.info(f"Reservation created successfully with ID {reservation.id}.")
@@ -137,7 +138,6 @@ def get_session_data():
     service_id = session.get('service_id')
     extra_ids = session.get('extra_ids')
 
-    #not implemented
     carwash_id = session.get('carwash_id')
     researvation_date = session.get('reservation_date')
     return slot_id, service_id, extra_ids, carwash_id, researvation_date 
@@ -151,13 +151,22 @@ def parse_reservation_data(data):
         car_type = 'large_car'
     else:
         car_type = 'medium_car'
-
+        
+    fizetesi_mod = data.get('fizetesi_mod')
+    if fizetesi_mod == 'card':
+        payment_method = PaymentEnum.card
+    elif fizetesi_mod == 'list':
+        payment_method = PaymentEnum.list
+    elif fizetesi_mod == 'transaction':
+        payment_method = PaymentEnum.transaction
+    else:
+        payment_method = PaymentEnum.cash
+        
     license_plate = data.get('license_plate')
     parking_spot = data.get('parking_spot')
     car_brand = data.get('car_brand')
     car_model = data.get('car_model')
-
-    return car_type, license_plate, parking_spot, car_brand, car_model
+    return car_type, license_plate, parking_spot, car_brand, car_model, payment_method
 
 def parse_customer_data(data):
     return dict(
