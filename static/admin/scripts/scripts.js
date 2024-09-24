@@ -22,6 +22,7 @@ $(document).ready(function() {
                         $('#new_car_license_plate').val(data.new_car_license_plate);
                         $('#new_car_type').val(data.new_car_type);
                         $('#new_car_brand').val(data.new_car_brand);
+                        $('#new_car_model').val(data.new_car_model);
                         $('#new_customer_forname').val(data.customer_forname);
                         $('#new_customer_lastname').val(data.customer_lastname);
                         $('#new_customer_phone_number').val(data.customer_phone_number);
