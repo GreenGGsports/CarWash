@@ -9,7 +9,7 @@ from src.models.reservation_model import ReservationModel, PaymentEnum
 from src.models.billing_model import BillingModel
 from src.views.my_modelview import MyModelView
 from flask_login import current_user
-from flask import current_app
+from flask import current_app, request
 from src.views.filters import ThisMonthFilter, ThisWeekFilter, TodayFilter
 from flask_admin.contrib.sqla.filters import DateBetweenFilter
 from src.views.reservation_form import ReservationForm
@@ -87,6 +87,11 @@ class ReservationAdminView(MyModelView):
         form = super(ReservationAdminView, self).edit_form(obj)
         form.session = self.session
         form.user_role = current_user.role if current_user.is_authenticated else None  # Pass user role to form
+
+        # Csak GET kérés esetén hívjuk meg a load_data-t
+        if request.method == 'GET' and obj:
+            form.load_data(obj)
+
         return form
     
     def on_model_change(self, form, model, is_created):

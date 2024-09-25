@@ -38,6 +38,14 @@ def autocomplete():
                 'carwash': reservation.carwash.carwash_name,
                 'new_car_model': reservation.car.car_model,
             }
+        if reservation.billing:
+            response.update({
+                'billing_name': reservation.billing.name,
+                'address': reservation.billing.address,
+                'email': reservation.billing.email,
+                'company_name': reservation.billing.company_name,
+                'tax_ID': reservation.billing.tax_ID,
+            })
             return jsonify(response)
         else:
             return jsonify({'error': 'No reservation found'}), 404
