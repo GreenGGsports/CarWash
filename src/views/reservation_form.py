@@ -1,4 +1,5 @@
 from src.models.car_model import CarTypeEnum
+from src.models.reservation_model import PaymentEnum
 from src.models.service_model import ServiceModel
 from src.models.slot_model import SlotModel
 from src.models.carwash_model import CarWashModel
@@ -78,6 +79,7 @@ class ReservationForm(FlaskForm):
     parking_spot = StringField('Parkolóhely')
     carwash = QuerySelectField('Autómosó', allow_blank=False, query_factory=lambda: [])
     slot = QuerySelectField('Slot', allow_blank=False, query_factory=lambda: [])
+    payment_method =  SelectField('Fizetési mód', choices=[(t.name, t.value) for t in PaymentEnum], validators=[DataRequired()])
     is_completed = BooleanField('Kész?')
     
     

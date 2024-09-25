@@ -5,7 +5,7 @@ from src.models.service_model import ServiceModel
 from src.models.slot_model import SlotModel
 from src.models.carwash_model import CarWashModel
 from src.models.extra_model import ExtraModel
-from src.models.reservation_model import ReservationModel
+from src.models.reservation_model import ReservationModel, PaymentEnum
 from src.models.billing_model import BillingModel
 from src.views.my_modelview import MyModelView
 from flask_login import current_user
@@ -44,6 +44,10 @@ class ReservationAdminView(MyModelView):
         'payment_method': 'Fizetési mód',
         'customer.phone_number': 'Tel',
         'is_completed': 'Kész?'
+    }
+    
+    column_formatters = {
+        'payment_method': lambda v, c, model, name: model.payment_method.value if model.payment_method else None
     }
 
     form_excluded_columns = ['billing']
@@ -87,7 +91,6 @@ class ReservationAdminView(MyModelView):
     
     def on_model_change(self, form, model, is_created):
         session = form.session
-
         
         try:
             # Use no_autoflush to prevent automatic flushes
@@ -151,16 +154,26 @@ class ReservationAdminView(MyModelView):
                                                                            car_id= model.car.id, 
                                                                            extras=[extra.id for extra in model.extras])
                 if form.billing_required.data:
-                    BillingModel.add_billing_data(
-                        session=session,
-                        reservation_id=model.id,
-                        name=form.billing_name.data,
-                        address=form.address.data,
-                        email=form.email.data,
-                        company_name=form.company_name.data,
-                        tax_ID=form.tax_ID.data
-                    )
-                    
+                    billing = session.query(BillingModel).filter_by(reservation_id=model.id).first()
+                    if not billing:
+                        # Ha nincs számlázási adat, hozzunk létre újat
+                        BillingModel.add_billing_data(
+                            session=session,
+                            reservation_id=model.id,
+                            name=form.billing_name.data,
+                            address=form.address.data,
+                            email=form.email.data,
+                            company_name=form.company_name.data,
+                            tax_ID=form.tax_ID.data
+                        )
+                    else:
+                        # Ha van számlázási adat, frissítsük
+                        billing.name = form.billing_name.data
+                        billing.address = form.address.data
+                        billing.email = form.email.data
+                        billing.company_name = form.company_name.data
+                        billing.tax_ID = form.tax_ID.data
+                        session.add(billing)
 
                 session.flush()
 
