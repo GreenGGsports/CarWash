@@ -30,7 +30,7 @@ class Dashboard(MyModelView):
         'car.license_plate': 'Rendszám',
         'service.service_name': 'Csomag',
         'extras': 'Extra',
-        'final_price': 'Ár',
+        'final_price': 'Bevétel',
         'car.company.company_name': 'Cégnév'
     }
 

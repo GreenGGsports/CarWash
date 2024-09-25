@@ -5,6 +5,9 @@ from src.models.billing_model import BillingModel
 from src.views.filters import ThisMonthFilter, ThisWeekFilter, TodayFilter
 from flask_admin.contrib.sqla.filters import DateBetweenFilter,  FilterLike
 class InvoiceModelView(MyModelView):
+    can_create = False
+    can_delete = False
+    can_edit = True
     column_labels = {
         'reservation.reservation_date': 'Dátum',
         'reservation.car.license_plate': 'Rendszám',
@@ -12,15 +15,18 @@ class InvoiceModelView(MyModelView):
         'address': 'Cím',
         'tax_ID': 'Adószám',
         'company_name': 'Cégnév',
+        'reservation.payment_method': 'Fizetési mód',
         'reservation.final_price': 'Összeg,'
     }
 
-    column_list = ['reservation.reservation_date','reservation.car.license_plate', 'name', 'address', 'email','company_name', 'tax_ID', 'reservation.final_price']
+    column_list = ['reservation.reservation_date','reservation.car.license_plate', 'name', 'address', 'email','company_name', 'tax_ID','reservation.payment_method' ,'reservation.final_price']
+    
 
     column_filters = [
         DateBetweenFilter(BillingModel.reservation.property.mapper.class_.reservation_date, 'Custom date'),
         'reservation.car.license_plate',
-        'company_name'
+        'company_name',
+        'reservation.payment_method'
     ]
     def is_accessible(self):
         # Ellenőrizzük, hogy a felhasználó be van-e jelentkezve és admin szerepe van-e

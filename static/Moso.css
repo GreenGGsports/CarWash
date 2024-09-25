@@ -2,6 +2,7 @@ body {
     width: 100%;
     height: 100%;
     font-family: 'Arial', sans-serif;
+    background-color: #000;
     background-image: url('/static/images/background-image.png'); /* Itt add meg a háttérképed elérési útvonalát */
     background-repeat: no-repeat;
     background-size: cover;
@@ -11,6 +12,10 @@ body {
     align-items: center;*/
     margin: 0;
     /* Remove default body margin */
+}
+
+a{
+    text-decoration: none;
 }
 
 .header {
@@ -202,7 +207,6 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-radius: 10px 50px 50px 10px;
     margin: auto;
     gap: 1rem;
     margin-top: 4rem;
@@ -211,7 +215,6 @@ body {
 .slide-img {
     width: 100%;
     height: 100%; /* Vagy a kívánt magasság */
-    background-image: url('/static/images/slide-car.png'); /* Itt add meg a háttérképed elérési útvonalát */
     background-size: cover; /* A kép méretét úgy állítja be, hogy a container teljesen kitöltse a képet torzítás nélkül */
     background-position: center; /* A háttérképet középre igazítja */
     background-repeat: no-repeat; /* Nem ismétli meg a háttérképet */
@@ -219,11 +222,10 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 10px 50px 50px 10px;
 }
 
 .slide-img img{
-    width: 20vw;
+    width: 25vw;
 }
 
 .slide-text{
@@ -362,6 +364,7 @@ body {
 .video-hr{
     height: 27rem;
     margin-top: 1rem;
+    background-color: white;
 }
 
 h1{
@@ -426,21 +429,88 @@ h2{
     justify-content: center;
 }
 
-.cosmetic-service{
-    width: 45%;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-}
-
-.titles{
+.cosmetic-service-teszt {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+    /*kell*/
 }
+
+.cosmetic-service-container{
+    display: flex;
+    gap: 2rem;
+}
+
+.cosmetic-services-list-container{
+    width: 47%;
+}
+
+.titles-teszt{
+    font-size: 1.2em;
+    width: 100%;
+    text-align: left;
+}
+
+.services-list-teszt {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-height: 12rem;
+    /*kell*/
+}
+
+.cosmetic-services-list-teszt {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-height: 17rem;
+    /*kell*/
+}
+
+.cosmetic-services-list-teszt p{
+    margin: 0;
+    line-height: 2em;
+    font-size: 1.1em;
+    /*kell*/
+}
+
+.description-teszt {
+    width: 45%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    /*kell*/
+}
+
+.cosmetic-text1-teszt {
+    text-align: left;
+    line-height: 2em;
+    font-family: "graphie", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    margin-top: 0;
+    font-size: 1.1em;
+    /*kell*/
+}
+
+/*.cosmetic-service{
+    width: 45%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+}*/
+
+/*.titles{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}*/
 
 .services-list{
     display: flex;
@@ -449,12 +519,12 @@ h2{
     max-height: 12rem;
 }
 
-.cosmetic-services-list{
+/*.cosmetic-services-list{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     max-height: 17rem;
-}
+}*/
 
 .last-services-list{
     display: flex;
@@ -484,12 +554,12 @@ h2{
     font-style: normal;
 }
 
-.cosmetic-services-list p{
+/*.cosmetic-services-list p{
     margin: 0.5rem 4rem 0.5rem 0;
     font-family: "graphie", sans-serif;
     font-weight: 500;
     font-style: normal;
-}
+}*/
 
 hr{
     width: 0.2em;
@@ -507,13 +577,13 @@ hr{
     margin: 4.5rem 1rem 0 1rem;
 }
 
-.description{
+/*.description{
     width: 45%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-}
+}*/
 
 .text{
     text-align: left;
@@ -536,7 +606,7 @@ hr{
 
 }
 
-.cosmetic-text1{
+/*.cosmetic-text1{
     text-align: left;
     padding-right: 6rem;
     line-height: 2em;
@@ -567,7 +637,7 @@ hr{
     font-weight: 400;
     font-style: normal;
 
-}
+}*/
 
 .last-text{
     text-align: left;
@@ -629,7 +699,7 @@ footer{
 
 .jogok-box{
     display: flex;
-    border-left: 1px solid white;
+    border-left: 1px solid #13669C;
     padding-left: 1rem;
     max-width: 25%;
     height: 4rem;
@@ -731,9 +801,9 @@ i{
         font-size: 2em;
     }
     
-    .cosmetic-services-list p{
+    /*.cosmetic-services-list p{
         font-size: 2em;
-    }
+    }*/
 
     hr{
         margin: 8.6rem 1rem 0 1rem;
@@ -764,16 +834,16 @@ i{
         font-size: 2.2em;
     }
 
-    .cosmetic-services-list{
+    /*.cosmetic-services-list{
         max-height: 23rem;
-    }
+    }*/
 
     .cosmetic-text{
         margin-top: 6.2rem;
         font-size: 2em;
     }
 
-    .cosmetic-text1{
+    /*.cosmetic-text1{
         margin-top: 7.9rem;
         font-size: 2em;
     }
@@ -781,7 +851,7 @@ i{
     .cosmetic-text2{
         margin-top: 5.5rem;
         font-size: 2em;
-    }
+    }*/
 
     footer{
         font-size: 2em;
@@ -886,9 +956,9 @@ i{
         font-size: 1.7em;
     }
     
-    .cosmetic-services-list p{
+    /*.cosmetic-services-list p{
         font-size: 1.7em;
-    }
+    }*/
 
     hr{
         margin: 8.6rem 1rem 0 1rem;
@@ -920,16 +990,16 @@ i{
         font-size: 1.9em;
     }
 
-    .cosmetic-services-list{
+    /*.cosmetic-services-list{
         max-height: 21rem;
-    }
+    }*/
 
     .cosmetic-text{
         margin-top: 5.2rem;
         font-size: 1.7em;
     }
 
-    .cosmetic-text1{
+    /*.cosmetic-text1{
         margin-top: 6.9rem;
         font-size: 1.7em;
     }
@@ -941,7 +1011,7 @@ i{
 
     .cosmetic-text3{
         font-size: 1.7em;
-    }
+    }*/
 
     .extra-services-list{
         font-size: 1.7em;
@@ -1050,9 +1120,9 @@ i{
         font-size: 1.7em;
     }
     
-    .cosmetic-services-list p{
+    /*.cosmetic-services-list p{
         font-size: 1.7em;
-    }
+    }*/
 
     hr{
         margin: 6.6rem 1rem 0 1rem;
@@ -1084,16 +1154,16 @@ i{
         font-size: 1.9em;
     }
 
-    .cosmetic-services-list{
+    /*.cosmetic-services-list{
         max-height: 21rem;
-    }
+    }*/
 
     .cosmetic-text{
         margin-top: 6.7rem;
         font-size: 1.7em;
     }
 
-    .cosmetic-text1{
+    /*.cosmetic-text1{
         margin-top: 6.9rem;
         font-size: 1.7em;
     }
@@ -1105,7 +1175,7 @@ i{
 
     .cosmetic-text3{
         font-size: 1.7em;
-    }
+    }*/
 
     .extra-services-list{
         font-size: 1.7em;
@@ -1209,9 +1279,9 @@ i{
         font-size: 1.6em;
     }
     
-    .cosmetic-services-list p{
+    /*.cosmetic-services-list p{
         font-size: 1.6em;
-    }
+    }*/
 
     hr{
         margin: 5.6rem 1rem 0 1rem;
@@ -1243,16 +1313,16 @@ i{
         font-size: 1.55em;
     }
 
-    .cosmetic-services-list{
+    /*.cosmetic-services-list{
         max-height: 21rem;
-    }
+    }*/
 
     .cosmetic-text{
         margin-top: 5.7rem;
         font-size: 1.6em;
     }
 
-    .cosmetic-text1{
+    /*.cosmetic-text1{
         margin-top: 5.2rem;
         font-size: 1.6em;
     }
@@ -1265,7 +1335,7 @@ i{
     .cosmetic-text3{
         font-size: 1.6em;
         margin-top: -1rem;
-    }
+    }*/
 
     .extra-services-list{
         font-size: 1.6em;
@@ -1394,9 +1464,9 @@ i{
         font-size: 1.1em;
     }
     
-    .cosmetic-services-list p{
+    /*.cosmetic-services-list p{
         font-size: 1.1em;
-    }
+    }*/
 
     hr{
         margin: 3.6rem 1rem 0 1rem;
@@ -1431,9 +1501,9 @@ i{
         font-size: 1.03em;
     }
 
-    .cosmetic-services-list{
+    /*.cosmetic-services-list{
         flex-wrap: nowrap;
-    }
+    }*/
 
     .cosmetic-text{
         margin-top: -8.5rem;
@@ -1441,7 +1511,7 @@ i{
         padding-right: 0;
     }
 
-    .cosmetic-text1{
+    /*.cosmetic-text1{
         margin-top: -5.4rem;
         font-size: 1.1em;
         padding-right: 0;
@@ -1457,7 +1527,7 @@ i{
         font-size: 1.1em;
         margin-top: -22rem;
         padding-right: 0;
-    }
+    }*/
 
     .extra-services-list{
         flex-wrap: nowrap;
@@ -1613,10 +1683,35 @@ i{
     .last-services-list p{
         font-size: 0.8em;
     }
-    
-    .cosmetic-services-list p{
-        font-size: 0.8em;
+
+    .titles-teszt{
+        text-align: center;
     }
+
+    .cosmetic-service-container{
+        display: flex;
+    gap: 2rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    }
+
+    .cosmetic-services-list-container{
+        width: 100%;
+    text-align: center;
+    }
+
+    .description-teszt{
+        width: 100%;
+    }
+
+    .cosmetic-text1-teszt{
+        text-align: center;
+    }
+    
+    /*.cosmetic-services-list p{
+        font-size: 0.8em;
+    }*/
 
     hr{
         margin: 3rem 1rem 0 1rem;
@@ -1654,17 +1749,17 @@ i{
         font-size: 0.77em;
     }
 
-    .cosmetic-services-list{
+    /*.cosmetic-services-list{
         flex-wrap: nowrap;
         max-height: 23rem;
-    }
+    }*/
 
     .cosmetic-text{
         margin-top: -1rem;
         font-size: 0.8em;
     }
 
-    .cosmetic-text1{
+    /*.cosmetic-text1{
         margin-top: 2.9rem;
         font-size: 0.8em;
     }
@@ -1677,7 +1772,7 @@ i{
     .cosmetic-text3{
         font-size: 0.8em;
         margin-top: -2.1rem;
-    }
+    }*/
 
     .extra-services-list{
         flex-wrap: nowrap;
@@ -1840,13 +1935,38 @@ i{
         width: 100%;
     }
 
-    .titles{
-        align-items: center;
+    .titles-teszt{
+        text-align: center;
     }
 
-    .description{
+    .cosmetic-service-container{
+        display: flex;
+    gap: 2rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    }
+
+    .cosmetic-services-list-container{
+        width: 100%;
+    text-align: center;
+    }
+
+    .description-teszt{
         width: 100%;
     }
+
+    .cosmetic-text1-teszt{
+        text-align: center;
+    }
+
+    /*.titles{
+        align-items: center;
+    }*/
+
+    /*.description{
+        width: 100%;
+    }*/
 
     .services-list p{
         font-size: 0.8em;
@@ -1860,9 +1980,9 @@ i{
         font-size: 0.8em;
     }
     
-    .cosmetic-services-list p{
+    /*.cosmetic-services-list p{
         font-size: 0.8em;
-    }
+    }*/
 
     hr{
        display: none;
@@ -1904,14 +2024,14 @@ i{
         font-size: 0.7em;
     }
 
-    .cosmetic-service{
+    /*.cosmetic-service{
         width: 100%;
-    }
+    }*/
 
-    .cosmetic-services-list{
+    /*.cosmetic-services-list{
         flex-wrap: nowrap;
         max-height: 23rem;
-    }
+    }*/
 
     .cosmetic-text{
         margin-top: -1rem;
@@ -1921,7 +2041,7 @@ i{
         text-align: center;
     }
 
-    .cosmetic-text1{
+    /*.cosmetic-text1{
         margin-top: 2.9rem;
         font-size: 0.8em;
         text-align: center;
@@ -1944,7 +2064,7 @@ i{
         padding-right: 0;
         text-align: center;
         margin: auto;
-    }
+    }*/
 
     .extra-services-list{
         flex-wrap: nowrap;
@@ -2123,13 +2243,38 @@ i{
         width: 100%;
     }
 
-    .titles{
-        align-items: center;
+    .titles-teszt{
+        text-align: center;
     }
 
-    .description{
+    .cosmetic-service-container{
+        display: flex;
+    gap: 2rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    }
+
+    .cosmetic-services-list-container{
+        width: 100%;
+    text-align: center;
+    }
+
+    .description-teszt{
         width: 100%;
     }
+
+    .cosmetic-text1-teszt{
+        text-align: center;
+    }
+
+    /*.titles{
+        align-items: center;
+    }*/
+
+    /*.description{
+        width: 100%;
+    }*/
 
     .services-list p{
         font-size: 0.8em;
@@ -2143,9 +2288,9 @@ i{
         font-size: 0.8em;
     }
     
-    .cosmetic-services-list p{
+    /*.cosmetic-services-list p{
         font-size: 0.8em;
-    }
+    }*/
 
     hr{
        display: none;
@@ -2187,14 +2332,14 @@ i{
         font-size: 0.7em;
     }
 
-    .cosmetic-service{
+    /*.cosmetic-service{
         width: 100%;
-    }
+    }*/
 
-    .cosmetic-services-list{
+    /*.cosmetic-services-list{
         flex-wrap: nowrap;
         max-height: 23rem;
-    }
+    }*/
 
     .cosmetic-text{
         margin-top: -1rem;
@@ -2204,7 +2349,7 @@ i{
         text-align: center;
     }
 
-    .cosmetic-text1{
+    /*.cosmetic-text1{
         margin-top: 2.9rem;
         font-size: 0.8em;
         text-align: center;
@@ -2227,7 +2372,7 @@ i{
         padding-right: 0;
         text-align: center;
         margin: auto;
-    }
+    }*/
 
     .extra-services-list{
         flex-wrap: nowrap;

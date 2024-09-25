@@ -5,26 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Landing page</title>
-    <link rel= "stylesheet" href= "{{ url_for('static',filename='landing_page.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='landing_page.css') }}">
     <link rel="stylesheet" href="https://use.typekit.net/gnm3icp.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="{{ url_for('static', filename='customer_login.js') }}"></script>
 </head>
 
 <body>
-    <div class="page-wrapper" 
-    style=  "z-index:1;
+    <div class="page-wrapper" style="z-index:1;
             background-repeat: no-repeat;
             background-size: cover;">
         <div class="header">
-            <div class="inner-container-1"></div>
+            <div class="inner-container-1">HU</div>
             <div class="inner-container-2">
                 <img class="image" src="{{ url_for('static', filename='images/Logo2.png')}}" alt="">
             </div>
             <div class="inner-container-3">
                 <button type="button" class="login-toggle">
                     <i class="fas fa-user"></i>
-                    <p>Log in</p>
+                    <p>Belépés</p>
                 </button>
             </div>
         </div>
@@ -34,72 +32,77 @@
                 <span class="close-button">&times;</span>
                 <div class="Reg-container">
                     <div>
-                        <h2>Login</h2>
-                        <form id="login-form">
+                        <h2>Belépés</h2>
+                        <form id='login-form'>
                             <div class="form-group">
-                                <label for="login-username">Username:</label>
+                                <label for="login-username">Felhasználónév:</label>
                                 <input type="text" id="login-username" name="user_name" required>
                             </div>
                             <div class="form-group">
-                                <label for="login-password">Password:</label>
+                                <label for="login-password">Jelszó:</label>
                                 <input type="password" id="login-password" name="password" required>
                             </div>
                             <div class="form-group">
-                                <button type="submit">Login</button>
+                                <button type="submit">Belépés</button>
                             </div>
                             <div class="message" id="login-message"></div>
                         </form>
                     </div>
                     <!-- Register Form -->
                     <div>
-                        <h2>Register</h2>
+                        <h2>Regisztráció</h2>
                         <form id="register-form">
                             <div class="form-group">
-                                <label for="register-username">Username:</label>
+                                <label for="register-username">Felhasználónév:</label>
                                 <input type="text" id="register-username" name="user_name" required>
                             </div>
                             <div class="form-group">
-                                <label for="register-password">Password:</label>
+                                <label for="register-password">Jelszó:</label>
                                 <input type="password" id="register-password" name="password" required>
                             </div>
                             <div class="form-group">
-                                <button type="submit">Register</button>
+                                <button type="submit">Regisztráció</button>
                             </div>
                             <div class="message" id="register-message"></div>
                         </form>
                     </div>
-            
+
                     <!-- Logout Form -->
                     <div>
-                        <h2>Logout</h2>
+                        <h2>Kilépés</h2>
                         <form id="logout-form">
                             <div class="form-group">
-                                <button type="submit">Logout</button>
+                                <button type="submit">Kilépés</button>
                             </div>
                             <div class="message" id="logout-message"></div>
                         </form>
                     </div>
                 </div>
             </div>
-        </div>        
-        <div class="divider"></div> <!-- Divider line -->
+        </div>
         <div class="slider-container">
             <div class="slider">
-                <img src="{{ url_for('static', filename='images/gallery6.png')}}" alt="Slide 1">
-                <img src="{{ url_for('static', filename='images/gallery6.png')}}" alt="Slide 2">
-                <img src="{{ url_for('static', filename='images/gallery6.png')}}" alt="Slide 3">
-                <!-- Additional slides as needed -->
+                <img src="{{ url_for('static', filename='images/slider1.png')}}" alt="Slide 1">
+                <img src="{{ url_for('static', filename='images/slider2.png')}}" alt="Slide 2">
+                <img src="{{ url_for('static', filename='images/slider3.png')}}" alt="Slide 3">
+                <img src="{{ url_for('static', filename='images/slider4.png')}}" alt="Slide 4">
+                <img src="{{ url_for('static', filename='images/slider5.png')}}" alt="Slide 5">
+                <img src="{{ url_for('static', filename='images/slider6.png')}}" alt="Slide 6">
+                
             </div>
             <div class="text-overlay">
-                <p>Küldetésünk, autókozmetikai minőséget nyújtani a céges flottáknak.</p>
+                <p></p>
             </div>
         </div>
         <div class="content">
-            <div class="Foglalas">
-                <button class="FoglalasGomb"id = 'bookingButton'>Online időpont foglalás
-                    <div class="tooltip">Lépj be, vagy regisztrálj az online időpont foglaláshoz az oldal tetején.</div>
-                </button>
-            </div>
+            <a href="Foglalas.html">
+                <div class="Foglalas">
+                    <button class="FoglalasGomb" id='bookingButton'>Online időpont foglalás
+                        <div class="tooltip">Lépj be, vagy regisztrálj az online időpont foglaláshoz az oldal tetején.
+                        </div>
+                    </button>
+                </div>
+            </a>
             <div class="main-container">
                 <div class="title-container">
                     <div class="title">Árlisták</div>
@@ -112,7 +115,7 @@
                                 <div class="IkonKeret">
                                     <img src="{{ url_for('static', filename='images/map.svg') }}" alt="" class="ikon">
                                 </div>
-                                <div class="MosokCim">1097 Budapest,<br />Könyves Kálmán krt. 11.</div>
+                                <div class="MosokCim">1097 Budapest,<br> Könyves Kálmán krt. 11.</div>
                             </button>
                         </a>
                     
@@ -125,7 +128,7 @@
                                 <div class="MosokCim">1097 Budapest,<br />Könyves Kálmán krt. 11.</div>
                             </button>
                         </a>
-                    
+
                         <a href="{{ url_for('carwash_site', site_name='City-Gate') }}">
                             <button class="keret">
                                 <img class="helyszin" src="{{ url_for('static', filename='images/City-gate.png') }}" />
@@ -135,7 +138,7 @@
                                 <div class="MosokCim">1097 Budapest,<br />Könyves Kálmán krt. 11.</div>
                             </button>
                         </a>
-                    
+
                         <a href="{{ url_for('carwash_site', site_name='Capital-square') }}">
                             <button class="keret">
                                 <img class="helyszin" src="{{ url_for('static', filename='images/Capital-square.png') }}" />
@@ -145,35 +148,35 @@
                                 <div class="MosokCim">1097 Budapest,<br />Könyves Kálmán krt. 11.</div>
                             </button>
                         </a>
-                    </div>     
-                </div>               
+                    </div>
+                </div>
             </div>
 
-                <div class="main-Carousel-container">
-                    Galéria
-                    <div class="carousel-container">
-                        <button class="carousel-button prev" onclick="prevImage()">&#10094;</button>
-                        <div class="carousel-wrapper">
-                            <div class="carousel">
+            <div class="main-Carousel-container">
+                Galéria
+                <div class="carousel-container">
+                    <button class="carousel-button prev" onclick="prevImage()">&#10094;</button>
+                    <div class="carousel-wrapper">
+                        <div class="carousel">
                                 <img src="{{ url_for('static', filename='images/Gallery6.png') }}" alt="Image 1" class="carousel-image">
                                 <img src="{{ url_for('static', filename='images/Gallery6.png') }}" alt="Image 1" class="carousel-image">
                                 <img src="{{ url_for('static', filename='images/Gallery6.png') }}" alt="Image 1" class="carousel-image">
                                 <img src="{{ url_for('static', filename='images/Gallery6.png') }}" alt="Image 1" class="carousel-image">
                                 <img src="{{ url_for('static', filename='images/Gallery6.png') }}" alt="Image 1" class="carousel-image">
                                 <img src="{{ url_for('static', filename='images/Gallery6.png') }}" alt="Image 1" class="carousel-image">                                
-                                <!-- Add more images as needed -->
-                            </div>
+                            <!-- Add more images as needed -->
                         </div>
-                        <button class="carousel-button next" onclick="nextImage()">&#10095;</button>
                     </div>
+                    <button class="carousel-button next" onclick="nextImage()">&#10095;</button>
                 </div>
+            </div>
             <div class="Supports">
                 <div class="Supports-container-1">
                     <img src="{{ url_for('static', filename='images/support1.png') }}" alt="">
                 </div>
                 <div class="Supports-container-2">
                     <img src="{{ url_for('static', filename='images/Logo2.png') }}" alt="">
-                </div>                
+                </div>
             </div>
             <div class="footer">
                 <div class="footer-content">
@@ -193,16 +196,16 @@
                         <div class="footer-box">
                             <img class="footer-image" src="{{ url_for('static', filename='images/Capital-square.png') }}" />
                             <div class="footer-text">+36 20 69 69 669</div>
-                        </div>                        
+                        </div>
                     </div>
                     <div class="footer-texts">
-                        <div class="footer-box">
+                        <div class="footer-box1">
                             <div class="footer-text">© 2024 Eliteshine<br />Minden jog fenntartva</div>
                         </div>
-                        <div class="footer-box">
-                            <div class="footer-text">Adatvédelmi nyilatkozat<br />Általános szerződési feltételek</div>
+                        <div class="footer-box1">
+                            <div class="footer-text">Adatvédelmi nyilatkozat<br />ASZF</div>
                         </div>
-                        <div class="footer-box">
+                        <div class="footer-box1">
                             <div class="footer-text">eliteshine@shine.com<br />+36 20 69 69 669</div>
                         </div>
                         <div class="footer-socials">
@@ -221,58 +224,99 @@
     </div>
 
     <script>
+
+        /*log in*/
+        document.addEventListener('DOMContentLoaded', function () {
+            var modal = document.getElementById('login-modal');
+            var btn = document.querySelector('.login-toggle');
+            var span = document.querySelector('.close-button');
+
+            btn.onclick = function () {
+                modal.style.display = "block";
+            }
+
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        });
+
+
         /*Gallery*/
         let currentIndex = 0;
 
-function showImage(index) {
-    const carousel = document.querySelector('.carousel');
-    const images = document.querySelectorAll('.carousel-image');
-    const imageWidth = images[0].clientWidth;
-    
-    carousel.style.transform = `translateX(${-index * imageWidth}px)`;
-}
+        function showImage(index) {
+            const carousel = document.querySelector('.carousel');
+            const images = document.querySelectorAll('.carousel-image');
+            const imageWidth = images[0].clientWidth;
 
-function nextImage() {
-    const images = document.querySelectorAll('.carousel-image');
-    if (currentIndex < images.length - 1) {
-        currentIndex++;
-    } else {
-        currentIndex = 0;
-    }
-    showImage(currentIndex);
-}
+            carousel.style.transform = `translateX(${-index * imageWidth}px)`;
+        }
 
-function prevImage() {
-    if (currentIndex > 0) {
-        currentIndex--;
-    } else {
-        currentIndex = document.querySelectorAll('.carousel-image').length - 1;
-    }
-    showImage(currentIndex);
-}
+        function nextImage() {
+            const images = document.querySelectorAll('.carousel-image');
+            if (currentIndex < images.length - 1) {
+                currentIndex++;
+            } else {
+                currentIndex = 0;
+            }
+            showImage(currentIndex);
+        }
 
-window.addEventListener('resize', () => {
-    showImage(currentIndex); // Adjust the image position on resize
-});
+        function prevImage() {
+            if (currentIndex > 0) {
+                currentIndex--;
+            } else {
+                currentIndex = document.querySelectorAll('.carousel-image').length - 1;
+            }
+            showImage(currentIndex);
+        }
+
+        window.addEventListener('resize', () => {
+            showImage(currentIndex); // Adjust the image position on resize
+        });
 
 
         /*slider*/
 
         function startSlider() {
-            const slides = document.querySelectorAll('.slider img');
-            const totalSlides = slides.length;
+    const slides = document.querySelectorAll('.slider img');
+    const totalSlides = slides.length;
+    const texts = [
+        "Küldetésünk, autókozmetikai minőséget nyújtani a céges flottáknak.",
+        "Az autód a megjelenésed része. Nálunk megtalálod az igényeidnek megfelelő csomagot!",
+        "Fontos eseményre mész? Kényeztető csomagunkkal garantáljuk az igényes megjelenést!", 
+        "Helyre kéne pofozni az autód nyaralás után? Válaszd az extraszennyezett extránkat a mélytisztításért!", 
+        "Meggyűlik a bajod a sok bogárral az autópályáról? Válaszd a bogárkerámia csomagunkat a hosszantartó védelemért!",
+        "Esküvőre mész, vagy csak imádod az autód? Válaszd Csillog-Villog csomagunkat az extra megjelenésért, könnyed karbantartásért és a plusz védelemért! "
+    ];
 
-            setInterval(() => {
-                currentIndex++;
-                if (currentIndex >= totalSlides) {
-                    currentIndex = 0;
-                }
-                const offset = currentIndex * -100 / totalSlides;
-                document.querySelector('.slider').style.transform = `translateX(${offset}%)`;
-            }, 3000); // Change image every 3000 milliseconds (3 seconds)
+    let currentIndex = 0;
+
+    // Az oldal betöltésekor állítsd be az első szöveget
+    document.querySelector('.text-overlay p').textContent = texts[currentIndex];
+
+    setInterval(() => {
+        currentIndex++;
+        if (currentIndex >= totalSlides) {
+            currentIndex = 0;
         }
+        
+        // Képcsúszás
+        const offset = currentIndex * -100 / totalSlides;
+        document.querySelector('.slider').style.transform = `translateX(${offset}%)`;
 
-        window.onload = startSlider;
+        // Szöveg váltás
+        document.querySelector('.text-overlay p').textContent = texts[currentIndex];
+    }, 6000); // 5000 milliszekundum = 5 másodperc
+}
+
+window.onload = startSlider;
 
         /*log in*/
         document.addEventListener('DOMContentLoaded', function() {
@@ -300,6 +344,7 @@ window.addEventListener('resize', () => {
             window.location.href = '/reservation';
         });
     </script>
+    <script src="{{ url_for('static', filename='customer_login.js') }}"></script>
 </body>
 
 

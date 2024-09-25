@@ -199,34 +199,120 @@
         {{ lib.add_modal_window() }}
     {%- endif -%}
 
-        <canvas id="revenueChart"></canvas>
+    <canvas id="revenueChart"></canvas>
+
+    <label for="timeRange">Válaszd ki az időtartamot:</label>
+    <select id="timeRange">
+        <option value="daily">Napi</option>
+        <option value="weekly">Heti</option>
+        <option value="monthly">Havi</option>
+    </select>
     
     {% block chart_script %}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        const dates = {{ summary_data[0].dates | tojson }};
-        const revenues = {{ summary_data[0].revenues | tojson }};
-
-        const ctx = document.getElementById('revenueChart').getContext('2d');
-        const chart = new Chart(ctx, {
-            type: 'line', // or 'bar' for bar chart
-            data: {
-                labels: dates,
-                datasets: [{
-                    label: 'Daily Revenue',
-                    data: revenues,
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    fill: true
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
+        document.addEventListener('DOMContentLoaded', function() {
+            // Napi adatok
+            const dailyData = {
+                dates: {{ summary_data[0].dates | tojson }},
+                revenues: {{ summary_data[0].revenues | tojson }}
+            };
+    
+            // Heti összesítés
+            function aggregateWeekly(data) {
+                let weeklyData = { dates: [], revenues: [] };
+                let tempSum = 0;
+                let count = 0;
+    
+                data.dates.forEach((date, index) => {
+                    tempSum += data.revenues[index];
+                    count++;
+    
+                    if (count === 7 || index === data.dates.length - 1) {
+                        weeklyData.dates.push(date); // A hét utolsó napja
+                        weeklyData.revenues.push(tempSum / count); // Heti átlag
+                        tempSum = 0;
+                        count = 0;
+                    }
+                });
+    
+                return weeklyData;
+            }
+    
+            // Havi összesítés
+            function aggregateMonthly(data) {
+                let monthlyData = { dates: [], revenues: [] };
+                let tempSum = 0;
+                let count = 0;
+                let currentMonth = new Date(data.dates[0]).getMonth();
+    
+                data.dates.forEach((date, index) => {
+                    let dateObj = new Date(date);
+                    if (dateObj.getMonth() === currentMonth) {
+                        tempSum += data.revenues[index];
+                        count++;
+                    } else {
+                        monthlyData.dates.push(new Date(data.dates[index - 1]).toISOString().substring(0, 7)); // Hónap utolsó napja
+                        monthlyData.revenues.push(tempSum / count); // Havi átlag
+                        tempSum = data.revenues[index]; // Kezdjük az új hónapot
+                        count = 1;
+                        currentMonth = dateObj.getMonth();
+                    }
+                    // Utolsó hónap hozzáadása
+                    if (index === data.dates.length - 1) {
+                        monthlyData.dates.push(dateObj.toISOString().substring(0, 7));
+                        monthlyData.revenues.push(tempSum / count);
+                    }
+                });
+    
+                return monthlyData;
+            }
+    
+            // Grafikon inicializálása
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            let chart = new Chart(ctx, {
+                type: 'line', // vagy 'bar' diagram
+                data: {
+                    labels: dailyData.dates,
+                    datasets: [{
+                        label: 'Napi bevétel',
+                        data: dailyData.revenues,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        fill: true
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
                     }
                 }
+            });
+    
+            // Diagram frissítése
+            function updateChart(data, label) {
+                chart.data.labels = data.dates;
+                chart.data.datasets[0].data = data.revenues;
+                chart.data.datasets[0].label = label;
+                chart.update();
             }
+    
+            // Legördülő menü esemény figyelése
+            document.getElementById('timeRange').addEventListener('change', function() {
+                const selectedValue = this.value;
+    
+                if (selectedValue === 'daily') {
+                    updateChart(dailyData, 'Napi bevétel');
+                } else if (selectedValue === 'weekly') {
+                    const weeklyData = aggregateWeekly(dailyData);
+                    updateChart(weeklyData, 'Heti átlagolt bevétel');
+                } else if (selectedValue === 'monthly') {
+                    const monthlyData = aggregateMonthly(dailyData);
+                    updateChart(monthlyData, 'Havi átlagolt bevétel');
+                }
+            });
         });
     </script>
     {% endblock %}
