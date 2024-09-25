@@ -29,9 +29,6 @@ class ReservationForm(FlaskForm):
 
             self.slot.query_factory = lambda: self.session.query(SlotModel).filter_by(live=True).all()
 
-        if obj:
-            self.load_data(obj)
-
     def load_data(self, obj):
         """Betölti az adatokat a foglalás objektumból az űrlap mezőibe."""
         if obj.car:
