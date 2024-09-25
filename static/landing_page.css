@@ -3,10 +3,15 @@
     /* Default font-size for rem calculations */
 }
 
+a{
+    text-decoration: none;
+}
+
 body {
     width: 100%;
     height: 100%;
     font-family: 'Arial', sans-serif;
+    background-color: #000;
     background-image: url('/static/images/background-image.png');;
     /* Itt add meg a háttérképed elérési útvonalát */
     background-repeat: no-repeat;
@@ -89,6 +94,7 @@ i {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    margin-bottom: 2rem;
 }
 
 .Reg-container {
@@ -223,12 +229,12 @@ i {
 
 .slider {
     display: flex;
-    width: 300%;
+    width: 600%;
     transition: transform 0.5s ease;
 }
 
 .slider img {
-    width: 33.33%;
+    width: 16.66%;
     height: auto;
 }
 
@@ -267,7 +273,7 @@ i {
 .FoglalasGomb {
     border-radius: 20px 5px;
     border: 1.5px solid #7CF2DA;
-    background: #000;
+    background-color: rgba(0, 0, 0, 0.5);
     box-shadow: 0px 0px 15px 3px rgba(124, 242, 218, 0.50), 0px 0px 15px 3px rgba(124, 242, 218, 0.50) inset;
     color: white;
     display: flex;
@@ -367,7 +373,6 @@ i {
 .keret {
     width: 21rem;
     height: 29rem;
-    background: black;
     border: 1.50px #13669C solid;
     display: flex;
     flex-direction: column;
@@ -377,7 +382,7 @@ i {
     padding-bottom: 50px;
     border-radius: 10px;
     border: 1.5px solid var(--A-kk, #13669C);
-    background: #000;
+    background-color: rgba(0, 0, 0, 0.7);
     box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50), 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset;
 }
 
@@ -545,6 +550,7 @@ i {
     justify-content: flex-start;
     align-items: center;
     gap: 3vh;
+    margin-bottom: 10rem;
 }
 
 .footer-content {
@@ -769,7 +775,7 @@ i {
     }
 
     .footer-powered {
-        margin-top: 2rem;
+        margin-top: 10rem;
     }
 
     .footer-powered-text {
@@ -787,7 +793,7 @@ i {
     }
 
     .text-overlay{
-        height: 210px;
+        height: 236px;
     }
 
     .text-overlay p {
@@ -795,7 +801,7 @@ i {
     }
 
     .slider-container{
-        height: 77rem;
+        height: 72rem;
     }
 
     .FoglalasGomb {
@@ -857,7 +863,7 @@ i {
     }
 
     .footer-powered {
-        margin-top: 2rem;
+        margin-top: 9rem;
     }
 
     .footer-powered-text {
@@ -930,6 +936,7 @@ i {
 
     .MosokCim {
         margin-top: 19rem;
+        font-size: 1.3em;
     }
 
     .main-Carousel-container {
@@ -945,7 +952,7 @@ i {
     }
 
     .footer-powered {
-        margin-top: 2rem;
+        margin-top: 9rem;
     }
 
     .footer-powered-text{
@@ -1040,6 +1047,10 @@ i {
         margin-top: 1rem;
     }
 
+    .footer-powered-content{
+        margin-top: 8rem;
+    }
+
     .footer-powered-text{
         font-size: 2em;
     }
@@ -1080,7 +1091,7 @@ i {
     }
 
     .FoglalasGomb {
-        width: 37rem;
+        width: 40rem;
         font-size: 3em;
         height: 8rem;
     }
@@ -1135,6 +1146,10 @@ i {
 
     .carousel-container{
         max-width: 1050px;
+    }
+
+    .footer{
+        margin-bottom: 0;
     }
 
     .footer-text {
@@ -1195,7 +1210,7 @@ i {
     }
 
     .FoglalasGomb {
-        width: 27rem;
+        width: 30rem;
         height: 6rem;
         font-size: 2em;
     }
@@ -1255,12 +1270,12 @@ i {
 
     .footer{
         margin-top: 14rem;
-        margin-bottom: 5rem;    
+        margin-bottom: 8rem;    
     }
 
     .footer-content {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
     }
@@ -1271,16 +1286,21 @@ i {
 
     .Footer-washes {
         display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+        flex-direction: row;
+        justify-content: center;
         align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 7rem;
+        row-gap: 2rem;
     }
 
     .footer-texts {
         display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+        flex-direction: row;
+        justify-content: center;
         align-items: flex-start;
+        flex-wrap: wrap;
+        row-gap: 2rem;
     }
 
     .footer-powered{
@@ -1348,9 +1368,10 @@ i {
     }
 
     .FoglalasGomb {
-        width: 14rem;
+        width: 20rem;
         height: 3rem;
-        font-size: 1em;
+        font-size: 1.3em;
+        border-radius: 10px 5px;
     }
 
     .tooltip {
@@ -1372,11 +1393,15 @@ i {
 
     .keret {
         width: 8rem;
-        height: 17rem;
+        height: 14rem;
+    }
+
+    .helyszin{
+        margin-top: 1rem;
     }
 
     .IkonKeret {
-        top: calc(10rem + -5rem + 3rem);
+        top: calc(10rem + -8rem + 3rem);
     }
 
     .ikon {
@@ -1412,41 +1437,40 @@ i {
     }
 
     .footer {
-        margin: auto;
+        margin-bottom: 5rem;
         width: auto;
     }
 
     .footer-content {
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: stretch;
-        margin: auto;
-        gap: 3vw;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     .Footer-washes {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 7rem;
+        row-gap: 2rem;
+        column-gap: 10rem;
     }
 
     .footer-texts {
         display: flex;
-        flex-direction: column;
-        width: 49%;
+        flex-direction: row;
+        justify-content: center;
         align-items: flex-start;
+        flex-wrap: wrap;
+        row-gap: 2rem;
+        column-gap: 8rem;
     }
 
     .footer-text {
         font-size: 0.8em;
-    }
-
-    .footer-texts{
-        gap: 0.9rem;
-    }
-
-    .Footer-washes{
-        gap: 1.4rem;
     }
 
     .footer-box{
@@ -1455,7 +1479,7 @@ i {
 
     .footer-powered {
         width: auto;
-        margin-top: 1rem;
+        margin-top: 7rem;
     }
 
     .footer-powered-content {
@@ -1517,10 +1541,6 @@ i {
         display: none;
     }
 
-    .slider-container{
-        height: 24rem;
-    }
-
     .text-overlay {
         height: 70px;
     }
@@ -1530,9 +1550,10 @@ i {
     }
 
     .FoglalasGomb {
-        width: 14rem;
+        width: 20rem;
         height: 3rem;
-        font-size: 1em;
+        font-size: 1.3em;
+        border-radius: 10px 5px;
     }
 
     .tooltip {
@@ -1554,11 +1575,15 @@ i {
 
     .keret {
         width: 8rem;
-        height: 17rem;
+        height: 13rem;
+    }
+
+    .helyszin{
+        margin-top: 1rem;
     }
 
     .IkonKeret {
-        top: calc(10rem + -5rem + 3rem);
+        top: calc(10rem + -8rem + 3rem);
     }
 
     .ikon {
@@ -1568,7 +1593,7 @@ i {
 
     .MosokCim {
         font-size: 0.7em;
-        margin-top: 8rem;
+        margin-top: 7rem;
     }
 
     .main-Carousel-container {
@@ -1595,40 +1620,40 @@ i {
     }
 
     .footer {
-        margin: auto;
+        margin: 11rem auto;
         width: auto;
     }
 
     .footer-content {
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: stretch;
-        margin: auto;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     .Footer-washes {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 7rem;
+        row-gap: 2rem;
+        column-gap: 11rem;
     }
 
     .footer-texts {
         display: flex;
-        flex-direction: column;
-        width: 49%;
+        flex-direction: row;
+        justify-content: center;
         align-items: flex-start;
+        flex-wrap: wrap;
+        row-gap: 2rem;
+        column-gap: 9rem;
     }
 
     .footer-text {
         font-size: 0.8em;
-    }
-
-    .footer-texts{
-        gap: 0.9rem;
-    }
-
-    .Footer-washes{
-        gap: 1.4rem;
     }
 
     .footer-box{
@@ -1637,7 +1662,7 @@ i {
 
     .footer-powered {
         width: auto;
-        margin-top: 1rem;
+        margin-top: 8rem;
     }
 
     .footer-powered-content {

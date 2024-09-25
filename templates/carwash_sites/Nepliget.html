@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <link rel= "stylesheet" href= "{{ url_for('static',filename='Moso.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://use.typekit.net/uzv0akr.css">
@@ -105,10 +105,12 @@
         </div>
         <div class="Foglalas">
             <button class="FoglalasGomb"id = 'bookingButton'>Online időpont foglalás
-                <div class="tooltip">Lépj be, vagy regisztrálj az online időpont foglaláshoz az oldal tetején.</div>
-            </button>
+                    <div class="tooltip">Lépj be, vagy regisztrálj az online időpont foglaláshoz az oldal tetején.</div>
+                </button>
+            </a>
         </div>
-        <div class="all-Service">
+        <img src="{{ url_for('static', filename='images/Arlista.png')}}" style="width: 100%; height: 100%; margin-top: 5rem;" alt="">
+        <!--<div class="all-Service">
             <h1>Csomagok</h1>
             <div class="services">
                 <div class="service">
@@ -180,88 +182,156 @@
                         kiválasztott autó parfümmel illatosítjuk az utasteret.</p>
                 </div>
             </div>
-        </div>
+        </div>-->
         <div class="second-all-Service">
             <h1>Autó kozmetikai szolgáltatások</h1>
             <p class="info">Autókozmetikai szolgáltatásainkat csak felmérés után vállaljuk. (A felmérésnek nincs plusz
                 költsége.)<br>Keresd kollégáinkat telefonon, vagy személyesen üzletünkben.</p>
             <div class="services">
-                <div class="cosmetic-service">
-                    <div class="titles">
-                        <h2>Csillog-Villog Csomag: 6000 Ft-tól</h2>
-                        <div class="cosmetic-services-list">
-                            <p>Előmosás</p>
-                            <p>Samponos mosás</p>
-                            <p>Felni tisztítás</p>
-                            <p>Öblítés</p>
-                            <p>Szárítás</p>
-                            <p><b>Kemény waxolás</b></p>
-                            <p><strong>Gumiápolás</strong></p>
-                            <p>Porszívózás</p>
-                            <p>Műanyag tisztítás</p>
-                            <p><strong>Műanyag ápolás</strong></p>
-                            <p>Ablak tisztítás</p>
-                            <p><strong>Autó parfüm</strong></p>
-                        </div>
-                    </div>
-                </div>
-                <hr class="last-hr">
-                <div class="description">
-                    <p class="cosmetic-text">Az autód külsejére kemény waxot aplikálunk, ami 6 hónapig tartó hidrofób
-                        védőréteget
-                        képez, mélyfényű ragyogással.Belül a műanyag felületeket leápljuk, majd az általad kiválasztott
-                        autó parfümmel illatosítjuk az utasteret.</p>
-                </div>
-                <div class="cosmetic-service">
-                    <div class="titles">
-                        <h2>Kerámia Bevonat</h2>
-                        <div class="cosmetic-services-list">
-                            <p>Bogár kerámia: 5000 Ft-tól</p>
-                            <p>Szélvédő kerámia: 5000 Ft-tól</p>
-                            <p>Teljes kerámia: 5000 Ft-tól</p>
-                        </div>
-                    </div>
-                </div>
-                <hr class="last-hr">
-                <div class="description">
-                    <p class="cosmetic-text1">Egy 9H keménységű nano bevonatot aplikálunk autód külsejére, ami 3 évig
-                        garantáltan védeni fogja a lakkréteget a karcoktól és a savaktól.A bevonat exra hidrofób
-                        felületet képez, ami optikailag üvegbe mártott színmélységet és csillogást ad.</p>
-                </div>
-                <div class="cosmetic-service">
-                    <div class="titles">
-                        <h2>Kárpit Tisztítás</h2>
-                        <div class="cosmetic-services-list">
-                            <p>Szövet szőnyeg: 5000 Ft-tól</p>
-                            <p>1 ülés: 5000 Ft-tól</p>
-                            <p>Első ülés sor: 5000 Ft-tól</p>
-                            <p>Hátsó ülés sor: 5000 Ft-tól</p>
-                            <p>Csak ülés: 5000 Ft-tól</p>
-                            <p>Teljes kárpit: 5000 Ft-tól</p>
-                        </div>
-                    </div>
-                </div>
-                <hr class="last-hr">
-                <div class="description">
-                    <p class="cosmetic-text2">Kárpit Tisztítást csak felmérés után vállalunk. Az autót minimum 24 óráig
-                        nálunk kell maradnia a szárítás idejéig. A felmérés egyeztetéséért keresd kollegánkat telefonon,
-                        vagy üzletünkben.</p>
-                </div>
-                <div class="cosmetic-service">
-                    <div class="titles">
+                <div class="cosmetic-service-teszt">
+                    <div class="titles-teszt">
                         <h2>Polírozás</h2>
-                        <div class="cosmetic-services-list">
-                            <p>Lakk tisztító polír: 5000 Ft-tól</p>
-                            <p>Fényesítő polír: 5000 Ft-tól</p>
-                            <p>Korrekciós polír: 5000 Ft-tól</p>
-                            <p>Fényszoro polír: 5000 Ft-tól</p>
-                            <p>Bogár polír: 5000 Ft-tól</p>
+                    </div>
+                    <div class="cosmetic-service-container">
+                        <div class="cosmetic-services-list-container">
+                            <div class="cosmetic-services-list-teszt">
+                                <p>Fényesítő polírozás: 70000 -tól</p>
+                                <p>Korrekciós polírozás: 100000 -tól</p>
+                                <p>Fényszoro polírozás(párban): 16000</p>
+                                <p>Elem polírozás: 30000 tól</p>
+                            </div>
+                        </div>
+                        <hr style="margin: 0; height: auto;">
+                        <div class="description-teszt">
+                            <p class="cosmetic-text1-teszt">Az autó polírozása során a felületi karcok és mikrosérülések eltávolítása mellett a fényezés visszanyeri eredeti ragyogását. Speciális anyagokkal és gépekkel végezzük, hogy a fényezés sima és egyenletes legyen, így az autó újszerű megjelenést kap. A polírozás növeli a védelem tartósságát és kiemeli az autó színét.</p>
                         </div>
                     </div>
                 </div>
-                <hr class="last-hr">
-                <div class="description">
-                    <p class="cosmetic-text3">Polírozást csak felmérés után vállalunk.</p>
+                <div class="cosmetic-service-teszt">
+                    <div class="titles-teszt">
+                        <h2>Kavicsvédő Fóliázás</h2>
+                    </div>
+                    <div class="cosmetic-service-container">
+                        <div class="cosmetic-services-list-container">
+                            <div class="cosmetic-services-list-teszt">
+                                <p>Kilincs öböl fóliázás: 18000/öböl</p>
+                                <p>Front kavics fóliázás: Felmérés alapján</p>
+                                <p>Teljes kavics fóliázás: Felmérés alapján</p>
+                                <p>Belső kavics fóliázás: Felmérés alapján</p>
+                            </div>
+                        </div>
+                        <hr style="margin: 0; height: auto;">
+                        <div class="description-teszt">
+                            <p class="cosmetic-text1-teszt">A kavicsvédő fóliázás egy átlátszó, tartós fólia alkalmazása, amely
+                                megvédi az autó fényezését a kavicsfelverődésektől, karcolásoktól és kisebb sérülésektől. Az
+                                anyag rugalmas és ellenálló, így a jármű kritikus területeit hosszú távon óvja anélkül, hogy
+                                befolyásolná annak megjelenését. Ideális megoldás azoknak, akik megőriznék autójuk esztétikai
+                                értékét és hosszabb élettartamát.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="cosmetic-service-teszt">
+                    <div class="titles-teszt">
+                        <h2>Kerámia Bevonat</h2>
+                    </div>
+                    <div class="cosmetic-service-container">
+                        <div class="cosmetic-services-list-container">
+                            <div class="cosmetic-services-list-teszt">
+                                <p>Teljes ablak: 50000 -tól</p>
+                            <p>Teljes karosszéria: 190000 -tól</p>
+                            </div>
+                        </div>
+                        <hr style="margin: 0; height: auto;">
+                        <div class="description-teszt">
+                            <p class="cosmetic-text1-teszt">A kerámia bevonat egy innovatív védelmi réteg, amely hosszú távú, kemény és vízlepergető felületet biztosít az autó fényezésén. Ellenáll az UV-sugárzásnak, szennyeződéseknek és kisebb karcolásoknak, így az autó fényes és védett marad a mindennapi igénybevétel mellett. A bevonat hosszan tartó ragyogást és könnyebb tisztíthatóságot kínál, megőrizve az autó eredeti szépségét.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="cosmetic-service-teszt">
+                    <div class="titles-teszt">
+                        <h2>Graphen Bevonat</h2>
+                    </div>
+                    <div class="cosmetic-service-container">
+                        <div class="cosmetic-services-list-container">
+                            <div class="cosmetic-services-list-teszt">
+                                <p>Teljes karosszéria graphen bevonat: 170000 -tól</p>
+                            </div>
+                        </div>
+                        <hr style="margin: 0; height: auto;">
+                        <div class="description-teszt">
+                            <p class="cosmetic-text1-teszt">A grafén bevonat egy modern, csúcstechnológiás védelem, amely extrém tartósságot és kiemelkedő hő-, víz- és vegyszerállóságot nyújt az autó felületének. A grafén molekuláris szerkezete miatt erősebb és rugalmasabb, mint a hagyományos kerámia bevonatok, így hosszabb élettartamot és mélyebb fényt biztosít. Emellett kiváló vízlepergető tulajdonsággal rendelkezik, megkönnyítve az autó tisztán tartását és védve a fényezést a környezeti hatásokkal szemben.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="cosmetic-service-teszt">
+                    <div class="titles-teszt">
+                        <h2>Fólia & Matrica Eltávolítás</h2>
+                    </div>
+                    <div class="cosmetic-service-container">
+                        <div class="cosmetic-services-list-container">
+                            <div class="cosmetic-services-list-teszt">
+                                <p>Teljes fólia eltávolítás: 120000 -tól</p>
+                            <p>Reklám matrica eltávolítás: 80000 -tól</p>
+                            </div>
+                        </div>
+                        <hr style="margin: 0; height: auto;">
+                        <div class="description-teszt">
+                            <p class="cosmetic-text1-teszt">A fólia és matrica eltávolítása során kíméletesen távolítjuk el az autóra felvitt rétegeket anélkül, hogy sérülést okoznánk a fényezésen. Speciális hőkezelési és oldószeres technikákat alkalmazunk, hogy a ragasztómaradványokat is teljesen eltüntessük, megőrizve az autó eredeti megjelenését. A megfelelő szakértelemmel végzett eltávolítás biztosítja, hogy a fényezés ép és sérülésmentes maradjon a folyamat során.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="cosmetic-service-teszt">
+                    <div class="titles-teszt">
+                        <h2>Tető impregnálás</h2>
+                    </div>
+                    <div class="cosmetic-service-container">
+                        <div class="cosmetic-services-list-container">
+                            <div class="cosmetic-services-list-teszt">
+                                <p>Tető impregnálás: 50000</p>
+                            </div>
+                        </div>
+                        <hr style="margin: 0; height: auto;">
+                        <div class="description-teszt">
+                            <p class="cosmetic-text1-teszt">A tető impregnálás egy speciális kezelés, amelyet elsősorban kabrió autók vászontetején alkalmaznak, hogy megvédjék azt a víz, UV-sugárzás és szennyeződések ellen. Az impregnáló anyag mélyen behatol az anyag szerkezetébe, ezáltal vízlepergetővé teszi a tetőt, miközben megőrzi annak légáteresztő képességét. Az impregnálás hosszabb élettartamot és jobb ellenállóságot biztosít a környezeti hatásokkal szemben, megóvva a tető esztétikai és funkcionális tulajdonságait.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="cosmetic-service-teszt">
+                    <div class="titles-teszt">
+                        <h2>Kárpit Tisztítás</h2>
+                    </div>
+                    <div class="cosmetic-service-container">
+                        <div class="cosmetic-services-list-container">
+                            <div class="cosmetic-services-list-teszt">
+                                <p>Ülés kárpit: 8000/ülés</p>
+                            <p>Teljes padlókárpit: 15000</p>
+                            <p>Teljes tetőkárpit: 15000</p>
+                            <p>Csomagtér kárpit: 10000</p>
+                            </div>
+                        </div>
+                        <hr style="margin: 0; height: auto;">
+                        <div class="description-teszt">
+                            <p class="cosmetic-text1-teszt">Kárpit Tisztítást csak felmérés után vállalunk. Az autót minimum 24 óráig
+                                nálunk kell maradnia a szárítás idejéig. A felmérés egyeztetéséért keresd kollegánkat telefonon,
+                                vagy üzletünkben.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="cosmetic-service-teszt">
+                    <div class="titles-teszt">
+                        <h2>Bőr Tisztítás & Ápolás</h2>
+                    </div>
+                    <div class="cosmetic-service-container">
+                        <div class="cosmetic-services-list-container">
+                            <div class="cosmetic-services-list-teszt">
+                                <p>Bőr Tisztítás & Ápolás: 8000/ülés</p>
+                            </div>
+                        </div>
+                        <hr style="margin: 0; height: auto;">
+                        <div class="description-teszt">
+                            <p class="cosmetic-text1-teszt">A bőr tisztítás és ápolás során speciális tisztítószerekkel távolítjuk el a felhalmozódott szennyeződéseket, miközben megóvjuk a bőr felületét a károsodástól. Az ápolás során bőrkondicionáló anyagokat használunk, amelyek mélyen táplálják a bőrt, megőrizve annak rugalmasságát és fényét, valamint védelmet nyújtanak a repedezés és fakulás ellen. Rendszeres tisztítással és ápolással a bőr hosszabb ideig megőrzi természetes szépségét és tartósságát.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -310,7 +380,7 @@
                     Általános szerződési feltételek</div>
                 <div class="jogok-box">eliteshine@shine.com<br>
                     +36 20 69 69 669</div>
-                <div class="jogok-box"> 
+                <div class="jogok-box">
                     <i class="fa-brands fa-facebook"></i>
                     <i class="fa-brands fa-instagram"></i>
                 </div>
