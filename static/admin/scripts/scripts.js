@@ -26,10 +26,20 @@ $(document).ready(function() {
                         $('#new_customer_forname').val(data.customer_forname);
                         $('#new_customer_lastname').val(data.customer_lastname);
                         $('#new_customer_phone_number').val(data.customer_phone_number);
+                        
+                        if (data.billing_name) {
+                            $('#billing_name').val(data.billing_name);
+                            $('#address').val(data.address);
+                            $('#email').val(data.email);
+                            $('#company_name').val(data.company_name);
+                            $('#tax_ID').val(data.tax_ID);
+                            $('#billing_required').prop('checked', true); // Mark billing required as checked
+                        }
                         response([{
                             label: data.new_car_license_plate,
                             value: data.new_car_license_plate
                         }]);
+                        
                     }
                 },
                 error: function() {
