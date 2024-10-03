@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, current_app
+from flask import Blueprint, jsonify, current_app, request
 from sqlalchemy.orm import joinedload
 from src.models.reservation_model import ReservationModel
 from src.models.car_model import CarModel
@@ -6,14 +6,20 @@ from src.models.service_model import ServiceModel
 from src.models.customer_model import CustomerModel
 from src.models.carwash_model import CarWashModel
 
-# Create the helix Blueprint
-helix_api = Blueprint('helix_api', __name__,url_prefix='/helix')
+
+helix_api = Blueprint('helix_api', __name__)
 
 @helix_api.route('/reservations', methods=['GET'])
 def get_reservations():
-    # Fetch reservation data with relationships
+    # Extract query parameters
+    license_plate = request.args.get('license_plate')
+    reservation_id = request.args.get('id')
+
+    # Get session from session factory
     session = current_app.session_factory.get_session()
-    reservations = session.query(
+
+    # Base query to fetch reservation data
+    query = session.query(
         CarWashModel.carwash_name,
         ReservationModel.reservation_date,
         CarModel.license_plate,
@@ -28,8 +34,16 @@ def get_reservations():
     ).join(CarWashModel, ReservationModel.carwash_id == CarWashModel.id) \
      .join(CarModel, ReservationModel.car_id == CarModel.id) \
      .join(ServiceModel, ReservationModel.service_id == ServiceModel.id) \
-     .join(CustomerModel, ReservationModel.customer_id == CustomerModel.id) \
-     .all()
+     .join(CustomerModel, ReservationModel.customer_id == CustomerModel.id)
+
+    # Apply filters based on query parameters
+    if license_plate:
+        query = query.filter(CarModel.license_plate == license_plate)
+    if reservation_id:
+        query = query.filter(ReservationModel.id == reservation_id)
+
+    # Fetch filtered reservations
+    reservations = query.all()
 
     # Serialize the data to JSON format
     results = []
@@ -46,6 +60,6 @@ def get_reservations():
             'final_price': res[9],
             'is_completed': res[10]
         })
-        
 
     return jsonify(results), 200
+
