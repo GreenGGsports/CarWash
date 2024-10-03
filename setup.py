@@ -16,7 +16,7 @@ from src.controllers.reservation_autofill import reservation_autofill_ctrl
 from database import create_database, get_db, close_db
 from src.controllers.admin import init_admin, init_local_admin, init_developer_admin
 from src.models.user_model import UserModel
-
+from src.controllers.helix_api import helix_api
 
 
 from logger import setup_logging
@@ -92,6 +92,7 @@ def add_blueprints(app: Flask):
     app.register_blueprint(admin_ctrl, url_prefix='/admin', name='admin_blueprint')
     app.register_blueprint(local_admin_ctrl, url_prefix='/local-admin', name='local_admin_blueprint')
     app.register_blueprint(developer_ctrl, url_prefix='/developer', name='developer_admin_blueprint')
+    app.register_blueprint(helix_api, url_prefix='/helix')
     return app 
 
 if __name__ == '__main__':
