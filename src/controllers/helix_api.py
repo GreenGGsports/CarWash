@@ -54,9 +54,9 @@ def get_reservations():
         current_app.logger.info(f"Found {len(reservations)} reservations")
         
         # Serialize the data to JSON format
-        results = []
+        items = []
         for res in reservations:
-            results.append({
+            items.append({
                 'carwash_name': res[0],
                 'reservation_date': res[1].strftime('%Y-%m-%d %H:%M:%S'),
                 'license_plate': res[2],
@@ -70,7 +70,13 @@ def get_reservations():
             })
         
         current_app.logger.info("Successfully serialized reservation data")
-        return jsonify(results), 200
+
+        # Build the response in the desired format
+        response = {
+            "items": items
+        }
+
+        return jsonify(response), 200
     
     except Exception as e:
         current_app.logger.error(f"Error fetching reservations: {str(e)}")
