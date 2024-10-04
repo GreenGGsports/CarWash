@@ -17,6 +17,7 @@ def get_reservations():
     reservation_id = request.args.get('id')
 
     current_app.logger.debug(f"Query params: license_plate={license_plate}, reservation_id={reservation_id}")
+    current_app.logger.debug(request.args)
 
     session = current_app.session_factory.get_session()
 
