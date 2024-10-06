@@ -23,21 +23,25 @@ def autocomplete():
             .order_by(ReservationModel.reservation_date.desc())
             .first()
         )
+        if not reservation:
+            return jsonify({'error': 'No reservation found'}), 404
         
-        if reservation:
-            response = {
-                'new_car_license_plate': reservation.car.license_plate,
-                'new_car_type': reservation.car.car_type.name,
-                'new_car_brand': reservation.car.car_brand,
-                'customer_forname': reservation.customer.forname,
-                'customer_lastname': reservation.customer.lastname,
-                'customer_phone_number': reservation.customer.phone_number,
-                'service': reservation.service.service_name,
-                'reservation_date': reservation.reservation_date.strftime('%Y-%m-%d %H:%M:%S'),
-                'parking_spot': reservation.parking_spot,
-                'carwash': reservation.carwash.carwash_name,
-                'new_car_model': reservation.car.car_model,
-            }
+        # Base response with reservation data
+        response = {
+            'new_car_license_plate': reservation.car.license_plate,
+            'new_car_type': reservation.car.car_type.name,
+            'new_car_brand': reservation.car.car_brand,
+            'customer_forname': reservation.customer.forname,
+            'customer_lastname': reservation.customer.lastname,
+            'customer_phone_number': reservation.customer.phone_number,
+            'service': reservation.service.service_name,
+            'reservation_date': reservation.reservation_date.strftime('%Y-%m-%d %H:%M:%S'),
+            'parking_spot': reservation.parking_spot,
+            'carwash': reservation.carwash.carwash_name,
+            'new_car_model': reservation.car.car_model,
+        }
+
+        # Add billing data if available
         if reservation.billing:
             response.update({
                 'billing_name': reservation.billing.name,
@@ -46,9 +50,9 @@ def autocomplete():
                 'company_name': reservation.billing.company_name,
                 'tax_ID': reservation.billing.tax_ID,
             })
-            return jsonify(response)
-        else:
-            return jsonify({'error': 'No reservation found'}), 404
+        
+        # Return the response whether or not billing is available
+        return jsonify(response)
             
     except SQLAlchemyError as e:
         # Log the exception
