@@ -5,9 +5,9 @@ from src.models.slot_model import SlotModel
 from src.models.carwash_model import CarWashModel
 from src.models.extra_model import ExtraModel
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, DateTimeField, BooleanField
+from wtforms import StringField, SelectField, DateTimeField, BooleanField, FloatField
 from wtforms_sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired,  Optional
 from flask_login import current_user
 
 class ReservationForm(FlaskForm):
@@ -76,6 +76,8 @@ class ReservationForm(FlaskForm):
     parking_spot = StringField('Parkolóhely')
     carwash = QuerySelectField('Autómosó', allow_blank=False, query_factory=lambda: [])
     slot = QuerySelectField('Slot', allow_blank=False, query_factory=lambda: [])
+
+    new_price = FloatField('Egyedi ár', validators=[Optional()])
     payment_method =  SelectField('Fizetési mód', choices=[(t.name, t.value) for t in PaymentEnum], validators=[DataRequired()])
     is_completed = BooleanField('Kész?')
     

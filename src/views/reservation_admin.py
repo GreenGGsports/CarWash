@@ -24,6 +24,7 @@ class ReservationAdminView(MyModelView):
         'car.license_plate',
         'car.car_brand',
         'car.car_model',
+        'car.company.company_name',
         'service.service_name',
         'extras',
         'customer.phone_number',
@@ -38,6 +39,7 @@ class ReservationAdminView(MyModelView):
         'car.license_plate': 'Rendszám',
         'car.car_brand': 'Márka',
         'car.car_model': 'Típus',
+        'car.company.company_name: Cégnév'
         'service.service_name': 'Csomag',
         'extras': 'Extra',
         'final_price': 'Ár',
@@ -78,7 +80,7 @@ class ReservationAdminView(MyModelView):
         return count, query
 
     def create_form(self, obj=None):
-        form = super(ReservationAdminView, self).create_form(obj)
+        form = form = super(ReservationAdminView, self).create_form(obj)
         form.session = self.session
         form.user_role = current_user.role if current_user.is_authenticated else None  # Pass user role to form
         return form
@@ -96,7 +98,6 @@ class ReservationAdminView(MyModelView):
     
     def on_model_change(self, form, model, is_created):
         session = form.session
-        
         try:
             # Use no_autoflush to prevent automatic flushes
             with session.no_autoflush:
@@ -158,6 +159,15 @@ class ReservationAdminView(MyModelView):
                                                                            service_id=model.service.id,
                                                                            car_id= model.car.id, 
                                                                            extras=[extra.id for extra in model.extras])
+                
+                from pdb import set_trace
+                set_trace()
+                
+                if form.new_price.data:
+                    model.final_price = form.new_price.data
+
+                
+
                 if form.billing_required.data:
                     billing = session.query(BillingModel).filter_by(reservation_id=model.id).first()
                     if not billing:
