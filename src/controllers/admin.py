@@ -36,7 +36,7 @@ def init_admin(app, session_factory):
     admin.add_view(ExtraModelView(ExtraModel, session, name='Extrák', endpoint='extra_admin'))
     admin.add_view(MyModelView(CompanyModel, session, name='Cégek', endpoint='company_admin'))
     admin.add_view(CarwashAdminView(CarWashModel, session, name='Autómosók', endpoint='carwash_admin'))
-    admin.add_view(MyModelView(CarModel, session, name='Car', endpoint='car_admin'))
+    admin.add_view(MyModelView(CarModel, session, name='Autók', endpoint='car_admin'))
     admin.add_view(MonthlyInvoiceView(session=session, name='Havi számlázás', endpoint='monthly_invoices'))
     admin.add_view(InvoiceModelView(BillingModel, session, name='Számlák', endpoint='billing_admin'))
     admin.add_view(Dashboard(ReservationModel, session, name='Dashboard', endpoint='dashboard'))
