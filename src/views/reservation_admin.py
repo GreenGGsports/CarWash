@@ -160,9 +160,6 @@ class ReservationAdminView(MyModelView):
                                                                            car_id= model.car.id, 
                                                                            extras=[extra.id for extra in model.extras])
                 
-                from pdb import set_trace
-                set_trace()
-                
                 if form.new_price.data:
                     model.final_price = form.new_price.data
 
