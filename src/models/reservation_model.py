@@ -49,8 +49,11 @@ class ReservationModel(BaseModel):
         car_type = car.car_type
 
         service = ServiceModel.get_by_id(session, service_id)
-        if car_type == 'large_car':
+        
+        if car_type.value == 'large_car':
             service_price = service.price_large if service else 0
+        elif car_type.value == 'medium_car':
+            service_price = service.price_medium if service else 0
         else:
             service_price = service.price_small if service else 0
 
