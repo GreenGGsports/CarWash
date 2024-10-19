@@ -33,6 +33,7 @@ class ReservationModel(BaseModel):
     final_price = Column(Integer)
     payment_method = Column(SqlEnum(PaymentEnum, nullable = False))
     is_completed = Column(Boolean, default=False)
+    comment = Column(String(512), nullable=True)
 
     car = relationship('CarModel', back_populates='reservations')
     slot = relationship("SlotModel")

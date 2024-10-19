@@ -71,6 +71,7 @@ class ReservationForm(FlaskForm):
 
     service = QuerySelectField('Csomag', allow_blank=False, query_factory=lambda: [],validators=[DataRequired()])
     extras = QuerySelectMultipleField('Extrák', get_label='service_name')
+    comment = StringField('Megjegyzés')
 
     reservation_date = DateTimeField('Időpont', format='%Y-%m-%d %H:%M:%S',validators=[DataRequired()])
     parking_spot = StringField('Parkolóhely')
