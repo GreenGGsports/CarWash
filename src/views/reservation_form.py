@@ -47,7 +47,7 @@ class ReservationForm(FlaskForm):
         self.reservation_date.data = obj.reservation_date
         self.is_completed.data = obj.is_completed
         self.billing_required.data = False
-        self.new_price = obj.final_price
+        self.new_price.data = obj.final_price
 
         if obj.billing:
             self.billing_required.data = True
