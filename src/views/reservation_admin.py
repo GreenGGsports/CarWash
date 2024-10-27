@@ -24,6 +24,7 @@ class ReservationAdminView(MyModelView):
         'car.license_plate',
         'car.car_brand',
         'car.car_model',
+        'parking_spot',
         'car.company.company_name',
         'service.service_name',
         'extras',
@@ -47,7 +48,8 @@ class ReservationAdminView(MyModelView):
         'final_price': 'Ár',
         'payment_method': 'Fizetési mód',
         'customer.phone_number': 'Tel',
-        'is_completed': 'Kész?'
+        'is_completed': 'Kész?',
+        'parking_spot': 'Parkolóhely'
     }
     
     column_formatters = {
