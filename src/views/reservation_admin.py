@@ -159,13 +159,15 @@ class ReservationAdminView(MyModelView):
                     model.car_id = car.id
                     model.car = car
                 
-                model.final_price = ReservationModel.calculate_final_price(session, 
-                                                                           service_id=model.service.id,
-                                                                           car_id= model.car.id, 
-                                                                           extras=[extra.id for extra in model.extras])
-                
+
                 if form.new_price.data:
                     model.final_price = form.new_price.data
+                else:
+                    model.final_price = ReservationModel.calculate_final_price(session, 
+                                                                            service_id=model.service.id,
+                                                                            car_id= model.car.id, 
+                                                                            extras=[extra.id for extra in model.extras])
+                
 
                 
 
