@@ -28,7 +28,7 @@ class ReservationModel(BaseModel):
     carwash_id = Column(Integer, ForeignKey('Carwash.id'), nullable=False)
     
     reservation_date = Column(DateTime, nullable=False)
-    parking_spot = Column(Integer)
+    parking_spot = Column(String(127))
     
     final_price = Column(Integer)
     payment_method = Column(SqlEnum(PaymentEnum, nullable = False))
@@ -82,7 +82,7 @@ class ReservationModel(BaseModel):
     @classmethod
     def add_reservation(cls, session: Session, service_id: int, slot_id: int, carwash_id: int, car_id : int,
                         reservation_date: datetime, customer_id: int, payment_method = str ,extras: Optional[List[int]] = None,
-                        parking_spot: Optional[int] = None, billing_id: int = None) -> 'ReservationModel':
+                        parking_spot: Optional[String] = None, billing_id: int = None) -> 'ReservationModel':
         
         
 

@@ -43,6 +43,7 @@ class ReservationForm(FlaskForm):
             self.new_customer_lastname.data = obj.customer.lastname
             self.new_customer_phone_number.data = obj.customer.phone_number
 
+        self.parking_spot.data = obj.parking_spot
         self.reservation_date.data = obj.reservation_date
         self.is_completed.data = obj.is_completed
         self.billing_required.data = False
