@@ -11,5 +11,5 @@ class BaseAdminIndexView(AdminIndexView):
     @expose('/')
     def index(self):
         if not (current_user.is_authenticated and current_user.role == self.role):
-            return redirect(url_for('user_ctrl.login'))
+            return redirect('/')
         return super(BaseAdminIndexView, self).index()

@@ -73,15 +73,18 @@ class ReservationAdminView(MyModelView):
         super(ReservationAdminView, self).__init__(model, session, *args, **kwargs)
         
     def get_list(self, *args, **kwargs):
-    # Fetch the count and query from the base ModelView method
         count, query = super().get_list(*args, **kwargs)
-        # Apply additional filter if current_user has carwash_id
-        if current_user is current_user.is_authenticated:
-            if  hasattr(current_user, 'carwash_id'): 
-                query = [item for item in query if item.carwash_id == current_user.carwash_id]
+        
+        if current_user.is_authenticated:
             if current_user.role == 'admin':
-                query = [item for item in query]
+                return count, query
+            elif hasattr(current_user, 'carwash_id') and current_user.carwash_id is not None:
+                query = [item for item in query if item.carwash_id == current_user.carwash_id]
+            else:
+                query = []
+
         return count, query
+
 
     def create_form(self, obj=None):
         form = form = super(ReservationAdminView, self).create_form(obj)

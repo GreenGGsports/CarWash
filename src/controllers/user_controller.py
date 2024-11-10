@@ -48,19 +48,41 @@ def login():
         data = request.json
         user_name = data.get('user_name')
         password = data.get('password')
+        
+        # Felhasználó ellenőrzése a UserModel segítségével
         user = UserModel.login(session=db_session, user_name=user_name, password=password)
-        current_app.logger.info('loggin sucessfull')
+        
         if user:
             user_obj = User(user)
             login_user(user_obj, remember=False)
+            
+            # Küldjünk identity_changed jelet a Flask-Principal-nek
             identity_changed.send(current_app._get_current_object(), identity=Identity(user.id))
-            return jsonify({'status': 'logged_in'})
-        return jsonify({'status': 'failed'})
+            
+            # Szerepkör alapú átirányítás
+            if user.role == 'admin':
+                redirect_url = '/admin'  # Admin felület
+            elif user.role == 'local_admin':
+                redirect_url = '/local-admin'  # Carwash felület
+            elif user.role == 'developer':
+                redirect_url = '/developer'
+            else:
+                redirect_url = ''  # Általános felhasználói felület
+            
+            current_app.logger.info('Log in successful')
+            return jsonify({'status': 'logged_in', 'redirect_url': redirect_url})
+        
+        # Hibás hitelesítés esetén
+        return jsonify({'status': 'failed', 'message': 'Invalid username or password'}), 401
+    
     except Exception as e:
         db_session.rollback()
-        current_app.logger.error(e)
+        current_app.logger.error(f"Error during login: {e}")
+        return jsonify({'status': 'error', 'message': 'An error occurred during login'}), 500
+    
     finally:
         db_session.close()
+
 
 @user_ctrl.route('/logout', methods=['POST'])
 @login_required

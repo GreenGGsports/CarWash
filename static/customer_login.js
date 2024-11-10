@@ -15,13 +15,22 @@ window.addEventListener('load', function() {
             if (data.status === 'logged_in') {
                 messageElement.textContent = 'Login successful!';
                 messageElement.style.color = 'green';
+                
+                // Ha van redirect_url a válaszban, irányítsuk át a felhasználót
+                if (data.redirect_url) {
+                    window.location.href = data.redirect_url;  // Átirányítjuk
+                }
             } else {
                 messageElement.textContent = 'Login failed.';
                 messageElement.style.color = 'red';
             }
+        })
+        .catch(error => {
+            console.error("Error during login:", error);
         });
     });
 
+    // Regisztráció és logout kódja változatlanul marad
     document.getElementById('register-form').addEventListener('submit', function(event) {
         event.preventDefault();
         const formData = new FormData(this);
