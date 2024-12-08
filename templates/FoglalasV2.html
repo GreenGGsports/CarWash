@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='FoglalasV3.css') }}">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='modal.css') }}">
-    <script src="{{ url_for('static', filename='cust_script.js') }}"></script>
     <title>Foglalás</title>
 </head>
 <body>
@@ -161,14 +160,23 @@
                 <div class='datumKeret'>
                 <h2 class="alcim">4. Válasszon időpontot</h2> 
                     <div>
-                        <input type="date" class="input-mezo" placeholder="Dátumot" required>
+                        <input type="date" id="dateInput" class="input-mezo" placeholder="Dátumot" required>
                     </div>
                     <div class="info">
                     Autóját a kiválasztott időpontig készítjük el!<br><br>
                     Kérjük hozza autóját az átadási időpont előtt két órával, amennyiben ez nem teljesíthető, jelezze lent a megjegyzésben!
                     </div>
                 </div>
-            <div class = "idopontKeret"></div>
+                <div class="GombBox" id = "GombBox">
+                    <template id = "idopontok">
+                        <button class="IdopontGomb", id = 'IdopontGomb'>
+                            <input type="checkbox" class="checkbox">
+                            <span class="checkbox-label">10 órás átadás</span>
+                        </button>                 
+                    </template>     
+                </div>       
+            </div>    
+            </div>
             </div>
         <div>
     </div>
@@ -303,3 +311,4 @@
     </div>
 </footer>
 </body>
+<script src="{{ url_for('static', filename='cust_script.js') }}"></script>
