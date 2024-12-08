@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='FoglalasV3.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='modal.css') }}">
+    <script src="{{ url_for('static', filename='cust_script.js') }}"></script>
+    <title>Foglalás</title>
+</head>
+<body>
+    <header>
+        <div class="headerDesktop">
+        <div class="exit">
+            <button class="exitButton"></button>
+        </div>
+        <div class="headerButtonBox">
+            <div class="headerButtonwrapper">
+                <button class="headerButton">Bejelentkezés</button>
+            </div>
+            <div class="headerButtonwrapper">
+                <button class="headerButton">Árlisták</button>
+            </div>
+            <div class="headerButtonwrapper">
+                <button class="headerButton">Galéria</button>
+            </div>
+            <div class="headerButtonwrapper">
+                <button class="headerButton">Kapcsolat</button>
+            </div>
+            <div class="headerButtonwrapper">
+                <button class="headerButtonSelected">Online időpontFoglalás</button>
+            </div>
+        </div>
+        </div>
+        <div class="headerMobile">
+            <div class="exit">
+                <button class="exitButton"></button>
+            </div>
+            <button onclick="openModal()" class="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div class = "modal" id="modal">
+            <div id="modal-content">
+                <span id="close" onclick="closeModal()">&times;</span>
+                <div class="modalButtonBox">
+                    <button onclick="openLoginModal()" class="modalButton">Bejelentkezés</button>
+                </div>
+                <div class="modalButtonBox">
+                    <button class="modalButton">Online Időpontfoglalás</button>
+                </div>
+                <div class="modalButtonBox">
+                    <button class="modalButton">Galéria</button>
+                </div>
+                <div class="modalButtonBox">
+                    <button class="modalButton">Kapcsolat</button>
+                </div>
+            </div>
+        </div>
+        <div class = "modal" id="login-modal">
+            <div id="modal-content">
+                <h2 class="alcim">Bejelentkezés</h2>
+                <span id="close" onclick="closeLoginModal()">&times;</span>
+                <form id="loginRegisterForm">
+                <div class='input-keret'> 
+                    <label class = "input-label"  for="username">Felhasználónév:</label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        name="username" 
+                        value="{{ customer.forname }}" 
+                        placeholder="" 
+                        class="input-mezo"
+                        required>
+                </div>
+                <div class='input-keret'> 
+                    <label class = "input-label"  for="password">Jelszó:</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        value="{{ customer.forname }}" 
+                        placeholder="" 
+                        class="input-mezo"
+                        required>
+                </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="FoglalasiFelulet">
+        <h1 class="focim">Online Időpontfoglalás</h1>  
+        <div class='FoglalasBox'>
+        <h2 class="alcim">1. Válasszon autómosót</h2>
+            <div class="locationBox" id = "box">
+                <form id="locationForm" action="/reservation_test/select_location" method="POST">
+                    {% for location in locations %}
+                    <button class="keret" name="location_id" value="{{ location.id }}" type="submit" id="location_btn">
+                        <img class="helyszinkep" src="/static/images/{{ location.image_name }}" />
+                        <img class="helyszinikon" src="/static/images/map.svg">
+                        <div class="IkonKeret"></div>
+                        <div class="MosokCim">{{ location.location }}</div>
+                    </button>
+                    {% endfor %}
+                </form>
+            </div>
+        <form id="reservationForm" action="/reservation_test/select_location" method="POST">
+        <h2 class="alcim">2. Válasszon csomagot</h2> 
+        <div class="serviceBox">
+            {% for service in services %}
+            <input 
+                type="radio" 
+                class="radio"
+                name="service" 
+                id="service-{{ service.id }}" 
+                value="{{ service.id }}" 
+            />
+            <label class="serviceKeret" for="service-{{ service.id }}">
+                <div class = "csomag_header">
+                    <div class="csomag_nev">{{ service.service_name }}</div>
+                </div>
+                <div class="csomag_content">
+                    <div class='meret_box'> 
+                        <div class="csomag_meret">M</div>
+                        <div class="csomag_ar">{{ service.price_small }}</div>
+                        <div class="meret_leiras">(Sedan, Hatchback)</div>
+                    </div>
+                    <div class='meret_box'>
+                        <div class="csomag_meret">L</div>
+                        <div class="csomag_ar">{{ service.price_medium }}</div>
+                        <div class="meret_leiras">(Combi, SUV)</div>
+                    </div>
+                    <div class='meret_box'>
+                        <div class="csomag_meret">XXL</div>
+                        <div class="csomag_ar">{{ service.price_large }}</div>
+                        <div class="meret_leiras">(Microbus, Pickup)</div>
+                    </div>
+                </div>
+            </label>
+        {% endfor %}       
+        </div>
+        <div class="box2">
+            <div class="keret2">
+                <h2 class="alcim">3. Válasszon extrákat</h2> 
+                <div class="extraBox">
+                    {% for extra in extras %}
+                    <label class="custom-checkbox">
+                        <input type="checkbox">
+                        <span></span>
+                        {{extra.service_name}}
+                    </label>
+                    {% endfor %}
+            </div>
+        </div>
+            <div class="keret2">
+                <div class="keret3">
+                <div class='datumKeret'>
+                <h2 class="alcim">4. Válasszon időpontot</h2> 
+                    <div>
+                        <input type="date" class="input-mezo" placeholder="Dátumot" required>
+                    </div>
+                    <div class="info">
+                    Autóját a kiválasztott időpontig készítjük el!<br><br>
+                    Kérjük hozza autóját az átadási időpont előtt két órával, amennyiben ez nem teljesíthető, jelezze lent a megjegyzésben!
+                    </div>
+                </div>
+            <div class = "idopontKeret"></div>
+            </div>
+        <div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class='FoglalasBox'>
+        <div class="inputContaner">
+            <div class="inputBox">
+                <h2 class="alcim">5. Személyes adatok</h2> 
+                <div class="inputBoxInner">
+                <div class='input-keret'> 
+                    <label class = "input-label"  for="forname">First Name:</label>
+                    <input 
+                        type="text" 
+                        id="forname" 
+                        name="forname" 
+                        value="{{ customer.forname }}" 
+                        placeholder="" 
+                        class="input-mezo"
+                        required>
+                </div>
+                <div class='input-keret'> 
+                    <label class = "input-label" for="lastname">Last Name:</label>
+                    <input 
+                        type="text" 
+                        id="lastname" 
+                        name="lastname" 
+                        value="{{ customer.lastname }}" 
+                        placeholder="" 
+                        class="input-mezo"
+                        required>
+                </div>
+                <div class='input-keret'> 
+                    <label class = "input-label" for="phone_number">Phone Number:</label>
+                    <input 
+                        type="text" 
+                        id="phone_number" 
+                        name="phone_number" 
+                        value="{{ customer.phone_number }}" 
+                        placeholder="Enter phone number" 
+                        class="input-mezo"
+                        required>
+                </div>
+                <div class='input-keret'> 
+                    <label class = "input-label"  for="payment_method">Fizetési mód</label>
+                    <select id="payment_method" name="payment_method" class="input-mezo">
+                        <option value="bankcard">Bankkártya</option>
+                        <option value="cash">Kézpénz</option>
+                    </select>
+                </div>
+                <div class='input-keret'> 
+                    <label class="custom-checkbox">
+                        <input type="checkbox">
+                        <span></span>
+                        Kérek számlát
+                    </label>
+                </div>
+            </div>
+            </div>
+            <div class="inputBox">
+                <h2 class="alcim">6. Autó adatok</h2> 
+                <div class="inputBoxInner">
+                    <div class='input-keret'> 
+                        <label class = "input-label"  for="Marka">Márka:</label>
+                        <input 
+                            type="text" 
+                            id="marka" 
+                            name="marka" 
+                            value="{{ customer.forname }}" 
+                            placeholder="" 
+                            class="input-mezo"
+                            required>
+                    </div>
+                    <div class='input-keret'> 
+                        <label class = "input-label"  for="Marka">Parkoló:</label>
+                        <input 
+                            type="text" 
+                            id="marka" 
+                            name="marka" 
+                            value="{{ customer.forname }}" 
+                            placeholder="" 
+                            class="input-mezo"
+                            required>
+                    </div>
+                    <div class='input-keret'> 
+                        <label class = "input-label"  for="Marka">Típus:</label>
+                        <input 
+                            type="text" 
+                            id="marka" 
+                            name="marka" 
+                            value="{{ customer.forname }}" 
+                            placeholder="" 
+                            class="input-mezo"
+                            required>
+                    </div>
+                    <div class='input-keret'> 
+                        <label class = "input-label"  for="Marka">Rendszám*</label>
+                        <input 
+                            type="text" 
+                            id="license_plate" 
+                            name="license_pkate" 
+                            value="{{ customer.forname }}" 
+                            placeholder="" 
+                            class="input-mezo"
+                            required>
+                    </div>
+                    <div class='input-keret'> 
+                        <label class = "input-label"  for="size">Autó Méret</label>
+                        <select id="size" name="size" class="input-mezo">
+                            <option value="small">M</option>
+                            <option value="medium">L</option>
+                            <option value="large">XXL</option>
+                        </select>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="Wrapper">
+        <div class="Foglalas">
+            <button type="submit" class="FoglalasButton">Foglalás</button>
+        </div>
+    </div>    
+</div>
+<footer> 
+    <div class="footerBox">
+        <div class="footerTextBox">© 2024 Eliteshine Minden jog fenntartva</div>
+        <div class="footerTextBox">Adatvédelmi nyilatkozat<br>ASZF</div>
+        <div class="footerTextBox">eliteshine@shine.com<br>+36 20 69 69 669</div>
+        <div class = "socialBox"> insta</div>
+    </div>
+</footer>
+</body>

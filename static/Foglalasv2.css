@@ -1,6 +1,24 @@
+    /* Hide the actual radio button */
+    .radio {
+        display: none;
+    }
+
+    /* Style the label (the clickable area) */
+
+    /* When radio button is selected, change background color */
+    .radio:checked + .keret {
+        background-color: yellow;
+        border-color: #f39c12;
+    }
+
+
 form {
     display: contents; /* vagy flex, attól függ, hogy hogyan szeretnéd kezelni a belső elemeket */
   }
+  
+.csomag_ar {
+    color:white
+}
 .overlay {
     position: relative;
     top: 0;

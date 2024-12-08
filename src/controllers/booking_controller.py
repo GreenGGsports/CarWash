@@ -203,3 +203,38 @@ def get_carwash_slots():
     except Exception as e:
         current_app.logger.error(f"Error fetching carwash slots: {e}")
         return jsonify({'success': False, 'error': str(e)})
+    
+@booking_ctrl.route('/api/carwash/get_slots2', methods=['POST'])
+def get_slots():
+    db_session = current_app.session_factory.get_session()
+    data = request.get_json()
+    date = datetime.strptime(data['date'], '%Y-%m-%d')
+    carwash_id = session['carwash_id']
+    
+    live_slots = db_session.query(SlotModel).filter_by(live=True, carwash_id=carwash_id).all()
+    response = []
+    for slot in live_slots:
+        if date >= slot.end_time:
+            if ReservationModel.is_slot_available(
+                session=db_session,
+                slot_id=slot.id,
+                reservation_date=date
+            ):
+                response.append(
+                    dict(
+                        id = slot.id,
+                        end_time_hours = slot.end_time.strftime('%H'),
+                        end_time_minutes = slot.end_time.strftime('%M'),
+                        available = True
+                    )
+                )
+            else:  
+                response.append(
+                    dict(
+                        id = slot.id,
+                        end_time_hours = slot.end_time.strftime('%H'),
+                        end_time_minutes = slot.end_time.strftime('%M'),
+                        available = False
+                    )
+                )
+    return jsonify({'success': True, 'slots': response})
