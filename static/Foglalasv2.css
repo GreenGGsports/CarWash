@@ -11,6 +11,11 @@
         border-color: #f39c12;
     }
 
+.IdopontLabel{
+    background-color: green !important;
+    height: 30px;
+    width: 300px;
+}
 
 form {
     display: contents; /* vagy flex, attól függ, hogy hogyan szeretnéd kezelni a belső elemeket */

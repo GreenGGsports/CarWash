@@ -1,16 +1,32 @@
-    /* Hide the actual radio button */
-    .radio {
-        display: none;
+.radio{
+    display: none;
+}
+
+input[type="radio"]:checked + label .csomag_content {
+    background-color: #D5F048;
+    color: #161616;
+}
+
+input[type="radio"]:checked + .IdopontLabel {
+    background-color: #D5F048;
+    color: #161616;
+}
+.IdopontLabel{
+    background-color: #2D2D2D ;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: 100%;
+    border-radius: 5vh;
+
+}
+
+.IdopontLabel.false {
+    background-color: #352222 ;
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
     }
-
-    /* Style the label (the clickable area) */
-
-    /* When radio button is selected, change background color */
-    .radio:checked + .keret {
-        background-color: yellow;
-        border-color: #f39c12;
-    }
-
 
 form {
     display: contents; /* vagy flex, attól függ, hogy hogyan szeretnéd kezelni a belső elemeket */
@@ -159,6 +175,8 @@ footer{
 }
 
 .FoglalasBox{
+    display: flex;
+    flex-direction: column;
     border: 2px solid white;
     border-right: none;
     border-top-left-radius: 3vw; 
@@ -185,6 +203,11 @@ footer{
     align-items: center;
     border-radius: 2vw; 
 }
+
+.keret.selected {
+    background-color: #D5F048;
+}
+
 .helyszinkep{
     width: 30%;
     height: 20%;
@@ -204,15 +227,13 @@ footer{
 
 .serviceKeret{
     width: 18%;
-    border-radius: 50vw; 
     flex-shrink: 0; /* Ne zsugorodjon össze */
     scroll-snap-align: start; /* Az elem illeszkedjen a görgetéshez */
     transition: all 0.3s ease;
-
+    background-color: inherit !important;
 }
 
-.csomag_meret {
-    color: #E0E0E0;      
+.csomag_meret {   
     font-family: 'New Science', sans-serif;  /* Set the font */
     font-weight: 700;         /* Set the font weight */
     font-size: 200%;          /* Set the font size */
@@ -221,7 +242,8 @@ footer{
 
 .csomag_content{
     background-color: #2D2D2D;
-    border-radius: 2vw;
+    color: #E0E0E0;
+    border-radius: 5vh;
     font-family: 'New Science', sans-serif;  /* Set the font */
     font-weight: 700;    
     padding-bottom: 10%; 
@@ -232,15 +254,13 @@ footer{
     padding-bottom: 5%;
     padding-left: 5%;
 }
-.meret_leiras{
-    color:#E0E0E0;        /* Set the width */           
+.meret_leiras{    /* Set the width */           
     font-family: 'New Science', sans-serif;  /* Set the font */
     font-weight: 10;         /* Set the font weight */
     font-size: 100%;          /* Set the font size */
     text-align: center;   
 }
-.csomag_ar {
-    color: #E0E0E0;        /* Set the width */           
+.csomag_ar {    /* Set the width */           
     font-family: 'New Science', sans-serif;  /* Set the font */
     font-weight: 500;         /* Set the font weight */
     font-size: 150%;          /* Set the font size */    /* Set the line height */
@@ -332,7 +352,7 @@ footer{
     color: #ffffff; /* White text */
     padding: 10px;
     border: 1px solid #161616;
-    border-radius: 25px;
+    border-radius: 5vh;
     font-size: 1rem;
     outline: none;
     width: 200px;
@@ -341,6 +361,7 @@ footer{
 .keret3{
     display: grid;
     grid-template-columns: 1fr 1fr;
+    height: 100%;
 }
 
 .inputContaner{
@@ -354,6 +375,9 @@ footer{
     grid-template-columns: 1fr 1fr;
     gap: 10px;
     
+}
+.inputBox.hidden{
+    display: none;
 }
 .input-keret{
     display: flex;
@@ -374,7 +398,7 @@ footer{
     background-color: #2D2D2D;
     height: 40px;
     width: 100%;
-    border-radius: 10vh;
+    border-radius: 5vh;
     border: 1px solid #161616;
     padding-left: 7.5%;
     color: #E0E0E0;
@@ -400,13 +424,46 @@ footer{
     width: 100%; /* Kitölti a szülő teljes szélességét */
     height: 100%; /* Kitölti a szülő teljes magasságát */
     background-color: #D5F048;
-    border-radius: 10vh;
+    border-radius: 5vh;
     border: none; /* Opció: eltünteti a gomb alapértelmezett keretét */
     cursor: pointer; /* Mutatja, hogy kattintható */
     font-size: 16px;
     text-align: center;
 }
 
+.GombBox{
+    display: grid;
+    padding: 5%;
+    padding-top: 15%;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    height: 100%;
+}
+.IdopontGomb{
+    display: flex;
+    background-color: #2D2D2D;
+    border: 1px solid #161616;
+    color: #E0E0E0;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10vh;
+    height: 40px;
+}
+
+.megjegyzes{
+    background-color: #2D2D2D;
+    border: 1px solid #161616;
+    border-radius: 5vh;
+    min-height: 200px;
+    height: 50%;
+    width: 90%;
+    resize: none;
+}
+/* Error handling */
+.error{
+    background-color: red;
+    border-radius: 3px solid red;
+}
 /* Mobil nézet */
 @media (max-width: 768px) {
     body {

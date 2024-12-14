@@ -98,7 +98,12 @@
             <div class="locationBox" id = "box">
                 <form id="locationForm" action="/reservation_test/select_location" method="POST">
                     {% for location in locations %}
-                    <button class="keret" name="location_id" value="{{ location.id }}" type="submit" id="location_btn">
+                    <button 
+                        class="keret {% if location.id == selected_location_id %}selected{% endif %}" 
+                        name="location_id" 
+                        value="{{ location.id }}" 
+                        type="submit" 
+                        id="location_btn-{{ location.id }}">
                         <img class="helyszinkep" src="/static/images/{{ location.image_name }}" />
                         <img class="helyszinikon" src="/static/images/map.svg">
                         <div class="IkonKeret"></div>
@@ -107,9 +112,9 @@
                     {% endfor %}
                 </form>
             </div>
-        <form id="reservationForm" action="/reservation_test/select_location" method="POST">
+        <form id="reservationForm" action="/reservation_test/create_reservation" method="POST">
         <h2 class="alcim">2. Válasszon csomagot</h2> 
-        <div class="serviceBox">
+        <div class="serviceBox" id="serviceBox">
             {% for service in services %}
             <input 
                 type="radio" 
@@ -148,9 +153,9 @@
                 <div class="extraBox">
                     {% for extra in extras %}
                     <label class="custom-checkbox">
-                        <input type="checkbox">
+                        <input type="checkbox" name="extras" value="{{ extra.id }}">
                         <span></span>
-                        {{extra.service_name}}
+                        {{ extra.service_name }}
                     </label>
                     {% endfor %}
             </div>
@@ -167,13 +172,7 @@
                     Kérjük hozza autóját az átadási időpont előtt két órával, amennyiben ez nem teljesíthető, jelezze lent a megjegyzésben!
                     </div>
                 </div>
-                <div class="GombBox" id = "GombBox">
-                    <template id = "idopontok">
-                        <button class="IdopontGomb", id = 'IdopontGomb'>
-                            <input type="checkbox" class="checkbox">
-                            <span class="checkbox-label">10 órás átadás</span>
-                        </button>                 
-                    </template>     
+                <div class="GombBox" id = "GombBox">               
                 </div>       
             </div>    
             </div>
@@ -230,7 +229,7 @@
                 </div>
                 <div class='input-keret'> 
                     <label class="custom-checkbox">
-                        <input type="checkbox">
+                        <input type="checkbox"  id="billing-required">
                         <span></span>
                         Kérek számlát
                     </label>
@@ -296,9 +295,76 @@
             </div>
         </div>
     </div>
+    <div class='FoglalasBox'>
+        <div class="inputContaner">
+            <div class="inputBox">
+            <h2 class="alcim">7. Megjegyzés</h2> 
+            <textarea class="megjegyzes"></textarea>
+            </div>
+            <div class="inputBox" id="billing_data">
+            <h2 class="alcim">8. Számlázási adatok</h2> 
+            <div class="inputBoxInner">
+                <div class='input-keret'> 
+                    <label class = "input-label"  for="billing-name">Név:*</label>
+                    <input 
+                        type="text" 
+                        id="billing-name" 
+                        name="name" 
+                        value="{{ customer.forname }}" 
+                        placeholder="" 
+                        class="input-mezo"
+                        required>
+                </div>
+                <div class='input-keret'> 
+                    <label class = "input-label" for="email">E-mail:*</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="billing.email" 
+                        value="{{ customer.lastname }}" 
+                        placeholder="" 
+                        class="input-mezo"
+                        required>
+                </div>
+            <div class='input-keret'> 
+                <label class = "input-label"  for="adress">Cím:*</label>
+                <input 
+                    type="text" 
+                    id="adress" 
+                    name="adress" 
+                    value="{{ customer.forname }}" 
+                    placeholder="" 
+                    class="input-mezo"
+                    required>
+            </div>
+            <div class='input-keret'> 
+                <label class = "input-label"  for="company_name">Cégnév:</label>
+                <input 
+                    type="text" 
+                    id="company_name" 
+                    name="forname" 
+                    value="{{ customer.forname }}" 
+                    placeholder="" 
+                    class="input-mezo">
+            </div>
+            <div class='input-keret'> 
+                <label class = "input-label"  for="tax_ID">Adószám:</label>
+                <input 
+                    type="text" 
+                    id="tax_ID" 
+                    name="tax_ID" 
+                    value="{{ customer.forname }}" 
+                    placeholder="" 
+                    class="input-mezo">
+            </div>
+        </div>
+        </div>
+    </div>
+</form>
+</div>
     <div class="Wrapper">
         <div class="Foglalas">
-            <button type="submit" class="FoglalasButton">Foglalás</button>
+            <button onclick="create_reservation()" class="FoglalasButton">Foglalás</button>
         </div>
     </div>    
 </div>
