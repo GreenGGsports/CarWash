@@ -69,7 +69,10 @@ def create_app(config_name: str):
 def add_blueprints(app: Flask):
     @app.route('/')
     def home():
-        return render_template('Landing_page.html')
+        from src.models.carwash_model import CarWashModel
+        db_session = current_app.session_factory.get_session()
+        locations = db_session.query(CarWashModel).all()
+        return render_template('Landing_page.html', locations=locations)
     
     @app.route('/carwash_sites/<site_name>')
     def carwash_site(site_name):

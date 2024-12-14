@@ -1,0 +1,180 @@
+header{
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.exit{
+    height: 100%;
+    width: 50%
+}
+
+.exitButton{
+    height: 60px;
+    width: 50%;
+    background-color: #2D2D2D;
+    border: 1px solid #161616;
+}
+
+.headerDesktop{
+    display: flex;
+    flex-direction: row;
+    padding-right: 5%;
+}
+
+.headerButtonBox {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    align-items: center;
+}
+
+.headerButtonwrapper{
+    display: flex;
+    width: 50%
+}
+.headerButton{
+    display: flex;
+    width: 100%;
+    height: 40px;
+    background-color: #161616;
+    border: 1px solid #161616;
+    color: #E0E0E0;
+    text-align: center;
+    justify-content: center;
+    padding-left: 5%;
+    align-items: center;
+}
+
+.headerButtonSelected{
+    display: flex;
+    width: 100%;
+    height: 40px;
+    background-color: #D5F048;
+    border: 1px solid #161616;
+    border-radius: 10vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.headerMobile {
+    display: none;
+}
+
+.hamburger-menu {
+    width: 60px; /* A gomb szélessége */
+    height: 25px; /* A gomb magassága */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    background-color: #161616;
+    border: 1px solid #161616;
+  }
+  
+  .hamburger-menu span {
+    display: block;
+    width: 100%;
+    height: 3px; /* A csík vastagsága */
+    background-color: white; /* A csík színe */
+    border-radius: 3px; /* Lekerekített sarkok */
+  }
+
+  .modal {
+    display: none; /* Alapból rejtett */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Sötét áttetsző háttér */
+    z-index: 1000; /* Az összes tartalom fölött jelenjen meg */
+    overflow: hidden;
+    justify-content: center;
+}
+
+/* A modális tartalom */
+#modal-content {
+    padding-top: 20%;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: #161616;
+    align-items: center;
+    flex-direction: column;
+    color: #E0E0E0;
+    font-size: 20px;
+    text-align: center;
+}
+
+/* Bezáró gomb */
+#close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #E0E0E0;
+}
+
+.modalButtonBox{
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.modalButton{
+    height: 50px;
+    background-color: #161616;
+    border: 1px solid #161616;
+    color: #E0E0E0;
+}
+
+footer{
+    padding-left: 5%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+.footerBox{
+    display: flex;
+    flex-direction: row;
+    border-top: 2px solid #E0E0E0;
+    width: 90%;
+    padding: 5%;
+    justify-content: space-between;
+
+}
+
+.footerTextBox{
+    text-align: center;
+    width: 100%;
+}
+
+.socialBox{
+    display: flex;
+    text-align: center;
+    width: 90%;
+    flex-direction: column;
+}
+@media (max-width: 768px) {
+    .headerDesktop{
+        display: none;
+    }
+
+    .headerMobile {
+        display: flex;
+        justify-content: space-between; /* Elemek közötti tér */
+        align-items: center; /* Függőleges középre igazítás */
+        padding: 0 5%; /* Fejléc belső margói */
+        padding-right: 0%;
+        height: 60px; /* Fejléc magassága */
+    }
+
+    .footerBox{
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .footerTextBox{
+        padding-bottom: 5%;
+    }
+}
