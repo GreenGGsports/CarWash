@@ -13,9 +13,8 @@ from flask import current_app, request
 from src.views.filters import ThisMonthFilter, ThisWeekFilter, TodayFilter
 from flask_admin.contrib.sqla.filters import DateBetweenFilter
 from src.views.reservation_form import ReservationForm
-from src.controllers.write_to_csv import ExportCSVMixin
 
-class ReservationAdminView(MyModelView, ExportCSVMixin):
+class ReservationAdminView(MyModelView):
     form = ReservationForm
     create_template = 'admin/reservation_form.html'
     list_template = 'admin/list_template.html'
@@ -46,6 +45,23 @@ class ReservationAdminView(MyModelView, ExportCSVMixin):
         'service.service_name': 'Csomag',
         'extras': 'Extra',
         'comment' : 'Megjegyzés',
+        'final_price': 'Ár',
+        'payment_method': 'Fizetési mód',
+        'customer.phone_number': 'Tel',
+        'is_completed': 'Kész?',
+        'parking_spot': 'Parkolóhely'
+    }
+
+    columns_to_export = {
+        'carwash.carwash_name': 'Hely',
+        'reservation_date': 'Dátum',
+        'car.license_plate': 'Rendszám',
+        'car.car_brand': 'Márka',
+        'car.car_model': 'Típus',
+        'car.company.company_name': 'Cégnév',
+        'service.service_name': 'Csomag',
+        'extras': 'Extra',
+        'comment': 'Megjegyzés',
         'final_price': 'Ár',
         'payment_method': 'Fizetési mód',
         'customer.phone_number': 'Tel',

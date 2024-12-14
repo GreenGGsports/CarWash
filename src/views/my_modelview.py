@@ -2,15 +2,19 @@
 from flask_admin.contrib.sqla import ModelView
 from flask import flash, current_app
 from flask_login import current_user
-from flask import redirect, url_for, request
+from flask import redirect, url_for, request, Response
 from sqlalchemy.orm import joinedload
 from sqlalchemy.sql import func
+import csv
+from flask_admin import expose
+from io import StringIO  # StringIO importálása
 
 class MyModelView(ModelView):
     def __init__(self, *args, **kwargs):
         self.role = kwargs.pop('role', None)
+        self.columns_to_export = kwargs.pop('columns_to_export', None)  # Beállítható oszlopok exportálása
         super(MyModelView, self).__init__(*args, **kwargs)
-    
+        
     def is_accessible(self):
         # Check if the user is authenticated and has the required role
         if not current_user.is_authenticated:
@@ -128,4 +132,94 @@ class MyModelView(ModelView):
             # Handle specific exceptions or log the error as needed
             current_app.logger.error(f"Error calculating sum for column '{column_name}': {str(e)}")
             return 0
+        
+    @expose('/export/csv/')
+    def export_csv(self):
+        """
+        Exportálja az aktuális szűrt adatokat CSV formátumban.
+        """
+        try:
+            # Aktuális lekérdezés
+            query = self.get_query()
+
+            # Alkalmazza a szűrőket, ha léteznek
+            filters = self._filters
+            query = self.apply_filters(query, filters)
+
+            # Fejléc (column_labels alapján vagy column_list alapján)
+            if self.columns_to_export:
+                column_headers = list(self.columns_to_export.values())  # Felhasználói oszlopok
+                column_list = list(self.columns_to_export.keys())
+            else:
+                column_headers = [
+                    self.column_labels.get(col, col)  # Oszlop címke, ha elérhető
+                    for col in self.column_list
+                ]
+                column_list = self.column_list
+
+
+            # Adatok előkészítése
+            rows = []
+            for item in query:
+                row = []
+                for col in column_list:
+                    attr = self._get_attr_value(item, col)
+                    # Ha szám, akkor formázzuk tizedesvesszővel
+                    if isinstance(attr, float):
+                        attr = f"{attr:.2f}".replace('.', ',')  # Tizedesvesszőre cserél
+                    row.append(attr)
+                rows.append(row)
+
+            # CSV válasz generálása
+            output = StringIO()  # StringIO objektum létrehozása
+            writer = csv.writer(output, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            writer.writerow(column_headers)  # Fejléc sor
+            for row in rows:
+                writer.writerow(row)  # Adatsorok
+
+            # HTTP válasz előkészítése
+            output.seek(0)  # Visszaállítjuk az olvasási pozíciót
+            csv_data = output.getvalue()  # CSV tartalom karakterláncként
+            # Encode-olás ISO-8859-2 kódolással
+            response = Response(csv_data.encode('iso-8859-2'), mimetype='text/csv')
+            response.headers['Content-Disposition'] = 'attachment; filename=export.csv'
+            return response
+
+        except Exception as e:
+            self.session.rollback()
+            current_app.logger.error(f"CSV exportálási hiba: {str(e)}")
+            return "Hiba történt az exportálás során.", 500
+
+
+    def apply_filters(self, query, filters):
+        """
+        Szűrők alkalmazása a lekérdezéshez.
+        Ez a metódus szűrők alkalmazásával módosítja a lekérdezést.
+        """
+        if filters:
+            for filter in filters:
+                # Ha a filter egy szűrő objektum (pl. CustomDateRangeFilter), akkor alkalmazza az apply metódust
+                if hasattr(filter, 'apply'):
+                    filter_value = getattr(filter, 'value', None)  # Biztosítjuk, hogy ne legyen 'None' érték
+                    if filter_value is not None:
+                        query = filter.apply(query, filter_value)  # Passzoljuk át a szűrő értéket
+                elif isinstance(filter, tuple) and len(filter) == 2:
+                    # Ha a filter egy egyszerű tuple (pl. ('field', value)), akkor alkalmazzuk a szűrést
+                    field, value = filter
+                    if value:
+                        query = query.filter(getattr(self.model, field) == value)
+        return query
+
+    def _get_attr_value(self, obj, column):
+        """
+        Oszlopnév alapján attribútum érték lekérése.
+        Támogatja a pontozott elérést (pl. 'car.license_plate').
+        """
+        try:
+            for attr in column.split('.'):
+                obj = getattr(obj, attr, None)
+            return obj if obj is not None else ''
+        except Exception:
+            return ''
+
 

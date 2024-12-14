@@ -15,6 +15,9 @@ class PaymentEnum(PyEnum):
     cash = "készpénz"
     list = "listás"
     transaction = 'utalás'
+
+    def __str__(self):
+        return self.value
     
 
 class ReservationModel(BaseModel):
