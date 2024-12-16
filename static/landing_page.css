@@ -4,20 +4,40 @@ html, body {
     /* Center content horizontally */
     overflow-x: hidden;
     height: auto;
-    
+}
+
+form {
+    display: contents; /* vagy flex, attól függ, hogy hogyan szeretnéd kezelni a belső elemeket */
+  }
+
+.headerDesktop{
+    background-image: url("images/Header.png");
+    height: 70vh;
+    background-size:cover;
+    background-position: left center; 
+}
+
+.headerButton{
+    color: black;
+}
+
+.contentBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 body {
     background-color: #161616;
     color: #E0E0E0;
-    padding-left: 5%;
     font-family: 'New Science', sans-serif;  /* Set the font */
     font-weight: 600;     
 }
 
 .locationBox{
-    display: flex;
+    display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    gap: 20px;
     width: 90%;
     justify-content: center;
     align-items: center;
@@ -32,14 +52,14 @@ body {
 
 .helyszinikon{
     height: auto;
-    object-fit: cover;
+    object-fit: contain;
     background-color: #2D2D2D;
 }
 
 .keret{
     background-color: #2D2D2D;
     border: 2px solid #161616;
-    height: 90%;
+    height: 100%;
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -50,19 +70,272 @@ body {
 }
 
 .helyszinImgs{
-    display:;
+    display:flex;
     align-items: center;
     height: 100%;
 }
 
 .helyszinkepContainer{
     display: flex;
-    height: 100%;
+    height: 10vw;
+    width: 13vw;
     background-color: #161616;
 }
 
 .helyszinikonContainer{
     display: flex;
-    height: 100%;
+    height: 5vw;
+    width: 5vw;
     background-color: #161616;
+    justify-content: center;
+}
+
+.MosokCim{
+    font-size: clamp(16px, 1vw, 30px);
+    color: #E0E0E0;
+}
+
+.alcim{
+    font-size: 4vw;
+    text-align: center;
+}
+
+.Wrapper {
+    padding-top: 10%;
+    display: flex;
+    justify-content: center; /* Vízszintes középre helyezés */
+    align-items: center;    /* Függőleges középre helyezés */      /* Az egész képernyő magassága */
+}
+.Foglalas {
+    display: flex;
+    height: 40px;
+    width: 35%;
+    min-width: 200px;
+}
+
+.FoglalasButton {
+    width: 100%; /* Kitölti a szülő teljes szélességét */
+    height: 100%; /* Kitölti a szülő teljes magasságát */
+    background-color: #D5F048;
+    border-radius: 5vh;
+    border: none; /* Opció: eltünteti a gomb alapértelmezett keretét */
+    cursor: pointer; /* Mutatja, hogy kattintható */
+    font-size: 16px;
+    text-align: center;
+}
+
+.galeryBox{
+    display: flex;
+    gap: 2%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory; /* A görgetés "összefogása" */
+}
+
+.imgContainer{
+    width: 90%;
+    height: 200px;
+    background-color: green;
+    flex-shrink: 0; /* Ne zsugorodjon össze */
+    scroll-snap-align: start; /* Az elem illeszkedjen a görgetéshez */
+    transition: all 0.3s ease;
+}
+
+.KapcsolatBox{
+    padding-left: 5%;
+    width: 90%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    gap:20px;
+    padding-top: 5%;
+}
+
+.KapcsolatContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 150px;
+    padding-left: 5%;
+}
+
+.CimContainer{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.helyszinikonKapcsolat{
+    height: auto;
+    object-fit: contain;
+    background-color: #161616;
+}
+@media (max-width: 768px) {
+    .keret{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .helyszinImgs{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 0%;
+    }
+
+    .helyszinikonContainer{
+        margin-bottom: 10%;
+        height: 7vw;
+    }
+
+    .helyszinkepContainer{
+        margin-bottom: 10%;
+    }
+
+    .MosokCim{
+    }
+
+    .KapcsolatBox{
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+.property-container{
+    width: 90%;
+    padding-left:5% ;
+}
+a:link,
+a:visited,
+a:hover,
+a:active,
+a:focus {
+  text-decoration: none;
+  outline: none;
+}
+
+.slick-track * {
+  outline: none;
+}
+
+.property-wrapper {
+  text-align: center;
+  padding: 20px 0 20px;
+}
+
+
+.property-slide {
+  margin: 0 -7px;
+}
+
+.property-slide:not(.slick-initialized) .property-item:nth-child(n + 4) ~ div {
+  display: none;
+}
+
+.property-item {
+  display: inline-block;
+  vertical-align: middle;
+  width: calc(100% / 4);
+  padding: 0 7px;
+}
+
+.property-item a {
+  display: block;
+  position: relative;
+}
+
+.property-slide {
+  padding: 38px 0 0;
+}
+
+.property-slide button.slick-arrow {
+  display: inline-block;
+  position: absolute;
+  width: 41px;
+  height: 41px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  transform: translateY(-40px);
+  border: none;
+  outline: none;
+}
+
+.property-slide button:before {
+  font-family: inherit !important;
+  color: #000 !important;
+  font-size: 30px;
+}
+.property-slide button.slick-prev {
+  left: -50px;
+}
+
+.property-slide button.slick-next {
+  right: -50px;
+}
+
+.property-item .property-img:before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background: rgba(153, 126, 67, 0.3);
+  opacity: 0;
+  outline: 1px solid #ffffff;
+  outline-offset: -10px;
+  -webkit-transition: all 0.6s;
+  -moz-transition: all 0.6s;
+  -o-transition: all 0.6s;
+  -ms-transition: all 0.6s;
+  transition: all 0.6s;
+}
+
+.property-item .property-img:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  opacity: 0;
+  background: rgba(255, 255, 255, 0.5);
+  -webkit-transition: all 0.6s;
+  -moz-transition: all 0.6s;
+  -o-transition: all 0.6s;
+  -ms-transition: all 0.6s;
+  transition: all 0.6s;
+}
+
+.property-img {
+  position: relative;
+}
+
+.property-img img {
+  display: inline-block;
+  width: 100%;
+  height: auto;
+}
+
+.property-details {
+  padding: 20px 0;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.property-details strong {
+  font: 500 20px "Roboto", sans-serif;
+  color: #2f2f2f;
+}
+
+.property-item:hover .property-img:before,
+.property-item:hover .property-img:after {
+  opacity: 1;
+}
+
+.property-item a:hover .property-details {
+  opacity: 1;
 }

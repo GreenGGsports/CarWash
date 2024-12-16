@@ -1,11 +1,12 @@
 header{
-    padding-top: 2%;
+    margin-top: 0%;
     padding-bottom: 2%;
 }
 
 .exit{
     height: 100%;
-    width: 50%
+    width: 50%;
+    padding-top: 2%;
 }
 
 .exitButton{
@@ -22,10 +23,10 @@ header{
 }
 
 .headerButtonBox {
+    padding-top: 2%;
     display: flex;
     flex-direction: row;
     width: 90%;
-    align-items: center;
 }
 
 .headerButtonwrapper{
@@ -36,8 +37,8 @@ header{
     display: flex;
     width: 100%;
     height: 40px;
-    background-color: #161616;
-    border: 1px solid #161616;
+    background-color: transparent;
+    border: none;
     color: #E0E0E0;
     text-align: center;
     justify-content: center;
@@ -50,7 +51,7 @@ header{
     width: 100%;
     height: 40px;
     background-color: #D5F048;
-    border: 1px solid #161616;
+    border: 1px solid #D5F048;
     border-radius: 10vh;
     align-items: center;
     justify-content: center;

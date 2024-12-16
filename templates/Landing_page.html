@@ -6,6 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='common.css') }}">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='landing_page.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    
+    <!-- Include Slick JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
     <title>Landing page</title>
 </head>
 
@@ -17,7 +26,7 @@
         </div>
         <div class="headerButtonBox">
             <div class="headerButtonwrapper">
-                <button class="headerButton">Bejelentkezés</button>
+                <button onclick="openModal()" class="headerButton">Bejelentkezés</button>
             </div>
             <div class="headerButtonwrapper">
                 <button class="headerButton">Árlisták</button>
@@ -91,7 +100,9 @@
         </div>
     </header>
     <div class="contentBox">
+        <h2 class="alcim">Árlisták</h2>
         <div class="locationBox" id = "box">
+            <form id="locationForm" action="/carwash/" method="POST">
             {% for location in locations %}
             <button 
                 class="keret {% if location.id == selected_location_id %}selected{% endif %}" 
@@ -110,7 +121,70 @@
                 <div class="MosokCim">{{ location.location }}</div>
             </button>
             {% endfor %}
+        </form>
         </div>
+    </div>
+    <div class="Wrapper">
+        <div class="Foglalas">
+            <button onclick="create_reservation()" class="FoglalasButton">Online Időpontfoglalás</button>
+        </div>
+    </div>  
+    <h2 class="alcim">Galéria</h2>
+    <div class="property-container">
+        <div class="container">
+          <div class="property-wrapper">
+            <div class="property-slide">
+              <div class="property-item">
+                  <div class="property-img">
+                    <img src="static/images/gallery1.png"  />
+                  </div>
+              </div>
+              <div class="property-item">
+                  <div class="property-img">
+                    <img src="static/images/gallery2.png"  />
+                  </div>
+              </div>
+              <div class="property-item">
+                  <div class="property-img">
+                    <img src="static/images/gallery3.png"  />
+                  </div>
+              </div>
+              <div class="property-item">
+                  <div class="property-img">
+                    <img src="static/images/gallery4.png"  />
+                  </div>
+              </div>
+              <div class="property-item">
+                  <div class="property-img">
+                    <img src="static/images/gallery6.png"  />
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+    <h2 class="alcim">Kapcsolat</h2>
+    <div class="KapcsolatBox">
+        {% for location in locations %}
+        <div class = "KapcsolatContainer">
+            <div class="helyszinkepContainer">
+                <img class="helyszinkep" src="/static/images/{{ location.image_name }}" />
+            </div>
+            <div class="CimContainer">
+                <div class="helyszinikonContainer">
+                <img class="helyszinikonKapcsolat" src="/static/images/map.svg">
+                </div>
+            <div class="MosokCim">{{ location.location }}</div>
+            </div>
+            <div class="CimContainer">
+                <div class="helyszinikonContainer">
+                <img class="helyszinikonKapcsolat" src="/static/images/map.svg">
+                </div>
+            <div class="MosokCim">{{ location.contact }}</div>
+            </div>
+        </div>
+        {% endfor %}
     </div>
     <footer> 
         <div class="footerBox">
@@ -121,3 +195,4 @@
         </div>
     </footer>
 </body>
+<script src="{{ url_for('static', filename='landing_script.js') }}"></script>

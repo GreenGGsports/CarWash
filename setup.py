@@ -14,6 +14,7 @@ from src.controllers.booking_controller import booking_ctrl
 from src.controllers.developer_controller import developer_ctrl
 from src.controllers.reservation_autofill import reservation_autofill_ctrl
 from src.views.customer_reservation import reservation_test
+from src.views.main_view import main_view
 from database import create_database, get_db, close_db
 from src.controllers.admin import init_admin, init_local_admin, init_developer_admin
 from src.models.user_model import UserModel
@@ -67,13 +68,6 @@ def create_app(config_name: str):
     return app
 
 def add_blueprints(app: Flask):
-    @app.route('/')
-    def home():
-        from src.models.carwash_model import CarWashModel
-        db_session = current_app.session_factory.get_session()
-        locations = db_session.query(CarWashModel).all()
-        return render_template('Landing_page.html', locations=locations)
-    
     @app.route('/carwash_sites/<site_name>')
     def carwash_site(site_name):
         try:
@@ -90,6 +84,7 @@ def add_blueprints(app: Flask):
     app.register_blueprint(service_ctrl, url_prefix='/service')
     app.register_blueprint(booking_ctrl, url_prefix = '/booking')
     app.register_blueprint(reservation_autofill_ctrl, url_prefix = '/reservation_autofill')
+    app.register_blueprint(main_view, url_prefix = '/')
 
 
     app.register_blueprint(car_ctrl, url_prefix='/api/car')
