@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import Session, relationship
 from .base import BaseModel
+from src.models.service_extras import service_extra
 
 class ServiceModel(BaseModel):
     __tablename__ = 'Service'
@@ -13,6 +14,7 @@ class ServiceModel(BaseModel):
     description = Column(String(512),nullable=True )
     carwash_id = Column(Integer, ForeignKey('Carwash.id'), nullable=True)
     
+    extras = relationship('ServiceModel', secondary=service_extra, back_populates='extras')
     carwash = relationship("CarWashModel")
     def __repr__(self):
         return self.service_name
@@ -30,3 +32,4 @@ class ServiceModel(BaseModel):
         session.add(service)
         session.commit()
         return service
+    
