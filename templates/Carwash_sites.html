@@ -5,5 +5,151 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='common.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='Carwash_sites.css') }}">
     <title>{{ location.carwash_name }}</title>
 </head>
+<body>
+    <header>
+        <div class="headerDesktop">
+        <div class="exit">
+            <button class="exitButton"></button>
+        </div>
+        <div class="headerButtonBox">
+            <div class="headerButtonwrapper">
+                <button onclick="openLoginModal()" class="headerButton">Bejelentkezés</button>
+            </div>
+            <div class="headerButtonwrapper">
+                <button class="headerButton">Árlisták</button>
+            </div>
+            <div class="headerButtonwrapper">
+                <button class="headerButton">Galéria</button>
+            </div>
+            <div class="headerButtonwrapper">
+                <button class="headerButton">Kapcsolat</button>
+            </div>
+            <div class="headerButtonwrapper">
+                <button class="headerButtonSelected">Online időpontFoglalás</button>
+            </div>
+        </div>
+        </div>
+        <div class="headerMobile">
+            <div class="exit">
+                <button class="exitButton"></button>
+            </div>
+            <button onclick="openModal()" class="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div class = "modal" id="modal">
+            <div id="modal-content">
+                <span id="close" onclick="closeModal()">&times;</span>
+                <div class="modalButtonBox">
+                    <button onclick="openLoginModal()" class="modalButton">Bejelentkezés</button>
+                </div>
+                <div class="modalButtonBox">
+                    <button class="modalButton">Online Időpontfoglalás</button>
+                </div>
+                <div class="modalButtonBox">
+                    <button class="modalButton">Galéria</button>
+                </div>
+                <div class="modalButtonBox">
+                    <button class="modalButton">Kapcsolat</button>
+                </div>
+            </div>
+        </div>
+        <div class = "modal" id="login-modal">
+            <div id="modal-content">
+                <h2 class="alcim">Bejelentkezés</h2>
+                <span id="close" onclick="closeLoginModal()">&times;</span>
+                <form id="loginRegisterForm">
+                <div class='input-keret'> 
+                    <label class = "input-label"  for="username">Felhasználónév:</label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        name="username" 
+                        placeholder="" 
+                        class="input-mezo"
+                        required>
+                </div>
+                <div class='input-keret'> 
+                    <label class = "input-label"  for="password">Jelszó:</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        placeholder="" 
+                        class="input-mezo"
+                        required>
+                </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </header>
+    <h2 class="alcim">Autókozmetikai szolgáltatások</h2>
+    <div class="figyelmeztetes">Autókozmetikai szolgáltatásainkat kizárólag ingyenes felmérés után végezzük. 
+        Keresd kollégáinkat telefonon, vagy személyesen üzletünkben.</div>
+        <div class="MobileScroller"></div>
+    <div class="kozmetika">
+        <div class="kozmetikaOuterContainer">
+        <div class="KozmetikaCim">Polírozás</div>
+        <div class="kozmetikaContainer">
+            <div class="kozmetikaContent">
+                <div class="kozmetikaLeiras">
+                    Az autó polírozása során a felületi karcok és mikrosérülések eltávolítása mellett a fényezés visszanyeri eredeti ragyogását. Speciális anyagokkal és gépekkel végezzük, hogy a fényezés sima és egyenletes legyen, így az autó újszerű megjelenést kap. A polírozás növeli a védelem tartósságát és kiemeli az autó színét.
+                </div>
+                <div class="kozmetikaReszletek">
+                    <div class="kozmetikaReszlet">
+                        <div class="kozmetikaElem">Fényesítő polírozás</div>
+                        <div class="kozmetikaÁr">70.00 Ft-tól</div>   
+                    </div>
+                    <div class="kozmetikaReszlet">
+                        <div class="kozmetikaElem">Fényesítő polírozás</div>
+                        <div class="kozmetikaÁr">70.00 Ft-tól</div>   
+                    </div>
+                    <div class="kozmetikaReszlet">
+                        <div class="kozmetikaElem">Fényesítő polírozás</div>
+                        <div class="kozmetikaÁr">70.00 Ft-tól</div>   
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="kozmetikaOuterContainer">
+        <div class="KozmetikaCim">Polírozás</div>
+        <div class="kozmetikaContainer">
+            <div class="kozmetikaContent">
+                <div class="kozmetikaLeiras">
+                    Az autó polírozása során a felületi karcok és mikrosérülések eltávolítása mellett a fényezés visszanyeri eredeti ragyogását. Speciális anyagokkal és gépekkel végezzük, hogy a fényezés sima és egyenletes legyen, így az autó újszerű megjelenést kap. A polírozás növeli a védelem tartósságát és kiemeli az autó színét.
+                </div>
+                <div class="kozmetikaReszletek">
+                    <div class="kozmetikaReszlet">
+                        <div class="kozmetikaElem">Fényesítő polírozás</div>
+                        <div class="kozmetikaÁr">70.00 Ft-tól</div>   
+                    </div>
+                    <div class="kozmetikaReszlet">
+                        <div class="kozmetikaElem">Fényesítő polírozás</div>
+                        <div class="kozmetikaÁr">70.00 Ft-tól</div>   
+                    </div>
+                    <div class="kozmetikaReszlet">
+                        <div class="kozmetikaElem">Fényesítő polírozás</div>
+                        <div class="kozmetikaÁr">70.00 Ft-tól</div>   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <footer> 
+        <div class="footerBox">
+            <div class="footerTextBox">© 2024 Eliteshine Minden jog fenntartva</div>
+            <div class="footerTextBox">Adatvédelmi nyilatkozat<br>ASZF</div>
+            <div class="footerTextBox">eliteshine@shine.com<br>+36 20 69 69 669</div>
+            <div class = "socialBox"> insta</div>
+        </div>
+    </footer>
+</body>
+<script src="{{ url_for('static', filename='carwash_site.js') }}"></script>

@@ -68,15 +68,6 @@ def create_app(config_name: str):
     return app
 
 def add_blueprints(app: Flask):
-    @app.route('/carwash_sites/<site_name>')
-    def carwash_site(site_name):
-        try:
-            # This will look for the corresponding HTML file inside templates/carwash_sites
-            return render_template(f'carwash_sites/{site_name}.html')
-        except :
-            # Return a 404 error if the file does not exist
-            return "Car wash site not found", 404
-    
     app.register_blueprint(billing_ctrl, url_prefix ='/billing')
     app.register_blueprint(reservation_ctrl, url_prefix='/reservation')
     app.register_blueprint(user_ctrl, url_prefix='/user')
