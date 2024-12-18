@@ -13,8 +13,9 @@ from flask import current_app, request
 from src.views.filters import ThisMonthFilter, ThisWeekFilter, TodayFilter
 from flask_admin.contrib.sqla.filters import DateBetweenFilter
 from src.views.reservation_form import ReservationForm
+from src.controllers.write_to_csv import ExportCSVMixin
 
-class ReservationAdminView(MyModelView):
+class ReservationAdminView(MyModelView, ExportCSVMixin):
     form = ReservationForm
     create_template = 'admin/reservation_form.html'
     list_template = 'admin/list_template.html'
@@ -57,6 +58,8 @@ class ReservationAdminView(MyModelView):
     }
 
     form_excluded_columns = ['billing']
+
+    can_export = True
     
     column_filters = [
         TodayFilter(ReservationModel.reservation_date),
