@@ -14,7 +14,7 @@ class ServiceModel(BaseModel):
     description = Column(String(512),nullable=True )
     carwash_id = Column(Integer, ForeignKey('Carwash.id'), nullable=True)
     
-    extras = relationship('ServiceModel', secondary=service_extra, back_populates='extras')
+    extras = relationship('ExtraModel', secondary=service_extra)
     carwash = relationship("CarWashModel")
     def __repr__(self):
         return self.service_name
