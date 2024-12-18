@@ -11,30 +11,30 @@
 <body>
     <header>
         <div class="headerDesktop">
-        <div class="exit">
-            <button class="exitButton"></button>
-        </div>
-        <div class="headerButtonBox">
-            <div class="headerButtonwrapper">
-                <button onclick="openLoginModal()" class="headerButton">Bejelentkezés</button>
+            <div class="exit">
+                <button onclick = "exit()" class="exitButton"></button>
             </div>
-            <div class="headerButtonwrapper">
-                <button class="headerButton">Árlisták</button>
+            <div class="headerButtonBox">
+                <div class="headerButtonwrapper">
+                    <button onclick="openLoginModal()" class="headerButton">Bejelentkezés</button>
+                </div>
+                <div class="headerButtonwrapper">
+                    <button onclick="toPrices()" class="headerButton">Árlisták</button>
+                </div>
+                <div class="headerButtonwrapper">
+                    <button onclick="toGallery()" class="headerButton">Galéria</button>
+                </div>
+                <div class="headerButtonwrapper">
+                    <button onclick="toContact()" class="headerButton">Kapcsolat</button>
+                </div>
+                <div class="headerButtonwrapper">
+                    <button onclick="toReservation()" class="headerButtonSelected">Online időpontFoglalás</button>
+                </div>
             </div>
-            <div class="headerButtonwrapper">
-                <button class="headerButton">Galéria</button>
             </div>
-            <div class="headerButtonwrapper">
-                <button class="headerButton">Kapcsolat</button>
-            </div>
-            <div class="headerButtonwrapper">
-                <button class="headerButtonSelected">Online időpontFoglalás</button>
-            </div>
-        </div>
-        </div>
         <div class="headerMobile">
             <div class="exit">
-                <button class="exitButton"></button>
+                <button onclick = "exit()" class="exitButton"></button>
             </div>
             <button onclick="openModal()" class="hamburger-menu">
                 <span></span>
@@ -49,13 +49,16 @@
                     <button onclick="openLoginModal()" class="modalButton">Bejelentkezés</button>
                 </div>
                 <div class="modalButtonBox">
-                    <button class="modalButton">Online Időpontfoglalás</button>
+                    <button onclick="toPrices()" class="modalButton">Árlisták</button>
                 </div>
                 <div class="modalButtonBox">
-                    <button class="modalButton">Galéria</button>
+                    <button onclick="toReservation()" class="modalButton">Online Időpontfoglalás</button>
                 </div>
                 <div class="modalButtonBox">
-                    <button class="modalButton">Kapcsolat</button>
+                    <button onclick="toGallery()" class="modalButton">Galéria</button>
+                </div>
+                <div class="modalButtonBox">
+                    <button onclick="toContact()" class="modalButton">Kapcsolat</button>
                 </div>
             </div>
         </div>
@@ -153,3 +156,4 @@
     </footer>
 </body>
 <script src="{{ url_for('static', filename='carwash_site.js') }}"></script>
+<script src="{{ url_for('static', filename='common.js') }}"></script>

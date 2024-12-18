@@ -109,12 +109,11 @@ def add_user():
     finally:
         db_session.close()
 
-# Test output route
-@user_ctrl.route('/test', methods=['GET'])
-def test_output():
+@user_ctrl.route('/test-auth', methods=['POST'])
+def test_authentication():
     if current_user.is_authenticated:
-        return jsonify({'vicc': 'mi az 3 lába van de nem szék?'})
-    return jsonify({'status': 'not_authenticated'})
+        return jsonify({'status': 'authenticated', 'message': 'User is authenticated'})
+    return jsonify({'status': 'not_authenticated', 'message': 'User is not authenticated'})
 
 def init_principal(app):
     principals = Principal(app)

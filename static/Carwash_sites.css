@@ -23,7 +23,7 @@ body {
     flex-direction: column;
     height: auto;
     flex-shrink: 0;
-    overflow-x: hidden; /* Oldalirányú görgetés a konténeren belül */
+    overflow-x: auto; /* Oldalirányú görgetés a konténeren belül */
     scroll-snap-type: x mandatory; /* A görgetés "összefogása" */
     scrollbar-width: none;
 }
