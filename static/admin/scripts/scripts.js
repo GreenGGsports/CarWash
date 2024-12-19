@@ -106,4 +106,43 @@ $(document).ready(function() {
     // Event listeners for carwash and date changes
     $('#carwash').on('change', fetchAvailableSlots);
     $('#reservation_date').on('change', fetchAvailableSlots);
+
+    $(document).ready(function () {
+        // Az eseményfigyelő a slot kiválasztására
+        $('#slot').on('change', function () {
+            const slotId = $(this).val();  // A kiválasztott slot ID-ja
+            const reservationDate = $('#reservation_date').val();  // A foglalás dátuma
+    
+            if (slotId && reservationDate) {
+                // Elküldjük a zárolási kérést a szervernek
+                lockSlot(slotId, reservationDate);
+            }
+        });
+    
+        // Zárolási kérés küldése
+        function lockSlot(slotId, reservationDate) {
+            $.ajax({
+                url: '/booking/api/carwash/reserve_slot',  // Zárolási végpont
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    slot_id: slotId,
+                    date: reservationDate
+                }),
+                success: function (response) {
+                    if (response.success) {
+                        // Ha sikeres a zárolás, tájékoztatjuk a felhasználót
+                        alert(response.message);
+                    } else {
+                        // Ha a slot már zárolva van, figyelmeztetjük a felhasználót
+                        alert(response.message);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                    alert('Hiba történt a slot zárolásakor. Kérjük, próbálja újra.');
+                }
+            });
+        }
+    });
 });

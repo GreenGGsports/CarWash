@@ -45,10 +45,14 @@ def test_delete_company(session):
     assert deleted_company is None
 
 def test_add_multiple_cars(session):
-    car1 = CarModel.add_car(session,'xyz-000', 'small_car', 'Ferrari' )
-    car2 = CarModel.add_car(session,'zzz-999', 'small_car', 'Lamborghini' )
+    # Paraméterek átadása az add_car metódusnak
+    car1 = CarModel.add_car(session, 'xyz-000', 'small_car', 'Ferrari', '488 GTB')
+    car2 = CarModel.add_car(session, 'zzz-999', 'sports_car', 'Lamborghini', 'Huracán')
     cars = [car1, car2]
     
+    # Hozzunk létre egy céget és rendeljük hozzá az autókat
     company = CompanyModel.add_company(session, 'Test Company')
     company.cars = cars
+    
+    # Ellenőrizzük, hogy az autók helyesen lettek hozzáadva
     assert len(cars) == len(company.cars)

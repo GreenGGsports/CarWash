@@ -11,7 +11,9 @@ from src.models.extra_model import ExtraModel
 from src.models.reservation_extras import reservation_extra
 from src.models.customer_model import CustomerModel
 from src.models.car_model import CarModel
+from src.models.slot_lock_model import SlotLockModel
 from src.models.service_extras import service_extra
+
 
 from sqlalchemy import create_engine, text
 from sqlalchemy.exc import SQLAlchemyError

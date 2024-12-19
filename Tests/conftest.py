@@ -15,6 +15,7 @@ from src.models.reservation_extras import reservation_extra
 from src.models.customer_model import CustomerModel
 from src.models.base import BaseModel
 from src.models.carwash_model import CarWashModel
+from src.models.slot_lock_model import SlotLockModel
 
 # Configure an in-memory SQLite database for testing
 from src.models.reservation_extras import reservation_extra
