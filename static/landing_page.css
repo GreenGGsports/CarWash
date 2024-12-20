@@ -1,3 +1,23 @@
+@font-face {
+  font-family: 'NewScienceLight';
+  src: url('fonts/fonnts.com-New_Science_Light.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NewScienceLightExtended';
+  src: url('fonts/fonnts.com-New_Science_Light_Extended.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NewScienceMedium';
+  src: url('fonts/fonnts.com-New_Science_Medium_Extended.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
 html, body {
     margin: 0;
     padding: 0;
@@ -30,17 +50,18 @@ form {
 body {
     background-color: #161616;
     color: #E0E0E0;
-    font-family: 'New Science', sans-serif;  /* Set the font */
-    font-weight: 600;     
+    font-family: 'NewScienceLight', sans-serif;
+    font-weight: 600;    
 }
 
 .locationBox{
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
-    width: 90%;
+    width: 70%;
     justify-content: center;
     align-items: center;
+    max-width: 1200px;
 }
 .helyszinkep{
     display: flex;
@@ -51,7 +72,6 @@ body {
 }
 
 .helyszinikon{
-    height: auto;
     object-fit: contain;
     background-color: #2D2D2D;
 }
@@ -77,31 +97,36 @@ body {
 
 .helyszinkepContainer{
     display: flex;
-    height: 10vw;
-    width: 13vw;
+    height: clamp(40px,10vw,100px);
+    width: clamp(60px,15vw,150px);
     background-color: #161616;
 }
 
 .helyszinikonContainer{
     display: flex;
-    height: 5vw;
-    width: 5vw;
+    height: 20px;
+    width: 20px;
     background-color: #161616;
     justify-content: center;
 }
 
 .MosokCim{
-    font-size: clamp(16px, 1vw, 30px);
+    font-family: 'NewScienceLight', sans-serif;
+    font-size: clamp(14px, 2vw, 40px);
     color: #E0E0E0;
 }
 
-.alcim{
-    font-size: 4vw;
-    text-align: center;
+.MosokCim2{
+  display: flex;
+  justify-content: center;
+  font-family: 'NewScienceLight', sans-serif;
+  font-size: clamp(10px, 1vw, 20px);
+  color: #E0E0E0 !important;
+  text-align: center;
 }
 
 .Wrapper {
-    padding-top: 10%;
+    padding-top: 5%;
     display: flex;
     justify-content: center; /* Vízszintes középre helyezés */
     align-items: center;    /* Függőleges középre helyezés */      /* Az egész képernyő magassága */
@@ -111,6 +136,7 @@ body {
     height: 40px;
     width: 35%;
     min-width: 200px;
+    max-width: 300px;
 }
 
 .FoglalasButton {
@@ -139,16 +165,19 @@ body {
     scroll-snap-align: start; /* Az elem illeszkedjen a görgetéshez */
     transition: all 0.3s ease;
 }
-
+.KapcsolatOuterContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .KapcsolatBox{
-    padding-left: 5%;
-    width: 90%;
     display: grid;
     justify-content: center;
     align-items: center;
     grid-template-columns: 1fr 1fr;
-    gap:20px;
-    padding-top: 5%;
+    justify-content: center;
+    align-items: center;
+    column-gap: 20px;
 }
 
 .KapcsolatContainer{
@@ -156,13 +185,14 @@ body {
     flex-direction: column;
     justify-content: center;
     min-height: 150px;
-    padding-left: 5%;
 }
 
 .CimContainer{
+    color: #E0E0E0;
     display: flex;
     align-items: center;
     gap: 5px;
+    padding-bottom: 5x;
 }
 
 .helyszinikonKapcsolat{
@@ -184,7 +214,6 @@ body {
     }
 
     .helyszinikonContainer{
-        margin-bottom: 10%;
         height: 7vw;
     }
 
@@ -199,6 +228,9 @@ body {
         grid-template-columns: 1fr;
     }
 
+    .locationBox{
+      width: 90%;
+    }
 }
 
 
@@ -221,7 +253,6 @@ a:focus {
 
 .property-wrapper {
   text-align: center;
-  padding: 20px 0 20px;
 }
 
 
@@ -321,7 +352,6 @@ a:focus {
 }
 
 .property-details {
-  padding: 20px 0;
   opacity: 0;
   transition: all 0.3s ease;
 }

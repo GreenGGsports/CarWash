@@ -14,7 +14,6 @@
     
     <!-- Include Slick JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-    <script src="{{ url_for('static', filename='landing_script.js') }}"></script>
     <script src="{{ url_for('static', filename='common.js') }}"></script>
     <script src="{{ url_for('static', filename='customer_login.js') }}"></script>
     <title>Landing page</title>
@@ -121,7 +120,8 @@
       </div>
     </div>  
     <h2 id="ContactCim" class="alcim">Kapcsolat</h2>
-    <div class="KapcsolatBox">
+    <div class = "KapcsolatOuterContainer">
+        <div class="KapcsolatBox">
         {% for location in locations %}
         <div class = "KapcsolatContainer">
             <div class="helyszinkepContainer">
@@ -131,16 +131,17 @@
                 <div class="helyszinikonContainer">
                 <img class="helyszinikonKapcsolat" src="/static/images/map.svg">
                 </div>
-            <div class="MosokCim">{{ location.location }}</div>
+            <div class="MosokCim2">{{ location.location }}</div>
             </div>
             <div class="CimContainer">
                 <div class="helyszinikonContainer">
                 <img class="helyszinikonKapcsolat" src="/static/images/map.svg">
                 </div>
-            <div class="MosokCim">{{ location.contact }}</div>
+            <div class="MosokCim2">{{ location.contact }}</div>
             </div>
         </div>
         {% endfor %}
+    </div>
     </div>
     <footer> 
         <div class="footerBox">
@@ -247,3 +248,4 @@
         </div>
     </div>
 </div>
+<script src="{{ url_for('static', filename='landing_script.js') }}"></script>

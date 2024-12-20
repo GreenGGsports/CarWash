@@ -1,3 +1,16 @@
+@font-face {
+    font-family: 'NewScienceLight';
+    src: url('fonts/fonnts.com-New_Science_Light.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'NewScienceLightExtended';
+    src: url('fonts/fonnts.com-New_Science_Light_Extended.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
 form {
     display: contents; /* vagy flex, attól függ, hogy hogyan szeretnéd kezelni a belső elemeket */
   }
@@ -14,8 +27,8 @@ body {
     background-color: #161616;
     color: #E0E0E0;
     padding-left: 5%;
-    font-family: 'New Science', sans-serif;  /* Set the font */
-    font-weight: 600;     
+    font-family: 'NewScienceLight', sans-serif;
+    font-weight: 600;  
 }
 
 .kozmetika{
@@ -45,12 +58,14 @@ body {
     flex-direction: row;
     text-align: left;
     width: 50%;
+    font-size: clamp(14px, 1vw, 40px);
+    align-items: center;
 }
 
 .kozmetikaReszletek{
     display: flex;
     flex-direction: column;
-    text-wrap: nowrap;
+    text-wrap:wrap;
     justify-content: center;
 }
 
@@ -60,17 +75,12 @@ body {
     padding-bottom: 10px;
 }
 
-.alcim{
-    font-family: 'New Science', sans-serif;  /* Set the font */
-    font-weight: 600;
-    display: flex;
-}
 
 .kozmetikaOuterContainer{
     display: flex;
     flex-direction: column;
     width: auto;
-    flex-shrink: 0; /* Ne zsugorodjon össze */
+    flex-shrink:0; /* Ne zsugorodjon össze */
     scroll-snap-align: start; /* Az elem illeszkedjen a görgetéshez */
     transition: all 0.3s ease;
     background-color: inherit !important;
@@ -78,7 +88,7 @@ body {
 
 .kozmetikaContainer{
     display: flex;
-    border: 2px solid white;
+    border: 2px solid #E0E0E0;
     padding: 3%;
     border-right: none;
     border-top-left-radius: 3vw; 
@@ -86,6 +96,157 @@ body {
 }
 
 .MobileScroller {
+    display: none;
+}
+
+.csomagok{
+    display:  flex ;
+    flex-direction: row;
+    padding: 5%;
+    width: 100%;
+}
+
+.csomagcontent{
+    display:  flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.csomagnev{
+    display: flex;
+    height: 6vh;
+    border-bottom: 1px solid #E0E0E0;
+    align-items: center;
+}
+.extratype{
+    display: flex;
+    height: 30px;
+    font-size: clamp(13px, 1.2vw, 25px);
+    align-items: center;
+}
+
+.servicename{
+    display: flex;
+    height: 30px;
+    font-size: clamp(13px, 1.2vw, 25px);
+    align-items: center;
+    justify-content: center;
+}
+
+.extracontent[data-included="True"]::after {
+    content: '✔';
+    color: #E0E0E0; /* Szín fehér */
+  }
+  
+.extracontent {
+    display: flex;
+    height: 6vh;
+    width: 100%;
+    font-family: "NewScienceLight"; /* Egységes betűtípus */
+    font-size: inherit; /* Örökölt méret */
+    color: #E0E0E0; /* Alapértelmezett szín */
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+
+.csomagtartalom{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+.csomagnevek{
+    font-family: "NewScienceLight"; /* Egységes betűtípus */
+    display: flex;
+    width: 20%;
+    font-size: clamp(10px, 1vw, 20px);
+    padding-left: 3px;
+    flex-direction: column;
+}
+
+.ServiceOuterContainer{
+    display: flex;
+    flex-shrink: 0; /* Ne zsugorodjon össze */
+    scroll-snap-align: start; /* Az elem illeszkedjen a görgetéshez */
+    transition: all 0.3s ease;
+    background-color:#161616;
+    border: 2px solid #E0E0E0;
+    border-top-left-radius: 3vh;
+    border-bottom-left-radius: 3vh;
+    border-right: none;
+}
+
+.csomag_ar{
+    display: flex;
+    font-size: clamp(18px, 1.5vw, 25px);
+    align-items: center;
+    padding-left: 40%;
+    margin-top: 5%;
+    padding: 5%;
+}
+.price{
+    font-size: clamp(13px, 1.2vw, 20px);
+    display: flex;
+    margin-top: 5%;
+    align-items: center;
+    background-color: #2D2D2D;
+    width: 60%;
+    justify-content: center;
+    padding: 5%;
+    border-radius: 20px;
+}
+
+.priceContainer{
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mobileScrollerLabel{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    background-color: #161616;
+    width: 100px;
+    
+}
+
+input[type="radio"]:checked + .mobileScrollerLabel {
+    background-color: #D5F048;
+    color: #161616;
+    border-radius: 10px;
+}
+
+.mobileScrollerLabelCsomag{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 100%;
+    border: none;
+
+    
+}
+
+input[type="radio"]:checked + .mobileScrollerLabelCsomag {
+    background-color: #D5F048;
+    color: #161616;
+    border-radius: 20px;
+}
+.radioButton {
+    cursor: pointer;
+    accent-color: #161616; /* A radio button színe */
+}
+
+.radioButton{
+    display: none;
+}
+
+.MobileScrollerCsomag{
     display: none;
 }
 
@@ -141,6 +302,12 @@ body {
         margin-top: 10px;
         padding: 5%;
     }
+    .MobileScrollerCsomag {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+        padding: 5%;
+    }
 
     .alcim{
         display: flex;
@@ -157,29 +324,36 @@ body {
         padding-right:15% ;
         text-align: center;
     }
-}
 
-.mobileScrollerLabel{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 30px;
-    background-color: #161616;
-    width: 100px;
-    
-}
+    .csomagcontent{
+        display:  flex;
+        flex-direction: row;
+        width: 80%;
+        overflow-x: auto; /* Oldalirányú görgetés a konténeren belül */
+        scroll-snap-type: x mandatory; /* A görgetés "összefogása" */
+        scrollbar-width: none;
+    }
 
-input[type="radio"]:checked + .mobileScrollerLabel {
-    background-color: #D5F048;
-    color: #161616;
-    border-radius: 10px;
-}
+    .csomagtartalom{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        flex-shrink: 0;
+        scroll-snap-align:start; /* Az elem illeszkedjen a görgetéshez */
+        transition: all 0.3s ease;
+        background-color: inherit !important;
+    }
 
-.radioButton {
-    cursor: pointer;
-    accent-color: #161616; /* A radio button színe */
-}
+    .csomagnevek{
+        width: 40%;
+        flex-shrink: 0;
+    }
 
-.radioButton{
-    display: none;
+    .csomag_ar{
+        padding-left: 5%;
+    }
+
+    .price{
+        width: 75%;
+    }
 }

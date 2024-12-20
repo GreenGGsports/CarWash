@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='FoglalasV3.css') }}">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='common.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='FoglalasV3.css') }}">
     <title>Foglalás</title>
 </head>
 <body>
@@ -74,6 +74,7 @@
                 name="service" 
                 id="service-{{ service.id }}" 
                 value="{{ service.id }}" 
+                onchange="handleRadioChange(this,service.extras)" 
             />
             <label class="serviceKeret" for="service-{{ service.id }}">
                 <div class = "csomag_header">
@@ -175,8 +176,8 @@
                 <div class='input-keret'> 
                     <label class = "input-label"  for="payment_method">Fizetési mód</label>
                     <select id="payment_method" name="payment_method" class="input-mezo">
-                        <option value="bankcard">Bankkártya</option>
                         <option value="cash">Kézpénz</option>
+                        <option value="bankcard">Bankkártya</option>
                     </select>
                 </div>
                 <div class='input-keret'> 
@@ -253,7 +254,7 @@
             <h2 class="alcim">7. Megjegyzés</h2> 
             <textarea class="megjegyzes"></textarea>
             </div>
-            <div class="inputBox" id="billing_data">
+            <div class="inputBox hidden" id="billing_data">
             <h2 class="alcim">8. Számlázási adatok</h2> 
             <div class="inputBoxInner">
                 <div class='input-keret'> 

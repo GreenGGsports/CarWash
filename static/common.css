@@ -1,4 +1,41 @@
+@font-face {
+    font-family: 'NewScienceLight';
+    src: url('fonts/fonnts.com-New_Science_Light.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+@font-face {
+    font-family: 'NewScienceLightExtended';
+    src: url('fonts/fonnts.com-New_Science_Light_Extended.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+@font-face {
+    font-family: 'NewScienceThin';
+    src: url('fonts/fonnts.com-New_Science_Thin_Extended.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+@font-face {
+    font-family: 'NewScienceMediumExtended';
+    src: url('fonts/fonnts.com-New_Science_Medium_Extended.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.alcim{
+    font-weight: 500;
+      padding: 20px;
+      font-family: 'NewScienceMediumExtended', sans-serif;
+      font-size: clamp(20px, 2vw, 40px);
+      text-align: center;
+  }
+  
 header{
+    font-size: 0px;
     margin-top: 0%;
     padding-bottom: 2%;
 }
@@ -15,8 +52,8 @@ header{
     background-color: #2D2D2D;
     border: 1px solid #161616;
 }
-
 .headerDesktop{
+    font-family: 'NewScienceLight';
     display: flex;
     flex-direction: row;
     padding-right: 5%;
@@ -131,6 +168,7 @@ header{
 }
 
 footer{
+    font-family: 'NewScienceThin';
     padding-left: 5%;
     padding-top: 5%;
     padding-bottom: 5%;
@@ -148,6 +186,7 @@ footer{
 .footerTextBox{
     text-align: center;
     width: 100%;
+    font-size: clamp(14px, 1vw, 40px);
 }
 
 .socialBox{

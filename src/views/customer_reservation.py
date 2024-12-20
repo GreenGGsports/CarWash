@@ -40,6 +40,4 @@ def render(locations, services, extras, customer, selected_location_id=None):
 
 @reservation_test.route("/create_reservation",methods=[ "POST"])
 def create_reservation():
-    from pdb import set_trace
-    set_trace()
     pass
