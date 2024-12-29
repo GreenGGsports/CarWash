@@ -16,7 +16,14 @@ class BillingModel(BaseModel):
     company_name = Column(String(30),nullable= True)
     tax_ID = Column(String(30),nullable=True)
     reservation = relationship('ReservationModel', back_populates='billing')
-    
+
+    def __init__(self, name , address, email, reservation_id, company_name, tax_ID):
+        self.name = name
+        self.address = address
+        self.email = email
+        self.reservation_id = reservation_id
+        self.company_name = company_name
+        self.tax_ID = tax_ID
     
     @classmethod
     def add_billing_data(cls,session: Session, reservation_id: int,  name: str, address: str, email : str, company_name: str = None, tax_ID: str = None):
