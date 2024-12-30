@@ -39,6 +39,7 @@
         <thead>
             <tr>
                 <th>Company Name</th>
+                <th>Reservation Date</th>
                 <th>License Plate</th>
                 <th>Customer Forename</th>
                 <th>Customer Lastname</th>
@@ -51,6 +52,7 @@
             {% for invoice in invoices %}
             <tr>
                 <td>{{ invoice.company_name }}</td>
+                <td>{{ invoice.reservation_date }}</td>
                 <td>{{ invoice.licence_plate }}</td>
                 <td>{{ invoice.customer_forename }}</td>
                 <td>{{ invoice.customer_lastname }}</td>
