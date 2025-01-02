@@ -21,6 +21,7 @@ class InvoiceModelView(MyModelView):
 
     column_list = ['reservation.reservation_date','reservation.car.license_plate', 'name', 'address', 'email','company_name', 'tax_ID','reservation.payment_method' ,'reservation.final_price']
     
+    column_default_sort = ('reservation.reservation_date', True)
 
     column_filters = [
         DateBetweenFilter(BillingModel.reservation.property.mapper.class_.reservation_date, 'Custom date'),
