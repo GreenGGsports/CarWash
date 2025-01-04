@@ -48,7 +48,7 @@ def get_carwash_slots():
     try:
         db_session = current_app.session_factory.get_session()
         data = request.get_json()
-        date = datetime.strptime(data['date'], '%Y-%m-%d %H:%M:%S')
+        date = datetime.strptime(data['date'], '%Y-%m-%d')
         carwash_id = int(data['carwash_id'])
 
         available_slots = get_available_slots(db_session, date, carwash_id)
@@ -103,7 +103,7 @@ def reserve_slot():
         db_session = current_app.session_factory.get_session()
         data = request.get_json()
         slot_id = data['slot_id']
-        reservation_date = datetime.strptime(data['date'], '%Y-%m-%d %H:%M:%S').date()
+        reservation_date = datetime.strptime(data['date'], '%Y-%m-%d').date()
 
         # A zárolás lejárati idejének beállítása (10 perc)
         lock_expiration = datetime.now() + timedelta(minutes=10)

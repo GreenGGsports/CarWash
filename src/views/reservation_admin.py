@@ -13,8 +13,8 @@ from flask import current_app, request, redirect, flash, url_for
 from src.views.filters import ThisMonthFilter, ThisWeekFilter, TodayFilter
 from flask_admin.contrib.sqla.filters import DateBetweenFilter
 from src.views.reservation_form import ReservationForm
-from src.controllers.reservation_controller2 import create_reservation, create_billing
-from src.views.form_data import ReservationData, BillingData, CarData
+from src.controllers.reservation_controller2 import create_reservation, create_billing, add_car, add_customer
+from src.views.form_data import ReservationData, BillingData, CarData, CustomerData
 
 class ReservationAdminView(MyModelView):
     form = ReservationForm
@@ -108,7 +108,7 @@ class ReservationAdminView(MyModelView):
 
 
     def create_form(self, obj=None):
-        form = form = super(ReservationAdminView, self).create_form(obj)
+        form = super(ReservationAdminView, self).create_form(obj)
         form.session = self.session
         form.user_role = current_user.role if current_user.is_authenticated else None  # Pass user role to form
         return form
@@ -127,21 +127,28 @@ class ReservationAdminView(MyModelView):
     def create_model(self, form):
         reservation_data = ReservationData.parseForm(form.data)
         car_data = CarData.parseForm(form.data)
+        car = add_car(session=form.session,car_data=car_data)
+        
+        customer_data = CustomerData.parseForm(form.data)
+        customer = add_customer(form.session, customer_data, admin=True)
         service = form.service.data
         carwash = form.carwash.data
         extras = form.extras.data
         slot = form.slot.data
         reservation = create_reservation(
-            carwash, 
-            service, 
-            extras, 
-            slot,
-            reservation_data,
+            session=form.session,
+            carwash=carwash, 
+            service=service, 
+            extras=extras, 
+            slot=slot,
+            car=car,
+            customer=customer,
+            reservation_data=reservation_data,
             admin=True
             )
         flash(f'Reservation {reservation.id} created successfully!', 'success')
         # Redirect back to the admin list view
-        if form.data['billing_required']:
+        if form.data.get('billing_required', False):
             billing_data = BillingData.parseForm(form.data)
             create_billing(
                 reservation=reservation,

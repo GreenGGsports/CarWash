@@ -38,6 +38,32 @@ document.addEventListener('DOMContentLoaded', () => {
 document.getElementById('dateInput').addEventListener('change', (event) => {
     sendDateToServer(event.target.value);
 });
+
+function lockSlot(slotId, reservationDate) {
+    $.ajax({
+        url: '/booking/api/carwash/reserve_slot',  // Zárolási végpont
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            slot_id: slotId,
+            date: reservationDate
+        }),
+        success: function (response) {
+            if (response.success) {
+                // Ha sikeres a zárolás, tájékoztatjuk a felhasználót
+                alert(response.message);
+            } else {
+                // Ha a slot már zárolva van, figyelmeztetjük a felhasználót
+                alert(response.message);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error('Error:', error);
+            alert('Hiba történt a slot zárolásakor. Kérjük, próbálja újra.');
+        }
+    });
+}
+
 function generateHourlyButtons(response) {
     const template = document.getElementById("GombBox");
     const buttonContainer = document.querySelector(".GombBox");
@@ -57,6 +83,13 @@ function generateHourlyButtons(response) {
         radioButton.value = slot['id'];
         radioButton.id = `slot-${slot['id']}`
         radioButton.dataset.free = slot['available'];
+
+        radioButton.addEventListener('change', () => {
+            date = document.getElementById('dateInput').value
+            id = radioButton.value
+            console.log(`Selected ID: ${radioButton.value}, Date: ${date}`);
+            lockSlot(id, date)
+        });
 
         // Create the label for the radio button
         const label = document.createElement('label');
@@ -78,8 +111,15 @@ checkbox.addEventListener('change', () => {
     const extraFields = document.getElementById("billing_data");
     if (checkbox.checked) {
         extraFields.classList.remove('hidden'); // Mezők megjelenítése
+        document.getElementById('billing_name').setAttribute("required", "true");
+        document.getElementById('email').setAttribute("required", "true");
+        document.getElementById('address').setAttribute("required", "true");
+
     } else {
         extraFields.classList.add('hidden'); // Mezők elrejtése
+        document.getElementById('billing_name').removeAttribute("required");
+        document.getElementById('email').removeAttribute("required");
+        document.getElementById('address').removeAttribute("required");
     }
 });
 
@@ -88,8 +128,14 @@ paymentmethod.addEventListener('change', () => {
     const extraFields = document.getElementById("billing_data");
     if (paymentmethod.value === "bankcard") {
         extraFields.classList.remove('hidden'); // Mezők megjelenítése
+        document.getElementById('billing_name').setAttribute("required", "true");
+        document.getElementById('email').setAttribute("required", "true");
+        document.getElementById('address').setAttribute("required", "true");
     } else {
         extraFields.classList.add('hidden'); // Mezők elrejtése
+        document.getElementById('billing_name').removeAttribute("required");
+        document.getElementById('email').removeAttribute("required");
+        document.getElementById('address').removeAttribute("required");
     }
 });
 

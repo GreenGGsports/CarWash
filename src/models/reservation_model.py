@@ -92,8 +92,6 @@ class ReservationModel(BaseModel):
         final_price = int((service_price + total_extra_price) * discount_multiplier)
 
         self.final_price = final_price
-        from pdb import set_trace
-        set_trace()
 
 
     @classmethod
@@ -108,8 +106,6 @@ class ReservationModel(BaseModel):
         # Végső ár kiszámítása külön függvény használatával
         if not final_price:
             final_price = ReservationModel.calculate_final_price(session, service_id , car_id, extras)
-        from pdb import set_trace
-        set_trace() 
         reservation = cls(
             car_id=car_id,
             service_id=service_id,

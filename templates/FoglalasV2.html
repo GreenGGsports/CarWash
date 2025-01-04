@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='common.css') }}">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='FoglalasV3.css') }}">
     <title>Foglalás</title>
@@ -118,7 +119,7 @@
                 <div class='datumKeret'>
                 <h2 class="alcim">4. Válasszon időpontot</h2> 
                     <div>
-                        <input type="date" id="dateInput" class="input-mezo" placeholder="Dátumot" required>
+                        <input type="date" id="dateInput" class="input-mezo" name="reservation_date" placeholder="Dátumot" required>
                     </div>
                     <div class="info">
                     Autóját a kiválasztott időpontig készítjük el!<br><br>
@@ -141,33 +142,33 @@
                 <h2 class="alcim">5. Személyes adatok</h2> 
                 <div class="inputBoxInner">
                 <div class='input-keret'> 
-                    <label class = "input-label"  for="forname">First Name:</label>
+                    <label class = "input-label"  for="lastname">Vezetéknév:</label>
                     <input 
                         type="text" 
                         id="forname" 
-                        name="forname" 
-                        value="{{ customer.forname }}" 
-                        placeholder="" 
-                        class="input-mezo"
-                        required>
-                </div>
-                <div class='input-keret'> 
-                    <label class = "input-label" for="lastname">Last Name:</label>
-                    <input 
-                        type="text" 
-                        id="lastname" 
-                        name="lastname" 
+                        name="new_customer_lastname" 
                         value="{{ customer.lastname }}" 
                         placeholder="" 
                         class="input-mezo"
                         required>
                 </div>
                 <div class='input-keret'> 
-                    <label class = "input-label" for="phone_number">Phone Number:</label>
+                    <label class = "input-label" for="lastname">Keresztnév:</label>
+                    <input 
+                        type="text" 
+                        id="forname" 
+                        name="new_customer_forname" 
+                        value="{{ customer.forname }}" 
+                        placeholder="" 
+                        class="input-mezo"
+                        required>
+                </div>
+                <div class='input-keret'> 
+                    <label class = "input-label" for="phone_number">Telefonszám:</label>
                     <input 
                         type="text" 
                         id="phone_number" 
-                        name="phone_number" 
+                        name="new_customer_phone_number" 
                         value="{{ customer.phone_number }}" 
                         placeholder="Enter phone number" 
                         class="input-mezo"
@@ -177,12 +178,12 @@
                     <label class = "input-label"  for="payment_method">Fizetési mód</label>
                     <select id="payment_method" name="payment_method" class="input-mezo">
                         <option value="cash">Kézpénz</option>
-                        <option value="bankcard">Bankkártya</option>
+                        <option value="card">Bankkártya</option>
                     </select>
                 </div>
                 <div class='input-keret'> 
                     <label class="custom-checkbox">
-                        <input type="checkbox"  id="billing-required">
+                        <input type="checkbox"  id="billing-required" name='billing_required'6>
                         <span></span>
                         Kérek számlát
                     </label>
@@ -197,7 +198,7 @@
                         <input 
                             type="text" 
                             id="marka" 
-                            name="marka" 
+                            name="new_car_brand" 
                             value="{{ customer.forname }}" 
                             placeholder="" 
                             class="input-mezo"
@@ -208,7 +209,7 @@
                         <input 
                             type="text" 
                             id="marka" 
-                            name="marka" 
+                            name="parking_spot" 
                             value="{{ customer.forname }}" 
                             placeholder="" 
                             class="input-mezo"
@@ -219,7 +220,7 @@
                         <input 
                             type="text" 
                             id="marka" 
-                            name="marka" 
+                            name="new_car_model" 
                             value="{{ customer.forname }}" 
                             placeholder="" 
                             class="input-mezo"
@@ -230,7 +231,7 @@
                         <input 
                             type="text" 
                             id="license_plate" 
-                            name="license_pkate" 
+                            name="new_car_license_plate" 
                             value="{{ customer.forname }}" 
                             placeholder="" 
                             class="input-mezo"
@@ -238,10 +239,10 @@
                     </div>
                     <div class='input-keret'> 
                         <label class = "input-label"  for="size">Autó Méret</label>
-                        <select id="size" name="size" class="input-mezo">
-                            <option value="small">M</option>
-                            <option value="medium">L</option>
-                            <option value="large">XXL</option>
+                        <select id="size" name="new_car_type" class="input-mezo">
+                            <option value="small_car">M</option>
+                            <option value="medium_car">L</option>
+                            <option value="large_car">XXL</option>
                         </select>
                 </div>
             </div>
@@ -252,7 +253,7 @@
         <div class="inputContaner">
             <div class="inputBox">
             <h2 class="alcim">7. Megjegyzés</h2> 
-            <textarea class="megjegyzes"></textarea>
+            <input type="textarea" class="megjegyzes" name="comment">
             </div>
             <div class="inputBox hidden" id="billing_data">
             <h2 class="alcim">8. Számlázási adatok</h2> 
@@ -261,42 +262,42 @@
                     <label class = "input-label"  for="billing-name">Név:*</label>
                     <input 
                         type="text" 
-                        id="billing-name" 
-                        name="name" 
-                        value="{{ customer.forname }}" 
+                        id="billing_name" 
+                        name="billing_name" 
+                        value="{{ billing.name }}" 
                         placeholder="" 
                         class="input-mezo"
-                        required>
+                        >
                 </div>
                 <div class='input-keret'> 
                     <label class = "input-label" for="email">E-mail:*</label>
                     <input 
                         type="email" 
                         id="email" 
-                        name="billing.email" 
-                        value="{{ customer.lastname }}" 
+                        name="email" 
+                        value="{{ billing.email }}" 
                         placeholder="" 
                         class="input-mezo"
-                        required>
+                        >
                 </div>
             <div class='input-keret'> 
-                <label class = "input-label"  for="adress">Cím:*</label>
+                <label class = "input-label"  for="address">Cím:*</label>
                 <input 
                     type="text" 
-                    id="adress" 
-                    name="adress" 
-                    value="{{ customer.forname }}" 
+                    id="address" 
+                    name="address" 
+                    value="{{ billing.address }}" 
                     placeholder="" 
                     class="input-mezo"
-                    required>
+                    >
             </div>
             <div class='input-keret'> 
                 <label class = "input-label"  for="company_name">Cégnév:</label>
                 <input 
                     type="text" 
                     id="company_name" 
-                    name="forname" 
-                    value="{{ customer.forname }}" 
+                    name="company_name" 
+                    value="{{ billing.company_name }}" 
                     placeholder="" 
                     class="input-mezo">
             </div>
@@ -306,7 +307,7 @@
                     type="text" 
                     id="tax_ID" 
                     name="tax_ID" 
-                    value="{{ customer.forname }}" 
+                    value="{{ billing.tax_ID }}" 
                     placeholder="" 
                     class="input-mezo">
             </div>
