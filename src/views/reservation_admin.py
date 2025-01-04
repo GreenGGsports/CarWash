@@ -23,6 +23,7 @@ class ReservationAdminView(MyModelView):
     column_list = (
         'carwash.carwash_name',
         'reservation_date',
+        'slot',
         'car.license_plate',
         'car.car_brand',
         'car.car_model',
@@ -51,7 +52,8 @@ class ReservationAdminView(MyModelView):
         'payment_method': 'Fizetési mód',
         'customer.phone_number': 'Tel',
         'is_completed': 'Kész?',
-        'parking_spot': 'Parkolóhely'
+        'parking_spot': 'Parkolóhely',
+        'slot' : 'Idősáv'
     }
 
     columns_to_export = {
@@ -70,9 +72,13 @@ class ReservationAdminView(MyModelView):
         'is_completed': 'Kész?',
         'parking_spot': 'Parkolóhely'
     }
+
+    column_default_sort = ('reservation_date', True)
     
     column_formatters = {
-        'payment_method': lambda v, c, model, name: model.payment_method.value if model.payment_method else None
+        'payment_method': lambda v, c, model, name: model.payment_method.value if model.payment_method else None,
+        'slot': lambda v, c, m, p: f"{m.slot.start_time.hour:02d}:{m.slot.start_time.minute:02d}-{m.slot.end_time.hour:02d}:{m.slot.end_time.minute:02d}" if m.slot else "",
+        'reservation_date': lambda v, c, m, p: m.reservation_date.strftime('%Y-%m-%d') if m.reservation_date else ""
     }
 
     form_excluded_columns = ['billing']
