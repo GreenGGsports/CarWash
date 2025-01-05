@@ -162,20 +162,59 @@ function handle_errors(form){
         document.getElementById("GombBox").classList.add("error");
     return isvalid
 }
-async  function create_reservation()
-{
-    form = document.getElementById("reservationForm")
-    if (!handle_errors(form)){
-        console.log("form is not valid")
-        return
+
+async function create_reservation(event) {
+
+    const form = document.getElementById("reservationForm");
+
+    // Custom error handling logic
+    if (!handle_errors(form)) {
+        console.log("Form is not valid");
+        return;
     }
-    if (form.checkValidity()) {
-        form.submit();  // Submit the form if valid
-      } else {
-        form.reportValidity(); // This triggers the browser's built-in validation messages
+
+    // HTML5 form validation
+    if (!form.checkValidity()) {
+        form.reportValidity(); // Show native validation messages
+        return;
+    }
+
+    try {
+        // Collect form data
+        const formData = new FormData(form);
+
+        // Asynchronous submission
+        const response = await fetch(form.action, {
+            method: form.method,
+            body: formData,
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to submit: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        console.log(data)
+        // Check for success and open the modal with data
+        if (data.success) {
+            openReservationModal(data);
+        } else {
+            console.error("Reservation failed:", data.message);
+        }
+    } catch (error) {
+        console.error("Error creating reservation:", error);
     }
 }
 
+// Function to open a modal with the reservation data
+function openReservationModal(data) {
+    console.log("openmodal")
+    document.getElementById("ConfirmModal").style.display = "block"; // Megjeleníti a modált
+}
+
+function CloseReservationModal() {
+    document.getElementById("ConfirmModal").style.display = "none"; // Megjeleníti a modált
+}
 async function checkIncludedExtras(service_id)
 {
     try {

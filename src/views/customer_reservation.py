@@ -5,7 +5,7 @@ from src.models.extra_model import ExtraModel
 from src.models.customer_model import CustomerModel
 from src.models.reservation_model import ReservationModel
 from src.models.billing_model import BillingModel
-from flask import  render_template, request, Blueprint, current_app, session
+from flask import  render_template, request, Blueprint, current_app, session, jsonify
 from src.views.form_data import ReservationData, BillingData, CarData
 from src.controllers.reservation_controller2 import create_reservation, create_billing
 from src.models.slot_model import SlotModel
@@ -99,7 +99,7 @@ def render(locations, services, extras, customer=None, car =None, billing=None, 
 
 
 
-@reservation_test.route("/create_reservation",methods=["POST"])
+@reservation_test.route("/create_reservation",methods=["POST", "GET"])
 def reservation():
     form_data = request.form.to_dict()
     db_session = current_app.session_factory.get_session()
@@ -131,4 +131,9 @@ def reservation():
     if form_data.get('billing_required', False):
         billing_data = BillingData.parseForm(form_data)
         billing = create_billing(db_session,reservation, billing_data)
-    return "success"
+        
+        
+    return jsonify(dict(
+        success=True,
+        final_price=reservation.final_price,   
+        )), 200

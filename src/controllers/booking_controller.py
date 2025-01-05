@@ -69,31 +69,17 @@ def get_slots():
     date = datetime.strptime(data['date'], '%Y-%m-%d')
     carwash_id = session['carwash_id']
     
-    live_slots = db_session.query(SlotModel).filter_by(live=True, carwash_id=carwash_id).all()
+    available_slots = get_available_slots(db_session, date, carwash_id)
     response = []
-    for slot in live_slots:
+    for slot in available_slots :
         if date >= slot.end_time:
-            if ReservationModel.is_slot_available(
-                session=db_session,
-                slot_id=slot.id,
-                reservation_date=date
-            ):
-                response.append(
-                    dict(
-                        id = slot.id,
-                        end_time_hours = slot.end_time.strftime('%H'),
-                        end_time_minutes = slot.end_time.strftime('%M'),
-                        available = True
-                    )
+            response.append(
+                dict(
+                    id = slot.id,
+                    end_time_hours = slot.end_time.strftime('%H'),
+                    end_time_minutes = slot.end_time.strftime('%M'),
+                    available = True
                 )
-            else:  
-                response.append(
-                    dict(
-                        id = slot.id,
-                        end_time_hours = slot.end_time.strftime('%H'),
-                        end_time_minutes = slot.end_time.strftime('%M'),
-                        available = False
-                    )
                 )
     return jsonify({'success': True, 'slots': response})
 

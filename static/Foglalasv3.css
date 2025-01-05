@@ -26,9 +26,9 @@ input[type="radio"]:checked + .IdopontLabel {
     justify-content: center;
     align-items: center;
     display: flex;
-    height: 100%;
-    border-radius: 5vh;
-
+    border-radius: 2vh;
+    height: 10vh;
+    max-height: 40px;
 }
 
 .IdopontLabel.false {
@@ -363,22 +363,13 @@ header{
 }
 
 .GombBox{
-    display: grid;
+    display:grid;
     padding: 5%;
-    padding-top: 15%;
+    padding-top: 50px;
     grid-template-columns: 1fr 1fr;
+    align-content: flex-start;
     gap: 10px;
     height: 100%;
-}
-.IdopontGomb{
-    display: flex;
-    background-color: #2D2D2D;
-    border: 1px solid #161616;
-    color: #E0E0E0;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px;
-    height: 30px;
 }
 
 .megjegyzes{

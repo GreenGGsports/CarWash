@@ -44,6 +44,7 @@ header{
     height: 100%;
     width: 50%;
     padding-top: 2%;
+    padding-left: 10px;
 }
 
 .exitButton{
@@ -51,6 +52,7 @@ header{
     width: 50%;
     background-color: #2D2D2D;
     border: 1px solid #161616;
+    max-width: 120px;
 }
 .headerDesktop{
     font-family: 'NewScienceLight';
@@ -81,6 +83,7 @@ header{
     justify-content: center;
     padding-left: 5%;
     align-items: center;
+    font-size: clamp(14px, 1vw, 40px);
 }
 
 .headerButtonSelected{
@@ -89,9 +92,10 @@ header{
     height: 40px;
     background-color: #D5F048;
     border: 1px solid #D5F048;
-    border-radius: 10vh;
+    border-radius: 2vh;
     align-items: center;
     justify-content: center;
+    font-size: clamp(14px, 1vw, 40px);
 }
 
 .headerMobile {
@@ -117,31 +121,78 @@ header{
     border-radius: 3px; /* Lekerekített sarkok */
   }
 
-  .modal {
+.modal, .LoginOrRegistermodal{
     display: none; /* Alapból rejtett */
     position: fixed;
+    z-index: 1000; /* Az összes tartalom fölött jelenjen meg */
+    overflow: hidden;
+}
+
+.modal{
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Sötét áttetsző háttér */
-    z-index: 1000; /* Az összes tartalom fölött jelenjen meg */
-    overflow: hidden;
-    justify-content: center;
+    background-color: #161616; /* Sötét áttetsző háttér */
 }
 
+.LoginOrRegistermodal{
+    border-radius: 10px;
+    top: 30vh;
+    left: 25vw;
+    width: 50%;
+    height: 40%;
+    background-color: #2D2D2D; /* Sötét áttetsző háttér */
+    justify-content: center;
+    align-items: center;
+}
+
+.loginWrapper{
+    padding: 5px;
+}
 /* A modális tartalom */
 #modal-content {
-    padding-top: 20%;
+    padding-top: 10vh;
     display: flex;
     width: 100%;
     height: 100%;
     background-color: #161616;
-    align-items: center;
+
     flex-direction: column;
     color: #E0E0E0;
     font-size: 20px;
     text-align: center;
+}
+
+.modal-outerContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    width: 100%;
+}
+
+.modal-label{
+    display: flex;
+    text-align: left;
+    width: 200px;
+    padding: 10px;
+}
+
+.modal-input{
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    width: 300px;
+}
+
+.modal-mezo{
+    display: flex;
+    padding: 10px;
+    border-radius: 2vh;
+    border: none;
+    background-color: #2D2D2D !important;
+    color: #E0E0E0;
 }
 
 /* Bezáró gomb */
@@ -195,6 +246,81 @@ footer{
     width: 90%;
     flex-direction: column;
 }
+
+.LoginOrRegisterText{
+    text-align: center;
+    font-family: 'NewScienceLight';
+    font-weight: lighter;
+    font-size: clamp(14px, 1vw, 40px);
+    width: 70%;
+}
+
+.LoginOrRegisterButton{
+    margin-top: 20px;
+    padding: 5px;
+    background-color: #161616;
+    border: 1px solid #E0E0E0;
+    color: #E0E0E0;
+    display: flex;
+    border-radius: 2vh;
+    width: 300px;
+    justify-content: center;
+    align-items: center;
+}
+
+.LoginOrRegister{
+    width: 100%;
+    height: 100%;
+    background-color: red;
+
+}
+
+.LoginOrRegistercontent{
+    display: flex;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    width: 100%;
+
+}
+.regMenubutton{
+    display:  flex;
+    background-color: #2D2D2D;
+    border: none;
+    padding: 20px;
+    justify-content: right;
+    color: #E0E0E0;
+    font-family: "NewScienceLight";
+    width: 70%
+    
+
+}
+
+.Buziszmbólumgeci{
+    display:flex;
+    justify-content: left; 
+    align-items: center;
+    color: #E0E0E0;
+    font-family: "NewScienceLight";
+    font-size: large;
+    width: 20%;
+    
+}
+
+.LoginOrRegisterWrapper{
+    display: flex;
+    align-items:center;
+    flex-direction: column;
+    justify-content: left;
+}
+
+.LoginOrRegisterWrapper2{
+    display: flex;
+    flex-direction: row;
+
+}
 @media (max-width: 768px) {
     .headerDesktop{
         display: none;
@@ -216,5 +342,15 @@ footer{
 
     .footerTextBox{
         padding-bottom: 5%;
+    }
+
+    .LoginOrRegistermodal{
+        border-radius: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        top: 30vh;
+        left: 15vw;
+        width: 70%;
+        height: 40%;
     }
 }
