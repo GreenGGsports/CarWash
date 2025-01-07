@@ -92,10 +92,6 @@ class ReservationAdminView(MyModelView):
         'service.service_name',
         'carwash.carwash_name',
     ]
-
-    def __init__(self, model, session, *args, **kwargs):
-        self.session = session
-        super(ReservationAdminView, self).__init__(model, session, *args, **kwargs)
         
     def get_list(self, *args, **kwargs):
         count, query = super().get_list(*args, **kwargs)

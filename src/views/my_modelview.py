@@ -10,10 +10,19 @@ from flask_admin import expose
 from io import StringIO  # StringIO importálása
 
 class MyModelView(ModelView):
+
+    columns_to_export = {}
+    
+
     def __init__(self, *args, **kwargs):
+        # Ha nem adunk át 'columns_to_export'-ot, az alapértelmezett értékek kerülnek használatra
         self.role = kwargs.pop('role', None)
-        self.columns_to_export = kwargs.pop('columns_to_export', None)  # Beállítható oszlopok exportálása
+        columns_to_export = kwargs.pop('columns_to_export', None)
+        if columns_to_export is not None:
+            self.columns_to_export = columns_to_export  # Felülírjuk az alapértelmezett értéket
+        # A szülő konstruktor meghívása
         super(MyModelView, self).__init__(*args, **kwargs)
+
         
     def is_accessible(self):
         # Check if the user is authenticated and has the required role
@@ -25,7 +34,7 @@ class MyModelView(ModelView):
 
     def inaccessible_callback(self, name, **kwargs):
         # Redirect to login if access is denied
-        return redirect(url_for('user_ctrl.login'))
+        return redirect('/')
     
     def on_model_change(self, form, model, is_created):
         try:
@@ -145,6 +154,8 @@ class MyModelView(ModelView):
             # Alkalmazza a szűrőket, ha léteznek
             filters = self._filters
             query = self.apply_filters(query, filters)
+
+            current_app.logger.info(f"columns_to_export: {self.columns_to_export}")
 
             # Fejléc (column_labels alapján vagy column_list alapján)
             if self.columns_to_export:
