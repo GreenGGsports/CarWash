@@ -13,6 +13,8 @@ from src.controllers.billing_controller import billing_ctrl
 from src.controllers.booking_controller import booking_ctrl
 from src.controllers.developer_controller import developer_ctrl
 from src.controllers.reservation_autofill import reservation_autofill_ctrl
+from src.views.customer_reservation import reservation_test
+from src.views.main_view import main_view
 from database import create_database, get_db, close_db
 from src.controllers.admin import init_admin, init_local_admin, init_developer_admin
 from src.models.user_model import UserModel
@@ -66,19 +68,6 @@ def create_app(config_name: str):
     return app
 
 def add_blueprints(app: Flask):
-    @app.route('/')
-    def home():
-        return render_template('Landing_page.html')
-    
-    @app.route('/carwash_sites/<site_name>')
-    def carwash_site(site_name):
-        try:
-            # This will look for the corresponding HTML file inside templates/carwash_sites
-            return render_template(f'carwash_sites/{site_name}.html')
-        except :
-            # Return a 404 error if the file does not exist
-            return "Car wash site not found", 404
-    
     app.register_blueprint(billing_ctrl, url_prefix ='/billing')
     app.register_blueprint(reservation_ctrl, url_prefix='/reservation')
     app.register_blueprint(user_ctrl, url_prefix='/user')
@@ -86,6 +75,7 @@ def add_blueprints(app: Flask):
     app.register_blueprint(service_ctrl, url_prefix='/service')
     app.register_blueprint(booking_ctrl, url_prefix = '/booking')
     app.register_blueprint(reservation_autofill_ctrl, url_prefix = '/reservation_autofill')
+    app.register_blueprint(main_view, url_prefix = '/')
 
 
     app.register_blueprint(car_ctrl, url_prefix='/api/car')
@@ -93,6 +83,8 @@ def add_blueprints(app: Flask):
     app.register_blueprint(local_admin_ctrl, url_prefix='/local-admin', name='local_admin_blueprint')
     app.register_blueprint(developer_ctrl, url_prefix='/developer', name='developer_admin_blueprint')
     app.register_blueprint(helix_api, url_prefix='/helix')
+    
+    app.register_blueprint(reservation_test, url_prefix='/reservation_test')
     return app 
 
 if __name__ == '__main__':

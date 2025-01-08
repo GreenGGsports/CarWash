@@ -17,6 +17,7 @@ from src.views.extra_admin_view import ExtraModelView
 from src.views.my_modelview import MyModelView
 from src.views.carwash_modelview import CarwashAdminView
 from src.views.invoice_admin_view import InvoiceModelView
+from src.models.slot_lock_model import SlotLockModel
 from src.views.dashboard import Dashboard
 
 def init_admin(app, session_factory):
@@ -75,6 +76,7 @@ def init_developer_admin(app, session_factory):
     developer_admin.add_view(MyModelView(CustomerModel, session, name='Customer', endpoint='customer_developer'))
     developer_admin.add_view(MyModelView(BillingModel, session, name='Billing', endpoint='billing_developer'))
     developer_admin.add_view(MyModelView(CarModel, session, name='Car', endpoint='car_developer'))
+    developer_admin.add_view(MyModelView(SlotLockModel, session, name='SLotLock', endpoint='slot_lock_developer'))
     
     developer_admin.add_view(MonthlyInvoiceView(session=session, name='Monthly Invoices', endpoint='monthly_invoices_developer'))
 

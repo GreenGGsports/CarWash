@@ -21,6 +21,7 @@ class ReservationAdminView(MyModelView):
     column_list = (
         'carwash.carwash_name',
         'reservation_date',
+        'slot',
         'car.license_plate',
         'car.car_brand',
         'car.car_model',
@@ -49,14 +50,38 @@ class ReservationAdminView(MyModelView):
         'payment_method': 'Fizetési mód',
         'customer.phone_number': 'Tel',
         'is_completed': 'Kész?',
+        'parking_spot': 'Parkolóhely',
+        'slot' : 'Idősáv'
+    }
+
+    columns_to_export = {
+        'carwash.carwash_name': 'Hely',
+        'reservation_date': 'Dátum',
+        'car.license_plate': 'Rendszám',
+        'car.car_brand': 'Márka',
+        'car.car_model': 'Típus',
+        'car.company.company_name': 'Cégnév',
+        'service.service_name': 'Csomag',
+        'extras': 'Extra',
+        'comment': 'Megjegyzés',
+        'final_price': 'Ár',
+        'payment_method': 'Fizetési mód',
+        'customer.phone_number': 'Tel',
+        'is_completed': 'Kész?',
         'parking_spot': 'Parkolóhely'
     }
+
+    column_default_sort = ('reservation_date', True)
     
     column_formatters = {
-        'payment_method': lambda v, c, model, name: model.payment_method.value if model.payment_method else None
+        'payment_method': lambda v, c, model, name: model.payment_method.value if model.payment_method else None,
+        'slot': lambda v, c, m, p: f"{m.slot.start_time.hour:02d}:{m.slot.start_time.minute:02d}-{m.slot.end_time.hour:02d}:{m.slot.end_time.minute:02d}" if m.slot else "",
+        'reservation_date': lambda v, c, m, p: m.reservation_date.strftime('%Y-%m-%d') if m.reservation_date else ""
     }
 
     form_excluded_columns = ['billing']
+
+    can_export = True
     
     column_filters = [
         TodayFilter(ReservationModel.reservation_date),
@@ -67,10 +92,6 @@ class ReservationAdminView(MyModelView):
         'service.service_name',
         'carwash.carwash_name',
     ]
-
-    def __init__(self, model, session, *args, **kwargs):
-        self.session = session
-        super(ReservationAdminView, self).__init__(model, session, *args, **kwargs)
         
     def get_list(self, *args, **kwargs):
         count, query = super().get_list(*args, **kwargs)

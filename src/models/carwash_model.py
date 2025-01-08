@@ -12,6 +12,7 @@ class CarWashModel(BaseModel):
     id = Column(Integer, primary_key=True)
     carwash_name = Column(String(30), nullable=False)
     location = Column(String(100), nullable=False)
+    contact = Column(String(30), nullable=True)
     image_name = Column(String(30), nullable=True)
     
     close_start = Column(DateTime(),nullable=True)

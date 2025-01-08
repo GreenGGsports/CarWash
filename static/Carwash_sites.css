@@ -1,0 +1,185 @@
+form {
+    display: contents; /* vagy flex, attól függ, hogy hogyan szeretnéd kezelni a belső elemeket */
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    /* Center content horizontally */
+    overflow-x: hidden;
+    height: auto;
+    
+}
+body {
+    background-color: #161616;
+    color: #E0E0E0;
+    padding-left: 5%;
+    font-family: 'New Science', sans-serif;  /* Set the font */
+    font-weight: 600;     
+}
+
+.kozmetika{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    flex-shrink: 0;
+    overflow-x: auto; /* Oldalirányú görgetés a konténeren belül */
+    scroll-snap-type: x mandatory; /* A görgetés "összefogása" */
+    scrollbar-width: none;
+}
+
+.KozmetikaCim{
+    padding: 3%;
+}
+
+.kozmetikaContent{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-right: 10%;
+    gap: 10%;
+}
+
+.kozmetikaLeiras{
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    width: 50%;
+}
+
+.kozmetikaReszletek{
+    display: flex;
+    flex-direction: column;
+    text-wrap: nowrap;
+    justify-content: center;
+}
+
+.kozmetikaReszlet{
+    display: flex;
+    gap: 20%;
+    padding-bottom: 10px;
+}
+
+.alcim{
+    font-family: 'New Science', sans-serif;  /* Set the font */
+    font-weight: 600;
+    display: flex;
+}
+
+.kozmetikaOuterContainer{
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    flex-shrink: 0; /* Ne zsugorodjon össze */
+    scroll-snap-align: start; /* Az elem illeszkedjen a görgetéshez */
+    transition: all 0.3s ease;
+    background-color: inherit !important;
+}
+
+.kozmetikaContainer{
+    display: flex;
+    border: 2px solid white;
+    padding: 3%;
+    border-right: none;
+    border-top-left-radius: 3vw; 
+    border-bottom-left-radius: 3vw;
+}
+
+.MobileScroller {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .kozmetikaContainer{
+        border-top-left-radius: 6vw; 
+        border-bottom-left-radius: 6vw;
+        border: none;
+    }
+    .kozmetikaContent{
+        flex-direction: column-reverse;
+        padding-left: 5%;
+        padding-right: 0%;
+        justify-content: left;
+    }
+
+    .kozmetikaLeiras{
+        margin-top: 5%;
+        width: 100%;
+    }
+
+    .kozmetika{
+        margin-left: 3%;
+    }
+
+    .kozmetikaReszlet{
+        justify-content: left;
+    }
+
+    .kozmetika{
+        flex-direction: row;
+        gap: 5%;
+    }
+
+    .KozmetikaCim{
+        display: none;
+        padding-left: 8%;
+    }
+
+    .kozmetikaOuterContainer{
+        width: 90%;
+        flex-shrink: 0; /* Ne zsugorodjon össze */
+        scroll-snap-align: start; /* Az elem illeszkedjen a görgetéshez */
+        transition: all 0.3s ease;
+        background-color:#161616;
+        border: 1px solid #E0E0E0;
+        border-radius: 3vh;
+    }
+
+    .MobileScroller {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+        padding: 5%;
+    }
+
+    .alcim{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .figyelmeztetes{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 5%;
+        padding-left: 15%;
+        padding-right:15% ;
+        text-align: center;
+    }
+}
+
+.mobileScrollerLabel{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    background-color: #161616;
+    width: 100px;
+    
+}
+
+input[type="radio"]:checked + .mobileScrollerLabel {
+    background-color: #D5F048;
+    color: #161616;
+    border-radius: 10px;
+}
+
+.radioButton {
+    cursor: pointer;
+    accent-color: #161616; /* A radio button színe */
+}
+
+.radioButton{
+    display: none;
+}

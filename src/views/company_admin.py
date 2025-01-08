@@ -55,25 +55,29 @@ class MonthlyInvoiceView(BaseView):
             end_date = datetime(year + 1, 1, 1)
         else:
             end_date = datetime(year, month + 1, 1)
-        
+
         # Lekérdezés a havi számlák összesítéséhez
         query = session.query(
             CompanyModel.company_name,
             ReservationModel.id,
+            ReservationModel.reservation_date,
             func.sum(ReservationModel.final_price).label('total_amount')
         ).select_from(CompanyModel).join(CarModel).join(ReservationModel).filter(
             ReservationModel.reservation_date >= start_date,
             ReservationModel.reservation_date < end_date
         )
-        
+
         if company_name:
             query = query.filter(CompanyModel.company_name.like(f'%{company_name}%'))
-        
+
         invoices = query.group_by(
             CompanyModel.company_name,
-            ReservationModel.id
+            ReservationModel.id,
+            ReservationModel.reservation_date
+        ).order_by(
+            ReservationModel.reservation_date.desc()  # Rendezzük a legfrissebb szerint
         ).all()
-        
+
         # Lekérdezzük a kapcsolódó adatokat külön lekérdezéssel
         reservation_ids = [invoice[1] for invoice in invoices]
         reservations = session.query(ReservationModel).options(
@@ -87,22 +91,24 @@ class MonthlyInvoiceView(BaseView):
 
         # Készíts egy szótárt az azonosítók alapján
         reservation_dict = {reservation.id: reservation for reservation in reservations}
-        
+
         # Csatlakoztassuk az adatokat
         result = []
         for invoice in invoices:
             reservation = reservation_dict.get(invoice[1])
             result.append({
                 'company_name': invoice.company_name,
-                'licence_plate':reservation.car.license_plate if reservation.car else None,
+                'licence_plate': reservation.car.license_plate if reservation.car else None,
                 'customer_forename': reservation.customer.forname if reservation.customer else None,
                 'customer_lastname': reservation.customer.lastname if reservation.customer else None,
                 'service_name': reservation.service.service_name if reservation.service else None,
                 'extras': [extra.service_name for extra in reservation.extras] if reservation.extras else [],
+                'reservation_date': invoice.reservation_date,  # Hozzáadva a dátum
                 'total_amount': invoice.total_amount
             })
-        
+
         return result
+    
     def get_total_amount(self, session, year, month, company_name):
         start_date = datetime(year, month, 1)
         if month == 12:

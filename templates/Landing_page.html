@@ -4,348 +4,246 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='common.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='landing_page.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    
+    <!-- Include Slick JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="{{ url_for('static', filename='landing_script.js') }}"></script>
+    <script src="{{ url_for('static', filename='common.js') }}"></script>
+    <script src="{{ url_for('static', filename='customer_login.js') }}"></script>
     <title>Landing page</title>
-    <link rel="stylesheet" href="{{ url_for('static',filename='landing_page.css') }}">
-    <link rel="stylesheet" href="https://use.typekit.net/gnm3icp.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
-    <div class="page-wrapper" style="z-index:1;
-            background-repeat: no-repeat;
-            background-size: cover;">
-        <div class="header">
-            <div class="inner-container-1">HU</div>
-            <div class="inner-container-2">
-                <img class="image" src="{{ url_for('static', filename='images/Logo2.png')}}" alt="">
+    <header>
+        <div class="headerDesktop">
+        <div class="exit">
+            <button class="exitButton"></button>
+        </div>
+        <div class="headerButtonBox">
+            <div class="headerButtonwrapper">
+                <button onclick="openLoginModal()" class="headerButton">Bejelentkezés</button>
             </div>
-            <div class="inner-container-3">
-                <button type="button" class="login-toggle">
-                    <i class="fas fa-user"></i>
-                    <p>Belépés</p>
-                </button>
+            <div class="headerButtonwrapper">
+                <button onclick="toPrices()" class="headerButton">Árlisták</button>
+            </div>
+            <div class="headerButtonwrapper">
+                <button onclick="toGallery()" class="headerButton">Galéria</button>
+            </div>
+            <div class="headerButtonwrapper">
+                <button onclick="toContact()" class="headerButton">Kapcsolat</button>
+            </div>
+            <div class="headerButtonwrapper">
+                <button onclick="toReservation()" class="headerButtonSelected">Online időpontFoglalás</button>
             </div>
         </div>
-        <!--modal-->
-        <div id="login-modal" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <div class="Reg-container">
-                    <div>
-                        <h2>Belépés</h2>
-                        <form id='login-form'>
-                            <div class="form-group">
-                                <label for="login-username">Felhasználónév:</label>
-                                <input type="text" id="login-username" name="user_name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="login-password">Jelszó:</label>
-                                <input type="password" id="login-password" name="password" required>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit">Belépés</button>
-                            </div>
-                            <div class="message" id="login-message"></div>
-                        </form>
-                    </div>
-                    <!-- Register Form -->
-                    <div>
-                        <h2>Regisztráció</h2>
-                        <form id="register-form">
-                            <div class="form-group">
-                                <label for="register-username">Felhasználónév:</label>
-                                <input type="text" id="register-username" name="user_name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="register-password">Jelszó:</label>
-                                <input type="password" id="register-password" name="password" required>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit">Regisztráció</button>
-                            </div>
-                            <div class="message" id="register-message"></div>
-                        </form>
-                    </div>
-
-                    <!-- Logout Form -->
-                    <div>
-                        <h2>Kilépés</h2>
-                        <form id="logout-form">
-                            <div class="form-group">
-                                <button type="submit">Kilépés</button>
-                            </div>
-                            <div class="message" id="logout-message"></div>
-                        </form>
-                    </div>
-                </div>
-            </div>
         </div>
-        <div class="slider-container">
-            <div class="slider">
-                <img src="{{ url_for('static', filename='images/slider1.png')}}" alt="Slide 1">
-                <img src="{{ url_for('static', filename='images/slider2.png')}}" alt="Slide 2">
-                <img src="{{ url_for('static', filename='images/slider3.png')}}" alt="Slide 3">
-                <img src="{{ url_for('static', filename='images/slider4.png')}}" alt="Slide 4">
-                <img src="{{ url_for('static', filename='images/slider5.png')}}" alt="Slide 5">
-                <img src="{{ url_for('static', filename='images/slider6.png')}}" alt="Slide 6">
-                
+        <div class="headerMobile">
+            <div class="exit">
+                <button class="exitButton"></button>
             </div>
-            <div class="text-overlay">
-                <p></p>
-            </div>
+            <button onclick="openModal()" class="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
-        <div class="content">
-            <a href="Foglalas.html">
-                <div class="Foglalas">
-                    <button class="FoglalasGomb" id='bookingButton'>Online időpont foglalás
-                        <div class="tooltip">Lépj be, vagy regisztrálj az online időpont foglaláshoz az oldal tetején.
-                        </div>
-                    </button>
+    </header>
+    <div class="contentBox">
+        <h2 id = "PricesCim" class="alcim">Árlisták</h2>
+        <div class="locationBox" id = "box">
+            <form id="locationForm" action="/carwash/" method="POST">
+            {% for location in locations %}
+            <button 
+                class="keret {% if location.id == selected_location_id %}selected{% endif %}" 
+                name="location_id" 
+                value="{{ location.id }}" 
+                type="submit" 
+                id="location_btn-{{ location.id }}">
+                <div class="helyszinImgs">
+                <div class="helyszinikonContainer">
+                    <img class="helyszinikon" src="/static/images/map.svg">
                 </div>
-            </a>
-            <div class="main-container">
-                <div class="title-container">
-                    <div class="title">Árlisták</div>
+                <div class="helyszinkepContainer">
+                    <img class="helyszinkep" src="/static/images/{{ location.image_name }}" />
                 </div>
-                <div class="HelyszinekContainer" id="HelyszinekContainer">
-                    <div class="box">
-                        <a href="{{ url_for('carwash_site', site_name='Nepliget') }}">
-                            <button class="keret">
-                                <img class="helyszin" src="{{ url_for('static', filename='images/Nepliget-center.png') }}" />
-                                <div class="IkonKeret">
-                                    <img src="{{ url_for('static', filename='images/map.svg') }}" alt="" class="ikon">
-                                </div>
-                                <div class="MosokCim">1097 Budapest,<br> Könyves Kálmán krt. 11.</div>
-                            </button>
-                        </a>
-                    
-                        <a href="{{ url_for('carwash_site', site_name='IP-west') }}">
-                            <button class="keret">
-                                <img class="helyszin" src="{{ url_for('static', filename='images/IP-west.png') }}" />
-                                <div class="IkonKeret">
-                                    <img src="{{ url_for('static', filename='images/map.svg') }}" alt="" class="ikon">
-                                </div>
-                                <div class="MosokCim">1097 Budapest,<br />Könyves Kálmán krt. 11.</div>
-                            </button>
-                        </a>
-
-                        <a href="{{ url_for('carwash_site', site_name='City-Gate') }}">
-                            <button class="keret">
-                                <img class="helyszin" src="{{ url_for('static', filename='images/City-gate.png') }}" />
-                                <div class="IkonKeret">
-                                    <img src="{{ url_for('static', filename='images/map.svg') }}" alt="" class="ikon">
-                                </div>
-                                <div class="MosokCim">1097 Budapest,<br />Könyves Kálmán krt. 11.</div>
-                            </button>
-                        </a>
-
-                        <a href="{{ url_for('carwash_site', site_name='Capital-square') }}">
-                            <button class="keret">
-                                <img class="helyszin" src="{{ url_for('static', filename='images/Capital-square.png') }}" />
-                                <div class="IkonKeret">
-                                    <img src="{{ url_for('static', filename='images/map.svg') }}" alt="" class="ikon">
-                                </div>
-                                <div class="MosokCim">1097 Budapest,<br />Könyves Kálmán krt. 11.</div>
-                            </button>
-                        </a>
-                    </div>
                 </div>
-            </div>
-
-            <div class="main-Carousel-container">
-                Galéria
-                <div class="carousel-container">
-                    <button class="carousel-button prev" onclick="prevImage()">&#10094;</button>
-                    <div class="carousel-wrapper">
-                        <div class="carousel">
-                                <img src="{{ url_for('static', filename='images/Gallery6.png') }}" alt="Image 1" class="carousel-image">
-                                <img src="{{ url_for('static', filename='images/Gallery6.png') }}" alt="Image 1" class="carousel-image">
-                                <img src="{{ url_for('static', filename='images/Gallery6.png') }}" alt="Image 1" class="carousel-image">
-                                <img src="{{ url_for('static', filename='images/Gallery6.png') }}" alt="Image 1" class="carousel-image">
-                                <img src="{{ url_for('static', filename='images/Gallery6.png') }}" alt="Image 1" class="carousel-image">
-                                <img src="{{ url_for('static', filename='images/Gallery6.png') }}" alt="Image 1" class="carousel-image">                                
-                            <!-- Add more images as needed -->
-                        </div>
-                    </div>
-                    <button class="carousel-button next" onclick="nextImage()">&#10095;</button>
-                </div>
-            </div>
-            <div class="Supports">
-                <div class="Supports-container-1">
-                    <img src="{{ url_for('static', filename='images/support1.png') }}" alt="">
-                </div>
-                <div class="Supports-container-2">
-                    <img src="{{ url_for('static', filename='images/Logo2.png') }}" alt="">
-                </div>
-            </div>
-            <div class="footer">
-                <div class="footer-content">
-                    <div class="Footer-washes">
-                        <div class="footer-box">
-                            <img class="footer-image" src="{{ url_for('static', filename='images/Nepliget-center.png') }}" />
-                            <div class="footer-text">+36 20 69 69 669</div>
-                        </div>
-                        <div class="footer-box">
-                            <img class="footer-image" src="{{ url_for('static', filename='images/IP-west.png') }}" />
-                            <div class="footer-text">+36 20 69 69 669</div>
-                        </div>
-                        <div class="footer-box">
-                            <img class="footer-image" src="{{ url_for('static', filename='images/City-gate.png') }}" />
-                            <div class="footer-text">+36 20 69 69 669</div>
-                        </div>
-                        <div class="footer-box">
-                            <img class="footer-image" src="{{ url_for('static', filename='images/Capital-square.png') }}" />
-                            <div class="footer-text">+36 20 69 69 669</div>
-                        </div>
-                    </div>
-                    <div class="footer-texts">
-                        <div class="footer-box1">
-                            <div class="footer-text">© 2024 Eliteshine<br />Minden jog fenntartva</div>
-                        </div>
-                        <div class="footer-box1">
-                            <div class="footer-text">Adatvédelmi nyilatkozat<br />ASZF</div>
-                        </div>
-                        <div class="footer-box1">
-                            <div class="footer-text">eliteshine@shine.com<br />+36 20 69 69 669</div>
-                        </div>
-                        <div class="footer-socials">
-                            <i class="fa-brands fa-facebook"></i>
-                            <i class="fa-brands fa-instagram"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer-powered">
-                    <div class="footer-powered-content">
-                        <div class="footer-powered-text">Powered by GG_Solutions & MindMakers</div>
-                    </div>
-                </div>
-            </div>
+                <div class="MosokCim">{{ location.location }}</div>
+            </button>
+            {% endfor %}
+        </form>
         </div>
     </div>
-
-    <script>
-
-        /*log in*/
-        document.addEventListener('DOMContentLoaded', function () {
-            var modal = document.getElementById('login-modal');
-            var btn = document.querySelector('.login-toggle');
-            var span = document.querySelector('.close-button');
-
-            btn.onclick = function () {
-                modal.style.display = "block";
-            }
-
-            span.onclick = function () {
-                modal.style.display = "none";
-            }
-
-            window.onclick = function (event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            }
-        });
-
-
-        /*Gallery*/
-        let currentIndex = 0;
-
-        function showImage(index) {
-            const carousel = document.querySelector('.carousel');
-            const images = document.querySelectorAll('.carousel-image');
-            const imageWidth = images[0].clientWidth;
-
-            carousel.style.transform = `translateX(${-index * imageWidth}px)`;
-        }
-
-        function nextImage() {
-            const images = document.querySelectorAll('.carousel-image');
-            if (currentIndex < images.length - 1) {
-                currentIndex++;
-            } else {
-                currentIndex = 0;
-            }
-            showImage(currentIndex);
-        }
-
-        function prevImage() {
-            if (currentIndex > 0) {
-                currentIndex--;
-            } else {
-                currentIndex = document.querySelectorAll('.carousel-image').length - 1;
-            }
-            showImage(currentIndex);
-        }
-
-        window.addEventListener('resize', () => {
-            showImage(currentIndex); // Adjust the image position on resize
-        });
-
-
-        /*slider*/
-
-        function startSlider() {
-    const slides = document.querySelectorAll('.slider img');
-    const totalSlides = slides.length;
-    const texts = [
-        "Küldetésünk, autókozmetikai minőséget nyújtani a céges flottáknak.",
-        "Az autód a megjelenésed része. Nálunk megtalálod az igényeidnek megfelelő csomagot!",
-        "Fontos eseményre mész? Kényeztető csomagunkkal garantáljuk az igényes megjelenést!", 
-        "Helyre kéne pofozni az autód nyaralás után? Válaszd az extraszennyezett extránkat a mélytisztításért!", 
-        "Meggyűlik a bajod a sok bogárral az autópályáról? Válaszd a bogárkerámia csomagunkat a hosszantartó védelemért!",
-        "Esküvőre mész, vagy csak imádod az autód? Válaszd Csillog-Villog csomagunkat az extra megjelenésért, könnyed karbantartásért és a plusz védelemért! "
-    ];
-
-    let currentIndex = 0;
-
-    // Az oldal betöltésekor állítsd be az első szöveget
-    document.querySelector('.text-overlay p').textContent = texts[currentIndex];
-
-    setInterval(() => {
-        currentIndex++;
-        if (currentIndex >= totalSlides) {
-            currentIndex = 0;
-        }
-        
-        // Képcsúszás
-        const offset = currentIndex * -100 / totalSlides;
-        document.querySelector('.slider').style.transform = `translateX(${offset}%)`;
-
-        // Szöveg váltás
-        document.querySelector('.text-overlay p').textContent = texts[currentIndex];
-    }, 6000); // 5000 milliszekundum = 5 másodperc
-}
-
-window.onload = startSlider;
-
-        /*log in*/
-        document.addEventListener('DOMContentLoaded', function() {
-    var modal = document.getElementById('login-modal');
-    var btn = document.querySelector('.login-toggle');
-    var span = document.querySelector('.close-button');
-
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
-
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-});
-    </script>
-    <script>
-        document.getElementById('bookingButton').addEventListener('click', function() {
-            window.location.href = '/reservation';
-        });
-    </script>
-    <script src="{{ url_for('static', filename='customer_login.js') }}"></script>
+    <div class="Wrapper">
+        <div class="Foglalas">
+            <button onclick="create_reservation()" class="FoglalasButton">Online Időpontfoglalás</button>
+        </div>
+    </div>  
+    <h2  id = "GaleryCim" class="alcim">Galéria</h2>
+    <div class="property-container">
+        <div class="container">
+          <div class="property-wrapper">
+            <div class="property-slide">
+              <div class="property-item">
+                  <div class="property-img">
+                    <img src="static/images/gallery1.png"  />
+                  </div>
+              </div>
+              <div class="property-item">
+                  <div class="property-img">
+                    <img src="static/images/gallery2.png"  />
+                  </div>
+              </div>
+              <div class="property-item">
+                  <div class="property-img">
+                    <img src="static/images/gallery3.png"  />
+                  </div>
+              </div>
+              <div class="property-item">
+                  <div class="property-img">
+                    <img src="static/images/gallery4.png"  />
+                  </div>
+              </div>
+              <div class="property-item">
+                  <div class="property-img">
+                    <img src="static/images/gallery6.png"  />
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+    <h2 id="ContactCim" class="alcim">Kapcsolat</h2>
+    <div class="KapcsolatBox">
+        {% for location in locations %}
+        <div class = "KapcsolatContainer">
+            <div class="helyszinkepContainer">
+                <img class="helyszinkep" src="/static/images/{{ location.image_name }}" />
+            </div>
+            <div class="CimContainer">
+                <div class="helyszinikonContainer">
+                <img class="helyszinikonKapcsolat" src="/static/images/map.svg">
+                </div>
+            <div class="MosokCim">{{ location.location }}</div>
+            </div>
+            <div class="CimContainer">
+                <div class="helyszinikonContainer">
+                <img class="helyszinikonKapcsolat" src="/static/images/map.svg">
+                </div>
+            <div class="MosokCim">{{ location.contact }}</div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <footer> 
+        <div class="footerBox">
+            <div class="footerTextBox">© 2024 Eliteshine Minden jog fenntartva</div>
+            <div class="footerTextBox">Adatvédelmi nyilatkozat<br>ASZF</div>
+            <div class="footerTextBox">eliteshine@shine.com<br>+36 20 69 69 669</div>
+            <div class = "socialBox"> insta</div>
+        </div>
+    </footer>
 </body>
 
-
-</html>
+<!--Modals -->
+<div class = "modal" id="modal">
+    <div id="modal-content">
+        <span id="close" onclick="closeModal()">&times;</span>
+        <div class="modalButtonBox">
+            <button onclick="openLoginModal()" class="modalButton">Bejelentkezés</button>
+        </div>
+        <div class="modalButtonBox">
+            <button onclick="toPrices()" class="modalButton">Árlisták</button>
+        </div>
+        <div class="modalButtonBox">
+            <button onclick="toReservation()" class="modalButton">Online Időpontfoglalás</button>
+        </div>
+        <div class="modalButtonBox">
+            <button onclick="toGallery()" class="modalButton">Galéria</button>
+        </div>
+        <div class="modalButtonBox">
+            <button onclick="toContact()" class="modalButton">Kapcsolat</button>
+        </div>
+    </div>
+</div>
+<div class = "modal" id="login-modal">
+    <div id="modal-content">
+        <h2 class="alcim">Bejelentkezés</h2>
+        <span id="close" onclick="closeLoginModal()">&times;</span>
+        <form id='login-form'>
+        <div class='input-keret'> 
+            <label class = "input-label"  for="username">Felhasználónév:</label>
+            <input 
+                type="text" 
+                id="username" 
+                name="user_name" 
+                placeholder="" 
+                class="input-mezo"
+                required>
+        </div>
+        <div class='input-keret'> 
+            <label class = "input-label"  for="password">Jelszó:</label>
+            <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                placeholder="" 
+                class="input-mezo"
+                required>
+        </div>
+        <button type="submit">Belépés</button>
+        </form>
+        <div class="message" id="login-message"></div>
+        </div>
+    </div>
+</div>
+<div class = "modal" id="register-modal">
+    <div id="modal-content">
+        <h2 class="alcim">Regisztráció</h2>
+        <span id="close" onclick="closeRegisterModal()">&times;</span>
+        <form id='register-form'>
+        <div class='input-keret'> 
+            <label class = "input-label"  for="username">Felhasználónév:</label>
+            <input 
+                type="text" 
+                id="username" 
+                name="user_name" 
+                placeholder="" 
+                class="input-mezo"
+                required>
+        </div>
+        <div class='input-keret'> 
+            <label class = "input-label"  for="password">Jelszó:</label>
+            <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                placeholder="" 
+                class="input-mezo"
+                required>
+        </div>
+        <button type="submit">Register</button>
+        </form>
+        <div class="message" id="register-message"></div>
+        </div>
+    </div>
+</div>
+<div class = "modal" id="LoginOrRegister">
+    <div class = "LoginOrRegistercontent">
+        <div class="LoginOrRegisterText"></div>
+        <div class="LoginOrRegisterWrapper"></div>
+        <div class="LoginOrRegisterWrapper">
+            <button onclick="openLoginModal()"class="LoginOrRegisterButton">Bejelentkezés</div>
+        </div>
+        <div class="LoginOrRegisterWrapper">
+            <button onclick="openRegisterModal()" class="LoginOrRegisterButton">Regisztráció</div>
+        </div>
+    </div>
+</div>

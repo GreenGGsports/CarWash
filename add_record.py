@@ -7,6 +7,7 @@ from src.models.carwash_model import CarWashModel
 from src.models.service_model import ServiceModel
 from src.models.extra_model import ExtraModel
 from src.models.slot_model import SlotModel
+from src.models.user_model import UserModel
 import datetime
 
 db_path = Config.SQLALCHEMY_DATABASE_URI
@@ -50,18 +51,26 @@ def create_hourly_slots(session):
     end_time = start_time.replace(hour=17)
     SlotModel.create_default_slots(session = session, start_time=start_time,end_time=end_time, slot_duration_minutes=60)
     session.close()
+    
+def add_test_user(session):
+    UserModel.add_user(session=session,
+                       user_name='Admin',
+                       password='Admin',
+                       role='admin')
         
 def create_test_db(session):
     session = create_session()
     add_carwash_test(session)
     
     session.close()
+    
 # Example usage
 if __name__ == '__main__':
     session = create_session()
-    #create_database(engine=engine)
+    create_database(engine=engine)
     
-    create_hourly_slots(session)
-    #add_carwash_test(session=session)
-    #add_service_test(session)
+    # create_hourly_slots(session)
+    # add_carwash_test(session=session)
+    # add_service_test(session)
+    add_test_user(session)
     #add_service_test(session)

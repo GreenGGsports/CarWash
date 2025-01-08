@@ -1,1676 +1,341 @@
-:root {
-    font-size: 16px;
-    /* Default font-size for rem calculations */
-}
-
-a{
-    text-decoration: none;
-}
-
-body {
-    width: 100%;
-    height: 100%;
-    font-family: 'Arial', sans-serif;
-    background-color: #000;
-    background-image: url('/static/images/background-image.png');;
-    /* Itt add meg a háttérképed elérési útvonalát */
-    background-repeat: no-repeat;
-    background-size: cover;
-    color: #333;
-    /*display: flex;
-    justify-content: center;
-    align-items: center;*/
+html, body {
     margin: 0;
-    /* Remove default body margin */
-}
-
-i {
-    font-size: 1.7em;
-    margin-right: 0.5rem;
-    color: white;
-}
-
-.page-wrapper {
-    border-radius: 10px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.header {
-    display: flex;
-    width: 100%;
-    background-image: linear-gradient( to right, black 50%, #141414);
-    padding: 1rem 0;
-}
-
-.inner-container-1 {
-    display: flex;
-    width: 10%;
-}
-
-.inner-container-2 {
-    display: flex;
-    width: 80%;
-    justify-content: center;
-    padding: 1rem;
-}
-
-.image {
-    width: 28vw;
+    padding: 0;
+    /* Center content horizontally */
+    overflow-x: hidden;
     height: auto;
 }
 
-.inner-container-3 {
-    display: flex;
-    align-items: flex-end;
-    font-size: 1.2em;
-    color: white;
+form {
+    display: contents; /* vagy flex, attól függ, hogy hogyan szeretnéd kezelni a belső elemeket */
+  }
+
+.headerDesktop{
+    background-image: url("images/Header.png");
+    height: 70vh;
+    background-size:cover;
+    background-position: left center; 
 }
 
-.inner-container-3 i {
-    margin-right: 8px;
-    color: #7CF2DA;
-    font-size: 2.5em;
-}
-
-.inner-container-3 {
-    position: relative;
-    cursor: pointer;
-}
-
-.login-toggle {
-    background: none;
-    border: none;
-    color: #0af;
-    font-size: 1.6em;
-    cursor: pointer;
-    font-family: "graphie", sans-serif;
-    font-weight: 600;
-    font-style: normal;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 2rem;
-}
-
-.Reg-container {
-    width: 50%;
-    margin: 0 auto;
-    background: none;
-    padding: 15px;
-}
-
-.Reg-container h1 {
-    text-align: center;
-    color: #FFF;
-    font-family: Graphie;
-    font-size: 50px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-}
-
-.Reg-container h2 {
-    text-align: center;
-    color: #FFF;
-    font-family: Graphie;
-    font-size: 30px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0rem;
-    width: 90%;
-}
-
-.Reg-container label {
-    color: #F3F5F5;
-    font-family: Graphie;
-    font-size: 30px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    margin-left: 0.5rem;
-}
-
-.Reg-container input {
-    display: flex;
-    width: 95%;
-    height: 50px;
-    padding-left: 25px;
-    align-items: center;
-    gap: 10px;
-    border-radius: 5px 5px 5px 5px;
-    border: 1.5px solid var(--A-kk, #13669C);
-    background: #000;
-    color: white;
-}
-
-.Reg-container form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-}
-
-.Reg-container button {
-    display: flex;
-    width: 150px;
-    height: 50px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 0px;
-    border-radius: 5px 5px 5px 5px;
-    border: 1px solid var(--Color, #7CF2DA);
-    background: none;
-    box-shadow: 0px 0px 5px 3px rgba(123, 242, 218, 0.50) inset, 0px 0px 5px 3px rgba(123, 242, 218, 0.50);
-    color: white;
-    font-size: 1.5em;
-    margin: 0 auto;
-}
-
-.modal {
-    display: none;
-    /* Elrejtve, amíg aktiválva nem lesz */
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal-content {
-    border: 1px solid #13669C;
-    border-radius: 10px 10px 10px 10px;
-    box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50), 0px 0px 15px 6px rgba(19, 102, 156, 0.50);
-    background-color: black;
-    margin: 15% auto;
-    padding: 20px;
-    width: 50%;
-    /* Állítsd be a megfelelő szélességre */
-}
-
-.close-button {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.close-button:hover,
-.close-button:focus {
+.headerButton{
     color: black;
-    text-decoration: none;
-    cursor: pointer;
 }
 
-.slider-container {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 9px 18px 9px rgba(0, 0, 0, 0.3);
-}
-
-.slider {
+.contentBox{
     display: flex;
-    width: 600%;
-    transition: transform 0.5s ease;
-}
-
-.slider img {
-    width: 16.66%;
-    height: auto;
-}
-
-.text-overlay {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    padding: 20px;
-    box-sizing: border-box;
-    text-align: center;
-    height: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: "graphie", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-}
-
-.text-overlay p {
-    margin: 0;
-    color: white;
-    font-size: 2.5rem;
-}
-
-.Foglalas {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    margin-top: 3rem;
-    /* Needed to position the tooltip correctly */
-}
-
-.FoglalasGomb {
-    border-radius: 20px 5px;
-    border: 1.5px solid #7CF2DA;
-    background-color: rgba(0, 0, 0, 0.5);
-    box-shadow: 0px 0px 15px 3px rgba(124, 242, 218, 0.50), 0px 0px 15px 3px rgba(124, 242, 218, 0.50) inset;
-    color: white;
-    display: flex;
-    width: 60rem;
-    height: 10rem;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    font-size: 4em;
-    cursor: pointer;
-    /* Add cursor to indicate it's clickable */
-    position: relative;
-    /* Needed to position the tooltip relative to the button */
-    font-family: "graphie", sans-serif;
-    font-weight: 700;
-    font-style: normal;
-}
-
-.tooltip {
-    visibility: hidden;
-    width: 100%;
-    height: 6rem;
-    background-color: black;
-    color: white;
-    border-radius: 6px;
-    padding: 5px;
-    position: absolute;
-    z-index: 10;
-    top: 110%;
-    left: 50%;
-    transform: translateX(-50%);
-    box-sizing: border-box;
-    border: 1px solid red;
-    font-size: 0.45em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: "graphie", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-}
-
-.FoglalasGomb:hover .tooltip {
-    visibility: visible;
-}
-
-.main-container {
-    align-self: stretch;
-    height: 80vh;
-    padding-left: 2.5vw;
-    padding-right: 2.5vw;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 3vh;
-    display: flex;
-    margin-top: 8rem;
-}
-
-.title-container {
-    align-self: stretch;
-    height: 12vh;
-    padding: 1vh 0;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1vh;
-    display: flex;
-    margin-bottom: 2.5rem;
+}
+body {
+    background-color: #161616;
+    color: #E0E0E0;
+    font-family: 'New Science', sans-serif;  /* Set the font */
+    font-weight: 600;     
 }
 
-.title {
-    text-align: center;
-    color: white;
-    font-size: 4rem;
-    font-family: "graphie", sans-serif;
-    font-weight: 600;
-    font-style: normal;
-}
-
-.HelyszinekContainer {
-    display: flex;
-    flex-wrap: wrap;
-    /* Gyermekelemek több sorba törnek, ha nem férnek el egy sorban */
-    justify-content: space-evenly;
+.locationBox{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 20px;
-    /* Távolság a gombok között */
-}
-
-.box {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: center;
-}
-
-.keret {
-    width: 21rem;
-    height: 29rem;
-    border: 1.50px #13669C solid;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow: hidden;
-    position: relative;
-    padding-bottom: 50px;
-    border-radius: 10px;
-    border: 1.5px solid var(--A-kk, #13669C);
-    background-color: rgba(0, 0, 0, 0.7);
-    box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50), 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset;
-}
-
-.keret:hover {
-    border: 1.5px solid rgba(124, 242, 218, 0.90);
-    background: #000;
-    box-shadow: 0px 0px 15px 6px rgba(124, 242, 218, 0.50), 0px 0px 15px 6px rgba(124, 242, 218, 0.50) inset;
-}
-
-.keret:active {
-    border: 1.5px solid rgba(124, 242, 218, 0.90);
-    background: #000;
-    box-shadow: 0px 0px 15px 6px rgba(124, 242, 218, 0.50), 0px 0px 15px 6px rgba(124, 242, 218, 0.50) inset;
-}
-
-
-.helyszin {
-    width: 100%;
-    height: 100px;
-    object-fit: cover;
-    margin-top: 3rem;
-}
-
-.MosokCim {
-    width: 21rem;
-    height: 5rem;
-    color: #F3F5F5;
-    font-size: 2em;
-    font-family: "graphie", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    word-wrap: break-word;
-    margin-top: auto;
-}
-
-.IkonKeret {
-    width: 22rem;
-    height: 6rem;
-    position: absolute;
-    top: calc(10rem + 3rem + 3rem);
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.ikon {
-    width: 10rem;
-    height: 5rem;
-    margin: auto;
-}
-
-.main-Carousel-container {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    color: white;
-    font-size: 4em;
-    font-family: "graphie", sans-serif;
-    font-weight: 600;
-    font-style: normal;
-    margin-top: 20rem;
-}
-
-.carousel-container {
     width: 90%;
-    max-width: 2200px;
-    border: 3px solid #13669C;
-    border-radius: 10px;
-    overflow: hidden;
-    display: flex;
     justify-content: center;
     align-items: center;
-    background-color: white;
-    position: relative;
-    margin-top: 3rem;
-    box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50), 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset;
 }
-
-.carousel-wrapper {
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-}
-
-.carousel {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
-
-.carousel-image {
-    width: 33.33%;
-    /* Show three images at once */
-    height: auto;
-    flex-shrink: 0;
-}
-
-.carousel-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 1rem;
-    cursor: pointer;
-    z-index: 1;
-}
-
-.carousel-button:hover {
-    background-color: rgba(0, 0, 0, 0.7);
-}
-
-.prev {
-    left: 0;
-}
-
-.next {
-    right: 0;
-}
-
-.Supports {
+.helyszinkep{
     display: flex;
     width: 100%;
-    justify-content: space-between;
-    margin: 4rem 0;
-}
-
-.Supports-container-1,
-.Supports-container-2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* Center images vertically */
-    overflow: hidden;
-    /* Prevent images from overflowing */
-}
-
-.Supports-container-1 {
-    width: 49%;
     height: auto;
+    object-fit: contain;
+    background-color: #161616;
 }
 
-.Supports-container-2 {
-    width: 49%;
+.helyszinikon{
     height: auto;
-    padding: 1rem;
+    object-fit: contain;
+    background-color: #2D2D2D;
 }
 
-.Supports img {
-    width: 80%;
-    /* Image fills container width */
-    height: auto;
-    /* Image fills container height */
-    object-fit: cover;
-    /* Ensures image maintains aspect ratio */
-}
-
-
-.footer {
-    width: 100vw;
-    height: 45vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 3vh;
-    margin-bottom: 10rem;
-}
-
-.footer-content {
-    align-self: stretch;
-    height: 30vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 5vw;
-}
-
-.Footer-washes {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: stretch;
-    gap: 5.4rem;
-}
-
-.footer-texts {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 5.9rem;
-}
-
-.footer-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 1.5vh;
-}
-
-.footer-box {
-    padding: 0.5em;
-    border-left: 0.15em #13669C solid;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 0.3em;
-}
-
-.footer-box1 {
-    padding: 0.5em;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 0.3em;
-}
-
-.footer-box img {
-    width: 6vw;
-    height: auto;
-}
-
-.footer-text {
-    color: white;
-    font-size: 1.8rem;
-    font-family: "graphie", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    word-wrap: break-word;
-}
-
-.footer-socials {
-    height: 8vh;
-    padding-top: 0.5vh;
-    padding-bottom: 0.5vh;
-    padding-left: 0.8vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.8vw;
-}
-
-.footer-socials .social-icon {
-    width: 2vw;
-    height: 2vw;
-    background: white;
-}
-
-.footer-powered {
-    z-index: -1;
+.keret{
+    background-color: #2D2D2D;
+    border: 2px solid #161616;
+    height: 100%;
     width: 100%;
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
     align-items: center;
-    gap: 1vw;
-    margin-bottom: 5rem;
+    border-radius: 2vw; 
+    padding-top: 5%;
+    padding-bottom: 5%;
 }
 
-.footer-powered-content {
-    display: flex;
-    justify-content: center;
+.helyszinImgs{
+    display:flex;
     align-items: center;
-    gap: 0.5vw;
-    margin-top: 1rem;
+    height: 100%;
 }
 
-.footer-powered-text {
-    color: white;
-    font-size: 1.3rem;
-    font-family: "graphie", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    word-wrap: break-word;
+.helyszinkepContainer{
+    display: flex;
+    height: 10vw;
+    width: 13vw;
+    background-color: #161616;
 }
 
-.footer-powered-image {
+.helyszinikonContainer{
+    display: flex;
+    height: 5vw;
     width: 5vw;
+    background-color: #161616;
+    justify-content: center;
+}
+
+.MosokCim{
+    font-size: clamp(16px, 1vw, 30px);
+    color: #E0E0E0;
+}
+
+.alcim{
+    font-size: 4vw;
+    text-align: center;
+}
+
+.Wrapper {
+    padding-top: 10%;
+    display: flex;
+    justify-content: center; /* Vízszintes középre helyezés */
+    align-items: center;    /* Függőleges középre helyezés */      /* Az egész képernyő magassága */
+}
+.Foglalas {
+    display: flex;
+    height: 40px;
+    width: 35%;
+    min-width: 200px;
+}
+
+.FoglalasButton {
+    width: 100%; /* Kitölti a szülő teljes szélességét */
+    height: 100%; /* Kitölti a szülő teljes magasságát */
+    background-color: #D5F048;
+    border-radius: 5vh;
+    border: none; /* Opció: eltünteti a gomb alapértelmezett keretét */
+    cursor: pointer; /* Mutatja, hogy kattintható */
+    font-size: 16px;
+    text-align: center;
+}
+
+.galeryBox{
+    display: flex;
+    gap: 2%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory; /* A görgetés "összefogása" */
+}
+
+.imgContainer{
+    width: 90%;
+    height: 200px;
+    background-color: green;
+    flex-shrink: 0; /* Ne zsugorodjon össze */
+    scroll-snap-align: start; /* Az elem illeszkedjen a görgetéshez */
+    transition: all 0.3s ease;
+}
+
+.KapcsolatBox{
+    padding-left: 5%;
+    width: 90%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    gap:20px;
+    padding-top: 5%;
+}
+
+.KapcsolatContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 150px;
+    padding-left: 5%;
+}
+
+.CimContainer{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.helyszinikonKapcsolat{
     height: auto;
+    object-fit: contain;
+    background-color: #161616;
 }
-
-@media only screen and (min-width: 2600px) {
-    .inner-container-3 i {
-        font-size: 1.5em;
-    }
-
-    .login-toggle {
-        font-size: 2.5em;
-    }
-
-    .text-overlay p {
-        font-size: 4.5em;
-    }
-
-    .slider-container{
-        height: 54rem;
-    }
-
-    .text-overlay{
-        height: 170px;
-    }
-
-    .FoglalasGomb {
-        width: 92rem;
-        font-size: 6em;
-        height: 13rem;
-    }
-
-    .tooltip {
-        width: 114%;
-        height: 7rem;
-    }
-
-    .main-container {
-        margin-top: 10.8rem;
-    }
-
-    .title {
-        font-size: 6.1rem;
-    }
-
-    .title-container {
-        margin-bottom: 4.5rem;
-    }
-
-    .box {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6rem;
-        justify-content: center;
-    }
-
-    .keret {
-        width: 30rem;
-        height: 45rem;
-        background: black;
-        box-shadow: 0px 0px 15px 3px rgba(124, 242, 218, 0.45), 0px 0px 15px 3px rgba(124, 242, 218, 0.45) inset;
-        border: 1.50px #13669C solid;
+@media (max-width: 768px) {
+    .keret{
         display: flex;
         flex-direction: column;
-        align-items: center;
-        overflow: hidden;
-        position: relative;
-        padding-bottom: 50px;
-        border-radius: 10px;
-        border: 1.5px solid var(--A-kk, #13669C);
-        background: #000;
-        box-shadow: 0px 0px 15px 6px rgba(19, 102, 156, 0.50), 0px 0px 15px 6px rgba(19, 102, 156, 0.50) inset;
     }
 
-    .IkonKeret {
-        width: 27rem;
-        height: 13rem;
-        top: calc(14rem + 6rem + 3rem);
-    }
-
-    .ikon {
-        width: 7rem;
-        height: 10rem;
-    }
-
-    .MosokCim {
-        width: 32rem;
-        height: 6rem;
-        color: #F3F5F5;
-        font-size: 2.8em;
-        font-family: "graphie", sans-serif;
-        font-weight: 500;
-        font-style: normal;
-        word-wrap: break-word;
-        padding-top: 26rem;
-    }
-
-    .main-Carousel-container {
-        margin-top: 15rem;
-        font-size: 6.1em;
-    }
-
-    i{
-        font-size: 3em;
-    }
-
-    .footer-text {
-        font-size: 2.8em;
-    }
-
-    .footer-powered {
-        margin-top: 10rem;
-    }
-
-    .footer-powered-text {
-        font-size: 2.8em;
-    }
-}
-
-@media only screen and (min-width: 2300px) and (max-width: 2600px) {
-    .inner-container-3 i {
-        font-size: 2em;
-    }
-
-    .login-toggle {
-        font-size: 1.7em;
-    }
-
-    .text-overlay{
-        height: 236px;
-    }
-
-    .text-overlay p {
-        font-size: 4.5em;
-    }
-
-    .slider-container{
-        height: 72rem;
-    }
-
-    .FoglalasGomb {
-        width: 81rem;
-        height: 12rem;
-        font-size: 5.5em;
-    }
-
-    .tooltip {
-        width: 115%;
-        height: 8rem;
-        font-size: 0.47em;
-    }
-
-    .main-container {
-        margin-top: 11.5rem;
-    }
-
-    .title {
-        font-size: 6em;
-    }
-
-    .box {
-        gap: 5rem;
-    }
-
-    .keret {
-        width: 30rem;
-        height: 43rem;
-    }
-
-    .IkonKeret {
-        width: 27rem;
-        height: 13rem;
-        top: calc(14rem + 5rem + 3rem);
-    }
-
-    .ikon {
-        width: 7rem;
-        height: 10rem;
-    }
-
-    .MosokCim {
-        margin-top: 24rem;
-        font-size: 2.3em;
-    }
-
-    .main-Carousel-container {
-        font-size: 6em;
-        margin-top: 5rem;
-    }
-
-    .footer-socials i{
-        font-size: 4em;
-    }
-
-    .footer-text {
-        font-size: 2.5em;
-    }
-
-    .footer-powered {
-        margin-top: 9rem;
-    }
-
-    .footer-powered-text {
-        font-size: 2.5em;
-    }
-
-}
-
-@media only screen and (min-width: 1920px) and (max-width:2300px) {
-    .inner-container-3 i {
-        font-size: 2em;
-    }
-
-    .login-toggle {
-        font-size: 1.5em
-    }
-
-    .text-overlay p {
-        font-size: 3.2em;
-    }
-
-    .slider-container{
-        width: 100%;
-        height: 56rem;
-    }
-
-    .text-overlay{
-        height: 140px;
-    }
-
-    .FoglalasGomb {
-        width: 62rem;
-        height: 9rem;
-    }
-
-    .tooltip {
-        width: 120%;
-        height: 6.4rem;
-        font-size: 0.5em;
-    }
-
-    .main-container {
-        margin-top: 9.4rem;
-        height: 45rem;
-    }
-
-    .title-container {
-        margin-bottom: 3.5rem;
-    }
-
-    .box {
-        gap: 5rem;
-    }
-
-    .keret {
-        width: 23rem;
-        height: 35rem;
-    }
-
-    .IkonKeret {
-        width: 22rem;
-        height: 6rem;
-        top: calc(9.4rem + 7rem + 3rem);
-    }
-
-    .ikon {
-        width: 10rem;
-        height: 6rem;
-    }
-
-    .MosokCim {
-        margin-top: 19rem;
-        font-size: 1.3em;
-    }
-
-    .main-Carousel-container {
-        margin-top: 14rem;
-    }
-
-    .footer-socials i{
-        font-size: 3em;
-    }
-
-    .footer-text {
-        font-size: 2.1em;
-    }
-
-    .footer-powered {
-        margin-top: 9rem;
-    }
-
-    .footer-powered-text{
-        font-size: 1.8em;
-    }
-}
-
-@media only screen and (min-width: 1540px) and (max-width:1920px) {
-    .inner-container-3 i {
-        margin-left: 0;
-        font-size: 1.4em;
-    }
-
-    .login-toggle {
-        font-size: 1.6em;
-        width: 10rem;
-    }
-
-    .slider-container{
-        height: 57rem;
-    }
-
-    .text-overlay{
-        height: 160px;
-    }
-
-    .text-overlay p {
-        font-size: 3.3em;
-    }
-
-    .FoglalasGomb {
-        width: 54rem;
-        font-size: 3.8em;
-    }
-
-    .tooltip {
-        width: 115%;
-    }
-
-    .main-container {
-        margin-top: 7rem;
-    }
-
-    .title {
-        font-size: 3.5rem;
-    }
-
-    .title-container {
-        margin-bottom: 2rem;
-    }
-
-    .main-container {
-        height: 65vh;
-    }
-
-    .box {
-        gap: 4rem;
-    }
-
-    .keret {
-        width: 22rem;
-        height: 34rem;
-    }
-
-    .IkonKeret {
-        top: calc(10rem + 5rem + 3rem);
-    }
-
-    .MosokCim {
-        margin-top: 18rem;
-        font-size: 1.7em;
-    }
-
-    .main-Carousel-container {
-        margin-top: 11.5rem;
-        font-size: 3.5em;
-    }
-
-    .carousel-container{
-        max-width: 1600px;
-    }
-
-    .footer-text {
-        font-size: 1.7em;
-    }
-
-    .footer-socials i{
-        font-size: 2.5em;
-    }
-
-    .footer-powered {
-        margin-top: 1rem;
-    }
-
-    .footer-powered-content{
-        margin-top: 8rem;
-    }
-
-    .footer-powered-text{
-        font-size: 2em;
-    }
-}
-
-@media only screen and (min-width: 1024px) and (max-width:1540px) {
-    .Reg-container h1 {
-        font-size: 38px;
-    }
-
-    .Reg-container h2 {
-        font-size: 25px;
-    }
-
-    .Reg-container label {
-        font-size: 18px;
-    }
-
-    .Reg-container button {
-        font-size: 1.2em;
-    }
-
-    .login-toggle p {
-        display: none;
-    }
-
-    .inner-container-3 i {
-        font-size: 0.9em;
-        margin-bottom: 0.9rem;
-    }
-
-    .slider-container{
-        height: 36.2rem;
-    }
-
-    .text-overlay p {
-        font-size: 1.8em;
-    }
-
-    .FoglalasGomb {
-        width: 40rem;
-        font-size: 3em;
-        height: 8rem;
-    }
-
-    .tooltip {
-        width: 115%;
-        font-size: 0.42em;
-        height: 5rem;
-    }
-
-    .main-container {
-        margin-top: 5.7rem;
-        height: 92vh;
-    }
-
-    .title-container {
-        margin-bottom: 0.5rem;
-    }
-
-    .title {
-        font-size: 3.4em;
-    }
-
-    .box {
-        gap: 3.2rem;
-    }
-
-    .keret {
-        height: 22rem;
-        width: 14rem;
-    }
-
-    .IkonKeret {
-        top: calc(10rem + -3rem + 3rem);
-    }
-
-    .ikon {
-        width: 4rem;
-        height: 5rem;
-        margin: auto;
-    }
-
-    .MosokCim {
-        font-size: 1.2em;
-        margin-top: 9rem;
-    }
-
-    .main-Carousel-container {
-        font-size: 3.5em;
-        margin-top: -3rem;
-    }
-
-    .carousel-container{
-        max-width: 1050px;
-    }
-
-    .footer{
-        margin-bottom: 0;
-    }
-
-    .footer-text {
-        font-size: 1.1em;
-    }
-
-    .footer-socials i{
-        font-size: 2em;
-    }
-
-    .footer-powered{
-        margin-top: 2rem;
-    }
-
-}
-
-@media only screen and (min-width: 764px) and (max-width:1024px) {
-    .Reg-container h1 {
-        font-size: 30px;
-    }
-
-    .Reg-container h2 {
-        font-size: 25px;
-    }
-
-    .Reg-container label {
-        font-size: 18px;
-    }
-
-    .Reg-container input {
-        height: 40px;
-    }
-
-    .Reg-container button {
-        font-size: 1.2em;
-        width: 125px;
-        height: 40px;
-    }
-
-    .inner-container-3 i {
-        font-size: 1.6em;
-    }
-
-    .login-toggle {
-        font-size: 1em;
-    }
-
-    .login-toggle p {
-        display: none;
-    }
-
-    .slider-container{
-        height: 25rem;
-    }
-
-    .text-overlay p {
-        font-size: 1.3em;
-    }
-
-    .FoglalasGomb {
-        width: 30rem;
-        height: 6rem;
-        font-size: 2em;
-    }
-
-    .tooltip {
-        width: 115%;
-        height: 4rem;
-        font-size: 0.43em;
-    }
-
-    .main-container {
-        margin-top: 4.5rem;
-        height: 76vh;
-    }
-
-    .title {
-        font-size: 3em;
-    }
-
-    .title-container {
-        margin-bottom: 0.5rem;
-    }
-
-    .box {
-        gap: 4rem;
-    }
-
-    .keret {
-        width: 17rem;
-        height: 27rem;
-    }
-
-    .IkonKeret {
-        top: calc(10rem + 1rem + 3rem);
-    }
-
-    .MosokCim {
-        font-size: 1.5em;
-        margin-top: 13rem;
-    }
-
-    .main-Carousel-container {
-        margin-top: 24rem;
-    }
-
-    .Supports {
-        display: flex;
-        flex-direction: column;
-        align-content: space-around;
-        align-items: center;
-    }
-
-    .Supports-container-1,
-    .Supports-container-2 {
-        width: 90%;
-    }
-
-    .footer{
-        margin-top: 14rem;
-        margin-bottom: 8rem;    
-    }
-
-    .footer-content {
+    .helyszinImgs{
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
+        padding-left: 0%;
     }
 
-    .footer-box{
-        border: none;
+    .helyszinikonContainer{
+        margin-bottom: 10%;
+        height: 7vw;
     }
 
-    .Footer-washes {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: flex-start;
-        flex-wrap: wrap;
-        gap: 7rem;
-        row-gap: 2rem;
+    .helyszinkepContainer{
+        margin-bottom: 10%;
     }
 
-    .footer-texts {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: flex-start;
-        flex-wrap: wrap;
-        row-gap: 2rem;
+    .MosokCim{
     }
 
-    .footer-powered{
-        margin-top: 8rem;
-        margin-bottom: 0;
-    }
-
-    .footer-socials i{
-        font-size: 2.2em;
-        margin-right: 1rem;
-    }
-}
-
-@media only screen and (min-width: 380px) and (max-width:764px) {
-    .Reg-container h1 {
-        font-size: 16px;
-    }
-
-    .Reg-container h2 {
-        font-size: 16px;
-    }
-
-    .Reg-container label {
-        font-size: 10px;
-    }
-
-    .Reg-container input {
-        height: 30px;
-    }
-
-    .Reg-container button {
-        font-size: 1em;
-        width: 110px;
-        height: 30px;
-        border-radius: 5px 5px 5px 5px;
-    }
-
-    .inner-container-3 {
-        font-size: 0.3em;
-    }
-
-    .inner-container-3 i{
-        font-size: 4.5em;
-        margin-bottom: 1rem;
-    }
-
-    .login-toggle {
-        font-size: 0.6em;
-    }
-
-    .login-toggle p {
-        display: none;
-    }
-
-    .slider-container{
-        height: 13rem;
-    }
-
-    .text-overlay {
-        height: 40px;
-    }
-
-    .text-overlay p {
-        font-size: 0.7em;
-    }
-
-    .FoglalasGomb {
-        width: 20rem;
-        height: 3rem;
-        font-size: 1.3em;
-        border-radius: 10px 5px;
-    }
-
-    .tooltip {
-        width: 120%;
-        height: 3rem;
-    }
-
-    .main-container {
-        margin-top: 3.5em;
-    }
-
-    .title {
-        font-size: 2.5em;
-    }
-
-    .box {
-        gap: 3rem;
-    }
-
-    .keret {
-        width: 8rem;
-        height: 14rem;
-    }
-
-    .helyszin{
-        margin-top: 1rem;
-    }
-
-    .IkonKeret {
-        top: calc(10rem + -8rem + 3rem);
-    }
-
-    .ikon {
-        width: 3rem;
-        height: 5rem;
-    }
-
-    .MosokCim {
-        font-size: 0.7em;
-        margin-top: 8rem;
-    }
-
-    .main-Carousel-container {
-        font-size: 2.5em;
-    }
-
-    .carousel-image {
-        width: 100%;
-        /* Show one image at a time */
-    }
-
-    .Supports {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin: 5rem auto;
-    }
-
-    .Supports-container-1,
-    .Supports-container-2 {
-        width: 100%;
-    }
-
-    .footer {
-        margin-bottom: 5rem;
-        width: auto;
-    }
-
-    .footer-content {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .Footer-washes {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: flex-start;
-        flex-wrap: wrap;
-        gap: 7rem;
-        row-gap: 2rem;
-        column-gap: 10rem;
-    }
-
-    .footer-texts {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: flex-start;
-        flex-wrap: wrap;
-        row-gap: 2rem;
-        column-gap: 8rem;
-    }
-
-    .footer-text {
-        font-size: 0.8em;
-    }
-
-    .footer-box{
-        border: none;
-    }
-
-    .footer-powered {
-        width: auto;
-        margin-top: 7rem;
-    }
-
-    .footer-powered-content {
-        margin-top: 2rem;
-    }
-
-    .footer-powered-text {
-        font-size: 1em;
+    .KapcsolatBox{
+        grid-template-columns: 1fr;
     }
 
 }
 
-@media only screen and (min-width: 200px) and (max-width:380px) {
-    body {
-        width: 200%;
-    }
 
-    .image{
-        width: 40vw;
-    }
+.property-container{
+    width: 90%;
+    padding-left:5% ;
+}
+a:link,
+a:visited,
+a:hover,
+a:active,
+a:focus {
+  text-decoration: none;
+  outline: none;
+}
 
-    .Reg-container h1 {
-        font-size: 14px;
-    }
+.slick-track * {
+  outline: none;
+}
 
-    .Reg-container h2 {
-        font-size: 13px;
-    }
+.property-wrapper {
+  text-align: center;
+  padding: 20px 0 20px;
+}
 
-    .Reg-container label {
-        font-size: 10px;
-    }
 
-    .Reg-container input {
-        height: 25px;
-    }
+.property-slide {
+  margin: 0 -7px;
+}
 
-    .Reg-container button {
-        font-size: 0.8em;
-        width: 100px;
-        height: 25px;
-        border-radius: 5px 5px 5px 5px;
-    }
+.property-slide:not(.slick-initialized) .property-item:nth-child(n + 4) ~ div {
+  display: none;
+}
 
-    .inner-container-3 {
-        font-size: 0.3em;
-    }
+.property-item {
+  display: inline-block;
+  vertical-align: middle;
+  width: calc(100% / 4);
+  padding: 0 7px;
+}
 
-    .inner-container-3 i{
-        font-size: 4.5em;
-        margin-bottom: 1rem;
-    }
+.property-item a {
+  display: block;
+  position: relative;
+}
 
-    .login-toggle {
-        font-size: 0.6em;
-    }
+.property-slide {
+  padding: 38px 0 0;
+}
 
-    .login-toggle p {
-        display: none;
-    }
+.property-slide button.slick-arrow {
+  display: inline-block;
+  position: absolute;
+  width: 41px;
+  height: 41px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  transform: translateY(-40px);
+  border: none;
+  outline: none;
+}
 
-    .text-overlay {
-        height: 70px;
-    }
+.property-slide button:before {
+  font-family: inherit !important;
+  color: #000 !important;
+  font-size: 30px;
+}
+.property-slide button.slick-prev {
+  left: -50px;
+}
 
-    .text-overlay p {
-        font-size: 1.3em;
-    }
+.property-slide button.slick-next {
+  right: -50px;
+}
 
-    .FoglalasGomb {
-        width: 20rem;
-        height: 3rem;
-        font-size: 1.3em;
-        border-radius: 10px 5px;
-    }
+.property-item .property-img:before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background: rgba(153, 126, 67, 0.3);
+  opacity: 0;
+  outline: 1px solid #ffffff;
+  outline-offset: -10px;
+  -webkit-transition: all 0.6s;
+  -moz-transition: all 0.6s;
+  -o-transition: all 0.6s;
+  -ms-transition: all 0.6s;
+  transition: all 0.6s;
+}
 
-    .tooltip {
-        width: 120%;
-        height: 3rem;
-    }
+.property-item .property-img:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  opacity: 0;
+  background: rgba(255, 255, 255, 0.5);
+  -webkit-transition: all 0.6s;
+  -moz-transition: all 0.6s;
+  -o-transition: all 0.6s;
+  -ms-transition: all 0.6s;
+  transition: all 0.6s;
+}
 
-    .main-container {
-        margin-top: 3.5em;
-    }
+.property-img {
+  position: relative;
+}
 
-    .title {
-        font-size: 2.5em;
-    }
+.property-img img {
+  display: inline-block;
+  width: 100%;
+  height: auto;
+}
 
-    .box {
-        gap: 3rem;
-    }
+.property-details {
+  padding: 20px 0;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
 
-    .keret {
-        width: 8rem;
-        height: 13rem;
-    }
+.property-details strong {
+  font: 500 20px "Roboto", sans-serif;
+  color: #2f2f2f;
+}
 
-    .helyszin{
-        margin-top: 1rem;
-    }
+.property-item:hover .property-img:before,
+.property-item:hover .property-img:after {
+  opacity: 1;
+}
 
-    .IkonKeret {
-        top: calc(10rem + -8rem + 3rem);
-    }
-
-    .ikon {
-        width: 3rem;
-        height: 5rem;
-    }
-
-    .MosokCim {
-        font-size: 0.7em;
-        margin-top: 7rem;
-    }
-
-    .main-Carousel-container {
-        font-size: 2.5em;
-        margin-top: 0;
-    }
-
-    .carousel-image {
-        width: 100%;
-        /* Show one image at a time */
-    }
-
-    .Supports {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin: 5rem auto;
-    }
-
-    .Supports-container-1,
-    .Supports-container-2 {
-        width: 100%;
-    }
-
-    .footer {
-        margin: 11rem auto;
-        width: auto;
-    }
-
-    .footer-content {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .Footer-washes {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: flex-start;
-        flex-wrap: wrap;
-        gap: 7rem;
-        row-gap: 2rem;
-        column-gap: 11rem;
-    }
-
-    .footer-texts {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: flex-start;
-        flex-wrap: wrap;
-        row-gap: 2rem;
-        column-gap: 9rem;
-    }
-
-    .footer-text {
-        font-size: 0.8em;
-    }
-
-    .footer-box{
-        border: none;
-    }
-
-    .footer-powered {
-        width: auto;
-        margin-top: 8rem;
-    }
-
-    .footer-powered-content {
-        margin-top: 2rem;
-    }
-
-    .footer-powered-text {
-        font-size: 1em;
-    }
-
+.property-item a:hover .property-details {
+  opacity: 1;
 }
