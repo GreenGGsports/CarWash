@@ -92,10 +92,61 @@
             </div>
         </div>
     </header>
+    <h2 class="alcim">Csomagok</h2>
+    <div class="MobileScrollerCsomag">
+        {% for service in service_data %}
+            <input 
+            type="radio" ,
+            name="scrollRadio",
+            onchange="scrollToService('{{service.name}}')"
+            id="option_{{service.name}}"
+            class="radioButton"
+            />
+            <label for="option_{{service.name}}" class="mobileScrollerLabelCsomag">{{service.name}}</label>
+        {% endfor %}
+    </div>
+        <div class="ServiceOuterContainer">
+            <div class="csomagok">
+                <div class="csomagnevek">
+                    <div class="extratype">Külső</div>
+                    {% for extra in extra_names_out %}
+                    <div class="csomagnev">{{extra}}</div>
+                    {% endfor %}
+                    <div class="extratype">Belső</div>
+                    {% for extra in extra_names_in %}
+                    <div class="csomagnev">{{extra}}</div>
+                    {% endfor %}
+                    <div class="extratype">Csomag Ár</div>
+                    <div class="csomag_ar">M</div>
+                    <div class="csomag_ar">XL</div>
+                    <div class="csomag_ar">XXL</div>
+                </div>
+                <div class="csomagcontent">
+                {% for service in service_data %}
+                    <div class="csomagtartalom" id="{{service.name}}">
+                    <div class="servicename">{{service.name}}</div>
+                    {% for included in service.extras_out %}
+                    <div class="extracontent" data-included="{{ included }}"></div>
+                        
+                    {% endfor %}
+                    <div class="extratype"></div>
+                    {% for included in service.extras_in %}
+                    <div class="extracontent" data-included="{{ included }}"></div>
+                    {% endfor %}
+                    <div class="priceContainer">
+                        <div class="price">{{service.price_small}}</div>
+                        <div class="price">{{service.price_medium}}</div>
+                        <div class="price">{{service.price_large}}</div>
+                    </div>
+                </div>
+                {% endfor %}
+        </div>
+        </div>
+    </div>
     <h2 class="alcim">Autókozmetikai szolgáltatások</h2>
     <div class="figyelmeztetes">Autókozmetikai szolgáltatásainkat kizárólag ingyenes felmérés után végezzük. 
         Keresd kollégáinkat telefonon, vagy személyesen üzletünkben.</div>
-        <div class="MobileScroller"></div>
+        <div id = "MobileScrollerKozmetika"class="MobileScroller"></div>
     <div class="kozmetika">
         <div class="kozmetikaOuterContainer">
         <div class="KozmetikaCim">Polírozás</div>

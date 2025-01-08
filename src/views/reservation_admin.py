@@ -9,10 +9,12 @@ from src.models.reservation_model import ReservationModel, PaymentEnum
 from src.models.billing_model import BillingModel
 from src.views.my_modelview import MyModelView
 from flask_login import current_user
-from flask import current_app, request
+from flask import current_app, request, redirect, flash, url_for
 from src.views.filters import ThisMonthFilter, ThisWeekFilter, TodayFilter
 from flask_admin.contrib.sqla.filters import DateBetweenFilter
 from src.views.reservation_form import ReservationForm
+from src.controllers.reservation_controller2 import create_reservation, create_billing
+from src.views.form_data import ReservationData, BillingData, CarData
 
 class ReservationAdminView(MyModelView):
     form = ReservationForm
@@ -123,6 +125,31 @@ class ReservationAdminView(MyModelView):
             form.load_data(obj)
 
         return form
+    
+    def create_model(self, form):
+        reservation_data = ReservationData.parseForm(form.data)
+        car_data = CarData.parseForm(form.data)
+        service = form.service.data
+        carwash = form.carwash.data
+        extras = form.extras.data
+        slot = form.slot.data
+        reservation = create_reservation(
+            carwash, 
+            service, 
+            extras, 
+            slot,
+            reservation_data,
+            admin=True
+            )
+        flash(f'Reservation {reservation.id} created successfully!', 'success')
+        # Redirect back to the admin list view
+        if form.data['billing_required']:
+            billing_data = BillingData.parseForm(form.data)
+            create_billing(
+                reservation=reservation,
+                billing_data=billing_data
+                )
+        return redirect(url_for('reservation_admin.index_view'))
     
     def on_model_change(self, form, model, is_created):
         session = form.session

@@ -129,3 +129,49 @@ async  function create_reservation()
         form.reportValidity(); // This triggers the browser's built-in validation messages
     }
 }
+
+async function checkIncludedExtras(service_id)
+{
+    try {
+        const response = await fetch('/service/list_included', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ service_id: service_id })
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const result = await response.json();
+        return result
+    } catch (error) {
+        console.error('Hiba történt az adatküldés során:', error);
+    }
+}
+
+async function handleRadioChange(radio) {
+    service_id = radio.value
+    const result = await checkIncludedExtras(service_id)
+    console.log(result)
+    addClassToCheckedExtras(result)
+
+}
+
+function addClassToCheckedExtras(targetIds) {
+    // Get all the checkbox inputs
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][name="extras"]');
+    checkboxes.forEach((checkbox) => {
+        if (targetIds.includes(parseInt(checkbox.value))) {
+            console.log()
+            checkbox.disabled = true;
+            checkbox.parentElement.classList.add('isIncluded');
+        }
+        else{
+            checkbox.disabled = false;
+            checkbox.parentElement.classList.remove('isIncluded');
+        }
+    });
+}
