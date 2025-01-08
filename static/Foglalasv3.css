@@ -1,4 +1,30 @@
+@font-face {
+    font-family: 'NewScienceLight';
+    src: url('fonts/fonnts.com-New_Science_Light.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+@font-face {
+    font-family: 'NewScienceLightExtended';
+    src: url('fonts/fonnts.com-New_Science_Light_Extended.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
 
+@font-face {
+    font-family: 'NewScienceThin';
+    src: url('fonts/fonnts.com-New_Science_Thin_Extended.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+@font-face {
+    font-family: 'NewScienceMediumExtended';
+    src: url('fonts/fonnts.com-New_Science_Medium_Extended.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
 .alcim{
     font-weight: 500;
       padding: 20px;
@@ -351,6 +377,15 @@ header{
     width: 25%;
 }
 
+.priceTitle{
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+}
+
+.finalprcie{
+    font-weight: bold;
+}
+
 .FoglalasButton {
     width: 100%; /* Kitölti a szülő teljes szélességét */
     height: 100%; /* Kitölti a szülő teljes magasságát */
@@ -373,6 +408,7 @@ header{
 }
 
 .megjegyzes{
+    display: flex;
     background-color: #2D2D2D;
     border: 1px solid #161616;
     border-radius: 5vh;
@@ -380,6 +416,65 @@ header{
     height: 50%;
     width: 90%;
     resize: none;
+    text-align: left;
+    color: #E0E0E0;
+    padding: 10px;
+    justify-content: flex-start; /* Aligns content at the top vertically */
+    align-items: flex-start; /* Aligns content to the left horizontally */
+}
+
+.ConfirmModal{
+    top: 25vh;
+    left: 30vw;
+    width: 40%;
+    height: 50%;
+    background-color: #2D2D2D; /* Sötét áttetsző háttér */
+    border-radius: 20px
+}
+.ConfirmModal{
+    padding:30px;
+    position: fixed;
+    z-index: 1000; /* Az összes tartalom fölött jelenjen meg */
+    overflow: hidden;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+}
+
+.ConfirmModalContent{
+  display:flex;
+  align-items: center;
+  font-family: "NewScienceLight";
+  flex-direction:column;
+  width: 50%;
+  height: 100%;
+  font-weight: 100;
+}
+.ConfirmTitle{
+    display: flex;
+    font-size: large;
+    height: 10vh;
+    align-items: center;
+    justify-content: center;
+}
+.Check{
+    background-color: #2D2D2D;
+}
+.ConfirmCheck{}
+
+body{
+  background-color:#161616;
+}
+
+
+#close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #E0E0E0;
 }
 /* Error handling */
 .error{
@@ -451,5 +546,31 @@ header{
 
     .keret{
         width: 40vw;
+    }
+
+    .ConfirmModal{
+        top: 25vh;
+        left: 10vw;
+        width: 80%;
+        height: auto;
+        background-color: #2D2D2D; /* Sötét áttetsző háttér */
+    }
+
+    .ConfirmModalContent{
+        width: 90%;
+        text-align: center;
+    }
+
+    .ConfirmModal{
+        padding:0px;
+        padding-top: 10%;
+        padding-bottom: 10%;
+    }
+
+    #close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 35px;
     }
 }

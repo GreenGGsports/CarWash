@@ -25,7 +25,10 @@
     font-weight: normal;
     font-style: normal;
 }
-
+input, textarea, select, button {
+    font-size: 16px;
+  }
+  
 .alcim{
     font-weight: 500;
       padding: 20px;

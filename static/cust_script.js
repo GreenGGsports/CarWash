@@ -131,7 +131,11 @@ paymentmethod.addEventListener('change', () => {
         document.getElementById('billing_name').setAttribute("required", "true");
         document.getElementById('email').setAttribute("required", "true");
         document.getElementById('address').setAttribute("required", "true");
-    } else {
+    } 
+    else if (checkbox.checked) {
+        return
+    }
+    else{
         extraFields.classList.add('hidden'); // Mezők elrejtése
         document.getElementById('billing_name').removeAttribute("required");
         document.getElementById('email').removeAttribute("required");
@@ -209,7 +213,7 @@ async function create_reservation(event) {
 // Function to open a modal with the reservation data
 function openReservationModal(data) {
     console.log("openmodal")
-    document.getElementById("ConfirmModal").style.display = "block"; // Megjeleníti a modált
+    document.getElementById("ConfirmModal").style.display = "flex"; // Megjeleníti a modált
 }
 
 function CloseReservationModal() {

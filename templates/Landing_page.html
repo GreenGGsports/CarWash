@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='common.css') }}">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='landing_page.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
@@ -81,7 +82,7 @@
     </div>
     <div class="Wrapper">
         <div class="Foglalas">
-            <button onclick="create_reservation()" class="FoglalasButton">Online Időpontfoglalás</button>
+            <button onclick="toReservation()" class="FoglalasButton">Online Időpontfoglalás</button>
         </div>
     </div>  
     <h2  id = "GaleryCim" class="alcim">Galéria</h2>
@@ -235,7 +236,7 @@
                 required>
         </div>
         <div>
-        <button type="submit" class="LoginOrRegisterButton">Belépés</button>
+        <button onclick="toReservation()" class="LoginOrRegisterButton">Belépés</button>
         </form>
         <div class="message" id="login-message"></div>
         </div>

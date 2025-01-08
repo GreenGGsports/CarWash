@@ -54,6 +54,11 @@ body {
     font-weight: 600;    
 }
 
+.contentBox{
+  display: flex;
+  flex-direction: column;
+}
+
 .locationBox{
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -143,6 +148,7 @@ body {
     width: 100%; /* Kitölti a szülő teljes szélességét */
     height: 100%; /* Kitölti a szülő teljes magasságát */
     background-color: #D5F048;
+    color: #161616;
     border-radius: 5vh;
     border: none; /* Opció: eltünteti a gomb alapértelmezett keretét */
     cursor: pointer; /* Mutatja, hogy kattintható */
@@ -204,6 +210,10 @@ body {
     .keret{
         display: flex;
         flex-direction: column;
+        width: 45vw;
+        height: 45vw;
+        aspect-ratio: 1/1;
+        position: relative; /* Forces layout recalculation */
     }
 
     .helyszinImgs{
