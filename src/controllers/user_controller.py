@@ -27,7 +27,7 @@ class User(UserMixin):
 def init_login_manager(app):
     login_manager = LoginManager()
     login_manager.init_app(app)
-    login_manager.login_view = 'user_ctrl.login'
+    login_manager.login_view = '/'
 
     @login_manager.user_loader
     def load_user(user_id):
@@ -67,7 +67,7 @@ def login():
             elif user.role == 'developer':
                 redirect_url = '/developer'
             else:
-                redirect_url = ''  # Általános felhasználói felület
+                redirect_url = '/Foglalás/'  # Általános felhasználói felület
             
             current_app.logger.info('Log in successful')
             return jsonify({'status': 'logged_in', 'redirect_url': redirect_url})

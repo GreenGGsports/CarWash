@@ -48,7 +48,7 @@ def get_carwash_slots():
     try:
         db_session = current_app.session_factory.get_session()
         data = request.get_json()
-        date = datetime.strptime(data['date'], '%Y-%m-%d %H:%M:%S')
+        date = datetime.strptime(data['date'], '%Y-%m-%d')
         carwash_id = int(data['carwash_id'])
 
         available_slots = get_available_slots(db_session, date, carwash_id)
@@ -69,31 +69,17 @@ def get_slots():
     date = datetime.strptime(data['date'], '%Y-%m-%d')
     carwash_id = session['carwash_id']
     
-    live_slots = db_session.query(SlotModel).filter_by(live=True, carwash_id=carwash_id).all()
+    available_slots = get_available_slots(db_session, date, carwash_id)
     response = []
-    for slot in live_slots:
+    for slot in available_slots :
         if date >= slot.end_time:
-            if ReservationModel.is_slot_available(
-                session=db_session,
-                slot_id=slot.id,
-                reservation_date=date
-            ):
-                response.append(
-                    dict(
-                        id = slot.id,
-                        end_time_hours = slot.end_time.strftime('%H'),
-                        end_time_minutes = slot.end_time.strftime('%M'),
-                        available = True
-                    )
+            response.append(
+                dict(
+                    id = slot.id,
+                    end_time_hours = slot.end_time.strftime('%H'),
+                    end_time_minutes = slot.end_time.strftime('%M'),
+                    available = True
                 )
-            else:  
-                response.append(
-                    dict(
-                        id = slot.id,
-                        end_time_hours = slot.end_time.strftime('%H'),
-                        end_time_minutes = slot.end_time.strftime('%M'),
-                        available = False
-                    )
                 )
     return jsonify({'success': True, 'slots': response})
 
@@ -103,7 +89,7 @@ def reserve_slot():
         db_session = current_app.session_factory.get_session()
         data = request.get_json()
         slot_id = data['slot_id']
-        reservation_date = datetime.strptime(data['date'], '%Y-%m-%d %H:%M:%S').date()
+        reservation_date = datetime.strptime(data['date'], '%Y-%m-%d').date()
 
         # A zárolás lejárati idejének beállítása (10 perc)
         lock_expiration = datetime.now() + timedelta(minutes=10)

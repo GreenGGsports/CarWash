@@ -1,6 +1,8 @@
 import inspect
 from src.models.car_model import CarTypeEnum
-
+from datetime import datetime
+from typing import get_type_hints
+from flask import current_app
 class FormData():
     @classmethod
     def parseForm(cls, form_data):
@@ -8,7 +10,17 @@ class FormData():
         filtered_data = {key: form_data.get(key) for key in cls_params}
         missing_fields = [key for key, param in cls_params.items() if param.default == inspect.Parameter.empty and key not in form_data]
         if missing_fields:
+            current_app.logger.warning("error parsing form:")
+            current_app.logger.error(f"Missing required fields: {', '.join(missing_fields)}")
             raise ValueError(f"Missing required fields: {', '.join(missing_fields)}")
+         
+        cls_type_hints = get_type_hints(cls)       # Validate types
+        for key, value in filtered_data.items():
+            expected_type = cls_type_hints.get(key)
+            if expected_type and value is not None and not isinstance(value, expected_type):
+                current_app.logger.warning("error parsing form:")
+                current_app.logger.error(f"Field '{key}' expects type {expected_type.__name__}, got {type(value).__name__}")
+                raise TypeError(f"Field '{key}' expects type {expected_type.__name__}, got {type(value).__name__}")
         return cls(**filtered_data)
     
 class ReservationData(FormData):
@@ -21,7 +33,7 @@ class ReservationData(FormData):
         final_price: int = None,
         comment: str = None
     ):
-        self.reservation_date = reservation_date
+        self.reservation_date = datetime.strptime(reservation_date, "%Y-%m-%d") if isinstance(reservation_date, str) else reservation_date
         self.payment_method = payment_method
         self.parking_spot = parking_spot
         self.is_completed = is_completed
@@ -67,7 +79,27 @@ class CarData(FormData):
 
         self.kwargs = dict(
             license_plate=self.license_plate,
-            car_type=CarTypeEnum[self.car_type],
+            car_type=CarTypeEnum[self.car_type].value,
             car_brand=self.car_brand,
             car_model=self.car_model,
         )
+        
+class CustomerData(FormData):
+    def __init__(
+        self,
+        new_customer_forname,
+        new_customer_lastname,
+        new_customer_phone_number,
+        
+        ):
+        self.forname = new_customer_forname
+        self.lastname = new_customer_lastname
+        self.phone_number = new_customer_phone_number
+        
+        self.kwargs = dict(
+            forname = self.forname,
+            lastname = self.lastname,
+            phone_number = self.phone_number, 
+        )
+            
+        

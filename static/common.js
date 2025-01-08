@@ -33,7 +33,7 @@ function closeRegisterModal() {
 
 function openLogRegModal() {
     document.getElementById("modal").style.display = "none"; 
-    document.getElementById("LoginOrRegister").style.display = "block"; // Megjeleníti a modált
+    document.getElementById("LoginOrRegister").style.display = "flex"; // Megjeleníti a modált
 }
 
 function closeLogRegModal() {
@@ -133,8 +133,9 @@ window.addEventListener("load", () => {
 
 async function toReservation(){
     const authenticated = await testAuthentication(); // Await the async result
+    console.log(authenticated)
     if (authenticated) {
-        window.location.href = '/reservation_test/reserve';
+        window.location.href = '/Foglalás/';
     }
 
     else{

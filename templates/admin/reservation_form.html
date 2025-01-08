@@ -16,10 +16,8 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             flatpickr('#{{ form.reservation_date.id }}', {
-                enableTime: true,              // Enable time picker
-                dateFormat: "Y-m-d H:i:S",     // Desired date format: YYYY-MM-DD HH:mm:ss
-                time_24hr: true,               // Use 24-hour time format
-                enableSeconds: true            // Enable seconds in the time picker
+                enableTime: false,              // Enable time picker
+                dateFormat: "Y-m-d", 
             });
         });
     </script>
@@ -70,7 +68,7 @@
     <!-- Updated datetime input using Flatpickr -->
     <div>
         <label for="{{ form.reservation_date.id }}">{{ form.reservation_date.label.text }}</label>
-        <input type="text" id="{{ form.reservation_date.id }}" name="{{ form.reservation_date.name }}" value="{{ form.reservation_date.data }}">
+        <input type="date" id="{{ form.reservation_date.id }}" name="{{ form.reservation_date.name }}" value="{{ form.reservation_date.data }}">
     </div>
 
     <div>

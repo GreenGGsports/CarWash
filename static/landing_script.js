@@ -38,4 +38,7 @@ jQuery(".property-slide").slick({
       // instead of a settings object
     ]
   });
-  
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('show_modal') === 'true') {
+    openLogRegModal(); // Call the function to open the modal
+  }

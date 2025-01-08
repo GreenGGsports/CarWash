@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='common.css') }}">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='landing_page.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
@@ -81,7 +82,7 @@
     </div>
     <div class="Wrapper">
         <div class="Foglalas">
-            <button onclick="create_reservation()" class="FoglalasButton">Online Időpontfoglalás</button>
+            <button onclick="toReservation()" class="FoglalasButton">Online Időpontfoglalás</button>
         </div>
     </div>  
     <h2  id = "GaleryCim" class="alcim">Galéria</h2>
@@ -175,77 +176,88 @@
     </div>
 </div>
 <div class = "modal" id="login-modal">
-    <div id="modal-content">
-        <h2 class="alcim">Bejelentkezés</h2>
+    <div id="modal-content" class="modal-contnt">
+        <div class="modal-outerContainer">
+        <div class="alcim">Bejelentkezés</div>
         <span id="close" onclick="closeLoginModal()">&times;</span>
         <form id='login-form'>
-        <div class='input-keret'> 
-            <label class = "input-label"  for="username">Felhasználónév:</label>
+        <div class='modal-input'> 
+            <label class = "modal-label"  for="username">Felhasználónév:</label>
             <input 
                 type="text" 
                 id="username" 
                 name="user_name" 
                 placeholder="" 
-                class="input-mezo"
+                class="modal-mezo"
                 required>
         </div>
-        <div class='input-keret'> 
-            <label class = "input-label"  for="password">Jelszó:</label>
+        <div class='modal-input'> 
+            <label class = "modal-label"  for="password">Jelszó:</label>
             <input 
                 type="password" 
                 id="password" 
                 name="password" 
                 placeholder="" 
-                class="input-mezo"
+                class="modal-mezo"
                 required>
         </div>
-        <button type="submit">Belépés</button>
+        <div>
+        <button type="submit" class="LoginOrRegisterButton">Belépés</button>
         </form>
         <div class="message" id="login-message"></div>
         </div>
     </div>
 </div>
+</div>
 <div class = "modal" id="register-modal">
-    <div id="modal-content">
-        <h2 class="alcim">Regisztráció</h2>
+    <div id="modal-content" class="modal-contnt">
+        <div class="modal-outerContainer">
+        <div class="alcim">Regisztráció</div>
         <span id="close" onclick="closeRegisterModal()">&times;</span>
         <form id='register-form'>
-        <div class='input-keret'> 
-            <label class = "input-label"  for="username">Felhasználónév:</label>
+        <div class='modal-input'> 
+            <label class = "modal-label"  for="username">Felhasználónév:</label>
             <input 
                 type="text" 
                 id="username" 
                 name="user_name" 
                 placeholder="" 
-                class="input-mezo"
+                class="modal-mezo"
                 required>
         </div>
-        <div class='input-keret'> 
-            <label class = "input-label"  for="password">Jelszó:</label>
+        <div class='modal-input'> 
+            <label class = "modal-label"  for="password">Jelszó:</label>
             <input 
                 type="password" 
                 id="password" 
                 name="password" 
-                placeholder="" 
-                class="input-mezo"
+                placeholder=""
+                class="modal-mezo"
                 required>
         </div>
-        <button type="submit">Register</button>
+        <div>
+        <button onclick="toReservation()" class="LoginOrRegisterButton">Regisztráció</button>
         </form>
-        <div class="message" id="register-message"></div>
+        <div class="message" id="login-message"></div>
         </div>
     </div>
 </div>
-<div class = "modal" id="LoginOrRegister">
+</div>
+</div>
+<div class = "LoginOrRegistermodal" id="LoginOrRegister">
     <div class = "LoginOrRegistercontent">
-        <div class="LoginOrRegisterText"></div>
-        <div class="LoginOrRegisterWrapper"></div>
+        <div class="LoginOrRegisterText">Az online időpontfoglaláshoz jelentkezz be, vagy regisztrálj.</div>
         <div class="LoginOrRegisterWrapper">
-            <button onclick="openLoginModal()"class="LoginOrRegisterButton">Bejelentkezés</div>
-        </div>
-        <div class="LoginOrRegisterWrapper">
-            <button onclick="openRegisterModal()" class="LoginOrRegisterButton">Regisztráció</div>
+            <div class="LoginOrRegisterWrapper2">
+                <button onclick="openLoginModal()"class="regMenubutton">Bejelentkezés</button>
+                <div class="Buziszmbólumgeci">&gt;</div>
+            </div>
+            <div class="LoginOrRegisterWrapper2">
+                <button onclick="openRegisterModal()" class="regMenubutton">Regisztráció</button>
+                <div class="Buziszmbólumgeci">&gt;</div>
+            </div>
         </div>
     </div>
 </div>
+
 <script src="{{ url_for('static', filename='landing_script.js') }}"></script>
