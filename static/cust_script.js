@@ -143,7 +143,23 @@ paymentmethod.addEventListener('change', () => {
     }
 });
 
+function scrollToLowestElement(elements) {
+    if (elements.length === 0) return;
+
+    // Find the element with the lowest position (highest `top` value)
+    const lowestElement = elements.reduce((lowest, current) => {
+        const lowestRect = lowest.getBoundingClientRect();
+        const currentRect = current.getBoundingClientRect();
+        return currentRect.top > lowestRect.top ? current : lowest;
+    });
+
+    // Scroll to the lowest element
+    lowestElement.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+
 function handle_errors(form){
+    const invalidInputs = [];
     var isvalid = true
     var formData = new FormData(form);
     for (var pair of formData.entries()) {
@@ -153,17 +169,23 @@ function handle_errors(form){
     if (formData.has("service")) {
         console.log("Service is set.");
         document.getElementById("serviceBox").classList.remove("error");
-    } else {
+    } 
+    else {
         isvalid = false
         document.getElementById("serviceBox").classList.add("error");
+        invalidInputs.push(serviceBox); 
     }
     if (formData.has("timeSlot")) {
         console.log("Slot is set.");
         document.getElementById("GombBox").classList.remove("error");
     }
-    else
+    else {
         isvalid = false
         document.getElementById("GombBox").classList.add("error");
+        invalidInputs.push(serviceBox); 
+    }
+    scrollToLowestElement(invalidInputs);
+    console.log("Form is valid: ", isvalid)
     return isvalid
 }
 
@@ -213,6 +235,7 @@ async function create_reservation(event) {
 // Function to open a modal with the reservation data
 function openReservationModal(data) {
     console.log("openmodal")
+    document.getElementById("finalprcie").textContent = data['final_price']
     document.getElementById("ConfirmModal").style.display = "flex"; // Megjeleníti a modált
 }
 

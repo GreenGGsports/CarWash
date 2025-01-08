@@ -5,7 +5,7 @@ from src.models.extra_model import ExtraModel
 from src.models.customer_model import CustomerModel
 from src.models.reservation_model import ReservationModel
 from src.models.billing_model import BillingModel
-from flask import  render_template, request, Blueprint, current_app, session, jsonify
+from flask import  render_template, request, Blueprint, current_app, session, jsonify, redirect, url_for
 from src.views.form_data import ReservationData, BillingData, CarData
 from src.controllers.reservation_controller2 import create_reservation, create_billing
 from src.models.slot_model import SlotModel
@@ -15,6 +15,15 @@ from src.views.form_data import ReservationData, BillingData, CarData, CustomerD
 
 reservation_test = Blueprint('reservation_test', __name__, template_folder='templates')
 
+@reservation_test.before_request
+def require_authentication():
+    if not current_user.is_authenticated:
+        if request.is_json:
+            # Return a JSON response for AJAX or API requests
+            return jsonify({"success": False, "error": "Authentication required."}), 401
+        else:
+            # Redirect to the main route with a query parameter to trigger the modal
+            return redirect(url_for('main_view.home', show_modal='true'))
 
 def frontend_query(carwash_id=1):
     db_session = current_app.session_factory.get_session()
@@ -73,7 +82,7 @@ def frontend_query(carwash_id=1):
                 billing  = billing,
             )
     
-@reservation_test.route("/reserve")
+@reservation_test.route("/")
 def show():
     kwargs = frontend_query()
     session['carwash_id'] =  kwargs["locations"][0].id
@@ -99,41 +108,79 @@ def render(locations, services, extras, customer=None, car =None, billing=None, 
 
 
 
-@reservation_test.route("/create_reservation",methods=["POST", "GET"])
+@reservation_test.route("/create_reservation", methods=["POST", "GET"])
 def reservation():
-    form_data = request.form.to_dict()
-    db_session = current_app.session_factory.get_session()
-    selected_extras = request.form.getlist('extras') 
-    carwash =  db_session.query(CarWashModel).filter_by(id=session['carwash_id']).first()
-    service =  db_session.query(ServiceModel).filter_by(id=int(form_data['service'])).first()
-    extras = db_session.query(ExtraModel).filter(ExtraModel.id.in_(selected_extras)).all()
+    try:
+        form_data = request.form.to_dict()
+        if not form_data:
+            return jsonify({"success": False, "error": "Form data is missing."}), 400
 
-    slot = db_session.query(SlotModel).filter_by(id=int(form_data['timeSlot'])).first()
-    car_data = CarData.parseForm(form_data)
-    car = add_car(db_session,car_data)
+        db_session = current_app.session_factory.get_session()
+
+        # Validate required fields
+        required_fields = ['service', 'timeSlot']
+        for field in required_fields:
+            if field not in form_data:
+                return jsonify({"success": False, "error": f"'{field}' is required."}), 400
+
+        selected_extras = request.form.getlist('extras')
         
-    customer_data = CustomerData.parseForm(form_data)
-    customer = add_customer(db_session, customer_data, admin=False)
-    
-    reservation_data = ReservationData.parseForm(form_data)
-    reservation = create_reservation(
-        session=db_session,
-        carwash=carwash, 
-        service=service, 
-        extras=extras, 
-        slot=slot,
-        car=car,
-        customer=customer,
-        reservation_data=reservation_data,
-        admin=False
+        # Fetch related objects
+        carwash = db_session.query(CarWashModel).filter_by(id=session.get('carwash_id')).first()
+        if not carwash:
+            return jsonify({"success": False, "error": "Car wash not found."}), 404
+
+        service = db_session.query(ServiceModel).filter_by(id=int(form_data['service'])).first()
+        if not service:
+            return jsonify({"success": False, "error": "Service not found."}), 404
+
+        extras = db_session.query(ExtraModel).filter(ExtraModel.id.in_(selected_extras)).all()
+
+        slot = db_session.query(SlotModel).filter_by(id=int(form_data['timeSlot'])).first()
+        if not slot:
+            return jsonify({"success": False, "error": "Time slot not found."}), 404
+
+        # Parse and add data
+        car_data = CarData.parseForm(form_data)
+        car = add_car(db_session, car_data)
+
+        customer_data = CustomerData.parseForm(form_data)
+        customer = add_customer(db_session, customer_data, admin=False)
+
+        reservation_data = ReservationData.parseForm(form_data)
+        reservation = create_reservation(
+            session=db_session,
+            carwash=carwash,
+            service=service,
+            extras=extras,
+            slot=slot,
+            car=car,
+            customer=customer,
+            reservation_data=reservation_data,
+            admin=False
         )
 
-    if form_data.get('billing_required', False):
-        billing_data = BillingData.parseForm(form_data)
-        billing = create_billing(db_session,reservation, billing_data)
-        
-        
-    return jsonify(dict(
-        success=True,
-        final_price=reservation.final_price,   
-        )), 200
+        # Handle billing if required
+        if form_data.get('billing_required', False):
+            billing_data = BillingData.parseForm(form_data)
+            billing = create_billing(db_session, reservation, billing_data)
+
+        db_session.commit()
+
+        return jsonify({
+            "success": True,
+            "final_price": reservation.final_price
+        }), 200
+
+    except ValueError as ve:
+        current_app.logger.error(f"ValueError: {ve}")
+        db_session.rollback()
+        return jsonify({"success": False, "error": "Invalid input data."}), 400
+
+    except Exception as e:
+        current_app.logger.error(f"Unexpected error: {e}")
+        db_session.rollback()
+        return jsonify({"success": False, "error": "An unexpected error occurred."}), 500
+
+    finally:
+        db_session.close()

@@ -135,7 +135,7 @@ async function toReservation(){
     const authenticated = await testAuthentication(); // Await the async result
     console.log(authenticated)
     if (authenticated) {
-        window.location.href = '/reservation_test/reserve';
+        window.location.href = '/Foglalás/';
     }
 
     else{

@@ -84,7 +84,7 @@ def add_blueprints(app: Flask):
     app.register_blueprint(developer_ctrl, url_prefix='/developer', name='developer_admin_blueprint')
     app.register_blueprint(helix_api, url_prefix='/helix')
     
-    app.register_blueprint(reservation_test, url_prefix='/reservation_test')
+    app.register_blueprint(reservation_test, url_prefix='/Foglalás')
     return app 
 
 if __name__ == '__main__':
