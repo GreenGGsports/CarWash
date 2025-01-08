@@ -23,8 +23,7 @@ services:
       - DB_NAME=testdb
       - DB_HOST=db  # Docker szolgáltatás neve a MySQL adatbázishoz
       - DB_PORT=3306
-    ports:
-      - "8000:8000"
+      - PORT=8000  # Ensure the app listens on port 8000
     depends_on:
       - db
     networks:
@@ -34,17 +33,15 @@ services:
     build:
       context: .
       dockerfile: db.dockerfile
+    env_file:
+      - .env  # Reference the .env file
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: testdb
-      MYSQL_USER: testuser
-      MYSQL_PASSWORD: testpassword
-
-    ports:
-      - "3306:3306"
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     networks:
       - app-network
-
 networks:
   app-network:
     driver: bridge
