@@ -17,7 +17,6 @@ services:
       context: .
       dockerfile: app.dockerfile
     environment:
-      - PORT=8000  # A gunicorn indítási portja
       - DB_USER=testuser
       - DB_PASSWORD=testpassword
       - DB_NAME=testdb
