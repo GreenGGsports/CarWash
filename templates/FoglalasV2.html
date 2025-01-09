@@ -65,7 +65,7 @@
                     {% endfor %}
                 </form>
             </div>
-        <form id="reservationForm" action="/reservation_test/create_reservation" method="POST">
+        <form id="reservationForm" action="/Foglalás/create_reservation" method="POST">
         <h2 class="alcim">2. Válasszon csomagot</h2> 
         <div class="serviceBox" id="serviceBox">
             {% for service in services %}
@@ -242,8 +242,7 @@
                         name="parking_spot" 
                         value="{{ customer.forname }}" 
                         placeholder="" 
-                        class="input-mezo"
-                        required>
+                        class="input-mezo">
                 </div>
             </div>
             </div>
