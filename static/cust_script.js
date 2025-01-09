@@ -126,7 +126,7 @@ checkbox.addEventListener('change', () => {
 const paymentmethod = document.getElementById("payment_method")
 paymentmethod.addEventListener('change', () => {
     const extraFields = document.getElementById("billing_data");
-    if (paymentmethod.value === "bankcard") {
+    if (paymentmethod.value === "card") {
         extraFields.classList.remove('hidden'); // Mezők megjelenítése
         document.getElementById('billing_name').setAttribute("required", "true");
         document.getElementById('email').setAttribute("required", "true");
