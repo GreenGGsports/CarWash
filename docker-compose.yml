@@ -21,7 +21,7 @@ services:
     environment:
       - DB_USER=${MYSQL_USER}
       - DB_PASSWORD=${MYSQL_PASSWORD}
-      - DB_NAME=carwash_db
+      - DB_NAME=${MYSQL_DATABASE}
       - DB_HOST=db  # Docker szolgáltatás neve a MySQL adatbázishoz
       - DB_PORT=3306
       - PORT=8000  # Ensure the app listens on port 8000
