@@ -292,6 +292,16 @@ header{
     font-size: 14px;
     color: black; /* Fekete pipa */
 }
+
+.custom-checkbox.no_select {
+    opacity: 0.5; /* Make the label appear disabled */
+    pointer-events: none; /* Disable any interaction with the label */
+}
+
+.custom-checkbox.isIncluded {
+    pointer-events: none; /* Disable any interaction with the label */
+}
+
 .info{
     color: #E0E0E0;        /* Set the width */           
     font-family: 'New Science', sans-serif;  /* Set the font */

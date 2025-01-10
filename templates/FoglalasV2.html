@@ -106,7 +106,7 @@
                 <h2 class="alcim">3. Válasszon extrákat</h2> 
                 <div class="extraBox">
                     {% for extra in extras %}
-                    <label class="custom-checkbox">
+                    <label class="custom-checkbox {% if not extra.user_select %}no_select{% endif %}">
                         <input type="checkbox" name="extras" value="{{ extra.id }}">
                         <span></span>
                         {{ extra.service_name }}

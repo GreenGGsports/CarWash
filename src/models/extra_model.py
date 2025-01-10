@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Enum, ForeignKey 
+from sqlalchemy import Column, Integer, String, Enum, ForeignKey , Boolean
 from sqlalchemy.orm import Session, relationship
 from .base import BaseModel
 
@@ -12,6 +12,7 @@ class ExtraModel(BaseModel):
     price = Column(Integer, nullable=False)
     extra_type = Column(EtraTypeEnum, nullable=False)
     carwash_id = Column(ForeignKey('Carwash.id'), nullable= False)
+    user_select = Column(Boolean, nullable=True)
     carwash = relationship("CarWashModel")
     reservations = relationship('ReservationModel', secondary='reservation_extra', back_populates='extras')
 
