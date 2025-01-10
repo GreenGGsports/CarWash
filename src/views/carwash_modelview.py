@@ -14,13 +14,40 @@ class CarwashAdminView(MyModelView):
     column_labels = {
         'carwash_name': 'Név',
         'location': 'Helyszín',
-        'image_name': 'Kép',
         'close_start': 'Tiltás (-tól)',
         'close_end': 'Tiltás (-ig)',
         'start_time': 'Nyitás',
         'end_time': 'Zárás',
         'capacity': 'Kapacitás',  # A slot_count nevének megjelenítése
     }
+    
+    column_list = ['carwash_name', 'location', 'close_start', 'close_end', 'start_time', 'end_time', 'capacity']
+
+    
+    
+    def create_form(self, obj=None):
+        """
+        Customize the create form to remove the extras field for adding new records.
+        """
+        # Call the parent method to get the form
+        form = super().create_form(obj)
+
+        # Remove the 'extras' field from the form
+        del form.close_start
+        del form.close_end
+        del form.image_name
+        return form
+    
+    def edit_form(self, obj=None):
+        """
+        Customize the create form to remove the extras field for adding new records.
+        """
+        # Call the parent method to get the form
+        form = super().create_form(obj)
+
+        # Remove the 'extras' field from the form
+        del form.image_name
+        return form
 
     def on_model_change(self, form, model, is_created):
         """
