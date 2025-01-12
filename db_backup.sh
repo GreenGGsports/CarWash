@@ -12,7 +12,7 @@ fi
 DATE=$(date +%F-%H%M%S)
 
 # Backup directory on the host
-BACKUP_DIR="/var/backups/database_backups"
+BACKUP_DIR="/var/backups/database_backups/carwash"
 mkdir -p $BACKUP_DIR
 
 # Ensure required environment variables are set
