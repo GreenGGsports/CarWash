@@ -8,7 +8,7 @@ jQuery(".property-slide").slick({
     autoplay: true,
     autoplaySpeed: 6000,
     prevArrow:
-      '<button class="slick-prev fa-solid fa-arrow-left" aria-label="Prev"></button>',
+    '<button class="slick-prev fa-solid fa-arrow-left" aria-label="Prev" style="color: white;"></button>',
     nextArrow:
       '<button class="slick-next fa-solid fa-arrow-right" aria-label="Next"></button>',
     responsive: [

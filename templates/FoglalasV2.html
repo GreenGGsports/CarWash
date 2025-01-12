@@ -49,7 +49,7 @@
         <div class='FoglalasBox'>
         <h2 class="alcim">1. Válasszon autómosót</h2>
             <div class="locationBox" id = "box">
-                <form id="locationForm" action="/reservation_test/select_location" method="POST">
+                <form id="locationForm" action="/Foglalás/select_location" method="POST">
                     {% for location in locations %}
                     <button 
                         class="keret {% if location.id == selected_location_id %}selected{% endif %}" 
@@ -58,7 +58,11 @@
                         type="submit" 
                         id="location_btn-{{ location.id }}">
                         <img class="helyszinkep" src="/static/images/{{ location.image_name }}" />
+                        {% if location.id == selected_location_id %}
+                         <img class="helyszinikon" src="/static/images/map_black.svg">
+                        {% else %}
                         <img class="helyszinikon" src="/static/images/map.svg">
+                        {% endif %}
                         <div class="IkonKeret"></div>
                         <div class="MosokCim">{{ location.location }}</div>
                     </button>
@@ -326,7 +330,10 @@
         <div class="footerTextBox">© 2024 Eliteshine Minden jog fenntartva</div>
         <div class="footerTextBox">Adatvédelmi nyilatkozat<br>ASZF</div>
         <div class="footerTextBox">eliteshine@shine.com<br>+36 20 69 69 669</div>
-        <div class = "socialBox"> insta</div>
+        <div class = "socialBox">
+            <img class="socialIcon"src="/static/images/Facebook.svg">
+            <img class="socialIcon"src="/static/images/Instagram.svg">
+        </div>
     </div>
 </footer>
 </body>

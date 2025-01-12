@@ -37,6 +37,13 @@ form {
     background-position: left center; 
 }
 
+.headerMobile{
+  background-image: url("images/Header.png");
+  height: 20vh;
+  background-size:cover;
+  background-position: left center; 
+}
+
 .headerButton{
     color: black;
 }
@@ -245,6 +252,8 @@ body {
 
 
 .property-container{
+  display: flex;
+  flex-direction: column;
     width: 90%;
     padding-left:5% ;
 }
@@ -275,7 +284,7 @@ a:focus {
 }
 
 .property-item {
-  display: inline-block;
+  display: flex;
   vertical-align: middle;
   width: calc(100% / 4);
   padding: 0 7px;
@@ -286,26 +295,30 @@ a:focus {
   position: relative;
 }
 
+.container{
+  display: flex;
+  flex-direction: column;
+}
 .property-slide {
   padding: 38px 0 0;
 }
 
 .property-slide button.slick-arrow {
-  display: inline-block;
-  position: absolute;
-  width: 41px;
-  height: 41px;
-  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 5%;
+  height: 70%;
   bottom: 0;
   margin: auto;
   transform: translateY(-40px);
   border: none;
   outline: none;
+
 }
 
 .property-slide button:before {
   font-family: inherit !important;
-  color: #000 !important;
   font-size: 30px;
 }
 .property-slide button.slick-prev {
@@ -379,3 +392,4 @@ a:focus {
 .property-item a:hover .property-details {
   opacity: 1;
 }
+

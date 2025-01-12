@@ -37,6 +37,17 @@ input, textarea, select, button {
       text-align: center;
   }
   
+.szlogen{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width:50%;
+    font-family: 'NewScienceMediumExtended', sans-serif;
+    font-size: clamp(20px, 2vw, 40px);
+    font-family: 'NewScienceLight', sans-serif;
+    margin-top: 30px;
+}
 header{
     font-size: 0px;
     margin-top: 0%;
@@ -247,7 +258,7 @@ footer{
     display: flex;
     text-align: center;
     width: 90%;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .LoginOrRegisterText{
@@ -355,5 +366,13 @@ footer{
         left: 15vw;
         width: 70%;
         height: 40%;
+    }
+
+    .socialBox{
+        justify-content: center;
+    }
+
+    .szlogen{
+        width: 80%;
     }
 }
