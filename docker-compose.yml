@@ -16,8 +16,6 @@ services:
     build:
       context: .
       dockerfile: app.dockerfile
-      env_file:
-      - .env  # Reference the .env file
     environment:
       - DB_USER=${MYSQL_USER}
       - DB_PASSWORD=${MYSQL_PASSWORD}
