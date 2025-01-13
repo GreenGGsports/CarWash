@@ -117,7 +117,7 @@ def reserve_slot():
         db_session.add(new_lock)
         db_session.commit()
 
-        return jsonify({'success': True, 'message': 'A slot tartalékban van, 10 percig foglalva.'})
+        return jsonify({'success': True, 'message': 'Az időpont tartalékban van, 10 percig foglalva.'})
 
     except SQLAlchemyError as e:
         db_session.rollback()

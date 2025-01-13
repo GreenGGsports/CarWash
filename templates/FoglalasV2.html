@@ -47,7 +47,7 @@
     <div class="FoglalasiFelulet">
         <h1 class="focim">Online Időpontfoglalás</h1>  
         <div class='FoglalasBox'>
-        <h2 class="alcim">1. Válasszon autómosót</h2>
+        <h2 class="alcim">1. Válassz autómosót</h2>
             <div class="locationBox" id = "box">
                 <form id="locationForm" action="/Foglalás/select_location" method="POST">
                     {% for location in locations %}
@@ -70,7 +70,7 @@
                 </form>
             </div>
         <form id="reservationForm" action="/Foglalás/create_reservation" method="POST">
-        <h2 class="alcim">2. Válasszon csomagot</h2> 
+        <h2 class="alcim">2. Válassz csomagot</h2> 
         <div class="serviceBox" id="serviceBox">
             {% for service in services %}
             <input 
@@ -107,7 +107,7 @@
         </div>
         <div class="box2">
             <div class="keret2">
-                <h2 class="alcim">3. Válasszon extrákat</h2> 
+                <h2 class="alcim">3. Válassz extrákat</h2> 
                 <div class="extraBox">
                     {% for extra in extras %}
                     <label class="custom-checkbox {% if not extra.user_select %}no_select{% endif %}">
@@ -121,7 +121,7 @@
             <div class="keret2">
                 <div class="keret3">
                 <div class='datumKeret'>
-                <h2 class="alcim">4. Válasszon időpontot</h2> 
+                <h2 class="alcim">4. Válassz időpontot</h2> 
                     <div>
                         <input type="date" id="dateInput" class="input-mezo" name="reservation_date" placeholder="Dátumot" required>
                     </div>
