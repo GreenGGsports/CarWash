@@ -33,8 +33,9 @@ window.addEventListener('load', function() {
     // Regisztráció és logout kódja változatlanul marad
     document.getElementById('register-form').addEventListener('submit', function(event) {
         event.preventDefault();
+        document.getElementById("LoginOrRegister").style.display = "none"
         const formData = new FormData(this);
-        fetch('/user/add_user', {
+        fetch('/user/register', {
             method: 'POST',
             body: JSON.stringify(Object.fromEntries(formData)),
             headers: {

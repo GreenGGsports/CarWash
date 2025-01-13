@@ -43,6 +43,15 @@
             </button>
         </div>
     </header>
+    <div class="locationDataBox">
+        <div class="locationLogo">
+            <img class="helyszinkep" src="/static/images/{{ location.image_name }}" />
+        </div>
+        <div class="helyszinikonContainer">
+            <img class="helyszinikon" src="/static/images/map.svg">
+        </div>
+        {{ location.contact}}
+    </div>
     <h2 class="alcim">Csomagok</h2>
     <div class="MobileScrollerCsomag">
         {% for service in service_data %}
@@ -52,7 +61,7 @@
             onchange="scrollToService('{{service.name}}')"
             id="option_{{service.name}}"
             class="radioButton"
-            />
+            {% if loop.first %}checked{% endif %} >
             <label for="option_{{service.name}}" class="mobileScrollerLabelCsomag">{{service.name}}</label>
         {% endfor %}
     </div>
@@ -251,7 +260,7 @@
         <div>
         <button type="submit" class="LoginOrRegisterButton">Belépés</button>
         </form>
-        <div class="message" id="login-message"></div>
+        <div class="message" id="register-message"></div>
         </div>
     </div>
 </div>

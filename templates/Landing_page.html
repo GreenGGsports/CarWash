@@ -242,9 +242,9 @@
                 required>
         </div>
         <div>
-        <button onclick="toReservation()" class="LoginOrRegisterButton">Regisztráció</button>
+        <button type="submit" class="LoginOrRegisterButton">Regisztráció</button>
         </form>
-        <div class="message" id="login-message"></div>
+        <div class="message" id="register-message"></div>
         </div>
     </div>
 </div>
@@ -265,5 +265,4 @@
         </div>
     </div>
 </div>
-
 <script src="{{ url_for('static', filename='landing_script.js') }}"></script>

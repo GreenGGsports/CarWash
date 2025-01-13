@@ -161,7 +161,8 @@ header{
 }
 
 .helyszinikon{
-    height: 50%;
+    margin:10%;
+    height: 30%;
 }
 .serviceBox{
     display: flex;

@@ -31,6 +31,15 @@ body {
     font-weight: 600;  
 }
 
+.locationDataBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
 .kozmetika{
     display: flex;
     flex-direction: column;
@@ -237,7 +246,7 @@ input[type="radio"]:checked + .mobileScrollerLabel {
     height: 45px;
     border: none;
     flex-shrink:0; /* Ne zsugorodjon össze */
-    width: 65%;
+    width: 40%;
     scroll-snap-align: start; /* Az elem illeszkedjen a görgetéshez */
     transition: all 0.3s ease;
     
@@ -293,8 +302,9 @@ input[type="radio"]:checked + .mobileScrollerLabelCsomag {
     }
 
     .KozmetikaCim{
-        display: none;
+        display: flex;
         padding-left: 8%;
+        font-size: 20px;
     }
 
     .kozmetikaOuterContainer{

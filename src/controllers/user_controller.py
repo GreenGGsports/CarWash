@@ -108,6 +108,25 @@ def add_user():
         current_app.logger.error(e)
     finally:
         db_session.close()
+        
+
+@user_ctrl.route('/register', methods=['POST'])      
+def register():
+    db_session = current_app.session_factory.get_session()
+    try:
+        data = request.json
+        user_name = data.get('user_name')
+        password = data.get('password')
+        if not UserModel.check_name_taken(session=db_session, user_name=user_name):
+            UserModel.add_user(session=db_session, user_name=user_name, password=password, role="user")
+            return jsonify({'status': 'success'})
+        return jsonify({'status': 'failed'})
+    except Exception as e:
+        db_session.rollback()
+        current_app.logger.error(e)
+    finally:
+        db_session.close()
+    
 
 @user_ctrl.route('/test-auth', methods=['POST'])
 def test_authentication():

@@ -3,41 +3,48 @@ function exit(){
     window.location.href = "/";
 }
 
+function closeAllModals() {
+    // Hide all modals
+    document.getElementById("modal").style.display = "none";
+    document.getElementById("login-modal").style.display = "none";
+    document.getElementById("register-modal").style.display = "none";
+    document.getElementById("LoginOrRegister").style.display = "none";
+}
+
 function openModal() {
-    document.getElementById("modal").style.display = "block"; // Megjeleníti a modált
+    closeAllModals(); // Close all modals first
+    document.getElementById("modal").style.display = "block"; // Show the default modal
 }
 
 function closeModal() {
-    document.getElementById("modal").style.display = "none"; // Elrejti a modált
+    closeAllModals(); // Close all modals
 }
 
 function openLoginModal() {
-    closeLogRegModal() 
-    document.getElementById("modal").style.display = "none"; 
-    document.getElementById("login-modal").style.display = "block"; // Megjeleníti a modált
+    closeAllModals(); // Close all modals first
+    document.getElementById("login-modal").style.display = "block"; // Show the login modal
 }
 
 function closeLoginModal() {
-    document.getElementById("login-modal").style.display = "none"; // Elrejti a modált
+    document.getElementById("login-modal").style.display = "none"; // Hide the login modal
 }
 
 function openRegisterModal() {
-    closeLogRegModal() 
-    document.getElementById("modal").style.display = "none"; 
-    document.getElementById("register-modal").style.display = "block"; // Megjeleníti a modált
+    closeAllModals(); // Close all modals first
+    document.getElementById("register-modal").style.display = "block"; // Show the register modal
 }
 
 function closeRegisterModal() {
-    document.getElementById("register-modal").style.display = "none"; // Elrejti a modált
+    document.getElementById("register-modal").style.display = "none"; // Hide the register modal
 }
 
 function openLogRegModal() {
-    document.getElementById("modal").style.display = "none"; 
-    document.getElementById("LoginOrRegister").style.display = "flex"; // Megjeleníti a modált
+    closeAllModals(); // Close all modals first
+    document.getElementById("LoginOrRegister").style.display = "flex"; // Show the login/register choice modal
 }
 
 function closeLogRegModal() {
-    document.getElementById("LoginOrRegister").style.display = "none"; // Elrejti a modált
+    document.getElementById("LoginOrRegister").style.display = "none"; // Hide the login/register choice modal
 }
 
 function toContact() {

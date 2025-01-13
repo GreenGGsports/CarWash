@@ -55,13 +55,17 @@ header{
 }
 
 .exit{
+    display: flex;
     height: 100%;
     width: 50%;
-    padding-top: 2%;
     padding-left: 10px;
 }
 
 .exitButton{
+    background-image: url("images/elit-logo.png");
+    background-size: contain; /* A kép arányosan kitölti a területet */
+    background-repeat: no-repeat; /* Nem ismétlődik a kép */
+    background-position: center; 
     height: 60px;
     width: 50%;
     background-color: #2D2D2D;
@@ -123,8 +127,8 @@ header{
     flex-direction: column;
     justify-content: space-between;
     cursor: pointer;
-    background-color: #161616;
-    border: 1px solid #161616;
+    border: none;
+    background: transparent;
   }
   
   .hamburger-menu span {
@@ -343,10 +347,10 @@ footer{
     .headerMobile {
         display: flex;
         justify-content: space-between; /* Elemek közötti tér */
-        align-items: center; /* Függőleges középre igazítás */
         padding: 0 5%; /* Fejléc belső margói */
         padding-right: 0%;
         height: 60px; /* Fejléc magassága */
+        padding-top: 30px;
     }
 
     .footerBox{

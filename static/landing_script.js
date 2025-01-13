@@ -40,5 +40,6 @@ jQuery(".property-slide").slick({
   });
   const urlParams = new URLSearchParams(window.location.search);
   if (urlParams.get('show_modal') === 'true') {
+    console.log("logreg modall called from landing script")
     openLogRegModal(); // Call the function to open the modal
   }

@@ -30,13 +30,26 @@ form {
     display: contents; /* vagy flex, attól függ, hogy hogyan szeretnéd kezelni a belső elemeket */
   }
 
-.headerDesktop{
+  .headerDesktop {
+    position: relative;
     background-image: url("images/Header.png");
     height: 70vh;
-    background-size:cover;
-    background-position: left center; 
+    background-size: cover;
+    background-position: left center;
 }
 
+.headerDesktop::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: inherit;
+    background-size: inherit;
+    opacity: 0.7; /* Change opacity here */
+    z-index: -1; /* Ensures the overlay stays behind the content */
+}
 .headerMobile{
   background-image: url("images/Header.png");
   height: 20vh;
@@ -132,7 +145,7 @@ body {
   display: flex;
   justify-content: center;
   font-family: 'NewScienceLight', sans-serif;
-  font-size: clamp(10px, 1vw, 20px);
+  font-size: clamp(15px, 1.5vw,30px);
   color: #E0E0E0 !important;
   text-align: center;
 }
@@ -205,7 +218,7 @@ body {
     display: flex;
     align-items: center;
     gap: 5px;
-    padding-bottom: 5x;
+    padding-bottom: 15px;
 }
 
 .helyszinikonKapcsolat{
