@@ -58,6 +58,7 @@ class ReservationForm(FlaskForm):
             self.company_name.data = obj.billing.company_name
             self.tax_ID.data = obj.billing.tax_ID
 
+        self.carwash.data = obj.carwash
         self.slot.data = obj.slot
         self.service.data = obj.service  # A service objektumot állítjuk be
         self.extras.data = obj.extras  # Az extras listát állítjuk be

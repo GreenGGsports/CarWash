@@ -1,0 +1,601 @@
+@font-face {
+    font-family: 'NewScienceLight';
+    src: url('fonts/fonnts.com-New_Science_Light.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+@font-face {
+    font-family: 'NewScienceLightExtended';
+    src: url('fonts/fonnts.com-New_Science_Light_Extended.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+@font-face {
+    font-family: 'NewScienceThin';
+    src: url('fonts/fonnts.com-New_Science_Thin_Extended.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+@font-face {
+    font-family: 'NewScienceMediumExtended';
+    src: url('fonts/fonnts.com-New_Science_Medium_Extended.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+.alcim{
+    font-weight: 500;
+      padding: 20px;
+      margin: 0%;
+      font-family: 'NewScienceMediumExtended', sans-serif;
+      font-size: clamp(20px, 2vw, 40px);
+      text-align: left;
+  }
+
+.radio{
+    display: none;
+}
+
+input[type="radio"]:checked + label .csomag_content {
+    background-color: #D5F048;
+    color: #161616;
+}
+
+input[type="radio"]:checked + .IdopontLabel {
+    background-color: #D5F048;
+    color: #161616;
+}
+
+.IdopontLabel{
+    background-color: #2D2D2D ;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border-radius: 2vh;
+    height: 10vh;
+    max-height: 40px;
+}
+
+.IdopontLabel.false {
+    background-color: #352222 ;
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+    }
+
+form {
+    display: contents; /* vagy flex, attól függ, hogy hogyan szeretnéd kezelni a belső elemeket */
+  }
+
+  input, textarea {
+    font-size: 16px;
+  }
+  
+html, body {
+    margin: 0;
+    padding: 0;
+    /* Center content horizontally */
+    overflow-x: hidden;
+    height: auto;
+    
+}
+body {
+    background-color: #161616;
+    color: #E0E0E0;
+    padding-left: 10%;
+    font-family: 'New Science', sans-serif;  /* Set the font */
+    font-weight: 600;     
+}
+
+header{
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.exit{
+    height: 100%;
+    width: 50%
+}
+
+.exitButton{
+    height: 60px;
+    width: 50%;
+    background-color: #2D2D2D;
+    border: 1px solid #161616;
+}
+
+.FoglalasiFelulet{
+    padding-bottom: 20px;
+}
+
+.focim{
+    text-align: center;
+}
+
+.FoglalasBox{
+    display: flex;
+    flex-direction: column;
+    border: 2px solid white;
+    border-right: none;
+    border-top-left-radius: 3vw; 
+    border-bottom-left-radius: 3vw;
+    padding-left: 3%;
+    padding-bottom: 3%;
+    padding-top: 2%;
+    margin-bottom: 40px;
+}
+
+.locationBox{
+    display: grid;
+    grid-template-columns:1fr 1fr 1fr 1fr;
+    gap: 2%;
+    max-width: 1500px;
+}
+
+.keret{
+    background-color: #2D2D2D;
+    border: 2px solid #161616;
+    width: 18vw;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px; 
+    max-width: 400px;
+    max-height: 300px;
+    color: #E0E0E0;
+}
+
+.keret.selected {
+    background-color: #D5F048;
+    color: #161616;
+}
+
+.helyszinkep{
+    width: 30%;
+    height: 20%;
+    background-color: #161616;
+}
+
+.helyszinikon{
+    margin:10%;
+    height: 30%;
+}
+.serviceBox{
+    display: flex;
+    gap: 2%;
+    overflow-x: auto; /* Oldalirányú görgetés a konténeren belül */
+    scroll-snap-type: x mandatory; /* A görgetés "összefogása" */
+    scrollbar-width: none;
+}
+
+.serviceKeret{
+    width: 16%;
+    flex-shrink: 0; /* Ne zsugorodjon össze */
+    scroll-snap-align: start; /* Az elem illeszkedjen a görgetéshez */
+    transition: all 0.3s ease;
+    background-color: inherit !important;
+}
+
+.csomag_meret {   
+    font-family: 'New Science', sans-serif;  /* Set the font */
+    font-weight: 700;         /* Set the font weight */
+    font-size: 200%;          /* Set the font size */
+    text-align: center;       /* Center align the text */
+  }
+
+.csomag_content{
+    background-color: #2D2D2D;
+    color: #E0E0E0;
+    border-radius: 20px;
+    font-family: 'New Science', sans-serif;  /* Set the font */
+    font-weight: 700;    
+    padding-bottom: 10%; 
+}
+
+.csomag_nev{
+    font-size: 110%;
+    padding-bottom: 5%;
+    padding-left: 5%;
+}
+.meret_leiras{    /* Set the width */           
+    font-family: 'New Science', sans-serif;  /* Set the font */
+    font-weight: 10;         /* Set the font weight */
+    font-size: 100%;          /* Set the font size */
+    text-align: center;   
+}
+.csomag_ar {    /* Set the width */           
+    font-family: 'New Science', sans-serif;  /* Set the font */
+    font-weight: 500;         /* Set the font weight */
+    font-size: 150%;          /* Set the font size */    /* Set the line height */
+    text-align: center;    
+}
+
+.meret_box{
+    padding-top: 10%;
+}
+
+.box2{
+    display: grid;
+    grid-template-columns: 1fr 1.3fr; 
+    padding-bottom: 2%;
+    height: 100%;
+}
+
+.keret2{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 10px; /* Távolság a tartalom elemei között */
+}
+.extraBox{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5%;
+    gap: 20px; 
+    grid-column-gap: 10px;
+    height: auto;
+}
+
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff; /* Fehér szöveg */
+  }
+  
+  .custom-checkbox input {
+    display: none; /* Az alapértelmezett checkbox elrejtése */
+  }
+  
+  .custom-checkbox span {
+    width: 30px;
+    height: 30px;
+    border: 2px solid #3a3a3a; /* Szürke szegély */
+    display: inline-block;
+    border-radius: 4px; /* Enyhén lekerekített sarkok */
+    margin-right: 10px; /* Távolság a szövegtől */
+    background-color: transparent;
+    position: relative;
+    margin-right: 5%;
+  }
+  
+  .custom-checkbox input:checked + span {
+    background-color: #D5F048; /* Zöld háttérszín */
+    border-color: #D5F048; /* Zöld szegély */
+  }
+  
+  .custom-checkbox input:checked + span::after {
+    content: "✔"; /* Pipa jel hozzáadása */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+    color: black; /* Fekete pipa */
+  }
+
+.custom-checkbox.isIncluded  span {
+    background-color: #D5F048; /* Zöld háttérszín */
+    border-color: #D5F048; /* Zöld szegély */
+}
+
+.custom-checkbox.isIncluded span::after {
+    content: "✔"; /* Pipa jel hozzáadása */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+    color: black; /* Fekete pipa */
+}
+
+.custom-checkbox.no_select {
+    opacity: 0.5; /* Make the label appear disabled */
+    pointer-events: none; /* Disable any interaction with the label */
+}
+
+.custom-checkbox.isIncluded {
+    pointer-events: none; /* Disable any interaction with the label */
+}
+
+.info{
+    color: #E0E0E0;        /* Set the width */           
+    font-family: 'New Science', sans-serif;  /* Set the font */
+    font-weight: 500;         /* Set the font weight */
+    font-size: 100%;          /* Set the font size */    /* Set the line height */
+    text-align: left;    
+    width: 70%;
+    padding-top: 10px; 
+}
+.date-container {
+    position: relative;
+    display: inline-block;
+    justify-content: center;
+  }
+
+.date-selector {
+    background-color: #2D2D2D; /* Dark input background */
+    color: #ffffff; /* White text */
+    padding: 10px;
+    border: 1px solid #161616;
+    border-radius: 20px;
+    font-size: 1rem;
+    outline: none;
+    width: 200px;
+  }
+
+.keret3{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100%;
+}
+
+.inputContaner{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: auto;
+}
+
+.inputBoxInner{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    
+}
+.inputBox.hidden{
+    display: none;
+}
+.input-keret{
+    display: flex;
+    flex-direction: column;
+}
+.inputBox {
+    display: flex;
+    flex-direction: column;
+    width: 95%; /* Automatikusan igazodik a tartalom szélességéhez */
+    height: fit-content; /* Automatikusan igazodik a tartalom magasságához */
+    padding: 0; /* Extra üres hely eltávolítása */
+    margin: 0; /* Extra külső hely eltávolítása */
+    max-width: 800px;
+}
+
+.input-mezo{
+    display: flex;
+    background-color: #2D2D2D;
+    height: 40px;
+    width: 100%;
+    border-radius: 20px;
+    border: 1px solid #161616;
+    padding-left: 7.5%;
+    color: #E0E0E0;
+    box-sizing: border-box; /* Egységes dobozmodell */
+    appearance: none; /* Böngésző-specifikus stílusok kikapcsolása */
+}
+.input-label{
+    display: flex;
+    padding-bottom: 2%;
+}
+.Wrapper {
+    display: flex;
+    justify-content: center; /* Vízszintes középre helyezés */
+    align-items: center;    /* Függőleges középre helyezés */      /* Az egész képernyő magassága */
+}
+.Foglalas {
+    display: flex;
+    height: 40px;
+    width: 25%;
+}
+
+.priceTitle{
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+}
+
+.finalprcie{
+    font-weight: bold;
+}
+
+.FoglalasButton {
+    width: 100%; /* Kitölti a szülő teljes szélességét */
+    height: 100%; /* Kitölti a szülő teljes magasságát */
+    background-color: #D5F048;
+    border-radius: 20px;
+    border: none; /* Opció: eltünteti a gomb alapértelmezett keretét */
+    cursor: pointer; /* Mutatja, hogy kattintható */
+    font-size: 16px;
+    text-align: center;
+}
+
+.GombBox{
+    display:grid;
+    padding: 5%;
+    padding-top: 50px;
+    grid-template-columns: 1fr 1fr;
+    align-content: flex-start;
+    gap: 10px;
+    height: 100%;
+}
+
+.megjegyzes{
+    display: flex;
+    background-color: #2D2D2D;
+    border: 1px solid #161616;
+    border-radius: 5vh;
+    min-height: 200px;
+    height: 50%;
+    width: 90%;
+    resize: none;
+    text-align: left;
+    color: #E0E0E0;
+    padding: 10px;
+    justify-content: flex-start; /* Aligns content at the top vertically */
+    align-items: flex-start; /* Aligns content to the left horizontally */
+}
+
+.ConfirmModal{
+    top: 25vh;
+    left: 30vw;
+    width: 40%;
+    height: 50%;
+    background-color: #2D2D2D; /* Sötét áttetsző háttér */
+    border-radius: 20px
+}
+.ConfirmModal{
+    padding:30px;
+    position: fixed;
+    z-index: 1000; /* Az összes tartalom fölött jelenjen meg */
+    overflow: hidden;
+    display:none;
+    flex-direction: column;
+    align-items:center;
+}
+
+.ConfirmModalContent{
+  display:flex;
+  align-items: center;
+  font-family: "NewScienceLight";
+  flex-direction:column;
+  width: 50%;
+  height: 100%;
+  font-weight: 100;
+}
+.ConfirmTitle{
+    display: flex;
+    font-size: large;
+    height: 10vh;
+    align-items: center;
+    justify-content: center;
+}
+.Check{
+    background-color: #2D2D2D;
+}
+.ConfirmCheck{}
+
+body{
+  background-color:#161616;
+}
+
+
+#close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #E0E0E0;
+}
+/* Error handling */
+.error{
+    background-color: red;
+    border-radius: 3px solid red;
+}
+/* Mobil nézet */
+@media (max-width: 768px) {
+    body {
+        padding-left: 0%;
+        padding: 5%;
+    }
+    .serviceKeret{
+        width: 70%;
+    }
+    .locationBox{
+        display: grid;
+        grid-template-columns:1fr 1fr;
+        gap: 2%;
+    }
+
+    .Foglalas{
+        width: 50%;
+    }
+    .FoglalasBox{
+        border: none;
+        border-right: none;
+        padding-left: none;
+        padding-top: 20px;
+        padding-bottom: 0%;
+        margin-bottom: 0px;
+    }
+    .extraBox{
+        display: grid;
+        grid-template-columns: 1fr  1fr;
+        gap: 3px;
+        grid-row-gap: 20px;
+    }
+    .box2{
+        display: grid;
+        grid-template-columns: 1fr ; 
+    }
+
+    .keret3{
+        grid-template-columns: 1fr;
+    }
+    .date-container {
+        text-align: center;
+    }
+    .info{
+        width: 90%;
+        text-align: left;
+    }
+
+    .inputContaner{
+        grid-template-columns: 1fr;
+    }
+
+    .inputBoxInner{
+        grid-template-columns: 1fr;
+    }
+
+    .input-mezo{
+        justify-content: center;
+        align-items: center;
+    }
+
+    .input-keret{
+        text-align: left;
+    } 
+
+    .keret{
+        width: 40vw;
+    }
+
+    .ConfirmModal{
+        top: 25vh;
+        left: 10vw;
+        width: 80%;
+        height: auto;
+        background-color: #2D2D2D; /* Sötét áttetsző háttér */
+    }
+
+    .ConfirmModalContent{
+        width: 90%;
+        text-align: center;
+    }
+
+    .ConfirmModal{
+        padding:0px;
+        padding-top: 10%;
+        padding-bottom: 10%;
+    }
+
+    #close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 35px;
+    }
+
+    .Wrapper {
+        margin-top:20px
+    }
+
+    .alcim{
+        font-weight: 500;
+          padding: 10px;
+        }
+}
