@@ -153,6 +153,7 @@ class ReservationAdminView(MyModelView):
         if form.data.get('billing_required', False):
             billing_data = BillingData.parseForm(form.data)
             create_billing(
+                session=form.session,
                 reservation=reservation,
                 billing_data=billing_data
                 )
