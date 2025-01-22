@@ -1,7 +1,8 @@
-from flask import Blueprint, request, jsonify, current_app, render_template, session, redirect, url_for
+from flask import flash,Blueprint, request, jsonify, current_app, render_template, session, redirect, url_for
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_principal import Principal, Identity, RoleNeed, UserNeed, identity_changed, identity_loaded
 from src.models.user_model import UserModel
+
 
 user_ctrl = Blueprint('user_ctrl', __name__, url_prefix='/user')
 
@@ -73,6 +74,7 @@ def login():
             return jsonify({'status': 'logged_in', 'redirect_url': redirect_url})
         
         # Hibás hitelesítés esetén
+        current_app.logger.info('Login failed Invalid username or password')
         return jsonify({'status': 'failed', 'message': 'Invalid username or password'}), 401
     
     except Exception as e:
@@ -92,23 +94,52 @@ def logout():
 
 @user_ctrl.route('/add_user', methods=['POST'])
 def add_user():
+    if not current_user.is_authenticated:
+        return jsonify({'status': 'failed', 'message': 'Authentication required'}), 401
+
+    if current_user.role != 'developer':
+        return jsonify({'status': 'failed', 'message': 'Unauthorized action'}), 403
+
     db_session = current_app.session_factory.get_session()
     try:
+        # Validate input
         data = request.json
         user_name = data.get('user_name')
         password = data.get('password')
         role = data.get('role', 'user')
         carwash_id = data.get('carwash_id') if role == 'local_admin' else None
-        if not UserModel.check_name_taken(session=db_session, user_name=user_name):
-            UserModel.add_user(session=db_session, user_name=user_name, password=password, role=role, carwash_id=carwash_id)
-            return jsonify({'status': 'success'})
-        return jsonify({'status': 'failed'})
+
+        if not user_name or not password:
+            return jsonify({'status': 'failed', 'message': 'Missing required fields'}), 400
+        
+        # Enforce role validation
+        allowed_roles = {'user', 'local_admin','admin'}
+        if role not in allowed_roles:
+            return jsonify({'status': 'failed', 'message': 'Invalid role'}), 400
+
+        # Check if username is already taken
+        if UserModel.check_name_taken(session=db_session, user_name=user_name):
+            return jsonify({'status': 'failed', 'message': 'Username already exists'}), 409
+        
+        # Add user
+        UserModel.add_user(
+            session=db_session,
+            user_name=user_name,
+            password=password,
+            role=role,
+            carwash_id=carwash_id,
+        )
+
+        return jsonify({'status': 'success'}), 201
+
     except Exception as e:
         db_session.rollback()
-        current_app.logger.error(e)
+        current_app.logger.error(f"Error adding user: {e}")
+        return jsonify({'status': 'failed', 'message': 'Internal server error'}), 500
+
     finally:
         db_session.close()
-        
+
 
 @user_ctrl.route('/register', methods=['POST'])      
 def register():

@@ -29,7 +29,7 @@ def show_carwash_sites(site_name):
         services = db_session.query(ServiceModel).filter_by(carwash_id=carwash_id).all()
         extras = db_session.query(ExtraModel).filter_by(carwash_id=carwash_id).all()
         service_data, extra_names_out, extra_names_in = get_service_data(carwash_id)
-        return render_template('Carwash_sites.html', location=location, service_data=service_data, extra_names_out=extra_names_out, extra_names_in=extra_names_in)
+        return render_template('Carwash_sites.html', location=location, service_data=service_data, extra_names_out=extra_names_out, extra_names_in=extra_names_in, extras = extras)
 
     except Exception as e:
         current_app.logger.error(f"An error occurred: {e}")

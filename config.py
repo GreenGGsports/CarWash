@@ -9,10 +9,13 @@ class Config:
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(os.getcwd(), 'db', 'car_wash.db')
     LOG_LEVEL = 'DEBUG'
     
+    DEVELOPER_USERNAME = os.getenv('DEVELOPER_USERNAME')
+    DEVELOPER_PASSWORD = os.getenv('DEVELOPER_PASSWORD')
+    
 class DevelopmentConfig(Config):
     DEBUG = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    LOG_LEVEL = 'DEBUG'
+    LOG_LEVEL = 'INFO'
     
 class DeploymentConfig(Config):
     DEBUG = True

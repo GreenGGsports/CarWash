@@ -24,6 +24,27 @@ from src.controllers.helix_api import helix_api
 from logger import setup_logging
 from database import check_database_connection
 
+def add_default_user(app):
+    session = current_app.session_factory.get_session()
+    default_user = app.config.get("DEVELOPER_USERNAME")
+    default_pwd = app.config.get("DEVELOPER_PASSWORD")
+
+    if not default_user or not default_pwd:
+        app.logger.error("Default user credentials are not set in the configuration.")
+        return
+
+    existing_user = session.query(UserModel).filter_by(user_name=default_user).first()
+    if not existing_user:
+        UserModel.add_user(
+            session=session,
+            user_name=default_user,
+            password=default_pwd,
+            role="developer"
+        )
+        app.logger.info(f"Default user '{default_user}' added.")
+    else:
+        app.logger.info(f"Default user '{default_user}' already exists.")
+
 def create_app(config_name: str):
     app = Flask(__name__)
     
@@ -46,7 +67,7 @@ def create_app(config_name: str):
     
     session_factory = SessionFactory(engine)
     app.session_factory = session_factory
-        
+    
     @app.teardown_request
     def teardown_request(exception=None):
         current_app.session_factory.remove(exception)
@@ -58,6 +79,7 @@ def create_app(config_name: str):
         init_admin(app, session_factory)
         init_local_admin(app, session_factory)
         init_developer_admin(app, session_factory)
+        add_default_user(app)
         
     init_login_manager(app)
     init_principal(app)  # Ensure this is called
