@@ -154,6 +154,15 @@ body {
     align-items: center;
 }
 
+.extratype2{
+    display: flex;
+    height: 30px;
+    font-size: clamp(16px, 1.5vw, 25px);
+    align-items: center;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
 .servicename{
     display: flex;
     height: 30px;

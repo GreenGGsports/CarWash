@@ -271,14 +271,28 @@
         <div class="KozmetikaCim">Extrák</div>
         <div class="kozmetikaContainer">
         <div class="extraContainer">
+            <div class="extratype2">Belső</div>
             {% for extra in extras %}
             {% if extra.user_select %}
-            <div class="kozmetikaReszlet">
-                <div class="kozmetikaElem">{{ extra.service_name }}</div>
-                <div class="kozmetikaÁr">{{ extra.price }} Ft</div>   
-            </div>
+                {% if extra.extra_type == "interior" %}
+                <div class="kozmetikaReszlet">
+                    <div class="kozmetikaElem">{{ extra.service_name }}</div>
+                    <div class="kozmetikaÁr">{{ extra.price }} Ft</div>   
+                </div>
+                {% endif %}
             {% endif %}
-        {% endfor %}
+            {% endfor %}
+            <div class="extratype2">Külső</div>
+            {% for extra in extras %}
+            {% if extra.user_select %}
+                {% if extra.extra_type == "exterior" %}
+                <div class="kozmetikaReszlet">
+                    <div class="kozmetikaElem">{{ extra.service_name }}</div>
+                    <div class="kozmetikaÁr">{{ extra.price }} Ft</div>   
+                </div>
+                {% endif %}
+            {% endif %}
+            {% endfor %}
     </div>   
 </div> 
 </div>  
