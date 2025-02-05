@@ -148,6 +148,7 @@ body {
     align-items: center;
 }
 .extratype{
+    padding-top: 20px;
     display: flex;
     height: 30px;
     font-size: clamp(13px, 1.2vw, 25px);
@@ -169,6 +170,7 @@ body {
     font-size: clamp(13px, 1.2vw, 25px);
     align-items: center;
     justify-content: center;
+    padding-top: 20px;
 }
 
 .extracontent[data-included="True"]::after {
