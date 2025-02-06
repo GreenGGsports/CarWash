@@ -38,6 +38,23 @@ form {
     background-position: left center;
 }
 
+.elitlogo{
+  display:  flex;
+  background-image: url("images/elit-logo.png");
+  background-size: contain; /* A kép arányosan kitölti a területet */
+  background-repeat: no-repeat; /* Nem ismétlődik a kép */
+  height: 100%;
+  width: 100%;
+}
+
+.logoContainer{
+  display: flex;
+  justify-content: center;
+  width: 500px;
+  height: 150px;
+  padding: 10px;
+}
+
 .headerDesktop::after {
     content: '';
     position: absolute;
@@ -93,7 +110,6 @@ body {
     width: 100%;
     height: auto;
     object-fit: contain;
-    background-color: #161616;
 }
 
 .helyszinikon{
@@ -124,14 +140,12 @@ body {
     display: flex;
     height: clamp(40px,10vw,100px);
     width: clamp(60px,15vw,150px);
-    background-color: #161616;
 }
 
 .helyszinikonContainer{
     display: flex;
     height: 20px;
     width: 20px;
-    background-color: #161616;
     justify-content: center;
 }
 
@@ -260,6 +274,10 @@ body {
 
     .locationBox{
       width: 90%;
+    }
+
+    .logoContainer{
+      width: 30%;
     }
 }
 

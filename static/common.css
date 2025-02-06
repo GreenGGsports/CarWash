@@ -59,6 +59,7 @@ header{
     height: 100%;
     width: 50%;
     padding-left: 10px;
+    padding-top: 2%;
 }
 
 .exitButton{
@@ -68,22 +69,42 @@ header{
     background-position: center; 
     height: 60px;
     width: 50%;
-    background-color: #2D2D2D;
-    border: 1px solid #161616;
+    background-color: transparent;
+    border: none;
     max-width: 120px;
 }
 .headerDesktop{
     font-family: 'NewScienceLight';
     display: flex;
+    justify-content: right;
     flex-direction: row;
     padding-right: 5%;
 }
+.elitlogo{
+    display:  flex;
+    background: none;
+    background-image: url("images/elit-logo2.png");
+    background-size: contain; /* A kép arányosan kitölti a területet */
+    background-repeat: no-repeat; /* Nem ismétlődik a kép */
+    height: 100%;
+    width: 100%;
+    border: none;
+  }
+  
+  .logoContainer{
+    display: flex;
+    justify-content: center;
+    width: 500px;
+    height: 150px;
+    padding: 10px;
+    border: none;
+  }
 
 .headerButtonBox {
     padding-top: 2%;
     display: flex;
     flex-direction: row;
-    width: 90%;
+    width: 100%;
 }
 
 .headerButtonwrapper{
@@ -351,7 +372,6 @@ footer{
     .headerMobile {
         display: flex;
         justify-content: space-between; /* Elemek közötti tér */
-        padding: 0 5%; /* Fejléc belső margói */
         padding-right: 0%;
         height: 60px; /* Fejléc magassága */
         padding-top: 30px;
@@ -383,5 +403,9 @@ footer{
 
     .szlogen{
         width: 80%;
+    }
+
+    .logoContainer{
+        width: 30%;
     }
 }

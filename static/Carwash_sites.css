@@ -40,6 +40,18 @@ body {
     padding: 20px;
 }
 
+.helyszinkep{
+    display: flex;
+    justify-content: center;
+    height: 50%;
+    width: 50%;
+}
+
+.locationLogo{
+    display: flex;
+    justify-content: center;
+}
+
 .kozmetika{
     display: flex;
     flex-direction: column;
@@ -245,7 +257,7 @@ body {
 }
 
 .priceContainer{
-    padding-top: 5px;
+    padding-top: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;

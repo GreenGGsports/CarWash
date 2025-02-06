@@ -12,37 +12,37 @@
 <body>
     <header>
         <div class="headerDesktop">
-        <div class="exit">
-            <button onclick = "exit()" class="exitButton"></button>
-        </div>
-        <div class="headerButtonBox">
-            <div class="headerButtonwrapper">
-                <button onclick="openLoginModal()" class="headerButton">Bejelentkezés</button>
+            <div class="headerButtonBox">
+                <div class="logoContainer">
+                    <button onclick = "exit()" class="elitlogo"></button>
+                </div>
+                <div class="headerButtonwrapper">
+                    <button onclick="openLoginModal()" class="headerButton">Bejelentkezés</button>
+                </div>
+                <div class="headerButtonwrapper">
+                    <button onclick="toPrices()" class="headerButton">Árlisták</button>
+                </div>
+                <div class="headerButtonwrapper">
+                    <button onclick="toGallery()" class="headerButton">Galéria</button>
+                </div>
+                <div class="headerButtonwrapper">
+                    <button onclick="toContact()" class="headerButton">Kapcsolat</button>
+                </div>
+                <div class="headerButtonwrapper">
+                    <button onclick="toReservation()" class="headerButtonSelected">Online időpontFoglalás</button>
+                </div>
             </div>
-            <div class="headerButtonwrapper">
-                <button onclick="toPrices()" class="headerButton">Árlisták</button>
             </div>
-            <div class="headerButtonwrapper">
-                <button onclick="toGallery()" class="headerButton">Galéria</button>
+            <div class="headerMobile">
+                <div class="logoContainer">
+                    <button onclick = "exit()" class="elitlogo"></button>
+                </div>
+                <button onclick="openModal()" class="hamburger-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
-            <div class="headerButtonwrapper">
-                <button onclick="toContact()" class="headerButton">Kapcsolat</button>
-            </div>
-            <div class="headerButtonwrapper">
-                <button onclick="toReservation()" class="headerButtonSelected">Online időpontFoglalás</button>
-            </div>
-        </div>
-        </div>
-        <div class="headerMobile">
-            <div class="exit">
-                <button onclick = "exit()" class="exitButton"></button>
-            </div>
-            <button onclick="openModal()" class="hamburger-menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
     </header>
     <div class="FoglalasiFelulet">
         <h1 class="focim">Online Időpontfoglalás</h1>  
