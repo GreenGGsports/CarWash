@@ -16,10 +16,11 @@ class InvoiceModelView(MyModelView):
         'tax_ID': 'Adószám',
         'company_name': 'Cégnév',
         'reservation.payment_method': 'Fizetési mód',
-        'reservation.final_price': 'Összeg,'
+        'reservation.final_price': 'Összeg,',
+        'reservation.carwash.carwash_name': 'Hely'
     }
 
-    column_list = ['reservation.reservation_date','reservation.car.license_plate', 'name', 'address', 'email','company_name', 'tax_ID','reservation.payment_method' ,'reservation.final_price']
+    column_list = ['reservation.carwash.carwash_name','reservation.reservation_date','reservation.car.license_plate', 'name', 'address', 'email','company_name', 'tax_ID','reservation.payment_method' ,'reservation.final_price']
     
     column_default_sort = ('reservation.reservation_date', True)
 
@@ -27,7 +28,8 @@ class InvoiceModelView(MyModelView):
         DateBetweenFilter(BillingModel.reservation.property.mapper.class_.reservation_date, 'Custom date'),
         'reservation.car.license_plate',
         'company_name',
-        'reservation.payment_method'
+        'reservation.payment_method',
+        'reservation.carwash.carwash_name'
     ]
     def is_accessible(self):
         # Ellenőrizzük, hogy a felhasználó be van-e jelentkezve és admin szerepe van-e
