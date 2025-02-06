@@ -94,19 +94,3 @@ class ReservationForm(FlaskForm):
     company_name = StringField('Cégnév')
     tax_ID = StringField('Adószám')
 
-    def validate(self):
-        if not super().validate():
-            return False
-
-        if self.billing_required.data:  # Csak akkor ellenőrizzük, ha be van pipálva
-            if not self.billing_name.data:
-                self.billing_name.errors.append('Kötelező megadni a nevet a számlához.')
-                return False
-            if not self.address.data:
-                self.address.errors.append('Kötelező megadni a címet a számlához.')
-                return False
-            if not self.email.data:
-                self.email.errors.append('Kötelező megadni az e-mail címet a számlához.')
-                return False
-
-        return True
