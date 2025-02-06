@@ -8,7 +8,7 @@ class BillingModel(BaseModel):
     __tablename__ = 'Billing'
     
     id = Column(Integer, primary_key=True)
-    name = Column(String(50), nullable= False)
+    name = Column(String(100), nullable= False)
     address = Column(String(256),nullable=False)
     email = Column(String(64),nullable=False)
     reservation_id = Column(Integer, ForeignKey('Reservation.id'),nullable=False)
