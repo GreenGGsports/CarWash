@@ -1,4 +1,5 @@
 from flask import Blueprint, request, jsonify, current_app, render_template, url_for, redirect
+import os
 from src.models.carwash_model import CarWashModel
 from src.models.service_model import ServiceModel
 from src.models.extra_model import ExtraModel
@@ -9,7 +10,9 @@ def home():
     try:
         db_session = current_app.session_factory.get_session()
         locations = db_session.query(CarWashModel).all()
-        return render_template('Landing_page.html', locations=locations)
+        image_folder = 'static/images/galery'
+        image_files = [f for f in os.listdir(image_folder) if f.endswith(('jpg', 'jpeg', 'png', 'gif'))]
+        return render_template('Landing_page.html', locations=locations, image_files=image_files)
     except Exception as e:
         current_app.logger.error(f"An error occurred: {e}")
         return render_template("500.html", message="An internal error occurred"), 500

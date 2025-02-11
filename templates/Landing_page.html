@@ -93,36 +93,17 @@
         <div class="container">
           <div class="property-wrapper">
             <div class="property-slide">
-              <div class="property-item">
+              {% for image in image_files %}
+                <div class="property-item">
                   <div class="property-img">
-                    <img src="static/images/gallery1.png"  />
+                    <img src="{{ url_for('static', filename='images/galery/' + image) }}" alt="{{ image }}" />
                   </div>
-              </div>
-              <div class="property-item">
-                  <div class="property-img">
-                    <img src="static/images/gallery2.png"  />
-                  </div>
-              </div>
-              <div class="property-item">
-                  <div class="property-img">
-                    <img src="static/images/gallery3.png"  />
-                  </div>
-              </div>
-              <div class="property-item">
-                  <div class="property-img">
-                    <img src="static/images/gallery4.png"  />
-                  </div>
-              </div>
-              <div class="property-item">
-                  <div class="property-img">
-                    <img src="static/images/gallery6.png"  />
-                  </div>
-              </div>
+                </div>
+              {% endfor %}
             </div>
           </div>
         </div>
       </div>
-    </div>  
     <h2 id="ContactCim" class="alcim">Kapcsolat</h2>
     <div class = "KapcsolatOuterContainer">
         <div class="KapcsolatBox">
