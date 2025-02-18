@@ -11,7 +11,9 @@ def home():
         db_session = current_app.session_factory.get_session()
         locations = db_session.query(CarWashModel).all()
         image_folder = 'static/images/galery'
-        image_files = [f for f in os.listdir(image_folder) if f.endswith(('jpg', 'jpeg', 'png', 'gif'))]
+        image_files = sorted([f for f in os.listdir(image_folder) if f.lower().endswith(('jpg', 'jpeg', 'png', 'gif'))],
+        key=lambda x: int(x.split('.')[0]))
+
         return render_template('Landing_page.html', locations=locations, image_files=image_files)
     except Exception as e:
         current_app.logger.error(f"An error occurred: {e}")
