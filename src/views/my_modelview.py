@@ -147,6 +147,8 @@ class MyModelView(ModelView):
         """
         Exportálja az aktuális szűrt adatokat CSV formátumban.
         """
+        flash('Export jelenleg nem elérhető.', 'warning')
+        return redirect(url_for('.index_view'))
         try:
             # Aktuális lekérdezés
             query = self.get_query()
