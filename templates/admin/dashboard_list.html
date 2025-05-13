@@ -219,55 +219,63 @@
             };
     
             // Heti összesítés
-            function aggregateWeekly(data) {
-                let weeklyData = { dates: [], revenues: [] };
-                let tempSum = 0;
-                let count = 0;
-    
-                data.dates.forEach((date, index) => {
-                    tempSum += data.revenues[index];
-                    count++;
-    
-                    if (count === 7 || index === data.dates.length - 1) {
-                        weeklyData.dates.push(date); // A hét utolsó napja
-                        weeklyData.revenues.push(tempSum / count); // Heti átlag
-                        tempSum = 0;
-                        count = 0;
-                    }
-                });
-    
-                return weeklyData;
+    function aggregateWeekly(data) {
+        let weeklyData = { dates: [], revenues: [] };
+        let tempSum = 0;
+        let count = 0;
+
+        data.dates.forEach((date, index) => {
+            tempSum += data.revenues[index];
+            count++;
+
+            // Push the weekly data at the end of every 7-day period
+            if (count === 7 || index === data.dates.length - 1) {
+                weeklyData.dates.push(date); // Last date of the week
+                weeklyData.revenues.push(tempSum / count); // Weekly average
+
+                // Reset for next week
+                tempSum = 0;
+                count = 0;
             }
-    
+        });
+
+        return weeklyData;
+    }
+        
             // Havi összesítés
-            function aggregateMonthly(data) {
-                let monthlyData = { dates: [], revenues: [] };
-                let tempSum = 0;
-                let count = 0;
-                let currentMonth = new Date(data.dates[0]).getMonth();
-    
-                data.dates.forEach((date, index) => {
-                    let dateObj = new Date(date);
-                    if (dateObj.getMonth() === currentMonth) {
-                        tempSum += data.revenues[index];
-                        count++;
-                    } else {
-                        monthlyData.dates.push(new Date(data.dates[index - 1]).toISOString().substring(0, 7)); // Hónap utolsó napja
-                        monthlyData.revenues.push(tempSum / count); // Havi átlag
-                        tempSum = data.revenues[index]; // Kezdjük az új hónapot
-                        count = 1;
-                        currentMonth = dateObj.getMonth();
-                    }
-                    // Utolsó hónap hozzáadása
-                    if (index === data.dates.length - 1) {
-                        monthlyData.dates.push(dateObj.toISOString().substring(0, 7));
-                        monthlyData.revenues.push(tempSum / count);
-                    }
-                });
-    
-                return monthlyData;
+    function aggregateMonthly(data) {
+        let monthlyData = { dates: [], revenues: [] };
+        let tempSum = 0;
+        let count = 0;
+        let currentMonth = new Date(data.dates[0]).getMonth();
+        let lastDate = new Date(data.dates[0]);
+
+        data.dates.forEach((date, index) => {
+            let dateObj = new Date(date);
+            if (dateObj.getMonth() === currentMonth) {
+                tempSum += data.revenues[index];
+                count++;
+            } else {
+                // Store the previous month's data
+                monthlyData.dates.push(lastDate.toISOString().substring(0, 7)); // Last date of the previous month
+                monthlyData.revenues.push(tempSum / count); // Monthly average
+                tempSum = data.revenues[index]; // Start a new month
+                count = 1;
+                currentMonth = dateObj.getMonth();
             }
-    
+            lastDate = dateObj; // Keep track of the last date for the current month
+
+            // Ensure the last month's data is added after the loop
+            if (index === data.dates.length - 1) {
+                monthlyData.dates.push(lastDate.toISOString().substring(0, 7)); // Last date of the last month
+                monthlyData.revenues.push(tempSum / count);
+            }
+        });
+
+        return monthlyData;
+    }
+
+
             // Grafikon inicializálása
             const ctx = document.getElementById('revenueChart').getContext('2d');
             let chart = new Chart(ctx, {
