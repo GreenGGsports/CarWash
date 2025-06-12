@@ -6,7 +6,7 @@ from flask import current_app
 from src.views.filters import ThisMonthFilter, ThisWeekFilter, TodayFilter
 from flask_admin.contrib.sqla.filters import DateBetweenFilter
 from sqlalchemy import func
-from datetime import datetime
+from datetime import datetime, time
 class Dashboard(MyModelView):
     create_template = 'admin/reservation_form.html'
     list_template = 'admin/dashboard_list.html'
@@ -86,7 +86,11 @@ class Dashboard(MyModelView):
         dates = [result[0] for result in results] 
         revenues = [result[1] if result[1] is not None else 0 for result in results] 
 
-        dates = [datetime.strptime(date, '%Y-%m-%d') for date in dates]
+        dates = [
+            datetime.strptime(d, '%Y-%m-%d') if isinstance(d, str)
+            else datetime.combine(d, time.min)  # if it's already a date
+            for d in dates
+        ]
         return dates, revenues
     
     

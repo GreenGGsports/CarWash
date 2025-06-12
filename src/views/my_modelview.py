@@ -147,6 +147,8 @@ class MyModelView(ModelView):
         """
         Exportálja az aktuális szűrt adatokat CSV formátumban.
         """
+        flash('Export jelenleg nem elérhető.', 'warning')
+        return redirect(url_for('.index_view'))
         try:
             # Aktuális lekérdezés
             query = self.get_query()
@@ -192,7 +194,7 @@ class MyModelView(ModelView):
             output.seek(0)  # Visszaállítjuk az olvasási pozíciót
             csv_data = output.getvalue()  # CSV tartalom karakterláncként
             # Encode-olás ISO-8859-2 kódolással
-            response = Response(csv_data.encode('iso-8859-2'), mimetype='text/csv')
+            response = Response(csv_data.encode('utf-8'), mimetype='text/csv; charset=utf-8')
             response.headers['Content-Disposition'] = 'attachment; filename=export.csv'
             return response
 

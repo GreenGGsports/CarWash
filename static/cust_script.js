@@ -241,6 +241,8 @@ function openReservationModal(data) {
 
 function CloseReservationModal() {
     document.getElementById("ConfirmModal").style.display = "none"; // Megjeleníti a modált
+    const today = new Date().toISOString().split('T')[0]; // format: 'YYYY-MM-DD'
+    sendDateToServer(today);
 }
 async function checkIncludedExtras(service_id)
 {

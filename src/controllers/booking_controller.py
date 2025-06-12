@@ -23,19 +23,16 @@ def get_available_slots(db_session: Session, date: datetime, carwash_id: int) ->
                 SlotLockModel.reservation_date == date,
                 SlotLockModel.locked_until > datetime.now()  # Még érvényben lévő zárolás
             ).first()
-
-            if existing_lock:
-                # Ha a slot zárolva van, ellenőrizzük, hogy az aktuális useré-e
-                if existing_lock.user_id == current_user.id:
-                    available_slots.append(slot)
-            else:
-                # Ellenőrizzük a tényleges foglaltságot
-                if ReservationModel.is_slot_available(
+            slot_free = ReservationModel.is_slot_available(
                     session=db_session,
                     slot_id=slot.id,
                     reservation_date=date
-                ):
-                    available_slots.append(slot)
+                )
+            if existing_lock and existing_lock.user_id == current_user.id and slot_free:
+                available_slots.append(slot)
+            
+            elif not existing_lock and slot_free:
+                available_slots.append(slot)
 
         return available_slots
 
