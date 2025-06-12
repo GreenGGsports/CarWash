@@ -51,6 +51,7 @@
             <div class="locationBox" id = "box">
                 <form id="locationForm" action="/Foglalás/select_location" method="POST">
                     {% for location in locations %}
+                    {% if location.user_select %}
                     <button 
                         class="keret {% if location.id == selected_location_id %}selected{% endif %}" 
                         name="location_id" 
@@ -66,11 +67,23 @@
                         <div class="IkonKeret"></div>
                         <div class="MosokCim">{{ location.location }}</div>
                     </button>
+                    {% endif %}
                     {% endfor %}
                 </form>
             </div>
         <form id="reservationForm" action="/Foglalás/create_reservation" method="POST">
         <h2 class="alcim">2. Válassz csomagot</h2> 
+        <div class="inputBoxInner" style="padding-top:20px;padding-bottom:20px">
+        <div class="input-keret" style="max-width: 500px;">
+            <label class="input-label" for="serviceTypeSelect">Szolgáltatás típusa</label>
+            <select id="serviceTypeSelect" name="service_type" class="input-mezo" onchange="filterServiceType(this.value)">
+                <option value="all">Mind</option>
+                <option value="interior">Belső</option>
+                <option value="exterior">Külső</option>
+                <option value="both">Külső-belső</option>
+            </select>
+        </div>
+        </div>    
         <div class="serviceBox" id="serviceBox">
             {% for service in services %}
             <input 
@@ -458,3 +471,28 @@
       <div id = "finalprcie" class = "finalprcie">6666</div>
     </div>
 </div>
+<script>
+    const serviceMeta = {
+        {% for service in services %}
+        {{ service.id }}: {
+            id: "service-{{ service.id }}",
+            type: "{{ service.service_type }}"
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+    };
+
+    console.log("Szolgáltatás metaadatok:", serviceMeta);
+    function filterServiceType(selectedType) {
+        for (const serviceId in serviceMeta) {
+            const meta = serviceMeta[serviceId];
+            const inputEl = document.getElementById(meta.id);
+            const labelEl = document.querySelector(`label[for="${meta.id}"]`);
+
+            // Csak akkor jelenítjük meg, ha pontosan megegyezik a típus
+            const shouldShow = meta.type === selectedType || selectedType === "all";
+            if (inputEl) inputEl.style.display = shouldShow ? '' : 'none';
+            if (labelEl) labelEl.style.display = shouldShow ? '' : 'none';
+        }
+    }
+</script>
+

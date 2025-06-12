@@ -162,18 +162,17 @@ header{
     margin:10%;
     height: 30%;
 }
-.serviceBox{
+.serviceBox {
     display: flex;
+    flex-wrap: wrap;  /* Allow wrapping to next line */
     gap: 2%;
-    overflow-x: auto; /* Oldalirányú görgetés a konténeren belül */
-    scroll-snap-type: x mandatory; /* A görgetés "összefogása" */
-    scrollbar-width: none;
+    overflow-x: unset; /* No horizontal scroll */
+    scroll-snap-type: none; /* Disable scroll snapping */
 }
 
-.serviceKeret{
-    width: 16%;
-    flex-shrink: 0; /* Ne zsugorodjon össze */
-    scroll-snap-align: start; /* Az elem illeszkedjen a görgetéshez */
+.serviceKeret {
+    width: calc((100% - 8%) / 5); /* 5 items per row */
+    flex-shrink: 0;
     transition: all 0.3s ease;
     background-color: inherit !important;
 }
@@ -499,9 +498,25 @@ body{
         padding-left: 0%;
         padding: 5%;
     }
-    .serviceKeret{
-        width: 70%;
+    .serviceBox {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
     }
+
+    .serviceBox::-webkit-scrollbar {
+        display: none;
+    }
+
+    .serviceKeret {
+        flex: 0 0 70%; /* Big cards on mobile */
+        scroll-snap-align: start;
+        flex-shrink: 0;
+    }
+
+
     .locationBox{
         display: grid;
         grid-template-columns:1fr 1fr;

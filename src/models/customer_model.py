@@ -40,4 +40,5 @@ class CustomerModel(BaseModel):
             print(f"An error occurred: {e}")
             return None
 
-
+    def __repr__(self):
+        return f"{self.forname} {self.lastname}"

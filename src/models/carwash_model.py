@@ -21,6 +21,7 @@ class CarWashModel(BaseModel):
     start_time = Column(Time, nullable=False)
     end_time = Column(Time, nullable=False)
     capacity = Column(Integer, nullable= False)
+    user_select = Column(Boolean, nullable = False)
     slots = relationship('SlotModel', back_populates='carwash')  # Kapcsolat a SlotModel-lel
 
     def __repr__(self):

@@ -1,8 +1,9 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, Enum
 from sqlalchemy.orm import Session, relationship
 from .base import BaseModel
 from src.models.service_extras import service_extra
 
+ServiceTypeEnum = Enum('interior', 'exterior', 'both', name='ServiceTypeEnum ')
 class ServiceModel(BaseModel):
     __tablename__ = 'Service'
 
@@ -13,6 +14,7 @@ class ServiceModel(BaseModel):
     price_large = Column(Integer, nullable=False)
     description = Column(String(512),nullable=True )
     carwash_id = Column(Integer, ForeignKey('Carwash.id'), nullable=True)
+    service_type = Column(ServiceTypeEnum, nullable=True)  
     
     extras = relationship('ExtraModel', secondary=service_extra)
     carwash = relationship("CarWashModel")
