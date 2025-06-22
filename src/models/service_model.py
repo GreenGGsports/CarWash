@@ -12,6 +12,8 @@ class ServiceModel(BaseModel):
     price_small = Column(Integer, nullable=False)
     price_medium = Column(Integer,nullable=False)
     price_large = Column(Integer, nullable=False)
+    price_x_large = Column(Integer, nullable=False)
+    price_xx_large = Column(Integer, nullable=False, default = 0)
     description = Column(String(512),nullable=True )
     carwash_id = Column(Integer, ForeignKey('Carwash.id'), nullable=True)
     service_type = Column(ServiceTypeEnum, nullable=True)  

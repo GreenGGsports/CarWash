@@ -9,6 +9,11 @@ class CarTypeEnum(PyEnum):
     small_car = "small_car"
     medium_car = "medium_car"
     large_car = "large_car"
+    x_large_car = "x_large_car"
+    xx_large_car = "xx_large_car"
+    
+    def __str__(self):
+        return self.value
 
 class CarModel(BaseModel):
     __tablename__ = 'Car'
