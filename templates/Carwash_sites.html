@@ -53,18 +53,6 @@
         {{ location.contact}}
     </div>
     <h2 class="alcim">Csomagok</h2>
-    <div class="MobileScrollerCsomag">
-        {% for service in service_data %}
-            <input 
-            type="radio" ,
-            name="scrollRadio",
-            onchange="scrollToService('{{service.name}}')"
-            id="option_{{service.name}}"
-            class="radioButton"
-            {% if loop.first %}checked{% endif %} >
-            <label for="option_{{service.name}}" class="mobileScrollerLabelCsomag">{{service.name}}</label>
-        {% endfor %}
-    </div>
         <div class="ServiceOuterContainer">
             <div class="csomagok">
                 <div class="csomagnevek">
@@ -76,9 +64,11 @@
                     {% for extra in extra_names_in %}
                     <div class="csomagnev">{{extra}}</div>
                     {% endfor %}
-                    <div class="extratype">Csomag Ár</div>
+                    <div class="arcim">Csomag Ár</div>
                     <div class="csomag_meretek">
+                        <div class="csomag_ar">S</div>
                         <div class="csomag_ar">M</div>
+                        <div class="csomag_ar">L</div>
                         <div class="csomag_ar">XL</div>
                         <div class="csomag_ar">XXL</div>
                     </div>
@@ -99,6 +89,8 @@
                         <div class="price">{{service.price_small}}</div>
                         <div class="price">{{service.price_medium}}</div>
                         <div class="price">{{service.price_large}}</div>
+                        <div class="price">{{service.price_x_large}}</div>
+                        <div class="price">{{service.price_xx_large}}</div>
                     </div>
                 </div>
                 {% endfor %}

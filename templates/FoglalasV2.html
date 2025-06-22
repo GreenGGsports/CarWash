@@ -100,19 +100,29 @@
                 </div>
                 <div class="csomag_content">
                     <div class='meret_box'> 
-                        <div class="csomag_meret">M</div>
+                        <div class="csomag_meret">S</div>
                         <div class="csomag_ar">{{ service.price_small }}</div>
+                        <div class="meret_leiras">(Kisautó)</div>
+                    </div>
+                    <div class='meret_box'> 
+                        <div class="csomag_meret">M</div>
+                        <div class="csomag_ar">{{ service.price_medium }}</div>
                         <div class="meret_leiras">(Sedan, Hatchback)</div>
                     </div>
                     <div class='meret_box'>
                         <div class="csomag_meret">L</div>
-                        <div class="csomag_ar">{{ service.price_medium }}</div>
+                        <div class="csomag_ar">{{ service.price_large }}</div>
                         <div class="meret_leiras">(Combi, SUV)</div>
                     </div>
                     <div class='meret_box'>
-                        <div class="csomag_meret">XXL</div>
-                        <div class="csomag_ar">{{ service.price_large }}</div>
+                        <div class="csomag_meret">XL</div>
+                        <div class="csomag_ar">{{ service.price_x_large }}</div>
                         <div class="meret_leiras">(Microbus, Pickup)</div>
+                    </div>
+                                        <div class='meret_box'>
+                        <div class="csomag_meret">XXL</div>
+                        <div class="csomag_ar">{{ service.price_xx_large }}</div>
+                        <div class="meret_leiras">(Dobozos autó)</div>
                     </div>
                 </div>
             </label>
@@ -248,9 +258,11 @@
                     <div class='input-keret'> 
                         <label class = "input-label"  for="size">Autó Méret*</label>
                         <select id="size" name="new_car_type" class="input-mezo">
-                            <option value="small_car">M</option>
-                            <option value="medium_car">L</option>
-                            <option value="large_car">XXL</option>
+                            <option value="small_car">S</option>
+                            <option value="medium_car">M</option>
+                            <option value="large_car">L</option>
+                            <option value="x_large_car">XL</option>
+                            <option value="xx_large_car">XXL</option>
                         </select>
                 </div>
                 <div class='input-keret'> 

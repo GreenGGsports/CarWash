@@ -68,6 +68,10 @@ class ReservationModel(BaseModel):
         
         if car.car_type.value == 'large_car':
             service_price = service.price_large if service else 0
+        elif car.car_type.value == 'x_large_car':
+            service_price = service.price_x_large if service else 0
+        elif car.car_type.value == 'xx_large_car':
+            service_price = service.price_xx_large if service else 0
         elif car.car_type.value == 'medium_car':
             service_price = service.price_medium if service else 0
         else:

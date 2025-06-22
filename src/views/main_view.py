@@ -57,6 +57,8 @@ def get_service_data(carwash_id):
             price_small = service.price_small,
             price_medium = service.price_medium,
             price_large = service.price_large,
+            price_x_large = service.price_x_large,
+            price_xx_large = service.price_xx_large
             )
         )
     extra_names_out =  [extra.service_name for extra in extras_out]

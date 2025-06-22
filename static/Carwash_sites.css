@@ -167,6 +167,14 @@ body {
     align-items: center;
 }
 
+.arcim{
+    padding-top: 20px;
+    display: flex;
+    height: 30px;
+    font-size: clamp(13px, 1.2vw, 25px);
+    align-items: center;
+}
+
 .extratype2{
     display: flex;
     height: 30px;
@@ -240,24 +248,28 @@ body {
     font-size: clamp(18px, 1.5vw, 25px);
     align-items: center;
     padding-left: 40%;
-    margin-top: 5%;
-    padding: 5%;
+    padding-top: 20px;
+    margin-bottom: 10px;
+    padding-bottom: 20px;
 }
 .price{
     font-size: clamp(13px, 1.2vw, 20px);
     display: flex;
-    margin-top: 5%;
+
     align-items: center;
     background-color: #2D2D2D;
     width: 60%;
     justify-content: center;
-    padding: 20px;
-    border-radius: 20px;
-    max-height: 10px;
+    padding-top: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    width: 90%;
+    border-radius: 1vh;
+
 }
 
 .priceContainer{
-    padding-top: 10px;
+    padding-top: 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
