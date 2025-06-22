@@ -108,6 +108,10 @@ class Dashboard(MyModelView):
                     total_sum += item.service.price_medium
                 elif item.car.car_type == CarTypeEnum.large_car:
                     total_sum += item.service.price_large
+                elif item.car.car_type == CarTypeEnum.x_large_car:
+                    total_sum += item.service.price_x_large
+                elif item.car.car_type == CarTypeEnum.xx_large_car:
+                    total_sum += item.service.price_xx_large                    
             except Exception as e:
                 current_app.logger.error(f'Error processing item: {e}')
             
