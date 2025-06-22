@@ -32,7 +32,12 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     networks:
       - app-network
+    volumes:
+      - db-data:/var/lib/mysql
+
 networks:
   app-network:
     driver: bridge
 
+volumes:
+  db-data: 
