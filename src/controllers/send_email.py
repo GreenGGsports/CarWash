@@ -13,7 +13,7 @@ def send_confirm_email(reservation):
     FROM_EMAIL = current_app.config["SMTP_FROM_EMAIL"]
     if current_user.is_authenticated and re.match(r"^[^@]+@[^@]+\.[^@]+$", current_user.user_name):
         user_email = current_user.user_name
-        subject = "Test Email via Brevo SMTP"
+        subject = "Sikeres Foglalás"
         html_content = f"""
         <html>
         <body style="font-family: Arial, sans-serif; color: #333;">
