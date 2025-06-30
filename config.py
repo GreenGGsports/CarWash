@@ -11,6 +11,11 @@ class Config:
     
     DEVELOPER_USERNAME = os.getenv('DEVELOPER_USERNAME')
     DEVELOPER_PASSWORD = os.getenv('DEVELOPER_PASSWORD')
+    SMTP_SERVER = os.getenv('SMTP_SERVER')
+    SMTP_PORT = int(os.getenv('SMTP_PORT', 587))  # default 587, ha nincs beállítva
+    SMTP_LOGIN = os.getenv('SMTP_LOGIN')
+    SMTP_PASSWORD = os.getenv('SMTP_PASSWORD')
+    SMTP_FROM_EMAIL = os.getenv('SMTP_FROM_EMAIL')
     
 class DevelopmentConfig(Config):
     DEBUG = True

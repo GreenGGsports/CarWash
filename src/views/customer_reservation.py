@@ -12,6 +12,8 @@ from src.models.slot_model import SlotModel
 from flask_login import current_user
 from src.controllers.reservation_controller2 import create_reservation, create_billing, add_car, add_customer
 from src.views.form_data import ReservationData, BillingData, CarData, CustomerData
+from src.controllers.send_email import send_confirm_email
+
 
 reservation_test = Blueprint('reservation_test', __name__, template_folder='templates')
 
@@ -159,6 +161,8 @@ def reservation():
             reservation_data=reservation_data,
             admin=False
         )
+        
+        
 
         # Handle billing if required
         if form_data.get('billing_required', False):
@@ -166,6 +170,8 @@ def reservation():
             billing = create_billing(db_session, reservation, billing_data)
 
         db_session.commit()
+        
+        send_confirm_email(reservation)
 
         return jsonify({
             "success": True,
