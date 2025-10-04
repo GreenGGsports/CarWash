@@ -19,6 +19,17 @@ from src.views.carwash_modelview import CarwashAdminView
 from src.views.invoice_admin_view import InvoiceModelView
 from src.models.slot_lock_model import SlotLockModel
 from src.views.dashboard import Dashboard
+from src.views.customer_admin import CustomerAdminView
+def init_customer_admin(app, session_factory):
+    customer_admin = Admin(
+        app,
+        name='Admin Panel',
+        template_mode='bootstrap3',
+        index_view=BaseAdminIndexView(role='customer_admin',url='/customer_admin', endpoint='customer_admin')
+    )
+
+    session = session_factory.get_session()
+    customer_admin.add_view(CustomerAdminView(ReservationModel, session, name='Foglalások', endpoint='customer_reservation_admin'))
 
 def init_admin(app, session_factory):
     admin = Admin(

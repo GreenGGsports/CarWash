@@ -2,10 +2,11 @@ from flask import Blueprint, jsonify, request, current_app
 from src.models.car_model import CarModel
 from src.models.reservation_model import ReservationModel
 from sqlalchemy.exc import SQLAlchemyError
-
+from flask_login import current_user, login_required
 car_ctrl = Blueprint('car_ctrl', __name__)
 
 @car_ctrl.route('/get_car_data', methods=['GET'])
+@login_required
 def autocomplete():
     license_plate = request.args.get('license_plate')
     if not license_plate:
@@ -16,13 +17,30 @@ def autocomplete():
         session = current_app.session_factory.get_session()
         
         # Query the latest reservation based on the license plate
-        reservation = (
-            session.query(ReservationModel)
-            .join(CarModel)
-            .filter(CarModel.license_plate == license_plate)
-            .order_by(ReservationModel.reservation_date.desc())
-            .first()
-        )
+        reservation = None
+        if current_user.role in ["admin", "developer", 'local_admin']:
+            reservation = (
+                session.query(ReservationModel)
+                .join(CarModel)
+                .filter(CarModel.license_plate == license_plate)
+                .order_by(ReservationModel.reservation_date.desc())
+                .first()
+            )
+        elif current_user.role == "customer_admin":
+            # Get list of company IDs the user can access
+            allowed_company_ids = [company.id for company in current_user.companies]
+
+            # Restrict query to only cars in those companies
+            reservation = (
+                session.query(ReservationModel)
+                .join(CarModel)
+                .filter(
+                    CarModel.license_plate == license_plate,
+                    CarModel.company_id.in_(allowed_company_ids)
+                )
+                .order_by(ReservationModel.reservation_date.desc())
+                .first()
+            )
         if not reservation:
             return jsonify({'error': 'No reservation found'}), 404
         

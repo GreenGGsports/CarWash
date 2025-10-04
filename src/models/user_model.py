@@ -1,8 +1,15 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, relationship
 from werkzeug.security import generate_password_hash, check_password_hash
-from sqlalchemy.orm import relationship
+from sqlalchemy import Table
 from .base import BaseModel
+# association table between users and companies
+user_company = Table(
+    "user_company",
+    BaseModel.metadata,
+    Column("user_id", Integer, ForeignKey("User.id"), primary_key=True),
+    Column("company_id", Integer, ForeignKey("Company.id"), primary_key=True),
+)
 
 class UserModel(BaseModel):
     __tablename__ = 'User'
@@ -14,6 +21,7 @@ class UserModel(BaseModel):
     carwash_id = Column(Integer, ForeignKey('Carwash.id'), nullable=True)  # Nullable for general admins
 
     carwash = relationship("CarWashModel")
+    companies = relationship("CompanyModel", secondary="user_company")    
 
     
     def __repr__(self):

@@ -18,13 +18,35 @@ def create_session():
     return Session()
 
 def add_carwash_test(session):
-    carwash_name_1 = "Sparkle Clean"
-    location_1 = "123 Main St"
-    carwash_name_2 = "Shiny Wash"
-    location_2 = "456 Elm St"
-    CarWashModel.add_carwash(session=session,carwash_name=carwash_name_1, location=location_1)
-    CarWashModel.add_carwash(session=session,carwash_name=carwash_name_2, location=location_2)
-    session.close()
+    carwash1 = CarWashModel(
+        carwash_name="Sparkle Clean",
+        location="123 Main St",
+        contact="123-456-7890",
+        image_name=None,
+        close_start=None,
+        close_end=None,
+        start_time=datetime.time(8, 0),
+        end_time=datetime.time(18, 0),
+        capacity=10,
+        user_select=True
+    )
+
+    carwash2 = CarWashModel(
+        carwash_name="Shiny Wash",
+        location="456 Elm St",
+        contact="987-654-3210",
+        image_name=None,
+        close_start=None,
+        close_end=None,
+        start_time=datetime.time(9, 0),
+        end_time=datetime.time(19, 0),
+        capacity=15,
+        user_select=False
+    )
+
+    # add both objects in one go
+    session.add_all([carwash1, carwash2])
+    session.commit()  # commit once
 
 def add_service_test(session):
     service_name_1 = "Test Service 1"

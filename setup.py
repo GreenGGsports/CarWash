@@ -16,7 +16,7 @@ from src.controllers.reservation_autofill import reservation_autofill_ctrl
 from src.views.customer_reservation import reservation_test
 from src.views.main_view import main_view
 from database import create_database, get_db, close_db
-from src.controllers.admin import init_admin, init_local_admin, init_developer_admin
+from src.controllers.admin import init_admin, init_local_admin, init_developer_admin, init_customer_admin
 from src.models.user_model import UserModel
 from src.controllers.helix_api import helix_api
 
@@ -77,6 +77,7 @@ def create_app(config_name: str):
     with app.app_context():
         create_database(engine)
         init_admin(app, session_factory)
+        init_customer_admin(app, session_factory)
         init_local_admin(app, session_factory)
         init_developer_admin(app, session_factory)
         add_default_user(app)

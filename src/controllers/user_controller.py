@@ -23,6 +23,7 @@ class User(UserMixin):
         self.role = user.role
         self.carwash_id = user.carwash_id
         self.carwash = user.carwash
+        self.companies = user.companies
 
 # Function to initialize LoginManager
 def init_login_manager(app):
