@@ -68,6 +68,8 @@ def login():
                 redirect_url = '/local-admin'  # Carwash felület
             elif user.role == 'developer':
                 redirect_url = '/developer'
+            elif user.role == 'customer_admin':
+                redirect_url = '/customer_admin'
             else:
                 redirect_url = '/Foglalás/'  # Általános felhasználói felület
             

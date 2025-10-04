@@ -71,12 +71,13 @@ class CarData(FormData):
         new_car_type,
         new_car_brand,
         new_car_model,
+        new_car_company = None,
     ):
         self.license_plate = new_car_license_plate
         self.car_type = new_car_type
         self.car_brand = new_car_brand
         self.car_model = new_car_model
-
+        self.company =  new_car_company
         self.kwargs = dict(
             license_plate=self.license_plate,
             car_type=CarTypeEnum[self.car_type].value,

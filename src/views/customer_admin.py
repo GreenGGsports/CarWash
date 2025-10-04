@@ -146,8 +146,8 @@ class CustomerAdminView(MyModelView):
     def create_model(self, form):
         reservation_data = ReservationData.parseForm(form.data)
         car_data = CarData.parseForm(form.data)
-        car = add_car(session=form.session,car_data=car_data)
-        
+        car = add_car(session=form.session,car_data=car_data, company=form.new_car_company.data)
+
         customer_data = CustomerData.parseForm(form.data)
         customer = add_customer(form.session, customer_data, admin=True)
         service = form.service.data
@@ -220,13 +220,15 @@ class CustomerAdminView(MyModelView):
                         car.car_type = CarTypeEnum[form.new_car_type.data]
                         car.car_brand = form.new_car_brand.data
                         car.car_model = form.new_car_model.data
+                        car.company = form.new_car_company.data
                     else:
                         # Ha nem létezik, hozzuk létre az újat
                         car = CarModel(
                             license_plate=form.new_car_license_plate.data,
                             car_type=CarTypeEnum[form.new_car_type.data],
                             car_brand=form.new_car_brand.data,
-                            car_model = form.new_car_model.data
+                            car_model = form.new_car_model.data,
+                            company = form.new_car_company.data
                         )
                         session.add(car)
                     
@@ -235,7 +237,8 @@ class CustomerAdminView(MyModelView):
                     model.car_id = car.id
                     model.car = car
                 
-
+                from pdb import set_trace 
+                set_trace()
                 if form.new_price.data:
                     model.final_price = form.new_price.data
                 else:

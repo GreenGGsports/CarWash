@@ -48,7 +48,7 @@ def create_billing(session, reservation, billing_data):
         raise
 
 
-def add_car(session, car_data):
+def add_car(session, car_data, company = None):
     try:
         license_plate = car_data.kwargs.get('license_plate')
         if not license_plate:
@@ -64,6 +64,7 @@ def add_car(session, car_data):
             current_app.logger.info(f"Adding new car with license plate: {license_plate}")
             car = CarModel(**car_data.kwargs)
         
+        car.company = company
         session.add(car)
         session.commit()
         return car

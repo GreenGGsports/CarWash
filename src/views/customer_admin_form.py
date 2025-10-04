@@ -9,6 +9,7 @@ from wtforms import StringField, SelectField, DateTimeField, BooleanField, Float
 from wtforms_sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
 from wtforms.validators import DataRequired,  Optional
 from flask_login import current_user
+from src.models.company_model import CompanyModel
 
 class ReservationForm(FlaskForm):
     def __init__(self, session, obj=None, *args, **kwargs):
@@ -19,7 +20,8 @@ class ReservationForm(FlaskForm):
         self.service.query_factory = lambda: self.session.query(ServiceModel).all()
         
         self.extras.query_factory = lambda: self.session.query(ExtraModel).all()
-
+        allowed_ids = [c.id for c in current_user.companies]
+        self.new_car_company.query_factory = lambda: self.session.query(CompanyModel).filter(CompanyModel.id.in_(allowed_ids)).all()
         self.slot.query_factory = lambda: self.session.query(SlotModel).filter_by(live=True).all()
 
     def load_data(self, obj):
@@ -29,6 +31,7 @@ class ReservationForm(FlaskForm):
             self.new_car_type.data = obj.car.car_type.name  # Enum név
             self.new_car_brand.data = obj.car.car_brand
             self.new_car_model.data = obj.car.car_model
+            self.new_car_company = obj.car.company
 
         if obj.customer:
             self.new_customer_forname.data = obj.customer.forname
@@ -39,13 +42,6 @@ class ReservationForm(FlaskForm):
         self.reservation_date.data = obj.reservation_date
         self.payment_method.data = obj.payment_method.name if obj.payment_method else None
         self.comment.data = obj.comment if obj.comment else None
-        if obj.billing:
-            self.billing_required.data = True
-            self.billing_name.data = obj.billing.name
-            self.address.data = obj.billing.address
-            self.email.data = obj.billing.email
-            self.company_name.data = obj.billing.company_name
-            self.tax_ID.data = obj.billing.tax_ID
 
         self.carwash.data = obj.carwash
         self.slot.data = obj.slot
@@ -53,23 +49,26 @@ class ReservationForm(FlaskForm):
         self.extras.data = obj.extras  # Az extras listát állítjuk be
         
     # Form fields
+    carwash = QuerySelectField('Autómosó', allow_blank=False, query_factory=lambda: [])
+    reservation_date = DateTimeField('Időpont', format='%Y-%m-%d',validators=[DataRequired()])
+    slot = QuerySelectField('Slot', allow_blank=False, query_factory=lambda: [])
+    service = QuerySelectField('Csomag', allow_blank=False, query_factory=lambda: [],validators=[DataRequired()])
+    extras = QuerySelectMultipleField('Extrák', get_label='service_name')
+
     new_car_license_plate = StringField('Rendszám', validators=[DataRequired()])
     new_car_type = SelectField('Méret', choices=[(t.name, t.name) for t in CarTypeEnum], validators=[DataRequired()])
     new_car_brand = StringField('Márka', validators=[DataRequired()])
     new_car_model = StringField('Típus', validators=[DataRequired()])
+    new_car_company = QuerySelectField('Cég', allow_blank=False, query_factory=lambda: [],validators=[DataRequired()])
 
     new_customer_forname = StringField('Keresztnév', validators=[DataRequired()])
     new_customer_lastname = StringField('Vezetéknév', validators=[DataRequired()])
     new_customer_phone_number = StringField('Telefonszám', validators=[DataRequired()])
 
-    service = QuerySelectField('Csomag', allow_blank=False, query_factory=lambda: [],validators=[DataRequired()])
-    extras = QuerySelectMultipleField('Extrák', get_label='service_name')
     comment = StringField('Megjegyzés')
 
-    reservation_date = DateTimeField('Időpont', format='%Y-%m-%d',validators=[DataRequired()])
     payment_method =  SelectField('Fizetési mód', choices=[(t.name, t.value) for t in PaymentEnum], validators=[DataRequired()])
     parking_spot = StringField('Parkolóhely')
-    carwash = QuerySelectField('Autómosó', allow_blank=False, query_factory=lambda: [])
-    slot = QuerySelectField('Slot', allow_blank=False, query_factory=lambda: [])
+    
 
 
