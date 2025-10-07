@@ -23,18 +23,25 @@ class CustomerAdminView(MyModelView):
         if current_user.role in ["admin", "developer"]:
             return query
 
-        elif current_user.role == "customer_admin":
-            #customer admin can not delete reservaton
+        # Get all carwash IDs for the current user (applies to both local_admin and customer_admin)
+        allowed_carwash_ids = [cw.id for cw in getattr(current_user, "carwash", [])]
+
+        if current_user.role == "customer_admin":
+            # Customer admin cannot delete reservations
             self.can_delete = False
-            company_ids = [c.id for c in current_user.companies]
+            company_ids = [c.id for c in getattr(current_user, "companies", [])]
+
             if company_ids:
                 query = query.join(CarModel, CarModel.id == self.model.car_id)\
-                             .filter(CarModel.company_id.in_(company_ids))
+                            .filter(CarModel.company_id.in_(company_ids))
             else:
                 query = query.filter(False)
 
-        elif current_user.role == "local_admin":
-            query = query.filter(self.model.carwash_id == current_user.carwash_id)
+        if current_user.role in ("customer_admin", "local_admin"):
+            if allowed_carwash_ids:
+                query = query.filter(self.model.carwash_id.in_(allowed_carwash_ids))
+            else:
+                query = query.filter(False)
 
         if count:
             query = query.with_entities(func.count("*"))
@@ -237,8 +244,6 @@ class CustomerAdminView(MyModelView):
                     model.car_id = car.id
                     model.car = car
                 
-                from pdb import set_trace 
-                set_trace()
                 if form.new_price.data:
                     model.final_price = form.new_price.data
                 else:

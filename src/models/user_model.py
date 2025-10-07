@@ -10,7 +10,12 @@ user_company = Table(
     Column("user_id", Integer, ForeignKey("User.id"), primary_key=True),
     Column("company_id", Integer, ForeignKey("Company.id"), primary_key=True),
 )
-
+user_carwash = Table(
+    "user_carwash",
+    BaseModel.metadata,
+    Column("user_id", Integer, ForeignKey("User.id"), primary_key=True),
+    Column("carwash_id", Integer, ForeignKey("Carwash.id"), primary_key=True),
+)
 class UserModel(BaseModel):
     __tablename__ = 'User'
     
@@ -20,7 +25,7 @@ class UserModel(BaseModel):
     role = Column(String(20), nullable=False, default='user')  # Added role field
     carwash_id = Column(Integer, ForeignKey('Carwash.id'), nullable=True)  # Nullable for general admins
 
-    carwash = relationship("CarWashModel")
+    carwash = relationship("CarWashModel", secondary="user_carwash")
     companies = relationship("CompanyModel", secondary="user_company")    
 
     

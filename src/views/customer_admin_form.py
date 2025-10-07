@@ -16,11 +16,15 @@ class ReservationForm(FlaskForm):
         super(ReservationForm, self).__init__(*args, **kwargs)
         self.session = session
 
-        self.carwash.query_factory = lambda: self.session.query(CarWashModel).all()
-        self.service.query_factory = lambda: self.session.query(ServiceModel).all()
+        allowed_carwashes = [cw.id for cw in current_user.carwash] if current_user.carwash else []
+
+        self.carwash.query_factory = lambda: self.session.query(CarWashModel).filter(CarWashModel.id.in_(allowed_carwashes)).all()
+        self.service.query_factory = lambda: self.session.query(ServiceModel).filter(ServiceModel.carwash_id.in_(allowed_carwashes)).all()
         
         self.extras.query_factory = lambda: self.session.query(ExtraModel).all()
         allowed_ids = [c.id for c in current_user.companies]
+
+
         self.new_car_company.query_factory = lambda: self.session.query(CompanyModel).filter(CompanyModel.id.in_(allowed_ids)).all()
         self.slot.query_factory = lambda: self.session.query(SlotModel).filter_by(live=True).all()
 
@@ -65,9 +69,15 @@ class ReservationForm(FlaskForm):
     new_customer_lastname = StringField('Vezetéknév', validators=[DataRequired()])
     new_customer_phone_number = StringField('Telefonszám', validators=[DataRequired()])
 
-    comment = StringField('Megjegyzés')
+    comment = StringField('Megjegyzés',validators=[DataRequired()])
 
-    payment_method =  SelectField('Fizetési mód', choices=[(t.name, t.value) for t in PaymentEnum], validators=[DataRequired()])
+    payment_method = SelectField(
+    'Fizetési mód',
+    choices=[(t.name, t.value) for t in PaymentEnum],
+    default=PaymentEnum.list.name,   # 👈 use .name here, not .value
+    validators=[DataRequired()]
+)
+
     parking_spot = StringField('Parkolóhely')
     
 

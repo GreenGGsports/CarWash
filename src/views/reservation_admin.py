@@ -15,8 +15,45 @@ from flask_admin.contrib.sqla.filters import DateBetweenFilter
 from src.views.reservation_form import ReservationForm
 from src.controllers.reservation_controller2 import create_reservation, create_billing, add_car, add_customer
 from src.views.form_data import ReservationData, BillingData, CarData, CustomerData
+from sqlalchemy import func
 
 class ReservationAdminView(MyModelView):
+    def _apply_iam_filters(self, query, count=False):
+        if current_user.role in ["admin", "developer"]:
+            return query
+
+        # Get all carwash IDs for the current user (applies to both local_admin and customer_admin)
+        allowed_carwash_ids = [cw.id for cw in getattr(current_user, "carwash", [])]
+
+        if current_user.role == "customer_admin":
+            # Customer admin cannot delete reservations
+            self.can_delete = False
+            company_ids = [c.id for c in getattr(current_user, "companies", [])]
+
+            if company_ids:
+                query = query.join(CarModel, CarModel.id == self.model.car_id)\
+                            .filter(CarModel.company_id.in_(company_ids))
+            else:
+                query = query.filter(False)
+
+        if current_user.role in ("customer_admin", "local_admin"):
+            if allowed_carwash_ids:
+                query = query.filter(self.model.carwash_id.in_(allowed_carwash_ids))
+            else:
+                query = query.filter(False)
+
+        if count:
+            query = query.with_entities(func.count("*"))
+
+        return query
+    
+    def get_query(self):
+        query = super().get_query()
+        return self._apply_iam_filters(query)
+
+    def get_count_query(self):
+        query = super().get_count_query()
+        return self._apply_iam_filters(query, count=True)
     form = ReservationForm
     create_template = 'admin/reservation_form.html'
     list_template = 'admin/list_template.html'
@@ -96,18 +133,19 @@ class ReservationAdminView(MyModelView):
     ]
         
     def get_list(self, *args, **kwargs):
-        count, query = super().get_list(*args, **kwargs)
-        
-        if current_user.is_authenticated:
-            if current_user.role == 'admin':
-                return count, query
-            elif hasattr(current_user, 'carwash_id') and current_user.carwash_id is not None:
-                query = [item for item in query if item.carwash_id == current_user.carwash_id]
+        count, data = super().get_list(*args, **kwargs)
+
+        if current_user.is_authenticated and current_user.role not in ('admin', 'developer'):
+            allowed_carwash_ids = [cw.id for cw in current_user.carwash]
+
+            if allowed_carwash_ids:
+                data = [item for item in data if item.carwash_id in allowed_carwash_ids]
+                count = len(data)
             else:
-                query = []
+                data = []
+                count = 0
 
-        return count, query
-
+        return count, data
 
     def create_form(self, obj=None):
         form = super(ReservationAdminView, self).create_form(obj)
