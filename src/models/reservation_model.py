@@ -11,7 +11,7 @@ from src.models.company_model import CompanyModel
 from src.models.car_model import CarModel
 
 class PaymentEnum(PyEnum):
-    card = "bankkárya"
+    card = "bankkártya"
     cash = "készpénz"
     list = "listás"
     transaction = 'utalás'

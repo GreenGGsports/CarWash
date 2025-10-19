@@ -9,7 +9,14 @@
     {{ super() }}
     {{ lib.form_css() }}
 {% endblock %}
-
+{% block navbar_links %}
+    {{ super() }}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('reservationadminview.index_view') }}?flt0_0=today">
+            Reservations This Week
+        </a>
+    </li>
+{% endblock %}
 {% block body %}
     {% block model_menu_bar %}
     <ul class="nav nav-tabs actions-nav">
@@ -41,6 +48,7 @@
         {% if filters %}
         <li class="dropdown">
             {{ model_layout.filter_options() }}
+            
         </li>
         {% endif %}
 

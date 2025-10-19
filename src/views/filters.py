@@ -19,8 +19,8 @@ class CustomDateRangeFilter(BaseSQLAFilter):
         raise NotImplementedError("Subclasses must implement this method")
 
 class TodayFilter(CustomDateRangeFilter):
-    def __init__(self, column):
-        super().__init__(column, 'Today')
+    def __init__(self, column, name='Napi'):
+        super().__init__(column, name)
 
     def get_date_range(self):
         today = datetime.now()
@@ -29,8 +29,8 @@ class TodayFilter(CustomDateRangeFilter):
         return start_date, end_date
 
 class ThisWeekFilter(CustomDateRangeFilter):
-    def __init__(self, column):
-        super().__init__(column, 'This Week')
+    def __init__(self, column, name='Heti'):
+        super().__init__(column, name)
 
     def get_date_range(self):
         today = datetime.now()
@@ -40,8 +40,8 @@ class ThisWeekFilter(CustomDateRangeFilter):
         return start_date, end_date
 
 class ThisMonthFilter(CustomDateRangeFilter):
-    def __init__(self, column):
-        super().__init__(column, 'This Month')
+    def __init__(self, column, name='Havi'):
+        super().__init__(column, name)
 
     def get_date_range(self):
         today = datetime.now()

@@ -18,10 +18,14 @@ class ReservationForm(FlaskForm):
 
         # Filtering options based on the current user
         if current_user.role == 'local_admin':
-            self.carwash.query_factory = lambda: self.session.query(CarWashModel).filter_by(id=current_user.carwash.id).all()
-            self.service.query_factory = lambda: self.session.query(ServiceModel).filter_by(carwash_id=current_user.carwash.id).all()
-            self.extras.query_factory = lambda: self.session.query(ExtraModel).filter_by(carwash_id=current_user.carwash.id).all()
-            self.slot.query_factory = lambda: self.session.query(SlotModel).filter_by(carwash_id=current_user.carwash.id, live=True).all()
+            
+            allowed_carwashes = [cw.id for cw in current_user.carwash] if current_user.carwash else []
+
+            self.carwash.query_factory = lambda: self.session.query(CarWashModel).filter(CarWashModel.id.in_(allowed_carwashes)).all()
+            self.service.query_factory = lambda: self.session.query(ServiceModel).filter(ServiceModel.carwash_id.in_(allowed_carwashes)).all()
+        
+            self.extras.query_factory = lambda: self.session.query(ExtraModel).filter(ExtraModel.carwash_id.in_(allowed_carwashes)).all()
+            self.slot.query_factory = lambda: self.session.query(SlotModel).filter(SlotModel.carwash_id.in_(allowed_carwashes)).all()
         else:
             self.carwash.query_factory = lambda: self.session.query(CarWashModel).all()
             self.service.query_factory = lambda: self.session.query(ServiceModel).all()

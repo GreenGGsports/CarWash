@@ -10,13 +10,25 @@ from src.models.billing_model import BillingModel
 from src.views.my_modelview import MyModelView
 from flask_login import current_user
 from flask import current_app, request, redirect, flash, url_for
-from src.views.filters import ThisMonthFilter, ThisWeekFilter, TodayFilter
+from src.views.filters import ThisMonthFilter, ThisWeekFilter, TodayFilter, CustomDateRangeFilter
 from flask_admin.contrib.sqla.filters import DateBetweenFilter
 from src.views.reservation_form import ReservationForm
 from src.controllers.reservation_controller2 import create_reservation, create_billing, add_car, add_customer
 from src.views.form_data import ReservationData, BillingData, CarData, CustomerData
 from sqlalchemy import func
+from datetime import datetime, timedelta, MINYEAR, MAXYEAR
+# Define the Show All filter
+class ShowAllFilter(CustomDateRangeFilter):
+    def __init__(self, column):
+        super().__init__(column, "Összes megjelenítése")
 
+    def get_date_range(self):
+        start_date = datetime(MINYEAR, 1, 1)
+        end_date = datetime(MAXYEAR, 12, 31, 23, 59, 59)
+        return start_date, end_date
+
+    def operation(self):
+        return "between"  #
 class ReservationAdminView(MyModelView):
     def _apply_iam_filters(self, query, count=False):
         if current_user.role in ["admin", "developer"]:
@@ -47,13 +59,39 @@ class ReservationAdminView(MyModelView):
 
         return query
     
+    def scaffold_filters(self, name):
+        filters = super().scaffold_filters(name)
+
+        # Preselect TodayFilter if no filter applied AND ShowAll not selected
+        if name == 'reservation_date' and not any(k.startswith('flt') for k in request.args.keys()):
+            for f in filters:
+                if isinstance(f, TodayFilter):
+                    f.data = True
+                    break
+
+        return filters
+
     def get_query(self):
         query = super().get_query()
-        return self._apply_iam_filters(query)
+
+        # Check if ShowAll is selected
+        show_all_selected = any(
+            k.startswith('flt') and 'Összes megjelenítése' in request.args.get(k, '')
+            for k in request.args.keys()
+        )
+
+        # Apply TodayFilter only if no other filter AND ShowAll not selected
+        if not show_all_selected and not any(k.startswith('flt') for k in request.args.keys()):
+            query = TodayFilter(ReservationModel.reservation_date).apply(query, self.model)
+
+        # Apply IAM filters
+        query = self._apply_iam_filters(query)
+        return query
 
     def get_count_query(self):
         query = super().get_count_query()
-        return self._apply_iam_filters(query, count=True)
+        query = self._apply_iam_filters(query, count=True)
+        return query
     form = ReservationForm
     create_template = 'admin/reservation_form.html'
     list_template = 'admin/list_template.html'
@@ -123,15 +161,16 @@ class ReservationAdminView(MyModelView):
     can_export = True
     
     column_filters = [
-        TodayFilter(ReservationModel.reservation_date),
-        ThisWeekFilter(ReservationModel.reservation_date),
-        ThisMonthFilter(ReservationModel.reservation_date),
+        ShowAllFilter(ReservationModel.reservation_date),  # <-- added
+        TodayFilter(ReservationModel.reservation_date, 'Napi'),
+        ThisWeekFilter(ReservationModel.reservation_date, 'Heti'),
+        ThisMonthFilter(ReservationModel.reservation_date, 'Havi'),
         DateBetweenFilter(ReservationModel.reservation_date, "Custom date"),
         'car.license_plate',
         'service.service_name',
         'carwash.carwash_name',
-    ]
-        
+        ]
+
     def get_list(self, *args, **kwargs):
         count, data = super().get_list(*args, **kwargs)
 

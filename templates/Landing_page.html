@@ -28,7 +28,7 @@
                 <div class="elitlogo"></div>
             </div>
             <div class="headerButtonwrapper">
-                <button onclick="openLoginModal()" class="headerButton">Bejelentkezés</button>
+                <button onclick="openLogRegModal()" class="headerButton">Bejelentkezés</button>
             </div>
             <div class="headerButtonwrapper">
                 <button onclick="toPrices()" class="headerButton">Árlisták</button>
@@ -40,7 +40,7 @@
                 <button onclick="toContact()" class="headerButton">Kapcsolat</button>
             </div>
             <div class="headerButtonwrapper">
-                <button onclick="toReservation()" class="headerButtonSelected">Online időpontFoglalás</button>
+                <button onclick="toReservation()" class="headerButtonSelected">Online időpontfoglalás</button>
             </div>
         </div>
         </div>
@@ -236,6 +236,7 @@
 </div>
 </div>
 <div class = "LoginOrRegistermodal" id="LoginOrRegister">
+    <span id="close" onclick="closeModal()">&times;</span>
     <div class = "LoginOrRegistercontent">
         <div class="LoginOrRegisterText">Az online időpontfoglaláshoz jelentkezz be, vagy regisztrálj.</div>
         <div class="LoginOrRegisterWrapper">
