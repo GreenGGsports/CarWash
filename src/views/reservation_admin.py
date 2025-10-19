@@ -50,7 +50,7 @@ class ReservationAdminView(MyModelView):
 
         if current_user.role in ("customer_admin", "local_admin"):
             if allowed_carwash_ids:
-                query = query.filter(self.model.carwash_id.in_(allowed_carwash_ids))
+                query = query.filter(self.model.carwash_id.in_(allowed_carwash_ids) )
             else:
                 query = query.filter(False)
 
@@ -171,20 +171,6 @@ class ReservationAdminView(MyModelView):
         'carwash.carwash_name',
         ]
 
-    def get_list(self, *args, **kwargs):
-        count, data = super().get_list(*args, **kwargs)
-
-        if current_user.is_authenticated and current_user.role not in ('admin', 'developer'):
-            allowed_carwash_ids = [cw.id for cw in current_user.carwash]
-
-            if allowed_carwash_ids:
-                data = [item for item in data if item.carwash_id in allowed_carwash_ids]
-                count = len(data)
-            else:
-                data = []
-                count = 0
-
-        return count, data
 
     def create_form(self, obj=None):
         form = super(ReservationAdminView, self).create_form(obj)
