@@ -8,7 +8,7 @@ from src.models.car_model import CarModel, CarTypeEnum
 from src.models.reservation_model import ReservationModel
 from src.models.billing_model import BillingModel
 from flask_login import current_user
-from send_email import send_owner_email
+from src.controllers.send_email import send_owner_email
     
 def create_reservation(session, carwash, service, extras, slot, car, customer, reservation_data, admin=False):
     try:

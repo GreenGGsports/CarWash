@@ -52,3 +52,51 @@ def send_confirm_email(reservation):
             print("✅ Email sent successfully.")
         except Exception as e:
             print("❌ Failed to send email:", str(e))
+
+def send_owner_email(reservation):
+    """Send a simple email to owner(s) with CC support."""
+    SMTP_SERVER = current_app.config["SMTP_SERVER"]
+    SMTP_PORT = current_app.config["SMTP_PORT"]
+    SMTP_LOGIN = current_app.config["SMTP_LOGIN"]
+    SMTP_PASSWORD = current_app.config["SMTP_PASSWORD"]
+    FROM_EMAIL = current_app.config["SMTP_FROM_EMAIL"]
+    OWNER_EMAILS = current_app.config.get("OWNER_EMAILS", [])
+
+    if not OWNER_EMAILS:
+        print("❌ No owner emails configured.")
+        return
+
+    to_email = OWNER_EMAILS[0]
+    cc_emails = OWNER_EMAILS[1:]
+
+    subject = "Új foglalás érkezett"
+    body = f"""
+Új foglalás érkezett:
+
+Ügyfél neve: {reservation.customer.forname} {reservation.customer.lastname}
+Autó: {reservation.car.car_brand} {reservation.car.car_model}
+Rendszám: {reservation.car.license_plate}
+Időpont: {reservation.reservation_date.strftime('%Y.%m.%d')} {reservation.slot.start_time.strftime('%H:%M')}
+Szolgáltatás: {reservation.service.service_name}
+Végösszeg: {reservation.final_price} Ft
+"""
+
+    # MIMEMultipart a CC-hez
+    msg = MIMEMultipart()
+    msg["From"] = FROM_EMAIL
+    msg["To"] = to_email
+    if cc_emails:
+        msg["Cc"] = ", ".join(cc_emails)
+    msg["Subject"] = subject
+    msg.attach(MIMEText(body, "plain"))
+
+    all_recipients = [to_email] + cc_emails
+
+    try:
+        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+            server.starttls()
+            server.login(SMTP_LOGIN, SMTP_PASSWORD)
+            server.send_message(msg, from_addr=FROM_EMAIL, to_addrs=all_recipients)
+        print("✅ Owner email sent.")
+    except Exception as e:
+        print("❌ Failed to send owner email:", e)
