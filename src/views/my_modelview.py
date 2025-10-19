@@ -8,7 +8,10 @@ from sqlalchemy.sql import func
 import csv
 from flask_admin import expose
 from io import StringIO  # StringIO importálása
-
+from openpyxl import Workbook
+from datetime import datetime
+from io import BytesIO
+from enum import Enum
 class MyModelView(ModelView):
 
     columns_to_export = {}
@@ -145,62 +148,80 @@ class MyModelView(ModelView):
     @expose('/export/csv/')
     def export_csv(self):
         """
-        Exportálja az aktuális szűrt adatokat CSV formátumban.
+        Exportálja az aktuális szűrt adatokat XLSX formátumban, 
+        Enum-okat value-jukkal írja, üres listákat és None-t üres cellába.
         """
-        flash('Export jelenleg nem elérhető.', 'warning')
-        return redirect(url_for('.index_view'))
         try:
-            # Aktuális lekérdezés
+            # Lekérdezés és szűrők
             query = self.get_query()
-
-            # Alkalmazza a szűrőket, ha léteznek
-            filters = self._filters
+            filters = getattr(self, '_filters', None)
             query = self.apply_filters(query, filters)
+            current_app.logger.debug(f"Final query: {str(query)}")
 
-            current_app.logger.info(f"columns_to_export: {self.columns_to_export}")
-
-            # Fejléc (column_labels alapján vagy column_list alapján)
-            if self.columns_to_export:
-                column_headers = list(self.columns_to_export.values())  # Felhasználói oszlopok
-                column_list = list(self.columns_to_export.keys())
+            # Oszlopok
+            columns_to_export = getattr(self, 'columns_to_export', {}) or {}
+            if columns_to_export:
+                column_headers = list(columns_to_export.values())
+                column_list = list(columns_to_export.keys())
             else:
                 column_headers = [
-                    self.column_labels.get(col, col)  # Oszlop címke, ha elérhető
-                    for col in self.column_list
+                    self.column_labels.get(col, col)
+                    for col in getattr(self, 'column_list', [])
                 ]
-                column_list = self.column_list
+                column_list = getattr(self, 'column_list', [])
 
+            # Workbook létrehozása
+            wb = Workbook()
+            ws = wb.active
+            ws.title = "Export"
 
-            # Adatok előkészítése
-            rows = []
+            # Fejléc
+            ws.append(column_headers)
+
+            # Adatok
             for item in query:
                 row = []
                 for col in column_list:
-                    attr = self._get_attr_value(item, col)
-                    # Ha szám, akkor formázzuk tizedesvesszővel
-                    if isinstance(attr, float):
-                        attr = f"{attr:.2f}".replace('.', ',')  # Tizedesvesszőre cserél
-                    row.append(attr)
-                rows.append(row)
+                    val = self._get_attr_value(item, col)
 
-            # CSV válasz generálása
-            output = StringIO()  # StringIO objektum létrehozása
-            writer = csv.writer(output, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            writer.writerow(column_headers)  # Fejléc sor
-            for row in rows:
-                writer.writerow(row)  # Adatsorok
+                    # None vagy üres lista/tuple → ""
+                    if val is None or (isinstance(val, (list, tuple, set)) and len(val) == 0):
+                        val_str = ""
+                    # Float formázás
+                    elif isinstance(val, float):
+                        val_str = round(val, 2)
+                    # Dátumok
+                    elif isinstance(val, datetime):
+                        val_str = val.strftime("%Y-%m-%d %H:%M:%S")
+                    # Enum → value
+                    elif isinstance(val, Enum):
+                        val_str = val.value
+                    # Egyéb típusok → str
+                    else:
+                        val_str = str(val)
 
-            # HTTP válasz előkészítése
-            output.seek(0)  # Visszaállítjuk az olvasási pozíciót
-            csv_data = output.getvalue()  # CSV tartalom karakterláncként
-            # Encode-olás ISO-8859-2 kódolással
-            response = Response(csv_data.encode('utf-8'), mimetype='text/csv; charset=utf-8')
-            response.headers['Content-Disposition'] = 'attachment; filename=export.csv'
+                    row.append(val_str)
+                ws.append(row)
+
+            # XLSX mentés BytesIO-ba
+            output = BytesIO()
+            wb.save(output)
+            output.seek(0)
+
+            # HTTP válasz
+            response = Response(
+                output.getvalue(),
+                mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+            )
+            response.headers['Content-Disposition'] = 'attachment; filename="export.xlsx"'
             return response
 
         except Exception as e:
-            self.session.rollback()
-            current_app.logger.error(f"CSV exportálási hiba: {str(e)}")
+            try:
+                self.session.rollback()
+            except Exception:
+                pass
+            current_app.logger.error(f"XLSX exportálási hiba: {str(e)}")
             return "Hiba történt az exportálás során.", 500
 
 

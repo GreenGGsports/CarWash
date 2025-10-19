@@ -16,6 +16,7 @@ class Config:
     SMTP_LOGIN = os.getenv('SMTP_LOGIN')
     SMTP_PASSWORD = os.getenv('SMTP_PASSWORD')
     SMTP_FROM_EMAIL = os.getenv('SMTP_FROM_EMAIL')
+    OWNER_EMAILS = os.getenv('OWNER_EMAILS', '').split(',')
     
 class DevelopmentConfig(Config):
     DEBUG = True
