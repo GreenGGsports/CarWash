@@ -9,8 +9,8 @@ from src.models.reservation_model import ReservationModel
 from src.models.billing_model import BillingModel
 from flask_login import current_user
 from src.controllers.send_email import send_owner_email
-    
-def create_reservation(session, carwash, service, extras, slot, car, customer, reservation_data, admin=False):
+
+def create_reservation(session, carwash, service, extras, slot, car, customer, reservation_data, final_price=None, admin=False):
     try:
         reservation = ReservationModel(
             car_id=car.id,
@@ -21,12 +21,12 @@ def create_reservation(session, carwash, service, extras, slot, car, customer, r
             extras=extras,
             **reservation_data.kwargs
         )
-        
-        if admin and reservation_data.final_price:
-            reservation.final_price = reservation_data.final_price
+        if admin and final_price is not None:
+            reservation.final_price = final_price
         else:
             reservation.calculate_final_price(session=session)
         
+
         session.add(reservation)
         session.commit()
         send_owner_email(reservation)

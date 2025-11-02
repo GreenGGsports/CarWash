@@ -92,6 +92,7 @@ class ReservationAdminView(MyModelView):
         query = super().get_count_query()
         query = self._apply_iam_filters(query, count=True)
         return query
+    
     form = ReservationForm
     create_template = 'admin/reservation_form.html'
     list_template = 'admin/list_template.html'
@@ -209,6 +210,7 @@ class ReservationAdminView(MyModelView):
             car=car,
             customer=customer,
             reservation_data=reservation_data,
+            final_price=form.new_price.data,
             admin=True
             )
         flash(f'Reservation {reservation.id} created successfully!', 'success')
