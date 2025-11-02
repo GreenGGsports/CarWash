@@ -68,6 +68,12 @@ class ReservationForm(FlaskForm):
         self.extras.data = obj.extras  # Az extras listát állítjuk be
         
     # Form fields
+    carwash = QuerySelectField('Autómosó', allow_blank=False, query_factory=lambda: [])
+    service = QuerySelectField('Csomag', allow_blank=False, query_factory=lambda: [],validators=[DataRequired()])
+    extras = QuerySelectMultipleField('Extrák', get_label='service_name')
+    reservation_date = DateTimeField('Időpont', format='%Y-%m-%d',validators=[DataRequired()])
+    slot = QuerySelectField('Slot', allow_blank=False, query_factory=lambda: [])
+
     new_car_license_plate = StringField('Rendszám', validators=[DataRequired()])
     new_car_type = SelectField('Méret', choices=[(t.name, t.name) for t in CarTypeEnum], validators=[DataRequired()])
     new_car_brand = StringField('Márka', validators=[DataRequired()])
@@ -77,14 +83,9 @@ class ReservationForm(FlaskForm):
     new_customer_lastname = StringField('Vezetéknév', validators=[DataRequired()])
     new_customer_phone_number = StringField('Telefonszám', validators=[DataRequired()])
 
-    service = QuerySelectField('Csomag', allow_blank=False, query_factory=lambda: [],validators=[DataRequired()])
-    extras = QuerySelectMultipleField('Extrák', get_label='service_name')
     comment = StringField('Megjegyzés')
 
-    reservation_date = DateTimeField('Időpont', format='%Y-%m-%d',validators=[DataRequired()])
     parking_spot = StringField('Parkolóhely')
-    carwash = QuerySelectField('Autómosó', allow_blank=False, query_factory=lambda: [])
-    slot = QuerySelectField('Slot', allow_blank=False, query_factory=lambda: [])
 
     new_price = FloatField('Egyedi ár', validators=[Optional()])
     payment_method =  SelectField('Fizetési mód', choices=[(t.name, t.value) for t in PaymentEnum], validators=[DataRequired()])

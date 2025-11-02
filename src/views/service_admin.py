@@ -58,6 +58,9 @@ class ServiceModelView(MyModelView):
                 self.can_delete = False
                 return True
             elif current_user.role == 'admin':
+                self.can_create = False
+                self.can_edit = False
+                self.can_delete = False
                 return True
         return False
 

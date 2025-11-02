@@ -1,4 +1,3 @@
-<!-- templates/admin/my_form.html -->
 {% extends 'admin/model/edit.html' %}
 
 {% block tail %}
@@ -8,23 +7,52 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    
-    <!-- Link to the external script (if you have any additional scripts) -->
     <script src="/static/admin/scripts/scripts.js"></script>
 
     <!-- Initialize Flatpickr -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             flatpickr('#{{ form.reservation_date.id }}', {
-                enableTime: false,              // Enable time picker
-                dateFormat: "Y-m-d", 
+                enableTime: false,
+                dateFormat: "Y-m-d",
             });
         });
+    </script>
+
+    <!-- 💡 Dynamic filtering: update services & extras when carwash changes -->
+    <script>
+    $(document).ready(function() {
+        const carwashField = $('select[name="{{ form.carwash.name }}"]');
+        const serviceField = $('select[name="{{ form.service.name }}"]');
+        const extrasField = $('select[name="{{ form.extras.name }}"]');
+
+        carwashField.on('change', function() {
+            const carwashId = $(this).val();
+            if (!carwashId) return;
+
+            // Fetch services
+            $.getJSON(`/ajax/admin/_get_services?carwash_id=${carwashId}`, function(data) {
+                serviceField.empty();
+                $.each(data, function(i, item) {
+                    serviceField.append($('<option>', { value: item.id, text: item.name }));
+                });
+            });
+
+            // Fetch extras
+            $.getJSON(`/ajax/admin/_get_extras?carwash_id=${carwashId}`, function(data) {
+                extrasField.empty();
+                $.each(data, function(i, item) {
+                    extrasField.append($('<option>', { value: item.id, text: item.name }));
+                });
+            });
+        });
+    });
     </script>
 {% endblock %}
 
 {% block form %}
     {{ super() }}
+
     <div>
         <label for="new_car_license_plate">{{ form.new_car_license_plate.label.text }}</label>
         <input type="text" id="new_car_license_plate" name="new_car_license_plate" value="{{ form.new_car_license_plate.data }}">
@@ -56,6 +84,11 @@
     </div>
 
     <div>
+        <label for="{{ form.carwash.id }}">{{ form.carwash.label.text }}</label>
+        {{ form.carwash() }}
+    </div>
+
+    <div>
         <label for="{{ form.service.id }}">{{ form.service.label.text }}</label>
         {{ form.service() }}
     </div>
@@ -65,7 +98,6 @@
         {{ form.extras() }}
     </div>
 
-    <!-- Updated datetime input using Flatpickr -->
     <div>
         <label for="{{ form.reservation_date.id }}">{{ form.reservation_date.label.text }}</label>
         <input type="date" id="{{ form.reservation_date.id }}" name="{{ form.reservation_date.name }}" value="{{ form.reservation_date.data }}">
@@ -77,16 +109,12 @@
     </div>
 
     <div>
-        <label for="{{ form.carwash.id }}">{{ form.carwash.label.text }}</label>
-        {{ form.carwash() }}
-    </div>
-
-    <div>
         <label for="{{ form.slot.id }}">{{ form.slot.label.text }}</label>
         {{ form.slot() }}
     </div>
+
     <div>
-        <label for="{{form.is_completed}}">{{ form.is_completed.label.text }}</label>
-            {{ form.is_completed() }}
+        <label for="{{ form.is_completed.id }}">{{ form.is_completed.label.text }}</label>
+        {{ form.is_completed() }}
     </div>
 {% endblock %}
