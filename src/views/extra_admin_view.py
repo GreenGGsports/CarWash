@@ -21,6 +21,9 @@ class ExtraModelView(MyModelView):
                 self.can_delete = False
                 return True
             elif current_user.role == 'admin':
+                self.can_create = True
+                self.can_edit = True
+                self.can_delete = True
                 return True
         return False
 
