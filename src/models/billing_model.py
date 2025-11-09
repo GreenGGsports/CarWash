@@ -8,13 +8,13 @@ class BillingModel(BaseModel):
     __tablename__ = 'Billing'
     
     id = Column(Integer, primary_key=True)
-    name = Column(String(100), nullable= True)
-    address = Column(String(256),nullable=True)
-    email = Column(String(64),nullable=True)
+    name = Column(String(255), nullable= True)
+    address = Column(String(512),nullable=True)
+    email = Column(String(255),nullable=True)
     reservation_id = Column(Integer, ForeignKey('Reservation.id'),nullable=False)
-    
-    company_name = Column(String(64),nullable= True)
-    tax_ID = Column(String(64),nullable=True)
+
+    company_name = Column(String(255),nullable= True)
+    tax_ID = Column(String(255),nullable=True)
     reservation = relationship('ReservationModel', back_populates='billing')
 
     def __init__(self, name , address, email, reservation_id, company_name, tax_ID):
