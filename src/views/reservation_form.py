@@ -75,7 +75,13 @@ class ReservationForm(FlaskForm):
     slot = QuerySelectField('Slot', allow_blank=False, query_factory=lambda: [])
 
     new_car_license_plate = StringField('Rendszám', validators=[DataRequired()])
-    new_car_type = SelectField('Méret', choices=[(t.name, t.name) for t in CarTypeEnum], validators=[DataRequired()])
+    new_car_type = SelectField(
+    'Méret',
+    choices=[(t.name, t.name) for t in CarTypeEnum if t not in {
+        CarTypeEnum.small_car, CarTypeEnum.xx_large_car
+    }],
+    validators=[DataRequired()]
+)
     new_car_brand = StringField('Márka', validators=[DataRequired()])
     new_car_model = StringField('Típus', validators=[DataRequired()])
 
