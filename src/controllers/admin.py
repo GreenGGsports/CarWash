@@ -36,6 +36,7 @@ def init_admin(app, session_factory):
         app,
         name='Admin Panel',
         template_mode='bootstrap3',
+        base_template='admin/master.html', 
         index_view=BaseAdminIndexView(role='admin',url='/admin', endpoint='admin')
     )
 
