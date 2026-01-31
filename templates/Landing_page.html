@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
 
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='common.css') }}">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='landing_page.css') }}">
@@ -17,7 +18,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script src="{{ url_for('static', filename='common.js') }}"></script>
     <script src="{{ url_for('static', filename='customer_login.js') }}"></script>
-    <title>Landing page</title>
+    <!-- Open Graph (Facebook, Messenger, LinkedIn, stb.) -->
+    <meta property="og:title" content="Az oldalad címe">
+    <meta property="og:description" content="Rövid leírás az oldalról">
+    <meta property="og:image" content="{{ url_for('static', filename='main.JPEG', _external=True) }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.url_root }}">
+
+    <!-- Twitter (X) megosztás -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Az oldalad címe">
+    <meta name="twitter:description" content="Rövid leírás az oldalról">
+    <meta name="twitter:image" content="{{ url_for('static', filename='main.JPEG', _external=True) }}">
+
+    <!-- Apple / Android ikon (opcionális) -->
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='main.JPEG') }}">
+    <title>Autókozmetika</title>
 </head>
 
 <body>

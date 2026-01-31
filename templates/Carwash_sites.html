@@ -4,8 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='common.css') }}">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='Carwash_sites.css') }}">
+        <!-- Include Slick JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="{{ url_for('static', filename='common.js') }}"></script>
+    <script src="{{ url_for('static', filename='customer_login.js') }}"></script>
+    <!-- Open Graph (Facebook, Messenger, LinkedIn, stb.) -->
+    <meta property="og:title" content="Az oldalad címe">
+    <meta property="og:description" content="Rövid leírás az oldalról">
+    <meta property="og:image" content="{{ url_for('static', filename='main.JPEG', _external=True) }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.url_root }}">
+
+    <!-- Twitter (X) megosztás -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Az oldalad címe">
+    <meta name="twitter:description" content="Rövid leírás az oldalról">
+    <meta name="twitter:image" content="{{ url_for('static', filename='main.JPEG', _external=True) }}">
+
+    <!-- Apple / Android ikon (opcionális) -->
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='main.JPEG') }}">
     <title>{{ location.carwash_name }}</title>
 </head>
 <body>
@@ -66,11 +87,11 @@
                     {% endfor %}
                     <div class="arcim">Csomag Ár</div>
                     <div class="csomag_meretek">
-                        <div class="csomag_ar">S</div>
+                        <!-- <div class="csomag_ar">S</div> -->
                         <div class="csomag_ar">M</div>
                         <div class="csomag_ar">L</div>
                         <div class="csomag_ar">XL</div>
-                        <div class="csomag_ar">XXL</div>
+                        <!-- <div class="csomag_ar">XXL</div> -->
                     </div>
                 </div>
                 <div class="csomagcontent">
@@ -86,11 +107,11 @@
                     <div class="extracontent" data-included="{{ included }}"></div>
                     {% endfor %}
                     <div class="priceContainer">
-                        <div class="price">{{service.price_small}}</div>
+                        <!-- <div class="price">{{service.price_small}}</div> -->
                         <div class="price">{{service.price_medium}}</div>
                         <div class="price">{{service.price_large}}</div>
                         <div class="price">{{service.price_x_large}}</div>
-                        <div class="price">{{service.price_xx_large}}</div>
+                        <!-- <div class="price">{{service.price_xx_large}}</div> -->
                     </div>
                 </div>
                 {% endfor %}
