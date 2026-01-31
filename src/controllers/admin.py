@@ -25,6 +25,7 @@ def init_customer_admin(app, session_factory):
         app,
         name='Admin Panel',
         template_mode='bootstrap3',
+        base_template='admin/master.html', 
         index_view=BaseAdminIndexView(role='customer_admin',url='/customer_admin', endpoint='customer_admin')
     )
 
@@ -59,6 +60,7 @@ def init_local_admin(app, session_factory):
         app,
         name='Local Admin Panel',
         template_mode='bootstrap3',
+        base_template='admin/master.html', 
         index_view=BaseAdminIndexView(role='local_admin',url='/local-admin', endpoint='local_admin')
     )
 

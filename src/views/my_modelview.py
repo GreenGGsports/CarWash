@@ -152,10 +152,9 @@ class MyModelView(ModelView):
         Enum-okat value-jukkal írja, üres listákat és None-t üres cellába.
         """
         try:
-            # Lekérdezés és szűrők
-            query = self.get_query()
-            filters = getattr(self, '_filters', None)
-            query = self.apply_filters(query, filters)
+            # Use the query_all which already has filters/search applied
+            query = self.query_all if hasattr(self, 'query_all') else self.get_query()
+            
             current_app.logger.debug(f"Final query: {str(query)}")
 
             # Oszlopok
@@ -179,7 +178,7 @@ class MyModelView(ModelView):
             ws.append(column_headers)
 
             # Adatok
-            for item in query:
+            for item in query.all():
                 row = []
                 for col in column_list:
                     val = self._get_attr_value(item, col)
